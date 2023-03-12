@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ninjafood/app/base_widget/base_widget.dart';
 import 'package:ninjafood/app/features/auth/presentation/onboard/devices/onboard_mobile_view.dart';
 
