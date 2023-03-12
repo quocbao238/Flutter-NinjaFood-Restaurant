@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/features/auth/infrastructure/models/onboard_model.dart';
 
 class OnboardController extends BaseController {
   List<OnboardModel> onboardListData = OnboardModel.listData;
   late final PageController pageController;
+  late final int lastCounter;
 
   @override
   void onInit() {
+    lastCounter = Get.arguments;
+
     pageController = PageController(initialPage: 0);
     super.onInit();
   }

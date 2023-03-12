@@ -10,7 +10,11 @@ class OnboardMobileScreen extends GetView<OnboardController> {
     final _onboardListData = controller.onboardListData;
 
     final _pageController = controller.pageController;
-    return PageView.builder(
+    return Center(
+      child: Text('Demo ${controller.lastCounter}'),
+    );
+
+    PageView.builder(
       itemCount: _onboardListData.length,
       controller: _pageController,
       itemBuilder: (context, index) {

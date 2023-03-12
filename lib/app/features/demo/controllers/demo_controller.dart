@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/routes/routes.dart';
@@ -6,7 +9,8 @@ class DemoController extends BaseController {
   Rx<int> counter = 0.obs;
 
   void increment() {
-    counter.value = counter.value + 1;
+    counter.value = 15;
+    // counter.value = counter.value + 1;
   }
 
   void decrement() {
@@ -18,7 +22,9 @@ class DemoController extends BaseController {
   }
 
   void onPressedOnBoardScreen() {
-    Get.toNamed(AppRouteProvider.onboardScreen);
+    final lastValue = counter.value;
+
+    Get.toNamed(AppRouteProvider.onboardScreen, arguments: lastValue);
   }
 
   @override
@@ -31,3 +37,5 @@ class DemoController extends BaseController {
     super.dispose();
   }
 }
+
+class HomeScreenController extends BaseController {}

@@ -17,3 +17,10 @@ class GetBinding extends Bindings {
     }
   }
 }
+
+
+// Tao screen (presentation)
+// Tao controller (controllers)
+// App_Provider tao routeName
+// Binding -> Map App_Provider vs Controller
+// app_router -> 
