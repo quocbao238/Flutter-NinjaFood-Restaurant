@@ -4,13 +4,16 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/theme/theme.dart';
 
 class DemoController extends BaseController {
   Rx<int> counter = 0.obs;
 
-  void increment() {
-    counter.value = 15;
-    // counter.value = counter.value + 1;
+  void changeTheme() {
+    if (Get.theme.brightness == Brightness.dark) {
+      return Get.changeTheme(ThemePrimary.lightTheme());
+    }
+    Get.changeTheme(ThemePrimary.darkTheme());
   }
 
   void decrement() {

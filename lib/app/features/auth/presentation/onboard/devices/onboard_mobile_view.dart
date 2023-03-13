@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/features/auth/controllers/onboard_controller.dart';
+import 'package:ninjafood/app/theme/core_widget/app_padding.dart';
+import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
 
 class OnboardMobileScreen extends GetView<OnboardController> {
   const OnboardMobileScreen({super.key});
@@ -10,78 +12,48 @@ class OnboardMobileScreen extends GetView<OnboardController> {
     final _onboardListData = controller.onboardListData;
 
     final _pageController = controller.pageController;
-    return Center(
-      child: Text('Demo ${controller.lastCounter}'),
-    );
-
-    PageView.builder(
-      itemCount: _onboardListData.length,
-      controller: _pageController,
-      itemBuilder: (context, index) {
-        final item = _onboardListData[index];
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Image.asset(item.image),
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                text: item.title,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 22,
+    return SafeArea(
+      child: PageView.builder(
+        itemCount: _onboardListData.length,
+        controller: _pageController,
+        itemBuilder: (context, index) {
+          final item = _onboardListData[index];
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.asset(
+                    item.image,
+                    fit: BoxFit.fill,
+                  )),
+              AppPadding(
+                  padding: AppEdgeInsets.only(
+                      top: AppGapSize.large,
+                      left: AppGapSize.verylarge,
+                      right: AppGapSize.verylarge),
+                  child: AppText.headlineLarge(text: item.title)),
+              AppPadding.medium(
+                  padding: AppEdgeInsets.symmetric(
+                      vertical: AppGapSize.medium,
+                      horizontal: AppGapSize.large),
+                  child: AppText.bodySmall(text: item.description)),
+              AppPadding.large(
+                child: AppButton(
+                  title: 'Next',
+                  onPressed: () {
+                    _pageController.nextPage(
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.ease,
+                    );
+                  },
                 ),
-                children: [
-                  TextSpan(
-                    text: item.description,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: 57,
-              width: 157,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xff53E88B),
-                    Color(0xff15BE77),
-                  ],
-                ),
-              ),
-              child: ElevatedButton(
-                onPressed: () {
-                  _pageController.nextPage(
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.ease,
-                  );
-                },
-                child: Text(
-                  'Next',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
+              )
+            ],
+          );
+        },
+      ),
     );
   }
 }
