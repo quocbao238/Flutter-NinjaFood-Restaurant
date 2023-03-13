@@ -10,14 +10,14 @@ class OnboardModel {
   static final List<OnboardModel> listData = [
     OnboardModel(
       image: 'assets/images/onboarding1.png',
-      title: 'Find your Comfort \nFood here \n',
+      title: 'Find your Comfort Food here',
       description:
-          '\nHere You Can find a chef or dish for every \ntaste and color. Enjoy!',
+          'Here You Can find a chef or dish for every taste and color. Enjoy!',
     ),
     OnboardModel(
       image: 'assets/images/onboarding2.png',
-      title: 'Food Ninja is Where Your \nComfort Food Lives \n',
-      description: '\nEnjoy a fast and smooth food delivery at \nyour doorstep',
+      title: 'Food Ninja is Where Your Comfort Food Lives',
+      description: 'Enjoy a fast and smooth food delivery at your doorstep',
     ),
   ];
 }

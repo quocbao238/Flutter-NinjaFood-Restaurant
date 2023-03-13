@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         title: "NinjaFood",
-        theme: ThemePrimary.theme(),
+        theme: ThemePrimary.lightTheme(),
+        darkTheme: ThemePrimary.darkTheme(),
         onReady: () {},
         onInit: () async {
           DeviceHelper.init();

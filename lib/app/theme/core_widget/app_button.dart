@@ -1,61 +1,68 @@
-import 'package:flutter/material.dart';
+part of core_widget;
+
+enum AppButtonType { min, max }
 
 class AppButton extends StatelessWidget {
   final EdgeInsets? padding;
   final EdgeInsets? margin;
-  final double? width;
-  final double? height;
-  final ButtonStyle? buttonStyle;
-  final void Function()? onTap;
-  final Widget child;
-  final Color? backgroundColor;
-  final Color? foregroundColor;
-  final Radius? radius;
+  final void Function()? onPressed;
+  final String title;
+  final AppButtonType? buttonType;
 
   const AppButton(
       {super.key,
+      required this.title,
       this.padding,
       this.margin,
-      this.width,
-      this.height,
-      this.buttonStyle,
-      this.onTap,
-      required this.child,
-      this.foregroundColor,
-      this.backgroundColor,
-      this.radius});
+      this.onPressed,
+      this.buttonType = AppButtonType.min});
 
-  const AppButton.rectangle(
+  const AppButton.min(
       {super.key,
+      required this.title,
       this.padding,
       this.margin,
-      this.width,
-      this.height,
-      this.buttonStyle,
-      this.onTap,
-      required this.child,
-      this.foregroundColor,
-      this.backgroundColor})
-      : radius = const Radius.circular(0);
+      this.onPressed,
+      this.buttonType = AppButtonType.min});
+  const AppButton.max(
+      {super.key,
+      required this.title,
+      this.padding,
+      this.margin,
+      this.onPressed,
+      this.buttonType = AppButtonType.max});
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
+    switch (buttonType) {
+      case AppButtonType.min:
+        width = width * 0.4;
+        break;
+      case AppButtonType.max:
+        width = width * 0.85;
+        break;
+      default:
+    }
+
     return Container(
       width: width,
-      height: height,
+      height: kToolbarHeight,
       margin: margin,
-      child: ElevatedButton(
-        onPressed: onTap,
-        style: buttonStyle ??
-            ElevatedButton.styleFrom(
-              backgroundColor: backgroundColor,
-              foregroundColor: foregroundColor,
-              elevation: 0,
-              padding: padding,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(16.0))),
-            ),
-        child: Center(child: child),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+            Color(0xFF53E88B),
+            Color(0xFF15BE77)
+            //add more colors
+          ]),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: ElevatedButton(
+          onPressed: onPressed,
+          child: Text(title),
+        ),
       ),
     );
   }
