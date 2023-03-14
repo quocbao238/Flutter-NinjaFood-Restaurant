@@ -1,8 +1,8 @@
-part of 'base_widget.dart';
+part of core_widget;
 
-class BaseErrorWidget extends StatelessWidget {
+class AppErrorWidget extends StatelessWidget {
   final String? message;
-  const BaseErrorWidget({super.key, this.message});
+  const AppErrorWidget({super.key, this.message});
 
   @override
   Widget build(BuildContext context) {

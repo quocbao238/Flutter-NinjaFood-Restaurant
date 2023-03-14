@@ -1,6 +1,4 @@
 PODS:
-  - ext_storage (0.0.1):
-    - Flutter
   - Flutter (1.0.0)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
@@ -22,7 +20,6 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - ext_storage (from `.symlinks/plugins/ext_storage/ios`)
   - Flutter (from `Flutter`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
@@ -36,8 +33,6 @@ SPEC REPOS:
     - FMDB
 
 EXTERNAL SOURCES:
-  ext_storage:
-    :path: ".symlinks/plugins/ext_storage/ios"
   Flutter:
     :path: Flutter
   path_provider_foundation:
@@ -54,7 +49,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter/ios"
 
 SPEC CHECKSUMS:
-  ext_storage: 4eaf3a84d5594106e2ebcc2502248cfde53c8fa1
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9

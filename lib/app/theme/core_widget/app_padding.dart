@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:ninjafood/app/theme/theme.dart';
+part of core_widget;
 
 enum AppGapSize {
   none(0),

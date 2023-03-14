@@ -61,7 +61,7 @@ class AppButton extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: onPressed,
-          child: Text(title),
+          child: FittedBox(child: Text(title)),
         ),
       ),
     );
