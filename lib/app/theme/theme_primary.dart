@@ -1,7 +1,6 @@
 part of 'theme.dart';
 
 class ThemePrimary {
-  
   static lightTheme() {
     return ThemeData(
       textTheme: GoogleFonts.interTextTheme(
@@ -14,7 +13,7 @@ class ThemePrimary {
         style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
-            shape: RoundedRectangleBorder(
+            shape: RoundedRectangleBorder(   
                 borderRadius: BorderRadius.circular(16.0)),
             surfaceTintColor: Colors.transparent,
             foregroundColor:

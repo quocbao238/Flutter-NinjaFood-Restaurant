@@ -9,61 +9,85 @@ enum AppTextStyle {
   headlineSmall,
   bodyLarge,
   bodyMedium,
-  bodySmall,
+  bodySmall;
 }
 
 class AppText extends StatelessWidget {
   final String text;
   final AppTextStyle? appTextStyle;
   final TextAlign? textAlign;
+  final FontWeight? fontWeight;
+  final Color? color;
 
-  const AppText(
-      {super.key, required this.text, this.appTextStyle, this.textAlign});
+  // const AppText(
+  //     {super.key,
+  //     required this.text,
+  //     this.appTextStyle,
+  //     this.textAlign,
+  //     this.fontWeight});
   const AppText.displayLarge(
       {super.key,
       required this.text,
       this.appTextStyle = AppTextStyle.displayLarge,
-      this.textAlign});
+      this.textAlign,
+      this.fontWeight,
+      this.color});
   const AppText.displayMedium(
       {super.key,
       required this.text,
       this.appTextStyle = AppTextStyle.displayMedium,
-      this.textAlign});
+      this.textAlign,
+      this.fontWeight,
+      this.color});
   const AppText.displaySmall(
       {super.key,
       required this.text,
       this.appTextStyle = AppTextStyle.displaySmall,
-      this.textAlign});
+      this.textAlign,
+      this.fontWeight,
+      this.color});
   const AppText.headlineLarge(
       {super.key,
       required this.text,
       this.appTextStyle = AppTextStyle.headlineLarge,
-      this.textAlign});
+      this.textAlign,
+      this.fontWeight,
+      this.color});
   const AppText.headlineMedium(
       {super.key,
       required this.text,
       this.appTextStyle = AppTextStyle.headlineMedium,
-      this.textAlign});
+      this.textAlign,
+      this.fontWeight,
+      this.color});
   const AppText.headlineSmall(
       {super.key,
       required this.text,
       this.appTextStyle = AppTextStyle.headlineSmall,
-      this.textAlign});
+      this.textAlign,
+      this.fontWeight,
+      this.color});
   const AppText.bodyLarge(
       {super.key,
       required this.text,
       this.appTextStyle = AppTextStyle.bodyLarge,
-      this.textAlign});
+      this.textAlign,
+      this.fontWeight,
+      this.color});
   const AppText.bodyMedium(
       {super.key,
       required this.text,
       this.appTextStyle = AppTextStyle.bodyMedium,
-      this.textAlign});
+      this.textAlign,
+      this.fontWeight,
+      this.color});
   const AppText.bodySmall(
       {super.key,
       required this.text,
       this.appTextStyle = AppTextStyle.bodySmall,
-      this.textAlign});
+      this.textAlign,
+      this.fontWeight,
+      this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +125,7 @@ class AppText extends StatelessWidget {
     }
 
     return Text(text,
-        textAlign: textAlign ?? TextAlign.center, style: textStyle);
+        textAlign: textAlign ?? TextAlign.center,
+        style: textStyle!.copyWith(fontWeight: fontWeight, color: color));
   }
 }

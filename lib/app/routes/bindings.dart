@@ -8,14 +8,14 @@ class GetBinding extends Bindings {
   @override
   void dependencies() {
     switch (routerName) {
-      case AppRouteProvider.demoScreen:
-        Get.lazyPut(() => DemoController());
+      case AppRouteProvider.splashScreen:
+        Get.lazyPut(() => SplashController());
         break;
       case AppRouteProvider.onboardScreen:
         Get.lazyPut(() => OnboardController());
         break;
       case AppRouteProvider.signupScreen:
-        Get.lazyPut(() => OnboardController());
+        Get.lazyPut(() => SignUpController());
         break;
     }
   }

@@ -4,6 +4,7 @@ enum AppGapSize {
   none(0),
   small(ThemeSizes.small),
   medium(ThemeSizes.medium),
+  regular(ThemeSizes.regular),
   large(ThemeSizes.large),
   verylarge(ThemeSizes.verylarge),
   customized(0);
@@ -96,6 +97,12 @@ class AppPadding extends StatelessWidget {
     Key? key,
     this.child,
     this.padding = const AppEdgeInsets.all(AppGapSize.medium),
+  }) : super(key: key);
+
+  const AppPadding.regular({
+    Key? key,
+    this.child,
+    this.padding = const AppEdgeInsets.all(AppGapSize.regular),
   }) : super(key: key);
 
   const AppPadding.large({

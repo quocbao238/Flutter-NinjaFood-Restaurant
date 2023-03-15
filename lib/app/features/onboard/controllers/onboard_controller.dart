@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/features/auth/infrastructure/models/onboard_model.dart';
+import 'package:ninjafood/app/features/onboard/infrastructure/models/onboard_model.dart';
 
 class OnboardController extends BaseController {
   List<OnboardModel> onboardListData = OnboardModel.listData;
@@ -10,7 +9,7 @@ class OnboardController extends BaseController {
 
   @override
   void onInit() {
-    lastCounter = Get.arguments;
+    // lastCounter = Get.arguments;
 
     pageController = PageController(initialPage: 0);
     super.onInit();

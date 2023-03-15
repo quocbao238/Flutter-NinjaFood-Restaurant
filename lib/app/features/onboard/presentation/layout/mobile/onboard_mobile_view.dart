@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ninjafood/app/features/auth/controllers/onboard_controller.dart';
+import 'package:ninjafood/app/features/onboard/controllers/onboard_controller.dart';
 import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
 
 class OnboardMobileScreen extends GetView<OnboardController> {
@@ -23,17 +23,17 @@ class OnboardMobileScreen extends GetView<OnboardController> {
                 AppSizeScale(
                   ratioHeight: 0.5,
                   ratioWidth: 1,
-                  child: Image.asset(
-                    item.image,
-                    fit: BoxFit.cover,
-                  ),
+                  child: Image.asset(item.image, fit: BoxFit.cover),
                 ),
                 AppPadding(
                     padding: AppEdgeInsets.only(
                         top: AppGapSize.large,
-                        left: AppGapSize.large,
-                        right: AppGapSize.large),
-                    child: AppText.headlineLarge(text: item.title)),
+                        left: AppGapSize.verylarge,
+                        right: AppGapSize.verylarge),
+                    child: AppText.headlineMedium(
+                      text: item.title,
+                      fontWeight: FontWeight.bold,
+                    )),
                 AppPadding.medium(
                     padding: AppEdgeInsets.symmetric(
                         vertical: AppGapSize.medium,
@@ -43,12 +43,13 @@ class OnboardMobileScreen extends GetView<OnboardController> {
                   child: AppButton(
                     title: 'Next',
                     onPressed: () {
+                      // Move behavior to controller
                       _pageController.nextPage(
                         duration: Duration(milliseconds: 500),
                         curve: Curves.ease,
                       );
                       if (index == 1) {
-                        Get.offNamed('/signupScreen');
+                        Get.offAll('/signupScreen');
                       }
                     },
                   ),

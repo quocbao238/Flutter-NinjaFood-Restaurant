@@ -38,7 +38,7 @@ dependencies:
   flutter_spinkit: ^4.1.1+1
   flutter_html: ^1.0.2
   rflutter_alert: ^1.0.3
-  flutter_svg: any
+  flutter_svg: ^0.20.0-nullsafety.3
   validators: ^2.0.1
   equatable: ^2.0.5
 

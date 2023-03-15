@@ -1,11 +1,12 @@
 library routes;
 
 import 'package:get/get.dart';
-import 'package:ninjafood/app/features/auth/controllers/onboard_controller.dart';
-import 'package:ninjafood/app/features/auth/presentation/onboard/onboard_screen.dart';
-import 'package:ninjafood/app/features/auth/presentation/sign_up/sign_up_screen.dart';
-import 'package:ninjafood/app/features/demo/controllers/demo_controller.dart';
-import 'package:ninjafood/app/features/demo/demo_screen.dart';
+import 'package:ninjafood/app/features/onboard/controllers/onboard_controller.dart';
+import 'package:ninjafood/app/features/onboard/presentation/layout/onboard_screen.dart';
+import 'package:ninjafood/app/features/sign_up/controllers/sign_up_controller.dart';
+import 'package:ninjafood/app/features/sign_up/presentation/layout/sign_up_screen.dart';
+import 'package:ninjafood/app/features/splash/controllers/splash_controller.dart';
+import 'package:ninjafood/app/features/splash/presentation/splash_screen.dart';
 
 part 'app_provider.dart';
 part 'app_router.dart';
