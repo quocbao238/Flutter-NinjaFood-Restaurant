@@ -52,11 +52,15 @@ class AppButton extends StatelessWidget {
       margin: margin,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Color(0xFF53E88B),
-            Color(0xFF15BE77)
-            //add more colors
-          ]),
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF53E88B),
+              Color(0xFF15BE77),
+              //add more colors
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.centerRight,
+          ),
           borderRadius: BorderRadius.circular(16),
         ),
         child: ElevatedButton(

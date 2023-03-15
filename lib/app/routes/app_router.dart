@@ -17,5 +17,9 @@ class AppPages {
       page: () => OnboardScreen(),
       binding: GetBinding(AppRouteProvider.onboardScreen),
     ),
+    GetPage(
+      name: AppRouteProvider.signupScreen,
+      page: () => SignUpScreen(),
+    ),
   ];
 }

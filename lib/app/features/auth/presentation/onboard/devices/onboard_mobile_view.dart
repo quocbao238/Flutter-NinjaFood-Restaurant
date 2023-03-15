@@ -9,7 +9,6 @@ class OnboardMobileScreen extends GetView<OnboardController> {
   @override
   Widget build(BuildContext context) {
     final _onboardListData = controller.onboardListData;
-
     final _pageController = controller.pageController;
     return AppScaffold(
       body: SafeArea(
@@ -22,17 +21,18 @@ class OnboardMobileScreen extends GetView<OnboardController> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 AppSizeScale(
-                    ratioHeight: 0.5,
-                    ratioWidth: 1,
-                    child: Image.asset(
-                      item.image,
-                      fit: BoxFit.fill,
-                    )),
+                  ratioHeight: 0.5,
+                  ratioWidth: 1,
+                  child: Image.asset(
+                    item.image,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 AppPadding(
                     padding: AppEdgeInsets.only(
                         top: AppGapSize.large,
-                        left: AppGapSize.verylarge,
-                        right: AppGapSize.verylarge),
+                        left: AppGapSize.large,
+                        right: AppGapSize.large),
                     child: AppText.headlineLarge(text: item.title)),
                 AppPadding.medium(
                     padding: AppEdgeInsets.symmetric(
@@ -47,9 +47,12 @@ class OnboardMobileScreen extends GetView<OnboardController> {
                         duration: Duration(milliseconds: 500),
                         curve: Curves.ease,
                       );
+                      if (index == 1) {
+                        Get.offNamed('/signupScreen');
+                      }
                     },
                   ),
-                )
+                ),
               ],
             );
           },

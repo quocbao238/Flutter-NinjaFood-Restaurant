@@ -8,5 +8,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AppViewLayout(
-      mobileView: SplashMobileLayout(), tabletView: SplashTabletLayout());
+        mobileView: SplashMobileLayout(),
+        tabletView: SplashTabletLayout(),
+      );
 }
