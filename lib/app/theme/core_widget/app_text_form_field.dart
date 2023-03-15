@@ -5,13 +5,13 @@ class AppTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 325,
+    return SizedBox(
       height: kToolbarHeight,
-      child: TextFormField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10)
+      child: AppPadding(
+        padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.regular),
+        child: TextFormField(
+          decoration: InputDecoration(
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           ),
         ),
       ),

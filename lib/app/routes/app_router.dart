@@ -1,16 +1,16 @@
 part of 'routes.dart';
 
 class AppPages {
-  static String initial = AppRouteProvider.demoScreen;
+  static String initial = AppRouteProvider.splashScreen;
 
   static navigateDefaultPage() async {}
 
   //
   static final routes = [
     GetPage(
-      name: AppRouteProvider.demoScreen,
-      page: () => DemoScreen(),
-      binding: GetBinding(AppRouteProvider.demoScreen),
+      name: AppRouteProvider.splashScreen,
+      page: () => SplashScreen(),
+      binding: GetBinding(AppRouteProvider.splashScreen),
     ),
     GetPage(
       name: AppRouteProvider.onboardScreen,
@@ -20,6 +20,7 @@ class AppPages {
     GetPage(
       name: AppRouteProvider.signupScreen,
       page: () => SignUpScreen(),
+      binding: GetBinding(AppRouteProvider.signupScreen),
     ),
   ];
 }
