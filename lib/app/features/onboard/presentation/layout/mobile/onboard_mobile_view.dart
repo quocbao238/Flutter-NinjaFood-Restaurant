@@ -8,7 +8,7 @@ class OnboardMobileScreen extends GetView<OnboardController> {
 
   @override
   Widget build(BuildContext context) {
-    final _onboardListData = controller.onboardListData;
+    final _onboardListData = controller.datas;
     final _pageController = controller.pageController;
     return AppScaffold(
       body: SafeArea(
@@ -21,38 +21,25 @@ class OnboardMobileScreen extends GetView<OnboardController> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 AppSizeScale(
-                  ratioHeight: 0.5,
-                  ratioWidth: 1,
-                  child: Image.asset(item.image, fit: BoxFit.cover),
-                ),
+                    ratioHeight: 0.5,
+                    ratioWidth: 1,
+                    child: Image.asset(item.image, fit: BoxFit.cover)),
                 AppPadding(
                     padding: AppEdgeInsets.only(
                         top: AppGapSize.large,
                         left: AppGapSize.verylarge,
                         right: AppGapSize.verylarge),
                     child: AppText.headlineMedium(
-                      text: item.title,
-                      fontWeight: FontWeight.bold,
-                    )),
+                        text: item.title.tr, fontWeight: FontWeight.bold)),
                 AppPadding.medium(
                     padding: AppEdgeInsets.symmetric(
                         vertical: AppGapSize.medium,
                         horizontal: AppGapSize.large),
-                    child: AppText.bodySmall(text: item.description)),
+                    child: AppText.bodySmall(text: item.description.tr)),
                 AppPadding.large(
-                  child: AppButton(
-                    title: 'Next',
-                    onPressed: () {
-                      // Move behavior to controller
-                      _pageController.nextPage(
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.ease,
-                      );
-                      if (index == 1) {
-                        Get.offAll('/signupScreen');
-                      }
-                    },
-                  ),
+                  child: AppButton.min(
+                      title: 'Next_Button'.tr,
+                      onPressed: () => controller.onPressedNext(index)),
                 ),
               ],
             );

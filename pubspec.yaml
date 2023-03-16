@@ -53,6 +53,6 @@ flutter:
   generate: true
 
   assets:
-    - assets/lang/
     - assets/images/
+    - assets/icons/
 

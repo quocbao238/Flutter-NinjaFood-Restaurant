@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/features/onboard/infrastructure/models/onboard_model.dart';
+import 'package:ninjafood/app/routes/routes.dart';
 
 class OnboardController extends BaseController {
-  List<OnboardModel> onboardListData = OnboardModel.listData;
+  List<OnboardModel> datas = OnboardModel.datas;
   late final PageController pageController;
   late final int lastCounter;
 
   @override
   void onInit() {
-    // lastCounter = Get.arguments;
-
     pageController = PageController(initialPage: 0);
     super.onInit();
   }
@@ -19,5 +19,14 @@ class OnboardController extends BaseController {
   void dispose() {
     pageController.dispose();
     super.dispose();
+  }
+
+  void onPressedNext(int index) {
+    if (index == 1) {
+      Get.toNamed(AppRouteProvider.signupScreen);
+      return;
+    }
+    pageController.nextPage(
+        duration: Duration(milliseconds: 500), curve: Curves.ease);
   }
 }

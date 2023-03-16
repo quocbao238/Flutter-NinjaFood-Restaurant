@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:ninjafood/app/theme/core_widget/app_scaffold_background.dart';
+import 'package:get/get.dart';
+import 'package:ninjafood/app/features/sign_up/controllers/sign_up_controller.dart';
 import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
-
 import 'widgets/socical_component.dart';
 
-class SignUpMobileScreen extends GetView {
+class SignUpMobileScreen extends GetView<SignUpController> {
   const SignUpMobileScreen({super.key});
 
   @override
@@ -20,28 +19,28 @@ class SignUpMobileScreen extends GetView {
                   padding: AppEdgeInsets.only(
                       top: AppGapSize.verylarge, bottom: AppGapSize.large),
                   child: AppText.headlineMedium(
-                    text: 'Login To Your Account',
-                    fontWeight: FontWeight.bold,
-                  )),
+                      text: 'SignUpScreen_Title'.tr,
+                      fontWeight: FontWeight.bold)),
               AppTextFormField(),
               AppPadding(
                   padding: AppEdgeInsets.only(
                       top: AppGapSize.medium, bottom: AppGapSize.medium),
                   child: AppTextFormField()),
               AppText.bodySmall(
-                  text: 'Or Continue With', fontWeight: FontWeight.bold),
+                  text: 'SignUpScreen_AnotherLogin'.tr,
+                  fontWeight: FontWeight.bold),
               SocialComponent(),
-              AppText.bodySmall(
-                text: 'Forgot Your Password?',
-                fontWeight: FontWeight.w400,
-                color: Theme.of(context).primaryColor,
+              GestureDetector(
+                onTap: controller.onPressedForgotPassword,
+                child: AppText.bodySmall(
+                    text: 'SignUpScreen_ForgotPassword'.tr,
+                    fontWeight: FontWeight.w400,
+                    color: Theme.of(context).primaryColor),
               ),
               AppPadding.large(
-                child: AppButton.max(
-                  title: 'Login',
-                  onPressed: () {},
-                ),
-              ),
+                  child: AppButton.max(
+                      title: 'SignUpScreen_LoginBtn'.tr,
+                      onPressed: controller.onPressedLogin)),
             ],
           ),
         ),

@@ -16,16 +16,17 @@ class SocialComponent extends GetView<SignUpController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: SocialButtonWidget(
-              socialButtonType: SocialButtonType.facebook,
-              onPressed: () {},
-            ),
-          ),
+              child: SocialButtonWidget(
+            title: 'Facebook',
+            iconWidget: AppIcons.facebook(),
+            onPressed: controller.onPressedSocialFacebook,
+          )),
           AppPadding.medium(),
           Expanded(
             child: SocialButtonWidget(
-              socialButtonType: SocialButtonType.google,
-              onPressed: () {},
+              title: 'Google',
+              iconWidget: AppIcons.google(),
+              onPressed: controller.onPressedSocialGoogle,
             ),
           )
         ],

@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
 
-enum SocialButtonType {
-  facebook('Facebook', 'assets/images/facebook_icon.svg'),
-  google('Google', 'assets/images/google_icon.svg');
-
-  final String title;
-  final String svgImage;
-  const SocialButtonType(this.title, this.svgImage);
-}
-
 class SocialButtonWidget extends StatelessWidget {
-  final SocialButtonType socialButtonType;
+  final String title;
+  final Widget iconWidget;
   final VoidCallback onPressed;
   const SocialButtonWidget(
-      {super.key, required this.socialButtonType, required this.onPressed});
+      {super.key,
+      required this.onPressed,
+      required this.title,
+      required this.iconWidget});
 
   @override
   Widget build(
@@ -36,10 +30,10 @@ class SocialButtonWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(socialButtonType.svgImage),
+            iconWidget,
             AppPadding(
               padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small),
-              child: AppText.bodyMedium(text: socialButtonType.title),
+              child: AppText.bodyMedium(text: title),
             )
           ],
         ),
