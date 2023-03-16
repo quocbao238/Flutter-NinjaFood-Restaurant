@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/features/sign_up/controllers/sign_up_controller.dart';
 import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
+import 'package:ninjafood/app/theme/theme.dart';
 import 'widgets/socical_component.dart';
 
 class SignUpMobileScreen extends GetView<SignUpController> {
@@ -35,7 +36,7 @@ class SignUpMobileScreen extends GetView<SignUpController> {
                 child: AppText.bodySmall(
                     text: 'SignUpScreen_ForgotPassword'.tr,
                     fontWeight: FontWeight.w400,
-                    color: Theme.of(context).primaryColor),
+                    color: ThemeColors.primaryColor),
               ),
               AppPadding.large(
                   child: AppButton.max(
