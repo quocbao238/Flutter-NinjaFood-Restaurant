@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
+part of core_widget;
 
 class AppScaffoldBackgroundImage extends AppScaffold {
   const AppScaffoldBackgroundImage({super.key, required super.body});

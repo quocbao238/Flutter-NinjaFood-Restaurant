@@ -1,30 +1,27 @@
 part of core_widget;
 
 enum AppTextStyle {
-  displayLarge,
-  displayMedium,
-  displaySmall,
-  headlineLarge,
-  headlineMedium,
-  headlineSmall,
-  bodyLarge,
-  bodyMedium,
-  bodySmall;
+  displayLarge(ThemeText.displayLarge),
+  displayMedium(ThemeText.displayMedium),
+  displaySmall(ThemeText.displaySmall),
+  headlineLarge(ThemeText.headlineLarge),
+  headlineMedium(ThemeText.headlineMedium),
+  headlineSmall(ThemeText.headlineSmall),
+  bodyLarge(ThemeText.bodyLarge),
+  bodyMedium(ThemeText.bodyMedium),
+  bodySmall(ThemeText.bodySmall);
+
+  final TextStyle textStyle;
+  const AppTextStyle(this.textStyle);
 }
 
 class AppText extends StatelessWidget {
   final String text;
-  final AppTextStyle? appTextStyle;
+  final AppTextStyle appTextStyle;
   final TextAlign? textAlign;
   final FontWeight? fontWeight;
   final Color? color;
 
-  // const AppText(
-  //     {super.key,
-  //     required this.text,
-  //     this.appTextStyle,
-  //     this.textAlign,
-  //     this.fontWeight});
   const AppText.displayLarge(
       {super.key,
       required this.text,
@@ -92,40 +89,10 @@ class AppText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    TextStyle? textStyle = textTheme.bodySmall;
-    switch (appTextStyle) {
-      case AppTextStyle.displayLarge:
-        textStyle = textTheme.displayLarge;
-        break;
-      case AppTextStyle.displayMedium:
-        textStyle = textTheme.displayMedium;
-        break;
-      case AppTextStyle.displaySmall:
-        textStyle = textTheme.displaySmall;
-        break;
-      case AppTextStyle.headlineLarge:
-        textStyle = textTheme.headlineLarge;
-        break;
-      case AppTextStyle.headlineMedium:
-        textStyle = textTheme.headlineMedium;
-        break;
-      case AppTextStyle.headlineSmall:
-        textStyle = textTheme.headlineSmall;
-        break;
-      case AppTextStyle.bodyLarge:
-        textStyle = textTheme.bodyLarge;
-        break;
-      case AppTextStyle.bodyMedium:
-        textStyle = textTheme.bodyMedium;
-        break;
-      case AppTextStyle.bodySmall:
-        textStyle = textTheme.bodySmall;
-        break;
-      default:
-    }
-
+    TextStyle? textStyle =
+        appTextStyle.textStyle.copyWith(color: textTheme.bodySmall!.color);
     return Text(text,
         textAlign: textAlign ?? TextAlign.center,
-        style: textStyle!.copyWith(fontWeight: fontWeight, color: color));
+        style: textStyle.copyWith(fontWeight: fontWeight, color: color));
   }
 }
