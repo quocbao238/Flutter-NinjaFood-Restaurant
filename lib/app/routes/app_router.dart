@@ -2,8 +2,10 @@ part of 'routes.dart';
 
 class AppPages {
   static String initial = AppRouteProvider.splashScreen;
-
-  static navigateDefaultPage() async {}
+  
+  static navigateDefaultPage() async {
+    
+  }
 
   //
   static final routes = [
