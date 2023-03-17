@@ -7,6 +7,8 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppViewLayout(mobileView: SignUpMobileScreen());
+    return AppViewLayout(
+      mobileView: SignUpMobileScreen(),
+    );
   }
 }

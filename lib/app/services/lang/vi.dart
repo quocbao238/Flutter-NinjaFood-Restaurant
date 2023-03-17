@@ -15,4 +15,5 @@ const Map<String, String> vi = {
   "SignUpScreen_AnotherLogin": "Hoặc tiếp tục với",
   "SignUpScreen_ForgotPassword": "Bạn quên mật khẩu?",
   "SignUpScreen_LoginBtn": "Đăng nhập",
+  "SignInScreen_Password": "Mật khẩu"
 };

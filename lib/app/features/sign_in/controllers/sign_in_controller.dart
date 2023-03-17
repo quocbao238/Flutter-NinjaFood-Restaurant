@@ -1,11 +1,10 @@
-import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/features/splash/controllers/theme_controller.dart';
 
-class SignUpController extends BaseController {
+class SignInController extends BaseController {
   final ThemeController themeController;
 
-  SignUpController({required this.themeController});
+  SignInController({required this.themeController});
 
   @override
   void onInit() {
@@ -25,7 +24,5 @@ class SignUpController extends BaseController {
     // themeController.changeTheme();
   }
 
-  void onPressedAlreadyHaveAnAccount() {
-    Get.toNamed("/signinScreen");
-  }
+  void onPressedForgotPassword() {}
 }

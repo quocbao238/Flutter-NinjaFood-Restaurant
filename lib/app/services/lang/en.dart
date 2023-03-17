@@ -10,9 +10,10 @@ const Map<String, String> en = {
   // Button
   "Next_Button": "Next",
 
-  // SignUp Screen
+  // SignIn Screen
   "SignUpScreen_Title": "Login To Your Account",
   "SignUpScreen_AnotherLogin": "Or Continue With",
   "SignUpScreen_ForgotPassword": "Forgot Your Password?",
   "SignUpScreen_LoginBtn": "Login",
+  "SignInScreen_Password": "Password",
 };
