@@ -22,7 +22,7 @@ class SignInMobileScreen extends GetView<SignInController> {
                   padding: AppEdgeInsets.only(
                       top: AppGapSize.verylarge, bottom: AppGapSize.large),
                   child: AppText.headlineMedium(
-                      text: 'SignUpScreen_Title'.tr,
+                      text: 'SignInScreen_Title'.tr,
                       fontWeight: FontWeight.bold)),
               AppTextFormField(
                 hintText: 'Email',
@@ -40,13 +40,13 @@ class SignInMobileScreen extends GetView<SignInController> {
                 onTap: controller.onPressedForgotPassword,
                 child: AppText.bodySmall(
                     textAlign: TextAlign.end,
-                    text: 'SignUpScreen_ForgotPassword'.tr,
+                    text: 'SignInScreen_ForgotPassword'.tr,
                     fontWeight: FontWeight.w400,
                     color: ThemeColors.primaryColor),
               ),
               AppPadding.medium(
                 child: AppButton.max(
-                    title: 'SignUpScreen_LoginBtn'.tr,
+                    title: 'SignInScreen_LoginBtn'.tr,
                     onPressed: controller.onPressedLogin),
               ),
               AppSizeScale(ratioWidth: 0.85, child: SocialComponent()),
@@ -59,11 +59,11 @@ class SignInMobileScreen extends GetView<SignInController> {
                     children: [
                       AppText.bodySmall(
                           textAlign: TextAlign.end,
-                          text: 'Don\'t have an account?'.tr,
+                          text: 'SignInScreen_DontAccount'.tr,
                           fontWeight: FontWeight.w400),
                       AppText.bodySmall(
                           textAlign: TextAlign.end,
-                          text: ' Sign Up'.tr,
+                          text: 'SignInScreen_SignUp'.tr,
                           fontWeight: FontWeight.w400,
                           color: ThemeColors.primaryColor),
                     ],

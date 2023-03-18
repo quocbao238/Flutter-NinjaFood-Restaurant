@@ -27,7 +27,7 @@ class SocialComponent extends GetView<SignInController> {
             iconWidget: AppIcons.google(),
             onPressed: controller.onPressedSocialGoogle,
           ),
-        )
+        ),
       ],
     );
   }

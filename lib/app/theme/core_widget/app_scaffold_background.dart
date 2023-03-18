@@ -15,7 +15,7 @@ class AppScaffoldBackgroundImage extends AppScaffold {
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(backgroundUrl), fit: BoxFit.cover)),
-        child: body,
+        child: AppSizeScale(ratioWidth: 1, ratioHeight: 1, child: body),
       );
     }));
   }

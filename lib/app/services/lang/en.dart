@@ -11,9 +11,17 @@ const Map<String, String> en = {
   "Next_Button": "Next",
 
   // SignIn Screen
-  "SignUpScreen_Title": "Login To Your Account",
-  "SignUpScreen_AnotherLogin": "Or Continue With",
-  "SignUpScreen_ForgotPassword": "Forgot Your Password?",
-  "SignUpScreen_LoginBtn": "Login",
+  "SignInScreen_Title": "Login To Your Account",
+  "SignInScreen_AnotherLogin": "Or Continue With",
+  "SignInScreen_ForgotPassword": "Forgot Your Password?",
+  "SignInScreen_LoginBtn": "Login",
   "SignInScreen_Password": "Password",
+  "SignInScreen_DontAccount": "Don\'t have an account? ",
+  "SignInScreen_SignUp": "Sign Up",
+
+  // SignUp Screen
+  "SignUpScreen_Title": "Sign Up For Free",
+  "SignUpScreen_Password": "Password",
+  "SignUpScreen_CreateAccount": "Create Account",
+  "SignUpScreen_HaveAnAccount": "Already have an account?",
 };
