@@ -5,17 +5,17 @@ class AppScaffoldBackgroundImage extends AppScaffold {
 
   @override
   Widget build(BuildContext context) {
-    ThemeController controller = Get.find<ThemeController>();
+    ThemeService controller = Get.find<ThemeService>();
 
     return Scaffold(body: Obx(() {
       final backgroundUrl = controller.isDarkTheme.value
-          ? 'assets/images/background_dark_image.png'
-          : 'assets/images/background_image.png';
+          ? AppImageAssets.backgroundDark
+          : AppImageAssets.backgroundLight;
       return DecoratedBox(
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(backgroundUrl), fit: BoxFit.cover)),
-        child: body,
+        child: AppSizeScale(ratioWidth: 1, ratioHeight: 1, child: body),
       );
     }));
   }

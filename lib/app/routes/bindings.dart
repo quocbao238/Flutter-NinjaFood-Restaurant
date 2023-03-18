@@ -9,14 +9,17 @@ class GetBinding extends Bindings {
   void dependencies() {
     switch (routerName) {
       case AppRouteProvider.splashScreen:
-        Get.lazyPut(() => SplashController());
+        Get.put(() => SplashController(
+            sharedPreferencesService: Get.find<SharedPreferencesService>()));
         break;
       case AppRouteProvider.onboardScreen:
         Get.lazyPut(() => OnboardController());
         break;
       case AppRouteProvider.signupScreen:
-        Get.lazyPut(() =>
-            SignUpController(themeController: Get.find<ThemeController>()));
+        Get.lazyPut(() => SignUpController(themeService: Get.find()));
+        break;
+      case AppRouteProvider.signinScreen:
+        Get.lazyPut(() => SignInController(themeService: Get.find()));
         break;
     }
   }

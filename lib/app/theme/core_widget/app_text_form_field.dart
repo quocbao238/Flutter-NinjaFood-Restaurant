@@ -1,18 +1,27 @@
 part of core_widget;
 
 class AppTextFormField extends StatelessWidget {
-  const AppTextFormField({super.key});
+  final Widget? prefixIcon;
+  final bool obscureText;
+  final String hintText;
+  const AppTextFormField({
+    super.key,
+    this.prefixIcon,
+    required this.obscureText,
+    required this.hintText,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: kToolbarHeight,
-      child: AppPadding(
-        padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.regular),
-        child: TextFormField(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-          ),
+      width: MediaQuery.of(context).size.width * 0.85,
+      child: TextFormField(
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          isDense: true,
+          hintText: hintText,
+          prefixIcon: AppPadding.medium(child: prefixIcon),
         ),
       ),
     );

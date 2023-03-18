@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/services/lang/en.dart';
 import 'package:ninjafood/app/services/lang/vi.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+import 'package:ninjafood/app/services/services.dart';
 
 class TranslationService extends Translations {
+  static late SharedPreferencesService prefsService = Get.find();
   static var fallbackLocale = Locale('vi', 'VN');
 
   static String localToString(Locale locale) {
@@ -19,8 +18,7 @@ class TranslationService extends Translations {
   }
 
   static Future<Null> init(Locale locale) async {
-    final SharedPreferences prefs = await _prefs;
-    String? lang = prefs.getString('lang');
+    String? lang = prefsService.getString(SharedPreferencesKey.currentLanguage);
     if (lang != null && lang.isNotEmpty)
       fallbackLocale = localFromString(lang);
     else
@@ -32,9 +30,9 @@ class TranslationService extends Translations {
   Map<String, Map<String, String>> get keys => {'en': en, 'vi': vi};
 
   static updateLocale(Locale locale) async {
-    final SharedPreferences prefs = await _prefs;
     Get.updateLocale(locale);
     fallbackLocale = locale;
-    prefs.setString('lang', localToString(locale));
+    prefsService.writeString(
+        SharedPreferencesKey.currentLanguage, localToString(locale));
   }
 }

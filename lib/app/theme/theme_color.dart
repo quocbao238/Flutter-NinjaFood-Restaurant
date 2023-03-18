@@ -11,6 +11,18 @@ class ThemeColors {
 
   static const textSubColor = Color(0xFF3B3B3B);
 
+  static const hintColorLight = Color(0xFF3B3B3B);
+  static const hintColorDark = Color(0xFFFFFFFF);
+
+  static backgroundTextFormDark() => backgroundColor.withOpacity(0.1);
+  static const backgroundTextFormLight = Color(0xFFFFFFFF);
+
+  static const borderColorLight = Color(0xFFF4F4F4);
+  static const borderColorDark = Colors.transparent;
+
+  // static const shadowLightColor = Color(0xFF5A6CEA);
+  static shadowLightColor() => Color(0xFF5A6CEA).withOpacity(0.07);
+
   static const gradientButtonColor = LinearGradient(
       begin: Alignment.centerLeft,
       end: Alignment.centerRight,

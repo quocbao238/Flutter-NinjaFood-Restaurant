@@ -5,15 +5,26 @@ class ThemePrimary {
     return ThemeData(
         textTheme: GoogleFonts.beVietnamProTextTheme(
             ThemeText.appTextTheme(ThemeColors.textLightColor)),
-        // colorSchemeSeed: ThemeColors.primaryColor,
         colorScheme: ColorScheme.light().copyWith(
-            primary: ThemeColors.primaryColor,
-            background: ThemeColors.backgroundColor),
+          primary: ThemeColors.primaryColor,
+          background: ThemeColors.backgroundColor,
+        ),
         brightness: Brightness.light,
         useMaterial3: true,
         // other
+        inputDecorationTheme: InputDecorationTheme(
+            border: OutlineInputBorder(
+                borderSide: BorderSide(color: ThemeColors.borderColorLight),
+                borderRadius: BorderRadius.circular(15)),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: ThemeColors.borderColorLight),
+                borderRadius: BorderRadius.circular(15)),
+            filled: true,
+            fillColor: ThemeColors.backgroundTextFormLight,
+            hintStyle: ThemeText.bodyMedium
+                .copyWith(color: ThemeColors.hintColorLight)),
         elevatedButtonTheme:
-            ElevatedButtonThemeData(style: elevatedButtonStyle()));
+            ElevatedButtonThemeData(style: elevatedButtonStyle()!));
   }
 
   static darkTheme() {
@@ -26,6 +37,17 @@ class ThemePrimary {
             background: ThemeColors.backgroundDarkColor),
         useMaterial3: true,
         // other
+        inputDecorationTheme: InputDecorationTheme(
+            border: OutlineInputBorder(
+                borderSide: BorderSide(color: ThemeColors.borderColorDark),
+                borderRadius: BorderRadius.circular(15)),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: ThemeColors.borderColorDark),
+                borderRadius: BorderRadius.circular(15)),
+            filled: true,
+            fillColor: ThemeColors.backgroundTextFormDark(),
+            hintStyle: ThemeText.bodyMedium
+                .copyWith(color: ThemeColors.hintColorDark)),
         elevatedButtonTheme:
             ElevatedButtonThemeData(style: elevatedButtonStyle()));
   }

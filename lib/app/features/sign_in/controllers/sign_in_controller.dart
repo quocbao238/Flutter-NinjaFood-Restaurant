@@ -3,10 +3,10 @@ import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/services/theme/theme_service.dart';
 
-class SignUpController extends BaseController {
+class SignInController extends BaseController {
   final ThemeService themeService;
 
-  SignUpController({required this.themeService});
+  SignInController({required this.themeService});
 
   @override
   void onInit() {
@@ -26,7 +26,9 @@ class SignUpController extends BaseController {
     themeService.toggleTheme();
   }
 
-  void onPressedAlreadyHaveAnAccount() {
-    Get.toNamed(AppRouteProvider.signinScreen);
+  void onPressedSignUp() {
+    Get.toNamed(AppRouteProvider.signupScreen);
   }
+
+  void onPressedForgotPassword() {}
 }
