@@ -9,8 +9,8 @@ class AppScaffoldBackgroundImage extends AppScaffold {
 
     return Scaffold(body: Obx(() {
       final backgroundUrl = controller.isDarkTheme.value
-          ? 'assets/images/background_dark_image.png'
-          : 'assets/images/background_image.png';
+          ? AppImageAssets.backgroundDark
+          : AppImageAssets.backgroundLight;
       return DecoratedBox(
         decoration: BoxDecoration(
             image: DecorationImage(

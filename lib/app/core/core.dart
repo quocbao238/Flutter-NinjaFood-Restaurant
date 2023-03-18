@@ -4,5 +4,8 @@ library boot;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 part 'baseController.dart';
+
+part 'app_icon_assets.dart';
+
+part 'app_image_assets.dart';

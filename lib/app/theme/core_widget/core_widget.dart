@@ -3,6 +3,7 @@ library core_widget;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ninjafood/app/services/theme/theme_service.dart';

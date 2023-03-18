@@ -1,7 +1,7 @@
 part of core_widget;
 
 enum AppImage {
-  logo('assets/images/logo.png');
+  logo(AppImageAssets.logo);
 
   final String url;
 

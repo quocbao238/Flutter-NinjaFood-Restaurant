@@ -1,64 +1,33 @@
 part of core_widget;
 
-class AppEmailAsset {
-  static const email = 'assets/icons/email_icon.svg';
-  static const password = 'assets/icons/password_icon.svg';
-  static const userProfile = 'assets/icons/password_icon.svg';
-  static const checkbox = 'assets/icons/user_profile_icon.svg';
-
-  static const unCheckbox = 'assets/icons/checkbox_icon.svg';
-  static const facebook = 'assets/icons/facebook_icon.svg';
-  static const google = 'assets/icons/google_icon.svg';
-  static const gallery = 'assets/icons/gallery_icon.svg';
-  static const camera = 'assets/icons/camera_icon.svg';
-  static const yourLocaltion = 'assets/icons/your_location.svg';
-  static const viaEmail = 'assets/icons/via_email_icon.svg';
-  static const viaSMS = 'assets/icons/via_sms_icon.svg';
-
-  static const menuHome = 'assets/icons/menu_home_icon.svg';
-  static const menuUser = 'assets/icons/menu_user_icon.svg';
-  static const menuCart = 'assets/icons/menu_cart_icon.svg';
-  static const menuChat = 'assets/icons/menu_chat_icon.svg';
-
-  static const notification = 'assets/icons/notification_icon.svg';
-  static const search = 'assets/icons/search_icon.svg';
-  static const filter = 'assets/icons/filter_icon.svg';
-  static const sendMessage = 'assets/icons/send_message_icon.svg.svg';
-  static const volumeOn = 'assets/icons/volume_on.svg';
-  static const volumeOff = 'assets/icons/volumeOff.svg';
-  static const edit = 'assets/icons/edit_icon.svg';
-  static const locationMap = 'assets/icons/location_icon.svg';
-  static const heart = 'assets/icons/heart_icon.svg';
-}
-
 enum AppIcon {
-  email(AppEmailAsset.email),
-  password(AppEmailAsset.password),
-  userProfile(AppEmailAsset.userProfile),
+  email(AppIconsAssets.email),
+  password(AppIconsAssets.password),
+  userProfile(AppIconsAssets.userProfile),
 
-  checkbox(AppEmailAsset.checkbox),
-  unCheckbox(AppEmailAsset.unCheckbox),
+  checkbox(AppIconsAssets.checkbox),
+  unCheckbox(AppIconsAssets.unCheckbox),
 
-  facebook(AppEmailAsset.facebook),
-  google(AppEmailAsset.google),
-  gallery(AppEmailAsset.gallery),
-  camera(AppEmailAsset.camera),
-  yourLocaltion(AppEmailAsset.yourLocaltion),
-  viaEmail(AppEmailAsset.viaEmail),
-  viaSMS(AppEmailAsset.viaSMS),
-  menuHome(AppEmailAsset.menuHome),
-  menuUser(AppEmailAsset.menuUser),
-  menuCart(AppEmailAsset.menuCart),
-  menuChat(AppEmailAsset.menuChat),
-  notification(AppEmailAsset.notification),
-  search(AppEmailAsset.search),
-  filter(AppEmailAsset.filter),
-  sendMessage(AppEmailAsset.sendMessage),
-  volumeOn(AppEmailAsset.volumeOn),
-  volumeOff(AppEmailAsset.volumeOff),
-  edit(AppEmailAsset.edit),
-  locationMap(AppEmailAsset.locationMap),
-  heart(AppEmailAsset.heart);
+  facebook(AppIconsAssets.facebook),
+  google(AppIconsAssets.google),
+  gallery(AppIconsAssets.gallery),
+  camera(AppIconsAssets.camera),
+  yourLocaltion(AppIconsAssets.yourLocaltion),
+  viaEmail(AppIconsAssets.viaEmail),
+  viaSMS(AppIconsAssets.viaSMS),
+  menuHome(AppIconsAssets.menuHome),
+  menuUser(AppIconsAssets.menuUser),
+  menuCart(AppIconsAssets.menuCart),
+  menuChat(AppIconsAssets.menuChat),
+  notification(AppIconsAssets.notification),
+  search(AppIconsAssets.search),
+  filter(AppIconsAssets.filter),
+  sendMessage(AppIconsAssets.sendMessage),
+  volumeOn(AppIconsAssets.volumeOn),
+  volumeOff(AppIconsAssets.volumeOff),
+  edit(AppIconsAssets.edit),
+  locationMap(AppIconsAssets.locationMap),
+  heart(AppIconsAssets.heart);
 
   final String url;
   const AppIcon(this.url);
