@@ -12,25 +12,21 @@ class ThemeService extends GetxService {
     final lcoalTheme =
         prefsService.getBool(SharedPreferencesKey.isDarkThemeKey) ?? false;
     isDarkTheme.value = lcoalTheme;
-    if (!isDarkTheme.value) return;
-
-    changeTheme();
+    if (isDarkTheme.value) {
+      Get.changeThemeMode(ThemeMode.dark);
+    }
   }
 
-  Future<void> changeTheme() async {
-    ThemeMode themeMode;
-
+  Future<void> toggleTheme() async {
     if (isDarkTheme.value) {
-      themeMode = ThemeMode.light;
       _writeCurrentThemeToLocal(false);
       isDarkTheme.value = false;
-      return Get.changeThemeMode(themeMode);
+      return Get.changeThemeMode(ThemeMode.light);
     }
 
-    themeMode = ThemeMode.dark;
     _writeCurrentThemeToLocal(true);
     isDarkTheme.value = true;
-    Get.changeThemeMode(themeMode);
+    Get.changeThemeMode(ThemeMode.dark);
   }
 
   Future<void> _writeCurrentThemeToLocal(bool isDarkTheme) async {

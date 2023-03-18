@@ -11,11 +11,13 @@ class SignInMobileScreen extends GetView<SignInController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage(
-      body: SafeArea(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/images/logo.png'),
+              AppImages.logo(),
               AppPadding(
                   padding: AppEdgeInsets.only(
                       top: AppGapSize.verylarge, bottom: AppGapSize.large),
@@ -34,21 +36,39 @@ class SignInMobileScreen extends GetView<SignInController> {
                   obscureText: true,
                 ),
               ),
-              AppText.bodySmall(
-                  text: 'SignUpScreen_AnotherLogin'.tr,
-                  fontWeight: FontWeight.bold),
-              SocialComponent(),
               GestureDetector(
                 onTap: controller.onPressedForgotPassword,
                 child: AppText.bodySmall(
+                    textAlign: TextAlign.end,
                     text: 'SignUpScreen_ForgotPassword'.tr,
                     fontWeight: FontWeight.w400,
                     color: ThemeColors.primaryColor),
               ),
-              AppPadding.large(
+              AppPadding.medium(
                 child: AppButton.max(
                     title: 'SignUpScreen_LoginBtn'.tr,
                     onPressed: controller.onPressedLogin),
+              ),
+              AppSizeScale(ratioWidth: 0.85, child: SocialComponent()),
+              InkWell(
+                onTap: controller.onPressedSignUp,
+                child: AppPadding.medium(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AppText.bodySmall(
+                          textAlign: TextAlign.end,
+                          text: 'Don\'t have an account?'.tr,
+                          fontWeight: FontWeight.w400),
+                      AppText.bodySmall(
+                          textAlign: TextAlign.end,
+                          text: ' Sign Up'.tr,
+                          fontWeight: FontWeight.w400,
+                          color: ThemeColors.primaryColor),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),

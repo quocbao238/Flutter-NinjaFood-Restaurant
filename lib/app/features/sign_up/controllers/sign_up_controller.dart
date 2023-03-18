@@ -22,7 +22,7 @@ class SignUpController extends BaseController {
   void onPressedSocialGoogle() {}
 
   void onPressedLogin() {
-    themeService.changeTheme();
+    themeService.toggleTheme();
   }
 
   void onPressedAlreadyHaveAnAccount() {

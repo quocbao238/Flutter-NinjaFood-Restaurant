@@ -95,6 +95,8 @@ class AppIcons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(appIcon.url);
+    return SvgPicture.asset(
+      appIcon.url,
+    );
   }
 }

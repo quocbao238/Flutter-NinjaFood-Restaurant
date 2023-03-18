@@ -1,4 +1,6 @@
+import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/services/theme/theme_service.dart';
 
 class SignInController extends BaseController {
@@ -21,7 +23,11 @@ class SignInController extends BaseController {
   void onPressedSocialGoogle() {}
 
   void onPressedLogin() {
-    // themeController.changeTheme();
+    themeService.toggleTheme();
+  }
+
+  void onPressedSignUp() {
+    Get.toNamed(AppRouteProvider.signupScreen);
   }
 
   void onPressedForgotPassword() {}

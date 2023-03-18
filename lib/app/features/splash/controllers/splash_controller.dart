@@ -20,6 +20,7 @@ class SplashController extends BaseController {
   }
 
   Future<void> checkFirstTimeInstallApp() async {
+    await Future.delayed(Duration(seconds: 5));
     final firstTimeOpenAppKey = (sharedPreferencesService
             .getBool(SharedPreferencesKey.firstTimeOpenAppKey) ??
         true);
@@ -27,12 +28,9 @@ class SplashController extends BaseController {
     if (!firstTimeOpenAppKey) {
       sharedPreferencesService.writeBool(
           SharedPreferencesKey.firstTimeOpenAppKey, true);
-      Future.delayed(Duration(seconds: 5))
-          .then((_) => Get.offAndToNamed(AppRouteProvider.onboardScreen));
+      Get.offAndToNamed(AppRouteProvider.onboardScreen);
       return;
     }
-
-    Future.delayed(Duration(seconds: 5))
-        .then((_) => Get.offAndToNamed(AppRouteProvider.signupScreen));
+    Get.offAndToNamed(AppRouteProvider.signinScreen);
   }
 }

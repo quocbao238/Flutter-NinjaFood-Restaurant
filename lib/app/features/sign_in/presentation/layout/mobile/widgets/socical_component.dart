@@ -10,27 +10,25 @@ class SocialComponent extends GetView<SignInController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppPadding.regular(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-              child: SocialButtonWidget(
-            title: 'Facebook',
-            iconWidget: AppIcons.facebook(),
-            onPressed: controller.onPressedSocialFacebook,
-          )),
-          AppPadding.medium(),
-          Expanded(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
             child: SocialButtonWidget(
-              title: 'Google',
-              iconWidget: AppIcons.google(),
-              onPressed: controller.onPressedSocialGoogle,
-            ),
-          )
-        ],
-      ),
+          title: 'Facebook',
+          iconWidget: AppIcons.facebook(),
+          onPressed: controller.onPressedSocialFacebook,
+        )),
+        AppPadding.small(),
+        Expanded(
+          child: SocialButtonWidget(
+            title: 'Google',
+            iconWidget: AppIcons.google(),
+            onPressed: controller.onPressedSocialGoogle,
+          ),
+        )
+      ],
     );
   }
 }

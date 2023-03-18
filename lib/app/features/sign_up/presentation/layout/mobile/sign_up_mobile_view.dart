@@ -11,68 +11,63 @@ class SignUpMobileScreen extends GetView<SignUpController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/logo.png'),
-              AppPadding(
-                padding: AppEdgeInsets.only(
-                    top: AppGapSize.verylarge, bottom: AppGapSize.large),
-                child: AppText.headlineMedium(
-                  text: 'Sign Up For Free',
-                  fontWeight: FontWeight.bold,
-                ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppImages.logo(),
+            AppPadding(
+              padding: AppEdgeInsets.only(
+                  top: AppGapSize.verylarge, bottom: AppGapSize.large),
+              child: AppText.headlineMedium(
+                text: 'Sign Up For Free',
+                fontWeight: FontWeight.bold,
               ),
-              //cần fix bug
-              AppTextFormField(
+            ),
+            //cần fix bug
+            AppTextFormField(
+              obscureText: false,
+              hintText: 'Anamwp . .',
+              prefixIcon: SvgPicture.asset(
+                'assets/icons/user_profile_icon.svg',
+                color: ThemeColors.primaryColor,
+              ),
+            ),
+            //cần fix bug
+            AppPadding(
+              padding: AppEdgeInsets.only(
+                  top: AppGapSize.medium, bottom: AppGapSize.medium),
+              child: AppTextFormField(
                 obscureText: false,
-                hintText: 'Anamwp . .',
+                hintText: 'Email',
                 prefixIcon: SvgPicture.asset(
-                  'assets/icons/user_profile_icon.svg',
+                  'assets/icons/email_icon.svg',
                   color: ThemeColors.primaryColor,
                 ),
               ),
-              //cần fix bug
-              AppPadding(
-                padding: AppEdgeInsets.only(
-                    top: AppGapSize.medium, bottom: AppGapSize.medium),
-                child: AppTextFormField(
-                  obscureText: false,
-                  hintText: 'Email',
-                  prefixIcon: SvgPicture.asset(
-                    'assets/icons/email_icon.svg',
-                    color: ThemeColors.primaryColor,
-                  ),
-                ),
-              ),
-              AppTextFormField(
+            ),
+            AppTextFormField(
                 obscureText: true,
                 hintText: 'SignInScreen_Password'.tr,
-                prefixIcon: SvgPicture.asset(
-                  'assets/icons/password_icon.svg',
-                  color: ThemeColors.primaryColor,
-                ),
+                prefixIcon: AppIcons.password()),
+            AppPadding(
+              padding: AppEdgeInsets.only(
+                  top: AppGapSize.verylarge, bottom: AppGapSize.large),
+              child: AppButton.min(
+                title: 'Create Account',
+                onPressed: controller.onPressedLogin,
               ),
-              AppPadding(
-                padding: AppEdgeInsets.only(
-                    top: AppGapSize.verylarge, bottom: AppGapSize.large),
-                child: AppButton.min(
-                  title: 'Create Account',
-                  onPressed: controller.onPressedLogin,
-                ),
+            ),
+            GestureDetector(
+              onTap: controller.onPressedAlreadyHaveAnAccount,
+              child: AppText.bodySmall(
+                text: 'already have an account?',
+                fontWeight: FontWeight.w400,
+                color: ThemeColors.primaryColor,
               ),
-              GestureDetector(
-                onTap: controller.onPressedAlreadyHaveAnAccount,
-                child: AppText.bodySmall(
-                  text: 'already have an account?',
-                  fontWeight: FontWeight.w400,
-                  color: ThemeColors.primaryColor,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

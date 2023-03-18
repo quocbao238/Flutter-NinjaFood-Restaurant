@@ -19,3 +19,4 @@ part 'app_size_scale.dart';
 part 'app_padding.dart';
 part 'app_text_form_field.dart';
 part 'app_scaffold_background.dart';
+part 'app_image.dart';
