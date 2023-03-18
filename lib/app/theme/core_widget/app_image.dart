@@ -1,7 +1,7 @@
 part of core_widget;
 
 enum AppImage {
-  logo(AppImageAssets.logo);
+  logo(AppImageAssets.logoLight);
 
   final String url;
 
@@ -17,6 +17,17 @@ class AppImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (appImage == AppImage.logo) {
+      return GetX<ThemeService>(
+        init: ThemeService(prefsService: Get.find()),
+        builder: (controller) {
+          final url = controller.isDarkTheme.value
+              ? AppImageAssets.logoDark
+              : appImage.url;
+          return Image.asset(url);
+        },
+      );
+    }
     return Image.asset(appImage.url);
   }
 }

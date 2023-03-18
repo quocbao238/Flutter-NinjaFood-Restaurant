@@ -36,13 +36,16 @@ class SignInMobileScreen extends GetView<SignInController> {
                   obscureText: true,
                 ),
               ),
-              GestureDetector(
-                onTap: controller.onPressedForgotPassword,
-                child: AppText.bodySmall(
+              AppSizeScale(
+                ratioWidth: 0.85,
+                child: GestureDetector(
+                  onTap: controller.onPressedForgotPassword,
+                  child: AppText.bodySmall(
                     textAlign: TextAlign.end,
                     text: 'SignInScreen_ForgotPassword'.tr,
-                    fontWeight: FontWeight.w400,
-                    color: ThemeColors.primaryColor),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
               AppPadding.medium(
                 child: AppButton.max(
@@ -61,11 +64,13 @@ class SignInMobileScreen extends GetView<SignInController> {
                           textAlign: TextAlign.end,
                           text: 'SignInScreen_DontAccount'.tr,
                           fontWeight: FontWeight.w400),
-                      AppText.bodySmall(
-                          textAlign: TextAlign.end,
-                          text: 'SignInScreen_SignUp'.tr,
-                          fontWeight: FontWeight.w400,
-                          color: ThemeColors.primaryColor),
+                      AppPadding.small(
+                        child: AppText.bodySmall(
+                            textAlign: TextAlign.end,
+                            text: 'SignInScreen_SignUp'.tr,
+                            fontWeight: FontWeight.w400,
+                            color: ThemeColors.primaryColor),
+                      ),
                     ],
                   ),
                 ),

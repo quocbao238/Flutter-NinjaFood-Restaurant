@@ -17,13 +17,12 @@ class SocialButtonWidget extends StatelessWidget {
   ) {
     return ElevatedButton(
       style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-            shape: MaterialStateProperty.all<OutlinedBorder>(
-              RoundedRectangleBorder(
-                  side: BorderSide(color: Color(0xFFF4F4F4), width: 1),
-                  borderRadius: BorderRadius.circular(16.0)),
-            ),
-          ),
-      onPressed: () {},
+              shape: MaterialStateProperty.all<OutlinedBorder>(
+            RoundedRectangleBorder(
+                side: BorderSide(color: Color(0xFFF4F4F4), width: 1),
+                borderRadius: BorderRadius.circular(16.0)),
+          )),
+      onPressed: onPressed,
       child: SizedBox(
         height: kToolbarHeight,
         child: Row(
@@ -32,9 +31,8 @@ class SocialButtonWidget extends StatelessWidget {
           children: [
             iconWidget,
             AppPadding(
-              padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small),
-              child: AppText.bodyMedium(text: title),
-            )
+                padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small),
+                child: AppText.bodyMedium(text: title))
           ],
         ),
       ),

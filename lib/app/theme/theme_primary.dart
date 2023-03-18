@@ -5,10 +5,10 @@ class ThemePrimary {
     return ThemeData(
         textTheme: GoogleFonts.beVietnamProTextTheme(
             ThemeText.appTextTheme(ThemeColors.textLightColor)),
-        // colorSchemeSeed: ThemeColors.primaryColor,
         colorScheme: ColorScheme.light().copyWith(
-            primary: ThemeColors.primaryColor,
-            background: ThemeColors.backgroundColor),
+          primary: ThemeColors.primaryColor,
+          background: ThemeColors.backgroundColor,
+        ),
         brightness: Brightness.light,
         useMaterial3: true,
         // other
@@ -24,7 +24,7 @@ class ThemePrimary {
             hintStyle: ThemeText.bodyMedium
                 .copyWith(color: ThemeColors.hintColorLight)),
         elevatedButtonTheme:
-            ElevatedButtonThemeData(style: elevatedButtonStyle()));
+            ElevatedButtonThemeData(style: elevatedButtonStyle()!));
   }
 
   static darkTheme() {

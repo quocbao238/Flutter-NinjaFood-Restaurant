@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/services/theme/theme_service.dart';
 
 class SignUpController extends BaseController {
@@ -26,6 +27,6 @@ class SignUpController extends BaseController {
   }
 
   void onPressedAlreadyHaveAnAccount() {
-    Get.toNamed("/signinScreen");
+    Get.toNamed(AppRouteProvider.signinScreen);
   }
 }
