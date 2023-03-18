@@ -1,10 +1,10 @@
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/features/splash/controllers/theme_controller.dart';
+import 'package:ninjafood/app/services/theme/theme_service.dart';
 
 class SignInController extends BaseController {
-  final ThemeController themeController;
+  final ThemeService themeService;
 
-  SignInController({required this.themeController});
+  SignInController({required this.themeService});
 
   @override
   void onInit() {

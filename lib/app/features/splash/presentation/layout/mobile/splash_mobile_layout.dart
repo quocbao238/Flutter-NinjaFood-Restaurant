@@ -8,8 +8,13 @@ class SplashMobileLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<SplashController>();
-    return AppScaffoldBackgroundImage(
-        body: Center(child: Image.asset('assets/images/logo.png')));
+    return GetBuilder<SplashController>(
+      init: SplashController(sharedPreferencesService: Get.find()),
+      initState: (_) {},
+      builder: (_) {
+        return AppScaffoldBackgroundImage(
+            body: Center(child: Image.asset('assets/images/logo.png')));
+      },
+    );
   }
 }

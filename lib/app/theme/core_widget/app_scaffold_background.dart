@@ -5,7 +5,7 @@ class AppScaffoldBackgroundImage extends AppScaffold {
 
   @override
   Widget build(BuildContext context) {
-    ThemeController controller = Get.find<ThemeController>();
+    ThemeService controller = Get.find<ThemeService>();
 
     return Scaffold(body: Obx(() {
       final backgroundUrl = controller.isDarkTheme.value

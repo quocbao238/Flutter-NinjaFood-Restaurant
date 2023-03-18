@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:ninjafood/app/features/splash/controllers/theme_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
+import 'package:ninjafood/app/services/services.dart';
 import 'package:ninjafood/app/theme/theme.dart';
 import 'routes/routes.dart';
-import 'services/lang/translation_service.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
         darkTheme: ThemePrimary.darkTheme(),
         onReady: () {},
         onInit: () async {
-          Get.put(ThemeController());
+          // initService();
           DeviceHelper.init();
         },
         debugShowCheckedModeBanner: false,

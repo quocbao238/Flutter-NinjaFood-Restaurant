@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/routes/routes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ninjafood/app/services/services.dart';
 
 class SplashController extends BaseController {
-  late final SharedPreferences _prefs;
+  final SharedPreferencesService sharedPreferencesService;
+
+  SplashController({required this.sharedPreferencesService});
 
   @override
   void onInit() async {
@@ -18,11 +20,13 @@ class SplashController extends BaseController {
   }
 
   Future<void> checkFirstTimeInstallApp() async {
-    _prefs = await SharedPreferences.getInstance();
-    final isSecondOpenedApp = _prefs.getBool('enbaleOnboard') ?? false;
+    final firstTimeOpenAppKey = (sharedPreferencesService
+            .getBool(SharedPreferencesKey.firstTimeOpenAppKey) ??
+        true);
 
-    if (!isSecondOpenedApp) {
-      _prefs.setBool('enbaleOnboard', true);
+    if (!firstTimeOpenAppKey) {
+      sharedPreferencesService.writeBool(
+          SharedPreferencesKey.firstTimeOpenAppKey, true);
       Future.delayed(Duration(seconds: 5))
           .then((_) => Get.offAndToNamed(AppRouteProvider.onboardScreen));
       return;

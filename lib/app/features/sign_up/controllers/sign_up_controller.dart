@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/features/splash/controllers/theme_controller.dart';
+import 'package:ninjafood/app/services/theme/theme_service.dart';
 
 class SignUpController extends BaseController {
-  final ThemeController themeController;
+  final ThemeService themeService;
 
-  SignUpController({required this.themeController});
+  SignUpController({required this.themeService});
 
   @override
   void onInit() {
@@ -22,7 +22,7 @@ class SignUpController extends BaseController {
   void onPressedSocialGoogle() {}
 
   void onPressedLogin() {
-    // themeController.changeTheme();
+    themeService.changeTheme();
   }
 
   void onPressedAlreadyHaveAnAccount() {

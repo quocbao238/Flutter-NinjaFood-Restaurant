@@ -8,8 +8,9 @@ import 'package:ninjafood/app/features/sign_in/presentation/layout/sign_in_scree
 import 'package:ninjafood/app/features/sign_up/controllers/sign_up_controller.dart';
 import 'package:ninjafood/app/features/sign_up/presentation/layout/sign_up.dart';
 import 'package:ninjafood/app/features/splash/controllers/splash_controller.dart';
-import 'package:ninjafood/app/features/splash/controllers/theme_controller.dart';
 import 'package:ninjafood/app/features/splash/presentation/splash_screen.dart';
+import 'package:ninjafood/app/services/services.dart';
+import 'package:ninjafood/app/services/shared_preferences_service/shared_preferences_service.dart';
 
 part 'app_provider.dart';
 part 'app_router.dart';
