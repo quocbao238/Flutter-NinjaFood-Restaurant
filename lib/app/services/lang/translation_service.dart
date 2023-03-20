@@ -6,7 +6,7 @@ import 'package:ninjafood/app/services/services.dart';
 
 class TranslationService extends Translations {
   static late SharedPreferencesService prefsService = Get.find();
-  static var fallbackLocale = Locale('vi', 'VN');
+  static var fallbackLocale = Locale('en', 'EN');
 
   static String localToString(Locale locale) {
     return locale.languageCode + "-" + locale.countryCode.toString();
@@ -18,12 +18,12 @@ class TranslationService extends Translations {
   }
 
   static Future<Null> init(Locale locale) async {
-    String? lang = prefsService.getString(SharedPreferencesKey.currentLanguage);
-    if (lang != null && lang.isNotEmpty)
-      fallbackLocale = localFromString(lang);
-    else
-      fallbackLocale = locale;
-    return null;
+    // String? lang = prefsService.getString(SharedPreferencesKey.currentLanguage);
+    // if (lang != null && lang.isNotEmpty)
+    //   fallbackLocale = localFromString(lang);
+    // else
+    //   fallbackLocale = locale;
+    // return null;
   }
 
   @override

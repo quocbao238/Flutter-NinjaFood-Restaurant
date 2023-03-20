@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/provider/auth_provider.dart';
 import 'package:ninjafood/app/routes/routes.dart';
-import 'package:ninjafood/app/services/theme/theme_service.dart';
 
 class SignInController extends BaseController {
-  final ThemeService themeService;
+  final AuthProvider authProvider;
 
-  SignInController({required this.themeService});
+  SignInController({required this.authProvider});
 
   @override
   void onInit() {
@@ -22,9 +22,7 @@ class SignInController extends BaseController {
 
   void onPressedSocialGoogle() {}
 
-  void onPressedLogin() {
-    themeService.toggleTheme();
-  }
+  void onPressedLogin() {}
 
   void onPressedSignUp() {
     Get.toNamed(AppRouteProvider.signupScreen);

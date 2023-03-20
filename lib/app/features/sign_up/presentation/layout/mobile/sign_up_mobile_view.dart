@@ -9,55 +9,58 @@ class SignUpMobileScreen extends GetView<SignUpController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldBackgroundImage(
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AppImages.logo(),
-              AppPadding(
-                padding: AppEdgeInsets.only(
-                    top: AppGapSize.verylarge, bottom: AppGapSize.large),
-                child: AppText.headlineMedium(
-                  text: 'SignUpScreen_Title'.tr,
-                  fontWeight: FontWeight.bold,
+    return Obx(
+      () => AppScaffoldBackgroundImage(
+        isLoading: controller.loading.value,
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppImages.logo(),
+                AppPadding(
+                  padding: AppEdgeInsets.only(
+                      top: AppGapSize.verylarge, bottom: AppGapSize.large),
+                  child: AppText.headlineMedium(
+                    text: 'SignUpScreen_Title'.tr,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              AppTextFormField(
-                  obscureText: false,
-                  hintText: 'Anamwp . .',
-                  prefixIcon: AppIcons.userProfile()),
-              AppPadding(
-                padding: AppEdgeInsets.only(
-                    top: AppGapSize.medium, bottom: AppGapSize.medium),
-                child: AppTextFormField(
+                AppTextFormField(
                     obscureText: false,
-                    hintText: 'Email',
-                    prefixIcon: AppIcons.email()),
-              ),
-              AppTextFormField(
-                  obscureText: true,
-                  hintText: 'SignUpScreen_Password'.tr,
-                  prefixIcon: AppIcons.password()),
-              AppPadding(
-                padding: AppEdgeInsets.only(
-                    top: AppGapSize.verylarge, bottom: AppGapSize.large),
-                child: AppButton.min(
-                  title: 'SignUpScreen_CreateAccount'.tr,
-                  onPressed: controller.onPressedLogin,
+                    hintText: 'Anamwp . .',
+                    prefixIcon: AppIcons.userProfile()),
+                AppPadding(
+                  padding: AppEdgeInsets.only(
+                      top: AppGapSize.medium, bottom: AppGapSize.medium),
+                  child: AppTextFormField(
+                      obscureText: false,
+                      hintText: 'Email',
+                      prefixIcon: AppIcons.email()),
                 ),
-              ),
-              GestureDetector(
-                onTap: controller.onPressedAlreadyHaveAnAccount,
-                child: AppText.bodySmall(
-                  text: 'SignUpScreen_HaveAnAccount'.tr,
-                  fontWeight: FontWeight.w400,
-                  color: ThemeColors.primaryColor,
+                AppTextFormField(
+                    obscureText: true,
+                    hintText: 'SignUpScreen_Password'.tr,
+                    prefixIcon: AppIcons.password()),
+                AppPadding(
+                  padding: AppEdgeInsets.only(
+                      top: AppGapSize.verylarge, bottom: AppGapSize.large),
+                  child: AppButton.min(
+                    title: 'SignUpScreen_CreateAccount'.tr,
+                    onPressed: controller.onPressedCreateAccount,
+                  ),
                 ),
-              ),
-            ],
+                GestureDetector(
+                  onTap: controller.onPressedAlreadyHaveAnAccount,
+                  child: AppText.bodySmall(
+                    text: 'SignUpScreen_HaveAnAccount'.tr,
+                    fontWeight: FontWeight.w400,
+                    color: ThemeColors.primaryColor,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
