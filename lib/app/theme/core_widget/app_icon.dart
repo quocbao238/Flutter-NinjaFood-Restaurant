@@ -27,7 +27,9 @@ enum AppIcon {
   volumeOff(AppIconsAssets.volumeOff),
   edit(AppIconsAssets.edit),
   locationMap(AppIconsAssets.locationMap),
-  heart(AppIconsAssets.heart);
+  heart(AppIconsAssets.heart),
+
+  back(AppIconsAssets.back);
 
   final String url;
   const AppIcon(this.url);
@@ -61,6 +63,7 @@ class AppIcons extends StatelessWidget {
   const AppIcons.volumeOff({super.key, this.appIcon = AppIcon.volumeOff});
   const AppIcons.edit({super.key, this.appIcon = AppIcon.edit});
   const AppIcons.heart({super.key, this.appIcon = AppIcon.heart});
+  const AppIcons.back({super.key, this.appIcon = AppIcon.back});
 
   @override
   Widget build(BuildContext context) {
