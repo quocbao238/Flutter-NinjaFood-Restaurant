@@ -6,7 +6,7 @@ class AppPages {
   static navigateDefaultPage() async {
     final authProvider = Get.find<AuthProvider>();
     if (authProvider.currnetAccount.value != null) {
-      initial =  AppRouteProvider.signinScreen;
+      initial = AppRouteProvider.signinScreen;
     }
   }
 
@@ -31,6 +31,11 @@ class AppPages {
       name: AppRouteProvider.signupScreen,
       page: () => SignUpScreen(),
       binding: GetBinding(AppRouteProvider.signupScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.signupProcessScreen,
+      page: () => SignUpProcessScreen(),
+      binding: GetBinding(AppRouteProvider.signupProcessScreen),
     ),
   ];
 }

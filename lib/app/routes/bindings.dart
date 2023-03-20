@@ -23,6 +23,10 @@ class GetBinding extends Bindings {
         Get.lazyPut(
             () => SignInController(authProvider: Get.find<AuthProvider>()));
         break;
+      case AppRouteProvider.signupProcessScreen:
+        Get.lazyPut(() =>
+            SignUpProcessController(authProvider: Get.find<AuthProvider>()));
+        break;
     }
   }
 }

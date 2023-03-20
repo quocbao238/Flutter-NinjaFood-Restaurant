@@ -11,6 +11,7 @@ class SignUpMobileScreen extends GetView<SignUpController> {
   Widget build(BuildContext context) {
     return Obx(
       () => AppScaffoldBackgroundImage(
+        type: BackgroundImageType.splash,
         isLoading: controller.loading.value,
         body: SingleChildScrollView(
           child: SafeArea(

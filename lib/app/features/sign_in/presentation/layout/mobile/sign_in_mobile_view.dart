@@ -11,6 +11,7 @@ class SignInMobileScreen extends GetView<SignInController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage(
+      type: BackgroundImageType.splash,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
@@ -53,26 +54,26 @@ class SignInMobileScreen extends GetView<SignInController> {
                     onPressed: controller.onPressedLogin),
               ),
               AppSizeScale(ratioWidth: 0.85, child: SocialComponent()),
-              InkWell(
-                onTap: controller.onPressedSignUp,
-                child: AppPadding.medium(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AppText.bodySmall(
-                          textAlign: TextAlign.end,
-                          text: 'SignInScreen_DontAccount'.tr,
-                          fontWeight: FontWeight.w400),
-                      AppPadding.small(
+              AppPadding.medium(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppText.bodySmall(
+                        textAlign: TextAlign.end,
+                        text: 'SignInScreen_DontAccount'.tr,
+                        fontWeight: FontWeight.w400),
+                    GestureDetector(
+                      onTap: controller.onPressedSignUp,
+                      child: AppPadding.small(
                         child: AppText.bodySmall(
                             textAlign: TextAlign.end,
                             text: 'SignInScreen_SignUp'.tr,
                             fontWeight: FontWeight.w400,
                             color: ThemeColors.primaryColor),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],
