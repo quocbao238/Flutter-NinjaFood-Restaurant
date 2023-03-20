@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/provider/auth_provider.dart';
 import 'package:ninjafood/app/routes/routes.dart';
-import 'package:ninjafood/app/services/theme/theme_service.dart';
 
 class SignUpController extends BaseController {
-  final ThemeService themeService;
+  final AuthProvider authProvider;
 
-  SignUpController({required this.themeService});
+  SignUpController({required this.authProvider});
 
   @override
   void onInit() {
@@ -18,12 +18,10 @@ class SignUpController extends BaseController {
     super.dispose();
   }
 
-  void onPressedSocialFacebook() {}
-
-  void onPressedSocialGoogle() {}
-
-  void onPressedLogin() {
-    themeService.toggleTheme();
+  Future<void> onPressedCreateAccount() async {
+    this.loading.value = true;
+    await authProvider.signUp(email: 'test1@gmail.com', password: '12345678');
+    this.loading.value = false;
   }
 
   void onPressedAlreadyHaveAnAccount() {

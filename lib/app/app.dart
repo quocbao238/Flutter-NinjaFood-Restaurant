@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
         darkTheme: ThemePrimary.darkTheme(),
         onReady: () {},
         onInit: () async {
-          // initService();
           DeviceHelper.init();
         },
         debugShowCheckedModeBanner: false,

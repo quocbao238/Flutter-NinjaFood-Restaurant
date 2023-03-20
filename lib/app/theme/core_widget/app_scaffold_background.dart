@@ -1,7 +1,8 @@
 part of core_widget;
 
 class AppScaffoldBackgroundImage extends AppScaffold {
-  const AppScaffoldBackgroundImage({super.key, required super.body});
+  const AppScaffoldBackgroundImage(
+      {super.key, required super.body, super.isLoading = false});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,13 @@ class AppScaffoldBackgroundImage extends AppScaffold {
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(backgroundUrl), fit: BoxFit.cover)),
-        child: AppSizeScale(ratioWidth: 1, ratioHeight: 1, child: body),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            AppSizeScale(ratioWidth: 1, ratioHeight: 1, child: body),
+            AppLoading(isLoading: isLoading)
+          ],
+        ),
       );
     }));
   }

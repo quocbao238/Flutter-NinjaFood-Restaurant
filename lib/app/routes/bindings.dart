@@ -16,10 +16,12 @@ class GetBinding extends Bindings {
         Get.lazyPut(() => OnboardController());
         break;
       case AppRouteProvider.signupScreen:
-        Get.lazyPut(() => SignUpController(themeService: Get.find()));
+        Get.lazyPut(
+            () => SignUpController(authProvider: Get.find<AuthProvider>()));
         break;
       case AppRouteProvider.signinScreen:
-        Get.lazyPut(() => SignInController(themeService: Get.find()));
+        Get.lazyPut(
+            () => SignInController(authProvider: Get.find<AuthProvider>()));
         break;
     }
   }
