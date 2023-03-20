@@ -1,8 +1,23 @@
 part of core_widget;
 
+enum BackgroundImageType {
+  splash(AppImageAssets.backgroundDark, AppImageAssets.backgroundLight),
+  normal(AppImageAssets.backgroundPattern, AppImageAssets.backgroundPattern);
+
+  final String backgroundDark;
+  final String backgroundLight;
+  const BackgroundImageType(this.backgroundDark, this.backgroundLight);
+}
+
 class AppScaffoldBackgroundImage extends AppScaffold {
-  const AppScaffoldBackgroundImage(
-      {super.key, required super.body, super.isLoading = false});
+  final BackgroundImageType? type;
+
+  const AppScaffoldBackgroundImage({
+    super.key,
+    required super.body,
+    super.isLoading = false,
+    this.type = BackgroundImageType.normal,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -10,8 +25,8 @@ class AppScaffoldBackgroundImage extends AppScaffold {
 
     return Scaffold(body: Obx(() {
       final backgroundUrl = controller.isDarkTheme.value
-          ? AppImageAssets.backgroundDark
-          : AppImageAssets.backgroundLight;
+          ? type!.backgroundDark
+          : type!.backgroundLight;
       return DecoratedBox(
         decoration: BoxDecoration(
             image: DecorationImage(
