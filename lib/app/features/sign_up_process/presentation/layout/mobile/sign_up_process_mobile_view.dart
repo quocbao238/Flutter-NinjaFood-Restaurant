@@ -9,7 +9,7 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage(
-      onPressBackButton: () {},
+      onPressBackButton: controller.onPressBack,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

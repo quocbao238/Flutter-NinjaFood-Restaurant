@@ -18,6 +18,10 @@ class PaymentController extends BaseController {
     super.dispose();
   }
 
+  void onPressBack() {
+    Get.back();
+  }
+
   void onPressedPayPal() {}
 
   void onPressedVisa() {}

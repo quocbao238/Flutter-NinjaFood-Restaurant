@@ -17,6 +17,10 @@ class UploadPhotoController extends BaseController {
     super.dispose();
   }
 
+  void onPressBack() {
+    Get.back();
+  }
+
   void onPressedFromGallery() {}
 
   void onPressedTakePhoto() {}
