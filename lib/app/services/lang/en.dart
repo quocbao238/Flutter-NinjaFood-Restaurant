@@ -25,21 +25,24 @@ const Map<String, String> en = {
   "SignUpScreen_CreateAccount": "Create Account",
   "SignUpScreen_HaveAnAccount": "Already have an account?",
 
-    //SignUp Process
-  "SignUpProcessScreen_Title": "Fill in your bio to get started",
-  "SignUpProcessScreen_Description": "This data will be displayed in your account profile for security",
+  //SignUp Process
+  "SignUpProcessScreen_Title": "Fill in your bio to get\nstarted",
+  "SignUpProcessScreen_Description":
+      "This data will be displayed in your\naccount profile for security",
   "SignUpProcessScreen_FirstName": "First Name",
-  "SignUpProcessScreen_LastName":"Last Name",
+  "SignUpProcessScreen_LastName": "Last Name",
   "SignUpProcessScreen_MobileNumber": "Mobile Number",
   "SignUpProcessScreen_Next": "Next",
 
   //Payment Method
   "PaymentMethodScreen_Title": "Payment Method",
-  "PaymentMethodScreen_Description": "This data will be displayed in your account profile for security",
+  "PaymentMethodScreen_Description":
+      "This data will be displayed in your account profile for security",
   "PaymentMethodScreen_Next": "Next",
 
   //Upload Photo
   "UploadPhotoScreen_Title": "Upload Your Photo Profile",
-  "UploadPhotoScreen_Description": "This data will be displayed in your account profile for security",
+  "UploadPhotoScreen_Description":
+      "This data will be displayed in your account profile for security",
   "UploadPhotoScreen_Next": "Next",
 };

@@ -15,7 +15,6 @@ class AppTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: kToolbarHeight,
-      width: MediaQuery.of(context).size.width * 0.85,
       child: TextFormField(
         obscureText: obscureText,
         decoration: InputDecoration(

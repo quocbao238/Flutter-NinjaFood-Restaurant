@@ -4,10 +4,10 @@ class AppPages {
   static String initial = AppRouteProvider.splashScreen;
 
   static navigateDefaultPage() async {
-    final authProvider = Get.find<AuthProvider>();
-    if (authProvider.currnetAccount.value != null) {
-      initial = AppRouteProvider.signinScreen;
-    }
+    // final authProvider = Get.find<AuthProvider>();
+    // if (authProvider.currnetAccount.value != null) {
+    //   initial = AppRouteProvider.signinScreen;
+    // }
   }
 
   //

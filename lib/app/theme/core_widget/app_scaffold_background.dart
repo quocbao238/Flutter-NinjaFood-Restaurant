@@ -11,9 +11,11 @@ enum BackgroundImageType {
 
 class AppScaffoldBackgroundImage extends AppScaffold {
   final BackgroundImageType? type;
+  final VoidCallback? onPressBackButton;
 
   AppScaffoldBackgroundImage({
     super.key,
+    this.onPressBackButton,
     required super.body,
     super.isLoading = false,
     this.type = BackgroundImageType.normal,
@@ -24,59 +26,33 @@ class AppScaffoldBackgroundImage extends AppScaffold {
     ThemeService controller = Get.find<ThemeService>();
 
     return Scaffold(
-      // extendBodyBehindAppBar: true,
-      // appBar: AppBar(
-      //   // elevation: 0,
-      //   backgroundColor: Colors.transparent,
-      //   leading: SizedBox(
-      //     width: 45,
-      //     height: 45,
-      //     child: DecoratedBox(
-      //       decoration: BoxDecoration(
-      //         borderRadius: BorderRadius.circular(15),
-      //         color: Color(0xFFF9A84D).withOpacity(0.1),
-      //       ),
-      //       child: Center(
-      //         child: Icon(
-      //           Icons.arrow_back_ios,
-      //           color: Color(0xFFDA6317),
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // ),
       body: Obx(
         () {
           final backgroundUrl = controller.isDarkTheme.value
               ? type!.backgroundDark
               : type!.backgroundLight;
-          return DecoratedBox(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(backgroundUrl), fit: BoxFit.cover)),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                AppSizeScale(ratioWidth: 1, ratioHeight: 1, child: body),
-                AppLoading(isLoading: isLoading),
-                Positioned(
-                  top: 35,
-                  left: 28,
-                  child: SizedBox(
-                    width: 45,
-                    height: 45,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Color(0xFFF9A84D).withOpacity(0.1),
-                      ),
-                      child: Center(
-                        child: AppIcons.back(),
-                      ),
+          return AppSizeScale(
+            ratioWidth: 1,
+            ratioHeight: 1,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(backgroundUrl), fit: BoxFit.cover)),
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        AppButtonBack(onPressed: onPressBackButton),
+                        Expanded(child: body),
+                      ],
                     ),
                   ),
-                ),
-              ],
+                  AppLoading(isLoading: isLoading),
+                ],
+              ),
             ),
           );
         },

@@ -18,7 +18,6 @@ class PaymentMethodMobileScreen extends GetView<PaymentController> {
             height: MediaQuery.of(context).size.height * 0.6,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Wrap(
                   direction: Axis.vertical,

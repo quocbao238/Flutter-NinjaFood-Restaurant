@@ -3,7 +3,7 @@ part of 'core.dart';
 class AppIconsAssets {
   static const email = 'assets/icons/email_icon.svg';
   static const password = 'assets/icons/password_icon.svg';
-  static const userProfile = 'assets/icons/password_icon.svg';
+  static const userProfile = 'assets/icons/user_profile_icon.svg';
   static const checkbox = 'assets/icons/user_profile_icon.svg';
 
   static const unCheckbox = 'assets/icons/checkbox_icon.svg';
