@@ -11,7 +11,7 @@ class AppButtonBack extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
           top: ThemeSizes.verylarge,
-          left: ThemeSizes.regular,
+          left: ThemeSizes.small,
           bottom: ThemeSizes.regular),
       child: SizedBox(
         width: 45,

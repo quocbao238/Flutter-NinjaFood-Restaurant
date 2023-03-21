@@ -16,7 +16,7 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppPadding(
-              padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.regular),
+              padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
               child: AppText.headlineLarge(
                 textAlign: TextAlign.start,
                 text: 'SignUpProcessScreen_Title'.tr,
@@ -33,7 +33,7 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
             ),
             AppPadding(
               padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.regular, vertical: AppGapSize.small),
+                  horizontal: AppGapSize.medium, vertical: AppGapSize.small),
               child: AppTextFormField(
                 obscureText: false,
                 hintText: 'SignUpProcessScreen_FirstName'.tr,
@@ -41,7 +41,7 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
             ),
             AppPadding(
               padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.regular, vertical: AppGapSize.small),
+                  horizontal: AppGapSize.medium, vertical: AppGapSize.small),
               child: AppTextFormField(
                 obscureText: false,
                 hintText: 'SignUpProcessScreen_LastName'.tr,
@@ -49,7 +49,7 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
             ),
             AppPadding(
               padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.regular, vertical: AppGapSize.small),
+                  horizontal: AppGapSize.medium, vertical: AppGapSize.small),
               child: AppTextFormField(
                 obscureText: false,
                 hintText: 'SignUpProcessScreen_MobileNumber'.tr,
@@ -57,7 +57,7 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
             ),
             AppPadding(
               padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.regular,
+                  horizontal: AppGapSize.medium,
                   vertical: AppGapSize.verylarge),
               child: AppButton.max(
                   title: 'SignUpProcessScreen_Next'.tr,

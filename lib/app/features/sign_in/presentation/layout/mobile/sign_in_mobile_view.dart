@@ -23,14 +23,14 @@ class SignInMobileScreen extends GetView<SignInController> {
                   padding: AppEdgeInsets.only(
                       top: AppGapSize.verylarge,
                       bottom: AppGapSize.large,
-                      left: AppGapSize.regular,
-                      right: AppGapSize.regular),
+                      left: AppGapSize.medium,
+                      right: AppGapSize.medium),
                   child: AppText.headlineMedium(
                       text: 'SignInScreen_Title'.tr,
                       fontWeight: FontWeight.bold)),
               AppPadding(
                 padding: AppEdgeInsets.symmetric(
-                    horizontal: AppGapSize.regular, vertical: AppGapSize.small),
+                    horizontal: AppGapSize.medium, vertical: AppGapSize.small),
                 child: AppTextFormField(
                   hintText: 'Email',
                   obscureText: false,
@@ -38,7 +38,7 @@ class SignInMobileScreen extends GetView<SignInController> {
               ),
               AppPadding(
                 padding: AppEdgeInsets.symmetric(
-                    horizontal: AppGapSize.regular, vertical: AppGapSize.small),
+                    horizontal: AppGapSize.medium, vertical: AppGapSize.small),
                 child: AppTextFormField(
                   hintText: 'SignInScreen_Password'.tr,
                   obscureText: true,
@@ -46,7 +46,7 @@ class SignInMobileScreen extends GetView<SignInController> {
               ),
               AppPadding(
                 padding: AppEdgeInsets.symmetric(
-                    horizontal: AppGapSize.regular, vertical: AppGapSize.small),
+                    horizontal: AppGapSize.medium, vertical: AppGapSize.small),
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
@@ -59,19 +59,19 @@ class SignInMobileScreen extends GetView<SignInController> {
                   ),
                 ),
               ),
-              AppPadding.regular(
+              AppPadding.medium(
                 child: AppButton.max(
                     title: 'SignInScreen_LoginBtn'.tr,
                     onPressed: controller.onPressedLogin),
               ),
               AppPadding(
                   padding: AppEdgeInsets.symmetric(
-                      horizontal: AppGapSize.regular,
+                      horizontal: AppGapSize.medium,
                       vertical: AppGapSize.small),
                   child: SocialComponent()),
               AppPadding(
                 padding:
-                    AppEdgeInsets.symmetric(horizontal: AppGapSize.regular),
+                    AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
