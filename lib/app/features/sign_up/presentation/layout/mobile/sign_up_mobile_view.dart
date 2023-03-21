@@ -83,4 +83,6 @@ class SignUpMobileScreen extends GetView<SignUpController> {
       ),
     );
   }
+
+  // Test 1234
 }
