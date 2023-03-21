@@ -24,4 +24,22 @@ const Map<String, String> vi = {
   "SignUpScreen_Password": "Mật khẩu",
   "SignUpScreen_CreateAccount": "Tạo tài khoản",
   "SignUpScreen_HaveAnAccount": "Bạn đã có sẵn một tài khoản?",
+
+  //SignUp Process
+  "SignUpProcessScreen_Title": "Điền vào tiểu sử của bạn để bắt đầu",
+  "SignUpProcessScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
+  "SignUpProcessScreen_FirstName": "Họ",
+  "SignUpProcessScreen_LastName":"Tên",
+  "SignUpProcessScreen_MobileNumber": "Số Điện Thoại",
+  "SignUpProcessScreen_Next": "Tiếp Theo",
+
+  //Payment Method
+  "PaymentMethodScreen_Title": "Phương thức thanh toán",
+  "PaymentMethodScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
+  "PaymentMethodScreen_Next": "Tiếp Theo",
+
+  //Upload Photo
+  "UploadPhotoScreen_Title": "Tải ảnh đại diện của bạn lên",
+  "UploadPhotoScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
+  "UploadPhotoScreen_Next": "Tiếp Theo",
 };

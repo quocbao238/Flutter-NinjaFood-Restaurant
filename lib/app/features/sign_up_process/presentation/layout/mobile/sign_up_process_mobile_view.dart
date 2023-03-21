@@ -9,7 +9,63 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage(
-      body: Container(),
+      onPressBackButton: () {},
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppPadding(
+              padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.regular),
+              child: AppText.headlineLarge(
+                textAlign: TextAlign.start,
+                text: 'SignUpProcessScreen_Title'.tr,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            AppPadding(
+              padding: AppEdgeInsets.symmetric(
+                  horizontal: AppGapSize.regular, vertical: AppGapSize.medium),
+              child: AppText.bodyMedium(
+                textAlign: TextAlign.start,
+                text: 'SignUpProcessScreen_Description'.tr,
+              ),
+            ),
+            AppPadding(
+              padding: AppEdgeInsets.symmetric(
+                  horizontal: AppGapSize.regular, vertical: AppGapSize.small),
+              child: AppTextFormField(
+                obscureText: false,
+                hintText: 'SignUpProcessScreen_FirstName'.tr,
+              ),
+            ),
+            AppPadding(
+              padding: AppEdgeInsets.symmetric(
+                  horizontal: AppGapSize.regular, vertical: AppGapSize.small),
+              child: AppTextFormField(
+                obscureText: false,
+                hintText: 'SignUpProcessScreen_LastName'.tr,
+              ),
+            ),
+            AppPadding(
+              padding: AppEdgeInsets.symmetric(
+                  horizontal: AppGapSize.regular, vertical: AppGapSize.small),
+              child: AppTextFormField(
+                obscureText: false,
+                hintText: 'SignUpProcessScreen_MobileNumber'.tr,
+              ),
+            ),
+            AppPadding(
+              padding: AppEdgeInsets.symmetric(
+                  horizontal: AppGapSize.regular,
+                  vertical: AppGapSize.verylarge),
+              child: AppButton.max(
+                  title: 'SignUpProcessScreen_Next'.tr,
+                  onPressed: controller.onPressedNext),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

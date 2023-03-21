@@ -2,7 +2,8 @@ part of core_widget;
 
 enum AppButtonType {
   min(0.4),
-  max(0.85);
+  max(1);
+
   final double ratio;
   const AppButtonType(this.ratio);
 }

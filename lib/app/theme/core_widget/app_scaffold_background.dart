@@ -11,9 +11,11 @@ enum BackgroundImageType {
 
 class AppScaffoldBackgroundImage extends AppScaffold {
   final BackgroundImageType? type;
+  final VoidCallback? onPressBackButton;
 
-  const AppScaffoldBackgroundImage({
+  AppScaffoldBackgroundImage({
     super.key,
+    this.onPressBackButton,
     required super.body,
     super.isLoading = false,
     this.type = BackgroundImageType.normal,
@@ -23,22 +25,38 @@ class AppScaffoldBackgroundImage extends AppScaffold {
   Widget build(BuildContext context) {
     ThemeService controller = Get.find<ThemeService>();
 
-    return Scaffold(body: Obx(() {
-      final backgroundUrl = controller.isDarkTheme.value
-          ? type!.backgroundDark
-          : type!.backgroundLight;
-      return DecoratedBox(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(backgroundUrl), fit: BoxFit.cover)),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            AppSizeScale(ratioWidth: 1, ratioHeight: 1, child: body),
-            AppLoading(isLoading: isLoading)
-          ],
-        ),
-      );
-    }));
+    return Scaffold(
+      body: Obx(
+        () {
+          final backgroundUrl = controller.isDarkTheme.value
+              ? type!.backgroundDark
+              : type!.backgroundLight;
+          return AppSizeScale(
+            ratioWidth: 1,
+            ratioHeight: 1,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(backgroundUrl), fit: BoxFit.cover)),
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        AppButtonBack(onPressed: onPressBackButton),
+                        Expanded(child: body),
+                      ],
+                    ),
+                  ),
+                  AppLoading(isLoading: isLoading),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

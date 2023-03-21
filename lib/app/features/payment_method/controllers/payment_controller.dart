@@ -2,12 +2,11 @@ import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/provider/auth_provider.dart';
 import 'package:ninjafood/app/routes/routes.dart';
-import 'package:ninjafood/app/services/services.dart';
 
-class SignUpProcessController extends BaseController {
+class PaymentController extends BaseController {
   final AuthProvider authProvider;
 
-  SignUpProcessController({required this.authProvider});
+  PaymentController({required this.authProvider});
 
   @override
   void onInit() {
@@ -19,8 +18,13 @@ class SignUpProcessController extends BaseController {
     super.dispose();
   }
 
+  void onPressedPayPal() {}
+
+  void onPressedVisa() {}
+
+  void onPressedPayoneer() {}
+
   void onPressedNext() {
-    // Get.toNamed(AppRouteProvider.paymentMethodScreen);
-    Get.find<ThemeService>().toggleTheme();
+    Get.toNamed(AppRouteProvider.uploadPhotoScreen);
   }
 }

@@ -22,32 +22,44 @@ class SignUpMobileScreen extends GetView<SignUpController> {
                 AppImages.logo(),
                 AppPadding(
                   padding: AppEdgeInsets.only(
-                      top: AppGapSize.verylarge, bottom: AppGapSize.large),
+                      top: AppGapSize.verylarge,
+                      bottom: AppGapSize.large,
+                      left: AppGapSize.regular,
+                      right: AppGapSize.regular),
                   child: AppText.headlineMedium(
                     text: 'SignUpScreen_Title'.tr,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                AppTextFormField(
-                    obscureText: false,
-                    hintText: 'Anamwp . .',
-                    prefixIcon: AppIcons.userProfile()),
                 AppPadding(
-                  padding: AppEdgeInsets.only(
-                      top: AppGapSize.medium, bottom: AppGapSize.medium),
+                  padding: AppEdgeInsets.symmetric(
+                      horizontal: AppGapSize.regular,
+                      vertical: AppGapSize.small),
+                  child: AppTextFormField(
+                      obscureText: false,
+                      hintText: 'Anamwp . .',
+                      prefixIcon: AppIcons.userProfile()),
+                ),
+                AppPadding(
+                  padding: AppEdgeInsets.symmetric(
+                      horizontal: AppGapSize.regular,
+                      vertical: AppGapSize.small),
                   child: AppTextFormField(
                       obscureText: false,
                       hintText: 'Email',
                       prefixIcon: AppIcons.email()),
                 ),
-                AppTextFormField(
-                    obscureText: true,
-                    hintText: 'SignUpScreen_Password'.tr,
-                    prefixIcon: AppIcons.password()),
                 AppPadding(
-                  padding: AppEdgeInsets.only(
-                      top: AppGapSize.verylarge, bottom: AppGapSize.large),
-                  child: AppButton.min(
+                  padding: AppEdgeInsets.symmetric(
+                      horizontal: AppGapSize.regular,
+                      vertical: AppGapSize.small),
+                  child: AppTextFormField(
+                      obscureText: true,
+                      hintText: 'SignUpScreen_Password'.tr,
+                      prefixIcon: AppIcons.password()),
+                ),
+                AppPadding.regular(
+                  child: AppButton.max(
                     title: 'SignUpScreen_CreateAccount'.tr,
                     onPressed: controller.onPressedCreateAccount,
                   ),

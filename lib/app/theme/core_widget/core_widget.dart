@@ -9,7 +9,6 @@ import 'package:ninjafood/app/helper/helper.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ninjafood/app/services/theme/theme_service.dart';
 import 'package:ninjafood/app/theme/theme.dart';
-
 part 'app_button.dart';
 part 'app_icon.dart';
 part 'app_loading.dart';
@@ -22,3 +21,5 @@ part 'app_padding.dart';
 part 'app_text_form_field.dart';
 part 'app_scaffold_background.dart';
 part 'app_image.dart';
+
+part 'app_back_button.dart';
