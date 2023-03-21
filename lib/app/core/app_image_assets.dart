@@ -8,4 +8,7 @@ class AppImageAssets {
   static const onboardBanner1 = 'assets/images/onboarding1.png';
   static const onboardBanner2 = 'assets/images/onboarding2.png';
   static const backgroundPattern = 'assets/images/background_pattern.png';
+  static const paypal = 'assets/images/paypal.png';
+  static const visa = 'assets/images/visa.png';
+  static const payoneer = 'assets/images/payoneer.png';
 }

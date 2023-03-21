@@ -37,5 +37,15 @@ class AppPages {
       page: () => SignUpProcessScreen(),
       binding: GetBinding(AppRouteProvider.signupProcessScreen),
     ),
+    GetPage(
+      name: AppRouteProvider.paymentMethodScreen,
+      page: () => PaymentMethodScreen(),
+      binding: GetBinding(AppRouteProvider.paymentMethodScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.uploadPhotoScreen,
+      page: () => UploadPhotoScreen(),
+      binding: GetBinding(AppRouteProvider.uploadPhotoScreen),
+    ),
   ];
 }

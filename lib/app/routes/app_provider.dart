@@ -7,4 +7,6 @@ class AppRouteProvider {
   static const String signinScreen = '/signinScreen';
   static const String signupScreen = '/signupScreen';
   static const String signupProcessScreen = '/signupProcessScreen';
+  static const String paymentMethodScreen = '/paymentMethodScreen';
+  static const String uploadPhotoScreen = '/uploadPhotoScreen';
 }

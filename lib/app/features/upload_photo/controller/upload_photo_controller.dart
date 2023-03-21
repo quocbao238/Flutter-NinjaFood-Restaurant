@@ -1,12 +1,11 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/provider/auth_provider.dart';
-import 'package:ninjafood/app/routes/routes.dart';
 
-class SignUpProcessController extends BaseController {
+class UploadPhotoController extends BaseController {
   final AuthProvider authProvider;
 
-  SignUpProcessController({required this.authProvider});
+  UploadPhotoController({required this.authProvider});
 
   @override
   void onInit() {
@@ -18,7 +17,9 @@ class SignUpProcessController extends BaseController {
     super.dispose();
   }
 
-  void onPressedNext() {
-    Get.toNamed(AppRouteProvider.paymentMethodScreen);
-  }
+  void onPressedFromGallery() {}
+
+  void onPressedTakePhoto() {}
+
+  void onPressedNext() {}
 }

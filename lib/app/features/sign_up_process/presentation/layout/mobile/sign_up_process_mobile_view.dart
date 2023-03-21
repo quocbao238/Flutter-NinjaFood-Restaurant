@@ -9,45 +9,60 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage(
-      body: AppPadding(
-        padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppText.headlineLarge(
-                    textAlign: TextAlign.start,
-                    text: 'Fill in your bio to get\nstarted'),
-                AppText.bodySmall(
-                    textAlign: TextAlign.start,
-                    text:
-                        'This data will be displayed in your account\nprofile for security'),
-              ],
-            ),
-            Column(
-              children: [
-                AppTextFormField(
-                  obscureText: false,
-                  hintText: 'First Name',
-                ),
-                AppPadding.medium(
-                  child: AppTextFormField(
-                    obscureText: false,
-                    hintText: 'Last Name',
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Wrap(
+                    direction: Axis.vertical,
+                    children: [
+                      AppText.headlineLarge(
+                        textAlign: TextAlign.start,
+                        text: 'SignUpProcessScreen_Title'.tr,
+                      ),
+                      AppPadding(
+                        padding: AppEdgeInsets.only(top: AppGapSize.medium),
+                        child: AppText.bodySmall(
+                          textAlign: TextAlign.start,
+                          text: 'SignUpProcessScreen_Description'.tr,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                AppTextFormField(
-                  obscureText: false,
-                  hintText: 'Mobile Number',
-                ),
-              ],
+                  Wrap(
+                    direction: Axis.vertical,
+                    children: [
+                      AppTextFormField(
+                        obscureText: false,
+                        hintText: 'SignUpProcessScreen_FirstName'.tr,
+                      ),
+                      AppPadding(
+                        padding: AppEdgeInsets.symmetric(
+                            vertical: AppGapSize.medium),
+                        child: AppTextFormField(
+                          obscureText: false,
+                          hintText: 'SignUpProcessScreen_LastName'.tr,
+                        ),
+                      ),
+                      AppTextFormField(
+                        obscureText: false,
+                        hintText: 'SignUpProcessScreen_MobileNumber'.tr,
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
             AppPadding(
               padding: AppEdgeInsets.only(top: AppGapSize.verylarge),
               child: AppButton.min(
-                title: 'Next',
+                title: 'SignUpProcessScreen_Next'.tr,
                 onPressed: controller.onPressedNext,
               ),
             )
