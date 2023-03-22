@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/features/sign_in/controllers/sign_in_controller.dart';
-import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
-
+import 'package:ninja_theme/ninja_theme.dart';
 import 'social_button.dart';
 
 class SocialComponent extends GetView<SignInController> {

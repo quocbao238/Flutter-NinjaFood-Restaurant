@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/provider/auth_provider.dart';
 import 'package:ninjafood/app/routes/routes.dart';
-import 'package:ninjafood/app/services/theme/theme_service.dart';
 
 class PaymentController extends BaseController {
   final AuthProvider authProvider;

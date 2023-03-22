@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/sign_in/controllers/sign_in_controller.dart';
-import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
-import 'package:ninjafood/app/theme/theme.dart';
 import 'widgets/socical_component.dart';
 
 class SignInMobileScreen extends GetView<SignInController> {
@@ -10,8 +9,7 @@ class SignInMobileScreen extends GetView<SignInController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldBackgroundImage(
-      type: BackgroundImageType.splash,
+    return AppScaffoldBackgroundImage.splash(
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
@@ -21,27 +19,26 @@ class SignInMobileScreen extends GetView<SignInController> {
               AppImages.logo(),
               AppPadding(
                   padding: AppEdgeInsets.only(
-                      top: AppGapSize.verylarge,
+                      top: AppGapSize.veryLarge,
                       bottom: AppGapSize.large,
                       left: AppGapSize.medium,
                       right: AppGapSize.medium),
-                  child: AppText.headlineMedium(
+                  child: AppText.headlineSmall(
                       text: 'SignInScreen_Title'.tr,
                       fontWeight: FontWeight.bold)),
               AppPadding(
                 padding: AppEdgeInsets.symmetric(
                     horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-                child: AppTextFormField(
-                  hintText: 'Email',
-                  obscureText: false,
+                child: AppTextFormField.email(
+                  hintText: 'Email'
+
                 ),
               ),
               AppPadding(
                 padding: AppEdgeInsets.symmetric(
                     horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-                child: AppTextFormField(
+                child: AppTextFormField.password(
                   hintText: 'SignInScreen_Password'.tr,
-                  obscureText: true,
                 ),
               ),
               AppPadding(
@@ -53,8 +50,7 @@ class SignInMobileScreen extends GetView<SignInController> {
                     onTap: controller.onPressedForgotPassword,
                     child: AppText.bodySmall(
                       textAlign: TextAlign.end,
-                      text: 'SignInScreen_ForgotPassword'.tr,
-                      fontWeight: FontWeight.w500,
+                      text: 'SignInScreen_ForgotPassword'.tr
                     ),
                   ),
                 ),

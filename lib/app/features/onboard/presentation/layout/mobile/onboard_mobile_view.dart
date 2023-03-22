@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/features/onboard/controllers/onboard_controller.dart';
-import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 
 class OnboardMobileScreen extends GetView<OnboardController> {
   const OnboardMobileScreen({super.key});
@@ -27,8 +27,8 @@ class OnboardMobileScreen extends GetView<OnboardController> {
                 AppPadding(
                     padding: AppEdgeInsets.only(
                         top: AppGapSize.large,
-                        left: AppGapSize.verylarge,
-                        right: AppGapSize.verylarge),
+                        left: AppGapSize.veryLarge,
+                        right: AppGapSize.veryLarge),
                     child: AppText.headlineMedium(
                         text: item.title.tr, fontWeight: FontWeight.bold)),
                 AppPadding.medium(

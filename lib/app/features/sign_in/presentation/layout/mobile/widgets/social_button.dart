@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 
 class SocialButtonWidget extends StatelessWidget {
   final String title;
@@ -32,7 +32,7 @@ class SocialButtonWidget extends StatelessWidget {
             iconWidget,
             AppPadding(
                 padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small),
-                child: AppText.bodyMedium(text: title))
+                child: AppText.bodySmall(text: title))
           ],
         ),
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 
 class BoxPhoto extends StatelessWidget {
   final VoidCallback onPressed;
@@ -20,6 +20,8 @@ class BoxPhoto extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.15,
         width: MediaQuery.of(context).size.width,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AppPadding(
                 padding: AppEdgeInsets.only(
