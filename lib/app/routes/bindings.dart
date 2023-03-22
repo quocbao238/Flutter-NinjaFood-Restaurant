@@ -28,12 +28,20 @@ class GetBinding extends Bindings {
             SignUpProcessController(authProvider: Get.find<AuthProvider>()));
         break;
       case AppRouteProvider.paymentMethodScreen:
-        Get.lazyPut(() =>
-            PaymentController(authProvider: Get.find<AuthProvider>()));
+        Get.lazyPut(
+            () => PaymentController(authProvider: Get.find<AuthProvider>()));
         break;
       case AppRouteProvider.uploadPhotoScreen:
         Get.lazyPut(() =>
             UploadPhotoController(authProvider: Get.find<AuthProvider>()));
+        break;
+      case AppRouteProvider.uploadPreviewScreen:
+        Get.lazyPut(() =>
+            UploadPreviewController(authProvider: Get.find<AuthProvider>()));
+        break;
+      case AppRouteProvider.setLocationScreen:
+        Get.lazyPut(() =>
+            SetLocationController(authProvider: Get.find<AuthProvider>()));
         break;
     }
   }

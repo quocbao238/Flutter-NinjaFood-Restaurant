@@ -12,19 +12,17 @@ class PaymentButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-        backgroundColor: MaterialStatePropertyAll(Colors.white),
-            shape: MaterialStateProperty.all<OutlinedBorder>(
-              RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.white, width: 0),
-                  borderRadius: BorderRadius.circular(16)),
-            ),
-          ),
+      // style: Theme.of(context)
+      //     .elevatedButtonTheme
+      //     .style!
+      //     .copyWith(backgroundColor: MaterialStatePropertyAll(Colors.white),),
       onPressed: onPressed,
       child: SizedBox(
         height: kToolbarHeight,
-        width: MediaQuery.of(context).size.width * 0.85,
-        child: Image.asset(imagePayment),
+        width: MediaQuery.of(context).size.width,
+        child: Image.asset(
+          imagePayment,
+        ),
       ),
     );
   }

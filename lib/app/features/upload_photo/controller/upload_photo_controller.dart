@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/provider/auth_provider.dart';
+import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/services/theme/theme_service.dart';
 
 class UploadPhotoController extends BaseController {
   final AuthProvider authProvider;
@@ -17,9 +19,17 @@ class UploadPhotoController extends BaseController {
     super.dispose();
   }
 
-  void onPressedFromGallery() {}
+  void onPressBack() {
+    Get.back();
+  }
+
+  void onPressedFromGallery() {
+    Get.find<ThemeService>().toggleTheme();
+  }
 
   void onPressedTakePhoto() {}
 
-  void onPressedNext() {}
+  void onPressedNext() {
+    Get.toNamed(AppRouteProvider.uploadPreviewScreen);
+  }
 }

@@ -9,7 +9,7 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage(
-      onPressBackButton: () {},
+      onPressBackButton: controller.onPressBack,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -27,9 +27,9 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
               padding: AppEdgeInsets.symmetric(
                   horizontal: AppGapSize.regular, vertical: AppGapSize.medium),
               child: AppText.bodyMedium(
-                textAlign: TextAlign.start,
-                text: 'SignUpProcessScreen_Description'.tr,
-              ),
+                  textAlign: TextAlign.start,
+                  text: 'SignUpProcessScreen_Description'.tr,
+                  fontWeight: FontWeight.w400),
             ),
             AppPadding(
               padding: AppEdgeInsets.symmetric(

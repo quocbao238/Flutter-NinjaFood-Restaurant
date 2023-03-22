@@ -1,12 +1,11 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/provider/auth_provider.dart';
-import 'package:ninjafood/app/routes/routes.dart';
 
-class SignUpProcessController extends BaseController {
+class SetLocationController extends BaseController {
   final AuthProvider authProvider;
 
-  SignUpProcessController({required this.authProvider});
+  SetLocationController({required this.authProvider});
 
   @override
   void onInit() {
@@ -22,8 +21,7 @@ class SignUpProcessController extends BaseController {
     Get.back();
   }
 
-  void onPressedNext() {
-    Get.toNamed(AppRouteProvider.paymentMethodScreen);
-    // Get.find<ThemeService>().toggleTheme();
-  }
+  void onPressedSetLocation() {}
+
+  void onPressedNext() {}
 }
