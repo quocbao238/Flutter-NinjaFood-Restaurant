@@ -27,9 +27,9 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
               padding: AppEdgeInsets.symmetric(
                   horizontal: AppGapSize.regular, vertical: AppGapSize.medium),
               child: AppText.bodyMedium(
-                textAlign: TextAlign.start,
-                text: 'SignUpProcessScreen_Description'.tr,
-              ),
+                  textAlign: TextAlign.start,
+                  text: 'SignUpProcessScreen_Description'.tr,
+                  fontWeight: FontWeight.w400),
             ),
             AppPadding(
               padding: AppEdgeInsets.symmetric(

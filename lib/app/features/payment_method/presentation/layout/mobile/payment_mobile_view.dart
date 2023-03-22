@@ -19,12 +19,14 @@ class PaymentMethodMobileScreen extends GetView<PaymentController> {
           AppPadding(
             padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
             child: AppText.headlineLarge(
+                fontWeight: FontWeight.bold,
                 textAlign: TextAlign.start,
                 text: 'PaymentMethodScreen_Title'.tr),
           ),
           AppPadding(
             padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
-            child: AppText.bodySmall(
+            child: AppText.bodyMedium(
+                fontWeight: FontWeight.w400,
                 textAlign: TextAlign.start,
                 text: 'PaymentMethodScreen_Description'.tr),
           ),

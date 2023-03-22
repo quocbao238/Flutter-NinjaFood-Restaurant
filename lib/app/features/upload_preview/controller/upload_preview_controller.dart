@@ -2,12 +2,11 @@ import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/provider/auth_provider.dart';
 import 'package:ninjafood/app/routes/routes.dart';
-import 'package:ninjafood/app/services/theme/theme_service.dart';
 
-class PaymentController extends BaseController {
+class UploadPreviewController extends BaseController {
   final AuthProvider authProvider;
 
-  PaymentController({required this.authProvider});
+  UploadPreviewController({required this.authProvider});
 
   @override
   void onInit() {
@@ -23,14 +22,9 @@ class PaymentController extends BaseController {
     Get.back();
   }
 
-  void onPressedPayPal() {}
-
-  void onPressedVisa() {}
-
-  void onPressedPayoneer() {}
+  void onPressedRemovePhoto() {}
 
   void onPressedNext() {
-    Get.toNamed(AppRouteProvider.uploadPhotoScreen);
-    // Get.find<ThemeService>().toggleTheme();
+    Get.toNamed(AppRouteProvider.setLocationScreen);
   }
 }

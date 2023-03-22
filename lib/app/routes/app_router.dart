@@ -47,5 +47,15 @@ class AppPages {
       page: () => UploadPhotoScreen(),
       binding: GetBinding(AppRouteProvider.uploadPhotoScreen),
     ),
+    GetPage(
+      name: AppRouteProvider.uploadPreviewScreen,
+      page: () => UploadPreviewScreen(),
+      binding: GetBinding(AppRouteProvider.uploadPreviewScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.setLocationScreen,
+      page: () => SetLocationScreen(),
+      binding: GetBinding(AppRouteProvider.setLocationScreen),
+    ),
   ];
 }

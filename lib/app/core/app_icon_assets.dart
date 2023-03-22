@@ -29,6 +29,7 @@ class AppIconsAssets {
   static const edit = 'assets/icons/edit_icon.svg';
   static const locationMap = 'assets/icons/location_icon.svg';
   static const heart = 'assets/icons/heart_icon.svg';
+  static const close = 'assets/icons/close_icon.svg';
 
   static const back = 'assets/icons/back_icon.svg';
 }
