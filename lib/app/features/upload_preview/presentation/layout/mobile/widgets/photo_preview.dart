@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 
 class PhotoPreview extends StatelessWidget {
   final VoidCallback removePhoto;
@@ -26,7 +26,7 @@ class PhotoPreview extends StatelessWidget {
           right: 11,
           child: GestureDetector(
               onTap: removePhoto,
-              child: SizedBox(height: 30, width: 30, child: AppIcons.close())),
+              child: SizedBox(height: 30, width: 30, child: AppIcons.close()))
         ),
       ],
     );

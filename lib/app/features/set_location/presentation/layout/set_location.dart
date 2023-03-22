@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/set_location/presentation/layout/mobile/set_location_mobile_view.dart';
-import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
 
 class SetLocationScreen extends StatelessWidget {
   const SetLocationScreen({super.key});

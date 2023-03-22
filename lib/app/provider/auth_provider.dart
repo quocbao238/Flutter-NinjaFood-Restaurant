@@ -30,6 +30,7 @@ class AuthProvider extends GetxService {
         }
       },
     );
+    return null;
   }
 
   Future<models.Token?> sendEmailConfirm(
@@ -42,6 +43,7 @@ class AuthProvider extends GetxService {
         print(_token);
       },
     );
+    return null;
   }
 }
 

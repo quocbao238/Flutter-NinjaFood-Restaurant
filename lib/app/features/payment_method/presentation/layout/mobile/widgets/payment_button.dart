@@ -1,29 +1,20 @@
 import 'package:flutter/material.dart';
 
-class PaymentButton extends StatelessWidget {
+class PaymentMethodButton extends StatelessWidget {
   final VoidCallback onPressed;
-  final String imagePayment;
-  const PaymentButton({
+  final Widget child;
+
+  const PaymentMethodButton({
     super.key,
     required this.onPressed,
-    required this.imagePayment,
+    required this.child,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      // style: Theme.of(context)
-      //     .elevatedButtonTheme
-      //     .style!
-      //     .copyWith(backgroundColor: MaterialStatePropertyAll(Colors.white),),
       onPressed: onPressed,
-      child: SizedBox(
-        height: kToolbarHeight,
-        width: MediaQuery.of(context).size.width,
-        child: Image.asset(
-          imagePayment,
-        ),
-      ),
+      child: SizedBox(height: 75, width: MediaQuery.of(context).size.width, child: child),
     );
   }
 }

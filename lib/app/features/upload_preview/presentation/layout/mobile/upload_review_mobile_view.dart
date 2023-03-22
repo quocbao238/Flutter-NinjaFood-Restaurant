@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/upload_preview/controller/upload_preview_controller.dart';
 import 'package:ninjafood/app/features/upload_preview/presentation/layout/mobile/widgets/photo_preview.dart';
-import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
 
 class UploadPreviewMobileView extends GetView<UploadPreviewController> {
   const UploadPreviewMobileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldBackgroundImage(
+    return AppScaffoldBackgroundImage.pattern(
       onPressBackButton: controller.onPressBack,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -18,14 +18,12 @@ class UploadPreviewMobileView extends GetView<UploadPreviewController> {
           AppPadding(
             padding: AppEdgeInsets.symmetric(
                 horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-            child: AppText.headlineLarge(
+            child: AppText.headlineSmall(
                 fontWeight: FontWeight.bold,
                 textAlign: TextAlign.start,
                 text: 'Upload Your Photo Profile'),
           ),
-          AppPadding(
-            padding: AppEdgeInsets.symmetric(
-                horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+          AppPadding.medium(
             child: AppText.bodyMedium(
                 fontWeight: FontWeight.w400,
                 textAlign: TextAlign.start,
@@ -42,7 +40,7 @@ class UploadPreviewMobileView extends GetView<UploadPreviewController> {
                   ))),
           AppPadding(
             padding: AppEdgeInsets.symmetric(
-                horizontal: AppGapSize.medium, vertical: AppGapSize.verylarge),
+                horizontal: AppGapSize.medium, vertical: AppGapSize.veryLarge),
             child: AppButton.max(
               title: 'Next'.tr,
               onPressed: controller.onPressedNext,

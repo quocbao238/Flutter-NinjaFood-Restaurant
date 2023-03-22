@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/sign_up/controllers/sign_up_controller.dart';
-import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
-import 'package:ninjafood/app/theme/theme.dart';
+
 
 class SignUpMobileScreen extends GetView<SignUpController> {
   const SignUpMobileScreen({super.key});
@@ -10,8 +10,7 @@ class SignUpMobileScreen extends GetView<SignUpController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => AppScaffoldBackgroundImage(
-        type: BackgroundImageType.splash,
+      () => AppScaffoldBackgroundImage.splash(
         isLoading: controller.loading.value,
         body: SingleChildScrollView(
           child: SafeArea(
@@ -22,11 +21,11 @@ class SignUpMobileScreen extends GetView<SignUpController> {
                 AppImages.logo(),
                 AppPadding(
                   padding: AppEdgeInsets.only(
-                      top: AppGapSize.verylarge,
+                      top: AppGapSize.veryLarge,
                       bottom: AppGapSize.large,
                       left: AppGapSize.medium,
                       right: AppGapSize.medium),
-                  child: AppText.headlineMedium(
+                  child: AppText.headlineSmall(
                     text: 'SignUpScreen_Title'.tr,
                     fontWeight: FontWeight.bold,
                   ),

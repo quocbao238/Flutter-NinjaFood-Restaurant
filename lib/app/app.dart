@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/services/services.dart';
-import 'package:ninjafood/app/theme/theme.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 import 'routes/routes.dart';
 
 class MyApp extends StatelessWidget {

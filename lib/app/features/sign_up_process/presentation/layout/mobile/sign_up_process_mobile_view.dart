@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/sign_up_process/controller/sign_up_process_controller.dart';
-import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
 
 class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
   const SignUpProcessMobileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldBackgroundImage(
+    return AppScaffoldBackgroundImage.splash(
       onPressBackButton: controller.onPressBack,
       body: SingleChildScrollView(
         child: Column(
@@ -17,15 +17,13 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
           children: [
             AppPadding(
               padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
-              child: AppText.headlineLarge(
+              child: AppText.headlineSmall(
                 textAlign: TextAlign.start,
                 text: 'SignUpProcessScreen_Title'.tr,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.regular, vertical: AppGapSize.medium),
+            AppPadding.medium(
               child: AppText.bodyMedium(
                   textAlign: TextAlign.start,
                   text: 'SignUpProcessScreen_Description'.tr,
@@ -35,7 +33,6 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
               padding: AppEdgeInsets.symmetric(
                   horizontal: AppGapSize.medium, vertical: AppGapSize.small),
               child: AppTextFormField(
-                obscureText: false,
                 hintText: 'SignUpProcessScreen_FirstName'.tr,
               ),
             ),
@@ -43,22 +40,20 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
               padding: AppEdgeInsets.symmetric(
                   horizontal: AppGapSize.medium, vertical: AppGapSize.small),
               child: AppTextFormField(
-                obscureText: false,
                 hintText: 'SignUpProcessScreen_LastName'.tr,
               ),
             ),
             AppPadding(
               padding: AppEdgeInsets.symmetric(
                   horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-              child: AppTextFormField(
-                obscureText: false,
+              child: AppTextFormField.phone(
                 hintText: 'SignUpProcessScreen_MobileNumber'.tr,
               ),
             ),
             AppPadding(
               padding: AppEdgeInsets.symmetric(
                   horizontal: AppGapSize.medium,
-                  vertical: AppGapSize.verylarge),
+                  vertical: AppGapSize.veryLarge),
               child: AppButton.max(
                   title: 'SignUpProcessScreen_Next'.tr,
                   onPressed: controller.onPressedNext),
