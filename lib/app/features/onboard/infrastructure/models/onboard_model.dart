@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/core/core.dart';
 
 class OnboardModel {
-  final String image, title, description;
+  final String title, description;
+  final Widget image;
 
   OnboardModel({
     required this.image,
@@ -11,11 +14,11 @@ class OnboardModel {
 
   static final List<OnboardModel> datas = [
     OnboardModel(
-        image: AppImageAssets.onboardBanner1,
+        image: AppImages.onboardBanner1(),
         title: 'OnboardScreen_Title1',
         description: 'OnboardScreen_Description2'),
     OnboardModel(
-        image: AppImageAssets.onboardBanner2,
+        image: AppImages.onboardBanner2(),
         title: 'OnboardScreen_Title2',
         description: 'OnboardScreen_Description2'),
   ];

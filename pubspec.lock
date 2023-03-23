@@ -288,11 +288,9 @@ packages:
   ninja_theme:
     dependency: "direct main"
     description:
-      path: "."
-      ref: devMaster
-      resolved-ref: "47fca7c4ad9641b303eb1e2cbaaa2ba8aba66046"
-      url: "https://github.com/quocbao238/ninjafood_theme.git"
-    source: git
+      path: "../NinjaFood_Theme"
+      relative: true
+    source: path
     version: "0.0.1"
   package_info_plus:
     dependency: transitive
