@@ -1,61 +1,70 @@
 class UserModel {
-  final String email;
-  final String name;
-  final String uid;
-  const UserModel({
-    required this.email,
-    required this.name,
+  String uid;
+  String? fullName;
+  String? firstName;
+  String? lastName;
+  String? phoneNumber;
+  String? email;
+  String? photoUrl;
+  String? address;
+
+  UserModel({
     required this.uid,
+    this.fullName,
+    this.firstName,
+    this.lastName,
+    this.phoneNumber,
+    this.email,
+    this.photoUrl,
+    this.address,
   });
 
-  UserModel.createUserByEmail({
-    required this.email,
-    required this.name,
-    required this.uid,
-  });
-
-  UserModel copyWith({String? email, String? name, String? uid}) {
-    return UserModel(
-      email: email ?? this.email,
-      name: name ?? this.name,
-      uid: uid ?? this.uid,
-    );
+  UserModel createUserEmail(String uid, String email) {
+    return UserModel(uid: uid, email: email);
   }
+
+  UserModel.fromMap(Map<String, dynamic> data)
+      : uid = data['uid'],
+        fullName = data['fullName'],
+        firstName = data['firstName'],
+        lastName = data['lastName'],
+        phoneNumber = data['phoneNumber'],
+        email = data['email'],
+        photoUrl = data['photoUrl'],
+        address = data['address'];
 
   Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-
-    result.addAll({'email': email});
-    result.addAll({'name': name});
-
-    return result;
+    return {
+      'uid': uid,
+      'fullName': fullName,
+      'firstName': firstName,
+      'lastName': lastName,
+      'phoneNumber': phoneNumber,
+      'email': email,
+      'photoUrl': photoUrl,
+      'address': address,
+    };
   }
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
+  copyWith({
+    String? uid,
+    String? fullName,
+    String? firstName,
+    String? lastName,
+    String? phoneNumber,
+    String? email,
+    String? photoUrl,
+    String? address,
+  }) {
     return UserModel(
-      email: map['email'] ?? '',
-      name: map['name'] ?? '',
-      uid: map['\$id'] ?? '',
+      uid: uid ?? this.uid,
+      fullName: fullName ?? this.fullName,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      email: email ?? this.email,
+      photoUrl: photoUrl ?? this.photoUrl,
+      address: address ?? this.address,
     );
-  }
-
-  @override
-  String toString() {
-    return 'UserModel(email: $email, name: $name, )';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is UserModel &&
-        other.email == email &&
-        other.name == name &&
-        other.uid == uid;
-  }
-
-  @override
-  int get hashCode {
-    return email.hashCode ^ name.hashCode ^ uid.hashCode;
   }
 }

@@ -47,13 +47,9 @@ class GetBinding extends Bindings {
         Get.lazyPut(() =>
             SignupSuccessController(authProvider: Get.find<AuthProvider>()));
         break;
+      case AppRouteProvider.homeScreen:
+        Get.lazyPut(() => HomeController(authProvider: Get.find<AuthProvider>()));
     }
   }
 }
 
-
-// Tao screen (presentation)
-// Tao controller (controllers)
-// App_Provider tao routeName
-// Binding -> Map App_Provider vs Controller
-// app_router -> 

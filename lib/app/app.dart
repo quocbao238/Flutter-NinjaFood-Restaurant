@@ -5,6 +5,7 @@ import 'package:ninjafood/app/services/services.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'routes/routes.dart';
 
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,10 +13,7 @@ class MyApp extends StatelessWidget {
         title: "NinjaFood",
         theme: ThemePrimary.lightTheme(),
         darkTheme: ThemePrimary.darkTheme(),
-        onReady: () {},
-        onInit: () async {
-          DeviceHelper.init();
-        },
+        onInit: () async => DeviceHelper.init(),
         debugShowCheckedModeBanner: false,
         enableLog: true,
         initialRoute: AppPages.initial,

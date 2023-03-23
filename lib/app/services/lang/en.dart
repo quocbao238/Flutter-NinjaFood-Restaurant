@@ -7,6 +7,18 @@ const Map<String, String> en = {
   "OnboardScreen_Description2":
       "Enjoy a fast and smooth food delivery at your doorstep",
 
+  // Validate
+  "Validate.Email_Invalid": "Email is invalid",
+  "Validate.Pass_required": "Password is required",
+  "Validate.Pass_require_length": "Password must be at least 8 characters",
+  "Validate.Phone_required": "Phone is required",
+  "Validate.Phone_invalid": "Phone is invalid",
+  "Validate.Name_required": "Name is required",
+  "Validate.Name_Invalid": "Name is invalid",
+  "Validate.Address_Required": "Address is required",
+  "Validate.Address_Invalid": "Address is invalid",
+
+
   // Button
   "Next_Button": "Next",
 

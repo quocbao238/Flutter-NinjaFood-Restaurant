@@ -1,21 +1,15 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:appwrite/models.dart' as models;
 
 abstract class IAuthRepository {
-  FutureEither<models.Account> signUp({
-    required String email,
-    required String password,
-  });
+  Future<Either<Failure, models.Account>> signUp({required String email, required String password, required String name});
 
-  FutureEither<models.Session> login(
-      {required String email, required String password});
+  Future<Either<Failure, models.Session>> login({required String email, required String password});
+
   Future<models.Account?> currentUserAccount();
 
-  FutureEitherVoid logout();
 
-  FutureEither<models.Token> createMagicURLSession(
-      {required String userId, required String email});
+  Future<Either<Failure, bool>> logout();
 
-  FutureEither<models.Session> confirmMagicURLSession(
-      {required String userId, required String secret});
 }

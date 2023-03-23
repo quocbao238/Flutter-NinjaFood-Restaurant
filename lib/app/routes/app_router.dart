@@ -4,10 +4,12 @@ class AppPages {
   static String initial = AppRouteProvider.splashScreen;
 
   static navigateDefaultPage() async {
-    // final authProvider = Get.find<AuthProvider>();
-    // if (authProvider.currnetAccount.value != null) {
-    //   initial = AppRouteProvider.signinScreen;
-    // }
+    final authProvider = Get.find<AuthProvider>();
+    if (authProvider.currentAccount.value != null) {
+      initial = AppRouteProvider.homeScreen;
+      return;
+    }
+    initial = AppRouteProvider.splashScreen;
   }
 
   //
@@ -61,6 +63,11 @@ class AppPages {
       name: AppRouteProvider.signupSuccessScreen,
       page: () => SignupSuccessScreen(),
       binding: GetBinding(AppRouteProvider.signupSuccessScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.homeScreen,
+      page: () => HomeScreen(),
+      binding: GetBinding(AppRouteProvider.homeScreen),
     ),
   ];
 }

@@ -10,6 +10,18 @@ const Map<String, String> vi = {
   // Button
   "Next_Button": "Tiếp tục",
 
+  // Validate
+  "Validate.Email_Invalid": "Email không hợp lệ",
+  "Validate.Pass_required": "Mật khẩu là bắt buộc",
+  "Validate.Pass_require_length": "Mật khẩu phải có ít nhất 8 ký tự",
+  "Validate.Phone_required": "Số điện thoại là bắt buộc",
+  "Validate.Phone_invalid": "Số điện thoại không hợp lệ",
+  "Validate.Name_required": "Tên là bắt buộc",
+  "Validate.Name_Invalid": "Tên không hợp lệ",
+  "Validate.Address_Required": "Địa chỉ là bắt buộc",
+  "Validate.Address_Invalid": "Địa chỉ không hợp lệ",
+
+
   // SignIn Screen
   "SignInScreen_Title": "Đăng nhập vào tài khoản của bạn",
   "SignInScreen_AnotherLogin": "Hoặc tiếp tục với",
