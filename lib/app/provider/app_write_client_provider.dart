@@ -22,6 +22,6 @@ class AppWriteProvider extends GetxService {
 
   Account get getAccount => account;
   Databases get getDatabase => database;
-  Storage get getstorageDatabase => storageDatabase;
+  Storage get getStorageDatabase => storageDatabase;
   Realtime get getRealtimeDatabase => getRealtimeDatabase;
 }

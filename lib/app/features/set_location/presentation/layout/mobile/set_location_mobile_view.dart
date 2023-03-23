@@ -50,7 +50,8 @@ class SetLocationMobileView extends GetView<SetLocationController> {
                 title: 'SetLocationScreen_Next'.tr,
                 onPressed: controller.onPressedNext,
               ),
-            ),
+            ),            AppPadding.small()
+
           ],
         ),
       ),

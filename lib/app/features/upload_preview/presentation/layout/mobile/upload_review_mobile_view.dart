@@ -18,7 +18,7 @@ class UploadPreviewMobileView extends GetView<UploadPreviewController> {
           children: [
             AppPadding(
               padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                  horizontal: AppGapSize.medium),
               child: AppText.headlineSmall(
                   fontWeight: FontWeight.bold,
                   textAlign: TextAlign.start,
