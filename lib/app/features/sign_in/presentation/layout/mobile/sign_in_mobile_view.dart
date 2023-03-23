@@ -78,6 +78,7 @@ class SignInMobileScreen extends GetView<SignInController> {
                     ],
                   ),
                 ),
+                AppPadding.small(),
               ],
             ),
           ),

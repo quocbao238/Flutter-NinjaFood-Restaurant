@@ -70,6 +70,7 @@ class SignUpMobileScreen extends GetView<SignUpController> {
                     color: ThemeColors.primaryColor,
                   ),
                 ),
+                AppPadding.small(),
               ],
             ),
           ),
