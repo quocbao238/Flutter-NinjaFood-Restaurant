@@ -28,11 +28,16 @@ class SignInMobileScreen extends GetView<SignInController> {
                     child: AppText.headlineSmall(text: 'SignInScreen_Title'.tr, fontWeight: FontWeight.bold)),
                 AppPadding(
                   padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-                  child: AppTextFormField.email(hintText: 'Email'),
+                  child: AppTextFormField.email(
+                      controller: controller.emailController,
+                      errorText: controller.emailError.value,
+                      hintText: 'Email'),
                 ),
                 AppPadding(
                   padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
                   child: AppTextFormField.password(
+                    controller: controller.passwordController,
+                    errorText: controller.passwordError.value,
                     hintText: 'SignInScreen_Password'.tr,
                   ),
                 ),
