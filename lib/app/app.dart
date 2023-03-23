@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/services/services.dart';
-import 'package:ninjafood/app/theme/theme.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 import 'routes/routes.dart';
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -13,11 +13,7 @@ class MyApp extends StatelessWidget {
         title: "NinjaFood",
         theme: ThemePrimary.lightTheme(),
         darkTheme: ThemePrimary.darkTheme(),
-        onReady: () {},
-        onInit: () async {
-          // initService();
-          DeviceHelper.init();
-        },
+        onInit: () async => DeviceHelper.init(),
         debugShowCheckedModeBanner: false,
         enableLog: true,
         initialRoute: AppPages.initial,

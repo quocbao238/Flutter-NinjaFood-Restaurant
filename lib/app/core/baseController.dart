@@ -2,8 +2,7 @@ part of 'core.dart';
 
 abstract class BaseController extends GetxController {
   static BaseController get to => Get.find();
-  bool get initialized => super.initialized;
   late BuildContext context;
-  var loading = false.obs;
-  var loadingMore = false.obs;
+  Rx<bool> loading = false.obs;
+
 }

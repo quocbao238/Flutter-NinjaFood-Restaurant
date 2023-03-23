@@ -16,18 +16,40 @@ class GetBinding extends Bindings {
         Get.lazyPut(() => OnboardController());
         break;
       case AppRouteProvider.signupScreen:
-        Get.lazyPut(() => SignUpController(themeService: Get.find()));
+        Get.lazyPut(
+            () => SignUpController(authProvider: Get.find<AuthProvider>()));
         break;
       case AppRouteProvider.signinScreen:
-        Get.lazyPut(() => SignInController(themeService: Get.find()));
+        Get.lazyPut(
+            () => SignInController(authProvider: Get.find<AuthProvider>()));
         break;
+      case AppRouteProvider.signupProcessScreen:
+        Get.lazyPut(() =>
+            SignUpProcessController(authProvider: Get.find<AuthProvider>()));
+        break;
+      case AppRouteProvider.paymentMethodScreen:
+        Get.lazyPut(
+            () => PaymentController(authProvider: Get.find<AuthProvider>()));
+        break;
+      case AppRouteProvider.uploadPhotoScreen:
+        Get.lazyPut(() =>
+            UploadPhotoController(authProvider: Get.find<AuthProvider>()));
+        break;
+      case AppRouteProvider.uploadPreviewScreen:
+        Get.lazyPut(() =>
+            UploadPreviewController(authProvider: Get.find<AuthProvider>()));
+        break;
+      case AppRouteProvider.setLocationScreen:
+        Get.lazyPut(() =>
+            SetLocationController(authProvider: Get.find<AuthProvider>()));
+        break;
+      case AppRouteProvider.signupSuccessScreen:
+        Get.lazyPut(() =>
+            SignupSuccessController(authProvider: Get.find<AuthProvider>()));
+        break;
+      case AppRouteProvider.homeScreen:
+        Get.lazyPut(() => HomeController(authProvider: Get.find<AuthProvider>()));
     }
   }
 }
 
-
-// Tao screen (presentation)
-// Tao controller (controllers)
-// App_Provider tao routeName
-// Binding -> Map App_Provider vs Controller
-// app_router -> 

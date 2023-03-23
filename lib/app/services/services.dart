@@ -2,6 +2,8 @@ library service;
 
 import 'dart:ui';
 import 'package:get/get.dart';
+import 'package:ninjafood/app/provider/app_write_client_provider.dart';
+import 'package:ninjafood/app/provider/auth_provider.dart';
 import 'services.dart';
 export './theme/theme_service.dart';
 export './shared_preferences_service/shared_preferences_service.dart';
@@ -17,5 +19,8 @@ Future<void> initService() async {
   await Get.put(
       ThemeService(prefsService: Get.find<SharedPreferencesService>()))();
   await TranslationService.init(Locale('vi', 'VN'));
+  Get.put(AppWriteProvider())();
+  await Get.put(AuthProvider())();
+
   console.show(_logName, 'All services started...');
 }

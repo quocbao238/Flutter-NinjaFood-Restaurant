@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/features/onboard/controllers/onboard_controller.dart';
-import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 
 class OnboardMobileScreen extends GetView<OnboardController> {
   const OnboardMobileScreen({super.key});
@@ -20,26 +20,16 @@ class OnboardMobileScreen extends GetView<OnboardController> {
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                AppSizeScale(
-                    ratioHeight: 0.5,
-                    ratioWidth: 1,
-                    child: Image.asset(item.image, fit: BoxFit.cover)),
+                AppSizeScale(ratioHeight: 0.5, ratioWidth: 1, child: item.image),
                 AppPadding(
                     padding: AppEdgeInsets.only(
-                        top: AppGapSize.large,
-                        left: AppGapSize.verylarge,
-                        right: AppGapSize.verylarge),
-                    child: AppText.headlineMedium(
-                        text: item.title.tr, fontWeight: FontWeight.bold)),
+                        top: AppGapSize.large, left: AppGapSize.veryLarge, right: AppGapSize.veryLarge),
+                    child: AppText.headlineMedium(text: item.title.tr, fontWeight: FontWeight.bold)),
                 AppPadding.medium(
-                    padding: AppEdgeInsets.symmetric(
-                        vertical: AppGapSize.medium,
-                        horizontal: AppGapSize.large),
+                    padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium, horizontal: AppGapSize.large),
                     child: AppText.bodySmall(text: item.description.tr)),
                 AppPadding.large(
-                  child: AppButton.min(
-                      title: 'Next_Button'.tr,
-                      onPressed: () => controller.onPressedNext(index)),
+                  child: AppButton.min(title: 'Next_Button'.tr, onPressed: () => controller.onPressedNext(index)),
                 ),
               ],
             );

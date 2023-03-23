@@ -2,10 +2,9 @@
 
 library boot;
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 part 'baseController.dart';
-
-part 'app_icon_assets.dart';
-
-part 'app_image_assets.dart';

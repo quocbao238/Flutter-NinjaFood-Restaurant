@@ -3,7 +3,14 @@ part of 'routes.dart';
 class AppPages {
   static String initial = AppRouteProvider.splashScreen;
 
-  static navigateDefaultPage() async {}
+  static navigateDefaultPage() async {
+    final authProvider = Get.find<AuthProvider>();
+    if (authProvider.currentAccount.value != null) {
+      initial = AppRouteProvider.homeScreen;
+      return;
+    }
+    initial = AppRouteProvider.splashScreen;
+  }
 
   //
   static final routes = [
@@ -26,6 +33,41 @@ class AppPages {
       name: AppRouteProvider.signupScreen,
       page: () => SignUpScreen(),
       binding: GetBinding(AppRouteProvider.signupScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.signupProcessScreen,
+      page: () => SignUpProcessScreen(),
+      binding: GetBinding(AppRouteProvider.signupProcessScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.paymentMethodScreen,
+      page: () => PaymentMethodScreen(),
+      binding: GetBinding(AppRouteProvider.paymentMethodScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.uploadPhotoScreen,
+      page: () => UploadPhotoScreen(),
+      binding: GetBinding(AppRouteProvider.uploadPhotoScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.uploadPreviewScreen,
+      page: () => UploadPreviewScreen(),
+      binding: GetBinding(AppRouteProvider.uploadPreviewScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.setLocationScreen,
+      page: () => SetLocationScreen(),
+      binding: GetBinding(AppRouteProvider.setLocationScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.signupSuccessScreen,
+      page: () => SignupSuccessScreen(),
+      binding: GetBinding(AppRouteProvider.signupSuccessScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.homeScreen,
+      page: () => HomeScreen(),
+      binding: GetBinding(AppRouteProvider.homeScreen),
     ),
   ];
 }

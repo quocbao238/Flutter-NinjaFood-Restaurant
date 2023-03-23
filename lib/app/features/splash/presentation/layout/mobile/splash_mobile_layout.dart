@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/splash/controllers/splash_controller.dart';
-import 'package:ninjafood/app/theme/core_widget/core_widget.dart';
 
 class SplashMobileLayout extends StatelessWidget {
   const SplashMobileLayout({super.key});
@@ -10,8 +10,11 @@ class SplashMobileLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<SplashController>(
       init: SplashController(sharedPreferencesService: Get.find()),
-      builder: (controller) =>
-          AppScaffoldBackgroundImage(body: Center(child: AppImages.logo())),
+      builder: (controller) => AppScaffoldBackgroundImage.splash(
+        body: Center(
+          child: AppImages.logo(),
+        ),
+      ),
     );
   }
 }

@@ -1,20 +1,43 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/helper/helper.dart';
+import 'package:ninjafood/app/provider/auth_provider.dart';
 import 'package:ninjafood/app/routes/routes.dart';
-import 'package:ninjafood/app/services/theme/theme_service.dart';
 
 class SignInController extends BaseController {
-  final ThemeService themeService;
+  final AuthProvider authProvider;
 
-  SignInController({required this.themeService});
+  SignInController({required this.authProvider});
+
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
+  Rxn<String?> emailError = Rxn<String?>(null);
+  Rxn<String?> passwordError = Rxn<String?>(null);
 
   @override
   void onInit() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+
+    emailController.addListener(() {
+      final email = emailController.text;
+      final isValid = Validator.validateEmail(email);
+      emailError.value = isValid;
+    });
+
+    passwordController.addListener(() {
+      final password = passwordController.text;
+      passwordError.value = Validator.validatePassword(password);
+    });
+
     super.onInit();
   }
 
   @override
   void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
@@ -22,8 +45,21 @@ class SignInController extends BaseController {
 
   void onPressedSocialGoogle() {}
 
-  void onPressedLogin() {
-    themeService.toggleTheme();
+  Future<void> onPressedLogin() async {
+    if (emailError.value != null || passwordError.value != null) {
+      return;
+    }
+
+    final email = emailController.text;
+    final password = passwordController.text;
+
+    loading.value = true;
+    final loginSuccess = await authProvider.login(email: email, password: password);
+    loading.value = false;
+
+    if (loginSuccess) {
+      Get.offAllNamed(AppRouteProvider.homeScreen);
+    }
   }
 
   void onPressedSignUp() {

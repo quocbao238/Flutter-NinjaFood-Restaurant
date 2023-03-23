@@ -7,6 +7,18 @@ const Map<String, String> en = {
   "OnboardScreen_Description2":
       "Enjoy a fast and smooth food delivery at your doorstep",
 
+  // Validate
+  "Validate.Email_Invalid": "Email is invalid",
+  "Validate.Pass_required": "Password is required",
+  "Validate.Pass_require_length": "Password must be at least 8 characters",
+  "Validate.Phone_required": "Phone is required",
+  "Validate.Phone_invalid": "Phone is invalid",
+  "Validate.Name_required": "Name is required",
+  "Validate.Name_Invalid": "Name is invalid",
+  "Validate.Address_Required": "Address is required",
+  "Validate.Address_Invalid": "Address is invalid",
+
+
   // Button
   "Next_Button": "Next",
 
@@ -24,4 +36,39 @@ const Map<String, String> en = {
   "SignUpScreen_Password": "Password",
   "SignUpScreen_CreateAccount": "Create Account",
   "SignUpScreen_HaveAnAccount": "Already have an account?",
+
+  //SignUp Process
+  "SignUpProcessScreen_Title": "Fill in your bio to get\nstarted",
+  "SignUpProcessScreen_Description":
+      "This data will be displayed in your\naccount profile for security",
+  "SignUpProcessScreen_FirstName": "First Name",
+  "SignUpProcessScreen_LastName": "Last Name",
+  "SignUpProcessScreen_MobileNumber": "Mobile Number",
+  "SignUpProcessScreen_Next": "Next",
+
+  //Payment Method
+  "PaymentMethodScreen_Title": "Payment Method",
+  "PaymentMethodScreen_Description":
+      "This data will be displayed in your account profile for security",
+  "PaymentMethodScreen_Next": "Next",
+
+  //Upload Photo
+  "UploadPhotoScreen_Title": "Upload Your Photo Profile",
+  "UploadPhotoScreen_Description":
+      "This data will be displayed in your account profile for security",
+  "UploadPhotoScreen_Next": "Next",
+
+  //Upload Preview
+  "UploadPreviewScreen_Title": "Upload Your Photo Profile",
+  "UploadPreviewScreen_Description": "This data will be displayed in your account profile for security",
+  "UploadPreviewScreen_Next": "Next",
+
+  //Set Location 
+  "SetLocationScreen_Title": "Set Your Location",
+  "SetLocationScreen_Description": "This data will be displayed in your account profile for security",
+  "SetLocationScreen_YourLocation": "  Your Location",
+  "SetLocationScreen_SetLocation": "Set Location",
+  "SetLocationScreen_Next": "Next",
+
+  //
 };
