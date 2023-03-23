@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/core/core.dart';
 
 class OnboardModel {
   final String title, description;

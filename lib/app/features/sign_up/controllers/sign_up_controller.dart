@@ -18,14 +18,15 @@ class SignUpController extends BaseController {
     super.dispose();
   }
 
-  // Future<void> onPressedCreateAccount() async {
-  //   this.loading.value = true;
-  //   await authProvider.signUp(email: 'test1@gmail.com', password: '12345678');
-  //   this.loading.value = false;
-  // }
-  void onPressedCreateAccount() {
-    Get.toNamed(AppRouteProvider.signupProcessScreen);
+  Future<void> onPressedCreateAccount() async {
+    loading(true);
+   final isSinged  = await authProvider.signUp(email: 'bao_dev@gmail.com', password: '12345678',name: 'Bao');
+    loading(false);
+   if(isSinged)
+     Get.offAllNamed(AppRouteProvider.homeScreen);
+
   }
+
 
   void onPressedAlreadyHaveAnAccount() {
     Get.toNamed(AppRouteProvider.signinScreen);
