@@ -46,7 +46,7 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
             AppPadding(
               padding: AppEdgeInsets.symmetric(
                   horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-              child: AppTextFormField.phone(
+              child: AppTextFormField(
                 hintText: 'SignUpProcessScreen_MobileNumber'.tr,
               ),
             ),
@@ -57,7 +57,7 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
               child: AppButton.max(
                   title: 'SignUpProcessScreen_Next'.tr,
                   onPressed: controller.onPressedNext),
-            )
+            ),
           ],
         ),
       ),

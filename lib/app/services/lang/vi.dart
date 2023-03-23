@@ -42,4 +42,17 @@ const Map<String, String> vi = {
   "UploadPhotoScreen_Title": "Tải ảnh đại diện của bạn lên",
   "UploadPhotoScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
   "UploadPhotoScreen_Next": "Tiếp Theo",
+
+  //Upload Preview
+  "UploadPreviewScreen_Title": "Tải ảnh của bạn lên",
+  "UploadPreviewScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
+  "UploadPreviewScreen_Next": "Tiếp Theo",
+
+  //Set Location 
+  "SetLocationScreen_Title": "Thiết lập vị trí của bạn",
+  "SetLocationScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
+  "SetLocationScreen_YourLocation": "  Vị trí của bạn",
+  "SetLocationScreen_SetLocation": "Thiết lập vị trí",
+  "SetLocationScreen_Next": "Tiếp Theo",
+
 };
