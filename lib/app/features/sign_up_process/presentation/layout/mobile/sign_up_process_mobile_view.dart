@@ -63,7 +63,7 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
               child: AppButton.max(
                   title: 'SignUpProcessScreen_Next'.tr,
                   onPressed: controller.onPressedNext),
-            )
+            ),
           ],
         ),
       ),

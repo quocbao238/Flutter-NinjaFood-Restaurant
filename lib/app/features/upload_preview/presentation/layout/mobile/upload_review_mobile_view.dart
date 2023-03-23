@@ -11,42 +11,44 @@ class UploadPreviewMobileView extends GetView<UploadPreviewController> {
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage.pattern(
       onPressBackButton: controller.onPressBack,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppPadding(
-            padding: AppEdgeInsets.symmetric(
-                horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-            child: AppText.headlineSmall(
-                fontWeight: FontWeight.bold,
-                textAlign: TextAlign.start,
-                text: 'Upload Your Photo Profile'),
-          ),
-          AppPadding.medium(
-            child: AppText.bodyMedium(
-                fontWeight: FontWeight.w400,
-                textAlign: TextAlign.start,
-                text:
-                    'This data will be displayed in your account profile for security'),
-          ),
-          Center(
-              child: AppPadding(
-                  padding: AppEdgeInsets.symmetric(
-                      horizontal: AppGapSize.medium,
-                      vertical: AppGapSize.large),
-                  child: PhotoPreview(
-                    removePhoto: controller.onPressedRemovePhoto,
-                  ))),
-          AppPadding(
-            padding: AppEdgeInsets.symmetric(
-                horizontal: AppGapSize.medium, vertical: AppGapSize.veryLarge),
-            child: AppButton.max(
-              title: 'Next'.tr,
-              onPressed: controller.onPressedNext,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppPadding(
+              padding: AppEdgeInsets.symmetric(
+                  horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+              child: AppText.headlineSmall(
+                  fontWeight: FontWeight.bold,
+                  textAlign: TextAlign.start,
+                  text: 'UploadPreviewScreen_Title'.tr),
             ),
-          )
-        ],
+            AppPadding.medium(
+              child: AppText.bodyMedium(
+                  fontWeight: FontWeight.w400,
+                  textAlign: TextAlign.start,
+                  text:
+                      'UploadPreviewScreen_Description'.tr),
+            ),
+            Center(
+                child: AppPadding(
+                    padding: AppEdgeInsets.symmetric(
+                        horizontal: AppGapSize.medium,
+                        vertical: AppGapSize.large),
+                    child: PhotoPreview(
+                      removePhoto: controller.onPressedRemovePhoto,
+                    ))),
+            AppPadding(
+              padding: AppEdgeInsets.symmetric(
+                  horizontal: AppGapSize.medium, vertical: AppGapSize.veryLarge),
+              child: AppButton.max(
+                title: 'UploadPreviewScreen_Next'.tr,
+                onPressed: controller.onPressedNext,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

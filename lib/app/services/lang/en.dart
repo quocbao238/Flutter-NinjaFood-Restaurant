@@ -57,4 +57,18 @@ const Map<String, String> en = {
   "UploadPhotoScreen_Description":
       "This data will be displayed in your account profile for security",
   "UploadPhotoScreen_Next": "Next",
+
+  //Upload Preview
+  "UploadPreviewScreen_Title": "Upload Your Photo Profile",
+  "UploadPreviewScreen_Description": "This data will be displayed in your account profile for security",
+  "UploadPreviewScreen_Next": "Next",
+
+  //Set Location 
+  "SetLocationScreen_Title": "Set Your Location",
+  "SetLocationScreen_Description": "This data will be displayed in your account profile for security",
+  "SetLocationScreen_YourLocation": "  Your Location",
+  "SetLocationScreen_SetLocation": "Set Location",
+  "SetLocationScreen_Next": "Next",
+
+  //
 };
