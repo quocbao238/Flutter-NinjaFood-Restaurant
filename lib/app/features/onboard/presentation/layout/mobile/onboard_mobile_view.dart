@@ -20,7 +20,7 @@ class OnboardMobileScreen extends GetView<OnboardController> {
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                AppSizeScale(ratioHeight: 0.5, ratioWidth: 1, child: item.image),
+                Expanded(child: AppSizeScale(ratioHeight: 0.5, ratioWidth: 1, child: item.image)),
                 AppPadding(
                     padding: AppEdgeInsets.only(
                         top: AppGapSize.large, left: AppGapSize.veryLarge, right: AppGapSize.veryLarge),

@@ -9,6 +9,7 @@ class AppPages {
       initial = AppRouteProvider.homeScreen;
       return;
     }
+    // initial = AppRouteProvider.splashScreen;
     initial = AppRouteProvider.splashScreen;
   }
 

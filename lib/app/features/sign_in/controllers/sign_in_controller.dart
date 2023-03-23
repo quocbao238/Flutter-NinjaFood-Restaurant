@@ -4,6 +4,7 @@ import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/provider/auth_provider.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/services/services.dart';
 
 class SignInController extends BaseController {
   final AuthProvider authProvider;
@@ -41,9 +42,14 @@ class SignInController extends BaseController {
     super.dispose();
   }
 
-  void onPressedSocialFacebook() {}
+  void onPressedSocialFacebook() {
+    final themeService = Get.find<ThemeService>();
+    themeService.toggleTheme();
+  }
 
-  void onPressedSocialGoogle() {}
+  void onPressedSocialGoogle() {
+    Get.toNamed(AppRouteProvider.paymentMethodScreen);
+  }
 
   Future<void> onPressedLogin() async {
     if (emailError.value != null || passwordError.value != null) {

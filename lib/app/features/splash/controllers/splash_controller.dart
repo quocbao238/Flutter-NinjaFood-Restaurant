@@ -23,7 +23,7 @@ class SplashController extends BaseController {
     await Future.delayed(Duration(seconds: 5));
     final firstTimeOpenAppKey = (sharedPreferencesService
             .getBool(SharedPreferencesKey.firstTimeOpenAppKey) ??
-        true);
+        false);
 
     if (!firstTimeOpenAppKey) {
       sharedPreferencesService.writeBool(
