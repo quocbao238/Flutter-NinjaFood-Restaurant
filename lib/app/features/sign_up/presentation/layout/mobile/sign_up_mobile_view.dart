@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/sign_up/controllers/sign_up_controller.dart';
 
-
 class SignUpMobileScreen extends GetView<SignUpController> {
   const SignUpMobileScreen({super.key});
 
@@ -31,31 +30,27 @@ class SignUpMobileScreen extends GetView<SignUpController> {
                   ),
                 ),
                 AppPadding(
-                  padding: AppEdgeInsets.symmetric(
-                      horizontal: AppGapSize.medium,
-                      vertical: AppGapSize.small),
+                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
                   child: AppTextFormField(
-                      obscureText: false,
-                      hintText: 'Anamwp . .',
+                      controller: controller.nameController,
+                      errorText: controller.nameError.value,
+                      hintText: 'Input Your Name ...',
                       prefixIcon: AppIcons.userProfile()),
                 ),
                 AppPadding(
-                  padding: AppEdgeInsets.symmetric(
-                      horizontal: AppGapSize.medium,
-                      vertical: AppGapSize.small),
-                  child: AppTextFormField(
-                      obscureText: false,
-                      hintText: 'Email',
-                      prefixIcon: AppIcons.email()),
+                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                  child: AppTextFormField.email(
+                      controller: controller.emailController,
+                      errorText: controller.emailError.value,
+                      hintText: 'Email'),
                 ),
                 AppPadding(
-                  padding: AppEdgeInsets.symmetric(
-                      horizontal: AppGapSize.medium,
-                      vertical: AppGapSize.small),
-                  child: AppTextFormField(
-                      obscureText: true,
-                      hintText: 'SignUpScreen_Password'.tr,
-                      prefixIcon: AppIcons.password()),
+                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                  child: AppTextFormField.password(
+                    controller: controller.passwordController,
+                    errorText: controller.passwordError.value,
+                    hintText: 'SignUpScreen_Password'.tr,
+                  ),
                 ),
                 AppPadding(
                   padding: AppEdgeInsets.symmetric(

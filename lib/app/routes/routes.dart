@@ -1,6 +1,8 @@
 library routes;
 
 import 'package:get/get.dart';
+import 'package:ninjafood/app/features/home/controllers/home_controller.dart';
+import 'package:ninjafood/app/features/home/presentation/home_screen.dart';
 import 'package:ninjafood/app/features/onboard/controllers/onboard_controller.dart';
 import 'package:ninjafood/app/features/onboard/presentation/layout/onboard_screen.dart';
 import 'package:ninjafood/app/features/payment_method/controllers/payment_controller.dart';

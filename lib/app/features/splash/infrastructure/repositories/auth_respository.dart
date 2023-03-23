@@ -24,94 +24,37 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<Either<Failure, models.Session>> login(
-      {required String email, required String password}) async {
+  Future<Either<Failure, models.Session>> login({required String email, required String password}) async {
     try {
-      final session = await appClient.getAccount
-          .createEmailSession(email: email, password: password);
+      final session = await appClient.getAccount.createEmailSession(email: email, password: password);
       return right(session);
     } on AppwriteException catch (e, stackTrace) {
-      return left(
-          Failure(e.message ?? 'Some unexpected error occurred', stackTrace));
+      return left(Failure(e.message ?? 'Some unexpected error occurred', stackTrace));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
   }
 
   @override
-  FutureEither<void> logout() async {
+  Future<Either<Failure, bool>> logout() async {
     try {
-      await appClient.getAccount.deleteSession(
-        sessionId: 'current',
-      );
-      return right(null);
+      await appClient.getAccount.deleteSession(sessionId: 'current');
+      return right(true);
     } on AppwriteException catch (e, stackTrace) {
-      console.showError(_logName, e.message.toString());
-      return left(
-          Failure(e.message ?? 'Some unexpected error occurred', stackTrace));
+      return left(Failure(e.message ?? 'Some unexpected error occurred', stackTrace));
     } catch (e, stackTrace) {
-      console.showError(_logName, e.toString());
       return left(Failure(e.toString(), stackTrace));
     }
   }
 
   @override
-  FutureEither<models.Account> signUp(
-      {required String email, required String password}) async {
+  Future<Either<Failure, models.Account>> signUp(
+      {required String email, required String password, required String name}) async {
     try {
-      final account = await appClient.getAccount
-          .create(userId: ID.unique(), email: email, password: password);
+      final account =
+          await appClient.getAccount.create(userId: ID.unique(), email: email, password: password, name: name);
       return right(account);
-    } on AppwriteException catch (e, stackTrace) {
-      console.showError(_logName, e.message.toString());
-
-      return left(
-          Failure(e.message ?? 'Some unexpected error occurred', stackTrace));
     } catch (e, stackTrace) {
-      console.showError(_logName, e.toString());
-
-      return left(Failure(e.toString(), stackTrace));
-    }
-  }
-
-  @override
-  FutureEither<models.Token> createMagicURLSession(
-      {required String userId, required String email}) async {
-    try {
-      final response = await appClient.getAccount.createMagicURLSession(
-        userId: userId,
-        email: email,
-      );
-      return right(response);
-    } on AppwriteException catch (e, stackTrace) {
-      console.showError(_logName, e.message.toString());
-
-      return left(
-          Failure(e.message ?? 'Some unexpected error occurred', stackTrace));
-    } catch (e, stackTrace) {
-      console.showError(_logName, e.toString());
-
-      return left(Failure(e.toString(), stackTrace));
-    }
-  }
-
-  @override
-  FutureEither<models.Session> confirmMagicURLSession(
-      {required String userId, required String secret}) async {
-    try {
-      final response = await appClient.getAccount.updateMagicURLSession(
-        userId: userId,
-        secret: secret,
-      );
-      return right(response);
-    } on AppwriteException catch (e, stackTrace) {
-      console.showError(_logName, e.message.toString());
-
-      return left(
-          Failure(e.message ?? 'Some unexpected error occurred', stackTrace));
-    } catch (e, stackTrace) {
-      console.showError(_logName, e.toString());
-
       return left(Failure(e.toString(), stackTrace));
     }
   }

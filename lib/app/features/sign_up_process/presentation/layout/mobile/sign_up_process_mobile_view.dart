@@ -33,6 +33,8 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
               padding: AppEdgeInsets.symmetric(
                   horizontal: AppGapSize.medium, vertical: AppGapSize.small),
               child: AppTextFormField(
+                controller: controller.firstNameController,
+                errorText: controller.firstNameError.value,
                 hintText: 'SignUpProcessScreen_FirstName'.tr,
               ),
             ),
@@ -40,6 +42,8 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
               padding: AppEdgeInsets.symmetric(
                   horizontal: AppGapSize.medium, vertical: AppGapSize.small),
               child: AppTextFormField(
+                controller: controller.lastNameController,
+                errorText: controller.lastNameError.value,
                 hintText: 'SignUpProcessScreen_LastName'.tr,
               ),
             ),
@@ -47,6 +51,8 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
               padding: AppEdgeInsets.symmetric(
                   horizontal: AppGapSize.medium, vertical: AppGapSize.small),
               child: AppTextFormField.phone(
+                controller: controller.phoneController,
+                errorText: controller.phoneError.value,
                 hintText: 'SignUpProcessScreen_MobileNumber'.tr,
               ),
             ),
