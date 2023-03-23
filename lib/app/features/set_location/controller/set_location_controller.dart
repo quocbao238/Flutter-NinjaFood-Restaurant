@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/provider/auth_provider.dart';
+import 'package:ninjafood/app/routes/routes.dart';
 
 class SetLocationController extends BaseController {
   final AuthProvider authProvider;
@@ -23,5 +24,7 @@ class SetLocationController extends BaseController {
 
   void onPressedSetLocation() {}
 
-  void onPressedNext() {}
+  void onPressedNext() {
+    Get.toNamed(AppRouteProvider.signupSuccessScreen);
+  }
 }

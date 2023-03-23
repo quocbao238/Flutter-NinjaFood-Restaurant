@@ -60,6 +60,11 @@ class AppPages {
       binding: GetBinding(AppRouteProvider.setLocationScreen),
     ),
     GetPage(
+      name: AppRouteProvider.signupSuccessScreen,
+      page: () => SignupSuccessScreen(),
+      binding: GetBinding(AppRouteProvider.signupSuccessScreen),
+    ),
+    GetPage(
       name: AppRouteProvider.homeScreen,
       page: () => HomeScreen(),
       binding: GetBinding(AppRouteProvider.homeScreen),

@@ -43,6 +43,10 @@ class GetBinding extends Bindings {
         Get.lazyPut(() =>
             SetLocationController(authProvider: Get.find<AuthProvider>()));
         break;
+      case AppRouteProvider.signupSuccessScreen:
+        Get.lazyPut(() =>
+            SignupSuccessController(authProvider: Get.find<AuthProvider>()));
+        break;
       case AppRouteProvider.homeScreen:
         Get.lazyPut(() => HomeController(authProvider: Get.find<AuthProvider>()));
     }
