@@ -1,17 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:ninjafood/app/services/services.dart';
+part of global_controller;
 
-class ThemeService extends GetxService {
-  final SharedPreferencesService prefsService;
+class ThemeController extends GetxService {
+  final LocalStorageController localStorageController;
   Rx<bool> isDarkTheme = false.obs;
 
-  ThemeService({required this.prefsService});
+  ThemeController({required this.localStorageController});
 
   Future<void> call() async {
-    final lcoalTheme =
-        prefsService.getBool(SharedPreferencesKey.isDarkThemeKey) ?? false;
-    isDarkTheme.value = lcoalTheme;
+    final localTheme =
+        localStorageController.getBool(LocalStorageKey.isDarkThemeKey) ?? false;
+    isDarkTheme.value = localTheme;
     if (isDarkTheme.value) {
       Get.changeThemeMode(ThemeMode.dark);
     }
@@ -30,7 +28,7 @@ class ThemeService extends GetxService {
   }
 
   Future<void> _writeCurrentThemeToLocal(bool isDarkTheme) async {
-    await prefsService.writeBool(
-        SharedPreferencesKey.isDarkThemeKey, isDarkTheme);
+    await localStorageController.writeBool(
+        LocalStorageKey.isDarkThemeKey, isDarkTheme);
   }
 }

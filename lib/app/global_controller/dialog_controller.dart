@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:ninja_theme/ninja_theme.dart';
+part of global_controller;
+
 
 class DialogController extends GetxController with GetSingleTickerProviderStateMixin {
   late final AnimationController _animationController;

@@ -1,12 +1,13 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/global_controller/global_controller.dart';
+import 'package:ninjafood/app/global_controller/local_storage_controller/local_storage_key.dart';
 import 'package:ninjafood/app/routes/routes.dart';
-import 'package:ninjafood/app/services/services.dart';
 
 class SplashController extends BaseController {
-  final SharedPreferencesService sharedPreferencesService;
+  final LocalStorageController localStorageController;
 
-  SplashController({required this.sharedPreferencesService});
+  SplashController({required this.localStorageController});
 
   @override
   void onInit() async {
@@ -21,13 +22,10 @@ class SplashController extends BaseController {
 
   Future<void> checkFirstTimeInstallApp() async {
     await Future.delayed(Duration(seconds: 5));
-    final firstTimeOpenAppKey = (sharedPreferencesService
-            .getBool(SharedPreferencesKey.firstTimeOpenAppKey) ??
-        false);
+    final firstTimeOpenAppKey = (localStorageController.getBool(LocalStorageKey.firstTimeOpenAppKey) ?? false);
 
     if (!firstTimeOpenAppKey) {
-      sharedPreferencesService.writeBool(
-          SharedPreferencesKey.firstTimeOpenAppKey, true);
+      localStorageController.writeBool(LocalStorageKey.firstTimeOpenAppKey, true);
       Get.offAndToNamed(AppRouteProvider.onboardScreen);
       return;
     }

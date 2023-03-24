@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "132267484565",
+    "project_id": "ninjafood-e422d",
+    "storage_bucket": "ninjafood-e422d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132267484565:android:2af40c35ebd7255a20029c",
+        "android_client_info": {
+          "package_name": "com.example.ninjafood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132267484565-9e8gnm1e1cv0dhrb675sm4p25lef8196.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB84nfMFqDwheo0mWfeiShTa8Ubm8hxXWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132267484565-9e8gnm1e1cv0dhrb675sm4p25lef8196.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
-import 'package:ninjafood/app/provider/auth_provider.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 
 class SignUpController extends BaseController {
-  final AuthProvider authProvider;
+  final AuthController authController;
 
-  SignUpController({required this.authProvider});
+  SignUpController({required this.authController});
 
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
@@ -37,7 +37,6 @@ class SignUpController extends BaseController {
       final name = nameController.text;
       nameError.value = Validator.validateName(name);
     });
-
     super.onInit();
   }
 
@@ -51,7 +50,7 @@ class SignUpController extends BaseController {
   }
 
   Future<void> onPressedCreateAccount() async {
-    if (emailError.value != null || passwordError.value != null || nameError.value != null) {
+    if (emailError.value != null || passwordError.value != null) {
       return;
     }
 
@@ -60,9 +59,10 @@ class SignUpController extends BaseController {
     final password = passwordController.text;
 
     loading(true);
-    final isSinged = await authProvider.signUp(email: email, password: password, name: name);
+    await authController.registerWithEmailAndPassword(email: email, password: password).then((value) {
+      if (value) Get.offAllNamed(AppRouteProvider.homeScreen);
+    });
     loading(false);
-    if (isSinged) Get.offAllNamed(AppRouteProvider.homeScreen);
   }
 
   void onPressedAlreadyHaveAnAccount() {

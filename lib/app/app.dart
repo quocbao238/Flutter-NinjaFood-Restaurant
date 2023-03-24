@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:ninjafood/app/services/services.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'routes/routes.dart';
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,19 +17,16 @@ class MyApp extends StatelessWidget {
         enableLog: true,
         initialRoute: AppPages.initial,
         getPages: AppPages.routes,
-        locale: TranslationService.fallbackLocale,
-        fallbackLocale: TranslationService.fallbackLocale,
+        locale: TranslationController.fallbackLocale,
+        fallbackLocale: TranslationController.fallbackLocale,
         builder: (context, child) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
-            child: child!,
-          );
+          return MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1), child: child!);
         },
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate
         ],
-        translations: TranslationService());
+        translations: TranslationController());
   }
 }

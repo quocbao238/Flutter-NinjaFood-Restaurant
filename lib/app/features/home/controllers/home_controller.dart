@@ -1,12 +1,11 @@
-
-
 import 'package:get/get.dart';
-import 'package:ninjafood/app/provider/auth_provider.dart';
+import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 
 class HomeController extends GetxController {
-  final AuthProvider authProvider;
-  HomeController({required this.authProvider});
+  final AuthController authController;
+
+  HomeController({required this.authController});
 
   @override
   void onInit() {
@@ -22,12 +21,8 @@ class HomeController extends GetxController {
   void onClose() {}
 
   onPressedLogout() async {
-    await authProvider.logout().then((value) {
-      if (value) {
-        Get.offAllNamed(AppRouteProvider.signinScreen);
-      }
+    await authController.signOut().then((value) {
+      if (value) Get.offAllNamed(AppRouteProvider.signinScreen);
     });
   }
-
-
 }

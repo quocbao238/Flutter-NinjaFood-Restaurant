@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:ninjafood/app/global_controller/lang/en.dart';
-import 'package:ninjafood/app/global_controller/lang/vi.dart';
-import '../services.dart';
+part of global_controller;
 
-class TranslationService extends Translations {
-  static late SharedPreferencesService prefsService = Get.find();
+class TranslationController extends Translations {
+  static late LocalStorageController localStorageController = Get.find();
   static var fallbackLocale = Locale('en', 'EN');
 
   static String localToString(Locale locale) {
@@ -18,7 +14,7 @@ class TranslationService extends Translations {
   }
 
   static Future<Null> init(Locale locale) async {
-    String? lang = prefsService.getString(SharedPreferencesKey.currentLanguage);
+    String? lang = localStorageController.getString(LocalStorageKey.currentLanguage);
     if (lang != null && lang.isNotEmpty)
       fallbackLocale = localFromString(lang);
     else
@@ -32,7 +28,7 @@ class TranslationService extends Translations {
   static updateLocale(Locale locale) async {
     Get.updateLocale(locale);
     fallbackLocale = locale;
-    prefsService.writeString(
-        SharedPreferencesKey.currentLanguage, localToString(locale));
+    localStorageController.writeString(
+        LocalStorageKey.currentLanguage, localToString(locale));
   }
 }
