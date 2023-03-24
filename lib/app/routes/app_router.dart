@@ -5,7 +5,7 @@ class AppPages {
 
   static navigateDefaultPage() async {
     final authController = Get.find<AuthController>();
-    if (authController.firebaseUser.value != null) {
+    if (authController.authUser.value != null) {
       initial = AppRouteProvider.homeScreen;
       return;
     }

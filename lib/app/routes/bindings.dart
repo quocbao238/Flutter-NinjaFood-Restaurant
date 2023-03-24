@@ -32,7 +32,8 @@ class GetBinding extends Bindings {
       case AppRouteProvider.signupProcessScreen:
         Get.lazyPut(() {
           final authController = Get.find<AuthController>();
-          return SignUpProcessController(authController: authController);
+          final databaseController = Get.find<DatabaseController>();
+          return SignUpProcessController(authController: authController, databaseController: databaseController);
         });
         break;
       case AppRouteProvider.paymentMethodScreen:

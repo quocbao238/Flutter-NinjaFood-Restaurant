@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+
+const _logName = 'SignUpController';
 
 class SignUpController extends BaseController {
   final AuthController authController;
@@ -57,9 +60,10 @@ class SignUpController extends BaseController {
     final email = emailController.text;
     final password = passwordController.text;
     loading(true);
-    await authController.registerWithEmailAndPassword(email: email, password: password, fullName: name).then((value) {
-      if (value) Get.offAllNamed(AppRouteProvider.signupProcessScreen);
-    });
+    final response =
+        await authController.registerWithEmailAndPassword(email: email, password: password, fullName: name);
+    await response.fold(
+        (l) => handleFailure(_logName, l, showDialog: true), (r) => Get.offAllNamed(AppRouteProvider.signupProcessScreen));
     loading(false);
   }
 
