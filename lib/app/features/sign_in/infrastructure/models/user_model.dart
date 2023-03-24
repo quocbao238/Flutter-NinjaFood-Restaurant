@@ -23,7 +23,7 @@ class UserModel {
     return UserModel(uid: uid, email: email);
   }
 
-  UserModel.fromMap(Map<String, dynamic> data)
+  UserModel.fromJson(Map<String, dynamic> data)
       : uid = data['uid'],
         fullName = data['fullName'],
         firstName = data['firstName'],
@@ -33,7 +33,7 @@ class UserModel {
         photoUrl = data['photoUrl'],
         address = data['address'];
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'uid': uid,
       'fullName': fullName,
@@ -45,6 +45,8 @@ class UserModel {
       'address': address,
     };
   }
+
+
 
   copyWith({
     String? uid,

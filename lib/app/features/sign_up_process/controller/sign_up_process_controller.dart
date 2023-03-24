@@ -17,7 +17,6 @@ class SignUpProcessController extends BaseController {
   Rxn<String?> lastNameError = Rxn<String?>(null);
   Rxn<String?> phoneError = Rxn<String?>(null);
 
-
   @override
   void onInit() {
     firstNameController = TextEditingController();
@@ -54,12 +53,18 @@ class SignUpProcessController extends BaseController {
     Get.back();
   }
 
-  void onPressedNext() {
-
+  Future<void> onPressedNext() async {
     if (firstNameError.value != null || lastNameError.value != null || phoneError.value != null) {
       return;
     }
 
-    Get.toNamed(AppRouteProvider.paymentMethodScreen);
+    loading(true);
+    await authController
+        .updateUserFirestore(
+            firstName: firstNameController.text, lastName: lastNameController.text, phoneNumber: phoneController.text)
+        .then((value) {
+      if (value) Get.toNamed(AppRouteProvider.paymentMethodScreen);
+    });
+    loading(false);
   }
 }

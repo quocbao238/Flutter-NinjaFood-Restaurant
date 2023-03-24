@@ -50,17 +50,15 @@ class SignUpController extends BaseController {
   }
 
   Future<void> onPressedCreateAccount() async {
-    if (emailError.value != null || passwordError.value != null) {
+    if (emailError.value != null || passwordError.value != null || nameError.value != null) {
       return;
     }
-
     final name = nameController.text;
     final email = emailController.text;
     final password = passwordController.text;
-
     loading(true);
-    await authController.registerWithEmailAndPassword(email: email, password: password).then((value) {
-      if (value) Get.offAllNamed(AppRouteProvider.homeScreen);
+    await authController.registerWithEmailAndPassword(email: email, password: password, fullName: name).then((value) {
+      if (value) Get.offAllNamed(AppRouteProvider.signupProcessScreen);
     });
     loading(false);
   }

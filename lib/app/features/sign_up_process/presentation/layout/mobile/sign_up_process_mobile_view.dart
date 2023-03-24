@@ -8,63 +8,59 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldBackgroundImage.splash(
-      onPressBackButton: controller.onPressBack,
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
-              child: AppText.headlineSmall(
-                textAlign: TextAlign.start,
-                text: 'SignUpProcessScreen_Title'.tr,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            AppPadding.medium(
-              child: AppText.bodyMedium(
+    return Obx(
+      () => AppScaffoldBackgroundImage.splash(
+        isLoading: controller.loading.value,
+        onPressBackButton: controller.onPressBack,
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppPadding(
+                padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+                child: AppText.headlineSmall(
                   textAlign: TextAlign.start,
-                  text: 'SignUpProcessScreen_Description'.tr,
-                  fontWeight: FontWeight.w400),
-            ),
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-              child: AppTextFormField(
-                controller: controller.firstNameController,
-                errorText: controller.firstNameError.value,
-                hintText: 'SignUpProcessScreen_FirstName'.tr,
+                  text: 'SignUpProcessScreen_Title'.tr,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-              child: AppTextFormField(
-                controller: controller.lastNameController,
-                errorText: controller.lastNameError.value,
-                hintText: 'SignUpProcessScreen_LastName'.tr,
+              AppPadding.medium(
+                child: AppText.bodyMedium(
+                    textAlign: TextAlign.start,
+                    text: 'SignUpProcessScreen_Description'.tr,
+                    fontWeight: FontWeight.w400),
               ),
-            ),
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-              child: AppTextFormField.phone(
-                controller: controller.phoneController,
-                errorText: controller.phoneError.value,
-                hintText: 'SignUpProcessScreen_MobileNumber'.tr,
+              AppPadding(
+                padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                child: AppTextFormField(
+                  controller: controller.firstNameController,
+                  errorText: controller.firstNameError.value,
+                  hintText: 'SignUpProcessScreen_FirstName'.tr,
+                ),
               ),
-            ),
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.medium,
-                  vertical: AppGapSize.veryLarge),
-              child: AppButton.max(
-                  title: 'SignUpProcessScreen_Next'.tr,
-                  onPressed: controller.onPressedNext),
-            ),
-          ],
+              AppPadding(
+                padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                child: AppTextFormField(
+                  controller: controller.lastNameController,
+                  errorText: controller.lastNameError.value,
+                  hintText: 'SignUpProcessScreen_LastName'.tr,
+                ),
+              ),
+              AppPadding(
+                padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                child: AppTextFormField.phone(
+                  controller: controller.phoneController,
+                  errorText: controller.phoneError.value,
+                  hintText: 'SignUpProcessScreen_MobileNumber'.tr,
+                ),
+              ),
+              AppPadding(
+                padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.veryLarge),
+                child: AppButton.max(title: 'SignUpProcessScreen_Next'.tr, onPressed: controller.onPressedNext),
+              ),
+            ],
+          ),
         ),
       ),
     );
