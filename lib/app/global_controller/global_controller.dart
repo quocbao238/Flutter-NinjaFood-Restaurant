@@ -8,8 +8,7 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/features/splash/infrastructure/models/user_model.dart';
-import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/features/sign_in/infrastructure/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer' as developer;
 import 'language_controller/en.dart';
@@ -39,6 +38,6 @@ Future<void> initGlobalController() async {
   await Get.put(LocalStorageController())();
   await Get.put(ThemeController(localStorageController: Get.find<LocalStorageController>()))();
   await TranslationController.init(Locale('vi', 'VN'));
-  Get.put(AuthController());
+  Get.put(AuthController(console: console));
   console.show(_logName, 'All services started...');
 }

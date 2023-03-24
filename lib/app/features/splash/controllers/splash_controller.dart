@@ -21,14 +21,16 @@ class SplashController extends BaseController {
   }
 
   Future<void> checkFirstTimeInstallApp() async {
-    await Future.delayed(Duration(seconds: 5));
-    final firstTimeOpenAppKey = (localStorageController.getBool(LocalStorageKey.firstTimeOpenAppKey) ?? false);
+    await Future.delayed(Duration(seconds: 2));
 
-    if (!firstTimeOpenAppKey) {
-      localStorageController.writeBool(LocalStorageKey.firstTimeOpenAppKey, true);
+    final secondTimeOpenApp = localStorageController.getBool(LocalStorageKey.secondTimeOpenApp);
+
+    if (secondTimeOpenApp == null || secondTimeOpenApp == false) {
+      localStorageController.writeBool(LocalStorageKey.secondTimeOpenApp, true);
       Get.offAndToNamed(AppRouteProvider.onboardScreen);
       return;
     }
+
     Get.offAndToNamed(AppRouteProvider.signinScreen);
   }
 }
