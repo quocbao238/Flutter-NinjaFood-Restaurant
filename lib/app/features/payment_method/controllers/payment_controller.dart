@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/provider/auth_provider.dart';
+import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 
 class PaymentController extends BaseController {
-  final AuthProvider authProvider;
+  final AuthController authController;
 
-  PaymentController({required this.authProvider});
+  PaymentController({required this.authController});
 
   @override
   void onInit() {
@@ -30,6 +30,5 @@ class PaymentController extends BaseController {
 
   void onPressedNext() {
     Get.toNamed(AppRouteProvider.uploadPhotoScreen);
-    // Get.find<ThemeService>().toggleTheme();
   }
 }

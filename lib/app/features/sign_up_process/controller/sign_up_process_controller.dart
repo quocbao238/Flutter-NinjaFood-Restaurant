@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
-import 'package:ninjafood/app/provider/auth_provider.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 
 class SignUpProcessController extends BaseController {
-  final AuthProvider authProvider;
+  final AuthController authController;
 
-  SignUpProcessController({required this.authProvider});
+  SignUpProcessController({required this.authController});
 
   late final TextEditingController firstNameController;
   late final TextEditingController lastNameController;

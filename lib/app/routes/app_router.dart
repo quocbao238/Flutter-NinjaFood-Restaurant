@@ -4,12 +4,11 @@ class AppPages {
   static String initial = AppRouteProvider.splashScreen;
 
   static navigateDefaultPage() async {
-    final authProvider = Get.find<AuthProvider>();
-    if (authProvider.currentAccount.value != null) {
+    final authController = Get.find<AuthController>();
+    if (authController.firebaseUser.value != null) {
       initial = AppRouteProvider.homeScreen;
       return;
     }
-    // initial = AppRouteProvider.splashScreen;
     initial = AppRouteProvider.splashScreen;
   }
 

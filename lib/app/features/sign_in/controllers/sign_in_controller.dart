@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
-import 'package:ninjafood/app/provider/auth_provider.dart';
 import 'package:ninjafood/app/routes/routes.dart';
-import 'package:ninjafood/app/services/services.dart';
 
 class SignInController extends BaseController {
-  final AuthProvider authProvider;
+  final AuthController authController;
 
-  SignInController({required this.authProvider});
+  SignInController({required this.authController});
 
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
@@ -43,7 +42,7 @@ class SignInController extends BaseController {
   }
 
   void onPressedSocialFacebook() {
-    final themeService = Get.find<ThemeService>();
+    final themeService = Get.find<ThemeController>();
     themeService.toggleTheme();
   }
 
@@ -60,12 +59,10 @@ class SignInController extends BaseController {
     final password = passwordController.text;
 
     loading.value = true;
-    final loginSuccess = await authProvider.login(email: email, password: password);
+    await authController.loginWithEmailAndPassword(email: email, password: password).then((value) {
+      if (value) Get.offAllNamed(AppRouteProvider.homeScreen);
+    });
     loading.value = false;
-
-    if (loginSuccess) {
-      Get.offAllNamed(AppRouteProvider.homeScreen);
-    }
   }
 
   void onPressedSignUp() {

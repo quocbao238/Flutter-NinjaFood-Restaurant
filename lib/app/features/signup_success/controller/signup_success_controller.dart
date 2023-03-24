@@ -1,10 +1,10 @@
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/provider/auth_provider.dart';
+import 'package:ninjafood/app/global_controller/global_controller.dart';
 
 class SignupSuccessController extends BaseController {
-  final AuthProvider authProvider;
+  final AuthController authController;
 
-  SignupSuccessController({required this.authProvider});
+  SignupSuccessController({required this.authController});
 
   @override
   void onInit() {

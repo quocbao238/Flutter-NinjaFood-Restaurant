@@ -1,8 +1,7 @@
-import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-export './shared_preferences_key.dart';
+part of global_controller;
 
-class SharedPreferencesService extends GetxService {
+
+class LocalStorageController extends GetxService {
   SharedPreferences? _prefs;
 
   Future<void> call() async {

@@ -19,12 +19,16 @@ dependencies:
   http: ^0.13.5
   appwrite: ^8.3.0
   fpdart: ^0.5.0
+  firebase_auth: ^4.3.0
+  cloud_firestore: ^4.4.5
 
   ninja_theme:
     git:
       url: https://github.com/quocbao238/ninjafood_theme.git
       ref: devMaster
-#    path: ../NinjaFood_Theme
+  firebase_core: ^2.8.0
+
+  #    path: ../NinjaFood_Theme
 
 
 

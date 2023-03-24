@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/provider/auth_provider.dart';
+import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 
 class SetLocationController extends BaseController {
-  final AuthProvider authProvider;
+  final AuthController authController;
 
-  SetLocationController({required this.authProvider});
+  SetLocationController({required this.authController});
 
   @override
   void onInit() {

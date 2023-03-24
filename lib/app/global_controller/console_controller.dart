@@ -1,22 +1,21 @@
-import 'package:flutter/foundation.dart' show kDebugMode;
-import 'dart:developer' as developer;
+
+
+part of global_controller;
+
 
 enum LogLevel { DEBUG, WARNING, ERROR }
 
-class AppConsoleService {
-  final bool flutterLogs;
-  static final AppConsoleService _instance =
-      AppConsoleService._internal(kDebugMode);
+class ConsoleController extends GetxService{
+  static ConsoleController get to => Get.find();
 
-  factory AppConsoleService() {
-    return _instance;
-  }
+  bool flutterLogs = kDebugMode;
 
-  AppConsoleService._internal(this.flutterLogs) {
+  Future<void> call() async {
     show('Normal Log', 'This is normal log');
     showWarning('Warning Log', 'This is warning log');
     showError('Error Log', 'This is error log');
   }
+
 
   // log events, states etc...
   void show(String logName, String message) {
