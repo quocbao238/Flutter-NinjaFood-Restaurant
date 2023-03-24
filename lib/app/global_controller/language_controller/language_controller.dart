@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ninjafood/app/services/lang/en.dart';
-import 'package:ninjafood/app/services/lang/vi.dart';
-import 'package:ninjafood/app/services/services.dart';
+import 'package:ninjafood/app/global_controller/lang/en.dart';
+import 'package:ninjafood/app/global_controller/lang/vi.dart';
+import '../services.dart';
 
 class TranslationService extends Translations {
   static late SharedPreferencesService prefsService = Get.find();
@@ -18,12 +18,12 @@ class TranslationService extends Translations {
   }
 
   static Future<Null> init(Locale locale) async {
-    // String? lang = prefsService.getString(SharedPreferencesKey.currentLanguage);
-    // if (lang != null && lang.isNotEmpty)
-    //   fallbackLocale = localFromString(lang);
-    // else
-    //   fallbackLocale = locale;
-    // return null;
+    String? lang = prefsService.getString(SharedPreferencesKey.currentLanguage);
+    if (lang != null && lang.isNotEmpty)
+      fallbackLocale = localFromString(lang);
+    else
+      fallbackLocale = locale;
+    return null;
   }
 
   @override
