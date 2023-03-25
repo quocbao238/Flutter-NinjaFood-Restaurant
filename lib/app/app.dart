@@ -20,7 +20,9 @@ class MyApp extends StatelessWidget {
         locale: TranslationController.fallbackLocale,
         fallbackLocale: TranslationController.fallbackLocale,
         builder: (context, child) {
-          return MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1), child: child!);
+          return MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+              child: child!);
         },
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,

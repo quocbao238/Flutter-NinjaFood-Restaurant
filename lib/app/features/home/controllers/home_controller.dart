@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
+import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+
+const _logName = 'HomeController';
 
 class HomeController extends GetxController {
   final AuthController authController;
@@ -20,9 +23,9 @@ class HomeController extends GetxController {
   @override
   void onClose() {}
 
-  onPressedLogout() async {
-    await authController.signOut().then((value) {
-      if (value) Get.offAllNamed(AppRouteProvider.signinScreen);
-    });
+  void onPressedLogout() async {
+    final response = await authController.signOut();
+    response.fold(
+        (l) => handleFailure(_logName, l, showDialog: true), (r) => Get.offAllNamed(AppRouteProvider.signinScreen));
   }
 }

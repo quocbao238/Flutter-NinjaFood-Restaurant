@@ -29,14 +29,14 @@ class SignUpMobileScreen extends GetView<SignUpController> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                AppPadding(
-                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-                  child: AppTextFormField(
-                      controller: controller.nameController,
-                      errorText: controller.nameError.value,
-                      hintText: 'Input Your Name ...',
-                      prefixIcon: AppIcons.userProfile()),
-                ),
+                // AppPadding(
+                //   padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                //   child: AppTextFormField(
+                //       controller: controller.nameController,
+                //       errorText: controller.nameError.value,
+                //       hintText: 'Input Your Name ...',
+                //       prefixIcon: AppIcons.userProfile()),
+                // ),
                 AppPadding(
                   padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
                   child: AppTextFormField.email(

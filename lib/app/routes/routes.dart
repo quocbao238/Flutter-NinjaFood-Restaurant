@@ -23,6 +23,7 @@ import 'package:ninjafood/app/features/upload_photo/controller/upload_photo_cont
 import 'package:ninjafood/app/features/upload_photo/presentation/layout/upload_photo.dart';
 import 'package:ninjafood/app/features/upload_preview/controller/upload_preview_controller.dart';
 import 'package:ninjafood/app/features/upload_preview/presentation/layout/upload_preview.dart';
+import 'package:ninjafood/app/global_controller/db_controller.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 
 part 'app_provider.dart';

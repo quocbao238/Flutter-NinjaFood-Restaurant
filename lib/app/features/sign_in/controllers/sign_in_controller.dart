@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
@@ -57,10 +58,10 @@ class SignInController extends BaseController {
 
     final email = emailController.text;
     final password = passwordController.text;
-
     loading.value = true;
-    await authController.loginWithEmailAndPassword(email: email, password: password).then((value) {
-      if (value) Get.offAllNamed(AppRouteProvider.homeScreen);
+    final response = await authController.loginWithEmailAndPassword(email: email, password: password);
+    await response.fold((l) => handleFailure('SignInController', l, showDialog: true), (r) {
+      Get.offAllNamed(AppRouteProvider.homeScreen);
     });
     loading.value = false;
   }

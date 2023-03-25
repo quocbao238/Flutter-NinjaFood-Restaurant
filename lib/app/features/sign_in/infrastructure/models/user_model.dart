@@ -1,6 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 class UserModel {
   String uid;
-  String? fullName;
   String? firstName;
   String? lastName;
   String? phoneNumber;
@@ -10,7 +11,6 @@ class UserModel {
 
   UserModel({
     required this.uid,
-    this.fullName,
     this.firstName,
     this.lastName,
     this.phoneNumber,
@@ -19,24 +19,22 @@ class UserModel {
     this.address,
   });
 
-  UserModel createUserEmail(String uid, String email) {
-    return UserModel(uid: uid, email: email);
+  static UserModel createUserByAuthUser({required User authUser}) {
+    return UserModel(uid: authUser.uid, email: authUser.email);
   }
 
   UserModel.fromJson(Map<String, dynamic> data)
-      : uid = data['uid'],
-        fullName = data['fullName'],
-        firstName = data['firstName'],
-        lastName = data['lastName'],
-        phoneNumber = data['phoneNumber'],
-        email = data['email'],
-        photoUrl = data['photoUrl'],
-        address = data['address'];
+      : uid = data['uid'] ?? '',
+        firstName = data['firstName'] ?? '',
+        lastName = data['lastName'] ?? '',
+        phoneNumber = data['phoneNumber'] ?? '',
+        email = data['email'] ?? '',
+        photoUrl = data['photoUrl'] ?? '',
+        address = data['address'] ?? '';
 
   Map<String, dynamic> toJson() {
     return {
       'uid': uid,
-      'fullName': fullName,
       'firstName': firstName,
       'lastName': lastName,
       'phoneNumber': phoneNumber,
@@ -46,9 +44,7 @@ class UserModel {
     };
   }
 
-
-
-  copyWith({
+  UserModel copyWith({
     String? uid,
     String? fullName,
     String? firstName,
@@ -60,7 +56,6 @@ class UserModel {
   }) {
     return UserModel(
       uid: uid ?? this.uid,
-      fullName: fullName ?? this.fullName,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       phoneNumber: phoneNumber ?? this.phoneNumber,

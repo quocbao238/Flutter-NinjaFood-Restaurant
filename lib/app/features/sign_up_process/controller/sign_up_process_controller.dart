@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/global_controller/db_controller.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 
+final _logName = 'SignUpProcessController';
+
 class SignUpProcessController extends BaseController {
   final AuthController authController;
+  final DatabaseController databaseController;
 
-  SignUpProcessController({required this.authController});
+  SignUpProcessController({required this.authController, required this.databaseController});
 
   late final TextEditingController firstNameController;
   late final TextEditingController lastNameController;
@@ -58,13 +63,21 @@ class SignUpProcessController extends BaseController {
       return;
     }
 
+    final currentUser = authController.currentUser.value;
+    if (currentUser == null) return;
+
     loading(true);
-    await authController
-        .updateUserFirestore(
-            firstName: firstNameController.text, lastName: lastNameController.text, phoneNumber: phoneController.text)
-        .then((value) {
-      if (value) Get.toNamed(AppRouteProvider.paymentMethodScreen);
+    final newUserData = currentUser.copyWith(
+      firstName: firstNameController.text,
+      lastName: lastNameController.text,
+      phoneNumber: phoneController.text,
+    );
+
+    final response = await databaseController.updateUser(newUserData);
+    await response.fold((l) => handleFailure(_logName, l), (r) {
+      Get.toNamed(AppRouteProvider.paymentMethodScreen);
     });
+
     loading(false);
   }
 }
