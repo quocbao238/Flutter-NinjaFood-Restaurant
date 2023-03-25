@@ -9,49 +9,46 @@ class SetLocationMobileView extends GetView<SetLocationController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldBackgroundImage.pattern(
-      onPressBackButton: controller.onPressBack,
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Obx(
+      () => AppScaffoldBackgroundImage.pattern(
+        isLoading: controller.loading.value,
+        onPressBackButton: controller.onPressBack,
+        body: Column(
           children: [
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
-              child: AppText.headlineSmall(
-                text: 'SetLocationScreen_Title'.tr,
-                fontWeight: FontWeight.bold,
-                textAlign: TextAlign.start,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  AppPadding(
+                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+                    child: AppText.headlineSmall(
+                      text: 'SetLocationScreen_Title'.tr,
+                      fontWeight: FontWeight.bold,
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                  AppPadding.medium(
+                    child: AppText.bodyMedium(
+                      text: 'SetLocationScreen_Description'.tr,
+                      fontWeight: FontWeight.w400,
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                  AppPadding.medium(
+                    child: Center(
+                      child: BoxLocation(
+                        onPressSetLocation: controller.onPressedSetLocation,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            AppPadding.medium(
-              child: AppText.bodyMedium(
-                text:
-                    'SetLocationScreen_Description'.tr,
-                fontWeight: FontWeight.w400,
-                textAlign: TextAlign.start,
-              ),
+            AppPadding.regular(
+              child: Obx(() =>
+                  AppButton.max(title: controller.getTitleButton().tr, onPressed: controller.onPressedNextSkipButton)),
             ),
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.medium,
-                  vertical: AppGapSize.veryLarge),
-              child: Center(
-                child: BoxLocation(
-                  onPressSetLocation: controller.onPressedSetLocation,
-                ),
-              ),
-            ),
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.medium,
-                  vertical: AppGapSize.veryLarge),
-              child: AppButton.max(
-                title: 'SetLocationScreen_Next'.tr,
-                onPressed: controller.onPressedNext,
-              ),
-            ),            AppPadding.small()
-
           ],
         ),
       ),

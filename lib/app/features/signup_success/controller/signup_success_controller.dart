@@ -11,10 +11,11 @@ class SignupSuccessController extends BaseController {
   @override
   void onInit() {
     super.onInit();
+    asyncFuture();
   }
 
   asyncFuture() async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 8));
     Get.offAllNamed(AppRouteProvider.homeScreen);
   }
 
@@ -23,5 +24,7 @@ class SignupSuccessController extends BaseController {
     super.dispose();
   }
 
-  void onPressedTryOrder() {}
+  void onPressedNext() {
+    Get.offAllNamed(AppRouteProvider.homeScreen);
+  }
 }

@@ -3,55 +3,57 @@ part of global_controller;
 class AuthController extends GetxService {
   final ConsoleController console;
   final DatabaseController dbController;
-
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   late Rx<User?> authUser = Rx<User?>(null);
-  late Rx<UserModel?> currentUser = Rx<UserModel?>(null);
+  late Rx<UserModel?> _currentUser = Rx<UserModel?>(null);
 
   AuthController({required this.console, required this.dbController});
+
+  UserModel? get currentUser => _currentUser.value;
+
+  StreamSubscription? _cloudUserSubscription;
 
   Future<void> call() async {
     final _authUser = _auth.currentUser;
     if (_authUser != null) {
       authUser.value = _authUser;
-      await _getCloudUser();
+      _handleCloudUserChanged();
     }
     _handleAuthChanged();
     super.onInit();
   }
 
-  Future<void> _getCloudUser() async {
-    if (authUser.value == null || authUser.value?.uid == null) return;
-    final user = await dbController.getUser(authUser.value!.uid);
-    currentUser.value = user;
+  void _handleCloudUserChanged() async {
+    if (_cloudUserSubscription != null || _auth.currentUser == null) return;
+    console.show(_logName, '_handleCloudUserChanged Run');
+    _cloudUserSubscription = dbController.getUserDataStream(authUser.value!.uid).listen((event) {
+      _currentUser.value = UserModel.fromJson(event.data()!);
+      console.show(_logName, '_handleCloudUserChanged ${_currentUser.value!.toJson()}');
+    });
   }
 
   void _handleAuthChanged() async {
     _auth.authStateChanges().listen((User? user) async {
       authUser.value = user;
-
       if (user == null) {
         console.show(_logName, 'User is currently signed out!');
-        await _getCloudUser();
+        _cloudUserSubscription?.cancel();
         return;
       }
-
+      _handleCloudUserChanged();
       console.show(_logName, 'User is signed in!');
-      await _getCloudUser();
     });
   }
 
-  Future<Either<Failure, void>> registerWithEmailAndPassword(
-      {required String email, required String password}) async {
+  Future<Either<Failure, void>> registerWithEmailAndPassword({required String email, required String password}) async {
     try {
       await _auth.createUserWithEmailAndPassword(email: email, password: password);
       final _authUser = _auth.currentUser;
       if (_authUser == null) return left(Failure('Auth user is null', StackTrace.current));
       final userModel = UserModel.createUserByAuthUser(authUser: _authUser);
-      await dbController.insertUser(userModel);
-      _getCloudUser();
+      final response = await dbController.insertUser(userModel);
+      response.fold((l) => left(l), (r) => r);
       return right(null);
     } on FirebaseAuthException catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));

@@ -9,39 +9,38 @@ class UploadPreviewMobileView extends GetView<UploadPreviewController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldBackgroundImage.pattern(
-      onPressBackButton: controller.onPressBack,
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Obx(
+      () => AppScaffoldBackgroundImage.pattern(
+        isLoading: controller.loading.value,
+        onPressBackButton: controller.onPressBack,
+        body: Column(
           children: [
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.medium),
-              child: AppText.headlineSmall(
-                  fontWeight: FontWeight.bold,
-                  textAlign: TextAlign.start,
-                  text: 'UploadPreviewScreen_Title'.tr),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  AppPadding(
+                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+                    child: AppText.headlineSmall(
+                        fontWeight: FontWeight.bold, textAlign: TextAlign.start, text: 'UploadPreviewScreen_Title'.tr),
+                  ),
+                  AppPadding.medium(
+                    child: AppText.bodyMedium(
+                        fontWeight: FontWeight.w400,
+                        textAlign: TextAlign.start,
+                        text: 'UploadPreviewScreen_Description'.tr),
+                  ),
+                  Center(
+                      child: AppPadding(
+                          padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.large),
+                          child: PhotoPreview(
+                            removePhoto: controller.onPressedRemovePhoto,
+                          ))),
+                ],
+              ),
             ),
-            AppPadding.medium(
-              child: AppText.bodyMedium(
-                  fontWeight: FontWeight.w400,
-                  textAlign: TextAlign.start,
-                  text:
-                      'UploadPreviewScreen_Description'.tr),
-            ),
-            Center(
-                child: AppPadding(
-                    padding: AppEdgeInsets.symmetric(
-                        horizontal: AppGapSize.medium,
-                        vertical: AppGapSize.large),
-                    child: PhotoPreview(
-                      removePhoto: controller.onPressedRemovePhoto,
-                    ))),
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.medium, vertical: AppGapSize.veryLarge),
+            AppPadding.regular(
               child: AppButton.max(
                 title: 'UploadPreviewScreen_Next'.tr,
                 onPressed: controller.onPressedNext,

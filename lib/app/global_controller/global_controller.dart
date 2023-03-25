@@ -1,13 +1,15 @@
 library global_controller;
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:ninjafood/app/constants/contains.dart';
-import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/features/sign_in/infrastructure/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer' as developer;
@@ -29,6 +31,8 @@ part 'language_controller/language_controller.dart';
 
 part 'auth_controller.dart';
 
+part 'cloud_storage_controller.dart';
+
 const _logName = 'globalController';
 
 Future<void> initGlobalController() async {
@@ -40,6 +44,7 @@ Future<void> initGlobalController() async {
   await Get.put(ThemeController(localStorageController: Get.find<LocalStorageController>()))();
   await Get.put(DatabaseController(console: console))();
   await Get.put(AuthController(console: console, dbController: Get.find<DatabaseController>()))();
+  await Get.put(CloudStorageController())();
   await TranslationController.init(Locale('vi', 'VN'));
   console.show(_logName, 'All services started...');
 }
