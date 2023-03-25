@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class UserModel {
   String uid;
-  String? fullName;
   String? firstName;
   String? lastName;
   String? phoneNumber;
@@ -12,7 +11,6 @@ class UserModel {
 
   UserModel({
     required this.uid,
-    this.fullName,
     this.firstName,
     this.lastName,
     this.phoneNumber,
@@ -21,15 +19,12 @@ class UserModel {
     this.address,
   });
 
-
-
   static UserModel createUserByAuthUser({required User authUser}) {
     return UserModel(uid: authUser.uid, email: authUser.email);
   }
 
   UserModel.fromJson(Map<String, dynamic> data)
       : uid = data['uid'] ?? '',
-        fullName = data['fullName'] ?? '',
         firstName = data['firstName'] ?? '',
         lastName = data['lastName'] ?? '',
         phoneNumber = data['phoneNumber'] ?? '',
@@ -40,7 +35,6 @@ class UserModel {
   Map<String, dynamic> toJson() {
     return {
       'uid': uid,
-      'fullName': fullName,
       'firstName': firstName,
       'lastName': lastName,
       'phoneNumber': phoneNumber,
@@ -49,8 +43,6 @@ class UserModel {
       'address': address,
     };
   }
-
-
 
   UserModel copyWith({
     String? uid,
@@ -64,7 +56,6 @@ class UserModel {
   }) {
     return UserModel(
       uid: uid ?? this.uid,
-      fullName: fullName ?? this.fullName,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       phoneNumber: phoneNumber ?? this.phoneNumber,

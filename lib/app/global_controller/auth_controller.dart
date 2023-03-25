@@ -44,7 +44,7 @@ class AuthController extends GetxService {
   }
 
   Future<Either<Failure, void>> registerWithEmailAndPassword(
-      {required String email, required String password, required String fullName}) async {
+      {required String email, required String password}) async {
     try {
       await _auth.createUserWithEmailAndPassword(email: email, password: password);
       final _authUser = _auth.currentUser;

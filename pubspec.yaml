@@ -21,6 +21,7 @@ dependencies:
   fpdart: ^0.5.0
   firebase_auth: ^4.3.0
   cloud_firestore: ^4.4.5
+  image_picker: ^0.8.7
 
   ninja_theme:
     git:

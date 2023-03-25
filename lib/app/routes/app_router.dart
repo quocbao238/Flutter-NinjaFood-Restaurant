@@ -4,12 +4,12 @@ class AppPages {
   static String initial = AppRouteProvider.splashScreen;
 
   static navigateDefaultPage() async {
-    final authController = Get.find<AuthController>();
-    if (authController.authUser.value != null) {
-      initial = AppRouteProvider.homeScreen;
-      return;
-    }
-    initial = AppRouteProvider.splashScreen;
+  //   final authController = Get.find<AuthController>();
+  //   if (authController.authUser.value != null) {
+  //     initial = AppRouteProvider.homeScreen;
+  //     return;
+  //   }
+    initial = AppRouteProvider.uploadPhotoScreen;
   }
 
   //
