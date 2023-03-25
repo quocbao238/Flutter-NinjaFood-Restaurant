@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/routes/routes.dart';
@@ -22,12 +25,36 @@ class UploadPhotoController extends BaseController {
     Get.back();
   }
 
-  void onPressedFromGallery() {
+  Future<void> onPressedFromGallery() async {
+    try {
+      final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (pickedFile != null) {
+        final image = File(pickedFile.path);
+        Get.toNamed(AppRouteProvider.uploadPreviewScreen, arguments: image);
+      } else {
+        print('No image selected.');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
-  void onPressedTakePhoto() {}
+  Future<void> onPressedTakePhoto() async {
+    try {
+      final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (pickedFile != null) {
+        final image = File(pickedFile.path);
+        Get.toNamed(AppRouteProvider.uploadPreviewScreen, arguments: image);
+      } else {
+        print('No image selected.');
+      }
+    } catch (e) {
+      print(e);
+    }
 
-  void onPressedNext() {
-    Get.toNamed(AppRouteProvider.uploadPreviewScreen);
+  }
+
+  void onPressedSkip() {
+    Get.toNamed(AppRouteProvider.setLocationScreen);
   }
 }

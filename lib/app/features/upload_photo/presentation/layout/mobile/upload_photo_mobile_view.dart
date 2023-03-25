@@ -11,51 +11,46 @@ class UploadPhotoMobileView extends GetView<UploadPhotoController> {
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage.pattern(
       onPressBackButton: controller.onPressBack,
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppPadding(
-                padding: AppEdgeInsets.symmetric(
-                    horizontal: AppGapSize.medium),
-                child: AppText.headlineSmall(
-                    fontWeight: FontWeight.bold,
-                    textAlign: TextAlign.start,
-                    text: 'UploadPhotoScreen_Title'.tr)),
-            AppPadding.medium(
-                child: AppText.bodyMedium(
-                    fontWeight: FontWeight.w400,
-                    textAlign: TextAlign.start,
-                    text: 'UploadPhotoScreen_Description'.tr)),
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-              child: BoxPhoto(
-                iconPhoto: AppIcons.gallery(),
-                textPhoto: 'Form Gallery',
-                onPressed: controller.onPressedFromGallery,
-              ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppPadding(
+                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+                    child: AppText.headlineSmall(
+                        fontWeight: FontWeight.bold, textAlign: TextAlign.start, text: 'UploadPhotoScreen_Title'.tr)),
+                AppPadding.medium(
+                    child: AppText.bodyMedium(
+                        fontWeight: FontWeight.w400,
+                        textAlign: TextAlign.start,
+                        text: 'UploadPhotoScreen_Description'.tr)),
+                AppPadding(
+                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                  child: BoxPhoto(
+                    iconPhoto: AppIcons.gallery(),
+                    textPhoto: 'Form Gallery',
+                    onPressed: controller.onPressedFromGallery,
+                  ),
+                ),
+                AppPadding(
+                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                  child: BoxPhoto(
+                    iconPhoto: AppIcons.camera(),
+                    textPhoto: 'Take Photo',
+                    onPressed: controller.onPressedTakePhoto,
+                  ),
+                ),
+              ],
             ),
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-              child: BoxPhoto(
-                iconPhoto: AppIcons.camera(),
-                textPhoto: 'Take Photo',
-                onPressed: () {},
-              ),
-            ),
-            AppPadding(
-              padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.medium, vertical: AppGapSize.veryLarge),
-              child: AppButton.max(
-                title: 'UploadPhotoScreen_Next'.tr,
-                onPressed: controller.onPressedNext,
-              ),
-            ),
-          ],
-        ),
+          ),
+          AppPadding.regular(
+            child: AppButton.max(title: 'Skip'.tr, onPressed: controller.onPressedSkip),
+          ),
+        ],
       ),
     );
   }

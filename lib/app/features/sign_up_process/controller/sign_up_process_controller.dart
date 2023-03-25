@@ -63,7 +63,7 @@ class SignUpProcessController extends BaseController {
       return;
     }
 
-    final currentUser = authController.currentUser.value;
+    final currentUser = authController.currentUser;
     if (currentUser == null) return;
 
     loading(true);

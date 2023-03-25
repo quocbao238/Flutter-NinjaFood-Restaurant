@@ -22,12 +22,14 @@ dependencies:
   firebase_auth: ^4.3.0
   cloud_firestore: ^4.4.5
   image_picker: ^0.8.7
+  firebase_core: ^2.8.0
+  firebase_storage: ^11.0.16
+
 
   ninja_theme:
     git:
       url: https://github.com/quocbao238/ninjafood_theme.git
       ref: devMaster
-  firebase_core: ^2.8.0
 
   #    path: ../NinjaFood_Theme
 

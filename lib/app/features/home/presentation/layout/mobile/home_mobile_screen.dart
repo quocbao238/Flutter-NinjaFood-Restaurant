@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/home/controllers/home_controller.dart';
-import 'package:ninjafood/app/global_controller/db_controller.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 
 class MobileHomeScreen extends GetView<HomeController> {
@@ -23,10 +22,8 @@ class MobileHomeScreen extends GetView<HomeController> {
                 controller.onPressedLogout();
               },
             ),
-
             AppPadding.regular(),
-
-            AppText.bodyMedium(text: 'UserModel: ${authController.currentUser.value!.toJson().toString()}'),
+            Obx(() => AppText.bodyMedium(text: 'UserModel: ${authController.currentUser?.toJson().toString()}')),
           ],
         ),
       ),

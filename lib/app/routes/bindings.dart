@@ -51,13 +51,19 @@ class GetBinding extends Bindings {
       case AppRouteProvider.uploadPreviewScreen:
         Get.lazyPut(() {
           final authController = Get.find<AuthController>();
-          return UploadPreviewController(authController: authController);
+          final dbController = Get.find<DatabaseController>();
+          final cloudStorageController = Get.find<CloudStorageController>();
+          return UploadPreviewController(
+              authController: authController,
+              dbController: dbController,
+              cloudStorageController: cloudStorageController);
         });
         break;
       case AppRouteProvider.setLocationScreen:
         Get.lazyPut(() {
           final authController = Get.find<AuthController>();
-          return SetLocationController(authController: authController);
+          final dbController = Get.find<DatabaseController>();
+          return SetLocationController(authController: authController, databaseController: dbController);
         });
         break;
       case AppRouteProvider.signupSuccessScreen:

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
@@ -24,39 +23,38 @@ class DatabaseController extends GetxService {
     _db = FirebaseFirestore.instance;
   }
 
-  Future<UserModel?> getUser(String uid) async {
-    UserModel? _result;
-    try {
-      final documentSnapshot = await _db.doc('${DatabaseKeys.user}$uid').get();
-      final data = documentSnapshot.data();
-      if (data == null) return null;
-      _result = UserModel.fromJson(data);
-    } catch (e) {
-      handleFailure(_logName, Failure.custom(e.toString()), showDialog: false);
-    }
-    console.show(_logName, 'getUser: ${_result!.toJson().toString()}');
-    return _result;
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getUserDataStream(String uid) {
+    final docRef = _db.doc('${DatabaseKeys.user}$uid');
+    return docRef.snapshots();
   }
 
-  Future<UserModel?> insertUser(UserModel userModel) async {
+  // Future<UserModel?> getUser(String uid) async {
+  //   UserModel? _result;
+  //   try {
+  //     final documentSnapshot = await _db.doc('${DatabaseKeys.user}$uid').get();
+  //     final data = documentSnapshot.data();
+  //     if (data == null) return null;
+  //     _result = UserModel.fromJson(data);
+  //   } catch (e) {
+  //     handleFailure(_logName, Failure.custom(e.toString()), showDialog: false);
+  //   }
+  //   console.show(_logName, 'getUser: ${_result!.toJson().toString()}');
+  //   return _result;
+  // }
+
+  Future<Either<Failure, void>> insertUser(UserModel userModel) async {
     try {
-      await _db
-          .doc('${DatabaseKeys.user}${userModel.uid}')
-          .set(userModel.toJson())
-          .then((value) async => await getUser(userModel.uid));
-    } catch (e) {
-      handleFailure(_logName, Failure.custom(e.toString()), showDialog: false);
+      await _db.doc('${DatabaseKeys.user}${userModel.uid}').set(userModel.toJson());
+      return right(null);
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
     }
-    return null;
   }
 
-  Future<Either<Failure, bool>> updateUser(UserModel userModel) async {
+  Future<Either<Failure, void>> updateUser(UserModel userModel) async {
     try {
-      await _db
-          .doc('${DatabaseKeys.user}${userModel.uid}')
-          .update(userModel.toJson())
-          .then((value) async => await getUser(userModel.uid));
-      return right(true);
+      await _db.doc('${DatabaseKeys.user}${userModel.uid}').update(userModel.toJson());
+      return right(null);
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/features/upload_preview/controller/upload_preview_controller.dart';
 
 class PhotoPreview extends StatelessWidget {
   final VoidCallback removePhoto;
   const PhotoPreview({super.key, required this.removePhoto});
 
+
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<UploadPreviewController>();
+
     return Stack(
       children: [
         SizedBox(
@@ -17,7 +22,7 @@ class PhotoPreview extends StatelessWidget {
                 color: Color(0xFFC4C4C4),
                 borderRadius: BorderRadius.circular(16),
                 image: DecorationImage(
-                    image: AssetImage('assets/images/photo_preview.png'),
+                    image: Image.file(controller.imageFile).image,
                     fit: BoxFit.cover)),
           ),
         ),
