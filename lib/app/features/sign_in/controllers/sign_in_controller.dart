@@ -43,8 +43,8 @@ class SignInController extends BaseController {
   }
 
   void onPressedSocialFacebook() {
-    final themeService = Get.find<ThemeController>();
-    themeService.toggleTheme();
+    // final themeService = Get.find<ThemeController>();
+    // themeService.toggleTheme();
   }
 
   void onPressedSocialGoogle() {
@@ -55,7 +55,7 @@ class SignInController extends BaseController {
     if (emailError.value != null || passwordError.value != null) {
       return;
     }
-
+    
     final email = emailController.text;
     final password = passwordController.text;
     loading.value = true;
@@ -70,5 +70,12 @@ class SignInController extends BaseController {
     Get.toNamed(AppRouteProvider.signupScreen);
   }
 
-  void onPressedForgotPassword() {}
+  void onPressedForgotPassword() {
+
+    authController.resetPassword(email: 'baobondev@gmail.com'.trim()).then((value){
+      value.fold((l) => handleFailure('SignInController', l, showDialog: true), (r) {
+        Get.snackbar('Reset password', 'Reset password success');
+      });
+    });
+  }
 }

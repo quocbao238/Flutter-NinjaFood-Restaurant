@@ -10,7 +10,7 @@ const Map<String, String> en = {
   // Validate
   "Validate.Email_Invalid": "Email is invalid",
   "Validate.Pass_required": "Password is required",
-  "Validate.Pass_require_length": "Password must be at least 8 characters",
+  "Validate.Pass_require_length": "Password must be at least 6 characters",
   "Validate.Phone_required": "Phone is required",
   "Validate.Phone_invalid": "Phone is invalid",
   "Validate.Name_required": "Name is required",

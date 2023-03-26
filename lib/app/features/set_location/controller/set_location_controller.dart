@@ -43,7 +43,7 @@ class SetLocationController extends BaseController {
     if (user == null) return;
 
     loading(true);
-    final newUserData = user!.copyWith(address: addressLocation.value);
+    final newUserData = user.copyWith(address: addressLocation.value);
     final response = await databaseController.updateUser(newUserData);
     await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
       Get.toNamed(AppRouteProvider.signupSuccessScreen);
