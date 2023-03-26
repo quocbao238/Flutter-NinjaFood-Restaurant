@@ -11,19 +11,54 @@ class MobileHomeScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     final authController = Get.find<AuthController>();
     return AppScaffoldBackgroundImage.pattern(
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            AppPadding.regular(),
+            Obx(() {
+              final currentUser = authController.currentUser;
+              if (currentUser == null) return SizedBox.shrink();
+              return Column(
+                children: [
+                  AppText.bodyMedium(text: 'Name: ${currentUser?.firstName} ${currentUser?.lastName}'),
+                  AppText.bodyMedium(text: 'Email: ${currentUser?.email}'),
+                  AppText.bodyMedium(text: 'Phone: ${currentUser?.phoneNumber}'),
+                  AppPadding.medium(
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      height: MediaQuery.of(context).size.width * 0.3,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.network(
+                          currentUser?.photoUrl ?? '',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }),
+            AppPadding.medium(
+              child: Obx(() {
+                final isVerified = authController.authUser.value?.emailVerified ?? false;
+                return AppButton.max(
+                    onPressed: isVerified
+                        ? null
+                        : () {
+                            controller.onPressedVerifyEmail();
+                          },
+                    title: isVerified ? 'Email Verified' : 'Verify Email');
+              }),
+            ),
             AppButton.min(
               title: 'Logout',
               onPressed: () async {
                 controller.onPressedLogout();
               },
             ),
-            AppPadding.regular(),
-            Obx(() => AppText.bodyMedium(text: 'UserModel: ${authController.currentUser?.toJson().toString()}')),
           ],
         ),
       ),

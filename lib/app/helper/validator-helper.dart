@@ -12,7 +12,7 @@ class Validator {
   static String? validatePassword(String? pass) {
     if (pass == null || pass.trim() == "")
       return "Validate.Pass_required".tr;
-    else if (pass.length < 8) return "Validate.Pass_require_length".tr;
+    else if (pass.length < 6) return "Validate.Pass_require_length".tr;
     return null;
   }
 

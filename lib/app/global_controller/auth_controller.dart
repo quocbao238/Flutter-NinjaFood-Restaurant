@@ -38,7 +38,7 @@ class AuthController extends GetxService {
       authUser.value = user;
       if (user == null) {
         console.show(_logName, 'User is currently signed out!');
-        _cloudUserSubscription?.cancel();
+        _cloudUserSubscription = null;
         return;
       }
       _handleCloudUserChanged();
@@ -87,6 +87,19 @@ class AuthController extends GetxService {
   Future<Either<Failure, void>> resetPassword({required String email}) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
+      return right(null);
+    } on FirebaseAuthException catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  Future<Either<Failure, void>> sendEmailVerification() async {
+    if (authUser.value!.emailVerified) return right(null);
+
+    try {
+      await authUser.value!.sendEmailVerification();
       return right(null);
     } on FirebaseAuthException catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));

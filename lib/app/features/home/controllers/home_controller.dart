@@ -28,4 +28,10 @@ class HomeController extends GetxController {
     response.fold(
         (l) => handleFailure(_logName, l, showDialog: true), (r) => Get.offAllNamed(AppRouteProvider.signinScreen));
   }
+
+  void onPressedVerifyEmail() async {
+    final response = await authController.sendEmailVerification();
+    response.fold(
+        (l) => handleFailure(_logName, l, showDialog: true), (r) => Get.snackbar('Success', 'Email verification sent'));
+  }
 }

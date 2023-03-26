@@ -13,7 +13,7 @@ const Map<String, String> vi = {
   // Validate
   "Validate.Email_Invalid": "Email không hợp lệ",
   "Validate.Pass_required": "Mật khẩu là bắt buộc",
-  "Validate.Pass_require_length": "Mật khẩu phải có ít nhất 8 ký tự",
+  "Validate.Pass_require_length": "Mật khẩu phải có ít nhất 6 ký tự",
   "Validate.Phone_required": "Số điện thoại là bắt buộc",
   "Validate.Phone_invalid": "Số điện thoại không hợp lệ",
   "Validate.Name_required": "Tên là bắt buộc",
