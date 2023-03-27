@@ -28,20 +28,6 @@ class DatabaseController extends GetxService {
     return docRef.snapshots();
   }
 
-  // Future<UserModel?> getUser(String uid) async {
-  //   UserModel? _result;
-  //   try {
-  //     final documentSnapshot = await _db.doc('${DatabaseKeys.user}$uid').get();
-  //     final data = documentSnapshot.data();
-  //     if (data == null) return null;
-  //     _result = UserModel.fromJson(data);
-  //   } catch (e) {
-  //     handleFailure(_logName, Failure.custom(e.toString()), showDialog: false);
-  //   }
-  //   console.show(_logName, 'getUser: ${_result!.toJson().toString()}');
-  //   return _result;
-  // }
-
   Future<Either<Failure, void>> insertUser(UserModel userModel) async {
     try {
       await _db.doc('${DatabaseKeys.user}${userModel.uid}').set(userModel.toJson());

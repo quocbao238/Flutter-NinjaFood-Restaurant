@@ -53,6 +53,8 @@
     <string>Your message to user here.</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>Your message to user here.</string>
+    <key>FirebaseCrashlyticsCollectionEnabled</key>
+    <false/>
 
 </dict>
 </plist>
