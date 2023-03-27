@@ -53,7 +53,8 @@ class DrawerItem extends StatelessWidget {
                   color: isSelected ? ThemeColors.textDarkColor : null,
                   size: Theme.of(context).textTheme.bodyMedium!.fontSize,
                 ),
-                AppPadding.medium(
+                AppPadding(
+                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small),
                   child: Text(
                     title,
                     maxLines: 1,

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:get/get.dart';
+import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/features/tabs/infrastructure/models/menu_models.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
+import 'package:ninjafood/app/routes/routes.dart';
+
+const _logName = 'TabsController';
 
 class TabsController extends BaseController {
   final AuthController authController;
@@ -18,9 +22,8 @@ class TabsController extends BaseController {
 
   List<MenuItem> menuItems = MenuItem.listMenu;
 
-  List<Widget> screens = MenuItem.listMenu.where((element) => element.screen != null).toList()
-      .map((e) => e.screen!)
-      .toList();
+  List<Widget> screens =
+      MenuItem.listMenu.where((element) => element.screen != null).toList().map((e) => e.screen!).toList();
 
   Rx<MenuItem> currentMenuItem = MenuItem.listMenu.first.obs;
 
@@ -55,8 +58,12 @@ class TabsController extends BaseController {
 
   void _onPressedSettings() {}
 
-  void _onPressedLogout() {
-    authController.signOut();
+  Future<void> _onPressedLogout() async {
+    final response = await authController.signOut();
+    response.fold(
+      (l) => handleFailure(_logName, l),
+      (r) => Get.offAllNamed(AppRouteProvider.signinScreen),
+    );
   }
 
   void _onPressedAbout() {}
