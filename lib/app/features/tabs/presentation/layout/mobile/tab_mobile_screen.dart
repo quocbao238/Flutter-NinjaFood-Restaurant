@@ -13,7 +13,7 @@ class TabsMobileScreen extends GetView<TabsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Get.isDarkMode ? null : null,
+      backgroundColor: Get.isDarkMode ? null : ThemeColors.menuLightColor,
       body: ZoomDrawer(
         controller: controller.zoomDrawerController,
         style: DrawerStyle.defaultStyle,

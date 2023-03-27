@@ -7,12 +7,15 @@ class DrawerItem extends StatelessWidget {
   final bool isSelected;
   final MenuItem menuItem;
   final VoidCallback? onTap;
+  final Color? backgroundColor;
+  final BoxBorder? border;
 
-  const DrawerItem({Key? key, required this.isSelected, required this.menuItem, this.onTap}) : super(key: key);
+  const DrawerItem(
+      {Key? key, required this.isSelected, required this.menuItem, this.onTap, this.backgroundColor, this.border})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     String title = menuItem.title;
     if (menuItem.menuType == MenuType.changeTheme) {
       title = Get.isDarkMode ? "Light Theme" : "Dark Theme";
@@ -20,8 +23,9 @@ class DrawerItem extends StatelessWidget {
     return AppPadding.small(
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: isSelected ? Theme.of(context).colorScheme.primary.withOpacity(0.8) : null,
+          color: backgroundColor ?? (isSelected ? Theme.of(context).colorScheme.primary.withOpacity(0.8) : null),
           borderRadius: BorderRadius.circular(8),
+          border: border,
           boxShadow: !isSelected
               ? null
               : [

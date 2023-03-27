@@ -11,6 +11,8 @@ class DrawerMobileView extends StatelessWidget {
   Widget build(BuildContext context) {
     final tabsController = Get.find<TabsController>();
     final currentUser = tabsController.authController.currentUser;
+    final menuItems = tabsController.menuItems;
+
     return SafeArea(
       child: AppSizeScale(
         child: AppPadding(
@@ -71,7 +73,6 @@ class DrawerMobileView extends StatelessWidget {
                 child: Obx(
                   () {
                     final currentMenuItem = tabsController.currentMenuItem.value;
-                    final menuItems = tabsController.menuItems;
                     return AppSizeScale(
                       ratioWidth: 0.5,
                       child: ListView.builder(
@@ -79,7 +80,6 @@ class DrawerMobileView extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final menuItem = menuItems[index];
                           final isSelected = currentMenuItem == menuItem;
-
                           return DrawerItem(
                             isSelected: isSelected,
                             menuItem: menuItem,
@@ -90,6 +90,18 @@ class DrawerMobileView extends StatelessWidget {
                         },
                       ),
                     );
+                  },
+                ),
+              ),
+              AppSizeScale(
+                ratioWidth: 0.5,
+                child: DrawerItem(
+                  isSelected: true,
+                  menuItem: menuItems.last,
+                  border: Border.all(width: 1, color: Theme.of(context).colorScheme.onPrimary),
+                  backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                  onTap: () {
+                    tabsController.onPressedMenuItem(menuItems.last);
                   },
                 ),
               ),
