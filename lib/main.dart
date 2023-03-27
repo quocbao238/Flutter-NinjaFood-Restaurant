@@ -15,7 +15,7 @@ void main() async {
     await Firebase.initializeApp();
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     // if (kDebugMode) {
-    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
+    // await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
     // }
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
