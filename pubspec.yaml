@@ -24,14 +24,16 @@ dependencies:
   image_picker: ^0.8.7
   firebase_core: ^2.8.0
   firebase_storage: ^11.0.16
+  flutter_zoom_drawer: ^3.0.4+1
+  font_awesome_flutter: ^10.4.0
 
 
   ninja_theme:
-    git:
-      url: https://github.com/quocbao238/ninjafood_theme.git
-      ref: devMaster
+#    git:
+#      url: https://github.com/quocbao238/ninjafood_theme.git
+#      ref: devMaster
 
-  #    path: ../NinjaFood_Theme
+      path: ../NinjaFood_Theme
 
 
 

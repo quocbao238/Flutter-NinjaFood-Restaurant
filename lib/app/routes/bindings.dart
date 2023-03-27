@@ -9,10 +9,8 @@ class GetBinding extends Bindings {
   void dependencies() {
     switch (routerName) {
       case AppRouteProvider.splashScreen:
-        Get.put(() {
-          final localStorageController = Get.find<LocalStorageController>();
-          return SplashController(localStorageController: localStorageController);
-        });
+        final localStorageController = Get.find<LocalStorageController>();
+        Get.lazyPut(() => SplashController(localStorageController: localStorageController));
         break;
       case AppRouteProvider.onboardScreen:
         Get.lazyPut(() => OnboardController());
@@ -73,11 +71,12 @@ class GetBinding extends Bindings {
           return SignupSuccessController(authController: authController);
         });
         break;
-      case AppRouteProvider.homeScreen:
-        Get.lazyPut(() {
-          final authController = Get.find<AuthController>();
-          return HomeController(authController: authController);
-        });
+      case AppRouteProvider.tabScreen:
+        final themeController = Get.find<ThemeController>();
+        final authController = Get.find<AuthController>();
+        Get.lazyPut(() => TabsController(authController: authController, themeController: themeController));
+        Get.lazyPut(() => HomeController(authController: authController));
+        break;
     }
   }
 }

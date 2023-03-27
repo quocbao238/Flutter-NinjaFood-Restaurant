@@ -16,7 +16,7 @@ class SignupSuccessController extends BaseController {
 
   asyncFuture() async {
     await Future.delayed(Duration(seconds: 8));
-    Get.offAllNamed(AppRouteProvider.homeScreen);
+    Get.offAllNamed(AppRouteProvider.tabScreen);
   }
 
   @override
@@ -25,6 +25,6 @@ class SignupSuccessController extends BaseController {
   }
 
   void onPressedNext() {
-    Get.offAllNamed(AppRouteProvider.homeScreen);
+    Get.offAllNamed(AppRouteProvider.tabScreen);
   }
 }

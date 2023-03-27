@@ -2,7 +2,6 @@ library routes;
 
 import 'package:get/get.dart';
 import 'package:ninjafood/app/features/home/controllers/home_controller.dart';
-import 'package:ninjafood/app/features/home/presentation/home_screen.dart';
 import 'package:ninjafood/app/features/onboard/controllers/onboard_controller.dart';
 import 'package:ninjafood/app/features/onboard/presentation/layout/onboard_screen.dart';
 import 'package:ninjafood/app/features/payment_method/controllers/payment_controller.dart';
@@ -19,13 +18,14 @@ import 'package:ninjafood/app/features/signup_success/controller/signup_success_
 import 'package:ninjafood/app/features/signup_success/presentation/layout/signup_success.dart';
 import 'package:ninjafood/app/features/splash/controllers/splash_controller.dart';
 import 'package:ninjafood/app/features/splash/presentation/splash_screen.dart';
+import 'package:ninjafood/app/features/tabs/controllers/tabs_controller.dart';
+import 'package:ninjafood/app/features/tabs/presentation/tab_screen.dart';
 import 'package:ninjafood/app/features/upload_photo/controller/upload_photo_controller.dart';
 import 'package:ninjafood/app/features/upload_photo/presentation/layout/upload_photo.dart';
 import 'package:ninjafood/app/features/upload_preview/controller/upload_preview_controller.dart';
 import 'package:ninjafood/app/features/upload_preview/presentation/layout/upload_preview.dart';
 import 'package:ninjafood/app/global_controller/db_controller.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
-
 part 'app_provider.dart';
 part 'app_router.dart';
 part 'bindings.dart';

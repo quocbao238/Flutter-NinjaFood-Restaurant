@@ -12,6 +12,7 @@ class AuthController extends GetxService {
 
   UserModel? get currentUser => _currentUser.value;
 
+  // ignore: cancel_subscriptions
   StreamSubscription? _cloudUserSubscription;
 
   Future<void> call() async {
