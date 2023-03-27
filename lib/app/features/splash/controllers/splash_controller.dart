@@ -22,9 +22,7 @@ class SplashController extends BaseController {
 
   Future<void> checkFirstTimeInstallApp() async {
     await Future.delayed(Duration(seconds: 2));
-
     final secondTimeOpenApp = localStorageController.getBool(LocalStorageKey.secondTimeOpenApp);
-
     if (secondTimeOpenApp == null || secondTimeOpenApp == false) {
       localStorageController.writeBool(LocalStorageKey.secondTimeOpenApp, true);
       Get.offAndToNamed(AppRouteProvider.onboardScreen);

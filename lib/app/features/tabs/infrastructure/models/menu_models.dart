@@ -42,7 +42,7 @@ class MenuItem {
     MenuItem(
         index: 2,
         title: 'Cart',
-        iconData: FontAwesomeIcons.shoppingCart,
+        iconData: FontAwesomeIcons.cartShopping,
         screen: CartScreen(),
         menuType: MenuType.cart),
     MenuItem(
