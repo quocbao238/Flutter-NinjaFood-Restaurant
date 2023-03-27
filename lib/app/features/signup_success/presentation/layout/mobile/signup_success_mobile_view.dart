@@ -22,13 +22,13 @@ class SignupSuccessMobileView extends GetView<SignupSuccessController> {
                 children: [
                   AppIcons.success(),
                   AppPadding.regular(
-                    child: AppText.headlineMedium(
+                    child: AppText.headlineLarge(
                       text: 'Congrats!',
                       color: ThemeColors.primaryColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  AppText.bodyLarge(
+                  AppText.titleLarge(
                     text: 'Your Profile Is Ready To Use',
                   ),
                 ],

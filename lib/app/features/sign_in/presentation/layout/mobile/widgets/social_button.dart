@@ -32,7 +32,7 @@ class SocialButtonWidget extends StatelessWidget {
             iconWidget,
             AppPadding(
                 padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small),
-                child: AppText.bodySmall(text: title))
+                child: AppText.bodyMedium(text: title))
           ],
         ),
       ),

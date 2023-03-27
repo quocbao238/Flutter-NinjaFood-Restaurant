@@ -9,9 +9,10 @@ class DrawerItem extends StatelessWidget {
   final VoidCallback? onTap;
   final Color? backgroundColor;
   final BoxBorder? border;
+  final AlignmentGeometry? alignment;
 
   const DrawerItem(
-      {Key? key, required this.isSelected, required this.menuItem, this.onTap, this.backgroundColor, this.border})
+      {Key? key, required this.isSelected, required this.menuItem, this.onTap, this.backgroundColor, this.border, this.alignment})
       : super(key: key);
 
   @override
@@ -20,7 +21,12 @@ class DrawerItem extends StatelessWidget {
     if (menuItem.menuType == MenuType.changeTheme) {
       title = Get.isDarkMode ? "Light Theme" : "Dark Theme";
     }
-    return AppPadding.small(
+    final shadowColor = Get.isDarkMode ? Colors.white : Colors.black;
+    return AppPadding(
+      padding: AppEdgeInsets.symmetric(
+        horizontal: AppGapSize.small,
+        // vertical: AppGapSize.small,
+      ),
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: backgroundColor ?? (isSelected ? Theme.of(context).colorScheme.primary.withOpacity(0.8) : null),
@@ -30,20 +36,32 @@ class DrawerItem extends StatelessWidget {
               ? null
               : [
                   BoxShadow(
-                    color: Theme.of(context).textTheme.bodySmall!.color!.withOpacity(0.1),
-                    blurRadius: 8,
-                    offset: Offset(-4, 4),
+                    color: shadowColor.withOpacity(0.15),
+                    blurRadius: 4,
+                    offset: Offset(0, 4),
                   ),
                   BoxShadow(
-                      color: Theme.of(context).textTheme.bodySmall!.color!.withOpacity(0.1),
-                      blurRadius: 8,
-                      offset: Offset(4, -4))
+                    color: shadowColor.withOpacity(0.15),
+                    blurRadius: 4,
+                    offset: Offset(0, -4),
+                  ),
+                  BoxShadow(
+                    color: shadowColor.withOpacity(0.15),
+                    blurRadius: 4,
+                    offset: Offset(-4, 0),
+                  ),
+                  BoxShadow(
+                    color: shadowColor.withOpacity(0.15),
+                    blurRadius: 4,
+                    offset: Offset(4, 0),
+                  ),
                 ],
         ),
         child: ListTile(
+          // contentPadding: EdgeInsets.zero,
           title: FittedBox(
             fit: BoxFit.scaleDown,
-            alignment: Alignment.centerLeft,
+            alignment: alignment ?? Alignment.centerLeft,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

@@ -34,13 +34,14 @@ const Map<String, String> en = {
   // SignUp Screen
   "SignUpScreen_Title": "Sign Up For Free",
   "SignUpScreen_Password": "Password",
+  "SignUpScreen_Confirm_Password": "Confirm password",
   "SignUpScreen_CreateAccount": "Create Account",
   "SignUpScreen_HaveAnAccount": "Already have an account?",
 
   //SignUp Process
   "SignUpProcessScreen_Title": "Fill in your bio to get\nstarted",
   "SignUpProcessScreen_Description":
-      "This data will be displayed in your\naccount profile for security",
+      "This data will be displayed in your account\nprofile for security",
   "SignUpProcessScreen_FirstName": "First Name",
   "SignUpProcessScreen_LastName": "Last Name",
   "SignUpProcessScreen_MobileNumber": "Mobile Number",
@@ -60,7 +61,7 @@ const Map<String, String> en = {
 
   //Upload Preview
   "UploadPreviewScreen_Title": "Upload Your Photo Profile",
-  "UploadPreviewScreen_Description": "This data will be displayed in your account profile for security",
+  "UploadPreviewScreen_Description": "This data will be displayed in your account\nprofile for security",
   "UploadPreviewScreen_Next": "Next",
 
   //Set Location 

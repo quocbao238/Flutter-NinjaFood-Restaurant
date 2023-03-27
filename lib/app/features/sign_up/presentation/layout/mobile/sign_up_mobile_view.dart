@@ -18,25 +18,12 @@ class SignUpMobileScreen extends GetView<SignUpController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 AppImages.logo(),
-                AppPadding(
-                  padding: AppEdgeInsets.only(
-                      top: AppGapSize.veryLarge,
-                      bottom: AppGapSize.large,
-                      left: AppGapSize.medium,
-                      right: AppGapSize.medium),
-                  child: AppText.headlineSmall(
+                AppPadding.medium(
+                  child: AppText.titleMedium(
                     text: 'SignUpScreen_Title'.tr,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                // AppPadding(
-                //   padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-                //   child: AppTextFormField(
-                //       controller: controller.nameController,
-                //       errorText: controller.nameError.value,
-                //       hintText: 'Input Your Name ...',
-                //       prefixIcon: AppIcons.userProfile()),
-                // ),
                 AppPadding(
                   padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
                   child: AppTextFormField.email(
@@ -50,6 +37,14 @@ class SignUpMobileScreen extends GetView<SignUpController> {
                     controller: controller.passwordController,
                     errorText: controller.passwordError.value,
                     hintText: 'SignUpScreen_Password'.tr,
+                  ),
+                ),
+                AppPadding(
+                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                  child: AppTextFormField.password(
+                    controller: controller.confirmPasswordController,
+                    errorText: controller.confirmPasswordError.value,
+                    hintText: 'SignUpScreen_Confirm_Password'.tr,
                   ),
                 ),
                 AppPadding(

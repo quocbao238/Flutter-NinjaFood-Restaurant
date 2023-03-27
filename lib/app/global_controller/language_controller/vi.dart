@@ -34,6 +34,7 @@ const Map<String, String> vi = {
   // SignUp Screen
   "SignUpScreen_Title": "Đăng kí miễn phí",
   "SignUpScreen_Password": "Mật khẩu",
+  "SignUpScreen_Confirm_Password": "Nhập lại mật khẩu",
   "SignUpScreen_CreateAccount": "Tạo tài khoản",
   "SignUpScreen_HaveAnAccount": "Bạn đã có sẵn một tài khoản?",
 

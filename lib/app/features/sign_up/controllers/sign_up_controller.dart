@@ -15,13 +15,17 @@ class SignUpController extends BaseController {
 
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
+  late final TextEditingController confirmPasswordController;
+
   Rxn<String?> emailError = Rxn<String?>(null);
   Rxn<String?> passwordError = Rxn<String?>(null);
+  Rxn<String?> confirmPasswordError = Rxn<String?>(null);
 
   @override
   void onInit() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    confirmPasswordController = TextEditingController();
 
     emailController.addListener(() {
       final email = emailController.text;
@@ -33,6 +37,12 @@ class SignUpController extends BaseController {
       passwordError.value = Validator.validatePassword(password);
     });
 
+    confirmPasswordController.addListener(() {
+      final password = passwordController.text;
+      final confirmPassword = confirmPasswordController.text;
+      confirmPasswordError.value = Validator.validatePasswordConfirm(password, confirmPassword);
+    });
+
 
     super.onInit();
   }
@@ -41,12 +51,13 @@ class SignUpController extends BaseController {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
 
     super.dispose();
   }
 
   Future<void> onPressedCreateAccount() async {
-    if (emailError.value != null || passwordError.value != null) {
+    if (emailError.value != null || passwordError.value != null || confirmPasswordError.value != null) {
       return;
     }
     final email = emailController.text;

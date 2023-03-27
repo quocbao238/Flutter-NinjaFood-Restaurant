@@ -35,7 +35,7 @@ class BoxLocation extends StatelessWidget {
                 AppIcons.yourLocation(),
                 AppPadding.small(),
                 Expanded(
-                  child: Obx(() => AppText.bodySmall(
+                  child: Obx(() => AppText.bodyLarge(
                       text: (setLocationController.addressLocation.value ?? 'SetLocationScreen_YourLocation').tr,
                       textAlign: TextAlign.start,
                       fontWeight: FontWeight.w400)),
@@ -53,7 +53,7 @@ class BoxLocation extends StatelessWidget {
                 height: kToolbarHeight,
                 width: MediaQuery.of(context).size.width,
                 child: Center(
-                  child: AppText.bodySmall(
+                  child: AppText.bodyMedium(
                     textAlign: TextAlign.center,
                     text: 'SetLocationScreen_SetLocation'.tr,
                     fontWeight: FontWeight.w500,

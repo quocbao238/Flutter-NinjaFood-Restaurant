@@ -37,6 +37,7 @@ class UploadPhotoController extends BaseController {
     } catch (e) {
       print(e);
     }
+
   }
 
   Future<void> onPressedTakePhoto() async {
