@@ -3,10 +3,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-            android:label="ninjafood"
+            android:label="Ninja Food"
             android:name="${applicationName}"
             android:requestLegacyExternalStorage="true"
-            android:icon="@mipmap/ic_launcher">
+            android:icon="@mipmap/launcher_icon">
         <activity
                 android:name=".MainActivity"
                 android:exported="true"
