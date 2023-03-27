@@ -27,6 +27,9 @@ dependencies:
   flutter_zoom_drawer: ^3.0.4+1
   font_awesome_flutter: ^10.4.0
   firebase_crashlytics: ^3.0.17
+  flutter_launcher_icons: ^0.12.0
+
+
 
   ninja_theme:
     git:
@@ -35,16 +38,25 @@ dependencies:
 #      path: ../NinjaFood_Theme
 
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/icon.png"
+  remove_alpha_ios: true
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/icons/icon.png"
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+
+
+
 flutter:
   uses-material-design: true
   generate: true
 
   assets:
-    - assets/images/
     - assets/icons/
