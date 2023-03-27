@@ -32,10 +32,10 @@ dependencies:
 
 
   ninja_theme:
-#    git:
-#      url: https://github.com/quocbao238/ninjafood_theme.git
-#      ref: devMaster
-      path: ../NinjaFood_Theme
+    git:
+      url: https://github.com/quocbao238/ninjafood_theme.git
+      ref: devMaster
+#      path: ../NinjaFood_Theme
 
 
 flutter_icons:

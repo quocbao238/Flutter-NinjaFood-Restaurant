@@ -25,8 +25,8 @@ class TabsMobileScreen extends GetView<TabsController> {
               color: Theme.of(context).colorScheme.primary.withOpacity(0.4), blurRadius: 8, offset: Offset(-4, 4)),
           BoxShadow(color: Theme.of(context).colorScheme.primary.withOpacity(0.4), blurRadius: 8, offset: Offset(4, -4))
         ],
-        shadowLayer1Color: darken(Color(0xFF7F67BE)),
-        shadowLayer2Color: darken(Color(0xFFFFD8E4)),
+        shadowLayer1Color: Get.isDarkMode ? ThemeColors.shadowLayer1ColorDark() : ThemeColors.shadowLayer1Color,
+        shadowLayer2Color: Get.isDarkMode ? ThemeColors.shadowLayer2ColorDark() : ThemeColors.shadowLayer2Color,
         borderRadius: 32.0,
         showShadow: true,
         angle: -8.0,
@@ -34,12 +34,4 @@ class TabsMobileScreen extends GetView<TabsController> {
       ),
     );
   }
-}
-
-Color darken(Color color) {
-  if (!Get.isDarkMode) return color;
-  final amount  = 0.4;
-  final hsl = HSLColor.fromColor(color);
-  final darkHsl = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
-  return darkHsl.toColor();
 }
