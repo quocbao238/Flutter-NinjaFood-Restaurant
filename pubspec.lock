@@ -309,6 +309,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_zoom_drawer:
+    dependency: "direct main"
+    description:
+      name: flutter_zoom_drawer
+      sha256: b439c87d63680465582ac301f2502dea6f95ddcba3a9787365dcadb52777c1e1
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.4+1"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      sha256: "959ef4add147753f990b4a7c6cccb746d5792dbdc81b1cde99e62e7edb31b206"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.4.0"
   fpdart:
     dependency: "direct main"
     description:
@@ -442,7 +458,7 @@ packages:
     description:
       path: "."
       ref: devMaster
-      resolved-ref: "4d0f76f780bd20906c543af1a1d800bf55115694"
+      resolved-ref: "878ba458527071ec645bd870b96e6b1e6bad2ec0"
       url: "https://github.com/quocbao238/ninjafood_theme.git"
     source: git
     version: "0.0.1"

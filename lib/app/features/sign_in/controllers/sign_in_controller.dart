@@ -61,7 +61,7 @@ class SignInController extends BaseController {
     loading.value = true;
     final response = await authController.loginWithEmailAndPassword(email: email, password: password);
     await response.fold((l) => handleFailure('SignInController', l, showDialog: true), (r) {
-      Get.offAllNamed(AppRouteProvider.homeScreen);
+      Get.offAllNamed(AppRouteProvider.tabScreen);
     });
     loading.value = false;
   }

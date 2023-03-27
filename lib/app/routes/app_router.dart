@@ -6,7 +6,7 @@ class AppPages {
   static navigateDefaultPage() async {
     final authController = Get.find<AuthController>();
     if (authController.authUser.value != null) {
-      initial = AppRouteProvider.homeScreen;
+      initial = AppRouteProvider.tabScreen;
       return;
     }
     initial = AppRouteProvider.splashScreen;
@@ -65,9 +65,9 @@ class AppPages {
       binding: GetBinding(AppRouteProvider.signupSuccessScreen),
     ),
     GetPage(
-      name: AppRouteProvider.homeScreen,
-      page: () => HomeScreen(),
-      binding: GetBinding(AppRouteProvider.homeScreen),
+      name: AppRouteProvider.tabScreen,
+      page: () => TabScreen(),
+      binding: GetBinding(AppRouteProvider.tabScreen),
     ),
   ];
 }

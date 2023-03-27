@@ -11,6 +11,6 @@ class AppRouteProvider {
   static const String uploadPhotoScreen = '/uploadPhotoScreen';
   static const String uploadPreviewScreen = '/uploadPreviewScreen';
   static const String setLocationScreen = '/setLocationScreen';
-  static const String homeScreen = '/homeScreen';
   static const String signupSuccessScreen = '/signupSuccessScreen';
+  static const String tabScreen = '/tabScreen';
 }
