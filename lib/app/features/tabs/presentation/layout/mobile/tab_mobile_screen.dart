@@ -3,7 +3,6 @@ import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/home/presentation/home_screen.dart';
 import 'package:ninjafood/app/features/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/features/tabs/presentation/layout/mobile/widgets/drawer/drawer_mobile_view.dart';
 
@@ -16,7 +15,9 @@ class TabsMobileScreen extends GetView<TabsController> {
       backgroundColor: Get.isDarkMode ? null : ThemeColors.menuLightColor,
       body: ZoomDrawer(
         controller: controller.zoomDrawerController,
+        androidCloseOnBackTap: true,
         style: DrawerStyle.defaultStyle,
+        menuScreenTapClose: true,
         menuScreen: DrawerMobileView(),
         mainScreen:
             Obx(() => IndexedStack(index: controller.currentMenuItem.value.index, children: controller.screens)),
