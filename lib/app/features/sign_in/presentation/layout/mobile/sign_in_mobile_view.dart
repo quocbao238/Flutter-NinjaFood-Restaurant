@@ -19,13 +19,8 @@ class SignInMobileScreen extends GetView<SignInController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 AppImages.logo(),
-                AppPadding(
-                    padding: AppEdgeInsets.only(
-                        top: AppGapSize.veryLarge,
-                        bottom: AppGapSize.large,
-                        left: AppGapSize.medium,
-                        right: AppGapSize.medium),
-                    child: AppText.headlineSmall(text: 'SignInScreen_Title'.tr, fontWeight: FontWeight.bold)),
+                AppPadding.medium(
+                    child: AppText.titleMedium(text: 'SignInScreen_Title'.tr, fontWeight: FontWeight.bold)),
                 AppPadding(
                   padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
                   child: AppTextFormField.email(
@@ -47,7 +42,7 @@ class SignInMobileScreen extends GetView<SignInController> {
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       onTap: controller.onPressedForgotPassword,
-                      child: AppText.bodySmall(textAlign: TextAlign.end, text: 'SignInScreen_ForgotPassword'.tr),
+                      child: AppText.bodySmall(textAlign: TextAlign.end, text: 'SignInScreen_ForgotPassword'.tr,color: ThemeColors.primaryColor,),
                     ),
                   ),
                 ),

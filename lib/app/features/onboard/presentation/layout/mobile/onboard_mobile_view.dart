@@ -24,7 +24,7 @@ class OnboardMobileScreen extends GetView<OnboardController> {
                 AppPadding(
                     padding: AppEdgeInsets.only(
                         top: AppGapSize.large, left: AppGapSize.veryLarge, right: AppGapSize.veryLarge),
-                    child: AppText.headlineMedium(text: item.title.tr, fontWeight: FontWeight.bold)),
+                    child: AppText.titleLarge(text: item.title.tr, fontWeight: FontWeight.bold)),
                 AppPadding.medium(
                     padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium, horizontal: AppGapSize.large),
                     child: AppText.bodySmall(text: item.description.tr)),

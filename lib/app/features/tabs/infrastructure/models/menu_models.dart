@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/cart/presentation/cart_screen.dart';
 import 'package:ninjafood/app/features/chat/presentation/chat_screen.dart';
 import 'package:ninjafood/app/features/home/presentation/home_screen.dart';
@@ -43,7 +42,7 @@ class MenuItem {
     MenuItem(
         index: 2,
         title: 'Cart',
-        iconData: FontAwesomeIcons.shoppingCart,
+        iconData: FontAwesomeIcons.cartShopping,
         screen: CartScreen(),
         menuType: MenuType.cart),
     MenuItem(

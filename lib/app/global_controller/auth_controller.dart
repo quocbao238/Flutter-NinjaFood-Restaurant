@@ -31,6 +31,7 @@ class AuthController extends GetxService {
     _cloudUserSubscription = dbController.getUserDataStream(authUser.value!.uid).listen((event) {
       _currentUser.value = UserModel.fromJson(event.data()!);
       console.show(_logName, '_handleCloudUserChanged ${_currentUser.value!.toJson()}');
+      FirebaseCrashlytics.instance.setUserIdentifier(_currentUser.value!.uid);
     });
   }
 

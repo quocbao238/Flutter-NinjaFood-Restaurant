@@ -58,17 +58,17 @@ class TabsController extends BaseController {
 
   void _onPressedSettings() {}
 
-  Future<void> _onPressedLogout() async {
-    final response = await authController.signOut();
-    response.fold(
-      (l) => handleFailure(_logName, l),
-      (r) => Get.offAllNamed(AppRouteProvider.signinScreen),
-    );
-  }
-
   void _onPressedAbout() {}
 
   void _onPressedChangeTheme() {
     themeController.toggleTheme();
+  }
+
+  Future<void> _onPressedLogout() async {
+    final response = await authController.signOut();
+    response.fold(
+      (l) => handleFailure(_logName, l),
+      (r) => Get.offAllNamed(AppRouteProvider.splashScreen),
+    );
   }
 }

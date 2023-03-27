@@ -38,4 +38,12 @@ class Validator {
     return null;
   }
 
+  static String? validatePasswordConfirm(String? pass, String? passConfirm) {
+    if (pass == null || pass.trim() == "")
+      return "Validate.Pass_required".tr;
+    else if (pass.length < 6) return "Validate.Pass_require_length".tr;
+    else if (pass != passConfirm) return "Validate.Pass_Confirm".tr;
+    return null;
+  }
+
 }

@@ -12,49 +12,45 @@ class PaymentMethodMobileScreen extends GetView<PaymentController> {
     return AppScaffoldBackgroundImage.pattern(
       onPressBackButton: controller.onPressBack,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppPadding(
-            padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
-            child: AppText.headlineSmall(
-                fontWeight: FontWeight.bold,
-                textAlign: TextAlign.start,
-                text: 'PaymentMethodScreen_Title'.tr),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppPadding(
+                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+                  child: AppText.headlineSmall(
+                      fontWeight: FontWeight.bold, textAlign: TextAlign.start, text: 'PaymentMethodScreen_Title'.tr),
+                ),
+                AppPadding.medium(
+                  child: AppText.bodyMedium(
+                      fontWeight: FontWeight.w400,
+                      textAlign: TextAlign.start,
+                      text: 'PaymentMethodScreen_Description'.tr),
+                ),
+                AppPadding(
+                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                    child: PaymentMethodButton(
+                      onPressed: () {},
+                      child: AppPadding.medium(child: AppIcons.paypal()),
+                    )),
+                AppPadding(
+                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                    child: PaymentMethodButton(
+                      onPressed: () {},
+                      child: AppIcons.visa(),
+                    )),
+                AppPadding(
+                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                    child: PaymentMethodButton(
+                      onPressed: () {},
+                      child: AppPadding.medium(child: AppIcons.payOneer()),
+                    )),
+              ],
+            ),
           ),
-          AppPadding.medium(
-            child: AppText.bodyMedium(
-                fontWeight: FontWeight.w400,
-                textAlign: TextAlign.start,
-                text: 'PaymentMethodScreen_Description'.tr),
-          ),
-          AppPadding(
-            padding: AppEdgeInsets.symmetric(
-                horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-            child: PaymentMethodButton(
-              onPressed: () {},
-              child: AppPadding.medium(child: AppIcons.paypal()),
-            )
-          ),
-          AppPadding(
-            padding: AppEdgeInsets.symmetric(
-                horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-            child: PaymentMethodButton(
-              onPressed: () {},
-              child: AppIcons.visa(),
-            )
-          ),
-          AppPadding(
-            padding: AppEdgeInsets.symmetric(
-                horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-            child: PaymentMethodButton(
-              onPressed: () {},
-              child: AppPadding.medium(child: AppIcons.payOneer()),
-            )
-          ),
-          AppPadding(
-            padding: AppEdgeInsets.symmetric(
-                horizontal: AppGapSize.medium, vertical: AppGapSize.veryLarge),
+          AppPadding.regular(
             child: AppButton.max(
               title: 'PaymentMethodScreen_Next'.tr,
               onPressed: controller.onPressedNext,

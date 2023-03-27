@@ -38,9 +38,9 @@ class BoxPhoto extends StatelessWidget {
             children: [
               AppPadding(
                   padding: AppEdgeInsets.only(
-                      top: AppGapSize.medium, bottom: AppGapSize.small),
+                      top: AppGapSize.medium, bottom: AppGapSize.medium),
                   child: iconPhoto),
-              AppText.bodyLarge(text: textPhoto, fontWeight: FontWeight.w400)
+              AppText.bodyMedium(text: textPhoto, fontWeight: FontWeight.bold)
             ],
           ),
         ),
