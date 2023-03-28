@@ -9,6 +9,7 @@ const Map<String, String> vi = {
 
   // Button
   "Next_Button": "Tiếp tục",
+  "Skip_Button": "Bỏ qua",
 
   // Validate
   "Validate.Email_Invalid": "Email không hợp lệ",
@@ -44,22 +45,18 @@ const Map<String, String> vi = {
   "SignUpProcessScreen_FirstName": "Họ",
   "SignUpProcessScreen_LastName":"Tên",
   "SignUpProcessScreen_MobileNumber": "Số Điện Thoại",
-  "SignUpProcessScreen_Next": "Tiếp Theo",
 
   //Payment Method
   "PaymentMethodScreen_Title": "Phương thức thanh toán",
   "PaymentMethodScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
-  "PaymentMethodScreen_Next": "Tiếp Theo",
 
   //Upload Photo
   "UploadPhotoScreen_Title": "Tải ảnh đại diện của bạn lên",
   "UploadPhotoScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
-  "UploadPhotoScreen_Next": "Tiếp Theo",
 
   //Upload Preview
   "UploadPreviewScreen_Title": "Tải ảnh của bạn lên",
   "UploadPreviewScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
-  "UploadPreviewScreen_Next": "Tiếp Theo",
 
   //Set Location 
   "SetLocationScreen_Title": "Thiết lập vị trí của bạn",

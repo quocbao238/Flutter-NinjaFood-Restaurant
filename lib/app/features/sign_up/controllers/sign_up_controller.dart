@@ -70,6 +70,6 @@ class SignUpController extends BaseController {
   }
 
   void onPressedAlreadyHaveAnAccount() {
-    Get.toNamed(AppRouteProvider.signinScreen);
+    Get.offAllNamed(AppRouteProvider.signinScreen);
   }
 }

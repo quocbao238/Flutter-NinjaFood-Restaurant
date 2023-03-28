@@ -42,10 +42,10 @@ class UploadPreviewMobileView extends GetView<UploadPreviewController> {
             ),
             AppPadding.regular(
               child: AppButton.max(
-                title: 'UploadPreviewScreen_Next'.tr,
+                title: 'Next_Button'.tr,
                 onPressed: controller.onPressedNext,
               ),
-            )
+            ),
           ],
         ),
       ),

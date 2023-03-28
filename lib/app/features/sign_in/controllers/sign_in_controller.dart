@@ -87,14 +87,10 @@ class SignInController extends BaseController {
   }
 
   void onPressedSignUp() {
-    Get.toNamed(AppRouteProvider.signupScreen);
+    Get.offAllNamed(AppRouteProvider.signupScreen);
   }
 
   void onPressedForgotPassword() {
-    authController.resetPassword(email: 'baobondev@gmail.com'.trim()).then((value) {
-      value.fold((l) => handleFailure('SignInController', l, showDialog: true), (r) {
-        Get.snackbar('Reset password', 'Reset password success');
-      });
-    });
+    Get.toNamed(AppRouteProvider.forgotPasswordScreen);
   }
 }

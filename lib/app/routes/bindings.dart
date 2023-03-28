@@ -77,6 +77,12 @@ class GetBinding extends Bindings {
         Get.lazyPut(() => TabsController(authController: authController, themeController: themeController));
         Get.lazyPut(() => HomeController(authController: authController));
         break;
+      case AppRouteProvider.forgotPasswordScreen:
+        Get.lazyPut(() {
+          final authController = Get.find<AuthController>();
+          return ForgotPassWordController(authController: authController);
+        });
+        break;
     }
   }
 }

@@ -52,6 +52,6 @@ class SetLocationController extends BaseController {
   }
 
   String getTitleButton() {
-    return addressLocation.value == null ? 'Skip' : 'Next';
+    return addressLocation.value == null ? 'Skip_Button' : 'Next_Button';
   }
 }
