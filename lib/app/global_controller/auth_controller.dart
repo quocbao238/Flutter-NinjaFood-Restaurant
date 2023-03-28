@@ -78,6 +78,10 @@ class AuthController extends GetxService {
   Future<Either<Failure, void>> signOut() async {
     try {
       await _auth.signOut();
+      final AccessToken? accessToken = await FacebookAuth.instance.accessToken;
+      if (accessToken != null) await FacebookAuth.instance.logOut();
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      if (await googleSignIn.isSignedIn()) await googleSignIn.signOut();
       return right(null);
     } on FirebaseAuthException catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
@@ -225,4 +229,3 @@ class AuthController extends GetxService {
 //     return left(Failure(e.toString(), stackTrace));
 //   }
 // }
-
