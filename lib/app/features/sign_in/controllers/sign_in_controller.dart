@@ -60,6 +60,17 @@ class SignInController extends BaseController {
     loading.value = false;
   }
 
+  // Future<void> onPressedSocialApple() async {
+  //   loading.value = true;
+  //   final response = await authController.registerWithApple();
+  //   await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
+  //     Get.offAllNamed(r
+  //         ? AppRouteProvider.signupProcessScreen
+  //         : AppRouteProvider.tabScreen);
+  //   });
+  //   loading.value = false;
+  // }
+
   Future<void> onPressedLogin() async {
     if (emailError.value != null || passwordError.value != null) {
       return;

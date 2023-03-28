@@ -146,7 +146,7 @@ packages:
     source: hosted
     version: "0.3.3+4"
   crypto:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: crypto
       sha256: aa274aa7774f8964e4f4f38cc994db7b6158dd36e9187aaceaddc994b35c6c67
@@ -576,11 +576,9 @@ packages:
   ninja_theme:
     dependency: "direct main"
     description:
-      path: "."
-      ref: devMaster
-      resolved-ref: "687902a64541fd4c3c69510954b510bae3f2d7ff"
-      url: "https://github.com/quocbao238/ninjafood_theme.git"
-    source: git
+      path: "../NinjaFood_Theme"
+      relative: true
+    source: path
     version: "0.0.1"
   package_info_plus:
     dependency: transitive
