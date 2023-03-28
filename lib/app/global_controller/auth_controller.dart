@@ -58,7 +58,7 @@ class AuthController extends GetxService {
       response.fold((l) => left(l), (r) => r);
       return right(null);
     } on FirebaseAuthException catch (e, stackTrace) {
-      return left(Failure(e.toString(), stackTrace));
+      return left(Failure(e.message.toString(), stackTrace));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
@@ -120,4 +120,76 @@ class AuthController extends GetxService {
       return left(Failure(e.toString(), stackTrace));
     }
   }
+
+  // Return Right true if NewUser
+  // Return Right false if OldUser
+  // Return Left Failure
+  Future<Either<Failure, bool>> registerWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+
+      if (googleSignInAccount == null) return left(Failure('Login with Google Failure', StackTrace.current));
+
+      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      final UserCredential userCredential = await _auth.signInWithCredential(credential);
+
+      // If Old User
+      if (!userCredential.additionalUserInfo!.isNewUser) return right(false);
+
+      final _authUser = userCredential.user;
+      if (_authUser == null) return left(Failure('Auth user is null', StackTrace.current));
+
+      final userModel = UserModel.createUserByAuthUser(authUser: _authUser);
+      await dbController.insertUser(userModel);
+      return right(true);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {}
+      if (e.code == 'invalid-credential') {}
+      return left(Failure(e.message.toString(), StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  // Future<Either<Failure, bool>> registerWithApple() async {
+  //   try {
+  //     final rawNonce = CryptographicHelper.generateNonce(32);
+  //     final nonce = CryptographicHelper.createSHA256Hash(rawNonce);
+  //
+  //     final appleCredential = await SignInWithApple.getAppleIDCredential(
+  //       scopes: [AppleIDAuthorizationScopes.email, AppleIDAuthorizationScopes.fullName],
+  //       nonce: nonce,
+  //     );
+  //
+  //     // Create an `OAuthCredential` from the credential returned by Apple.
+  //     final credential = OAuthProvider("apple.com").credential(
+  //       idToken: appleCredential.identityToken,
+  //       rawNonce: rawNonce,
+  //     );
+  //
+  //     final UserCredential userCredential = await _auth.signInWithCredential(credential);
+  //
+  //     // If Old User
+  //     if (!userCredential.additionalUserInfo!.isNewUser) return right(false);
+  //
+  //     final _authUser = userCredential.user;
+  //     if (_authUser == null) return left(Failure('Auth user is null', StackTrace.current));
+  //
+  //     final userModel = UserModel.createUserByAuthUser(authUser: _authUser);
+  //     await dbController.insertUser(userModel);
+  //     return right(true);
+  //   } on FirebaseAuthException catch (e) {
+  //     if (e.code == 'account-exists-with-different-credential') {}
+  //     if (e.code == 'invalid-credential') {}
+  //     return left(Failure(e.message.toString(), StackTrace.current));
+  //   } catch (e, stackTrace) {
+  //     return left(Failure(e.toString(), stackTrace));
+  //   }
+  // }
 }

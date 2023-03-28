@@ -29,6 +29,11 @@ class PaymentController extends BaseController {
   void onPressedPayoneer() {}
 
   void onPressedNext() {
+    final currentUser = authController.currentUser;
+    if (currentUser?.photoUrl?.isNotEmpty ?? false) {
+       Get.toNamed(AppRouteProvider.setLocationScreen);
+       return;
+    }
     Get.toNamed(AppRouteProvider.uploadPhotoScreen);
   }
 }

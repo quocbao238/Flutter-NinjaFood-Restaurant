@@ -1,6 +1,5 @@
 part of global_controller;
 
-
 class DialogController extends GetxController with GetSingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<double> _animation;
@@ -47,7 +46,7 @@ class DialogController extends GetxController with GetSingleTickerProviderStateM
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AppPadding.small(
-                          child: AppText.headlineSmall(
+                          child: AppText.titleMedium(
                         text: title ?? 'Error Message',
                         fontWeight: FontWeight.bold,
                         color: ThemeColors.textRedColor,
@@ -63,6 +62,12 @@ class DialogController extends GetxController with GetSingleTickerProviderStateM
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: Get.theme.colorScheme.primary.withOpacity(0.4),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            ),
                             onPressed: _hide,
                             child: AppText.bodySmall(text: 'OK'),
                           ),
