@@ -42,7 +42,11 @@ class SignInMobileScreen extends GetView<SignInController> {
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       onTap: controller.onPressedForgotPassword,
-                      child: AppText.bodySmall(textAlign: TextAlign.end, text: 'SignInScreen_ForgotPassword'.tr,color: ThemeColors.primaryColor,),
+                      child: AppText.bodySmall(
+                        textAlign: TextAlign.end,
+                        text: 'SignInScreen_ForgotPassword'.tr,
+                        color: ThemeColors.primaryColor,
+                      ),
                     ),
                   ),
                 ),

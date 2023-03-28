@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ninja Food</string>
+    <string name="facebook_app_id">725706055964694</string>
+    <string name="facebook_client_token">56b270b0215d394639e9bdd57582cb46</string>
+</resources>

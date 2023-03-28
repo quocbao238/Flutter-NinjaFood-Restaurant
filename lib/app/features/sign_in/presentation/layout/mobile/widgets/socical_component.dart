@@ -27,17 +27,6 @@ class SocialComponent extends GetView<SignInController> {
             onPressed: controller.onPressedSocialGoogle,
           ),
         ),
-        // if (Platform.isIOS) AppPadding.small(),
-        // if (Platform.isIOS)
-        //   Expanded(
-        //     child: SocialButtonWidget(
-        //       title: 'Apple',
-        //       iconWidget: AppIcons.apple(
-        //         color: Colors.white,
-        //       ),
-        //       onPressed: controller.onPressedSocialApple,
-        //     ),
-        //   ),
       ],
     );
   }

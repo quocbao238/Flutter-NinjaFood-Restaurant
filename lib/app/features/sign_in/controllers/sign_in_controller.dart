@@ -44,9 +44,15 @@ class SignInController extends BaseController {
     super.dispose();
   }
 
-  void onPressedSocialFacebook() {
-    // final themeService = Get.find<ThemeController>();
-    // themeService.toggleTheme();
+  Future<void> onPressedSocialFacebook() async {
+    loading.value = true;
+    final response = await authController.registerWithFacebook();
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
+      Get.offAllNamed(r
+          ? AppRouteProvider.signupProcessScreen
+          : AppRouteProvider.tabScreen);
+    });
+    loading.value = false;
   }
 
   Future<void> onPressedSocialGoogle() async {

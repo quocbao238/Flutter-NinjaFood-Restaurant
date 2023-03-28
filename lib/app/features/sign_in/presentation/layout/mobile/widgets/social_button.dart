@@ -26,9 +26,11 @@ class SocialButtonWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             iconWidget,
-            AppPadding(
-                padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small),
-                child: Expanded(child: AppText.bodyMedium(text: title)))
+            Expanded(
+              child: AppPadding(
+                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small),
+                  child: AppText.bodyMedium(text: title)),
+            )
           ],
         ),
       ),
