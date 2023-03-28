@@ -55,6 +55,18 @@
     <string>Your message to user here.</string>
     <key>FirebaseCrashlyticsCollectionEnabled</key>
     <false/>
-
+    <key>CFBundleURLTypes</key>
+    <array>
+    	<dict>
+    		<key>CFBundleTypeRole</key>
+    		<string>Editor</string>
+    		<key>CFBundleURLSchemes</key>
+    		<array>
+    			<!-- TODO Replace this value: -->
+    			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+    			<string>com.googleusercontent.apps.132267484565-s4ljiuud3fg6bip6hgo2hvbkcdi6cjso</string>
+    		</array>
+    	</dict>
+    </array>
 </dict>
 </plist>

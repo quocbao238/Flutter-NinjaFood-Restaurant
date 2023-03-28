@@ -8,27 +8,28 @@ import 'routes/routes.dart';
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-        title: "NinjaFood",
-        theme: ThemePrimary.lightTheme(),
-        darkTheme: ThemePrimary.darkTheme(),
-        onInit: () async => DeviceHelper.init(),
-        debugShowCheckedModeBanner: false,
-        enableLog: true,
-        initialRoute: AppPages.initial,
-        getPages: AppPages.routes,
-        locale: TranslationController.fallbackLocale,
-        fallbackLocale: TranslationController.fallbackLocale,
-        builder: (context, child) {
-          return MediaQuery(
-              data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
-              child: child!);
-        },
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate
-        ],
-        translations: TranslationController());
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: GetMaterialApp(
+          title: "NinjaFood",
+          theme: ThemePrimary.lightTheme(),
+          darkTheme: ThemePrimary.darkTheme(),
+          onInit: () async => DeviceHelper.init(),
+          debugShowCheckedModeBanner: false,
+          enableLog: true,
+          initialRoute: AppPages.initial,
+          getPages: AppPages.routes,
+          locale: TranslationController.fallbackLocale,
+          fallbackLocale: TranslationController.fallbackLocale,
+          builder: (context, child) {
+            return MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1), child: child!);
+          },
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate
+          ],
+          translations: TranslationController()),
+    );
   }
 }

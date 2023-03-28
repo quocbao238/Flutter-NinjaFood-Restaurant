@@ -20,7 +20,12 @@ class UserModel {
   });
 
   static UserModel createUserByAuthUser({required User authUser}) {
-    return UserModel(uid: authUser.uid, email: authUser.email);
+    return UserModel(
+        uid: authUser.uid,
+        email: authUser.email,
+        photoUrl: authUser.photoURL,
+        phoneNumber: authUser.phoneNumber,
+        firstName: authUser.displayName);
   }
 
   UserModel.fromJson(Map<String, dynamic> data)

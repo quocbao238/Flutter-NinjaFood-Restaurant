@@ -24,9 +24,10 @@ class SignUpProcessController extends BaseController {
 
   @override
   void onInit() {
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
-    phoneController = TextEditingController();
+    final currentUser = authController.currentUser;
+    firstNameController = TextEditingController(text: currentUser?.firstName ?? '');
+    lastNameController = TextEditingController(text: currentUser?.lastName ?? '');
+    phoneController = TextEditingController(text: currentUser?.phoneNumber ?? '');
 
     firstNameController.addListener(() {
       final firstName = firstNameController.text;
