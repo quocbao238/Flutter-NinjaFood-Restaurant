@@ -31,6 +31,7 @@ dependencies:
   crypto: ^3.0.2
   google_sign_in: ^6.0.2
 #  sign_in_with_apple: ^4.3.0
+  flutter_facebook_auth: ^5.0.8
 
 
   ninja_theme:
