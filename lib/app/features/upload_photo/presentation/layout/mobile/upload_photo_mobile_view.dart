@@ -48,7 +48,7 @@ class UploadPhotoMobileView extends GetView<UploadPhotoController> {
             ),
           ),
           AppPadding.regular(
-            child: AppButton.max(title: 'Skip'.tr, onPressed: controller.onPressedSkip),
+            child: AppButton.max(title: 'Skip_Button'.tr, onPressed: controller.onPressedSkip),
           ),
         ],
       ),

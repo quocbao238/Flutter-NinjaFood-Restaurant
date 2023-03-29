@@ -21,6 +21,7 @@ const Map<String, String> en = {
 
   // Button
   "Next_Button": "Next",
+  "Skip_Button": "Skip",
 
   // SignIn Screen
   "SignInScreen_Title": "Login To Your Account",
@@ -45,24 +46,20 @@ const Map<String, String> en = {
   "SignUpProcessScreen_FirstName": "First Name",
   "SignUpProcessScreen_LastName": "Last Name",
   "SignUpProcessScreen_MobileNumber": "Mobile Number",
-  "SignUpProcessScreen_Next": "Next",
 
   //Payment Method
   "PaymentMethodScreen_Title": "Payment Method",
   "PaymentMethodScreen_Description":
       "This data will be displayed in your account profile for security",
-  "PaymentMethodScreen_Next": "Next",
 
   //Upload Photo
   "UploadPhotoScreen_Title": "Upload Your Photo Profile",
   "UploadPhotoScreen_Description":
       "This data will be displayed in your account profile for security",
-  "UploadPhotoScreen_Next": "Next",
 
   //Upload Preview
   "UploadPreviewScreen_Title": "Upload Your Photo Profile",
   "UploadPreviewScreen_Description": "This data will be displayed in your account\nprofile for security",
-  "UploadPreviewScreen_Next": "Next",
 
   //Set Location 
   "SetLocationScreen_Title": "Set Your Location",

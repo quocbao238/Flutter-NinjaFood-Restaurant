@@ -1,6 +1,8 @@
 library routes;
 
 import 'package:get/get.dart';
+import 'package:ninjafood/app/features/forgot_password/controller/forgot_password_controller.dart';
+import 'package:ninjafood/app/features/forgot_password/presentation/layout/forgot_password_screen.dart';
 import 'package:ninjafood/app/features/home/controllers/home_controller.dart';
 import 'package:ninjafood/app/features/onboard/controllers/onboard_controller.dart';
 import 'package:ninjafood/app/features/onboard/presentation/layout/onboard_screen.dart';
@@ -18,6 +20,8 @@ import 'package:ninjafood/app/features/signup_success/controller/signup_success_
 import 'package:ninjafood/app/features/signup_success/presentation/layout/signup_success.dart';
 import 'package:ninjafood/app/features/splash/controllers/splash_controller.dart';
 import 'package:ninjafood/app/features/splash/presentation/splash_screen.dart';
+import 'package:ninjafood/app/features/success_notification/controller/signup_success_controller.dart';
+import 'package:ninjafood/app/features/success_notification/presentation/layout/signup_success.dart';
 import 'package:ninjafood/app/features/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/features/tabs/presentation/tab_screen.dart';
 import 'package:ninjafood/app/features/upload_photo/controller/upload_photo_controller.dart';

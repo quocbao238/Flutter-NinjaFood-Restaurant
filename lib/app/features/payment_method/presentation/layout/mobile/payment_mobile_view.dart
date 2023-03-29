@@ -52,7 +52,7 @@ class PaymentMethodMobileScreen extends GetView<PaymentController> {
           ),
           AppPadding.regular(
             child: AppButton.max(
-              title: 'PaymentMethodScreen_Next'.tr,
+              title: 'Next_Button'.tr,
               onPressed: controller.onPressedNext,
             ),
           ),

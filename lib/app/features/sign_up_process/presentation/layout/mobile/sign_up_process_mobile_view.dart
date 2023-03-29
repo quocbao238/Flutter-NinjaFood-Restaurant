@@ -63,7 +63,7 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
               ),
             ),
             AppPadding.regular(
-              child: AppButton.max(title: 'SignUpProcessScreen_Next'.tr, onPressed: controller.onPressedNext),
+              child: AppButton.max(title: 'Next_Button'.tr, onPressed: controller.onPressedNext),
             ),
           ],
         ),
