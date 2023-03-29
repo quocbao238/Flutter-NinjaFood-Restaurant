@@ -16,28 +16,25 @@ class AppDialog extends StatelessWidget {
   final String? rightBtnText;
   final VoidCallback? leftBtnOnPressed;
   final VoidCallback? rightBtnOnPressed;
-  final AppDialogType _type;
   final Animation<double> animation;
 
   const AppDialog.error(
       {required this.title,
       required this.message,
-      this.leftBtnText = 'Cancel',
       this.rightBtnText = 'OK',
-      this.leftBtnOnPressed,
       this.rightBtnOnPressed,
       required this.animation})
-      : _type = AppDialogType.error;
+      : leftBtnText = null,
+        leftBtnOnPressed = null;
 
   const AppDialog.success(
       {required this.title,
       required this.message,
-      this.leftBtnText,
       this.rightBtnText,
-      this.leftBtnOnPressed,
       this.rightBtnOnPressed,
       required this.animation})
-      : _type = AppDialogType.success;
+      : leftBtnText = null,
+        leftBtnOnPressed = null;
 
   const AppDialog.warning(
       {required this.title,
@@ -46,8 +43,7 @@ class AppDialog extends StatelessWidget {
       this.rightBtnText,
       this.leftBtnOnPressed,
       this.rightBtnOnPressed,
-      required this.animation})
-      : _type = AppDialogType.warning;
+      required this.animation});
 
   const AppDialog.info(
       {required this.title,
@@ -56,8 +52,7 @@ class AppDialog extends StatelessWidget {
       this.rightBtnText,
       this.leftBtnOnPressed,
       this.rightBtnOnPressed,
-      required this.animation})
-      : _type = AppDialogType.info;
+      required this.animation});
 
   @override
   Widget build(BuildContext context) {

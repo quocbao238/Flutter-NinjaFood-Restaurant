@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
-import 'package:ninjafood/app/features/sign_in/infrastructure/models/user_model.dart';
+import 'package:ninjafood/app/features/role_user/sign_in/infrastructure/models/user_model.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 
 const _logName = 'DatabaseController';

@@ -33,13 +33,13 @@ class DialogController extends GetxController
           leftBtnOnPressed: leftBtnOnPressed == null
               ? null
               : () {
-                  leftBtnOnPressed?.call();
+                  leftBtnOnPressed.call();
                   _hide();
                 },
           rightBtnOnPressed: rightBtnOnPressed == null
               ? null
               : () {
-                  rightBtnOnPressed?.call();
+                  rightBtnOnPressed.call();
                   _hide();
                 },
         ),
