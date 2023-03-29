@@ -3,8 +3,7 @@ part of 'helper.dart';
 class Validator {
   static String? validateEmail(String? email) {
     if (email == null || email.trim() == "") return null;
-    var isValid =
-        RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+    var isValid = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
     if (!isValid) return "Validate.Email_Invalid".tr;
     return null;
   }
@@ -41,9 +40,9 @@ class Validator {
   static String? validatePasswordConfirm(String? pass, String? passConfirm) {
     if (pass == null || pass.trim() == "")
       return "Validate.Pass_required".tr;
-    else if (pass.length < 6) return "Validate.Pass_require_length".tr;
+    else if (pass.length < 6)
+      return "Validate.Pass_require_length".tr;
     else if (pass != passConfirm) return "Validate.Pass_Confirm".tr;
     return null;
   }
-
 }

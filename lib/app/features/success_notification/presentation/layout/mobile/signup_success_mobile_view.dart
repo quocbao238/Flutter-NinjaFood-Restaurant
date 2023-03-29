@@ -29,7 +29,7 @@ class SuccessNotificationMobileView extends GetView<SuccessNotificationControlle
                     ),
                   ),
                   AppText.titleLarge(
-                    text: 'Password reset succesful',
+                    text: 'Password reset successful',
                   ),
                 ],
               ),
