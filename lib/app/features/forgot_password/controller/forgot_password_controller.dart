@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
+import 'package:ninjafood/app/routes/routes.dart';
 
 const _logName = 'SignInController';
 
@@ -37,12 +38,16 @@ class ForgotPassWordController extends BaseController {
     Get.back();
   }
 
-  Future<void> onPressedNext() async {
+  void onPressedSend(){
+    Get.toNamed(AppRouteProvider.successNotificationScreen);
+  }
+
+  // Future<void> onPressedNext() async {
   //   if (emailError.value != null) {
   //     return;
   //   }
   //   loading(true);
   //   final response = await ;
   //   loading(false);
-  }
+  // }
 }

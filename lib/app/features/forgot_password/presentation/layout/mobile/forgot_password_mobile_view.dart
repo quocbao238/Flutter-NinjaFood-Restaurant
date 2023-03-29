@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/forgot_password/controller/forgot_password_controller.dart';
+import 'package:ninjafood/app/features/forgot_password/presentation/layout/mobile/widgets/box_via_email.dart';
 
 class ForgotPasswordMobileView extends GetView<ForgotPassWordController> {
   const ForgotPasswordMobileView({super.key});
@@ -21,9 +22,19 @@ class ForgotPasswordMobileView extends GetView<ForgotPassWordController> {
                 textAlign: TextAlign.start,
                 text: 'Forgot password?'.tr),
           ),
+          AppPadding.medium(
+            child: AppText.bodyMedium(
+              text:
+                  'Select which contact details should we use to reset your password'
+                      .tr,
+              fontWeight: FontWeight.w400,
+              textAlign: TextAlign.start,
+            ),
+          ),
+          AppPadding.medium(child: BoxViaEmail()),
           AppPadding.regular(
             child: AppButton.max(
-                title: 'Next_Button'.tr, onPressed: controller.onPressedNext),
+                title: 'Send'.tr, onPressed: controller.onPressedSend),
           ),
         ],
       ),

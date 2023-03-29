@@ -74,5 +74,10 @@ class AppPages {
       page: () => ForgotPasswordScreen(),
       binding: GetBinding(AppRouteProvider.forgotPasswordScreen),
     ),
+    GetPage(
+      name: AppRouteProvider.successNotificationScreen,
+      page: () => SuccessNotificationScreen(),
+      binding: GetBinding(AppRouteProvider.successNotificationScreen),
+    ),
   ];
 }

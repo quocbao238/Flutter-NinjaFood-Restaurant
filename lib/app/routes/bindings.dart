@@ -83,6 +83,12 @@ class GetBinding extends Bindings {
           return ForgotPassWordController(authController: authController);
         });
         break;
+      case AppRouteProvider.successNotificationScreen:
+        Get.lazyPut(() {
+          final authController = Get.find<AuthController>();
+          return SuccessNotificationController(authController: authController);
+        });
+        break;
     }
   }
 }
