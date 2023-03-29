@@ -1,7 +1,4 @@
-import 'dart:convert';
-import 'dart:math';
-
-import 'package:crypto/crypto.dart';
+part of 'helper.dart';
 
 class CryptographicHelper {
   static String createSHA256Hash(String text) {

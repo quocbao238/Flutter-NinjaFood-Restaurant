@@ -1,11 +1,8 @@
-
-
 part of global_controller;
-
 
 enum LogLevel { DEBUG, WARNING, ERROR }
 
-class ConsoleController extends GetxService{
+class ConsoleController extends GetxService {
   static ConsoleController get to => Get.find();
 
   bool flutterLogs = kDebugMode;
@@ -16,29 +13,19 @@ class ConsoleController extends GetxService{
     showError('Error Log', 'This is error log');
   }
 
-
   // log events, states etc...
   void show(String logName, String message) {
-    developer.log('\x1B[32m${'[$logName]: $message'}\x1B[0m',
-        name: 'AppConsoleService',
-        time: DateTime.now(),
-        level: LogLevel.DEBUG.index);
+    developer.log('\x1B[32m${'$message'}\x1B[0m', name: logName, time: DateTime.now(), level: LogLevel.DEBUG.index);
     _showFlutterLogs(logName, message);
   }
 
   void showWarning(String logName, String message) {
-    developer.log('\x1B[33m${'[$logName]: $message'}\x1B[0m',
-        name: 'AppConsoleService',
-        time: DateTime.now(),
-        level: LogLevel.WARNING.index);
+    developer.log('\x1B[33m${'$message'}\x1B[0m', name: logName, time: DateTime.now(), level: LogLevel.WARNING.index);
     _showFlutterLogs(logName, message);
   }
 
   void showError(String logName, String message) {
-    developer.log('\x1B[31m${'[$logName]: $message'}\x1B[0m',
-        name: 'AppConsoleService',
-        time: DateTime.now(),
-        level: LogLevel.ERROR.index);
+    developer.log('\x1B[31m${'$message'}\x1B[0m', name: logName, time: DateTime.now(), level: LogLevel.ERROR.index);
     _showFlutterLogs(logName, message);
   }
 

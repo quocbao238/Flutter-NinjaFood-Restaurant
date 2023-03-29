@@ -14,6 +14,7 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/features/sign_in/infrastructure/models/user_model.dart';
+import 'package:ninjafood/app/widgets/app_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer' as developer;
 import 'db_controller.dart';

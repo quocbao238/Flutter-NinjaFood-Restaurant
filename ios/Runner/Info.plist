@@ -30,9 +30,24 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.132267484565-s4ljiuud3fg6bip6hgo2hvbkcdi6cjso</string>
+				<string>725706055964694</string>
 			</array>
 		</dict>
 	</array>
+
+	<key>FacebookAppID</key>
+    <string>725706055964694</string>
+    <key>FacebookClientToken</key>
+    <string>56b270b0215d394639e9bdd57582cb46</string>
+    <key>FacebookDisplayName</key>
+    <string>Ninja Food</string>
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>fbapi</string>
+      <string>fb-messenger-share-api</string>
+    </array>
+
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>FirebaseCrashlyticsCollectionEnabled</key>
@@ -66,5 +81,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+
 </dict>
 </plist>
