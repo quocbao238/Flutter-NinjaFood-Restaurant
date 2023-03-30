@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
+import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/box_special_deal.dart';
+import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/popular_food.dart';
+import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/popular_menu.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
-import 'package:ninjafood/app/global_controller/global_controller.dart';
 
 class MobileHomeScreen extends GetView<HomeController> {
   const MobileHomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final authController = Get.find<AuthController>();
     final tabsController = Get.find<TabsController>();
     return AppScaffoldBackgroundImage.patternWithDrawer(
       onPressDrawer: () {
@@ -18,52 +19,49 @@ class MobileHomeScreen extends GetView<HomeController> {
       },
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppPadding.regular(),
-            Obx(() {
-              final currentUser = authController.currentUser;
-              if (currentUser == null) return SizedBox.shrink();
-              return Column(
+            AppPadding(
+              padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AppText.bodyMedium(text: 'Name: ${currentUser.firstName} ${currentUser.lastName}'),
-                  AppText.bodyMedium(text: 'Email: ${currentUser.email}'),
-                  AppText.bodyMedium(text: 'Phone: ${currentUser.phoneNumber}'),
-                  AppPadding.medium(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      height: MediaQuery.of(context).size.width * 0.3,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: Image.network(
-                          currentUser.photoUrl ?? '',
-                          fit: BoxFit.cover,
-                        ),
+                  AppText.headlineLarge(
+                    text: 'Find Your\nFavorite Food',
+                    textAlign: TextAlign.start,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  AppIcons.notification(),
+                ],
+              ),
+            ),
+            AppPadding(
+              padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: AppPadding(
+                      padding: AppEdgeInsets.only(right: AppGapSize.medium),
+                      child: AppTextFormField(
+                        hintText: 'What do you want to order?',
+                        controller: TextEditingController(),
                       ),
                     ),
                   ),
+                  DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: AppIcons.filter())
                 ],
-              );
-            }),
+              ),
+            ),
             AppPadding.medium(
-              child: Obx(() {
-                final isVerified = authController.authUser.value?.emailVerified ?? false;
-                return AppButton.max(
-                    onPressed: isVerified
-                        ? null
-                        : () {
-                            controller.onPressedVerifyEmail();
-                          },
-                    title: isVerified ? 'Email Verified' : 'Verify Email');
-              }),
+              child: BoxSpecialDeal(),
             ),
-            AppButton.min(
-              title: 'Logout',
-              onPressed: () async {
-                controller.onPressedLogout();
-              },
-            ),
+            PopularMenu(),
+            PopularFood(),
           ],
         ),
       ),
