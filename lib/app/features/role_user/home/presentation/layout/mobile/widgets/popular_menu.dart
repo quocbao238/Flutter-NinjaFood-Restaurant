@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
-import 'package:ninjafood/app/features/role_user/home/infrastructure/models/popular_menu_model.dart';
 
 class PopularMenu extends GetView<HomeController> {
   PopularMenu({super.key});
 
-  List<PopularMenuItem> popularMenuList = PopularMenuItem.popularMenuList;
-
   @override
   Widget build(BuildContext context) {
+    final popularMenuList = controller.popularMenu;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return AppPadding(
       padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
       child: Column(
@@ -22,10 +21,12 @@ class PopularMenu extends GetView<HomeController> {
                 text: 'Popular Menu'.tr,
                 fontWeight: FontWeight.bold,
               ),
-              AppText.bodySmall(
-                text: 'View More'.tr,
-                fontWeight: FontWeight.w400,
-                color: Color(0xFFFF7C32),
+              InkWell(
+                onTap: () => controller.onPressedViewMorePopularMenu(),
+                child: AppText.bodySmall(
+                    text: 'View More'.tr,
+                    fontWeight: FontWeight.w400,
+                    color: ThemeColors.orangeColor),
               ),
             ],
           ),
@@ -37,24 +38,35 @@ class PopularMenu extends GetView<HomeController> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: popularMenuList.length,
+                shrinkWrap: true,
                 itemBuilder: (context, index) {
                   final _listMenu = popularMenuList[index];
                   return AppPadding(
                     padding: AppEdgeInsets.only(right: AppGapSize.medium),
-                    child: AppSizeScale(
-                      backgroundColor: Theme.of(context).colorScheme.onPrimary,
-                      ratioWidth: 0.4,
-                      child: Column(
-                        children: [
-                          Image.network(
-                            _listMenu.image.toString(),
-                            fit: BoxFit.fill,
-                          ),
-                          AppText.bodyLarge(
-                            text: _listMenu.name.toString(),
-                            fontWeight: FontWeight.bold,
-                          )
-                        ],
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: AppSizeScale(
+                        backgroundColor: isDarkMode
+                            ? ThemeColors.backgroundTextFormDark()
+                            : Theme.of(context).colorScheme.onPrimary,
+                        ratioWidth: 0.4,
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Image.network(
+                                _listMenu.image.toString(),
+                                fit: BoxFit.cover,
+                                width: MediaQuery.of(context).size.width * 0.4,
+                              ),
+                            ),
+                            AppPadding.small(
+                              child: AppText.bodyLarge(
+                                text: _listMenu.name.toString(),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   );

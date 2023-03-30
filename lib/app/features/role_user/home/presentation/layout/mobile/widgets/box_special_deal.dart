@@ -8,46 +8,70 @@ class BoxSpecialDeal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.18,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          gradient: ThemeColors.gradientButtonColor,
-          image: DecorationImage(
+    return AppPadding.medium(
+      child: AppSizeScale(
+        ratioWidth: 1,
+        ratioHeight: 0.2,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            gradient: ThemeColors.gradientButtonColor,
+            image: DecorationImage(
               image: AssetImage('assets/icons/box_special.png'),
-              fit: BoxFit.fill)),
-      child: Stack(
-        children: [
-          Image.asset(
-            'assets/icons/special_deal.png',
-            fit: BoxFit.cover,
-          ),
-          Positioned(
-            right: 0,
-            child: Column(
-              children: [
-                AppPadding(
-                    padding: AppEdgeInsets.symmetric(
-                        horizontal: AppGapSize.large,
-                        vertical: AppGapSize.small),
-                    child: AppText.titleSmall(
-                      text: 'Special Deal \nFor October',
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.start,
-                      color: Colors.white,
-                    )),
-                ElevatedButton(
-                    onPressed: () {},
-                    child: AppText.bodySmall(
-                      text: 'Buy now',
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ))
-              ],
+              fit: BoxFit.fill,
             ),
-          )
-        ],
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                flex:4,
+                child: Image.asset('assets/icons/thanbomy.png',
+                    fit: BoxFit.cover),
+              ),
+              Expanded(
+                flex: 3 ,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppPadding(
+                        // TODO: fix line max = 2
+                        padding: AppEdgeInsets.only(right: AppGapSize.small),
+                        child: AppText.titleSmall(
+                          text: 'Special Deal For October',
+                          fontWeight: FontWeight.bold,
+                          textAlign: TextAlign.start,
+                          color: Colors.white,
+                        )),
+                    ElevatedButton(
+                        onPressed: () {},
+                        style: Theme.of(context)
+                            .elevatedButtonTheme
+                            .style!
+                            .copyWith(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.white),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                              ),
+                            ),
+                        child: AppPadding(
+                          padding: AppEdgeInsets.symmetric(
+                              horizontal: AppGapSize.small),
+                          child: AppText.bodySmall(
+                            text: 'Buy now',
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ))
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

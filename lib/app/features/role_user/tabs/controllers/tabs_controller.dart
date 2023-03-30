@@ -71,4 +71,7 @@ class TabsController extends BaseController {
       (r) => Get.offAllNamed(AppRouteProvider.splashScreen),
     );
   }
+
+  void onPressedNotification() {
+  }
 }
