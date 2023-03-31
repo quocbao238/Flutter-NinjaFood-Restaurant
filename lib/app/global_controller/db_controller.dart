@@ -62,8 +62,24 @@ class DatabaseController extends GetxService {
     try {
       List<CategoryModel> _result;
       final querySnapshot = await _db.collection(DatabaseKeys.category).get();
+      _result = querySnapshot.docs.map((e) {
+        final _data = CategoryModel.fromJson(e.data());
+        final _category =
+            _data.copyWith(name: _data.name?.replaceAll('GG_HCM_', ''));
+        return _category;
+      }).toList();
+      return right(_result);
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  Future<Either<Failure, List<ProductModel>>> getListProducts() async {
+    try {
+      List<ProductModel> _result = [];
+      final querySnapshot = await _db.collection(DatabaseKeys.product).get();
       _result = querySnapshot.docs
-          .map((e) => CategoryModel.fromJson(e.data()))
+          .map((e) => ProductModel.fromJson(e.data()))
           .toList();
       return right(_result);
     } catch (e, stackTrace) {
@@ -71,13 +87,9 @@ class DatabaseController extends GetxService {
     }
   }
 
-  Future<Either<Failure, List<ProductModel>>> getListProductModelByCategory(
-      CategoryModel categoryModel) async {
+  Future<Either<Failure, List<ProductModel>>> getListProductById(
+      List<int> listProductsIds) async {
     try {
-      final listProductsIds = categoryModel.productIds;
-      if (listProductsIds == null || listProductsIds.isEmpty) {
-        return right([]);
-      }
       List<ProductModel> _result = [];
       final querySnapshot = await _db
           .collection(DatabaseKeys.product)

@@ -10,7 +10,8 @@ class GetBinding extends Bindings {
     switch (routerName) {
       case AppRouteProvider.splashScreen:
         final localStorageController = Get.find<LocalStorageController>();
-        Get.lazyPut(() => SplashController(localStorageController: localStorageController));
+        Get.lazyPut(() =>
+            SplashController(localStorageController: localStorageController));
         break;
       case AppRouteProvider.onboardScreen:
         Get.lazyPut(() => OnboardController());
@@ -31,7 +32,9 @@ class GetBinding extends Bindings {
         Get.lazyPut(() {
           final authController = Get.find<AuthController>();
           final databaseController = Get.find<DatabaseController>();
-          return SignUpProcessController(authController: authController, databaseController: databaseController);
+          return SignUpProcessController(
+              authController: authController,
+              databaseController: databaseController);
         });
         break;
       case AppRouteProvider.paymentMethodScreen:
@@ -61,7 +64,8 @@ class GetBinding extends Bindings {
         Get.lazyPut(() {
           final authController = Get.find<AuthController>();
           final dbController = Get.find<DatabaseController>();
-          return SetLocationController(authController: authController, databaseController: dbController);
+          return SetLocationController(
+              authController: authController, databaseController: dbController);
         });
         break;
       case AppRouteProvider.signupSuccessScreen:
@@ -74,8 +78,12 @@ class GetBinding extends Bindings {
       case AppRouteProvider.tabScreen:
         final themeController = Get.find<ThemeController>();
         final authController = Get.find<AuthController>();
-        Get.lazyPut(() => TabsController(authController: authController, themeController: themeController));
-        Get.lazyPut(() => HomeController(authController: authController));
+        final databaseController = Get.find<DatabaseController>();
+        Get.lazyPut(() => TabsController(
+            authController: authController, themeController: themeController));
+        Get.lazyPut(() => HomeController(
+            authController: authController,
+            databaseController: databaseController));
         break;
       case AppRouteProvider.forgotPasswordScreen:
         Get.lazyPut(() {

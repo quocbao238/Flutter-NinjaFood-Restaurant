@@ -1,78 +1,62 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
 
-class BoxSpecialDeal extends StatelessWidget {
+class BoxSpecialDeal extends GetView<HomeController> {
   const BoxSpecialDeal({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return AppPadding.medium(
-      child: AppSizeScale(
-        ratioWidth: 1,
-        ratioHeight: 0.2,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            gradient: ThemeColors.gradientButtonColor,
-            image: DecorationImage(
-              image: AssetImage('assets/icons/box_special.png'),
-              fit: BoxFit.fill,
+    return AppPadding(
+      padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
+      child: Obx(() {
+        final promotions = controller.promotions;
+        if (promotions.isEmpty) return SizedBox();
+        return Column(
+          children: [
+            CarouselSlider(
+              options: CarouselOptions(
+                  autoPlay: true,
+                  aspectRatio: 2,
+                  enlargeCenterPage: true,
+                  onPageChanged: (index, reason) {
+                    controller.currentIndexPromotion.value = index;
+                  }),
+              items: promotions
+                  .map((item) => ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.network(item.thumbnail!, fit: BoxFit.fill),
+                      ))
+                  .toList(),
             ),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                flex:4,
-                child: Image.asset('assets/icons/thanbomy.png',
-                    fit: BoxFit.cover),
-              ),
-              Expanded(
-                flex: 3 ,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AppPadding(
-                        // TODO: fix line max = 2
-                        padding: AppEdgeInsets.only(right: AppGapSize.small),
-                        child: AppText.titleSmall(
-                          text: 'Special Deal For October',
-                          fontWeight: FontWeight.bold,
-                          textAlign: TextAlign.start,
-                          color: Colors.white,
-                        )),
-                    ElevatedButton(
-                        onPressed: () {},
-                        style: Theme.of(context)
-                            .elevatedButtonTheme
-                            .style!
-                            .copyWith(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.white),
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                              ),
-                            ),
-                        child: AppPadding(
-                          padding: AppEdgeInsets.symmetric(
-                              horizontal: AppGapSize.small),
-                          child: AppText.bodySmall(
-                            text: 'Buy now',
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ))
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+            AppPadding.small(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: promotions.map(
+                (image) {
+                  int index = promotions.indexOf(image);
+                  return Container(
+                    width: 8.0,
+                    height: 8.0,
+                    margin:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: controller.currentIndexPromotion.value == index
+                          ? ThemeColors.primaryColor
+                          : Colors.grey,
+                    ),
+                  );
+                },
+              ).toList(), // this was the part the I had to add
+            ),
+          ],
+        );
+      }),
     );
   }
 }
