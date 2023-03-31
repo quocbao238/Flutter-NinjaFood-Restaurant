@@ -1,14 +1,20 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/features/role_user/sign_in/infrastructure/models/user_model.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
+import 'package:ninjafood/app/models/category_model.dart';
+import 'package:ninjafood/app/models/product_model.dart';
 
 const _logName = 'DatabaseController';
 
 class DatabaseKeys {
   static String user = '/user/';
+  static String product = '/product/';
+  static String category = '/category/';
 }
 
 class DatabaseController extends GetxService {
@@ -30,7 +36,9 @@ class DatabaseController extends GetxService {
 
   Future<Either<Failure, void>> insertUser(UserModel userModel) async {
     try {
-      await _db.doc('${DatabaseKeys.user}${userModel.uid}').set(userModel.toJson());
+      await _db
+          .doc('${DatabaseKeys.user}${userModel.uid}')
+          .set(userModel.toJson());
       return right(null);
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
@@ -39,8 +47,44 @@ class DatabaseController extends GetxService {
 
   Future<Either<Failure, void>> updateUser(UserModel userModel) async {
     try {
-      await _db.doc('${DatabaseKeys.user}${userModel.uid}').update(userModel.toJson());
+      await _db
+          .doc('${DatabaseKeys.user}${userModel.uid}')
+          .update(userModel.toJson());
       return right(null);
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  Future<Either<Failure, List<CategoryModel>>> getListCategories() async {
+    try {
+      List<CategoryModel> _result;
+      final querySnapshot = await _db.collection(DatabaseKeys.category).get();
+      _result = querySnapshot.docs
+          .map((e) => CategoryModel.fromJson(e.data()))
+          .toList();
+      return right(_result);
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  Future<Either<Failure, List<ProductModel>>> getListProductModelByCategory(
+      CategoryModel categoryModel) async {
+    try {
+      final listProductsIds = categoryModel.productIds;
+      if (listProductsIds == null || listProductsIds.isEmpty) {
+        return right([]);
+      }
+      List<ProductModel> _result = [];
+      final querySnapshot = await _db
+          .collection(DatabaseKeys.product)
+          .where('id', whereIn: listProductsIds)
+          .get();
+      _result = querySnapshot.docs
+          .map((e) => ProductModel.fromJson(e.data()))
+          .toList();
+      return right(_result);
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }

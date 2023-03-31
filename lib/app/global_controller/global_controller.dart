@@ -42,11 +42,13 @@ Future<void> initGlobalController() async {
   await Get.put(ConsoleController())();
   final console = Get.find<ConsoleController>();
   console.show(_logName, 'Start Boot services ...');
-  Get.put(DialogController());
+  Get.put(DialogController(), permanent: true);
   await Get.put(LocalStorageController())();
-  await Get.put(ThemeController(localStorageController: Get.find<LocalStorageController>()))();
+  await Get.put(ThemeController(
+      localStorageController: Get.find<LocalStorageController>()))();
   await Get.put(DatabaseController(console: console))();
-  await Get.put(AuthController(console: console, dbController: Get.find<DatabaseController>()))();
+  await Get.put(AuthController(
+      console: console, dbController: Get.find<DatabaseController>()))();
   await Get.put(CloudStorageController())();
   await TranslationController.init(Locale('vi', 'VN'));
   console.show(_logName, 'All services started...');

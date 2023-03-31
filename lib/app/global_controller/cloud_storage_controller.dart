@@ -24,4 +24,5 @@ class CloudStorageController extends GetxService {
       return null;
     }
   }
+
 }

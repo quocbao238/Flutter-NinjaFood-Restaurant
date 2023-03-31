@@ -80,6 +80,8 @@ class DialogController extends GetxController
 
   void _hide() {
     _animationController.reverse();
-    Future.delayed(Duration(milliseconds: milliseconds), () => Get.back());
+    Future.delayed(Duration(milliseconds: milliseconds), () {
+      if (Get.isDialogOpen ?? false) Get.back();
+    });
   }
 }

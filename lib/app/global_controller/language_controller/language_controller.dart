@@ -13,13 +13,14 @@ class TranslationController extends Translations {
     return Locale(code.first, code.last);
   }
 
+
   static Future<Null> init(Locale locale) async {
-    // String? lang = localStorageController.getString(LocalStorageKey.currentLanguage);
-    // if (lang != null && lang.isNotEmpty)
-    //   fallbackLocale = localFromString(lang);
-    // else
-    //   fallbackLocale = locale;
-    // return null;
+    String? lang = localStorageController.getString(LocalStorageKey.currentLanguage);
+    if (lang != null && lang.isNotEmpty)
+      fallbackLocale = localFromString(lang);
+    else
+      fallbackLocale = locale;
+    return null;
   }
 
   @override
