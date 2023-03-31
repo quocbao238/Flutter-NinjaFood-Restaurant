@@ -36,7 +36,6 @@ class PopularFood extends GetView<HomeController> {
             child: AppSizeScale(
               ratioWidth: 1,
               child: ListView.builder(
-
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: popularFoodList.length,
@@ -70,11 +69,11 @@ class PopularFood extends GetView<HomeController> {
                                   AppText.bodyLarge(
                                       text: _listMenu.name.toString()),
                                   AppText.labelLarge(
-                                    text: _listMenu.name.toString(),
-                                    color: isDarkMode
-                                        ? ThemeColors.labelDarkColor
-                                        : ThemeColors.labelColor.withOpacity(0.3)
-                                  ),
+                                      text: _listMenu.name.toString(),
+                                      color: isDarkMode
+                                          ? ThemeColors.labelDarkColor
+                                          : ThemeColors.labelColor
+                                              .withOpacity(0.3)),
                                 ],
                               ),
                             ),
