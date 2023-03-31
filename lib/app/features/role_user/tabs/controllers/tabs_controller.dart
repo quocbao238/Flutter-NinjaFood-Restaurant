@@ -23,8 +23,11 @@ class TabsController extends BaseController {
 
   List<MenuItem> menuItems = MenuItem.listMenu;
 
-  List<Widget> screens =
-      MenuItem.listMenu.where((element) => element.screen != null).toList().map((e) => e.screen!).toList();
+  List<Widget> screens = MenuItem.listMenu
+      .where((element) => element.screen != null)
+      .toList()
+      .map((e) => e.screen!)
+      .toList();
 
   Rx<MenuItem> currentMenuItem = MenuItem.listMenu.first.obs;
 
@@ -73,6 +76,6 @@ class TabsController extends BaseController {
     );
   }
 
-  void onPressedNotification() {
+  Future<void> onPressedNotification() async {
   }
 }
