@@ -2,10 +2,11 @@ class CategoryModel {
   String? name;
   int? id;
   List<int>? productIds;
+  String? image;
 
   String? sTypename;
 
-  CategoryModel({this.name, this.id, this.productIds, this.sTypename});
+  CategoryModel({this.name, this.id, this.productIds, this.sTypename,this.image});
 
   CategoryModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -22,5 +23,14 @@ class CategoryModel {
     data['productIds'] = this.productIds;
     data['__typename'] = this.sTypename;
     return data;
+  }
+
+  CategoryModel copyWith({String? name, int? id, List<int>? productIds, String? image}) {
+    return CategoryModel(
+      name: name ?? this.name,
+      id: id ?? this.id,
+      productIds: productIds ?? this.productIds,
+      image: image ?? this.image,
+    );
   }
 }

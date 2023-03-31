@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 
 class AppBarHomeWidget extends GetView<TabsController> {
+
   const AppBarHomeWidget({Key? key}) : super(key: key);
 
   @override
@@ -12,12 +14,23 @@ class AppBarHomeWidget extends GetView<TabsController> {
       children: [
         Row(
           children: [
-            AppButtonDrawer(onPressed: () {
-              controller.toggleDrawer();
+            Obx(() {
+              final homeController = Get.find<HomeController>();
+              final isViewTypeNormal = homeController.homeViewType.value ==
+                  HomeViewType.normal;
+              if(!isViewTypeNormal){
+                return AppButtonBack(onPressed: () {
+                  homeController.onPressedBackToNormalHome();
+                });
+              }
+              return AppButtonDrawer(onPressed: () {
+                controller.toggleDrawer();
+              });
             }),
             const Expanded(
               child: AppPadding.medium(
-                  child: AppText.headlineSmall(text: 'Find Your\nFavorite Food')),
+                  child: AppText.headlineSmall(
+                      text: 'Find Your\nFavorite Food')),
             ),
             AppButtonNotification(onPressed: () {
               controller.onPressedNotification();

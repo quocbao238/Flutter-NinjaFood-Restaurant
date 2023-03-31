@@ -33,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.10.0"
+  auto_animated:
+    dependency: "direct main"
+    description:
+      name: auto_animated
+      sha256: e0688309ac014333564932ac0eb059b265674004603d0118b649416fdcd6ab20
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -41,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  carousel_slider:
+    dependency: "direct main"
+    description:
+      name: carousel_slider
+      sha256: "9c695cc963bf1d04a47bd6021f68befce8970bcd61d24938e1fb0918cf5d9c42"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.1"
   characters:
     dependency: transitive
     description:
@@ -584,11 +600,9 @@ packages:
   ninja_theme:
     dependency: "direct main"
     description:
-      path: "."
-      ref: devMaster
-      resolved-ref: af7f84b78ac29ac8ca8193a511e2e53b4157aff3
-      url: "https://github.com/quocbao238/ninjafood_theme.git"
-    source: git
+      path: "../NinjaFood_Theme"
+      relative: true
+    source: path
     version: "0.0.1"
   path:
     dependency: transitive
@@ -851,6 +865,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  visibility_detector:
+    dependency: transitive
+    description:
+      name: visibility_detector
+      sha256: "15c54a459ec2c17b4705450483f3d5a2858e733aee893dcee9d75fd04814940d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.3"
   win32:
     dependency: transitive
     description:
