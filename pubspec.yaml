@@ -17,7 +17,6 @@ dependencies:
   shared_preferences: ^2.0.18
   intl: 0.17.0
   http: ^0.13.5
-  appwrite: ^8.3.0
   fpdart: ^0.5.0
   firebase_auth: ^4.3.0
   cloud_firestore: ^4.4.5
@@ -35,10 +34,10 @@ dependencies:
 
 
   ninja_theme:
-   git:
-     url: https://github.com/quocbao238/ninjafood_theme.git
-     ref: devMaster
-      # path: ../NinjaFood_Theme
+#   git:
+#     url: https://github.com/quocbao238/ninjafood_theme.git
+#     ref: devMaster
+       path: ../NinjaFood_Theme
 
 
 flutter_icons:

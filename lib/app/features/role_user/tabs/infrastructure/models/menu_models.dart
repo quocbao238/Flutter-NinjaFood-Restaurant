@@ -32,7 +32,12 @@ class MenuItem {
   });
 
   static List<MenuItem> listMenu = [
-    MenuItem(index: 0, title: 'Home', iconData: FontAwesomeIcons.house, screen: HomeScreen(), menuType: MenuType.home),
+    MenuItem(
+        index: 0,
+        title: 'Home',
+        iconData: FontAwesomeIcons.house,
+        screen: HomeScreen(),
+        menuType: MenuType.home),
     MenuItem(
         index: 1,
         title: 'Profile',
@@ -46,15 +51,29 @@ class MenuItem {
         screen: CartScreen(),
         menuType: MenuType.cart),
     MenuItem(
-        index: 3, title: 'Chat', iconData: FontAwesomeIcons.message, screen: ChatScreen(), menuType: MenuType.chat),
-    MenuItem(index: 4, title: 'Settings', iconData: FontAwesomeIcons.gear, screen: null, menuType: MenuType.settings),
+        index: 3,
+        title: 'Chat',
+        iconData: FontAwesomeIcons.message,
+        screen: ChatScreen(),
+        menuType: MenuType.chat),
+    MenuItem(
+        index: 4,
+        title: 'Settings',
+        iconData: FontAwesomeIcons.gear,
+        screen: null,
+        menuType: MenuType.settings),
     MenuItem(
         index: 5,
         title: 'Change Theme',
         iconData: FontAwesomeIcons.themeisle,
         screen: null,
         menuType: MenuType.changeTheme),
-    MenuItem(index: 6, title: 'About', iconData: FontAwesomeIcons.info, screen: null, menuType: MenuType.about),
+    MenuItem(
+        index: 6,
+        title: 'About',
+        iconData: FontAwesomeIcons.info,
+        screen: null,
+        menuType: MenuType.about),
     MenuItem(
         index: 7,
         title: 'Logout',
