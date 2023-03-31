@@ -23,8 +23,11 @@ class TabsController extends BaseController {
 
   List<MenuItem> menuItems = MenuItem.listMenu;
 
-  List<Widget> screens =
-      MenuItem.listMenu.where((element) => element.screen != null).toList().map((e) => e.screen!).toList();
+  List<Widget> screens = MenuItem.listMenu
+      .where((element) => element.screen != null)
+      .toList()
+      .map((e) => e.screen!)
+      .toList();
 
   Rx<MenuItem> currentMenuItem = MenuItem.listMenu.first.obs;
 
@@ -73,6 +76,22 @@ class TabsController extends BaseController {
     );
   }
 
-  void onPressedNotification() {
+  Future<void> onPressedNotification() async {
+    final dbController = Get.find<DatabaseController>();
+    final categoryList = await dbController.getListCategories();
+    categoryList.fold(
+      (l) => handleFailure(_logName, l),
+      (r) async {
+        final _categoryList = r;
+        final productList =  await dbController.getListProductModelByCategory(_categoryList[0]);
+        productList.fold(
+          (l) => handleFailure(_logName, l),
+          (r) {
+            final _productList = r;
+            print(_productList[0].toJson());
+          },
+        );
+      },
+    );
   }
 }

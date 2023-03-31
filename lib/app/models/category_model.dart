@@ -10,7 +10,8 @@ class CategoryModel {
   CategoryModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     id = json['id'];
-    productIds = json['productIds'];
+    productIds =
+        json['productIds'] != null ? json['productIds'].cast<int>() : null;
     sTypename = json['__typename'];
   }
 
