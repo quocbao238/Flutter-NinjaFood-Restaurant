@@ -77,21 +77,5 @@ class TabsController extends BaseController {
   }
 
   Future<void> onPressedNotification() async {
-    final dbController = Get.find<DatabaseController>();
-    final categoryList = await dbController.getListCategories();
-    categoryList.fold(
-      (l) => handleFailure(_logName, l),
-      (r) async {
-        final _categoryList = r;
-        final productList =  await dbController.getListProductModelByCategory(_categoryList[0]);
-        productList.fold(
-          (l) => handleFailure(_logName, l),
-          (r) {
-            final _productList = r;
-            print(_productList[0].toJson());
-          },
-        );
-      },
-    );
   }
 }

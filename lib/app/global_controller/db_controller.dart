@@ -8,6 +8,7 @@ import 'package:ninjafood/app/features/role_user/sign_in/infrastructure/models/u
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/models/category_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
+import 'package:ninjafood/app/models/promotion_model.dart';
 
 const _logName = 'DatabaseController';
 
@@ -15,6 +16,7 @@ class DatabaseKeys {
   static String user = '/user/';
   static String product = '/product/';
   static String category = '/category/';
+  static String promotion = '/promotion/';
 }
 
 class DatabaseController extends GetxService {
@@ -83,6 +85,19 @@ class DatabaseController extends GetxService {
           .get();
       _result = querySnapshot.docs
           .map((e) => ProductModel.fromJson(e.data()))
+          .toList();
+      return right(_result);
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  Future<Either<Failure, List<PromotionModel>>> getListPromotion() async {
+    try {
+      List<PromotionModel> _result = [];
+      final querySnapshot = await _db.collection(DatabaseKeys.promotion).get();
+      _result = querySnapshot.docs
+          .map((e) => PromotionModel.fromJson(e.data()))
           .toList();
       return right(_result);
     } catch (e, stackTrace) {
