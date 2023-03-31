@@ -43,7 +43,6 @@ class HomeViewTypeMenus extends GetView<HomeController> {
                           child: Image.network(
                             _listMenu.image.toString(),
                             fit: BoxFit.cover,
-                            width: MediaQuery.of(context).size.width * 0.4,
                           ),
                         ),
                         AppPadding.small(
