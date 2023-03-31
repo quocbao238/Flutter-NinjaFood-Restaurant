@@ -1,3 +1,4 @@
+import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
@@ -36,7 +37,13 @@ class PopularMenu extends GetView<HomeController> {
                 ? Obx(() {
                     final popularMenuList = controller.menus;
                     if (popularMenuList.isEmpty) return SizedBox();
-                    return GridView.builder(
+                    return LiveGrid.options(
+                        options: LiveOptions(
+                          showItemInterval: Duration(milliseconds: 100),
+                          showItemDuration: Duration(milliseconds: 100),
+                          visibleFraction: 0.05,
+                          reAnimateOnVisibility: false,
+                        ),
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -46,29 +53,40 @@ class PopularMenu extends GetView<HomeController> {
                         ),
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: popularMenuList.length,
-                        itemBuilder: (context, index) {
+                        itemBuilder: (context, index, animation) {
                           final _menuItem = popularMenuList[index];
                           final _menuName = _menuItem.name ?? '';
                           final _menuImage = controller
                               .getImageUrlByProductId(_menuItem.productIds![1]);
-                          return ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: AppSizeScale(
-                              backgroundColor: isDarkMode
-                                  ? ThemeColors.backgroundTextFormDark()
-                                  : Theme.of(context).colorScheme.onPrimary,
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    child: Image.network(_menuImage,
-                                        fit: BoxFit.cover),
+                          return FadeTransition(
+                            opacity: Tween<double>(begin: 0, end: 1)
+                                .animate(animation),
+                            // And slide transition
+                            child: SlideTransition(
+                              position: Tween<Offset>(
+                                begin: Offset(0, -0.1),
+                                end: Offset.zero,
+                              ).animate(animation),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: AppSizeScale(
+                                  backgroundColor: isDarkMode
+                                      ? ThemeColors.backgroundTextFormDark()
+                                      : Theme.of(context).colorScheme.onPrimary,
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                        child: Image.network(_menuImage,
+                                            fit: BoxFit.cover),
+                                      ),
+                                      AppPadding.small(
+                                        child: AppText.bodyLarge(
+                                            text: _menuName,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
                                   ),
-                                  AppPadding.small(
-                                    child: AppText.bodyLarge(
-                                        text: _menuName,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           );
@@ -80,37 +98,54 @@ class PopularMenu extends GetView<HomeController> {
                     child: Obx(() {
                       final popularMenuList = controller.menus;
                       if (popularMenuList.isEmpty) return SizedBox();
-                      return ListView.builder(
+                      return LiveList.options(
+                        options: LiveOptions(
+                          showItemInterval: Duration(milliseconds: 100),
+                          showItemDuration: Duration(milliseconds: 100),
+                          visibleFraction: 0.05,
+                          reAnimateOnVisibility: false,
+                        ),
                         scrollDirection: Axis.horizontal,
                         itemCount: popularMenuList.length,
                         shrinkWrap: true,
-                        itemBuilder: (context, index) {
+                        itemBuilder: (context, index, animation) {
                           final _items = popularMenuList[index];
                           final _image = controller
                               .getImageUrlByProductId(_items.productIds![1]);
                           final _name = _items.name ?? '';
-                          return AppPadding(
-                            padding:
-                                AppEdgeInsets.only(right: AppGapSize.medium),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: AppSizeScale(
-                                backgroundColor: isDarkMode
-                                    ? ThemeColors.backgroundTextFormDark()
-                                    : Theme.of(context).colorScheme.onPrimary,
-                                ratioWidth: 0.4,
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Image.network(_image,
-                                          fit: BoxFit.cover),
+                          return FadeTransition(
+                            opacity: Tween<double>(begin: 0, end: 1)
+                                .animate(animation),
+                            child: SlideTransition(
+                              position: Tween<Offset>(
+                                      begin: Offset(-0.5, 0), end: Offset.zero)
+                                  .animate(animation),
+                              child: AppPadding(
+                                padding: AppEdgeInsets.only(
+                                    right: AppGapSize.medium),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(16),
+                                  child: AppSizeScale(
+                                    backgroundColor: isDarkMode
+                                        ? ThemeColors.backgroundTextFormDark()
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                    ratioWidth: 0.4,
+                                    child: Column(
+                                      children: [
+                                        Expanded(
+                                          child: Image.network(_image,
+                                              fit: BoxFit.cover),
+                                        ),
+                                        AppPadding.small(
+                                          child: AppText.bodyLarge(
+                                              text: _name,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
                                     ),
-                                    AppPadding.small(
-                                      child: AppText.bodyLarge(
-                                          text: _name,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
+                                  ),
                                 ),
                               ),
                             ),

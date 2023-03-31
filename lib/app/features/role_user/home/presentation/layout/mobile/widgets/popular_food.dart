@@ -1,3 +1,4 @@
+import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
@@ -40,11 +41,17 @@ class PopularFood extends GetView<HomeController> {
                 if (popularFoodList.isEmpty) return Container();
                 final isNormalViewType =
                     controller.homeViewType.value == HomeViewType.normal;
-                return ListView.builder(
+                return LiveList.options(
+                  options: LiveOptions(
+                    showItemInterval: Duration(milliseconds: 100),
+                    showItemDuration: Duration(milliseconds: 100),
+                    visibleFraction: 0.05,
+                    reAnimateOnVisibility: false,
+                  ),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: isNormalViewType ? 3 : popularFoodList.length,
-                  itemBuilder: (context, index) {
+                  itemBuilder: (context, index, animation) {
                     final productItem = popularFoodList[index];
                     final _foodName = productItem.name ?? '';
                     final _foodPrice = formatPriceToVND(productItem
@@ -56,54 +63,70 @@ class PopularFood extends GetView<HomeController> {
                         '');
                     final _foodImage = productItem.image?.url ?? '';
 
-                    return AppPadding(
-                      padding: AppEdgeInsets.only(bottom: AppGapSize.medium),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: ColoredBox(
-                          color: isDarkMode
-                              ? ThemeColors.backgroundTextFormDark()
-                              : Theme.of(context).colorScheme.onPrimary,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              AppPadding.medium(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(_foodImage,
-                                      height: 64, width: 64, fit: BoxFit.fill),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: AppText.bodyLarge(
-                                    text: _foodName,
-                                    textAlign: TextAlign.start),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: AppPadding.small(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      AppText.titleSmall(
-                                          text: _foodPrice,
-                                          textAlign: TextAlign.end,
-                                          maxLines: 1,
-                                          fontWeight: FontWeight.w400,
-                                          color: ThemeColors.textPriceColor),
-                                      AppText.titleSmall(
-                                        text: _foodCurrency,
-                                        textAlign: TextAlign.end,
-                                        fontWeight: FontWeight.w400,
-                                        color: ThemeColors.textPriceColor,
-                                      ),
-                                    ],
+                    return FadeTransition(
+                      opacity:
+                          Tween<double>(begin: 0, end: 1).animate(animation),
+                      child: SlideTransition(
+                        position: Tween<Offset>(
+                          begin: Offset(0, -0.1),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: AppPadding(
+                          padding:
+                              AppEdgeInsets.only(bottom: AppGapSize.medium),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: ColoredBox(
+                              color: isDarkMode
+                                  ? ThemeColors.backgroundTextFormDark()
+                                  : Theme.of(context).colorScheme.onPrimary,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  AppPadding.medium(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(_foodImage,
+                                          height: 64,
+                                          width: 64,
+                                          fit: BoxFit.fill),
+                                    ),
                                   ),
-                                ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: AppText.bodyLarge(
+                                        text: _foodName,
+                                        textAlign: TextAlign.start),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: AppPadding.small(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          AppText.titleSmall(
+                                              text: _foodPrice,
+                                              textAlign: TextAlign.end,
+                                              maxLines: 1,
+                                              fontWeight: FontWeight.w400,
+                                              color:
+                                                  ThemeColors.textPriceColor),
+                                          AppText.titleSmall(
+                                            text: _foodCurrency,
+                                            textAlign: TextAlign.end,
+                                            fontWeight: FontWeight.w400,
+                                            color: ThemeColors.textPriceColor,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
@@ -117,4 +140,27 @@ class PopularFood extends GetView<HomeController> {
       ),
     );
   }
+
+  Widget buildAnimatedItem(
+    BuildContext context,
+    Widget child,
+    int index,
+    Animation<double> animation,
+  ) =>
+      // For example wrap with fade transition
+      FadeTransition(
+        opacity: Tween<double>(
+          begin: 0,
+          end: 1,
+        ).animate(animation),
+        // And slide transition
+        child: SlideTransition(
+          position: Tween<Offset>(
+            begin: Offset(0, -0.1),
+            end: Offset.zero,
+          ).animate(animation),
+          // Paste you Widget
+          child: child,
+        ),
+      );
 }
