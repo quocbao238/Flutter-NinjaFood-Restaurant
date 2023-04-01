@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
@@ -26,18 +27,28 @@ class HomeController extends BaseController {
 
   Rx<HomeViewType> homeViewType = HomeViewType.normal.obs;
   final currentIndexPromotion = 0.obs;
-
+  late final searchController;
+  final showClearSearch = false.obs;
   String lastSearch = "";
 
   @override
   void onInit() {
+    searchController = TextEditingController();
+    searchController.addListener(() {
+      if (searchController.text.isEmpty) {
+        showClearSearch.value = false;
+      } else {
+        showClearSearch.value = true;
+      }
+    });
     fetchAllData();
     super.onInit();
   }
 
   @override
-  void onReady() {
-    super.onReady();
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 
   Future<void> fetchAllData() async {
@@ -51,30 +62,27 @@ class HomeController extends BaseController {
   Future<void> _fetchMenus() async {
     final response = await databaseController.getListCategories();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
-            (List<CategoryModel> r) {
-          // r.sort((a, b) =>
-          //     (a.productIds?.length ?? 0) < (b.productIds?.length ?? 0) ? 1 : -1);
-          return menus.value = r;
-        });
+        (List<CategoryModel> r) {
+      // r.sort((a, b) =>
+      //     (a.productIds?.length ?? 0) < (b.productIds?.length ?? 0) ? 1 : -1);
+      return menus.value = r;
+    });
   }
 
   Future<void> _fetchProduct() async {
     final response = await databaseController.getListProducts();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
-            (List<ProductModel> r) => products.value = r);
+        (List<ProductModel> r) => products.value = r);
   }
 
   Future<void> _fetchPromotions() async {
     final response = await databaseController.getListPromotion();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
-            (r) => promotions.value = r);
+        (r) => promotions.value = r);
   }
 
   String getImageUrlByProductId(int id) {
-    return products
-        .firstWhere((element) => id == element.id)
-        .image
-        ?.url ?? '';
+    return products.firstWhere((element) => id == element.id).image?.url ?? '';
   }
 
   List<ProductModel> filterProductByIds(List<int> ids) {
@@ -89,8 +97,7 @@ class HomeController extends BaseController {
         bool compareProduct = Common.sanitizing(products[index].name ?? '')
             .toString()
             .contains(_searchData);
-        if (compareProduct)
-          tempList.add(products[index]);
+        if (compareProduct) tempList.add(products[index]);
       }
       lastSearch = pattern;
     } else {
@@ -107,13 +114,13 @@ class HomeController extends BaseController {
   void onPressedLogout() async {
     final response = await authController.signOut();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
-            (r) => Get.offAllNamed(AppRouteProvider.signinScreen));
+        (r) => Get.offAllNamed(AppRouteProvider.signinScreen));
   }
 
   void onPressedVerifyEmail() async {
     final response = await authController.sendEmailVerification();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
-            (r) => Get.snackbar('Success', 'Email verification sent'));
+        (r) => Get.snackbar('Success', 'Email verification sent'));
   }
 
   void onPressedViewMorePopularMenu() {
@@ -126,5 +133,10 @@ class HomeController extends BaseController {
 
   void onPressedBackToNormalHome() {
     homeViewType.value = HomeViewType.normal;
+  }
+
+  void onPressedClearSearch() {
+    searchController.clear();
+    showClearSearch.value = false;
   }
 }

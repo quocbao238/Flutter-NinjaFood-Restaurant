@@ -56,6 +56,8 @@ class SignUpController extends BaseController {
     super.dispose();
   }
 
+
+
   Future<void> onPressedCreateAccount() async {
     if (emailError.value != null || passwordError.value != null || confirmPasswordError.value != null) {
       return;
