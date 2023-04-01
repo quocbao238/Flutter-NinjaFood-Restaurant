@@ -1,4 +1,3 @@
-import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
@@ -56,26 +55,30 @@ class PopularMenu extends GetView<HomeController> {
                           final _menuName = _menuItem.name ?? '';
                           final _menuImage = controller
                               .getImageUrlByProductId(_menuItem.productIds![1]);
-                          return AnimationItem(
-                            animation: animation,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: AppSizeScale(
-                                backgroundColor: isDarkMode
-                                    ? ThemeColors.backgroundTextFormDark()
-                                    : Theme.of(context).colorScheme.onPrimary,
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Image.network(_menuImage,
-                                          fit: BoxFit.cover),
-                                    ),
-                                    AppPadding.small(
-                                      child: AppText.bodyLarge(
-                                          text: _menuName,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
+                          return GestureDetector(
+                            onTap: () =>
+                                controller.onPressedMenuItem(_menuItem),
+                            child: AnimationItem(
+                              animation: animation,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: AppSizeScale(
+                                  backgroundColor: isDarkMode
+                                      ? ThemeColors.backgroundTextFormDark()
+                                      : Theme.of(context).colorScheme.onPrimary,
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                        child: Image.network(_menuImage,
+                                            fit: BoxFit.cover),
+                                      ),
+                                      AppPadding.small(
+                                        child: AppText.bodyLarge(
+                                            text: _menuName,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
