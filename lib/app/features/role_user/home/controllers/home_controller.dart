@@ -63,8 +63,7 @@ class HomeController extends BaseController {
     final response = await databaseController.getListCategories();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
         (List<CategoryModel> r) {
-      // r.sort((a, b) =>
-      //     (a.productIds?.length ?? 0) < (b.productIds?.length ?? 0) ? 1 : -1);
+      r.sort((a, b) => a.name!.compareTo(b.name!));
       return menus.value = r;
     });
   }
@@ -72,7 +71,10 @@ class HomeController extends BaseController {
   Future<void> _fetchProduct() async {
     final response = await databaseController.getListProducts();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (List<ProductModel> r) => products.value = r);
+        (List<ProductModel> r) {
+      r.sort((a, b) => a.name!.compareTo(b.name!));
+      return products.value = r;
+    });
   }
 
   Future<void> _fetchPromotions() async {
@@ -133,6 +135,14 @@ class HomeController extends BaseController {
 
   void onPressedBackToNormalHome() {
     homeViewType.value = HomeViewType.normal;
+  }
+
+  void onPressedMenuItem(CategoryModel category) {
+    Get.toNamed(AppRouteProvider.menuScreen, arguments: category);
+  }
+
+  void onPressedFoodItem(ProductModel product) {
+    // Get.toNamed(AppRouteProvider.foodDetailScreen, arguments: product);
   }
 
   void onPressedClearSearch() {

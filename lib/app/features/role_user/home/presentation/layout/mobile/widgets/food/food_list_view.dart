@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/helper/utils.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/widgets/animation_list.dart';
-import 'package:ninjafood/app/widgets/app_network_image.dart';
-
 import 'food_item.dart';
 
 class FoodList extends StatelessWidget {

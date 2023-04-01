@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:ninjafood/app/features/role_user/forgot_password/controller/forgot_password_controller.dart';
 import 'package:ninjafood/app/features/role_user/forgot_password/presentation/layout/forgot_password_screen.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
+import 'package:ninjafood/app/features/role_user/menu/controllers/menu_controller.dart';
+import 'package:ninjafood/app/features/role_user/menu/presentation/menu_screen.dart';
 import 'package:ninjafood/app/features/role_user/onboard/controllers/onboard_controller.dart';
 import 'package:ninjafood/app/features/role_user/onboard/presentation/layout/onboard_screen.dart';
 import 'package:ninjafood/app/features/role_user/payment_method/controllers/payment_controller.dart';

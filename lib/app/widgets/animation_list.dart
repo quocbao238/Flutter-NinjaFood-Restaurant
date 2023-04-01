@@ -1,18 +1,13 @@
 import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
 
-
-
-
-
-
 class AnimationList extends StatelessWidget {
   final ScrollController? controller;
   final Widget Function(
       BuildContext context, int index, Animation<double> animation) itemBuilder;
   final int itemCount;
   final ScrollPhysics? physics;
-  final bool shrinkWrap;
+  final bool? shrinkWrap;
   final Axis? scrollDirection;
 
   const AnimationList(
@@ -22,7 +17,7 @@ class AnimationList extends StatelessWidget {
       required this.itemCount,
       this.scrollDirection = Axis.vertical,
       this.physics,
-      required this.shrinkWrap})
+      this.shrinkWrap})
       : super(key: key);
 
   @override

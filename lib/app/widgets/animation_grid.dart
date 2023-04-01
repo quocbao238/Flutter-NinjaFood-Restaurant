@@ -7,7 +7,7 @@ class AnimationGridView extends StatelessWidget {
       BuildContext context, int index, Animation<double> animation) itemBuilder;
   final int itemCount;
   final ScrollPhysics? physics;
-  final bool shrinkWrap;
+  final bool? shrinkWrap;
   final Axis? scrollDirection;
   final SliverGridDelegate gridDelegate;
   final EdgeInsetsGeometry? padding;
@@ -19,7 +19,7 @@ class AnimationGridView extends StatelessWidget {
       required this.itemCount,
       this.scrollDirection = Axis.vertical,
       this.physics,
-      required this.shrinkWrap,
+      this.shrinkWrap,
       required this.gridDelegate,
       this.padding})
       : super(key: key);

@@ -11,7 +11,6 @@ class SearchFoodBar extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return TypeAheadField(
       textFieldConfiguration: TextFieldConfiguration(
         controller: controller.searchController,
@@ -59,35 +58,33 @@ class SearchFoodBar extends GetView<HomeController> {
       },
       suggestionsBoxVerticalOffset: 8.0,
       itemBuilder: (context, ProductModel productModel) {
-        return Column(
-          children: [
-            ListTile(
-              leading: SizedBox(
-                  width: kToolbarHeight,
-                  height: kToolbarHeight,
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child:
-                          AppNetworkImage(url: productModel.image?.url ?? ''))),
-              title: AppText.titleSmall(
-                text: productModel.name ?? '',
-                textAlign: TextAlign.start,
-              ),
-              subtitle: AppText.bodyMedium(
-                text: productModel.getPrice + ' ' + productModel.currency,
-                color: ThemeColors.orangeColor,
-                textAlign: TextAlign.start,
-              ),
+        return Column(children: [
+          ListTile(
+            leading: SizedBox(
+                width: kToolbarHeight,
+                height: kToolbarHeight,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child:
+                        AppNetworkImage(url: productModel.image?.url ?? ''))),
+            title: AppText.titleSmall(
+              text: productModel.name ?? '',
+              textAlign: TextAlign.start,
             ),
-            Divider(
-                height: 1,
-                color: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .color!
-                    .withOpacity(0.4))
-          ],
-        );
+            subtitle: AppText.bodyMedium(
+              text: productModel.getPrice + ' ' + productModel.currency,
+              color: ThemeColors.textPriceColor,
+              textAlign: TextAlign.start,
+            ),
+          ),
+          Divider(
+              height: 1,
+              color: Theme.of(context)
+                  .textTheme
+                  .titleSmall!
+                  .color!
+                  .withOpacity(0.4))
+        ]);
       },
       onSuggestionSelected: (ProductModel productModel) =>
           controller.onSuggestionSelected(productModel),

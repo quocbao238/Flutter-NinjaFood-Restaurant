@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
-import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/food_list.dart';
+import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/food/food_list_view.dart';
 
 class PopularFood extends GetView<HomeController> {
   const PopularFood({super.key});
@@ -58,27 +58,4 @@ class PopularFood extends GetView<HomeController> {
       ),
     );
   }
-
-  Widget buildAnimatedItem(
-    BuildContext context,
-    Widget child,
-    int index,
-    Animation<double> animation,
-  ) =>
-      // For example wrap with fade transition
-      FadeTransition(
-        opacity: Tween<double>(
-          begin: 0,
-          end: 1,
-        ).animate(animation),
-        // And slide transition
-        child: SlideTransition(
-          position: Tween<Offset>(
-            begin: Offset(0, -0.1),
-            end: Offset.zero,
-          ).animate(animation),
-          // Paste you Widget
-          child: child,
-        ),
-      );
 }
