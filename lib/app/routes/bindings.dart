@@ -97,6 +97,12 @@ class GetBinding extends Bindings {
           return SuccessNotificationController(authController: authController);
         });
         break;
+      case AppRouteProvider.menuScreen:
+        Get.lazyPut(() {
+          final homeController = Get.find<HomeController>();
+          return MenuScreenController(homeController: homeController);
+        });
+        break;
     }
   }
 }

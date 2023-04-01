@@ -8,11 +8,9 @@ class SplashMobileLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final splashController = Get.find<SplashController>();
-    return AppScaffoldBackgroundImage.splash(
-      body: Center(
-        child: AppImages.logo(),
-      ),
+    return GetBuilder<SplashController>(
+      builder: (_) => AppScaffoldBackgroundImage.splash(
+          body: Center(child: AppImages.logo())),
     );
   }
 }

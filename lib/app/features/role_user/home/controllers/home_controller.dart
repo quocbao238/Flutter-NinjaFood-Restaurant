@@ -1,11 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/features/role_user/home/infrastructure/models/popular_food_model.dart';
-import 'package:ninjafood/app/features/role_user/home/infrastructure/models/popular_menu_model.dart';
-import 'package:ninjafood/app/features/role_user/tabs/infrastructure/models/menu_models.dart';
 import 'package:ninjafood/app/global_controller/db_controller.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
+import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/category_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
@@ -23,24 +22,34 @@ class HomeController extends BaseController {
       {required this.authController, required this.databaseController});
 
   final menus = <CategoryModel>[].obs;
-  final product = <ProductModel>[].obs;
+  final products = <ProductModel>[].obs;
   final promotions = <PromotionModel>[].obs;
 
   Rx<HomeViewType> homeViewType = HomeViewType.normal.obs;
   final currentIndexPromotion = 0.obs;
+  late final searchController;
+  final showClearSearch = false.obs;
+  String lastSearch = "";
 
   @override
   void onInit() {
+    searchController = TextEditingController();
+    searchController.addListener(() {
+      if (searchController.text.isEmpty) {
+        showClearSearch.value = false;
+      } else {
+        showClearSearch.value = true;
+      }
+    });
     fetchAllData();
     super.onInit();
   }
 
   @override
-  void onReady() {
-    super.onReady();
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
-
-
 
   Future<void> fetchAllData() async {
     loading.value = true;
@@ -54,8 +63,7 @@ class HomeController extends BaseController {
     final response = await databaseController.getListCategories();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
         (List<CategoryModel> r) {
-      // r.sort((a, b) =>
-      //     (a.productIds?.length ?? 0) < (b.productIds?.length ?? 0) ? 1 : -1);
+      r.sort((a, b) => a.name!.compareTo(b.name!));
       return menus.value = r;
     });
   }
@@ -63,7 +71,10 @@ class HomeController extends BaseController {
   Future<void> _fetchProduct() async {
     final response = await databaseController.getListProducts();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (List<ProductModel> r) => product.value = r);
+        (List<ProductModel> r) {
+      r.sort((a, b) => a.name!.compareTo(b.name!));
+      return products.value = r;
+    });
   }
 
   Future<void> _fetchPromotions() async {
@@ -73,11 +84,33 @@ class HomeController extends BaseController {
   }
 
   String getImageUrlByProductId(int id) {
-    return product.firstWhere((element) => id == element.id).image?.url ?? '';
+    return products.firstWhere((element) => id == element.id).image?.url ?? '';
   }
 
   List<ProductModel> filterProductByIds(List<int> ids) {
-    return product.where((element) => ids.contains(element.id)).toList();
+    return products.where((element) => ids.contains(element.id)).toList();
+  }
+
+  Future<List<ProductModel>> searchFood(String pattern) async {
+    List<ProductModel> tempList = [];
+    if (pattern.length > 0 && lastSearch != pattern) {
+      String _searchData = Common.sanitizing(pattern);
+      for (int index = 0; index < products.length; index++) {
+        bool compareProduct = Common.sanitizing(products[index].name ?? '')
+            .toString()
+            .contains(_searchData);
+        if (compareProduct) tempList.add(products[index]);
+      }
+      lastSearch = pattern;
+    } else {
+      tempList.assignAll(products);
+    }
+    return tempList;
+  }
+
+  void onSuggestionSelected(ProductModel product) {
+    lastSearch = product.name ?? '';
+    // Get.toNamed(AppRouteProvider.searchScreen, arguments: suggestion);
   }
 
   void onPressedLogout() async {
@@ -85,8 +118,6 @@ class HomeController extends BaseController {
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
         (r) => Get.offAllNamed(AppRouteProvider.signinScreen));
   }
-
-
 
   void onPressedVerifyEmail() async {
     final response = await authController.sendEmailVerification();
@@ -102,7 +133,20 @@ class HomeController extends BaseController {
     homeViewType.value = HomeViewType.popularFood;
   }
 
-  void onPressedBackToNormalHome(){
+  void onPressedBackToNormalHome() {
     homeViewType.value = HomeViewType.normal;
+  }
+
+  void onPressedMenuItem(CategoryModel category) {
+    Get.toNamed(AppRouteProvider.menuScreen, arguments: category);
+  }
+
+  void onPressedFoodItem(ProductModel product) {
+    // Get.toNamed(AppRouteProvider.foodDetailScreen, arguments: product);
+  }
+
+  void onPressedClearSearch() {
+    searchController.clear();
+    showClearSearch.value = false;
   }
 }

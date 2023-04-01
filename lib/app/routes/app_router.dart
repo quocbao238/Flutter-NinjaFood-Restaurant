@@ -79,5 +79,10 @@ class AppPages {
       page: () => SuccessNotificationScreen(),
       binding: GetBinding(AppRouteProvider.successNotificationScreen),
     ),
+    GetPage(
+      name: AppRouteProvider.menuScreen,
+      page: () => MenuScreen(),
+      binding: GetBinding(AppRouteProvider.menuScreen),
+    ),
   ];
 }

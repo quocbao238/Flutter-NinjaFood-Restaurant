@@ -17,6 +17,10 @@ class MobileHomeScreen extends GetView<HomeController> {
       appBarWidget: AppBarHomeWidget(),
       body: Obx(
         () {
+          final isLoading = controller.loading.value;
+          if (isLoading) {
+            return const Center(child: AppLoading(isLoading: true));
+          }
           final homeViewType = controller.homeViewType.value;
           return Builder(
             builder: (context) {
