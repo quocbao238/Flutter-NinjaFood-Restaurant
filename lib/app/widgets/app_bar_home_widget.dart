@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
+import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/search_food_bar.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 
 class AppBarHomeWidget extends GetView<TabsController> {
-
   const AppBarHomeWidget({Key? key}) : super(key: key);
 
   @override
@@ -16,9 +16,9 @@ class AppBarHomeWidget extends GetView<TabsController> {
           children: [
             Obx(() {
               final homeController = Get.find<HomeController>();
-              final isViewTypeNormal = homeController.homeViewType.value ==
-                  HomeViewType.normal;
-              if(!isViewTypeNormal){
+              final isViewTypeNormal =
+                  homeController.homeViewType.value == HomeViewType.normal;
+              if (!isViewTypeNormal) {
                 return AppButtonBack(onPressed: () {
                   homeController.onPressedBackToNormalHome();
                 });
@@ -29,28 +29,21 @@ class AppBarHomeWidget extends GetView<TabsController> {
             }),
             const Expanded(
               child: AppPadding.medium(
-                  child: AppText.headlineSmall(
-                      text: 'Find Your\nFavorite Food')),
+                  child:
+                      AppText.headlineSmall(text: 'Find Your\nFavorite Food')),
             ),
             AppButtonNotification(onPressed: () {
               controller.onPressedNotification();
             }),
-
           ],
         ),
         AppPadding(
           padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
           child: SizedBox(
-            height: 50,
+            height: kToolbarHeight,
             child: Row(
               children: [
-                Expanded(
-                  child: AppTextFormField(
-                    prefixIcon: AppIcons.search(),
-                    hintText: 'What do you want to order?',
-                    controller: TextEditingController(),
-                  ),
-                ),
+                Expanded(child: SearchFoodBar()),
                 AppPadding(
                   padding: AppEdgeInsets.only(left: AppGapSize.small),
                   child: AppFilterButton(

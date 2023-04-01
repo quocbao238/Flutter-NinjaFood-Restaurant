@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
+import 'package:ninjafood/app/widgets/app_network_image.dart';
 
 class BoxSpecialDeal extends GetView<HomeController> {
-  const BoxSpecialDeal({
-    super.key,
-  });
+  const BoxSpecialDeal({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +26,12 @@ class BoxSpecialDeal extends GetView<HomeController> {
                     controller.currentIndexPromotion.value = index;
                   }),
               items: promotions
-                  .map((item) => ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: Image.network(item.thumbnail!, fit: BoxFit.fill),
+                  .map((item) => SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: AppNetworkImage(url: item.thumbnail!),
+                        ),
                       ))
                   .toList(),
             ),

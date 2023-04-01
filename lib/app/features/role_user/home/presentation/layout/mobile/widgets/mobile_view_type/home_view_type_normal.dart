@@ -7,15 +7,8 @@ class HomeViewTypeNormal extends StatelessWidget {
   const HomeViewTypeNormal({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          BoxSpecialDeal(),
-          PopularMenu(),
-          PopularFood(),
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => SingleChildScrollView(
+        child: Column(
+      children: [BoxSpecialDeal(), PopularMenu(), PopularFood()],
+    ));
 }

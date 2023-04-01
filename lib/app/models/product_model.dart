@@ -1,4 +1,6 @@
 
+import 'package:ninjafood/app/helper/helper.dart';
+
 class ProductModel {
   String? name;
   int? id;
@@ -22,6 +24,9 @@ class ProductModel {
         this.priceRange,
         this.description,
         this.shortDescription});
+
+  String get getPrice => Common.formatMoney(priceRange?.minimumPrice?.finalPrice?.value ?? 0);
+  String get currency => priceRange?.minimumPrice?.finalPrice?.currency ?? '';
 
   ProductModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -81,7 +86,7 @@ class ProductModel {
 class Image {
   String? label;
   String? url;
-  Null? position;
+  Null position;
   String? sTypename;
 
   Image({this.label, this.url, this.position, this.sTypename});
@@ -104,9 +109,9 @@ class Image {
 }
 
 class SmallImage {
-  Null? disabled;
+  Null disabled;
   String? label;
-  Null? position;
+  Null position;
   String? url;
   String? sTypename;
 
@@ -134,7 +139,7 @@ class SmallImage {
 
 class MediaGallery {
   String? url;
-  Null? label;
+  Null label;
   int? position;
   String? sTypename;
 

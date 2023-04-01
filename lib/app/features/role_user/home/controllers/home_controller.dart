@@ -1,11 +1,9 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/features/role_user/home/infrastructure/models/popular_food_model.dart';
-import 'package:ninjafood/app/features/role_user/home/infrastructure/models/popular_menu_model.dart';
-import 'package:ninjafood/app/features/role_user/tabs/infrastructure/models/menu_models.dart';
 import 'package:ninjafood/app/global_controller/db_controller.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
+import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/category_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
@@ -23,11 +21,13 @@ class HomeController extends BaseController {
       {required this.authController, required this.databaseController});
 
   final menus = <CategoryModel>[].obs;
-  final product = <ProductModel>[].obs;
+  final products = <ProductModel>[].obs;
   final promotions = <PromotionModel>[].obs;
 
   Rx<HomeViewType> homeViewType = HomeViewType.normal.obs;
   final currentIndexPromotion = 0.obs;
+
+  String lastSearch = "";
 
   @override
   void onInit() {
@@ -40,8 +40,6 @@ class HomeController extends BaseController {
     super.onReady();
   }
 
-
-
   Future<void> fetchAllData() async {
     loading.value = true;
     await _fetchProduct();
@@ -53,45 +51,69 @@ class HomeController extends BaseController {
   Future<void> _fetchMenus() async {
     final response = await databaseController.getListCategories();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (List<CategoryModel> r) {
-      // r.sort((a, b) =>
-      //     (a.productIds?.length ?? 0) < (b.productIds?.length ?? 0) ? 1 : -1);
-      return menus.value = r;
-    });
+            (List<CategoryModel> r) {
+          // r.sort((a, b) =>
+          //     (a.productIds?.length ?? 0) < (b.productIds?.length ?? 0) ? 1 : -1);
+          return menus.value = r;
+        });
   }
 
   Future<void> _fetchProduct() async {
     final response = await databaseController.getListProducts();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (List<ProductModel> r) => product.value = r);
+            (List<ProductModel> r) => products.value = r);
   }
 
   Future<void> _fetchPromotions() async {
     final response = await databaseController.getListPromotion();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) => promotions.value = r);
+            (r) => promotions.value = r);
   }
 
   String getImageUrlByProductId(int id) {
-    return product.firstWhere((element) => id == element.id).image?.url ?? '';
+    return products
+        .firstWhere((element) => id == element.id)
+        .image
+        ?.url ?? '';
   }
 
   List<ProductModel> filterProductByIds(List<int> ids) {
-    return product.where((element) => ids.contains(element.id)).toList();
+    return products.where((element) => ids.contains(element.id)).toList();
+  }
+
+  Future<List<ProductModel>> searchFood(String pattern) async {
+    List<ProductModel> tempList = [];
+    if (pattern.length > 0 && lastSearch != pattern) {
+      String _searchData = Common.sanitizing(pattern);
+      for (int index = 0; index < products.length; index++) {
+        bool compareProduct = Common.sanitizing(products[index].name ?? '')
+            .toString()
+            .contains(_searchData);
+        if (compareProduct)
+          tempList.add(products[index]);
+      }
+      lastSearch = pattern;
+    } else {
+      tempList.assignAll(products);
+    }
+    return tempList;
+  }
+
+  void onSuggestionSelected(ProductModel product) {
+    lastSearch = product.name ?? '';
+    // Get.toNamed(AppRouteProvider.searchScreen, arguments: suggestion);
   }
 
   void onPressedLogout() async {
     final response = await authController.signOut();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) => Get.offAllNamed(AppRouteProvider.signinScreen));
+            (r) => Get.offAllNamed(AppRouteProvider.signinScreen));
   }
-
-
 
   void onPressedVerifyEmail() async {
     final response = await authController.sendEmailVerification();
     response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) => Get.snackbar('Success', 'Email verification sent'));
+            (r) => Get.snackbar('Success', 'Email verification sent'));
   }
 
   void onPressedViewMorePopularMenu() {
@@ -102,7 +124,7 @@ class HomeController extends BaseController {
     homeViewType.value = HomeViewType.popularFood;
   }
 
-  void onPressedBackToNormalHome(){
+  void onPressedBackToNormalHome() {
     homeViewType.value = HomeViewType.normal;
   }
 }
