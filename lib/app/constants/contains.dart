@@ -1,10 +1,5 @@
 library contains;
-
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ninjafood/app/services/services.dart';
-
-part 'app_write_constants.dart';
-
+import 'package:ninjafood/app/global_controller/global_controller.dart';
 part 'failure.dart';
 

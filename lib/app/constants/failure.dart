@@ -3,18 +3,16 @@ part of contains;
 class Failure {
   final String message;
   final StackTrace stackTrace;
+
+  const Failure.custom(this.message) : stackTrace = StackTrace.empty;
+
   const Failure(this.message, this.stackTrace);
 }
 
-handleFailure(String _logName,Failure failure, {bool showDialog = false}) {
-  console.showError(_logName, failure.message);
+handleFailure(String _logName, Failure failure, {bool showDialog = false}) {
+  Get.find<ConsoleController>().showError(_logName, failure.message);
   if (showDialog) {
-    Get.defaultDialog(
-      title: 'Error',
-      middleText: failure.message,
-      textConfirm: 'OK',
-      confirmTextColor: Colors.white,
-      onConfirm: () => Get.back(),
-    );
+    final dialogController = Get.find<DialogController>();
+    dialogController.showError(message: failure.message);
   }
 }

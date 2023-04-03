@@ -4,9 +4,9 @@ class AppPages {
   static String initial = AppRouteProvider.splashScreen;
 
   static navigateDefaultPage() async {
-    final authProvider = Get.find<AuthProvider>();
-    if (authProvider.currentAccount.value != null) {
-      initial = AppRouteProvider.homeScreen;
+    final authController = Get.find<AuthController>();
+    if (authController.authUser.value != null) {
+      initial = AppRouteProvider.tabScreen;
       return;
     }
     initial = AppRouteProvider.splashScreen;
@@ -65,9 +65,24 @@ class AppPages {
       binding: GetBinding(AppRouteProvider.signupSuccessScreen),
     ),
     GetPage(
-      name: AppRouteProvider.homeScreen,
-      page: () => HomeScreen(),
-      binding: GetBinding(AppRouteProvider.homeScreen),
+      name: AppRouteProvider.tabScreen,
+      page: () => TabScreen(),
+      binding: GetBinding(AppRouteProvider.tabScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.forgotPasswordScreen,
+      page: () => ForgotPasswordScreen(),
+      binding: GetBinding(AppRouteProvider.forgotPasswordScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.successNotificationScreen,
+      page: () => SuccessNotificationScreen(),
+      binding: GetBinding(AppRouteProvider.successNotificationScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.menuScreen,
+      page: () => MenuScreen(),
+      binding: GetBinding(AppRouteProvider.menuScreen),
     ),
   ];
 }
