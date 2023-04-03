@@ -1,6 +1,7 @@
 library routes;
 
 import 'package:get/get.dart';
+import 'package:ninjafood/app/features/role_user/chat/controllers/chat_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/forgot_password/controller/forgot_password_controller.dart';
 import 'package:ninjafood/app/features/role_user/forgot_password/presentation/layout/forgot_password_screen.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
