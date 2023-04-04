@@ -35,13 +35,13 @@ dependencies:
   auto_animated: ^3.1.0
   flutter_typeahead: ^4.3.7
   cached_network_image: ^3.2.3
-
+  firebase_messaging: ^14.4.0
 
   ninja_theme:
-    git:
-      url: https://github.com/quocbao238/ninjafood_theme.git
-      ref: devMaster
-    # path: ../NinjaFood_Theme
+#    git:
+#      url: https://github.com/quocbao238/ninjafood_theme.git
+#      ref: devMaster
+     path: ../NinjaFood_Theme
 
 
 flutter_icons:

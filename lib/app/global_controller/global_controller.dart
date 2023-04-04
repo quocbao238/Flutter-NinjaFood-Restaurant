@@ -12,7 +12,8 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:ninjafood/app/constants/contains.dart';
-import 'package:ninjafood/app/features/role_user/sign_in/infrastructure/models/user_model.dart';
+import 'package:ninjafood/app/global_controller/firebase_message_controller.dart';
+import 'package:ninjafood/app/models/user_model.dart';
 import 'package:ninjafood/app/widgets/app_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer' as developer;
@@ -44,11 +45,13 @@ Future<void> initGlobalController() async {
   console.show(_logName, 'Start Boot services ...');
   Get.put(DialogController(), permanent: true);
   await Get.put(LocalStorageController())();
-  await Get.put(ThemeController(
-      localStorageController: Get.find<LocalStorageController>()))();
+  await Get.put(ThemeController(localStorageController: Get.find<LocalStorageController>()))();
   await Get.put(DatabaseController(console: console))();
+  await Get.put(FirebaseMessageController())();
   await Get.put(AuthController(
-      console: console, dbController: Get.find<DatabaseController>()))();
+      firebaseMessageController: Get.find<FirebaseMessageController>(),
+      console: console,
+      dbController: Get.find<DatabaseController>()))();
   await Get.put(CloudStorageController())();
   await TranslationController.init(Locale('vi', 'VN'));
   console.show(_logName, 'All services started...');

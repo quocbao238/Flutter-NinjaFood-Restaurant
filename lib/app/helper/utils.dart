@@ -9,3 +9,14 @@ String formatPriceToVND(dynamic price) {
   _result =  formatter.format(price);
   return _result.trim();
 }
+
+String createTimeStamp() {
+  return DateTime.now().millisecondsSinceEpoch.toString();
+}
+
+String convertTimeStamp(String timestamp) {
+  var date = DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp));
+  var formatter = DateFormat('HH:mm dd/MM/yyyy');
+  String formatted = formatter.format(date);
+  return formatted;
+}
