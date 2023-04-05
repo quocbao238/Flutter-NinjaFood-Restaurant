@@ -5,19 +5,22 @@ class AuthController extends GetxService {
   final DatabaseController dbController;
   final FirebaseMessageController firebaseMessageController;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  late Rx<User?> authUser = Rx<User?>(null);
-  late Rx<UserModel?> _currentUser = Rx<UserModel?>(null);
-
-  late UserModel? adminUser;
 
   AuthController({required this.console, required this.dbController, required this.firebaseMessageController});
 
+  late Rx<User?> authUser = Rx<User?>(null);
+  late Rx<UserModel?> _currentUser = Rx<UserModel?>(null);
+  late UserModel? adminUser;
+
   UserModel? get currentUser => _currentUser.value;
 
+  bool get isAdmin => _currentUser.value?.role == ROLE_ADMIN ?? false;
+  late StreamSubscription<UserModel?>? _userStream;
 
+  RxList<ChatModel> chatList = RxList<ChatModel>([]);
 
-  // ignore: cancel_subscriptions
   StreamSubscription? _cloudUserSubscription;
+  StreamSubscription? _messageSubscription;
 
   Future<void> call() async {
     final _authUser = _auth.currentUser;
@@ -29,17 +32,15 @@ class AuthController extends GetxService {
     super.onInit();
   }
 
-  bool isUser() => _currentUser.value?.role == ROLE_USER;
-
-  void _handleCloudUserChanged() async {
-    if (_cloudUserSubscription != null || _auth.currentUser == null) return;
-    console.show(_logName, '_handleCloudUserChanged Run');
-    _cloudUserSubscription = dbController.getUserDataStream(authUser.value!.uid).listen((event) {
-      _currentUser.value = UserModel.fromJson(event.data()!);
-      console.show(_logName, '_handleCloudUserChanged ${_currentUser.value!.toJson()}');
-      FirebaseCrashlytics.instance.setUserIdentifier(_currentUser.value!.uid);
-    });
+  @override
+  void onClose() {
+    _userStream?.cancel();
+    _cloudUserSubscription?.cancel();
+    _messageSubscription?.cancel();
+    super.onClose();
   }
+
+  bool isUser() => _currentUser.value?.role == ROLE_USER;
 
   void _handleAuthChanged() async {
     _auth.authStateChanges().listen((User? user) async {
@@ -52,21 +53,49 @@ class AuthController extends GetxService {
       _handleCloudUserChanged();
 
       // Update FCM Token to Cloud
-
-      if (_currentUser.value == null) return;
-      if (_currentUser.value!.role == ROLE_USER) {
+      _userStream = _currentUser.listen((value) async {
+        if (value == null) return;
         final response = await dbController.getAdminUser();
-        response.fold((l) => console.show(_logName, l.message), (r) => adminUser = r);
-      }
+        response.fold((l) => console.show(_logName, l.message), (r) {
+          adminUser = r;
+          _handleMessage();
+        });
 
-      final fcmToken = await firebaseMessageController.getFCMToken();
-      if (_currentUser.value!.fcmToken != fcmToken) {
-        _currentUser.value!.fcmToken = fcmToken;
-        await dbController.updateUser(_currentUser.value!);
-        console.show(_logName, 'Update FCM Token to Cloud');
-      }
+        final fcmToken = await firebaseMessageController.getFCMToken();
+        if (fcmToken != null) {
+          _currentUser.value!.fcmToken = fcmToken;
+          await dbController.updateUser(_currentUser.value!);
+          console.show(_logName, 'Update FCM Token to Cloud');
+          _userStream?.cancel();
+        }
+      });
+      if (_currentUser.value == null) return;
+
       console.show(_logName, 'User is signed in!');
     });
+  }
+
+  void _handleCloudUserChanged() async {
+    if (_cloudUserSubscription != null || _auth.currentUser == null) return;
+    console.show(_logName, '_handleCloudUserChanged Run');
+    _cloudUserSubscription = dbController.getUserDataStream(authUser.value!.uid).listen((event) {
+      _currentUser.value = UserModel.fromJson(event.data()!);
+      console.show(_logName, '_handleCloudUserChanged ${_currentUser.value!.toJson()}');
+      FirebaseCrashlytics.instance.setUserIdentifier(_currentUser.value!.uid);
+    });
+  }
+
+  void _handleMessage() async {
+    if (!isAdmin) {
+      _messageSubscription = dbController
+          .getMessageStreamDataByUser(userId: currentUser!.uid, storeId: adminUser!.uid)
+          .listen((QuerySnapshot<Map<String, dynamic>> event) {
+        print(event);
+        final List<MessageChat> messageChats = event.docs.map((e) => MessageChat.fromJson(e.data())).toList();
+        final ChatModel chatModel = ChatModel(userTo: adminUser!, userFrom: currentUser!, messageChats: messageChats);
+        chatList.assignAll([chatModel]);
+      });
+    }
   }
 
   Future<Either<Failure, void>> registerWithEmailAndPassword({required String email, required String password}) async {

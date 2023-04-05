@@ -36,6 +36,8 @@ dependencies:
   flutter_typeahead: ^4.3.7
   cached_network_image: ^3.2.3
   firebase_messaging: ^14.4.0
+  uuid: ^3.0.7
+
 
   ninja_theme:
 #    git:

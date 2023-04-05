@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ninjafood/app/helper/utils.dart';
 
 class MessageChat {

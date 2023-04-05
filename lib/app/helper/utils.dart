@@ -1,5 +1,3 @@
-
-
 import 'package:intl/intl.dart';
 
 
@@ -20,3 +18,13 @@ String convertTimeStamp(String timestamp) {
   String formatted = formatter.format(date);
   return formatted;
 }
+
+String convertTimeStampToHour(String timestamp) {
+  var date = DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp));
+  var formatter = DateFormat('HH:mm');
+  String formatted = formatter.format(date);
+  return formatted;
+}
+
+
+

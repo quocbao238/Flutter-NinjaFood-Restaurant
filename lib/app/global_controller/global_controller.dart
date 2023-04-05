@@ -3,6 +3,7 @@ library global_controller;
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -12,7 +13,9 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:ninjafood/app/constants/contains.dart';
+import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/global_controller/firebase_message_controller.dart';
+import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/user_model.dart';
 import 'package:ninjafood/app/widgets/app_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';

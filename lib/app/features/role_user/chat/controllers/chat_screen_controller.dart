@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/features/role_user/chat/infrastructure/models/chat_model.dart';
+import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/global_controller/db_controller.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
@@ -14,10 +14,13 @@ class ChatScreenController extends BaseController {
 
   ChatScreenController({required this.tabsController});
 
-  List<ChatModel> chatList = ChatModel.chatList;
+  RxList<ChatModel> chatList = <ChatModel>[].obs;
 
   @override
   void onInit() {
+    authController.chatList.listen((event) {
+      chatList.assignAll(event);
+    });
     super.onInit();
   }
 
@@ -39,9 +42,9 @@ class ChatScreenController extends BaseController {
 
     final MessageChat messageChat =
         MessageChat.createMessageChat(idUserFrom: currentUserId, idUserTo: adminUserId, content: 'Hello');
-    final response =  await  databaseController.insertMessageChatByUser(messageChat);
+    final response = await databaseController.insertMessageChatByUser(messageChat);
     response.fold((l) => print(l), (r) {
-      Get.toNamed(AppRouteProvider.chatDetailsScreen);
+      // Get.toNamed(AppRouteProvider.chatDetailsScreen);
     });
   }
 }
