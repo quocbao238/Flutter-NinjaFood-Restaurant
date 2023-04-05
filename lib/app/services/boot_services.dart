@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:ninjafood/app/services/services.dart';
 
 class BootService {
@@ -10,7 +11,8 @@ class BootService {
 Future<void> runBootServices(List<BootService> boots) async {
   boots.sort((a, b) => a.priority.compareTo(b.priority));
   await Future.forEach(boots, (BootService boot) async {
-    await boot.serviceImpl();
+    final service = boot.serviceImpl;
+    await Get.put(service)();
   });
 }
 
