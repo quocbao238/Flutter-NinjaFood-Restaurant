@@ -28,7 +28,7 @@ class TabsController extends BaseController {
       .map((e) => e.screen!)
       .toList();
 
-  Rx<MenuItem> currentMenuItem = MenuItem.listMenu.first.obs;
+  Rx<MenuItem> currentMenuItem = MenuItem.listMenu[3].obs;
 
   @override
   void onInit() {

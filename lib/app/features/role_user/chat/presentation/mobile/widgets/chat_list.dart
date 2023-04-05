@@ -10,7 +10,6 @@ class ChatList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     if (listChat.isEmpty) return Container();
     return AnimatedList(
       shrinkWrap: true,

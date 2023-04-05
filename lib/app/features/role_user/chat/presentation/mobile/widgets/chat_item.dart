@@ -17,7 +17,7 @@ class ChatItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final messageChat = chatItem.messageChats.last;
-    final UserModel userTo = chatItem.userTo;
+    final receiverUser = chatItem.receiverUser;
     return AnimationItem(
       animation: animation,
       child: AppPadding(
@@ -38,7 +38,7 @@ class ChatItem extends StatelessWidget {
                         child: SizedBox(
                           width: kToolbarHeight,
                           height: kToolbarHeight,
-                          child: AppNetworkImage(url: userTo.photoUrl ?? ''),
+                          child: AppNetworkImage(url: receiverUser.photoUrl ?? ''),
                         ),
                       ),
                       Expanded(
@@ -48,12 +48,13 @@ class ChatItem extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             AppText.bodyLarge(
-                              text: userTo.getName(),
+                              text: receiverUser.getName(),
                               fontWeight: FontWeight.w400,
-                              maxLines: 1,
+                              textAlign: TextAlign.start,
+                              maxLines: 1
                             ),
                             AppText.bodyMedium(
-                              text: messageChat.content,
+                              text: messageChat.message,
                               fontWeight: FontWeight.w400,
                               maxLines: 2,
                               color: Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(0.5),

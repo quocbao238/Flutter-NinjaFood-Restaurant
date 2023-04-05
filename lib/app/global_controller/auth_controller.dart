@@ -87,15 +87,36 @@ class AuthController extends GetxService {
 
   void _handleMessage() async {
     if (!isAdmin) {
-      _messageSubscription = dbController
-          .getMessageStreamDataByUser(userId: currentUser!.uid, storeId: adminUser!.uid)
-          .listen((QuerySnapshot<Map<String, dynamic>> event) {
-        print(event);
-        final List<MessageChat> messageChats = event.docs.map((e) => MessageChat.fromJson(e.data())).toList();
-        final ChatModel chatModel = ChatModel(userTo: adminUser!, userFrom: currentUser!, messageChats: messageChats);
-        chatList.assignAll([chatModel]);
-      });
+      _messageSubscription =
+          dbController.listenMessageUser(currentUser!.uid).listen((QuerySnapshot<Map<String, dynamic>> event) {
+            final messages = event.docs.map((e) => MessageChat.fromJson(e.data())).toList();
+            final chatModel = ChatModel(
+              senderUser: currentUser!,
+              receiverUser: adminUser!,
+              messageChats: messages,
+            );
+            chatList.assignAll([chatModel]);
+          });
+      return;
     }
+    _messageSubscription =
+        dbController.listenMessageByAdmin().listen((QuerySnapshot<Map<String, dynamic>> event) {
+          final dataJson = event.docs;
+          List<ChatModel> listChatModel = dataJson.map((e) {
+            final json = e.data();
+            final message = MessageChat.fromJson(json['messageChat']);
+            UserModel receiverUser =  UserModel.fromJson(json['userGroupChat']);
+
+            final chatModel = ChatModel(
+              senderUser: currentUser!,
+              receiverUser: receiverUser,
+              messageChats: [message],
+            );
+            return chatModel;
+          }).toList();
+          chatList.assignAll(listChatModel);
+          print(event);
+        });
   }
 
   Future<Either<Failure, void>> registerWithEmailAndPassword({required String email, required String password}) async {
@@ -232,7 +253,7 @@ class AuthController extends GetxService {
       if (_authUser == null) return left(Failure('Auth user is null', StackTrace.current));
 
       final userModel =
-          UserModel.createUserByAuthUser(authUser: _authUser, createType: CREATE_TYPE_LOGIN_TYPE_FACEBOOK);
+      UserModel.createUserByAuthUser(authUser: _authUser, createType: CREATE_TYPE_LOGIN_TYPE_FACEBOOK);
       await dbController.insertUser(userModel);
       return right(true);
     } on FirebaseAuthException catch (e) {

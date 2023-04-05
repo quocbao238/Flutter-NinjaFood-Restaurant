@@ -12,7 +12,7 @@ class FirebaseMessageController extends GetxService {
   // Init methods
   Future<void> call() async {
     _firebaseMessaging = FirebaseMessaging.instance;
-    _onRequestPermission();
+    await _onRequestPermission();
     // Listen for when the app is in the foreground
     FirebaseMessaging.onMessage.listen(_handleMessage);
     // Listen for when the app has been closed completely and is opened from the notification
@@ -40,7 +40,7 @@ class FirebaseMessageController extends GetxService {
   // Private methods
   // When the app is in the background or terminated, you can still receive data messages.
   Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    await Firebase.initializeApp();
+    // await Firebase.initializeApp();
     print("Handling a background message: ${message.messageId}");
   }
 
@@ -53,8 +53,8 @@ class FirebaseMessageController extends GetxService {
   }
 
 
-  void _onRequestPermission() {
-    _firebaseMessaging.requestPermission(
+  Future<void> _onRequestPermission() async {
+   await _firebaseMessaging.requestPermission(
         alert: true,
         announcement: false,
         badge: true,

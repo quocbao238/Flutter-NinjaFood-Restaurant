@@ -3,22 +3,23 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/chat_details/controller/chat_details_controller.dart';
 import 'package:ninjafood/app/features/role_user/chat_details/presentation/mobile/widgets/message_item_widget.dart';
+import 'package:ninjafood/app/widgets/animation_list.dart';
 
 class ChatDetailsMobileView extends GetView<ChatDetailsController> {
   const ChatDetailsMobileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final userTo = controller.chatModel.value.userTo;
-    final currentUser = controller.authController.currentUser!;
+    final receiverUser = controller.chatModel.value.receiverUser;
+    final currentUser = controller.authController.currentUser;
+    final adminUser = controller.authController.adminUser;
     return AppScaffoldBackgroundImage.pattern(
       appBarWidget: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AppButtonBack(onPressed: controller.onPressedBack),
-          Expanded(child: AppPadding.medium(child: AppText.headlineSmall(maxLines: 1, text: userTo.getName()))),
+          Expanded(child: AppPadding.medium(child: AppText.headlineSmall(maxLines: 1, text: receiverUser.getName()))),
           SizedBox(width: 45, height: 45)
         ],
       ),
@@ -35,25 +36,37 @@ class ChatDetailsMobileView extends GetView<ChatDetailsController> {
                   if (messageChats.isEmpty) {
                     return AppText.bodyMedium(text: 'No message');
                   }
-                  return ListView.builder(
+                  return AnimationList(
+                      controller: controller.scrollController,
                       shrinkWrap: true,
                       physics: AlwaysScrollableScrollPhysics(),
                       itemCount: messageChats.length,
-                      itemBuilder: (context, index) {
+                      itemBuilder: (context, index, animation) {
                         final messageItem = messageChats[index];
-                        final isCurrentUser = messageItem.idUserFrom == currentUser.uid;
-                        return MessageItemWidget(
-                          messageChat: messageItem,
-                          isCurrentUser: isCurrentUser,
+                        final isCurrentUser = messageItem.senderId == currentUser!.uid;
+                        final avatarUrl = isCurrentUser ? null : adminUser!.photoUrl;
+                        return AnimationItem(
+                          animation: animation,
+                          child: MessageItemWidget(
+                            avatarUrl: avatarUrl,
+                            messageChat: messageItem,
+                            isCurrentUser: isCurrentUser,
+                          ),
                         );
                       });
                 }),
               ),
             ),
             TextField(
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .bodyMedium,
+              controller: controller.textEditingController,
               decoration: InputDecoration(
-                suffixIcon: AppPadding.medium(child: AppIcons.sendMessage()),
+
+                suffixIcon:
+                InkWell(onTap: () => controller.onSendMessage(), child: AppPadding.medium(child: AppIcons.sendMessage())),
               ),
             ),
           ],

@@ -1,42 +1,97 @@
 import 'package:ninjafood/app/helper/utils.dart';
 
+enum MessageChatType {
+  text(0),
+  image(1),
+  video(2);
+
+  final int type;
+
+  const MessageChatType(this.type);
+
+  static int setMessageType(MessageChatType type) {
+    switch (type) {
+      case MessageChatType.text:
+        return 0;
+      case MessageChatType.image:
+        return 1;
+      case MessageChatType.video:
+        return 2;
+      default:
+        return 0;
+    }
+  }
+
+  static MessageChatType getTypeMessage(int type) {
+    switch (type) {
+      case 0:
+        return MessageChatType.text;
+      case 1:
+        return MessageChatType.image;
+      case 2:
+        return MessageChatType.video;
+      default:
+        return MessageChatType.text;
+    }
+  }
+}
+
 class MessageChat {
-  String idUserFrom;
-  String idUSerTo;
+  String uid;
+  String senderId;
+  String receiverId;
   String timestamp;
-  String content;
-  int type;
+  String message;
+  MessageChatType messageChatType;
 
   MessageChat({
-    required this.idUserFrom,
-    required this.idUSerTo,
+    required this.uid,
+    required this.senderId,
+    required this.receiverId,
     required this.timestamp,
-    required this.content,
-    required this.type,
+    required this.message,
+    required this.messageChatType,
   });
 
   Map<String, dynamic> toJson() {
     return {
-      "idUserFrom": this.idUserFrom,
-      "idTo": this.idUSerTo,
+      "senderId": this.senderId,
+      "uid": this.uid,
+      "receiverId": this.receiverId,
       "timestamp": this.timestamp,
-      "content": this.content,
-      "type": this.type,
+      "message": this.message,
+      "messageChatType": MessageChatType.setMessageType(this.messageChatType),
     };
   }
 
   factory MessageChat.fromJson(Map<dynamic, dynamic> json) {
-    String idUserFrom = json["idUserFrom"];
-    String idUSerTo = json["idTo"];
+    String uid = json["uid"];
+    String senderId = json["senderId"];
+    String receiverId = json["receiverId"];
     String timestamp = json["timestamp"];
-    String content = json["content"];
-    int type = json["type"];
-    return MessageChat(idUserFrom: idUserFrom, idUSerTo: idUSerTo, timestamp: timestamp, content: content, type: type);
+    String message = json["message"];
+    MessageChatType messageChatType = MessageChatType.getTypeMessage(json["messageChatType"]);
+    return MessageChat(
+        senderId: senderId,
+        uid: uid,
+        receiverId: receiverId,
+        timestamp: timestamp,
+        message: message,
+        messageChatType: messageChatType);
   }
 
   static MessageChat createMessageChat(
-      {required String idUserFrom, required String idUserTo, required String content}) {
+      {required String senderId,
+      required String receiverId,
+      required String uid,
+      required String message,
+      required MessageChatType messageChatType}) {
     return MessageChat(
-        idUserFrom: idUserFrom, idUSerTo: idUserTo, timestamp: createTimeStamp(), content: content, type: 0);
+        senderId: senderId,
+        receiverId: receiverId,
+        uid: uid,
+        timestamp: createTimeStamp(),
+        message: message,
+        messageChatType: messageChatType);
   }
 }

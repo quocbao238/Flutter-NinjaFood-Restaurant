@@ -40,9 +40,14 @@ class ChatScreenController extends BaseController {
       throw Exception('currentUserId or adminUserId is null');
     }
 
-    final MessageChat messageChat =
-        MessageChat.createMessageChat(idUserFrom: currentUserId, idUserTo: adminUserId, content: 'Hello');
-    final response = await databaseController.insertMessageChatByUser(messageChat);
+    final MessageChat messageChat = MessageChat.createMessageChat(
+        uid: currentUserId,
+        senderId: currentUserId,
+        receiverId: adminUserId,
+        message: 'Hello',
+        messageChatType: MessageChatType.text);
+    final response = await databaseController.insertMessageChat(
+      messageChat: messageChat, currentUserModel: authController.currentUser!,);
     response.fold((l) => print(l), (r) {
       // Get.toNamed(AppRouteProvider.chatDetailsScreen);
     });

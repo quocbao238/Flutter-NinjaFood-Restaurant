@@ -17,7 +17,8 @@ class DatabaseKeys {
   static String product = '/product/';
   static String category = '/category/';
   static String promotion = '/promotion/';
-  static String pathMessageCollection = 'messages';
+  static String listMessage = '/messages/';
+  static String messageChat = '/message_chat/';
 }
 
 class DatabaseController extends GetxService {
@@ -114,29 +115,34 @@ class DatabaseController extends GetxService {
   }
 
   // Firebase Chat Message
-  Future<Either<Failure, void>> insertMessageChatByUser(MessageChat messageChat) async {
+  Future<Either<Failure, void>> insertMessageChat(
+      {required MessageChat messageChat, required final UserModel currentUserModel}) async {
+
+    final createUid = createTimeStamp();
+    final userId = currentUserModel.uid;
     try {
-      final idKey = createTimeStamp();
-      await _db
-          .collection(DatabaseKeys.pathMessageCollection)
-          .doc(messageChat.idUSerTo)
-          .collection(messageChat.idUserFrom)
-          .doc(idKey)
-          .set(messageChat.toJson());
+      final Map<String, dynamic> _chatModel = {
+        'messageChat': messageChat.toJson(),
+        'userGroupChat': currentUserModel.toJson(),
+      };
+      // Add to chatList
+      await _db.doc('${DatabaseKeys.listMessage}$userId').set(_chatModel);
+      // Add to chat
+      await _db.doc('${DatabaseKeys.messageChat}$createUid').set(messageChat.toJson());
+
       return right(null);
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> getMessageStreamDataByUser(
-      {required String storeId, required String userId}) {
-    final docRef = _db.collection(DatabaseKeys.pathMessageCollection).doc(storeId).collection(userId);
-    return docRef.snapshots();
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageUser(String uid) {
+    return _db.collection(DatabaseKeys.messageChat).where('uid', isEqualTo: uid).snapshots();
   }
 
-// Stream<QuerySnapshot<Map<String, dynamic>>> getMessageStreamData(String storeId) {
-//   final docRef = _db.collection(DatabaseKeys.pathMessageCollection).doc(storeId).collection(storeId);
-//   return docRef.snapshots();
-// }
+
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageByAdmin() {
+    return _db.collection(DatabaseKeys.listMessage).snapshots();
+  }
 }

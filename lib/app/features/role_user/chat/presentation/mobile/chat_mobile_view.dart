@@ -11,7 +11,10 @@ class MobileChatScreen extends GetView<ChatScreenController> {
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage.pattern(
         floatActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Theme
+              .of(context)
+              .colorScheme
+              .primary,
           onPressed: () => controller.handleOnTapChat(),
           child: Icon(Icons.message, color: Colors.white),
         ),
@@ -25,10 +28,13 @@ class MobileChatScreen extends GetView<ChatScreenController> {
                   padding: AppEdgeInsets.only(bottom: AppGapSize.small),
                   child: AppText.headlineSmall(text: 'Chat', fontWeight: FontWeight.bold)),
 
-              ChatList(
-                listChat: controller.chatList,
-                onTap: controller.onTapChat,
-              ),
+              Obx(() {
+                final chatList = controller.chatList.value;
+                return ChatList(
+                  listChat: chatList,
+                  onTap: controller.onTapChat,
+                );
+              }),
 
               // ChatDetails()
             ],
