@@ -29,7 +29,7 @@ class MobileChatScreen extends GetView<ChatScreenController> {
                   child: AppText.headlineSmall(text: 'Chat', fontWeight: FontWeight.bold)),
 
               Obx(() {
-                final chatList = controller.chatList.value;
+                final chatList = controller.chatList;
                 return ChatList(
                   listChat: chatList,
                   onTap: controller.onTapChat,
