@@ -32,7 +32,7 @@ class ChatDetailsMobileView extends GetView<ChatDetailsController> {
               child: AppPadding(
                 padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
                 child: Obx(() {
-                  final messageChats = controller.chatModel.value.messageChats ?? [];
+                  final messageChats = controller.chatModel.value.messageChats;
                   if (messageChats.isEmpty) {
                     return AppText.bodyMedium(text: 'No message');
                   }
