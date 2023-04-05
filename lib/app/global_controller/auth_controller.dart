@@ -14,7 +14,7 @@ class AuthController extends GetxService {
 
   UserModel? get currentUser => _currentUser.value;
 
-  bool get isAdmin => _currentUser.value?.role == ROLE_ADMIN ?? false;
+  bool get isAdmin => _currentUser.value?.role == ROLE_ADMIN;
   late StreamSubscription<UserModel?>? _userStream;
 
   RxList<ChatModel> chatList = RxList<ChatModel>([]);
