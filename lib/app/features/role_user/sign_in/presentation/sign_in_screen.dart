@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-
-import 'mobile/sign_in_mobile_view.dart';
+import 'package:ninjafood/app/features/role_user/sign_in/presentation/layout/mobile/sign_in_mobile_view.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
