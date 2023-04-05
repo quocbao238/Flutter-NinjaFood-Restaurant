@@ -1,24 +1,11 @@
-part of 'services.dart';
-
-abstract class AuthServiceImpl {
-  Future<Either<Failure, void>> registerWithFacebook();
-
-  Future<Either<Failure, void>> registerWithGoogle();
-
-  Future<Either<Failure, void>> registerWithEmail({required String email, required String password});
-
-  Future<Either<Failure, void>> updatePassword({required String newPassword});
-
-  Future<Either<Failure, void>> sendEmailVerification();
-
-  Future<Either<Failure, void>> sendEmailResetPassword({required String email});
-
-  Future<Either<Failure, void>> signOut();
-
-  Future<Either<Failure, void>> loginWithEmail({required String email, required String password});
-
-  Stream<User?> get userStream;
-}
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:ninjafood/app/constants/contains.dart';
+import 'package:ninjafood/app/services/auth_service/auth_service_imp.dart';
+import 'package:ninjafood/app/services/services.dart';
 
 class AuthService extends GetxService implements ServiceImpl, AuthServiceImpl {
   late final FirebaseAuth _firebaseAuth;
@@ -105,21 +92,45 @@ class AuthService extends GetxService implements ServiceImpl, AuthServiceImpl {
   }
 
   @override
-  Future<Either<Failure, void>> sendEmailVerification() {
-    // TODO: implement sendEmailVerification
-    throw UnimplementedError();
+  Future<Either<Failure, void>> sendEmailVerification({User? user}) async {
+    if (user == null) return left(Failure('User is null', StackTrace.current));
+
+    try {
+      await user.sendEmailVerification();
+      return right(null);
+    } on FirebaseAuthException catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
   }
 
   @override
-  Future<Either<Failure, void>> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<Either<Failure, void>> signOut() async {
+    try {
+      await _firebaseAuth.signOut();
+      final AccessToken? accessToken = await FacebookAuth.instance.accessToken;
+      if (accessToken != null) await FacebookAuth.instance.logOut();
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      if (await googleSignIn.isSignedIn()) await googleSignIn.signOut();
+      return right(null);
+    } on FirebaseAuthException catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
   }
 
   @override
-  Future<Either<Failure, void>> updatePassword({required String newPassword}) {
-    // TODO: implement updatePassword
-    throw UnimplementedError();
+  Future<Either<Failure, void>> updatePassword({required String newPassword, required User user}) async {
+    try {
+      await user.updatePassword(newPassword);
+      return right(null);
+    } on FirebaseAuthException catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
   }
 
   @override
