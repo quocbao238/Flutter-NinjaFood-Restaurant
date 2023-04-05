@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/helper/utils.dart';
-import 'package:ninjafood/app/models/user_model.dart';
 import 'package:ninjafood/app/widgets/animation_list.dart';
 import 'package:ninjafood/app/widgets/app_network_image.dart';
 
