@@ -93,9 +93,15 @@ class AuthService extends GetxService implements ServiceImpl, AuthServiceImpl {
   }
 
   @override
-  Future<Either<Failure, void>> sendEmailResetPassword({required String email}) {
-    // TODO: implement sendEmailResetPassword
-    throw UnimplementedError();
+  Future<Either<Failure, void>> sendEmailResetPassword({required String email}) async {
+    try {
+      final _result = await _firebaseAuth.sendPasswordResetEmail(email: email);
+      return right(_result);
+    } on FirebaseAuthException catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
   }
 
   @override
