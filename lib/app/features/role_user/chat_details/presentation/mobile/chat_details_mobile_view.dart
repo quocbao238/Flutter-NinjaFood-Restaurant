@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/chat_details/controller/chat_details_controller.dart';
-import 'package:ninjafood/app/features/role_user/chat_details/presentation/mobile/widgets/message_item_widget.dart';
-import 'package:ninjafood/app/widgets/animation_list.dart';
+import 'package:ninjafood/app/features/role_user/chat_details/presentation/mobile/widgets/receive_message.dart';
+import 'package:ninjafood/app/features/role_user/chat_details/presentation/mobile/widgets/send_message.dart';
 
 class ChatDetailsMobileView extends GetView<ChatDetailsController> {
   const ChatDetailsMobileView({super.key});
