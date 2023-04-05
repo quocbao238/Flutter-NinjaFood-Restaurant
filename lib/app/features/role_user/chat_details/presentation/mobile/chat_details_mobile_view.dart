@@ -10,105 +10,63 @@ class ChatDetailsMobileView extends GetView<ChatDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final receiverUser = controller.chatModel.value.receiverUser;
+    final currentUser = controller.authController.currentUser;
+    final adminUser = controller.authController.adminUser;
     return AppScaffoldBackgroundImage.pattern(
-      onPressBackButton: controller.onPressedback,
+      appBarWidget: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AppButtonBack(onPressed: controller.onPressedBack),
+          Expanded(child: AppPadding.medium(child: AppText.headlineSmall(maxLines: 1, text: receiverUser.getName()))),
+          SizedBox(width: 45, height: 45)
+        ],
+      ),
       body: AppPadding(
         padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(22),
-                      child: ColoredBox(
-                        color: isDarkMode
-                            ? ThemeColors.backgroundTextFormDark()
-                            : Theme.of(context).colorScheme.onPrimary,
-                        child: AppPadding.medium(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              AppPadding(
-                                padding: AppEdgeInsets.only(right: AppGapSize.medium),
-                                child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.asset(controller.chatModel.image)),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    AppText.bodyLarge(
-                                      text: controller.chatModel.name,
-                                      fontWeight: FontWeight.w400,
-                                      maxLines: 1,
-                                    ),
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          height: 6,
-                                          width: 6,
-                                          child: DecoratedBox(
-                                              decoration: BoxDecoration(
-                                                  gradient:
-                                                      ThemeColors.gradientButtonColor,
-                                                  shape: BoxShape.circle)),
-                                        ),
-                                        AppPadding(
-                                          padding: AppEdgeInsets.only(
-                                              left: AppGapSize.small),
-                                          child: AppText.bodyMedium(
-                                            text: 'Online',
-                                            fontWeight: FontWeight.w400,
-                                            maxLines: 2,
-                                            color: Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium!
-                                                .color!
-                                                .withOpacity(0.5),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+              child: AppPadding(
+                padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
+                child: Obx(() {
+                  final messageChats = controller.chatModel.value.messageChats ?? [];
+                  if (messageChats.isEmpty) {
+                    return AppText.bodyMedium(text: 'No message');
+                  }
+                  return AnimationList(
+                      controller: controller.scrollController,
+                      shrinkWrap: true,
+                      physics: AlwaysScrollableScrollPhysics(),
+                      itemCount: messageChats.length,
+                      itemBuilder: (context, index, animation) {
+                        final messageItem = messageChats[index];
+                        final isCurrentUser = messageItem.senderId == currentUser!.uid;
+                        final avatarUrl = isCurrentUser ? null : adminUser!.photoUrl;
+                        return AnimationItem(
+                          animation: animation,
+                          child: MessageItemWidget(
+                            avatarUrl: avatarUrl,
+                            messageChat: messageItem,
+                            isCurrentUser: isCurrentUser,
                           ),
-                        ),
-                      ),
-                    ),
-                    AppPadding(
-                      padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
-                      child: ListView(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          ReceiveMessage(),
-                          SendMessageBox(),
-                          ReceiveMessage(),
-                          SendMessageBox(),
-                          ReceiveMessage(),
-                          SendMessageBox(),
-                          ReceiveMessage(),
-                          SendMessageBox(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                        );
+                      });
+                }),
               ),
             ),
             TextField(
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .bodyMedium,
+              controller: controller.textEditingController,
               decoration: InputDecoration(
-                suffixIcon: AppPadding.medium(child: AppIcons.sendMessage()),
+
+                suffixIcon:
+                InkWell(onTap: () => controller.onSendMessage(), child: AppPadding.medium(child: AppIcons.sendMessage())),
               ),
             ),
           ],

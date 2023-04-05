@@ -10,8 +10,15 @@ class MobileChatScreen extends GetView<ChatScreenController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage.pattern(
-        appBarWidget: AppButtonDrawer(
-            onPressed: () => controller.tabsController.toggleDrawer()),
+        floatActionButton: FloatingActionButton(
+          backgroundColor: Theme
+              .of(context)
+              .colorScheme
+              .primary,
+          onPressed: () => controller.handleOnTapChat(),
+          child: Icon(Icons.message, color: Colors.white),
+        ),
+        appBarWidget: AppButtonDrawer(onPressed: () => controller.tabsController.toggleDrawer()),
         body: AppPadding(
           padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
           child: Column(
@@ -19,12 +26,16 @@ class MobileChatScreen extends GetView<ChatScreenController> {
             children: [
               AppPadding(
                   padding: AppEdgeInsets.only(bottom: AppGapSize.small),
-                  child: AppText.headlineSmall(
-                      text: 'Chat', fontWeight: FontWeight.bold)),
-              ChatList(
-                chatList: controller.chatList,
-                onTap: (chatModel) => controller.onTapChat(chatModel),
-              ),
+                  child: AppText.headlineSmall(text: 'Chat', fontWeight: FontWeight.bold)),
+
+              Obx(() {
+                final chatList = controller.chatList.value;
+                return ChatList(
+                  listChat: chatList,
+                  onTap: controller.onTapChat,
+                );
+              }),
+
               // ChatDetails()
             ],
           ),

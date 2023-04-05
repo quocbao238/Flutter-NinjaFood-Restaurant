@@ -17,34 +17,32 @@ class UserModel {
   String? address;
   String? role;
   String? createType;
+  String? fcmToken;
 
-  UserModel({
-    required this.uid,
-    this.firstName,
-    this.lastName,
-    this.phoneNumber,
-    this.email,
-    this.photoUrl,
-    this.address,
-    this.role,
-    this.createType,
-  });
+  UserModel(
+      {required this.uid,
+      this.firstName,
+      this.lastName,
+      this.phoneNumber,
+      this.email,
+      this.photoUrl,
+      this.address,
+      this.role,
+      this.createType,
+      this.fcmToken});
 
-  static UserModel createUserByAuthUser(
-      {required User authUser, required createType}) {
+  static UserModel createUserByAuthUser({required User authUser, required createType}) {
     return UserModel(
-      uid: authUser.uid,
-      email: authUser.email,
-      photoUrl: authUser.photoURL,
-      phoneNumber: authUser.phoneNumber,
-      firstName: authUser.displayName,
-      role: ROLE_USER,
-      createType: createType,
-    );
+        uid: authUser.uid,
+        email: authUser.email,
+        photoUrl: authUser.photoURL,
+        phoneNumber: authUser.phoneNumber,
+        firstName: authUser.displayName,
+        role: ROLE_USER,
+        createType: createType);
   }
 
-  static UserModel createAdminByAuthUser(
-      {required User authUser, required createType}) {
+  static UserModel createAdminByAuthUser({required User authUser, required createType}) {
     return UserModel(
       uid: authUser.uid,
       email: authUser.email,
@@ -60,6 +58,8 @@ class UserModel {
 
   bool isAdmin() => role == ROLE_ADMIN;
 
+  String getName() => (firstName ?? '') + ' ' + (lastName ?? '');
+
   UserModel.fromJson(Map<String, dynamic> data)
       : uid = data['uid'] ?? '',
         firstName = data['firstName'] ?? '',
@@ -69,6 +69,7 @@ class UserModel {
         photoUrl = data['photoUrl'] ?? '',
         address = data['address'] ?? '',
         role = data['role'] ?? '',
+        fcmToken = data['fcmToken'] ?? '',
         createType = data['createType'] ?? '';
 
   Map<String, dynamic> toJson() {
@@ -82,6 +83,7 @@ class UserModel {
       'address': address,
       'role': role,
       'createType': createType,
+      'fcmToken': fcmToken,
     };
   }
 
@@ -104,6 +106,7 @@ class UserModel {
       address: address ?? this.address,
       role: this.role,
       createType: this.createType,
+      fcmToken: this.fcmToken,
     );
   }
 }
