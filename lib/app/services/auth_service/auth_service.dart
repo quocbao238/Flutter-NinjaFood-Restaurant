@@ -4,10 +4,12 @@ import 'package:fpdart/fpdart.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ninjafood/app/constants/contains.dart';
-import 'package:ninjafood/app/services/auth_service/auth_service_imp.dart';
+import 'package:ninjafood/app/services/auth_service/auth_service_impl.dart';
 import 'package:ninjafood/app/services/services.dart';
 
+
 class AuthService extends GetxService implements ServiceImpl, AuthServiceImpl {
+
   late final FirebaseAuth _firebaseAuth;
 
   @override
