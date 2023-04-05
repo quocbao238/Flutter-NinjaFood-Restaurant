@@ -105,6 +105,12 @@ class GetBinding extends Bindings {
           return ChatDetailsController(tabsController: tabsController, authController: authController);
         });
         break;
+      case AppRouteProvider.foodDetailScreen:
+        Get.lazyPut(() {
+          final tabsController = Get.find<TabsController>();
+          return FoodDetailController(tabsController: tabsController);
+        });
+        break;
     }
   }
 }

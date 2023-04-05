@@ -89,5 +89,10 @@ class AppPages {
       page: () => ChatDetailsScreen(),
       binding: GetBinding(AppRouteProvider.chatDetailsScreen),
     ),
+    GetPage(
+      name: AppRouteProvider.foodDetailScreen,
+      page: () => FoodDetailScreen(),
+      binding: GetBinding(AppRouteProvider.foodDetailScreen),
+    ),
   ];
 }

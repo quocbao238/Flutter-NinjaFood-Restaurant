@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/features/role_user/food_detail/presentation/food_detail_screen.dart';
 import 'package:ninjafood/app/widgets/animation_list.dart';
 import 'package:ninjafood/app/widgets/app_network_image.dart';
 
@@ -24,7 +26,7 @@ class FoodItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return GestureDetector(
-      onTap: () => onTap?.call(),
+      onTap: () => Get.to(FoodDetailScreen()),
       child: AnimationItem(
         animation: animation,
         child: AppPadding(

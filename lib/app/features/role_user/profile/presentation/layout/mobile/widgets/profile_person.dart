@@ -17,7 +17,7 @@ class ProfilePerson extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: AppSizeScale(
-        ratioHeight: 1,
+        ratioHeight: MediaQuery.of(context).size.height,
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
         child: AppPadding.medium(
           child: Column(
