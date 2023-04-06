@@ -80,6 +80,7 @@ class ChatDetailsController extends BaseController {
 
   _animateToBottom() {
     if (scrollController.hasClients) {
+      if(scrollController.position.maxScrollExtent == scrollController.position.pixels) return;
       print('ChatDetailsController scroll');
       scrollController.animateTo(
         scrollController.position.maxScrollExtent,
