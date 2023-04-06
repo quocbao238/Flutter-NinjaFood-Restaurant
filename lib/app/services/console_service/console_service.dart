@@ -1,13 +1,19 @@
-part of global_controller;
+import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
+import 'package:ninjafood/app/services/boot_services.dart';
+import 'dart:developer' as developer;
 
-enum LogLevel { DEBUG, WARNING, ERROR }
+import 'console_service_enum.dart';
 
-class ConsoleController extends GetxService {
-  static ConsoleController get to => Get.find();
+class ConsoleService extends GetxService implements BootableService{
+
+  static ConsoleService get instance => Get.find<ConsoleService>();
 
   bool flutterLogs = kDebugMode;
 
+  @override
   Future<void> call() async {
+    Get.put(this, permanent: true);
     show('Normal Log', 'This is normal log');
     showWarning('Warning Log', 'This is warning log');
     showError('Error Log', 'This is error log');
@@ -32,4 +38,7 @@ class ConsoleController extends GetxService {
   void _showFlutterLogs(String logName, String message) {
     if (flutterLogs) print('[$logName] $message');
   }
+
+  @override
+  int priority = 0;
 }

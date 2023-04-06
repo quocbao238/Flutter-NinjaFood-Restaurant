@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/global_controller/global_controller.dart';
+import 'package:ninjafood/app/globalController/userController.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/services/database_service/database_service.dart';
 
 class PaymentController extends BaseController {
-  final AuthController authController;
-
-  PaymentController({required this.authController});
+  final _userController = UserController.instance;
+  final _databaseService = DatabaseService.instance;
 
   @override
   void onInit() {
@@ -29,7 +29,7 @@ class PaymentController extends BaseController {
   void onPressedPayoneer() {}
 
   void onPressedNext() {
-    final currentUser = authController.currentUser;
+    final currentUser = _userController.getCurrentUser;
     if (currentUser?.photoUrl?.isNotEmpty ?? false) {
        Get.toNamed(AppRouteProvider.setLocationScreen);
        return;

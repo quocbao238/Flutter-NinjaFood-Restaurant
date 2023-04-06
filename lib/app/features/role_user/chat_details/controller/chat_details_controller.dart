@@ -1,55 +1,48 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/globalController/message_controller.dart';
+import 'package:ninjafood/app/globalController/userController.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
-import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
-import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
+import 'package:ninjafood/app/models/user_model.dart';
+import 'package:ninjafood/app/services/database_service/database_service.dart';
 
 class ChatDetailsController extends BaseController {
-  final TabsController tabsController;
-  final AuthController authController;
+  final DatabaseService databaseService = DatabaseService.instance;
+  final MessageController messageController = MessageController.instance;
+  final UserController userController = UserController.instance;
+  late final GroupChatModel groupChatModel;
 
-  ChatDetailsController({required this.tabsController, required this.authController});
+  late final UserModel receiverUser;
+  late final UserModel senderUser;
 
-  Rx<ChatModel> chatModel = Rx<ChatModel>(Get.arguments as ChatModel);
+  StreamSubscription? streamListChat;
+  final RxList<MessageChat> lstChatMessage = <MessageChat>[].obs;
   final ScrollController scrollController = ScrollController();
   final TextEditingController textEditingController = TextEditingController();
 
   @override
   void onInit() {
-    print('ChatDetailsController onInit');
-    authController.chatList.listen((p0) {
+    groupChatModel = Get.arguments;
+    final currentUser = userController.getCurrentUser!;
+    receiverUser = {groupChatModel.receiverUser, groupChatModel.senderUser}
+        .firstWhere((element) => element.uid != currentUser.uid);
+    senderUser = {groupChatModel.receiverUser, groupChatModel.senderUser}
+        .firstWhere((element) => element.uid == currentUser.uid);
+
+    _listenChatByGroupChatId(groupChatModel.groupChatId);
+    lstChatMessage.listen((p0) {
       if (p0.isNotEmpty) {
-        chatModel.value = p0[0];
-        if (scrollController.hasClients) {
-          print('ChatDetailsController scroll');
-          scrollController.animateTo(
-            scrollController.position.maxScrollExtent,
-            duration: Duration(milliseconds: 300),
-            curve: Curves.easeOut,
-          );
-        }
+        Future.delayed(Duration(milliseconds: 500)).then((value) => _animateToBottom());
       }
     });
-
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => {
-        if (scrollController.hasClients)
-          {
-            scrollController.animateTo(
-              scrollController.position.maxScrollExtent,
-              duration: Duration(milliseconds: 300),
-              curve: Curves.easeOut,
-            )
-          }
-      },
-    );
-    if (authController.isAdmin)
-      authController.dbController.listenMessageUser(chatModel.value.receiverUser.uid).listen((event) {
-        final messages = event.docs.map((e) => MessageChat.fromJson(e.data())).toList();
-        chatModel.value = chatModel.value.copyWith(messageChats: messages);
-      });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(Duration(milliseconds: 500)).then((value) => _animateToBottom());
+    });
 
     super.onInit();
   }
@@ -58,7 +51,15 @@ class ChatDetailsController extends BaseController {
   void dispose() {
     scrollController.dispose();
     textEditingController.dispose();
+    streamListChat?.cancel();
     super.dispose();
+  }
+
+  _listenChatByGroupChatId(String groupChatId) {
+    streamListChat = databaseService.listenMessageChatByGroupChat(groupChatId: groupChatId).listen((event) {
+      final messages = event.docs.map((e) => MessageChat.fromJson(e.data())).toList().reversed;
+      lstChatMessage.assignAll(messages);
+    });
   }
 
   void onPressedBack() {
@@ -66,37 +67,26 @@ class ChatDetailsController extends BaseController {
   }
 
   Future<void> onSendMessage() async {
-    final currentUserId = authController.currentUser?.uid;
-    final adminUserId = authController.adminUser?.uid;
-    final isUser = authController.isUser();
-    if (currentUserId == null || adminUserId == null) {
-      throw Exception('currentUserId or adminUserId is null');
-    }
     if (textEditingController.text.isEmpty) return;
 
-    if (isUser) {
-      final MessageChat messageChat = MessageChat.createMessageChat(
-          uid: currentUserId,
-          senderId: currentUserId,
-          receiverId: adminUserId,
-          message: textEditingController.text,
-          messageChatType: MessageChatType.text);
-      await authController.dbController.insertMessageChat(
-        messageChat: messageChat,
-        currentUserModel: authController.currentUser!,
-      );
-      return;
-    }
+    FocusManager.instance.primaryFocus?.unfocus();
+    final isAdmin = userController.getCurrentUser?.isAdmin() ?? false;
+    final response = await messageController.sendMessage(
+        message: textEditingController.text, receiverUser: isAdmin ? receiverUser : null);
+    response.fold((l) => print(l), (r) {
+      textEditingController.clear();
+    });
+  }
 
-    final MessageChat messageChat = MessageChat.createMessageChat(
-        uid: chatModel.value.receiverUser.uid,
-        senderId: adminUserId,
-        receiverId: chatModel.value.receiverUser.uid,
-        message: textEditingController.text,
-        messageChatType: MessageChatType.text);
-    await authController.dbController.insertMessageChat(
-      messageChat: messageChat,
-      currentUserModel: authController.currentUser!,
-    );
+  _animateToBottom() {
+    if (scrollController.hasClients) {
+      if(scrollController.position.maxScrollExtent == scrollController.position.pixels) return;
+      print('ChatDetailsController scroll');
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: Duration(milliseconds: 600),
+        curve: Curves.easeOut,
+      );
+    }
   }
 }

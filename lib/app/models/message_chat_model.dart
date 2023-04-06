@@ -37,7 +37,7 @@ enum MessageChatType {
 }
 
 class MessageChat {
-  String uid;
+  String groupChatId;
   String senderId;
   String receiverId;
   String timestamp;
@@ -45,7 +45,7 @@ class MessageChat {
   MessageChatType messageChatType;
 
   MessageChat({
-    required this.uid,
+    required this.groupChatId,
     required this.senderId,
     required this.receiverId,
     required this.timestamp,
@@ -56,7 +56,7 @@ class MessageChat {
   Map<String, dynamic> toJson() {
     return {
       "senderId": this.senderId,
-      "uid": this.uid,
+      "groupChatId": this.groupChatId,
       "receiverId": this.receiverId,
       "timestamp": this.timestamp,
       "message": this.message,
@@ -65,31 +65,26 @@ class MessageChat {
   }
 
   factory MessageChat.fromJson(Map<dynamic, dynamic> json) {
-    String uid = json["uid"];
-    String senderId = json["senderId"];
-    String receiverId = json["receiverId"];
-    String timestamp = json["timestamp"];
-    String message = json["message"];
     MessageChatType messageChatType = MessageChatType.getTypeMessage(json["messageChatType"]);
     return MessageChat(
-        senderId: senderId,
-        uid: uid,
-        receiverId: receiverId,
-        timestamp: timestamp,
-        message: message,
+        senderId: json["senderId"],
+        groupChatId: json["groupChatId"],
+        receiverId: json["receiverId"],
+        timestamp: json["timestamp"],
+        message: json["message"],
         messageChatType: messageChatType);
   }
 
   static MessageChat createMessageChat(
       {required String senderId,
       required String receiverId,
-      required String uid,
+      required String groupChatId,
       required String message,
       required MessageChatType messageChatType}) {
     return MessageChat(
         senderId: senderId,
         receiverId: receiverId,
-        uid: uid,
+        groupChatId: groupChatId,
         timestamp: createTimeStamp(),
         message: message,
         messageChatType: messageChatType);

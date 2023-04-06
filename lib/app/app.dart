@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/global_controller/global_controller.dart';
+import 'package:ninjafood/app/services/language_service/language_service.dart';
 import 'routes/routes.dart';
 
 class MyApp extends StatelessWidget {
@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
           enableLog: true,
           initialRoute: AppPages.initial,
           getPages: AppPages.routes,
-          locale: TranslationController.fallbackLocale,
-          fallbackLocale: TranslationController.fallbackLocale,
+          locale: TranslationService.fallbackLocale,
+          fallbackLocale: TranslationService.fallbackLocale,
           builder: (context, child) {
             return MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1), child: child!);
           },
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate
           ],
-          translations: TranslationController()),
+          translations: TranslationService()),
     );
   }
 }
