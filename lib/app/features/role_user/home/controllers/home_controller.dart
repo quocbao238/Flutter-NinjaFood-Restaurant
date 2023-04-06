@@ -13,10 +13,7 @@ const _logName = 'HomeController';
 enum HomeViewType { normal, popularMenu, popularFood }
 
 class HomeController extends BaseController {
-  // final AuthController authController;
-  // final DatabaseController databaseController;
 
-  HomeController();
 
   final menus = <CategoryModel>[].obs;
   final products = <ProductModel>[].obs;

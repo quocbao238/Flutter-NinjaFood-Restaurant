@@ -3,20 +3,15 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
-// import 'package:ninjafood/app/global_controller/db_controller.dart';
-// import 'package:ninjafood/app/global_controller/global_controller.dart';
+import 'package:ninjafood/app/globalController/userController.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/services/cloud_storage_service/cloud_storage_service.dart';
 
 const _logName = 'uploadPreviewController';
 
 class UploadPreviewController extends BaseController {
-  // final AuthController authController;
-  // final DatabaseController dbController;
-  // final CloudStorageController cloudStorageController;
-  //
-  // UploadPreviewController(
-  //     {required this.authController, required this.dbController, required this.cloudStorageController});
-
+  final userController = UserController.instance;
+  final cloudStorageService = CloudStorageService.instance;
   late final File imageFile;
 
   @override
@@ -39,25 +34,22 @@ class UploadPreviewController extends BaseController {
   }
 
   Future<void> onPressedNext() async {
-    // final currentUser = authController.currentUser;
-    // if (currentUser == null) return;
-    //
-    //
-    // loading(true);
-    // final urlCallBack = await cloudStorageController.updateUserPhoto(imageFile, currentUser.uid);
-    // if (urlCallBack == null) {
-    //   loading(false);
-    //   return;
-    // }
-    //
-    //
-    // final newUser = currentUser.copyWith(photoUrl: urlCallBack);
-    //
-    // final response = await dbController.updateUser(newUser);
-    // await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
-    //   Get.toNamed(AppRouteProvider.setLocationScreen);
-    // });
-    //
-    // loading(false);
+    final currentUser = userController.getCurrentUser;
+    if (currentUser == null) return;
+    loading(true);
+    final urlCallBack = await cloudStorageService.uploadAvatarImage(
+      file: imageFile,
+      uid: currentUser.uid,
+    );
+    if (urlCallBack == null) {
+      loading(false);
+      return;
+    }
+    final response = await userController.updateUser(photoUrl: urlCallBack);
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
+      Get.toNamed(AppRouteProvider.setLocationScreen);
+    });
+
+    loading(false);
   }
 }

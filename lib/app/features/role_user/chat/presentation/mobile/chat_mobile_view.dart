@@ -18,7 +18,7 @@ class MobileChatScreen extends GetView<ChatScreenController> {
           onPressed: () => controller.handleOnTapChat(),
           child: Icon(Icons.message, color: Colors.white),
         ),
-        appBarWidget: AppButtonDrawer(onPressed: () => controller.tabsController.toggleDrawer()),
+        // appBarWidget: AppButtonDrawer(onPressed: () => controller.tabsController.toggleDrawer()),
         body: AppPadding(
           padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
           child: Column(

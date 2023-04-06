@@ -6,10 +6,6 @@ import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controlle
 import 'package:ninjafood/app/models/message_chat_model.dart';
 
 class ChatDetailsController extends BaseController {
-  final TabsController tabsController;
-  // final AuthController authController;
-
-  ChatDetailsController({required this.tabsController});
 
   Rx<ChatModel> chatModel = Rx<ChatModel>(Get.arguments as ChatModel);
   final ScrollController scrollController = ScrollController();

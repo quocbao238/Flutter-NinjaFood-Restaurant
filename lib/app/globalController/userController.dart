@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:get/get.dart';
+import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/globalController/boot_controllers.dart';
 import 'package:ninjafood/app/models/user_model.dart';
 import 'package:ninjafood/app/services/console_service/console_service.dart';
@@ -109,6 +111,31 @@ class UserController extends GetxController implements BootableController {
   }
 
   int get priority => 0;
+
+  Future<Either<Failure, void>> updateUser({
+    String? firstName,
+    String? lastName,
+    String? phoneNumber,
+    String? address,
+    String? photoUrl,
+    String? fcmToken,
+  }) async {
+    final _currentUser = getCurrentUser;
+    if (_currentUser == null) return left(Failure.custom('User is null'));
+    try {
+      final newDataUser = _currentUser.copyWith(
+          firstName: firstName ?? _currentUser.firstName,
+          lastName: lastName ?? _currentUser.lastName,
+          phoneNumber: phoneNumber ?? _currentUser.phoneNumber,
+          address: address ?? _currentUser.address,
+          photoUrl: photoUrl ?? _currentUser.photoUrl,
+          fcmToken: fcmToken ?? _currentUser.fcmToken);
+      await _databaseService.updateUser(userModel: newDataUser);
+      return Right(null);
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
 
 //
 // void _handleMessage() async {
@@ -287,4 +314,4 @@ class UserController extends GetxController implements BootableController {
 //     return left(Failure(e.toString(), stackTrace));
 //   }
 // }
-}
+  }

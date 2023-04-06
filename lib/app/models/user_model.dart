@@ -3,10 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 const ROLE_USER = 'role_user';
 const ROLE_ADMIN = 'role_admin';
 
-const CREATE_TYPE_LOGIN_TYPE_EMAIL = 'email';
-const CREATE_TYPE_LOGIN_TYPE_GOOGLE = 'google';
-const CREATE_TYPE_LOGIN_TYPE_FACEBOOK = 'facebook';
-
 class UserModel {
   String uid;
   String? firstName;
@@ -95,6 +91,7 @@ class UserModel {
     String? email,
     String? photoUrl,
     String? address,
+    String? fcmToken,
   }) {
     return UserModel(
       uid: this.uid,
@@ -106,7 +103,7 @@ class UserModel {
       address: address ?? this.address,
       role: this.role,
       createType: this.createType,
-      fcmToken: this.fcmToken,
+      fcmToken: fcmToken ??this.fcmToken,
     );
   }
 }

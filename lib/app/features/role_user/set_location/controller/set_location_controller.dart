@@ -1,15 +1,15 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/globalController/userController.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/services/database_service/database_service.dart';
 
 const _logName = 'setLocationController';
 
 class SetLocationController extends BaseController {
-  // final AuthController authController;
-  // final DatabaseController databaseController;
-
-  // SetLocationController({required this.authController, required this.databaseController});
+  final databaseService = DatabaseService.instance;
+  final userController = UserController.instance;
 
   Rxn<String?> addressLocation = Rxn<String?>(null);
 
@@ -36,17 +36,12 @@ class SetLocationController extends BaseController {
       Get.offNamed(AppRouteProvider.signupSuccessScreen);
       return;
     }
-
-    // final user = authController.currentUser;
-    // if (user == null) return;
-    //
-    // loading(true);
-    // final newUserData = user.copyWith(address: addressLocation.value);
-    // final response = await databaseController.updateUser(newUserData);
-    // await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
-    //   Get.toNamed(AppRouteProvider.signupSuccessScreen);
-    // });
-    // loading(false);
+    loading(true);
+    final response = await userController.updateUser(address: addressLocation.value);
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
+      Get.toNamed(AppRouteProvider.signupSuccessScreen);
+    });
+    loading(false);
   }
 
   String getTitleButton() {

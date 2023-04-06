@@ -6,10 +6,6 @@ import 'package:ninjafood/app/routes/routes.dart';
 
 
 class ForgotPassWordController extends BaseController {
-  // final AuthController authController;
-
-  // ForgotPassWordController({required this.authController});
-  ForgotPassWordController();
 
   late final TextEditingController emailController;
   Rxn<String?> emailError = Rxn<String?>(null);
