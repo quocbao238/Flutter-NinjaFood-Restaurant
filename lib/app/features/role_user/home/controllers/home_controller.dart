@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/global_controller/db_controller.dart';
-import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/category_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
@@ -15,11 +13,10 @@ const _logName = 'HomeController';
 enum HomeViewType { normal, popularMenu, popularFood }
 
 class HomeController extends BaseController {
-  final AuthController authController;
-  final DatabaseController databaseController;
+  // final AuthController authController;
+  // final DatabaseController databaseController;
 
-  HomeController(
-      {required this.authController, required this.databaseController});
+  HomeController();
 
   final menus = <CategoryModel>[].obs;
   final products = <ProductModel>[].obs;
@@ -60,27 +57,27 @@ class HomeController extends BaseController {
   }
 
   Future<void> _fetchMenus() async {
-    final response = await databaseController.getListCategories();
-    response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (List<CategoryModel> r) {
-      r.sort((a, b) => a.name!.compareTo(b.name!));
-      return menus.value = r;
-    });
+    // final response = await databaseController.getListCategories();
+    // response.fold((l) => handleFailure(_logName, l, showDialog: true),
+    //     (List<CategoryModel> r) {
+    //   r.sort((a, b) => a.name!.compareTo(b.name!));
+    //   return menus.value = r;
+    // });
   }
 
   Future<void> _fetchProduct() async {
-    final response = await databaseController.getListProducts();
-    response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (List<ProductModel> r) {
-      r.sort((a, b) => a.name!.compareTo(b.name!));
-      return products.value = r;
-    });
+    // final response = await databaseController.getListProducts();
+    // response.fold((l) => handleFailure(_logName, l, showDialog: true),
+    //     (List<ProductModel> r) {
+    //   r.sort((a, b) => a.name!.compareTo(b.name!));
+    //   return products.value = r;
+    // });
   }
 
   Future<void> _fetchPromotions() async {
-    final response = await databaseController.getListPromotion();
-    response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) => promotions.value = r);
+    // final response = await databaseController.getListPromotion();
+    // response.fold((l) => handleFailure(_logName, l, showDialog: true),
+    //     (r) => promotions.value = r);
   }
 
   String getImageUrlByProductId(int id) {
@@ -114,15 +111,15 @@ class HomeController extends BaseController {
   }
 
   void onPressedLogout() async {
-    final response = await authController.signOut();
-    response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) => Get.offAllNamed(AppRouteProvider.signinScreen));
+    // final response = await authController.signOut();
+    // response.fold((l) => handleFailure(_logName, l, showDialog: true),
+    //     (r) => Get.offAllNamed(AppRouteProvider.signinScreen));
   }
 
   void onPressedVerifyEmail() async {
-    final response = await authController.sendEmailVerification();
-    response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) => Get.snackbar('Success', 'Email verification sent'));
+    // final response = await authController.sendEmailVerification();
+    // response.fold((l) => handleFailure(_logName, l, showDialog: true),
+    //     (r) => Get.snackbar('Success', 'Email verification sent'));
   }
 
   void onPressedViewMorePopularMenu() {

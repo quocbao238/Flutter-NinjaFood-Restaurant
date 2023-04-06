@@ -8,16 +8,17 @@ import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
 import 'package:ninjafood/app/models/user_model.dart';
-import 'package:ninjafood/app/services/services.dart';
+import 'package:ninjafood/app/services/boot_services.dart';
 import 'database_key.dart';
 import 'database_service_impl.dart';
 
-class DatabaseService extends GetxService implements ServiceBootImpl, DatabaseServiceImpl {
+class DatabaseService extends GetxService implements BootableService, DatabaseServiceImpl {
   static DatabaseService get instance => Get.find<DatabaseService>();
   late final FirebaseFirestore _db;
 
   @override
   Future<void> call() async {
+    Get.put(this, permanent: true);
     _db = FirebaseFirestore.instance;
   }
 
@@ -138,4 +139,7 @@ class DatabaseService extends GetxService implements ServiceBootImpl, DatabaseSe
     if (customerId == null) return _db.doc('${DatabaseKeys.groupChat}').snapshots();
     return _db.doc('${DatabaseKeys.groupChat}$customerId').snapshots();
   }
+
+  @override
+  int priority = 0;
 }

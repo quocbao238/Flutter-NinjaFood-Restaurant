@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ninjafood/app/global_controller/local_storage_controller/local_storage_key.dart';
+import 'package:ninjafood/app/constants/contains.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'en.dart';
 import 'vi.dart';

@@ -1,12 +1,11 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 
 class SuccessNotificationController extends BaseController {
-  final AuthController authController;
+  // final AuthController authController;
 
-  SuccessNotificationController({required this.authController});
+  // SuccessNotificationController({required this.authController});
 
   @override
   void onInit() {

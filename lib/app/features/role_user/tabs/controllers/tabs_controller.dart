@@ -4,29 +4,24 @@ import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/features/role_user/tabs/infrastructure/models/menu_models.dart';
-import 'package:ninjafood/app/global_controller/global_controller.dart';
+// import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/services/theme_service/theme_service.dart';
 
 const _logName = 'TabsController';
 
 class TabsController extends BaseController {
-  final AuthController authController;
-  final ThemeController themeController;
+  // final AuthController authController;
+  final themeService = ThemeService.instance;
 
-  TabsController({
-    required this.authController,
-    required this.themeController,
-  });
+  // TabsController({required this.authController});
 
   final zoomDrawerController = ZoomDrawerController();
 
   List<MenuItem> menuItems = MenuItem.listMenu;
 
-  List<Widget> screens = MenuItem.listMenu
-      .where((element) => element.screen != null)
-      .toList()
-      .map((e) => e.screen!)
-      .toList();
+  List<Widget> screens =
+      MenuItem.listMenu.where((element) => element.screen != null).toList().map((e) => e.screen!).toList();
 
   Rx<MenuItem> currentMenuItem = MenuItem.listMenu[3].obs;
 
@@ -64,17 +59,16 @@ class TabsController extends BaseController {
   void _onPressedAbout() {}
 
   void _onPressedChangeTheme() {
-    themeController.toggleTheme();
+    themeService.toggleTheme();
   }
 
   Future<void> _onPressedLogout() async {
-    final response = await authController.signOut();
-    response.fold(
-      (l) => handleFailure(_logName, l),
-      (r) => Get.offAllNamed(AppRouteProvider.splashScreen),
-    );
+    // final response = await authController.signOut();
+    // response.fold(
+    //   (l) => handleFailure(_logName, l),
+    //   (r) => Get.offAllNamed(AppRouteProvider.splashScreen),
+    // );
   }
 
-  Future<void> onPressedNotification() async {
-  }
+  Future<void> onPressedNotification() async {}
 }

@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 
 
 class ForgotPassWordController extends BaseController {
-  final AuthController authController;
+  // final AuthController authController;
 
-  ForgotPassWordController({required this.authController});
+  // ForgotPassWordController({required this.authController});
+  ForgotPassWordController();
 
   late final TextEditingController emailController;
   Rxn<String?> emailError = Rxn<String?>(null);

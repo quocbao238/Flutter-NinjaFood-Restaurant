@@ -10,7 +10,8 @@ class Failure {
 }
 
 handleFailure(String _logName, Failure failure, {bool showDialog = false}) {
-  Get.find<ConsoleController>().showError(_logName, failure.message);
+  final consoleService = ConsoleService.instance;
+  consoleService.showError(_logName, failure.message);
   if (showDialog) {
     final dialogController = Get.find<DialogController>();
     dialogController.showError(message: failure.message);

@@ -1,17 +1,14 @@
 part of global_controller;
 
-class DialogController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+class DialogController extends GetxController with GetSingleTickerProviderStateMixin, BootableController {
   late final AnimationController _animationController;
   late final Animation<double> _animation;
-
   final milliseconds = 200;
 
   @override
-  void onInit() {
-    super.onInit();
-    _animationController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: milliseconds));
+  Future<void> call() async {
+    Get.put(this, permanent: true);
+    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: milliseconds));
     _animation = Tween<double>(begin: 0, end: 1).animate(_animationController);
   }
 
@@ -47,10 +44,7 @@ class DialogController extends GetxController
   }
 
   Future<void> showSuccess(
-      {String? title,
-      required String message,
-      VoidCallback? rightBtnOnPressed,
-      String? rightBtnText}) async {
+      {String? title, required String message, VoidCallback? rightBtnOnPressed, String? rightBtnText}) async {
     _animationController.forward();
     await Get.dialog(
         AppDialog.success(
@@ -84,4 +78,7 @@ class DialogController extends GetxController
       if (Get.isDialogOpen ?? false) Get.back();
     });
   }
+
+  @override
+  int get priority => throw UnimplementedError();
 }

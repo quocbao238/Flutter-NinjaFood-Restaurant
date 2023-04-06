@@ -4,8 +4,8 @@ class AppPages {
   static String initial = AppRouteProvider.splashScreen;
 
   static navigateDefaultPage() async {
-    final authController = Get.find<AuthController>();
-    if (authController.authUser.value != null) {
+    final userController = UserController.instance;
+    if (userController.getFirebaseAuthUser != null) {
       initial = AppRouteProvider.tabScreen;
       return;
     }

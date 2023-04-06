@@ -1,10 +1,10 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 
 abstract class AuthServiceImpl {
+  Stream<User?> get firebaseAuthUserStream;
+
   Future<Either<Failure, void>> registerWithFacebook();
 
   Future<Either<Failure, void>> registerWithGoogle();
@@ -21,5 +21,5 @@ abstract class AuthServiceImpl {
 
   Future<Either<Failure, void>> loginWithEmail({required String email, required String password});
 
-  Stream<User?> get userStream;
+  User? get getFirebaseAuthUser;
 }
