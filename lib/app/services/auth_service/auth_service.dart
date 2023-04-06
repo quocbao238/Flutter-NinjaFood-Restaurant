@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:get/get.dart';
@@ -117,6 +118,9 @@ class AuthService extends GetxService implements BootableService, AuthServiceImp
       if (accessToken != null) await FacebookAuth.instance.logOut();
       final GoogleSignIn googleSignIn = GoogleSignIn();
       if (await googleSignIn.isSignedIn()) await googleSignIn.signOut();
+      final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+      await firebaseMessaging.deleteToken();
+
       return right(null);
     } on FirebaseAuthException catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));

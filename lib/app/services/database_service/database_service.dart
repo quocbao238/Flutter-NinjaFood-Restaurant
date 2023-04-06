@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/helper/utils.dart';
 import 'package:ninjafood/app/models/category_model.dart';
+import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
@@ -27,6 +28,16 @@ class DatabaseService extends GetxService implements BootableService, DatabaseSe
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUserDataStream(String uid) {
     final docRef = _db.doc('${DatabaseKeys.userPath}$uid');
     return docRef.snapshots();
+  }
+
+  Future<Either<Failure, UserModel>> getUserById({required String userModel}) async {
+    try {
+      final _result = await _db.doc('${DatabaseKeys.userPath}$userModel').get();
+      if (_result.data() == null) return left(Failure('User is null', StackTrace.current));
+      return right(UserModel.fromJson(_result.data()!));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
   }
 
   @override
@@ -130,14 +141,28 @@ class DatabaseService extends GetxService implements BootableService, DatabaseSe
   }
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat({required String groupChatId}) {
-    return _db.collection(DatabaseKeys.messageChatPath).where('groupChatId', isEqualTo: groupChatId).snapshots();
+  Future<Either<Failure, void>> insertGroupChat({required GroupChatModel groupChatModel}) async {
+    try {
+      await _db.doc('${DatabaseKeys.groupChat}${groupChatModel.groupChatId}').set(groupChatModel.toJson());
+      return right(null);
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
   }
 
   @override
-  Stream<DocumentSnapshot<Map<String, dynamic>>> listenGroupChat({String? customerId}) {
-    if (customerId == null) return _db.doc('${DatabaseKeys.groupChat}').snapshots();
-    return _db.doc('${DatabaseKeys.groupChat}$customerId').snapshots();
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat({required String groupChatId}) {
+    return _db
+        .collection(DatabaseKeys.messageChatPath)
+        .where('groupChatId', isEqualTo: groupChatId)
+        .orderBy(FieldPath.documentId, descending: true)
+        .limit(20)
+        .snapshots();
+  }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat() {
+    return _db.collection(DatabaseKeys.groupChat).snapshots();
   }
 
   @override

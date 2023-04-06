@@ -1,0 +1,128 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:get/get.dart';
+import 'package:ninjafood/app/constants/contains.dart';
+import 'package:ninjafood/app/globalController/boot_controllers.dart';
+import 'package:ninjafood/app/globalController/userController.dart';
+import 'package:ninjafood/app/models/chat_model.dart';
+import 'package:ninjafood/app/models/message_chat_model.dart';
+import 'package:ninjafood/app/models/user_model.dart';
+import 'package:ninjafood/app/services/database_service/database_service.dart';
+
+class MessageController extends GetxController implements BootableController {
+  static MessageController get instance => Get.find<MessageController>();
+  late final UserController userController;
+  late final DatabaseService databaseService;
+  RxList<GroupChatModel> groupChats = <GroupChatModel>[].obs;
+
+
+
+  RxList<MessageChat> messageList = <MessageChat>[].obs;
+  StreamSubscription? _messageSubscription;
+
+  @override
+  Future<void> call() async {
+    Get.put(this);
+    userController = UserController.instance;
+    databaseService = DatabaseService.instance;
+    userController.currentUser.listen((user) {
+      if (user == null) {
+        _messageSubscription?.cancel();
+      }
+      if (user != null) {
+        _handleStreamGroupChat();
+      }
+    });
+  }
+
+  void _handleStreamGroupChat() async {
+    final isAdmin = userController.isAdmin();
+    final currentUser = userController.currentUser.value;
+    final groupChatId = isAdmin ? null : currentUser!.uid;
+    // GroupChatID is id of user
+    _messageSubscription = databaseService.listenGroupChat().listen((QuerySnapshot<Map<String, dynamic>> event) {
+      final List<GroupChatModel> _result  = event.docs.map((e) => GroupChatModel.fromJson(e.data())).toList();
+      if (isAdmin) {
+        groupChats.assignAll(_result);
+        return;
+      }
+      final _listFilter = _result.where((element) => element.groupChatId == groupChatId).toList();
+      groupChats.assignAll(_listFilter);
+    });
+  }
+
+  Future<Either<Failure, void>> sendMessage({required String message, UserModel? receiverUser}) async {
+    final isUser = userController.isUser();
+    if (isUser) {
+      final _response = await _userMessage(message);
+      return _response.fold((l) => left(l), (r) => right(null));
+    }
+    if (receiverUser == null) return left(Failure.custom('receiverUser is null'));
+    final _response = await _adminMessage(message: message, receiverUser: receiverUser);
+    return _response.fold((l) => left(l), (r) => right(null));
+  }
+
+  Future<Either<Failure, void>> _userMessage(String message) async {
+    final senderUser = userController.getCurrentUser!;
+    final receiverUser = userController.getAdminUser!;
+    final groupChatId = senderUser.uid;
+
+    final MessageChat messageChat = MessageChat.createMessageChat(
+        senderId: senderUser.uid,
+        receiverId: receiverUser.uid,
+        message: message,
+        messageChatType: MessageChatType.text,
+        groupChatId: groupChatId);
+
+    final groupChat = GroupChatModel(
+      senderUser: senderUser,
+      receiverUser: receiverUser,
+      groupChatId: groupChatId,
+      lastMessageChat: messageChat,
+    );
+
+    try {
+      final uploadGroupChat = await databaseService.insertGroupChat(groupChatModel: groupChat);
+      return uploadGroupChat.fold((l) => left(l), (r) async {
+        final uploadChatMessage = await databaseService.insertMessageChat(messageChat: messageChat);
+        return uploadChatMessage.fold((l) => left(l), (r) => right(null));
+      });
+    } catch (e, stacktrace) {
+      return left(Failure(e.toString(), stacktrace));
+    }
+  }
+
+  Future<Either<Failure, void>> _adminMessage({required String message, required UserModel receiverUser}) async {
+    final senderUser = userController.getCurrentUser!;
+    final groupChatId = receiverUser.uid;
+
+    final MessageChat messageChat = MessageChat.createMessageChat(
+        senderId: senderUser.uid,
+        receiverId: receiverUser.uid,
+        message: message,
+        messageChatType: MessageChatType.text,
+        groupChatId: groupChatId);
+
+    final groupChat = GroupChatModel(
+      senderUser: senderUser,
+      receiverUser: receiverUser,
+      groupChatId: groupChatId,
+      lastMessageChat: messageChat,
+    );
+
+    try {
+      final uploadGroupChat = await databaseService.insertGroupChat(groupChatModel: groupChat);
+      return uploadGroupChat.fold((l) => left(l), (r) async {
+        final uploadChatMessage = await databaseService.insertMessageChat(messageChat: messageChat);
+        return uploadChatMessage.fold((l) => left(l), (r) => right(null));
+      });
+    } catch (e, stacktrace) {
+      return left(Failure(e.toString(), stacktrace));
+    }
+  }
+
+  @override
+  int get priority => throw UnimplementedError();
+}

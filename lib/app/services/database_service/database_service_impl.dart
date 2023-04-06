@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/models/category_model.dart';
+import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
@@ -12,6 +13,8 @@ abstract class DatabaseServiceImpl {
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUserDataStream(String uid);
 
   Future<Either<Failure, void>> insertUser({required UserModel userModel});
+
+  Future<Either<Failure, UserModel>> getUserById({required String userModel});
 
   Future<Either<Failure, UserModel>> getAdminUser();
 
@@ -34,7 +37,9 @@ abstract class DatabaseServiceImpl {
   /* Chat */
   Future<Either<Failure, void>> insertMessageChat({required MessageChat messageChat});
 
+  Future<Either<Failure, void>> insertGroupChat({required GroupChatModel groupChatModel});
+
   Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat({required String groupChatId});
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>> listenGroupChat({String? customerId});
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat();
 }

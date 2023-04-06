@@ -29,20 +29,20 @@ class UserController extends GetxController implements BootableController {
   void setFirebaseAuthUser(User? user) => _firebaseAuthUser.value = user;
 
   // Database User
-  final _currentUser = Rx<UserModel?>(null);
-  final _adminUser = Rx<UserModel?>(null);
+  final currentUser = Rx<UserModel?>(null);
+  final adminUser = Rx<UserModel?>(null);
 
-  UserModel? get getCurrentUser => _currentUser.value;
+  UserModel? get getCurrentUser => currentUser.value;
 
-  UserModel? get getAdminUser => _adminUser.value;
+  UserModel? get getAdminUser => adminUser.value;
 
-  void setAdminUser(UserModel? user) => _adminUser.value = user;
+  void setAdminUser(UserModel? user) => adminUser.value = user;
 
-  void setCurrentUser(UserModel? user) => _currentUser.value = user;
+  void setCurrentUser(UserModel? user) => currentUser.value = user;
 
-  bool isUser() => _currentUser.value?.role == ROLE_USER;
+  bool isUser() => currentUser.value?.role == ROLE_USER;
 
-  bool isAdmin() => _currentUser.value?.role == ROLE_ADMIN;
+  bool isAdmin() => currentUser.value?.role == ROLE_ADMIN;
   late StreamSubscription<UserModel?>? _userStream;
 
   // RxList<ChatModel> chatList = RxList<ChatModel>([]);
@@ -79,7 +79,7 @@ class UserController extends GetxController implements BootableController {
       _handleCloudUserChanged();
 
       // Update FCM Token to Cloud
-      _userStream = _currentUser.listen((value) async {
+      _userStream = currentUser.listen((value) async {
         if (value == null) return;
         final response = await _databaseService.getAdminUser();
         response.fold((l) => _consoleService.show(_logName, l.message), (r) {
@@ -94,7 +94,7 @@ class UserController extends GetxController implements BootableController {
           _userStream?.cancel();
         }
       });
-      if (_currentUser.value == null) return;
+      if (currentUser.value == null) return;
 
       _consoleService.show(_logName, 'User is signed in!');
     });
@@ -104,9 +104,9 @@ class UserController extends GetxController implements BootableController {
     if (_cloudUserSubscription != null || getFirebaseAuthUser == null) return;
     _consoleService.show(_logName, '_handleCloudUserChanged Run');
     _cloudUserSubscription = _databaseService.getUserDataStream(getFirebaseAuthUser!.uid).listen((event) {
-      _currentUser.value = UserModel.fromJson(event.data()!);
-      _consoleService.show(_logName, '_handleCloudUserChanged ${_currentUser.value!.toJson()}');
-      FirebaseCrashlytics.instance.setUserIdentifier(_currentUser.value!.uid);
+      currentUser.value = UserModel.fromJson(event.data()!);
+      _consoleService.show(_logName, '_handleCloudUserChanged ${currentUser.value!.toJson()}');
+      FirebaseCrashlytics.instance.setUserIdentifier(currentUser.value!.uid);
     });
   }
 

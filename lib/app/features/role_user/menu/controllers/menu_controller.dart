@@ -5,6 +5,7 @@ import 'package:ninjafood/app/models/category_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 
 class MenuScreenController extends BaseController {
+  final homeController = Get.find<HomeController>();
 
 
   late final CategoryModel currentMenu;
@@ -14,7 +15,7 @@ class MenuScreenController extends BaseController {
   @override
   void onInit() {
     currentMenu = Get.arguments as CategoryModel;
-    // products.value = homeController.filterProductByIds(currentMenu.productIds!);
+    products.value = homeController.filterProductByIds(currentMenu.productIds!);
     super.onInit();
   }
 

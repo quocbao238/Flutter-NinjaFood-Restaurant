@@ -16,7 +16,6 @@ enum HomeViewType { normal, popularMenu, popularFood }
 class HomeController extends BaseController {
   final databaseService = DatabaseService.instance;
 
-
   final menus = <CategoryModel>[].obs;
   final products = <ProductModel>[].obs;
   final promotions = <PromotionModel>[].obs;
@@ -57,8 +56,7 @@ class HomeController extends BaseController {
 
   Future<void> _fetchMenus() async {
     final response = await databaseService.getListCategories();
-    response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (List<CategoryModel> r) {
+    response.fold((l) => handleFailure(_logName, l, showDialog: true), (List<CategoryModel> r) {
       r.sort((a, b) => a.name!.compareTo(b.name!));
       return menus.value = r;
     });
@@ -66,8 +64,7 @@ class HomeController extends BaseController {
 
   Future<void> _fetchProduct() async {
     final response = await databaseService.getListProducts();
-    response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (List<ProductModel> r) {
+    response.fold((l) => handleFailure(_logName, l, showDialog: true), (List<ProductModel> r) {
       r.sort((a, b) => a.name!.compareTo(b.name!));
       return products.value = r;
     });
@@ -75,9 +72,8 @@ class HomeController extends BaseController {
 
   Future<void> _fetchPromotions() async {
     final response = await databaseService.getListPromotions();
-    response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) => promotions.value = r);
-   }
+    response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) => promotions.value = r);
+  }
 
   String getImageUrlByProductId(int id) {
     return products.firstWhere((element) => id == element.id).image?.url ?? '';
@@ -92,9 +88,7 @@ class HomeController extends BaseController {
     if (pattern.length > 0 && lastSearch != pattern) {
       String _searchData = Common.sanitizing(pattern);
       for (int index = 0; index < products.length; index++) {
-        bool compareProduct = Common.sanitizing(products[index].name ?? '')
-            .toString()
-            .contains(_searchData);
+        bool compareProduct = Common.sanitizing(products[index].name ?? '').toString().contains(_searchData);
         if (compareProduct) tempList.add(products[index]);
       }
       lastSearch = pattern;
@@ -108,7 +102,6 @@ class HomeController extends BaseController {
     lastSearch = product.name ?? '';
     // Get.toNamed(AppRouteProvider.searchScreen, arguments: suggestion);
   }
-
 
   void onPressedViewMorePopularMenu() {
     homeViewType.value = HomeViewType.popularMenu;

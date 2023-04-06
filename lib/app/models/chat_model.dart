@@ -1,22 +1,44 @@
 import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/user_model.dart';
 
-class ChatModel{
+class GroupChatModel {
+  final String groupChatId;
   final UserModel senderUser;
   final UserModel receiverUser;
-  final List<MessageChat> messageChats;
+  final MessageChat lastMessageChat;
 
-  ChatModel({required this.senderUser, required this.receiverUser, required this.messageChats});
+  GroupChatModel(
+      {required this.senderUser, required this.receiverUser, required this.lastMessageChat, required this.groupChatId});
 
-  ChatModel copyWith({
+  GroupChatModel copyWith({
     UserModel? senderUser,
     UserModel? receiverUser,
-    List<MessageChat>? messageChats,
+    String? groupChatId,
+    MessageChat? lastMessageChat
   }) {
-    return ChatModel(
+    return GroupChatModel(
       senderUser: senderUser ?? this.senderUser,
       receiverUser: receiverUser ?? this.receiverUser,
-      messageChats: messageChats ?? this.messageChats,
+      lastMessageChat: lastMessageChat ?? this.lastMessageChat,
+      groupChatId: groupChatId ?? this.groupChatId,
     );
+  }
+
+  factory GroupChatModel.fromJson(Map<String, dynamic> json) {
+    return GroupChatModel(
+      senderUser: UserModel.fromJson(json['senderUser']),
+      receiverUser: UserModel.fromJson(json['receiverUser']),
+      lastMessageChat: MessageChat.fromJson(json['lastMessageChat']),
+      groupChatId: json['groupChatId'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'senderUser': senderUser.toJson(),
+      'receiverUser': receiverUser.toJson(),
+      'lastMessageChat': lastMessageChat.toJson(),
+      'groupChatId': groupChatId,
+    };
   }
 }

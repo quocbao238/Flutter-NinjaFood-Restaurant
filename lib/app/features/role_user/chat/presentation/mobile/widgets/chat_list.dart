@@ -3,24 +3,21 @@ import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/features/role_user/chat/presentation/mobile/widgets/chat_item.dart';
 
 class ChatList extends StatelessWidget {
-  final List<ChatModel> listChat;
-  final Function(ChatModel) onTap;
+  final List<GroupChatModel> groupChats;
+  final Function(GroupChatModel) onTap;
 
-  const ChatList({Key? key, required this.listChat, required this.onTap}) : super(key: key);
+  const ChatList({Key? key, required this.groupChats, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (listChat.isEmpty) return Container();
+    if (groupChats.isEmpty) return Container();
     return AnimatedList(
       shrinkWrap: true,
-      initialItemCount: listChat.length,
+      initialItemCount: groupChats.length,
       itemBuilder: (context, index, animation) {
-        final _chatItem = listChat[index];
+        final _groupChatItem = groupChats[index];
         return ChatItem(
-          animation: animation,
-          chatItem: _chatItem,
-          onTap: onTap,
-        );
+            animation: animation, groupChatItem: _groupChatItem, onTap: onTap);
       },
     );
   }
