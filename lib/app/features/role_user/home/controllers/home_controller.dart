@@ -7,12 +7,14 @@ import 'package:ninjafood/app/models/category_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/services/database_service/database_service.dart';
 
 const _logName = 'HomeController';
 
 enum HomeViewType { normal, popularMenu, popularFood }
 
 class HomeController extends BaseController {
+  final databaseService = DatabaseService.instance;
 
 
   final menus = <CategoryModel>[].obs;
@@ -54,28 +56,28 @@ class HomeController extends BaseController {
   }
 
   Future<void> _fetchMenus() async {
-    // final response = await databaseController.getListCategories();
-    // response.fold((l) => handleFailure(_logName, l, showDialog: true),
-    //     (List<CategoryModel> r) {
-    //   r.sort((a, b) => a.name!.compareTo(b.name!));
-    //   return menus.value = r;
-    // });
+    final response = await databaseService.getListCategories();
+    response.fold((l) => handleFailure(_logName, l, showDialog: true),
+        (List<CategoryModel> r) {
+      r.sort((a, b) => a.name!.compareTo(b.name!));
+      return menus.value = r;
+    });
   }
 
   Future<void> _fetchProduct() async {
-    // final response = await databaseController.getListProducts();
-    // response.fold((l) => handleFailure(_logName, l, showDialog: true),
-    //     (List<ProductModel> r) {
-    //   r.sort((a, b) => a.name!.compareTo(b.name!));
-    //   return products.value = r;
-    // });
+    final response = await databaseService.getListProducts();
+    response.fold((l) => handleFailure(_logName, l, showDialog: true),
+        (List<ProductModel> r) {
+      r.sort((a, b) => a.name!.compareTo(b.name!));
+      return products.value = r;
+    });
   }
 
   Future<void> _fetchPromotions() async {
-    // final response = await databaseController.getListPromotion();
-    // response.fold((l) => handleFailure(_logName, l, showDialog: true),
-    //     (r) => promotions.value = r);
-  }
+    final response = await databaseService.getListPromotions();
+    response.fold((l) => handleFailure(_logName, l, showDialog: true),
+        (r) => promotions.value = r);
+   }
 
   String getImageUrlByProductId(int id) {
     return products.firstWhere((element) => id == element.id).image?.url ?? '';
@@ -107,17 +109,6 @@ class HomeController extends BaseController {
     // Get.toNamed(AppRouteProvider.searchScreen, arguments: suggestion);
   }
 
-  void onPressedLogout() async {
-    // final response = await authController.signOut();
-    // response.fold((l) => handleFailure(_logName, l, showDialog: true),
-    //     (r) => Get.offAllNamed(AppRouteProvider.signinScreen));
-  }
-
-  void onPressedVerifyEmail() async {
-    // final response = await authController.sendEmailVerification();
-    // response.fold((l) => handleFailure(_logName, l, showDialog: true),
-    //     (r) => Get.snackbar('Success', 'Email verification sent'));
-  }
 
   void onPressedViewMorePopularMenu() {
     homeViewType.value = HomeViewType.popularMenu;

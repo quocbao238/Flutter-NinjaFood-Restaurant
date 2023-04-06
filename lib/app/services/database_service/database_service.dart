@@ -107,7 +107,7 @@ class DatabaseService extends GetxService implements BootableService, DatabaseSe
   Future<Either<Failure, List<PromotionModel>>> getListPromotions() async {
     try {
       List<PromotionModel> _result = [];
-      final querySnapshot = await _db.collection(DatabaseKeys.productPath).get();
+      final querySnapshot = await _db.collection(DatabaseKeys.promotionPath).get();
       _result = querySnapshot.docs.map((e) => PromotionModel.fromJson(e.data())).toList();
       return right(_result);
     } catch (e, stackTrace) {
