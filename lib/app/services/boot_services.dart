@@ -1,19 +1,17 @@
 import 'package:get/get.dart';
-import 'package:ninjafood/app/services/services.dart';
+import 'package:tuple/tuple.dart';
 
-class BootService {
-  final int priority;
-  final ServiceImpl serviceImpl;
+abstract class BootableService {
+  int get priority;
 
-  BootService({required this.priority,required this.serviceImpl, });
+  Future<void> call();
 }
 
-Future<void> runBootServices(List<BootService> boots) async {
-  boots.sort((a, b) => a.priority.compareTo(b.priority));
-  await Future.forEach(boots, (BootService boot) async {
-    final service = boot.serviceImpl;
-    await Get.put(service)();
-  });
+class BootServices {
+  Future<void> boot(List<Tuple2<BootableService, int>> listBootService) async {
+    listBootService.sort((a, b) => b.item2.compareTo(a.item2));
+    for (final controller in listBootService)
+      controller.item1.call();
+    print('Boot services completed');
+  }
 }
-
-

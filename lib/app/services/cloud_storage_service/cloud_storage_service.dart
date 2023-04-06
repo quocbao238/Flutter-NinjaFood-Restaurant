@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -7,14 +5,16 @@ import 'package:get/get.dart';
 import 'package:ninjafood/app/helper/utils.dart';
 import 'package:ninjafood/app/services/services.dart';
 
+import '../boot_services.dart';
 import 'cloud_storage_impl.dart';
 
-class CloudStorageService extends GetxService implements ServiceImpl, CloudStorageServiceImpl {
+class CloudStorageService extends GetxService implements BootableService, CloudStorageServiceImpl {
+  static CloudStorageService get instance => Get.find<CloudStorageService>();
+
   late final FirebaseStorage storage;
 
-
-
   Future<void> call() async {
+    Get.put(this, permanent: true);
     storage = FirebaseStorage.instance;
   }
 
@@ -53,4 +53,6 @@ class CloudStorageService extends GetxService implements ServiceImpl, CloudStora
     }
   }
 
+  @override
+  int priority = 0;
 }

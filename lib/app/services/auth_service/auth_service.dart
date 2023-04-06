@@ -5,15 +5,17 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/services/auth_service/auth_service_impl.dart';
+import 'package:ninjafood/app/services/boot_services.dart';
 import 'package:ninjafood/app/services/services.dart';
 
-
-class AuthService extends GetxService implements ServiceImpl, AuthServiceImpl {
+class AuthService extends GetxService implements BootableService, AuthServiceImpl {
+  static AuthService get instance => Get.find<AuthService>();
 
   late final FirebaseAuth _firebaseAuth;
 
   @override
   Future<void> call() async {
+    Get.put(this, permanent: true);
     _firebaseAuth = FirebaseAuth.instance;
   }
 
@@ -136,6 +138,11 @@ class AuthService extends GetxService implements ServiceImpl, AuthServiceImpl {
   }
 
   @override
-  // TODO: implement userStream
-  Stream<User?> get userStream => _firebaseAuth.authStateChanges();
+  Stream<User?> get firebaseAuthUserStream => _firebaseAuth.authStateChanges();
+
+  @override
+  User? get getFirebaseAuthUser => _firebaseAuth.currentUser;
+
+  @override
+  int priority = 0;
 }
