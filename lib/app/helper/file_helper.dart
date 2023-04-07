@@ -30,15 +30,14 @@ class FileHelper {
     }
   }
 
-  static Future<File?> pickImages() async {
+  static Future<List<File>> pickImages() async {
     final imageFiles = await ImagePicker().pickMultiImage(imageQuality: 10, maxWidth: 256, maxHeight: 256);
-    if (imageFiles != null) {
-      print(imageFiles);
-
-    } else {
-      print('No image selected.');
-      return null;
+    if (imageFiles.isNotEmpty) {
+      return imageFiles.map((e) => File(e.path)).toList();
     }
+
+    print('No image selected.');
+    return [];
   }
 
   static Future<File?> takePhoto() async {
@@ -72,13 +71,9 @@ class FileHelper {
     if (FileType.video.extensions.contains(ext)) {
       return FileType.video;
     }
-    //
-    // if (FileType.audio.extensions.contains(ext)) {
-    //   return FileType.audio;
-    // }
-    // if (FileType.pdf.extensions.contains(ext)) {
-    //   return FileType.pdf;
-    // }
+    if (FileType.pdf.extensions.contains(ext)) {
+      return FileType.pdf;
+    }
     return FileType.other;
   }
 }

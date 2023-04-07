@@ -21,9 +21,7 @@ class RoomChatMobileScreen extends GetView<RoomChatScreenController> {
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [
-            Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [RoomChatListMessageWidget(), RoomChatBottomSendWidget()]),
+            Column(children: [RoomChatListMessageWidget(), RoomChatBottomSendWidget()]),
             RoomChatButtonSelectFileWidget(),
           ],
         ),

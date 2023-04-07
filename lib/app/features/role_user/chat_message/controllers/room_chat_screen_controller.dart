@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,9 @@ class RoomChatScreenController extends BaseController {
   final TextEditingController textEditingController = TextEditingController();
   MessageChatType messageChatType = MessageChatType.text;
 
+  final RxList<File> lstImageFile = <File>[].obs;
+  final Rxn<File?> filePicker = Rxn<File?>(null);
+
   @override
   void onInit() {
     groupChatModel = Get.arguments;
@@ -46,9 +50,9 @@ class RoomChatScreenController extends BaseController {
         Future.delayed(Duration(milliseconds: 500)).then((value) => _animateToBottom());
       }
     });
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(Duration(milliseconds: 500)).then((value) => _animateToBottom());
-    });
+
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => Future.delayed(Duration(milliseconds: 500)).then((value) => _animateToBottom()));
 
     super.onInit();
   }
@@ -68,7 +72,21 @@ class RoomChatScreenController extends BaseController {
     });
   }
 
+  void _animateToBottom() {
+    if (scrollController.hasClients) {
+      if (scrollController.position.maxScrollExtent == scrollController.position.pixels) return;
+      print('ChatDetailsController scroll');
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: Duration(milliseconds: 600),
+        curve: Curves.easeOut,
+      );
+    }
+  }
+
   void onPressedBack() => Get.back();
+
+  // Function Logic
 
   Future<void> onSendMessage() async {
     if (textEditingController.text.isEmpty) return;
@@ -84,6 +102,11 @@ class RoomChatScreenController extends BaseController {
     });
   }
 
+  Future<void> onPressedSelectImages() async {
+    final _fileResults = await FileHelper.pickImages();
+    if (_fileResults.isEmpty) return;
+    lstImageFile.assignAll(_fileResults);
+  }
 
   Future<void> onPressedAttachFile() async {
     final _filePicker = await FileHelper.pickFile();
@@ -92,6 +115,7 @@ class RoomChatScreenController extends BaseController {
     if (getFileType == FileType.other) {
       return dialogController.showError(message: 'File is not supported');
     }
+
     String? urlFile;
     if (getFileType == FileType.image) {
       messageChatType = MessageChatType.image;
@@ -113,15 +137,12 @@ class RoomChatScreenController extends BaseController {
     response.fold((l) => print(l), (r) {});
   }
 
-  _animateToBottom() {
-    if (scrollController.hasClients) {
-      if (scrollController.position.maxScrollExtent == scrollController.position.pixels) return;
-      print('ChatDetailsController scroll');
-      scrollController.animateTo(
-        scrollController.position.maxScrollExtent,
-        duration: Duration(milliseconds: 600),
-        curve: Curves.easeOut,
-      );
-    }
+  void _clearAllFile() {
+    lstImageFile.clear();
+    filePicker.value = null;
+  }
+
+  void onRemoveImage(int index) {
+    lstImageFile.removeAt(index);
   }
 }
