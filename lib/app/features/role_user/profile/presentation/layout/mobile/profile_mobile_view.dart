@@ -13,28 +13,15 @@ class ProfileMobileView extends GetView {
     final List<FavoriteFood> favoriteItem = FavoriteFood.favoriteItem;
     return CustomScrollView(
       slivers: [
-        SliverAppBar(
-          floating: true,
+        SliverPersistentHeader(
           pinned: true,
-          snap: true,
-          elevation: 0,
-          expandedHeight: MediaQuery.of(context).size.height * 0.4,
-          flexibleSpace: AppSizeScale(
-            ratioHeight: 1,
-            child: FlexibleSpaceBar(
-                background: Image.asset('assets/icons/photo_profile.png',
-                    fit: BoxFit.cover)),
+          delegate: MySliverAppBar(
+            expandedHeight: MediaQuery.of(context).size.height * 0.4,
+            minExtentHeight: MediaQuery.of(context).size.height * 0.2,
+            backgroundImage: AssetImage(
+                'assets/icons/photo_profile.png'), // set the image as the background
+            title: AppButtonDrawer(onPressed: () {}),
           ),
-          bottom: PreferredSize(
-              preferredSize: Size.fromHeight(20),
-              child: Container(
-                padding: EdgeInsets.only(top: 20),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20))),
-              )),
         ),
         ProfilePerson(isDarkMode: isDarkMode, favoriteItem: favoriteItem),
       ],
@@ -42,6 +29,73 @@ class ProfileMobileView extends GetView {
   }
 }
 
+class MySliverAppBar extends SliverPersistentHeaderDelegate {
+  final double expandedHeight;
+  final double minExtentHeight;
+  final Widget title;
+  final ImageProvider backgroundImage;
 
+  MySliverAppBar({
+    required this.minExtentHeight,
+    required this.expandedHeight,
+    required this.title,
+    required this.backgroundImage,
+  });
 
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Image(
+          image: backgroundImage,
+          fit: BoxFit.cover,
+        ),
+        Container(
+          decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(20),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.transparent,
+                Colors.black.withOpacity(0.7),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          top: 16,
+          left: 16,
+          child: title, // add the title widget
+        ),
+        Positioned(
+          bottom: 0,
+          child: Container(
+            height: 30,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 
+  @override
+  double get maxExtent => expandedHeight;
+
+  @override
+  double get minExtent => minExtentHeight;
+
+  @override
+  bool shouldRebuild(covariant MySliverAppBar oldDelegate) {
+    return expandedHeight != oldDelegate.expandedHeight;
+    title != oldDelegate.title;
+    backgroundImage != oldDelegate.backgroundImage;
+  }
+}
