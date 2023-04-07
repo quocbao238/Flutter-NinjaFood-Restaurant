@@ -30,6 +30,17 @@ class FileHelper {
     }
   }
 
+  static Future<File?> pickImages() async {
+    final imageFiles = await ImagePicker().pickMultiImage(imageQuality: 10, maxWidth: 256, maxHeight: 256);
+    if (imageFiles != null) {
+      print(imageFiles);
+
+    } else {
+      print('No image selected.');
+      return null;
+    }
+  }
+
   static Future<File?> takePhoto() async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
     if (pickedFile != null) {

@@ -84,6 +84,7 @@ class RoomChatScreenController extends BaseController {
     });
   }
 
+
   Future<void> onPressedAttachFile() async {
     final _filePicker = await FileHelper.pickFile();
     if (_filePicker == null) return;
