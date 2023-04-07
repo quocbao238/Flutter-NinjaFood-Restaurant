@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/chat_details/controller/chat_details_controller.dart';
-import 'package:ninjafood/app/features/role_user/chat_details/presentation/mobile/widgets/message_item_widget.dart';
+import 'package:ninjafood/app/features/role_user/chat_message/controllers/room_chat_screen_controller.dart';
+import 'package:ninjafood/app/features/role_user/chat_message/presentation/layout/mobile/widgets/message/message_item_widget.dart';
+import 'package:ninjafood/app/widgets/app_network_image.dart';
 
-class ChatDetailsMobileView extends GetView<ChatDetailsController> {
-  const ChatDetailsMobileView({super.key});
+class RoomChatMobileScreen extends GetView<RoomChatScreenController> {
+  const RoomChatMobileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,21 @@ class ChatDetailsMobileView extends GetView<ChatDetailsController> {
               child: AppPadding(
                   padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small),
                   child: Center(child: AppText.headlineSmall(maxLines: 1, text: controller.receiverUser.getName())))),
-          SizedBox(width: 45, height: 45)
+          AppPadding(
+            padding: const AppEdgeInsets.only(
+                top: AppGapSize.paddingMedium,
+                left: AppGapSize.paddingMedium,
+                right: AppGapSize.paddingMedium,
+                bottom: AppGapSize.regular),
+            child: SizedBox(
+              width: 45,
+              height: 45,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(45),
+                child: AppNetworkImage(url: controller.receiverUser.photoUrl ?? ''),
+              ),
+            ),
+          )
         ],
       ),
       body: AppPadding(
@@ -41,10 +57,7 @@ class ChatDetailsMobileView extends GetView<ChatDetailsController> {
                         final messageItem = messageChats[index];
                         final isCurrentUser = messageItem.senderId == controller.senderUser.uid;
                         return MessageItemWidget(
-                          avatarUrl: null,
-                          messageChat: messageItem,
-                          isCurrentUser: isCurrentUser,
-                        );
+                            avatarUrl: null, messageChat: messageItem, isCurrentUser: isCurrentUser);
                       });
                 }),
               ),
@@ -52,12 +65,17 @@ class ChatDetailsMobileView extends GetView<ChatDetailsController> {
             AppPadding(
               padding: AppEdgeInsets.only(bottom: AppGapSize.medium),
               child: TextField(
+                textInputAction: TextInputAction.send,
+                onSubmitted: (value) => controller.onSendMessage(),
                 style: Theme.of(context).textTheme.bodyMedium,
                 controller: controller.textEditingController,
                 decoration: InputDecoration(
-                  suffixIcon: InkWell(
-                      onTap: () => controller.onSendMessage(), child: AppPadding.medium(child: AppIcons.sendMessage())),
-                ),
+                    prefixIcon: InkWell(
+                        onTap: () => controller.onPressedAttachFile(),
+                        child: AppPadding.medium(child: Icon(FontAwesomeIcons.file))),
+                    suffixIcon: InkWell(
+                        onTap: () => controller.onSendMessage(),
+                        child: AppPadding.medium(child: AppIcons.sendMessage()))),
               ),
             ),
           ],

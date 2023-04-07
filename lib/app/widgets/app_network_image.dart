@@ -5,9 +5,10 @@ import 'package:ninja_theme/ninja_theme.dart';
 class AppNetworkImage extends StatelessWidget {
   final String url;
   final BoxFit? fit;
+  final double? width;
+  final double? height;
 
-  const AppNetworkImage({Key? key, required this.url, this.fit})
-      : super(key: key);
+  const AppNetworkImage({Key? key, required this.url, this.fit, this.width, this.height}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

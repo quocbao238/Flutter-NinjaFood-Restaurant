@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
-import 'package:ninjafood/app/features/role_user/chat/presentation/mobile/widgets/chat_item.dart';
 
-class ChatList extends StatelessWidget {
+import 'group_chat_item.dart';
+
+class GroupChatList extends StatelessWidget {
   final List<GroupChatModel> groupChats;
   final Function(GroupChatModel) onTap;
 
-  const ChatList({Key? key, required this.groupChats, required this.onTap}) : super(key: key);
+  const GroupChatList({Key? key, required this.groupChats, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class ChatList extends StatelessWidget {
       initialItemCount: groupChats.length,
       itemBuilder: (context, index, animation) {
         final _groupChatItem = groupChats[index];
-        return ChatItem(
+        return GroupChatItem(
             animation: animation, groupChatItem: _groupChatItem, onTap: onTap);
       },
     );

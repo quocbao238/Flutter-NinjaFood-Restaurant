@@ -17,8 +17,6 @@ class MessageController extends GetxController implements BootableController {
   late final DatabaseService databaseService;
   RxList<GroupChatModel> groupChats = <GroupChatModel>[].obs;
 
-
-
   RxList<MessageChat> messageList = <MessageChat>[].obs;
   StreamSubscription? _messageSubscription;
 
@@ -43,7 +41,7 @@ class MessageController extends GetxController implements BootableController {
     final groupChatId = isAdmin ? null : currentUser!.uid;
     // GroupChatID is id of user
     _messageSubscription = databaseService.listenGroupChat().listen((QuerySnapshot<Map<String, dynamic>> event) {
-      final List<GroupChatModel> _result  = event.docs.map((e) => GroupChatModel.fromJson(e.data())).toList();
+      final List<GroupChatModel> _result = event.docs.map((e) => GroupChatModel.fromJson(e.data())).toList();
       if (isAdmin) {
         groupChats.assignAll(_result);
         return;
@@ -53,18 +51,20 @@ class MessageController extends GetxController implements BootableController {
     });
   }
 
-  Future<Either<Failure, void>> sendMessage({required String message, UserModel? receiverUser}) async {
+  Future<Either<Failure, void>> sendMessage(
+      {required dynamic message, UserModel? receiverUser, required MessageChatType messageChatType}) async {
     final isUser = userController.isUser();
     if (isUser) {
-      final _response = await _userMessage(message);
+      final _response = await _userMessage(message, messageChatType);
       return _response.fold((l) => left(l), (r) => right(null));
     }
     if (receiverUser == null) return left(Failure.custom('receiverUser is null'));
-    final _response = await _adminMessage(message: message, receiverUser: receiverUser);
+    final _response =
+        await _adminMessage(message: message, receiverUser: receiverUser, messageChatType: messageChatType);
     return _response.fold((l) => left(l), (r) => right(null));
   }
 
-  Future<Either<Failure, void>> _userMessage(String message) async {
+  Future<Either<Failure, void>> _userMessage(dynamic message, MessageChatType messageChatType) async {
     final senderUser = userController.getCurrentUser!;
     final receiverUser = userController.getAdminUser!;
     final groupChatId = senderUser.uid;
@@ -73,7 +73,7 @@ class MessageController extends GetxController implements BootableController {
         senderId: senderUser.uid,
         receiverId: receiverUser.uid,
         message: message,
-        messageChatType: MessageChatType.text,
+        messageChatType: messageChatType,
         groupChatId: groupChatId);
 
     final groupChat = GroupChatModel(
@@ -94,7 +94,8 @@ class MessageController extends GetxController implements BootableController {
     }
   }
 
-  Future<Either<Failure, void>> _adminMessage({required String message, required UserModel receiverUser}) async {
+  Future<Either<Failure, void>> _adminMessage(
+      {required dynamic message, required UserModel receiverUser, required MessageChatType messageChatType}) async {
     final senderUser = userController.getCurrentUser!;
     final groupChatId = receiverUser.uid;
 
@@ -102,7 +103,7 @@ class MessageController extends GetxController implements BootableController {
         senderId: senderUser.uid,
         receiverId: receiverUser.uid,
         message: message,
-        messageChatType: MessageChatType.text,
+        messageChatType: messageChatType,
         groupChatId: groupChatId);
 
     final groupChat = GroupChatModel(

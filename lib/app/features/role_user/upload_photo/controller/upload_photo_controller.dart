@@ -1,54 +1,25 @@
-import 'dart:io';
-
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/helper/file_helper.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/services/console_service/console_service.dart';
+const _logName = 'UploadPhotoController';
 
 class UploadPhotoController extends BaseController {
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  final ConsoleService console = ConsoleService.instance;
 
   void onPressBack() {
     Get.back();
   }
 
   Future<void> onPressedFromGallery() async {
-    try {
-      final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (pickedFile != null) {
-        final image = File(pickedFile.path);
-        Get.toNamed(AppRouteProvider.uploadPreviewScreen, arguments: image);
-      } else {
-        print('No image selected.');
-      }
-    } catch (e) {
-      print(e);
-    }
-
+    final image = await FileHelper.pickImage();
+    if (image != null) Get.toNamed(AppRouteProvider.uploadPreviewScreen, arguments: image);
   }
 
   Future<void> onPressedTakePhoto() async {
-    try {
-      final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
-      if (pickedFile != null) {
-        final image = File(pickedFile.path);
-        Get.toNamed(AppRouteProvider.uploadPreviewScreen, arguments: image);
-      } else {
-        print('No image selected.');
-      }
-    } catch (e) {
-      print(e);
-    }
-
+    final image = await FileHelper.takePhoto();
+    if (image != null) Get.toNamed(AppRouteProvider.uploadPreviewScreen, arguments: image);
   }
 
   void onPressedSkip() {

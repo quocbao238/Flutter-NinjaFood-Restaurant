@@ -6,12 +6,12 @@ import 'package:ninjafood/app/helper/utils.dart';
 import 'package:ninjafood/app/widgets/animation_list.dart';
 import 'package:ninjafood/app/widgets/app_network_image.dart';
 
-class ChatItem extends StatelessWidget {
+class GroupChatItem extends StatelessWidget {
   final GroupChatModel groupChatItem;
   final Animation<double> animation;
   final Function(GroupChatModel) onTap;
 
-  const ChatItem({super.key, required this.groupChatItem, required this.animation, required this.onTap});
+  const GroupChatItem({super.key, required this.groupChatItem, required this.animation, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class ChatItem extends StatelessWidget {
                               ],
                             ),
                             AppText.bodyMedium(
-                              text: groupChatItem.lastMessageChat.message,
+                              text: groupChatItem.lastMessageChat.message.toString(),
                               fontWeight: FontWeight.w400,
                               textAlign: TextAlign.start,
                               maxLines: 2,

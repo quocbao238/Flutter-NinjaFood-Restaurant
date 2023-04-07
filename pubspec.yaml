@@ -38,6 +38,8 @@ dependencies:
   firebase_messaging: ^14.4.0
   uuid: ^3.0.7
   tuple: ^2.0.1
+  file_picker: ^5.2.7
+  video_player: ^2.6.1
 
 
   ninja_theme:

@@ -2,9 +2,9 @@ library routes;
 
 import 'package:get/get.dart';
 import 'package:ninjafood/app/features/role_user/cart/controllers/cart_screen_controller.dart';
-import 'package:ninjafood/app/features/role_user/chat/controllers/chat_screen_controller.dart';
-import 'package:ninjafood/app/features/role_user/chat_details/controller/chat_details_controller.dart';
-import 'package:ninjafood/app/features/role_user/chat_details/presentation/chat_details_screen.dart';
+import 'package:ninjafood/app/features/role_user/chat_message/controllers/room_chat_screen_controller.dart';
+import 'package:ninjafood/app/features/role_user/chat_message/presentation/room_chat_screen.dart';
+import 'package:ninjafood/app/features/role_user/chat_message/controllers/group_chat_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/food_detail/controller/food_detail_controller.dart';
 import 'package:ninjafood/app/features/role_user/food_detail/presentation/food_detail_screen.dart';
 import 'package:ninjafood/app/features/role_user/forgot_password/controller/forgot_password_controller.dart';
@@ -37,7 +37,6 @@ import 'package:ninjafood/app/features/role_user/upload_photo/presentation/uploa
 import 'package:ninjafood/app/features/role_user/upload_preview/controller/upload_preview_controller.dart';
 import 'package:ninjafood/app/features/role_user/upload_preview/presentation/upload_preview.dart';
 import 'package:ninjafood/app/globalController/userController.dart';
-import 'package:ninjafood/app/services/theme_service/theme_service.dart';
 part 'app_provider.dart';
 part 'app_router.dart';
 part 'bindings.dart';
