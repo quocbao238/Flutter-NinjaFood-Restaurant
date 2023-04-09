@@ -17,7 +17,7 @@ class ProfilePerson extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: AppSizeScale(
-        ratioHeight: MediaQuery.of(context).size.height,
+        // ratioHeight: MediaQuery.of(context).size.height,
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
         child: AppPadding.medium(
           child: Column(
@@ -61,18 +61,20 @@ class ProfilePerson extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16)),
                   child: Row(
                     children: [
-                      // AppIconsAssets.voucher,
-                      AppPadding.medium(
-                          child: AppText.bodyLarge(
-                              text: 'You Have 3 Voucher',
-                              fontWeight: FontWeight.w400))
+                      AppPadding.medium(child: AppIcons.voucher()),
+                      AppText.bodyLarge(
+                          text: 'You Have 3 Voucher',
+                          fontWeight: FontWeight.w400)
                     ],
                   ),
                 ),
               ),
-              AppText.bodyLarge(
-                text: 'Favorite',
-                fontWeight: FontWeight.bold,
+              AppPadding(
+                padding: AppEdgeInsets.only(bottom: AppGapSize.medium),
+                child: AppText.bodyLarge(
+                  text: 'Favorite',
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               FavoriteList(favoriteItem: favoriteItem, isDarkMode: isDarkMode)
             ],

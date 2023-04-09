@@ -35,10 +35,10 @@ class FavoriteFood {
       name: 'Spacy fresh crab',
       price: 35,
     ),
-    FavoriteFood(
-      image: 'assets/icons/food3.png',
-      name: 'Spacy fresh crab',
-      price: 35,
-    ),
+    // FavoriteFood(
+    //   image: 'assets/icons/food3.png',
+    //   name: 'Spacy fresh crab',
+    //   price: 35,
+    // ),
   ];
 }
