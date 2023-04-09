@@ -18,7 +18,8 @@ class MobileChatScreen extends GetView<ChatScreenController> {
           onPressed: () => controller.handleOnTapChat(),
           child: Icon(Icons.message, color: Colors.white),
         ),
-        appBarWidget: AppButtonDrawer(onPressed: () => tabController.toggleDrawer()),
+        appBarWidget:
+            AppButtonDrawer(onPressed: () => tabController.toggleDrawer()),
         body: AppPadding(
           padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
           child: Column(
@@ -26,8 +27,8 @@ class MobileChatScreen extends GetView<ChatScreenController> {
             children: [
               AppPadding(
                   padding: AppEdgeInsets.only(bottom: AppGapSize.small),
-                  child: AppText.headlineSmall(text: 'Chat', fontWeight: FontWeight.bold)),
-
+                  child: AppText.headlineSmall(
+                      text: 'Chat', fontWeight: FontWeight.bold)),
               Obx(() {
                 final groupChats = controller.groupChats.value;
                 return ChatList(
@@ -35,8 +36,6 @@ class MobileChatScreen extends GetView<ChatScreenController> {
                   onTap: controller.onTapChat,
                 );
               }),
-
-              // ChatDetails()
             ],
           ),
         ));
