@@ -16,7 +16,6 @@ class ChatMessageAnotherView extends StatelessWidget {
     final file = messageChat.lstFiles.first;
     final fileName = file.fileName;
     final fileExtension = file.fileName.split('.').last;
-    final fileUrl = file.fileUrl;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [

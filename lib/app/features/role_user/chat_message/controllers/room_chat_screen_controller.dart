@@ -110,7 +110,7 @@ class RoomChatScreenController extends BaseController {
     if (selectedFiles.isEmpty) return;
     loading.value = true;
     final chatFiles = await selectChatFiles.value.uploadFileToStorage(selectedFiles);
-    if(chatFiles.isEmpty) return;
+    if (chatFiles.isEmpty) return;
     final messageChat =
         selectChatFiles.value.createMessageChat(message: textEditingController.text, chatFiles: chatFiles);
     final response = await messageController.sendMessage(
@@ -149,4 +149,13 @@ class RoomChatScreenController extends BaseController {
     selectedFiles.removeAt(index);
     if (selectedFiles.isEmpty) selectChatFiles.value = SelectChatTextOnly();
   }
+
+  Future<void> downloadFile(String fileUrl) async {
+    loading.value = true;
+    File? _resultFile = await FileHelper.downloadFile(fileUrl);
+    loading.value = false;
+    if (_resultFile == null) return;
+    FileHelper.openFileByPath(_resultFile.path);
+  }
+
 }

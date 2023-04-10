@@ -2,9 +2,9 @@ part of room_chat_widgets;
 
 class RoomChatFileView extends StatelessWidget {
   final File file;
-  final VoidCallback onRemoveImage;
+  final VoidCallback onRemoveFile;
 
-  const RoomChatFileView({Key? key, required this.onRemoveImage, required this.file}) : super(key: key);
+  const RoomChatFileView({Key? key, required this.onRemoveFile, required this.file}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +46,12 @@ class RoomChatFileView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Center(
-                            child:
-                                Icon(Icons.insert_drive_file, size: 24, color: Theme.of(context).colorScheme.primary)),
+                            child: Icon(
+                                FileHelper.getIconByExtension(
+                                  file.path.split('.').last,
+                                ),
+                                size: 24,
+                                color: Theme.of(context).colorScheme.primary)),
                         AppPadding.small(
                           child: AppText.bodySmall(text: FileHelper.getFileName(file.path), maxLines: 2),
                         ),
@@ -62,7 +66,7 @@ class RoomChatFileView extends StatelessWidget {
                 top: 0,
                 right: 0,
                 child: InkWell(
-                  onTap: onRemoveImage,
+                  onTap: onRemoveFile,
                   child: Container(
                     width: 20,
                     height: 20,

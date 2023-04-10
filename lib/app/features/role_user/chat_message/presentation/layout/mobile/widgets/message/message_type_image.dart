@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
+import 'package:ninjafood/app/routes/routes.dart';
 import 'message_type_text.dart';
 
 class ChatMessageImage extends StatefulWidget {
@@ -30,9 +32,12 @@ class _ChatMessageImageState extends State<ChatMessageImage> with AutomaticKeepA
       children: [
         ...lstFiles
             .map((e) => AppPadding.small(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: CachedNetworkImage(imageUrl: e.fileUrl, fit: BoxFit.fill),
+                  child: InkWell(
+                    onTap: () => Get.toNamed(AppRouteProvider.imagePreviewScreen, arguments: e.fileUrl),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: CachedNetworkImage(imageUrl: e.fileUrl, fit: BoxFit.fill),
+                    ),
                   ),
                 ))
             .toList(),

@@ -60,7 +60,7 @@ class RoomChatBottomSendWidget extends GetView<RoomChatScreenController> {
                   child: Wrap(crossAxisAlignment: WrapCrossAlignment.start, children: [
                     ...listFile.map((e) {
                       final index = listFile.indexOf(e);
-                      return RoomChatFileView(onRemoveImage: () => controller.onRemoveImage(index), file: e);
+                      return RoomChatFileView(onRemoveFile: () => controller.onRemoveImage(index), file: e);
                     }).toList(),
                     Obx(() {
                       final selectChatFiles = controller.selectChatFiles.value;
