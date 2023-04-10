@@ -2,6 +2,7 @@ library routes;
 
 import 'package:get/get.dart';
 import 'package:ninjafood/app/features/role_user/cart/controllers/cart_screen_controller.dart';
+import 'package:ninjafood/app/features/role_user/category/controllers/category_controller.dart';
 import 'package:ninjafood/app/features/role_user/category/presentation/category_screen.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/controllers/room_chat_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/presentation/image_preview_screen.dart';
