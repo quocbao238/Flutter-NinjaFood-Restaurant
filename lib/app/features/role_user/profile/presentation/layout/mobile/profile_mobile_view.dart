@@ -5,7 +5,7 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/layout/mobile/widgets/profile_appbar.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/layout/mobile/widgets/profile_person.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
-import 'package:ninjafood/app/globalController/userController.dart';
+import 'package:ninjafood/app/global_controller/global_controller.dart';
 
 class ProfileMobileView extends GetView<UserController> {
   const ProfileMobileView({super.key});

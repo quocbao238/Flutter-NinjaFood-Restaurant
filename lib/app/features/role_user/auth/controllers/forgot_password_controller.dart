@@ -38,7 +38,7 @@ class ForgotPassWordController extends BaseController {
   }
 
   void onPressedBackSuccess() {
-    Get.offAllNamed(AppRouteProvider.signinScreen);
+    Get.offAllNamed(AppRouteProvider.signInScreen);
   }
 
 }

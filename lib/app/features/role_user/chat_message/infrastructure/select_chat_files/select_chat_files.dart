@@ -2,7 +2,7 @@ library select_chat_files;
 
 import 'dart:io';
 
-import 'package:ninjafood/app/helper/file_helper.dart';
+import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/services/cloud_storage_service/cloud_storage_service.dart';
 

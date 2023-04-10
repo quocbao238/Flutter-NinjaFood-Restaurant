@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
-import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/globalController/userController.dart';
+import 'package:ninjafood/app/core/core.dart';import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/services/database_service/database_service.dart';
 

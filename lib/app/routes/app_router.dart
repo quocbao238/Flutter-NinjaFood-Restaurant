@@ -25,9 +25,9 @@ class AppPages {
       binding: GetBinding(AppRouteProvider.onboardScreen),
     ),
     GetPage(
-      name: AppRouteProvider.signinScreen,
+      name: AppRouteProvider.signInScreen,
       page: () => SignInScreen(),
-      binding: GetBinding(AppRouteProvider.signinScreen),
+      binding: GetBinding(AppRouteProvider.signInScreen),
     ),
     GetPage(
       name: AppRouteProvider.signupScreen,

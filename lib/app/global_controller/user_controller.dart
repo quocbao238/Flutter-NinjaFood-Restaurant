@@ -1,16 +1,4 @@
-import 'dart:async';
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:fpdart/fpdart.dart';
-import 'package:get/get.dart';
-import 'package:ninjafood/app/constants/contains.dart';
-import 'package:ninjafood/app/globalController/boot_controllers.dart';
-import 'package:ninjafood/app/models/user_model.dart';
-import 'package:ninjafood/app/services/console_service/console_service.dart';
-import 'package:ninjafood/app/services/database_service/database_service.dart';
-import 'package:ninjafood/app/services/notification_service/notification_service.dart';
-import 'package:ninjafood/app/services/services.dart';
+part of global_controller;
 
 const _logName = 'UserController';
 

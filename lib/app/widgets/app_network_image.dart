@@ -15,14 +15,9 @@ class AppNetworkImage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: url,
       imageBuilder: (context, imageProvider) => DecoratedBox(
-          decoration: BoxDecoration(
-        image: DecorationImage(image: imageProvider, fit: fit ?? BoxFit.fill),
-      )),
+          decoration: BoxDecoration(image: DecorationImage(image: imageProvider, fit: fit ?? BoxFit.fill))),
       placeholder: (context, url) => AppLoading(isLoading: true),
-      errorWidget: (context, url, error) => Icon(
-        Icons.error,
-        color: Theme.of(context).colorScheme.onError,
-      ),
+      errorWidget: (context, url, error) => Icon(Icons.error, color: Theme.of(context).colorScheme.onError),
     );
   }
 }

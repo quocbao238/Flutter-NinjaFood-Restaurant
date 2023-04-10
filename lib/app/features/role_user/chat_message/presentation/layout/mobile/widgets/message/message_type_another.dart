@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/controllers/room_chat_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/presentation/layout/mobile/widgets/message/message_type_text.dart';
-import 'package:ninjafood/app/helper/file_helper.dart';
+import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
 
 class ChatMessageAnotherView extends StatelessWidget {

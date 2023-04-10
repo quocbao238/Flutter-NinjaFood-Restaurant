@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/globalController/userController.dart';
+import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/helper/utils.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
