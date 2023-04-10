@@ -96,7 +96,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRouteProvider.imagePreviewScreen,
-      page: () => MessageImageFullScreenView(url: Get.arguments),
+      page: () => ImagePreviewScreen(url: Get.arguments),
     ),
   ];
 }
