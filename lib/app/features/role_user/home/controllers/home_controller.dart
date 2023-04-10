@@ -120,7 +120,7 @@ class HomeController extends BaseController {
   }
 
   void onPressedFoodItem(ProductModel product) {
-    // Get.toNamed(AppRouteProvider.foodDetailScreen, arguments: product);
+    Get.toNamed(AppRouteProvider.foodDetailScreen, arguments: product);
   }
 
   void onPressedClearSearch() {

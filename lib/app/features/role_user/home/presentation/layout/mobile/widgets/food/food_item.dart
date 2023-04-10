@@ -26,7 +26,7 @@ class FoodItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return GestureDetector(
-      onTap: () => Get.to(FoodDetailScreen()),
+      onTap: () => onTap?.call(),
       child: AnimationItem(
         animation: animation,
         child: AppPadding(

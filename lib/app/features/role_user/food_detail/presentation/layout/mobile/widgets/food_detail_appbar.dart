@@ -4,7 +4,7 @@ class FoodDetailAppbar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
   final double minExtentHeight;
   final Widget title;
-  final ImageProvider backgroundImage;
+  final Widget backgroundImage;
 
   FoodDetailAppbar({
     required this.minExtentHeight,
@@ -22,10 +22,7 @@ class FoodDetailAppbar extends SliverPersistentHeaderDelegate {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Image(
-          image: backgroundImage,
-          fit: BoxFit.cover,
-        ),
+        backgroundImage,
         Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -49,8 +46,7 @@ class FoodDetailAppbar extends SliverPersistentHeaderDelegate {
             height: 30,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
               color: Theme.of(context).colorScheme.onPrimary,
             ),
           ),
