@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
-import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/mobile_view_type/home_view_type_menu.dart';
+import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/mobile_view_type/home_view_type_category.dart';
 import 'package:ninjafood/app/widgets/app_bar_home_widget.dart';
 
-import 'widgets/mobile_view_type/home_view_type_foods.dart';
+import 'widgets/mobile_view_type/home_view_type_product.dart';
 import 'widgets/mobile_view_type/home_view_type_normal.dart';
 
 class MobileHomeScreen extends GetView<HomeController> {
@@ -29,11 +29,11 @@ class MobileHomeScreen extends GetView<HomeController> {
               }
 
               if (homeViewType == HomeViewType.popularMenu) {
-                return HomeViewTypeMenus();
+                return HomeViewTypeCategory();
               }
 
               if (homeViewType == HomeViewType.popularFood) {
-                return HomeViewTypeFoods();
+                return HomeViewTypeProduct();
               }
 
               return SizedBox.shrink();

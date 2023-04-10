@@ -4,7 +4,7 @@ class AppRouteProvider {
   static const String splashScreen = '/splashScreen';
   static const String demoScreen = '/demoScreen';
   static const String onboardScreen = '/onboardScreen';
-  static const String signinScreen = '/signinScreen';
+  static const String signInScreen = '/signInScreen';
   static const String signupScreen = '/signupScreen';
   static const String signupProcessScreen = '/signupProcessScreen';
   static const String paymentMethodScreen = '/paymentMethodScreen';
@@ -15,6 +15,8 @@ class AppRouteProvider {
   static const String tabScreen = '/tabScreen';
   static const String forgotPasswordScreen = '/forgotPasswordScreen';
   static const String successNotificationScreen = '/successNotificationScreen';
-  static const String menuScreen = '/menuScreen';
-
+  static const String categoryScreen = '/menuScreen';
+  static const String chatDetailsScreen = '/chatDetailsScreen';
+  static const String foodDetailScreen = '/foodDetailScreen';
+  static const String imagePreviewScreen = '/imagePreviewScreen';
 }

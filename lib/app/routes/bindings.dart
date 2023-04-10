@@ -9,99 +9,53 @@ class GetBinding extends Bindings {
   void dependencies() {
     switch (routerName) {
       case AppRouteProvider.splashScreen:
-        final localStorageController = Get.find<LocalStorageController>();
-        Get.lazyPut(() =>
-            SplashController(localStorageController: localStorageController));
+        Get.lazyPut(() => SplashController());
         break;
       case AppRouteProvider.onboardScreen:
         Get.lazyPut(() => OnboardController());
         break;
       case AppRouteProvider.signupScreen:
-        Get.lazyPut(() {
-          final authController = Get.find<AuthController>();
-          return SignUpController(authController: authController);
-        });
+        Get.lazyPut(() => SignUpController());
         break;
-      case AppRouteProvider.signinScreen:
-        Get.lazyPut(() {
-          final authController = Get.find<AuthController>();
-          return SignInController(authController: authController);
-        });
+      case AppRouteProvider.signInScreen:
+        Get.lazyPut(() => SignInController());
         break;
       case AppRouteProvider.signupProcessScreen:
-        Get.lazyPut(() {
-          final authController = Get.find<AuthController>();
-          final databaseController = Get.find<DatabaseController>();
-          return SignUpProcessController(
-              authController: authController,
-              databaseController: databaseController);
-        });
+        Get.lazyPut(() => SignUpProcessController());
         break;
       case AppRouteProvider.paymentMethodScreen:
-        Get.lazyPut(() {
-          final authController = Get.find<AuthController>();
-          return PaymentController(authController: authController);
-        });
+        Get.lazyPut(() => SignUpPaymentController());
         break;
       case AppRouteProvider.uploadPhotoScreen:
-        Get.lazyPut(() {
-          final authController = Get.find<AuthController>();
-          return UploadPhotoController(authController: authController);
-        });
+        Get.lazyPut(() => SignUpUploadPhotoController());
         break;
       case AppRouteProvider.uploadPreviewScreen:
-        Get.lazyPut(() {
-          final authController = Get.find<AuthController>();
-          final dbController = Get.find<DatabaseController>();
-          final cloudStorageController = Get.find<CloudStorageController>();
-          return UploadPreviewController(
-              authController: authController,
-              dbController: dbController,
-              cloudStorageController: cloudStorageController);
-        });
+        Get.lazyPut(() => SignUpPreviewPhotoController());
         break;
       case AppRouteProvider.setLocationScreen:
-        Get.lazyPut(() {
-          final authController = Get.find<AuthController>();
-          final dbController = Get.find<DatabaseController>();
-          return SetLocationController(
-              authController: authController, databaseController: dbController);
-        });
+        Get.lazyPut(() => SignUpLocationController());
         break;
       case AppRouteProvider.signupSuccessScreen:
-        Get.lazyPut(() {
-          final authController = Get.find<AuthController>();
-
-          return SignupSuccessController(authController: authController);
-        });
+        Get.lazyPut(() => SignupSuccessController());
         break;
       case AppRouteProvider.tabScreen:
-        final themeController = Get.find<ThemeController>();
-        final authController = Get.find<AuthController>();
-        final databaseController = Get.find<DatabaseController>();
-        Get.lazyPut(() => TabsController(
-            authController: authController, themeController: themeController));
-        Get.lazyPut(() => HomeController(
-            authController: authController,
-            databaseController: databaseController));
+        Get.lazyPut(() => TabsController());
+        Get.lazyPut(() => HomeController());
+        Get.lazyPut(() => GroupChatScreenController());
+        Get.lazyPut(() => CartScreenController());
+        Get.lazyPut(() => ProfileController());
         break;
       case AppRouteProvider.forgotPasswordScreen:
-        Get.lazyPut(() {
-          final authController = Get.find<AuthController>();
-          return ForgotPassWordController(authController: authController);
-        });
+        Get.lazyPut(() => ForgotPassWordController());
         break;
-      case AppRouteProvider.successNotificationScreen:
-        Get.lazyPut(() {
-          final authController = Get.find<AuthController>();
-          return SuccessNotificationController(authController: authController);
-        });
+      case AppRouteProvider.categoryScreen:
+        Get.lazyPut(() => CategoryScreen());
         break;
-      case AppRouteProvider.menuScreen:
-        Get.lazyPut(() {
-          final homeController = Get.find<HomeController>();
-          return MenuScreenController(homeController: homeController);
-        });
+      case AppRouteProvider.chatDetailsScreen:
+        Get.lazyPut(() => RoomChatScreenController());
+        break;
+      case AppRouteProvider.foodDetailScreen:
+        Get.lazyPut(() => ProductDetailController());
         break;
     }
   }

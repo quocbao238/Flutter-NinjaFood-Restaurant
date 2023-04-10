@@ -4,8 +4,8 @@ class AppPages {
   static String initial = AppRouteProvider.splashScreen;
 
   static navigateDefaultPage() async {
-    final authController = Get.find<AuthController>();
-    if (authController.authUser.value != null) {
+    final userController = UserController.instance;
+    if (userController.getFirebaseAuthUser != null) {
       initial = AppRouteProvider.tabScreen;
       return;
     }
@@ -25,9 +25,9 @@ class AppPages {
       binding: GetBinding(AppRouteProvider.onboardScreen),
     ),
     GetPage(
-      name: AppRouteProvider.signinScreen,
+      name: AppRouteProvider.signInScreen,
       page: () => SignInScreen(),
-      binding: GetBinding(AppRouteProvider.signinScreen),
+      binding: GetBinding(AppRouteProvider.signInScreen),
     ),
     GetPage(
       name: AppRouteProvider.signupScreen,
@@ -41,17 +41,17 @@ class AppPages {
     ),
     GetPage(
       name: AppRouteProvider.paymentMethodScreen,
-      page: () => PaymentMethodScreen(),
+      page: () => SignUpPaymentScreen(),
       binding: GetBinding(AppRouteProvider.paymentMethodScreen),
     ),
     GetPage(
       name: AppRouteProvider.uploadPhotoScreen,
-      page: () => UploadPhotoScreen(),
+      page: () => SignUpUploadPhotoScreen(),
       binding: GetBinding(AppRouteProvider.uploadPhotoScreen),
     ),
     GetPage(
       name: AppRouteProvider.uploadPreviewScreen,
-      page: () => UploadPreviewScreen(),
+      page: () => SignUpPhotoPreviewScreen(),
       binding: GetBinding(AppRouteProvider.uploadPreviewScreen),
     ),
     GetPage(
@@ -71,7 +71,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRouteProvider.forgotPasswordScreen,
-      page: () => ForgotPasswordScreen(),
+      page: () => ResetPasswordScreen(),
       binding: GetBinding(AppRouteProvider.forgotPasswordScreen),
     ),
     GetPage(
@@ -80,9 +80,23 @@ class AppPages {
       binding: GetBinding(AppRouteProvider.successNotificationScreen),
     ),
     GetPage(
-      name: AppRouteProvider.menuScreen,
-      page: () => MenuScreen(),
-      binding: GetBinding(AppRouteProvider.menuScreen),
+      name: AppRouteProvider.categoryScreen,
+      page: () => CategoryScreen(),
+      binding: GetBinding(AppRouteProvider.categoryScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.chatDetailsScreen,
+      page: () => ChatDetailsScreen(),
+      binding: GetBinding(AppRouteProvider.chatDetailsScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.foodDetailScreen,
+      page: () => ProductDetailScreen(),
+      binding: GetBinding(AppRouteProvider.foodDetailScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.imagePreviewScreen,
+      page: () => ImagePreviewScreen(url: Get.arguments),
     ),
   ];
 }
