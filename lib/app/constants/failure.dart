@@ -7,8 +7,6 @@ class Failure {
   const Failure.custom(this.message) : stackTrace = StackTrace.empty;
 
   const Failure(this.message, this.stackTrace);
-
-
 }
 
 handleFailure(String _logName, Failure failure, {bool showDialog = false}) {

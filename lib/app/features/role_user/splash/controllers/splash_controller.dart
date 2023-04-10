@@ -30,6 +30,6 @@ class SplashController extends BaseController {
       return;
     }
 
-    Get.offAndToNamed(AppRouteProvider.signinScreen);
+    Get.offAndToNamed(AppRouteProvider.signInScreen);
   }
 }

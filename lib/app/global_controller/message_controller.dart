@@ -1,15 +1,6 @@
-import 'dart:async';
+part of global_controller;
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fpdart/fpdart.dart';
-import 'package:get/get.dart';
-import 'package:ninjafood/app/constants/contains.dart';
-import 'package:ninjafood/app/globalController/boot_controllers.dart';
-import 'package:ninjafood/app/globalController/userController.dart';
-import 'package:ninjafood/app/models/chat_model.dart';
-import 'package:ninjafood/app/models/message_chat_model.dart';
-import 'package:ninjafood/app/models/user_model.dart';
-import 'package:ninjafood/app/services/database_service/database_service.dart';
+
 
 class MessageController extends GetxController implements BootableController {
   static MessageController get instance => Get.find<MessageController>();

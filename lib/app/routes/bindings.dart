@@ -17,7 +17,7 @@ class GetBinding extends Bindings {
       case AppRouteProvider.signupScreen:
         Get.lazyPut(() => SignUpController());
         break;
-      case AppRouteProvider.signinScreen:
+      case AppRouteProvider.signInScreen:
         Get.lazyPut(() => SignInController());
         break;
       case AppRouteProvider.signupProcessScreen:

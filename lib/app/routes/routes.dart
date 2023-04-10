@@ -36,7 +36,7 @@ import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_upload
 import 'package:ninjafood/app/features/role_user/auth/presentation/sign_up_upload_photo_screen.dart';
 import 'package:ninjafood/app/features/role_user/auth/controllers/signup_preview_photo_controller.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/sign_up_photo_review_screen.dart';
-import 'package:ninjafood/app/globalController/userController.dart';
+import 'package:ninjafood/app/global_controller/global_controller.dart';
 part 'app_provider.dart';
 part 'app_router.dart';
 part 'bindings.dart';

@@ -1,6 +1,6 @@
 library contains;
 import 'package:get/get.dart';
-import 'package:ninjafood/app/globalController/global_controller.dart';
+import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/services/console_service/console_service.dart';
 part 'failure.dart';
 
