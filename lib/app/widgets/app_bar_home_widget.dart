@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
-import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/search_food_bar.dart';
+import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/product_search_bar.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 
 class AppBarHomeWidget extends GetView<TabsController> {
@@ -43,7 +43,7 @@ class AppBarHomeWidget extends GetView<TabsController> {
             height: kToolbarHeight,
             child: Row(
               children: [
-                Expanded(child: SearchFoodBar()),
+                Expanded(child: ProductSearchBar()),
                 AppPadding(
                   padding: AppEdgeInsets.only(left: AppGapSize.small),
                   child: AppFilterButton(

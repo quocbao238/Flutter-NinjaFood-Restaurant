@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/helper/utils.dart';
@@ -164,7 +164,4 @@ class DatabaseService extends GetxService implements BootableService, DatabaseSe
   Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat() {
     return _db.collection(DatabaseKeys.groupChat).snapshots();
   }
-
-  @override
-  int priority = 0;
 }

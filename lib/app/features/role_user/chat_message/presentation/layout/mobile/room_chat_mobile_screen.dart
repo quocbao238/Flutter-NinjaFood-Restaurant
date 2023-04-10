@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
@@ -12,18 +10,21 @@ class RoomChatMobileScreen extends GetView<RoomChatScreenController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldBackgroundImage.pattern(
-      appBarWidget: RoomChatAppBarWidget(),
-      body: AppPadding(
-        padding: AppEdgeInsets.only(left: AppGapSize.medium, right: AppGapSize.medium, bottom: AppGapSize.medium),
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: [
-            Column(children: [RoomChatListMessageWidget(), RoomChatBottomSendWidget()]),
-            RoomChatButtonSelectFileWidget(),
-          ],
+    return Obx(() {
+      return AppScaffoldBackgroundImage.pattern(
+        isLoading: controller.loading.value,
+        appBarWidget: RoomChatAppBarWidget(),
+        body: AppPadding(
+          padding: AppEdgeInsets.only(left: AppGapSize.medium, right: AppGapSize.medium, bottom: AppGapSize.medium),
+          child: Stack(
+            alignment: Alignment.bottomLeft,
+            children: [
+              Column(children: [RoomChatListMessageWidget(), RoomChatBottomSendWidget()]),
+              RoomChatButtonSelectFileWidget(),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

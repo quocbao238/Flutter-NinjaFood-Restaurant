@@ -13,25 +13,27 @@ class ProfileMobileView extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     final tapController = Get.find<TabsController>();
-    final currentUser = controller.getCurrentUser;
-    if (currentUser == null) return Container();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.onPrimary,
-      body: CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: MySliverAppBar(
-              expandedHeight: MediaQuery.of(context).size.height * 0.4,
-              minExtentHeight: MediaQuery.of(context).size.height * 0.2,
-              backgroundImage: CachedNetworkImage(imageUrl: currentUser.photoUrl ?? '', fit: BoxFit.cover),
-              // set the image as the background
-              title: AppButtonDrawer(onPressed: () => tapController.toggleDrawer()),
+      body: Obx(() {
+        final currentUser = controller.getCurrentUser;
+        if (currentUser == null) return Container();
+        return CustomScrollView(
+          slivers: [
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: MySliverAppBar(
+                expandedHeight: MediaQuery.of(context).size.height * 0.4,
+                minExtentHeight: MediaQuery.of(context).size.height * 0.2,
+                backgroundImage: CachedNetworkImage(imageUrl: currentUser.photoUrl ?? '', fit: BoxFit.cover),
+                // set the image as the background
+                title: AppButtonDrawer(onPressed: () => tapController.toggleDrawer()),
+              ),
             ),
-          ),
-          ProfilePerson(),
-        ],
-      ),
+            ProfilePerson(),
+          ],
+        );
+      }),
     );
   }
 }

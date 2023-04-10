@@ -15,7 +15,7 @@ class AppRouteProvider {
   static const String tabScreen = '/tabScreen';
   static const String forgotPasswordScreen = '/forgotPasswordScreen';
   static const String successNotificationScreen = '/successNotificationScreen';
-  static const String menuScreen = '/menuScreen';
+  static const String categoryScreen = '/menuScreen';
   static const String chatDetailsScreen = '/chatDetailsScreen';
   static const String foodDetailScreen = '/foodDetailScreen';
   static const String imagePreviewScreen = '/imagePreviewScreen';

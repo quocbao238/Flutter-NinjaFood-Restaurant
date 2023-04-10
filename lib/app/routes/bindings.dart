@@ -24,13 +24,13 @@ class GetBinding extends Bindings {
         Get.lazyPut(() => SignUpProcessController());
         break;
       case AppRouteProvider.paymentMethodScreen:
-        Get.lazyPut(() => PaymentController());
+        Get.lazyPut(() => SignUpPaymentController());
         break;
       case AppRouteProvider.uploadPhotoScreen:
-        Get.lazyPut(() => UploadPhotoController());
+        Get.lazyPut(() => SignUpUploadPhotoController());
         break;
       case AppRouteProvider.uploadPreviewScreen:
-        Get.lazyPut(() => UploadPreviewController());
+        Get.lazyPut(() => SignUpPreviewPhotoController());
         break;
       case AppRouteProvider.setLocationScreen:
         Get.lazyPut(() => SignUpLocationController());
@@ -48,14 +48,14 @@ class GetBinding extends Bindings {
       case AppRouteProvider.forgotPasswordScreen:
         Get.lazyPut(() => ForgotPassWordController());
         break;
-      case AppRouteProvider.menuScreen:
-        Get.lazyPut(() => MenuScreenController());
+      case AppRouteProvider.categoryScreen:
+        Get.lazyPut(() => CategoryScreen());
         break;
       case AppRouteProvider.chatDetailsScreen:
         Get.lazyPut(() => RoomChatScreenController());
         break;
       case AppRouteProvider.foodDetailScreen:
-        Get.lazyPut(() => FoodDetailController());
+        Get.lazyPut(() => ProductDetailController());
         break;
     }
   }

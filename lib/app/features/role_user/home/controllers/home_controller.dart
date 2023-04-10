@@ -116,7 +116,7 @@ class HomeController extends BaseController {
   }
 
   void onPressedMenuItem(CategoryModel category) {
-    Get.toNamed(AppRouteProvider.menuScreen, arguments: category);
+    Get.toNamed(AppRouteProvider.categoryScreen, arguments: category);
   }
 
   void onPressedFoodItem(ProductModel product) {

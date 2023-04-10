@@ -11,7 +11,7 @@ class OnboardModel {
     required this.description,
   });
 
-  static final List<OnboardModel> datas = [
+  static final List<OnboardModel> lstData = [
     OnboardModel(
         image: AppImages.onboardBanner1(),
         title: 'OnboardScreen_Title1',

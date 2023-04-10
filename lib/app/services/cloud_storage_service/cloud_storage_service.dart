@@ -1,9 +1,6 @@
 import 'dart:io';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
-import 'package:ninjafood/app/helper/utils.dart';
-import 'package:ninjafood/app/services/services.dart';
 import 'package:uuid/uuid.dart';
 
 import '../boot_services.dart';
