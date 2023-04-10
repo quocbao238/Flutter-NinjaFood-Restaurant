@@ -4,7 +4,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
   final double minExtentHeight;
   final Widget title;
-  final ImageProvider backgroundImage;
+  final Widget backgroundImage;
 
   MySliverAppBar({
     required this.minExtentHeight,
@@ -22,10 +22,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Image(
-          image: backgroundImage,
-          fit: BoxFit.cover,
-        ),
+        backgroundImage,
         Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

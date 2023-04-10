@@ -7,6 +7,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppViewLayout(mobileView: ProfileMobileView(),);
+    return AppViewLayout(mobileView: ProfileMobileView());
   }
 }
