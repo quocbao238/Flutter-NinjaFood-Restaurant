@@ -1,6 +1,7 @@
 part of global_controller;
 
 class DialogController extends GetxController with GetSingleTickerProviderStateMixin, BootableController {
+  static DialogController get instance => Get.find<DialogController>();
   late final AnimationController _animationController;
   late final Animation<double> _animation;
   final milliseconds = 200;

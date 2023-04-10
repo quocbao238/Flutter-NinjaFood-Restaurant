@@ -3,7 +3,8 @@ import 'package:ninjafood/app/helper/utils.dart';
 enum MessageChatType {
   text(0),
   image(1),
-  video(2);
+  video(2),
+  anotherFile(3);
 
   final int type;
 
@@ -17,6 +18,8 @@ enum MessageChatType {
         return 1;
       case MessageChatType.video:
         return 2;
+      case MessageChatType.anotherFile:
+        return 3;
       default:
         return 0;
     }
@@ -30,9 +33,60 @@ enum MessageChatType {
         return MessageChatType.image;
       case 2:
         return MessageChatType.video;
+      case 3:
+        return MessageChatType.anotherFile;
       default:
         return MessageChatType.text;
     }
+  }
+}
+
+class ChatFileModel {
+  final String fileName;
+  final String fileType;
+  final String fileUrl;
+
+  ChatFileModel({required this.fileName, required this.fileType, required this.fileUrl});
+
+  Map<String, dynamic> toJson() {
+    return {
+      "fileName": this.fileName,
+      "fileType": this.fileType,
+      "fileUrl": this.fileUrl,
+    };
+  }
+
+  factory ChatFileModel.fromJson(Map<dynamic, dynamic> json) {
+    return ChatFileModel(
+      fileName: json["fileName"],
+      fileType: json["fileType"],
+      fileUrl: json["fileUrl"],
+    );
+  }
+}
+
+class MessageChatFile {
+  final List<ChatFileModel> lstFiles;
+  final String message;
+
+  MessageChatFile({required this.lstFiles, required this.message});
+
+  Map<String, dynamic> toJson() {
+    return {
+      "chatFileModel": lstFiles.map((e) => e.toJson()).toList(),
+      "message": this.message,
+    };
+  }
+
+  factory MessageChatFile.fromJson(Map<dynamic, dynamic> json) {
+    List<ChatFileModel> chatFileModel = [];
+    json["chatFileModel"].forEach((element) {
+      chatFileModel.add(ChatFileModel.fromJson(element));
+    });
+    return MessageChatFile(
+      lstFiles: chatFileModel,
+      message: json["message"],
+    );
   }
 }
 
@@ -41,7 +95,7 @@ class MessageChat {
   String senderId;
   String receiverId;
   String timestamp;
-  String message;
+  dynamic message;
   MessageChatType messageChatType;
 
   MessageChat({
@@ -79,7 +133,7 @@ class MessageChat {
       {required String senderId,
       required String receiverId,
       required String groupChatId,
-      required String message,
+      required dynamic message,
       required MessageChatType messageChatType}) {
     return MessageChat(
         senderId: senderId,

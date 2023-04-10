@@ -38,13 +38,20 @@ dependencies:
   firebase_messaging: ^14.4.0
   uuid: ^3.0.7
   tuple: ^2.0.1
+  file_picker: ^4.2.0
+  video_player: ^2.6.1
+  permission_handler: ^10.2.0
+  path_provider: ^2.0.14
+  open_file: ^3.2.1
+
+
 
 
   ninja_theme:
-   git:
-     url: https://github.com/quocbao238/ninjafood_theme.git
-     ref: devMaster
-    # path: ../NinjaFood_Theme
+    git:
+      url: https://github.com/quocbao238/ninjafood_theme.git
+      ref: devMaster
+      #  path: ../NinjaFood_Theme
 
 
 flutter_icons:

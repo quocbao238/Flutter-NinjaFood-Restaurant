@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ninjafood/app/features/role_user/cart/presentation/cart_screen.dart';
-import 'package:ninjafood/app/features/role_user/chat/presentation/chat_screen.dart';
+import 'package:ninjafood/app/features/role_user/chat_message/presentation/group_chat_screen.dart';
 import 'package:ninjafood/app/features/role_user/home/presentation/home_screen.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/profile_screen.dart';
 
-enum MenuType {
-  home,
-  chat,
-  profile,
-  cart,
-  settings,
-  logout,
-  about,
-  changeTheme,
-}
+enum MenuType { home, chat, profile, cart, settings, logout, about, changeTheme }
 
 class MenuItem {
   final String title;
@@ -32,12 +23,7 @@ class MenuItem {
   });
 
   static List<MenuItem> listMenu = [
-    MenuItem(
-        index: 0,
-        title: 'Home',
-        iconData: FontAwesomeIcons.house,
-        screen: HomeScreen(),
-        menuType: MenuType.home),
+    MenuItem(index: 0, title: 'Home', iconData: FontAwesomeIcons.house, screen: HomeScreen(), menuType: MenuType.home),
     MenuItem(
         index: 1,
         title: 'Profile',
@@ -51,29 +37,15 @@ class MenuItem {
         screen: CartScreen(),
         menuType: MenuType.cart),
     MenuItem(
-        index: 3,
-        title: 'Chat',
-        iconData: FontAwesomeIcons.message,
-        screen: ChatScreen(),
-        menuType: MenuType.chat),
-    MenuItem(
-        index: 4,
-        title: 'Settings',
-        iconData: FontAwesomeIcons.gear,
-        screen: null,
-        menuType: MenuType.settings),
+        index: 3, title: 'Chat', iconData: FontAwesomeIcons.message, screen: GroupChatScreen(), menuType: MenuType.chat),
+    MenuItem(index: 4, title: 'Settings', iconData: FontAwesomeIcons.gear, screen: null, menuType: MenuType.settings),
     MenuItem(
         index: 5,
         title: 'Change Theme',
         iconData: FontAwesomeIcons.themeisle,
         screen: null,
         menuType: MenuType.changeTheme),
-    MenuItem(
-        index: 6,
-        title: 'About',
-        iconData: FontAwesomeIcons.info,
-        screen: null,
-        menuType: MenuType.about),
+    MenuItem(index: 6, title: 'About', iconData: FontAwesomeIcons.info, screen: null, menuType: MenuType.about),
     MenuItem(
         index: 7,
         title: 'Logout',

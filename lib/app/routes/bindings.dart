@@ -41,7 +41,7 @@ class GetBinding extends Bindings {
       case AppRouteProvider.tabScreen:
         Get.lazyPut(() => TabsController());
         Get.lazyPut(() => HomeController());
-        Get.lazyPut(() => ChatScreenController());
+        Get.lazyPut(() => GroupChatScreenController());
         Get.lazyPut(() => CartScreenController());
         break;
       case AppRouteProvider.forgotPasswordScreen:
@@ -54,7 +54,7 @@ class GetBinding extends Bindings {
         Get.lazyPut(() => MenuScreenController());
         break;
       case AppRouteProvider.chatDetailsScreen:
-        Get.lazyPut(() => ChatDetailsController());
+        Get.lazyPut(() => RoomChatScreenController());
         break;
       case AppRouteProvider.foodDetailScreen:
         Get.lazyPut(() => FoodDetailController());

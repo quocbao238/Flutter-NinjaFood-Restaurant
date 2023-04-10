@@ -94,5 +94,9 @@ class AppPages {
       page: () => FoodDetailScreen(),
       binding: GetBinding(AppRouteProvider.foodDetailScreen),
     ),
+    GetPage(
+      name: AppRouteProvider.imagePreviewScreen,
+      page: () => MessageImageFullScreenView(url: Get.arguments),
+    ),
   ];
 }

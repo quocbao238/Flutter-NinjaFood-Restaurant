@@ -18,4 +18,5 @@ class AppRouteProvider {
   static const String menuScreen = '/menuScreen';
   static const String chatDetailsScreen = '/chatDetailsScreen';
   static const String foodDetailScreen = '/foodDetailScreen';
+  static const String imagePreviewScreen = '/imagePreviewScreen';
 }
