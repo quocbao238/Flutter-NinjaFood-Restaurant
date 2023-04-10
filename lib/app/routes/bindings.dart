@@ -33,7 +33,7 @@ class GetBinding extends Bindings {
         Get.lazyPut(() => UploadPreviewController());
         break;
       case AppRouteProvider.setLocationScreen:
-        Get.lazyPut(() => SetLocationController());
+        Get.lazyPut(() => SignUpLocationController());
         break;
       case AppRouteProvider.signupSuccessScreen:
         Get.lazyPut(() => SignupSuccessController());
@@ -48,7 +48,7 @@ class GetBinding extends Bindings {
         Get.lazyPut(() => ForgotPassWordController());
         break;
       case AppRouteProvider.successNotificationScreen:
-        Get.lazyPut(() => SuccessNotificationController());
+        Get.lazyPut(() => ResetPasswordController());
         break;
       case AppRouteProvider.menuScreen:
         Get.lazyPut(() => MenuScreenController());
