@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/profile/infrastructure/models/profile_model.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/layout/mobile/widgets/favorite_item.dart';
 import 'package:ninjafood/app/globalController/userController.dart';
 

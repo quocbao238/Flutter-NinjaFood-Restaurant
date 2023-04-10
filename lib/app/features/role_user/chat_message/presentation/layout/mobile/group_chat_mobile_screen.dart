@@ -18,8 +18,7 @@ class GroupChatMobileScreen extends GetView<GroupChatScreenController> {
           onPressed: () => controller.handleOnTapChat(),
           child: Icon(Icons.message, color: Colors.white),
         ),
-        appBarWidget:
-            AppButtonDrawer(onPressed: () => tabController.toggleDrawer()),
+        appBarWidget: AppButtonDrawer(onPressed: () => tabController.toggleDrawer()),
         body: AppPadding(
           padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
           child: Column(
@@ -28,7 +27,7 @@ class GroupChatMobileScreen extends GetView<GroupChatScreenController> {
               AppPadding(
                   padding: AppEdgeInsets.only(bottom: AppGapSize.small),
                   child: AppText.headlineSmall(text: 'Chat', fontWeight: FontWeight.bold)),
-              Obx(() => GroupChatList(groupChats: controller.groupChats.value, onTap: controller.onTapChat))
+              Obx(() => GroupChatList(groupChats: controller.groupChats.toList(), onTap: controller.onTapChat))
             ],
           ),
         ));

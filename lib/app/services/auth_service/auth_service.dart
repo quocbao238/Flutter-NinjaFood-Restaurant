@@ -7,7 +7,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/services/auth_service/auth_service_impl.dart';
 import 'package:ninjafood/app/services/boot_services.dart';
-import 'package:ninjafood/app/services/services.dart';
 
 class AuthService extends GetxService implements BootableService, AuthServiceImpl {
   static AuthService get instance => Get.find<AuthService>();
@@ -147,6 +146,4 @@ class AuthService extends GetxService implements BootableService, AuthServiceImp
   @override
   User? get getFirebaseAuthUser => _firebaseAuth.currentUser;
 
-  @override
-  int priority = 0;
 }

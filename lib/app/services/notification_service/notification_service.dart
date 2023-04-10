@@ -23,7 +23,7 @@ class NotificationService extends GetxService implements BootableService, Notifi
 
   @override
   Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    print("Handling a background message: ${message}");
+    print("Handling a background message: $message");
   }
 
   @override
@@ -52,6 +52,4 @@ class NotificationService extends GetxService implements BootableService, Notifi
   @override
   void handleMessage(RemoteMessage message) {}
 
-  @override
-  int priority = 0;
 }

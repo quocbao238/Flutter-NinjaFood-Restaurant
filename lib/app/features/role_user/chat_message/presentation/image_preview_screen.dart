@@ -52,12 +52,14 @@ class ImagePreviewScreen extends GetView<RoomChatScreenController> {
           ],
         ),
         Expanded(
-          child: CachedNetworkImage(
-            imageUrl: url,
-            width: double.infinity,
-            height: double.infinity,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: CachedNetworkImage(
+              imageUrl: url,
+            ),
           ),
         ),
+        AppPadding.medium()
         // Create button to download image
       ],
     ));

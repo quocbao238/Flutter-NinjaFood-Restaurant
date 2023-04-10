@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/box_special_deal.dart';
-import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/food/popular_food.dart';
-import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/menu/popular_menu.dart';
+import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/category_view/category_view.dart';
+import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/product_view/product_popular.dart';
 
 class HomeViewTypeNormal extends StatelessWidget {
   const HomeViewTypeNormal({Key? key}) : super(key: key);
@@ -9,6 +9,6 @@ class HomeViewTypeNormal extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
         child: Column(
-      children: [BoxSpecialDeal(), PopularMenu(), PopularFood()],
+      children: [BoxSpecialDeal(), CategoryPopular(), ProductPopular()],
     ));
 }

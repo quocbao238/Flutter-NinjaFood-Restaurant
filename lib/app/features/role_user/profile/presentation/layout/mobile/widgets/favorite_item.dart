@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/profile/controller/profile_controller.dart';
-import 'package:ninjafood/app/features/role_user/profile/infrastructure/models/profile_model.dart';
 
 class FavoriteList extends GetView<ProfileController> {
   const FavoriteList();
@@ -12,7 +11,7 @@ class FavoriteList extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Obx(() {
-      final lstFavorite = controller.lstProducts.value;
+      final lstFavorite = controller.lstProducts.toList();
       return ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),

@@ -60,11 +60,13 @@ class TabsController extends BaseController {
   }
 
   Future<void> _onPressedLogout() async {
+    loading.value = true;
     final response = await authService.signOut();
     response.fold(
       (l) => handleFailure(_logName, l),
       (r) => Get.offAllNamed(AppRouteProvider.splashScreen),
     );
+    loading.value = false;
   }
 
   Future<void> onPressedNotification() async {}

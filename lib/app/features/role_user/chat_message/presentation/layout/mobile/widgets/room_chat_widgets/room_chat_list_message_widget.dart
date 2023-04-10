@@ -10,7 +10,7 @@ class RoomChatListMessageWidget extends GetView<RoomChatScreenController> {
       child: AppPadding(
         padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
         child: Obx(() {
-          final messageChats = controller.lstChatMessage.value;
+          final messageChats = controller.lstChatMessage.toList();
           return ListView.builder(
               controller: controller.scrollController,
               shrinkWrap: true,

@@ -38,7 +38,4 @@ class ConsoleService extends GetxService implements BootableService{
   void _showFlutterLogs(String logName, String message) {
     if (flutterLogs) print('[$logName] $message');
   }
-
-  @override
-  int priority = 0;
 }

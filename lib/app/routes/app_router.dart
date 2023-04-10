@@ -41,17 +41,17 @@ class AppPages {
     ),
     GetPage(
       name: AppRouteProvider.paymentMethodScreen,
-      page: () => PaymentMethodScreen(),
+      page: () => SignUpPaymentScreen(),
       binding: GetBinding(AppRouteProvider.paymentMethodScreen),
     ),
     GetPage(
       name: AppRouteProvider.uploadPhotoScreen,
-      page: () => UploadPhotoScreen(),
+      page: () => SignUpUploadPhotoScreen(),
       binding: GetBinding(AppRouteProvider.uploadPhotoScreen),
     ),
     GetPage(
       name: AppRouteProvider.uploadPreviewScreen,
-      page: () => UploadPreviewScreen(),
+      page: () => SignUpPhotoPreviewScreen(),
       binding: GetBinding(AppRouteProvider.uploadPreviewScreen),
     ),
     GetPage(
@@ -71,7 +71,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRouteProvider.forgotPasswordScreen,
-      page: () => ForgotPasswordScreen(),
+      page: () => ResetPasswordScreen(),
       binding: GetBinding(AppRouteProvider.forgotPasswordScreen),
     ),
     GetPage(
@@ -80,9 +80,9 @@ class AppPages {
       binding: GetBinding(AppRouteProvider.successNotificationScreen),
     ),
     GetPage(
-      name: AppRouteProvider.menuScreen,
-      page: () => MenuScreen(),
-      binding: GetBinding(AppRouteProvider.menuScreen),
+      name: AppRouteProvider.categoryScreen,
+      page: () => CategoryScreen(),
+      binding: GetBinding(AppRouteProvider.categoryScreen),
     ),
     GetPage(
       name: AppRouteProvider.chatDetailsScreen,
@@ -91,7 +91,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRouteProvider.foodDetailScreen,
-      page: () => FoodDetailScreen(),
+      page: () => ProductDetailScreen(),
       binding: GetBinding(AppRouteProvider.foodDetailScreen),
     ),
     GetPage(
