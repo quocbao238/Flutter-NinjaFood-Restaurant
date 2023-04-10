@@ -29,7 +29,6 @@ import 'package:ninjafood/app/features/role_user/auth/controllers/signup_success
 import 'package:ninjafood/app/features/role_user/auth/presentation/sign_up_success_screen.dart';
 import 'package:ninjafood/app/features/role_user/splash/controllers/splash_controller.dart';
 import 'package:ninjafood/app/features/role_user/splash/presentation/splash_screen.dart';
-import 'package:ninjafood/app/features/role_user/auth/controllers/reset_password_controller.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/reset_password_success_screen.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/features/role_user/tabs/presentation/tab_screen.dart';

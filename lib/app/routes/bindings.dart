@@ -47,9 +47,6 @@ class GetBinding extends Bindings {
       case AppRouteProvider.forgotPasswordScreen:
         Get.lazyPut(() => ForgotPassWordController());
         break;
-      case AppRouteProvider.successNotificationScreen:
-        Get.lazyPut(() => ResetPasswordController());
-        break;
       case AppRouteProvider.menuScreen:
         Get.lazyPut(() => MenuScreenController());
         break;

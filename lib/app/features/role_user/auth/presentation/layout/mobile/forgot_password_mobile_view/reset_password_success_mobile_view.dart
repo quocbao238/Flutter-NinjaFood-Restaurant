@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/auth/controllers/forgot_password_controller.dart';
-import 'package:ninjafood/app/features/role_user/auth/controllers/reset_password_controller.dart';
 
 class SuccessNotificationMobileView extends GetView<ForgotPassWordController> {
   const SuccessNotificationMobileView({super.key});
