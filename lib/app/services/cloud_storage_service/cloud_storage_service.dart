@@ -73,6 +73,20 @@ class CloudStorageService extends GetxService implements BootableService, CloudS
     }
   }
 
-  @override
-  int priority = 0;
+  Future<String?> uploadAnotherFile({required File file}) async {
+    try {
+      final ref = storage.ref().child('files/${Uuid().v4()}');
+      final metadata = SettableMetadata(
+        contentType: 'application/pdf',
+        customMetadata: {'picked-file-path': file.path}
+      );
+      final uploadTask = ref.putFile(file, metadata);
+      final snapshot = await uploadTask.whenComplete(() {});
+      final url = await snapshot.ref.getDownloadURL();
+      return url;
+    } catch (e) {
+      print('Error uploading image to Firebase Storage: $e');
+      return null;
+    }
+  }
 }

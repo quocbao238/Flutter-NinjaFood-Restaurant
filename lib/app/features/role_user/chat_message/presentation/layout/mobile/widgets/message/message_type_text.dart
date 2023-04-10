@@ -20,6 +20,7 @@ class ChatMessageText extends StatelessWidget {
             child: AppPadding(
               padding: AppEdgeInsets.only(right: AppGapSize.small, bottom: AppGapSize.small),
               child: AppText.bodySmall(
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
                 text: convertTimeStampToHour(timestamp),
               ),
             ),

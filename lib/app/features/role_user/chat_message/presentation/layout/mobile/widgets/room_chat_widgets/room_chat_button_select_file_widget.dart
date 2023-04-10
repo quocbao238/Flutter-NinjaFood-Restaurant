@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:ninjafood/app/features/role_user/chat_message/controllers/room_chat_screen_controller.dart';
-import 'package:ninjafood/app/widgets/animated_floating_buttons.dart';
+part of room_chat_widgets;
+
 
 class RoomChatButtonSelectFileWidget extends GetView<RoomChatScreenController> {
   const RoomChatButtonSelectFileWidget({Key? key}) : super(key: key);
@@ -10,25 +7,27 @@ class RoomChatButtonSelectFileWidget extends GetView<RoomChatScreenController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final listImage = controller.lstImageFile.value;
-      if (listImage.isNotEmpty) return SizedBox.shrink();
+      final typeFilesInput = controller.selectChatFiles.value;
+      if (typeFilesInput is  !SelectChatTextOnly) {
+        return const SizedBox();
+      }
       return SizedBox(
         height: kToolbarHeight * 10,
         width: kToolbarHeight,
         child: AnimatedFloatingButtons(
             onPressedCallBack: (index) {
-              if (index == 2) {
-                return controller.onPressedSelectImages();
+              if (index == 0) {
+                controller.onSelectedFile(SelectAnotherFiles());
               }
-              return controller.onPressedAttachFile();
+              if (index == 1) {
+                controller.onSelectedFile(SelectChatImages());
+              }
+              if (index == 2) {
+                controller.onSelectedFile(SelectChatVideos());
+              }
             },
-            iconItems: [
-              FontAwesomeIcons.fileLines,
-              FontAwesomeIcons.filePdf,
-              FontAwesomeIcons.image,
-              FontAwesomeIcons.fileVideo
-            ],
-            primaryButtonIcon: FontAwesomeIcons.fileArrowUp),
+            iconItems: [FontAwesomeIcons.fileArrowUp, FontAwesomeIcons.image, FontAwesomeIcons.fileVideo],
+            primaryButtonIcon: FontAwesomeIcons.file),
       );
     });
   }

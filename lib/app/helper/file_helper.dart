@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 enum FileType {
   other({'other'}),
   image({'jpg', 'jpeg', 'png', 'gif', 'webp'}),
   video({'mp4', 'mov', 'avi', 'flv', 'wmv'}),
-  pdf({'pdf'}),
-  audio({'mp3', 'wav', 'aac', 'flac', 'm4a'});
+  another({'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'rtf'});
 
   final Set<String> extensions;
 
@@ -31,11 +31,20 @@ class FileHelper {
   }
 
   static Future<List<File>> pickImages() async {
-    final imageFiles = await ImagePicker().pickMultiImage(imageQuality: 10, maxWidth: 256, maxHeight: 256);
+    final imageFiles = await ImagePicker().pickMultiImage();
     if (imageFiles.isNotEmpty) {
       return imageFiles.map((e) => File(e.path)).toList();
     }
 
+    print('No image selected.');
+    return [];
+  }
+
+  static Future<List<File>> pickVideos() async {
+    final imageFiles = await ImagePicker().pickVideo(source: ImageSource.gallery);
+    if (imageFiles != null) {
+      return [File(imageFiles.path)];
+    }
     print('No image selected.');
     return [];
   }
@@ -62,7 +71,7 @@ class FileHelper {
     }
   }
 
-  static FileType getFileType({required File file}) {
+  static FileType? getFileType({required File file}) {
     final ext = file.path.split('.').last;
 
     if (FileType.image.extensions.contains(ext)) {
@@ -71,9 +80,30 @@ class FileHelper {
     if (FileType.video.extensions.contains(ext)) {
       return FileType.video;
     }
-    if (FileType.pdf.extensions.contains(ext)) {
-      return FileType.pdf;
+    if (FileType.another.extensions.contains(ext)) {
+      return FileType.another;
     }
-    return FileType.other;
+    return throw Exception('File type is not supported');
+  }
+
+  static IconData getIconByExtension(String extension) {
+    switch (extension) {
+      case 'pdf':
+        return Icons.picture_as_pdf;
+      case 'doc':
+      case 'docx':
+        return Icons.description;
+      case 'xls':
+      case 'xlsx':
+        return Icons.table_chart;
+      case 'ppt':
+      case 'pptx':
+        return Icons.slideshow;
+      case 'txt':
+      case 'rtf':
+        return Icons.text_fields;
+      default:
+        return Icons.insert_drive_file;
+    }
   }
 }

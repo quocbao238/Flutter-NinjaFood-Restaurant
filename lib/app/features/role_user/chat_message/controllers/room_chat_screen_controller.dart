@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/features/role_user/chat_message/infrastructure/select_chat_files/select_chat_files.dart';
 import 'package:ninjafood/app/globalController/global_controller.dart';
 import 'package:ninjafood/app/globalController/message_controller.dart';
 import 'package:ninjafood/app/globalController/userController.dart';
@@ -14,6 +16,8 @@ import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/user_model.dart';
 import 'package:ninjafood/app/services/cloud_storage_service/cloud_storage_service.dart';
 import 'package:ninjafood/app/services/database_service/database_service.dart';
+
+const _logName = 'RoomChatScreenController';
 
 class RoomChatScreenController extends BaseController {
   final DatabaseService databaseService = DatabaseService.instance;
@@ -30,10 +34,10 @@ class RoomChatScreenController extends BaseController {
   final RxList<MessageChat> lstChatMessage = <MessageChat>[].obs;
   final ScrollController scrollController = ScrollController();
   final TextEditingController textEditingController = TextEditingController();
-  MessageChatType messageChatType = MessageChatType.text;
 
-  final RxList<File> lstImageFile = <File>[].obs;
-  final Rxn<File?> filePicker = Rxn<File?>(null);
+  // create Rx null SelectChatFilesImpl
+  final Rx<SelectChatFilesImpl> selectChatFiles = Rx<SelectChatFilesImpl>(SelectChatTextOnly());
+  final RxList<File> selectedFiles = <File>[].obs;
 
   @override
   void onInit() {
@@ -87,62 +91,62 @@ class RoomChatScreenController extends BaseController {
   void onPressedBack() => Get.back();
 
   // Function Logic
-
   Future<void> onSendMessage() async {
-    if (textEditingController.text.isEmpty) return;
     FocusManager.instance.primaryFocus?.unfocus();
+
     final isAdmin = userController.getCurrentUser?.isAdmin() ?? false;
+    final _receiverUser = isAdmin ? receiverUser : null;
+    if (selectChatFiles.value is SelectChatTextOnly) {
+      if (textEditingController.text.isEmpty) return;
+      loading.value = true;
+      final response = await messageController.sendMessage(
+          message: textEditingController.text,
+          receiverUser: _receiverUser,
+          messageChatType: selectChatFiles.value.messageChatType);
+      response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) => _clearAllSeason());
+      loading.value = false;
+      return;
+    }
+    if (selectedFiles.isEmpty) return;
+    loading.value = true;
+    final chatFiles = await selectChatFiles.value.uploadFileToStorage(selectedFiles);
+    if(chatFiles.isEmpty) return;
+    final messageChat =
+        selectChatFiles.value.createMessageChat(message: textEditingController.text, chatFiles: chatFiles);
     final response = await messageController.sendMessage(
-        message: textEditingController.text,
-        receiverUser: isAdmin ? receiverUser : null,
-        messageChatType: messageChatType);
-    response.fold((l) => print(l), (r) {
-      messageChatType = MessageChatType.text;
-      textEditingController.clear();
-    });
-  }
-
-  Future<void> onPressedSelectImages() async {
-    final _fileResults = await FileHelper.pickImages();
-    if (_fileResults.isEmpty) return;
-    lstImageFile.assignAll(_fileResults);
-  }
-
-  Future<void> onPressedAttachFile() async {
-    final _filePicker = await FileHelper.pickFile();
-    if (_filePicker == null) return;
-    final getFileType = FileHelper.getFileType(file: _filePicker);
-    if (getFileType == FileType.other) {
-      return dialogController.showError(message: 'File is not supported');
-    }
-
-    String? urlFile;
-    if (getFileType == FileType.image) {
-      messageChatType = MessageChatType.image;
-      urlFile = await cloudStorageService.uploadImage(file: _filePicker);
-    } else if (getFileType == FileType.video) {
-      messageChatType = MessageChatType.video;
-      urlFile = await cloudStorageService.uploadVideo(file: _filePicker);
-    }
-    if (urlFile == null) return dialogController.showError(message: 'Upload file failed');
-    final MessageChatFile messageChatFile = MessageChatFile(
-      message: textEditingController.text.trim(),
-      fileName: FileHelper.getFileName(_filePicker.path),
-      fileType: getFileType.toString(),
-      fileUrl: urlFile,
+      message: messageChat.toJson(),
+      receiverUser: _receiverUser,
+      messageChatType: selectChatFiles.value.messageChatType,
     );
-    final messageStr = messageChatFile.toJson();
-    final response = await messageController.sendMessage(
-        message: messageStr, receiverUser: receiverUser, messageChatType: messageChatType);
-    response.fold((l) => print(l), (r) {});
+    response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) => _clearAllSeason());
+    loading.value = false;
   }
 
-  void _clearAllFile() {
-    lstImageFile.clear();
-    filePicker.value = null;
+  Future<void> onSelectedFile(SelectChatFilesImpl selectChatFilesImpl) async {
+    selectChatFiles.value = selectChatFilesImpl;
+    FocusManager.instance.primaryFocus?.unfocus();
+    final _files = await selectChatFilesImpl.selectFile();
+    if (_files.isEmpty) return;
+    selectedFiles.assignAll(_files);
+  }
+
+  // Select more File
+  Future<void> onPressedSelectMoreImages() async {
+    final _fileResults = await FileHelper.pickImages();
+    final _selectedFilesName = selectedFiles.map((e) => FileHelper.getFileName(e.path)).toList();
+    final _files =
+        _fileResults.where((element) => !_selectedFilesName.contains(FileHelper.getFileName(element.path))).toList();
+    selectedFiles.addAll(_files);
+  }
+
+  void _clearAllSeason() {
+    textEditingController.clear();
+    selectChatFiles.value = SelectChatTextOnly();
+    selectedFiles.clear();
   }
 
   void onRemoveImage(int index) {
-    lstImageFile.removeAt(index);
+    selectedFiles.removeAt(index);
+    if (selectedFiles.isEmpty) selectChatFiles.value = SelectChatTextOnly();
   }
 }

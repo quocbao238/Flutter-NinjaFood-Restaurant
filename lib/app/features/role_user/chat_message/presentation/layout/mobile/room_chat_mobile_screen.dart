@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/controllers/room_chat_screen_controller.dart';
-import 'widgets/room_chat_widgets/room_chat_appbar_widget.dart';
-import 'widgets/room_chat_widgets/room_chat_bottom_send_widget.dart';
-import 'widgets/room_chat_widgets/room_chat_button_select_file_widget.dart';
-import 'widgets/room_chat_widgets/room_chat_list_message_widget.dart';
+
+import 'widgets/room_chat_widgets/room_chat_widgets.dart';
 
 class RoomChatMobileScreen extends GetView<RoomChatScreenController> {
   const RoomChatMobileScreen({super.key});

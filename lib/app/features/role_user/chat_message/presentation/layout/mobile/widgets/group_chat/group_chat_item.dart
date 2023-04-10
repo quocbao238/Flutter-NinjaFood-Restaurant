@@ -3,6 +3,7 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/globalController/userController.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/helper/utils.dart';
+import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/widgets/animation_list.dart';
 import 'package:ninjafood/app/widgets/app_network_image.dart';
 
@@ -66,13 +67,21 @@ class GroupChatItem extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            AppText.bodyMedium(
-                              text: groupChatItem.lastMessageChat.message.toString(),
-                              fontWeight: FontWeight.w400,
-                              textAlign: TextAlign.start,
-                              maxLines: 2,
-                              color: Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(0.5),
-                            ),
+                            Builder(builder: (context) {
+                              String message = groupChatItem.lastMessageChat.message.toString();
+                              if (groupChatItem.lastMessageChat.messageChatType != MessageChatType.text) {
+                                message =
+                                    MessageChatFile.fromJson(groupChatItem.lastMessageChat.message).message.toString();
+                              }
+
+                              return AppText.bodyMedium(
+                                text: message,
+                                fontWeight: FontWeight.w400,
+                                textAlign: TextAlign.start,
+                                maxLines: 2,
+                                color: Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(0.5),
+                              );
+                            }),
                           ],
                         ),
                       ),

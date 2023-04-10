@@ -13,6 +13,7 @@ class GroupChatMobileScreen extends GetView<GroupChatScreenController> {
     final tabController = Get.find<TabsController>();
     return AppScaffoldBackgroundImage.pattern(
         floatActionButton: FloatingActionButton(
+          heroTag: null,
           backgroundColor: Theme.of(context).colorScheme.primary,
           onPressed: () => controller.handleOnTapChat(),
           child: Icon(Icons.message, color: Colors.white),

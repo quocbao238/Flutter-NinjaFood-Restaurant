@@ -66,6 +66,7 @@ class _AnimatedFloatingButtonsState extends State<AnimatedFloatingButtons> with 
                       height: kToolbarHeight,
                       width: kToolbarHeight,
                       child: FloatingActionButton(
+                          heroTag: null,
                           onPressed: () => _onPressedItem(index),
                           backgroundColor: Theme.of(context).colorScheme.primary,
                           child: Icon(widget.iconItems[index], color: Colors.white))),

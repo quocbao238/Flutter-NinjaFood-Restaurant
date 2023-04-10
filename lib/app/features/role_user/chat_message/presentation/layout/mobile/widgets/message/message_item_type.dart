@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'message_type_image.dart';
-import 'message_type_pdf.dart';
+import 'message_type_another.dart';
 import 'message_type_text.dart';
 import 'message_type_video.dart';
 
@@ -20,22 +20,34 @@ class MessageItemType extends StatelessWidget {
       child: Builder(
         builder: (context) {
           if (messageChat.messageChatType == MessageChatType.text) {
-            return ChatMessageText(message: messageChat.message, timestamp: messageChat.timestamp);
+            return ChatMessageText(
+              message: messageChat.message,
+              timestamp: messageChat.timestamp,
+            );
           }
 
           if (messageChat.messageChatType == MessageChatType.image) {
             final messageChatFile = MessageChatFile.fromJson(messageChat.message);
-            return ChatMessageImage(messageChat: messageChatFile, timestamp: messageChat.timestamp);
+            return ChatMessageImage(
+              messageChat: messageChatFile,
+              timestamp: messageChat.timestamp,
+            );
           }
 
           if (messageChat.messageChatType == MessageChatType.video) {
             final messageChatFile = MessageChatFile.fromJson(messageChat.message);
-            return ChatMessageVideo(messageChat: messageChatFile);
+            return ChatMessageVideo(
+              messageChat: messageChatFile,
+              timestamp: messageChat.timestamp,
+            );
           }
-
-          if (messageChat.messageChatType == MessageChatType.pdf) {
+          //
+          if (messageChat.messageChatType == MessageChatType.anotherFile) {
             final messageChatFile = MessageChatFile.fromJson(messageChat.message);
-            return ChatMessagePDFView(messageChat: messageChatFile);
+            return ChatMessageAnotherView(
+              messageChat: messageChatFile,
+              timestamp: messageChat.timestamp,
+            );
           }
 
           return SizedBox.shrink();

@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/chat_message/controllers/room_chat_screen_controller.dart';
-import 'package:ninjafood/app/widgets/app_network_image.dart';
+part of room_chat_widgets;
 
 class RoomChatAppBarWidget extends GetView<RoomChatScreenController> {
   const RoomChatAppBarWidget({Key? key}) : super(key: key);

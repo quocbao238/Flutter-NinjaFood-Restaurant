@@ -15,15 +15,27 @@ class ChatMessageImage extends StatefulWidget {
 }
 
 class _ChatMessageImageState extends State<ChatMessageImage> with AutomaticKeepAliveClientMixin {
+  late final List<ChatFileModel> lstFiles;
+
+  @override
+  void initState() {
+    lstFiles = widget.messageChat.lstFiles;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Column(
       children: [
-        AppPadding.small(
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(13),
-                child: CachedNetworkImage(imageUrl: widget.messageChat.fileUrl))),
+        ...lstFiles
+            .map((e) => AppPadding.small(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: CachedNetworkImage(imageUrl: e.fileUrl, fit: BoxFit.fill),
+                  ),
+                ))
+            .toList(),
         ChatMessageText(message: widget.messageChat.message, timestamp: widget.timestamp)
       ],
     );
