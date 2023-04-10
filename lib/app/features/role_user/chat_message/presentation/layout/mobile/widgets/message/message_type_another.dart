@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/features/role_user/chat_message/controllers/room_chat_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/presentation/layout/mobile/widgets/message/message_type_text.dart';
 import 'package:ninjafood/app/helper/file_helper.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
@@ -13,6 +15,7 @@ class ChatMessageAnotherView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final roomChatScreenController = Get.find<RoomChatScreenController>();
     final file = messageChat.lstFiles.first;
     final fileName = file.fileName;
     final fileExtension = file.fileName.split('.').last;
@@ -41,9 +44,9 @@ class ChatMessageAnotherView extends StatelessWidget {
                         ),
                         // Download Icon
                         IconButton(
-                          icon: Icon(FontAwesomeIcons.download, size: 16, color: Theme.of(context).colorScheme.primary),
-                          onPressed: () {},
-                        ),
+                            icon:
+                                Icon(FontAwesomeIcons.download, size: 16, color: Theme.of(context).colorScheme.primary),
+                            onPressed: () => roomChatScreenController.downloadFile(file.fileUrl)),
                       ],
                     ),
                   ),
