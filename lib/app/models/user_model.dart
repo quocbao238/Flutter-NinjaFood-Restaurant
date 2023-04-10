@@ -3,6 +3,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 const ROLE_USER = 'role_user';
 const ROLE_ADMIN = 'role_admin';
 
+enum UserType {
+  Sliver('Member Sliver', 0),
+  Gold('Member Gold', 1),
+  Platinum('Member Platinum', 2),
+  Diamond('Member Diamond', 3),
+  Owners('Restaurant Owners', 4);
+
+  final String name;
+  final int json;
+
+  const UserType(this.name, this.json);
+}
+
 class UserModel {
   String uid;
   String? firstName;
@@ -14,6 +27,8 @@ class UserModel {
   String? role;
   String? createType;
   String? fcmToken;
+  UserType? userType;
+  List<int> favorites;
 
   UserModel(
       {required this.uid,
@@ -25,6 +40,8 @@ class UserModel {
       this.address,
       this.role,
       this.createType,
+      this.userType,
+      required this.favorites,
       this.fcmToken});
 
   static UserModel createUserByAuthUser({required User authUser, required createType}) {
@@ -35,6 +52,8 @@ class UserModel {
         phoneNumber: authUser.phoneNumber,
         firstName: authUser.displayName,
         role: ROLE_USER,
+        favorites: [],
+        userType: UserType.Sliver,
         createType: createType);
   }
 
@@ -45,7 +64,9 @@ class UserModel {
       photoUrl: authUser.photoURL,
       phoneNumber: authUser.phoneNumber,
       firstName: authUser.displayName,
+      userType: UserType.Owners,
       role: ROLE_ADMIN,
+      favorites: [],
       createType: createType,
     );
   }
@@ -66,7 +87,9 @@ class UserModel {
         address = data['address'] ?? '',
         role = data['role'] ?? '',
         fcmToken = data['fcmToken'] ?? '',
-        createType = data['createType'] ?? '';
+        createType = data['createType'] ?? '',
+        favorites = List<int>.from(data['favorites'] ?? []),
+        userType = UserType.values[data['userType'] ?? 0];
 
   Map<String, dynamic> toJson() {
     return {
@@ -80,6 +103,8 @@ class UserModel {
       'role': role,
       'createType': createType,
       'fcmToken': fcmToken,
+      'favorites': favorites,
+      'userType': userType?.json,
     };
   }
 
@@ -92,6 +117,8 @@ class UserModel {
     String? photoUrl,
     String? address,
     String? fcmToken,
+    UserType userType = UserType.Sliver,
+    List<int>? favorites,
   }) {
     return UserModel(
       uid: this.uid,
@@ -103,7 +130,9 @@ class UserModel {
       address: address ?? this.address,
       role: this.role,
       createType: this.createType,
-      fcmToken: fcmToken ??this.fcmToken,
+      fcmToken: fcmToken ?? this.fcmToken,
+      favorites: favorites ?? this.favorites,
+      userType: userType ?? this.userType,
     );
   }
 }

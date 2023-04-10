@@ -1,21 +1,22 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/profile/controller/profile_controller.dart';
-import 'package:ninjafood/app/features/role_user/profile/infrastructure/models/profile_model.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/layout/mobile/widgets/profile_appbar.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/layout/mobile/widgets/profile_person.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
+import 'package:ninjafood/app/globalController/userController.dart';
 
-class ProfileMobileView extends GetView<ProfileController> {
+class ProfileMobileView extends GetView<UserController> {
   const ProfileMobileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final List<FavoriteFood> favoriteItem = FavoriteFood.favoriteItem;
     final tapController = Get.find<TabsController>();
+    final currentUser = controller.getCurrentUser;
+    if (currentUser == null) return Container();
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.onPrimary,
       body: CustomScrollView(
         slivers: [
           SliverPersistentHeader(
@@ -23,13 +24,12 @@ class ProfileMobileView extends GetView<ProfileController> {
             delegate: MySliverAppBar(
               expandedHeight: MediaQuery.of(context).size.height * 0.4,
               minExtentHeight: MediaQuery.of(context).size.height * 0.2,
-              backgroundImage: AssetImage(
-                  'assets/icons/photo_profile.png'), // set the image as the background
-              title:
-                  AppButtonDrawer(onPressed: () => tapController.toggleDrawer()),
+              backgroundImage: CachedNetworkImage(imageUrl: currentUser.photoUrl ?? '', fit: BoxFit.cover),
+              // set the image as the background
+              title: AppButtonDrawer(onPressed: () => tapController.toggleDrawer()),
             ),
           ),
-          ProfilePerson(isDarkMode: isDarkMode, favoriteItem: favoriteItem),
+          ProfilePerson(),
         ],
       ),
     );
