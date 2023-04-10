@@ -18,7 +18,8 @@ class GroupChatMobileScreen extends GetView<GroupChatScreenController> {
           onPressed: () => controller.handleOnTapChat(),
           child: Icon(Icons.message, color: Colors.white),
         ),
-        appBarWidget: AppButtonDrawer(onPressed: () => tabController.toggleDrawer()),
+        appBarWidget:
+            AppButtonDrawer(onPressed: () => tabController.toggleDrawer()),
         body: AppPadding(
           padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
           child: Column(
