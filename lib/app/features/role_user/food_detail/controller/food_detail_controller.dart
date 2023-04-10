@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
+import 'package:ninjafood/app/models/product_model.dart';
 
 class FoodDetailController extends BaseController {
+
+  final ProductModel currentProduct = Get.arguments;
 
   @override
   void onInit() {

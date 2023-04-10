@@ -117,7 +117,7 @@ class UserModel {
     String? photoUrl,
     String? address,
     String? fcmToken,
-    UserType userType = UserType.Sliver,
+    UserType? userType,
     List<int>? favorites,
   }) {
     return UserModel(

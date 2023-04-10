@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/features/role_user/food_detail/controller/food_detail_controller.dart';
 import 'package:ninjafood/app/features/role_user/food_detail/infrastructure/models/rating_n_cmt_models.dart';
 import 'package:ninjafood/app/features/role_user/food_detail/presentation/layout/mobile/widgets/reviewers.dart';
 
-class FoodDetail extends StatelessWidget {
-  const FoodDetail({
-    super.key,
-    required this.personRating,
-  });
-
-  final List<RateAndCmt> personRating;
+class FoodDetail extends GetView<FoodDetailController> {
+  const FoodDetail();
 
   @override
   Widget build(BuildContext context) {
+    final product = controller.currentProduct;
     return SliverToBoxAdapter(
       child: AppSizeScale(
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -21,13 +19,11 @@ class FoodDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   DecoratedBox(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: ThemeColors.primaryColor
-                            .withOpacity(0.1)),
+                        borderRadius: BorderRadius.circular(18), color: ThemeColors.primaryColor.withOpacity(0.1)),
                     child: AppPadding.small(
                       child: AppText.bodyMedium(
                         text: 'Popular',
@@ -36,51 +32,42 @@ class FoodDetail extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Spacer(),
+                  AppIcons.locationMap(),
                   DecoratedBox(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xFFFF1D1D).withOpacity(0.1)),
-                      child:
-                          AppPadding.small(child: AppIcons.heart())),
+                      decoration: BoxDecoration(shape: BoxShape.circle, color: Color(0xFFFF1D1D).withOpacity(0.1)),
+                      child: AppPadding.small(child: AppIcons.heart())),
                 ],
               ),
               AppPadding(
-                padding: AppEdgeInsets.symmetric(
-                    vertical: AppGapSize.medium),
+                padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
                 child: AppText.headlineMedium(
-                  text: 'Rainbow Sandwich Sugarless',
+                  text: product.name ?? '',
                   fontWeight: FontWeight.bold,
                   textAlign: TextAlign.start,
                 ),
               ),
-              AppPadding(
-                  padding:
-                      AppEdgeInsets.only(bottom: AppGapSize.medium),
-                  child: AppIcons.locationMap()),
-              AppText.bodyMedium(
-                text:
-                    'Nulla occaecat velit laborum exercitation ullamco. Elit labore eu aute elit nostrud culpa velit excepteur deserunt sunt. Velit non est cillum consequat cupidatat ex Lorem laboris labore aliqua ad duis eu laborum.',
-                textAlign: TextAlign.start,
-              ),
-              AppPadding.medium(
-                  child: AppText.bodyMedium(
-                text: '• Strowberry\n• Cream\n• wheat',
-                textAlign: TextAlign.start,
-              )),
-              AppText.bodyMedium(
-                text:
-                    'Nulla occaecat velit laborum exercitation ullamco. Elit labore eu aute elit nostrud culpa velit excepteur deserunt sunt.',
+              AppText.headlineSmall(
+                text: product.getPrice + ' ' + product.currency,
+                color: ThemeColors.textPriceColor,
                 textAlign: TextAlign.start,
               ),
               AppPadding(
-                padding: AppEdgeInsets.symmetric(
-                    vertical: AppGapSize.medium),
+                padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
+                child: AppText.bodyMedium(
+                  text:
+                      '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum''',
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              AppPadding(
+                padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
                 child: AppText.bodyLarge(
                   text: 'Testimonials',
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Reviewer(personRating: personRating),
+              Reviewer(),
             ],
           ),
         ),
