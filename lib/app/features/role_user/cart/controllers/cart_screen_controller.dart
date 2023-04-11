@@ -17,13 +17,18 @@ class CartScreenController extends BaseController {
   }
 
   void add(OrderDtails orderDetails, int index) {
-    int currentCount = lstOrderDetails[index].count;
-    int newCount = currentCount + 1;
-    lstOrderDetails[index].count = newCount;
+    int _currentCount = lstOrderDetails[index].count;
+    int _increase = _currentCount + 1;
+    lstOrderDetails[index].count = _increase;
     print(lstOrderDetails[index].count);
     lstOrderDetails.refresh();
   }
 
-  void remove() {
+  void remove(OrderDtails orderDetails, int index) {
+    int _currentCount = lstOrderDetails[index].count;
+    int _decrease = _currentCount - 1;
+    lstOrderDetails[index].count = _decrease;
+    print(lstOrderDetails[index].count);
+    lstOrderDetails.refresh();
   }
 }
