@@ -53,7 +53,6 @@ class FavoriteList extends GetView<ProfileController> {
                         ),
                         Column(
                           children: [
-                            // Widget Button Icon unFavorite
                             AppPadding(
                                 padding: AppEdgeInsets.only(bottom: AppGapSize.small),
                                 child: IconButton(

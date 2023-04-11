@@ -8,7 +8,7 @@ class ProductDetailDescription extends GetView<ProductDetailController> {
     final product = controller.currentProduct;
     return SliverToBoxAdapter(
       child: AppSizeScale(
-        backgroundColor: Theme.of(context).colorScheme.onPrimary,
+        backgroundColor: Theme.of(context).colorScheme.background,
         child: AppPadding.medium(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +28,9 @@ class ProductDetailDescription extends GetView<ProductDetailController> {
                     ),
                   ),
                   Spacer(),
-                  AppIcons.locationMap(),
+                  AppPadding(
+                    padding: AppEdgeInsets.only(right: AppGapSize.small),
+                    child: AppIcons.locationMap()),
                   DecoratedBox(
                       decoration: BoxDecoration(shape: BoxShape.circle, color: Color(0xFFFF1D1D).withOpacity(0.1)),
                       child: AppPadding.small(child: AppIcons.heart())),
