@@ -7,6 +7,7 @@ import 'package:ninjafood/app/widgets/app_bar_home_widget.dart';
 
 import 'widgets/mobile_view_type/home_view_type_product.dart';
 import 'widgets/mobile_view_type/home_view_type_normal.dart';
+import 'widgets/mobile_view_type/home_view_type_promotion.dart';
 
 class MobileHomeScreen extends GetView<HomeController> {
   const MobileHomeScreen({Key? key}) : super(key: key);
@@ -34,6 +35,10 @@ class MobileHomeScreen extends GetView<HomeController> {
 
               if (homeViewType == HomeViewType.popularFood) {
                 return HomeViewTypeProduct();
+              }
+
+              if (homeViewType == HomeViewType.promotion) {
+                return HomeViewTypePromotions();
               }
 
               return SizedBox.shrink();

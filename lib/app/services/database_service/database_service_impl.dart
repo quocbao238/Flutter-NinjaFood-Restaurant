@@ -3,6 +3,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/models/category_model.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
+import 'package:ninjafood/app/models/comment_model.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
@@ -42,4 +43,7 @@ abstract class DatabaseServiceImpl {
   Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat({required String groupChatId});
 
   Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat();
+
+  // Comment Product
+  Future<Either<Failure, void>> insertCommentProduct({required CommentModel commentModel});
 }

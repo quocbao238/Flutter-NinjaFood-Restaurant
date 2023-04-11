@@ -1,7 +1,5 @@
 part of global_controller;
 
-
-
 class MessageController extends GetxController implements BootableController {
   static MessageController get instance => Get.find<MessageController>();
   late final UserController userController;
@@ -114,7 +112,4 @@ class MessageController extends GetxController implements BootableController {
       return left(Failure(e.toString(), stacktrace));
     }
   }
-
-  @override
-  int get priority => throw UnimplementedError();
 }

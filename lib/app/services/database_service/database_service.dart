@@ -5,6 +5,7 @@ import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/helper/utils.dart';
 import 'package:ninjafood/app/models/category_model.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
+import 'package:ninjafood/app/models/comment_model.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
@@ -163,5 +164,15 @@ class DatabaseService extends GetxService implements BootableService, DatabaseSe
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat() {
     return _db.collection(DatabaseKeys.groupChat).snapshots();
+  }
+
+  @override
+  Future<Either<Failure, String>> insertCommentProduct({required CommentModel commentModel}) async {
+    try {
+      await _db.doc('${DatabaseKeys.commentPath}${commentModel.commentId}').set(commentModel.toJson());
+      return right(commentModel.commentId);
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
   }
 }

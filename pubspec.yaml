@@ -26,7 +26,7 @@ dependencies:
   flutter_zoom_drawer: ^3.0.4+1
   font_awesome_flutter: ^10.4.0
   firebase_crashlytics: ^3.0.17
-  flutter_launcher_icons: ^0.12.0
+#  flutter_launcher_icons: ^0.12.0
   crypto: ^3.0.2
   google_sign_in: ^6.0.2
   #  sign_in_with_apple: ^4.3.0
@@ -43,15 +43,16 @@ dependencies:
   permission_handler: ^10.2.0
   path_provider: ^2.0.14
   open_file: ^3.2.1
+  flutter_html: ^2.2.0
 
 
 
 
   ninja_theme:
-    git:
-      url: https://github.com/quocbao238/ninjafood_theme.git
-      ref: devMaster
-      #  path: ../NinjaFood_Theme
+#    git:
+#      url: https://github.com/quocbao238/ninjafood_theme.git
+#      ref: devMaster
+     path: ../NinjaFood_Theme
 
 
 flutter_icons:

@@ -5,8 +5,8 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
 import 'package:ninjafood/app/widgets/app_network_image.dart';
 
-class BoxSpecialDeal extends GetView<HomeController> {
-  const BoxSpecialDeal({super.key});
+class PromotionDeal extends GetView<HomeController> {
+  const PromotionDeal({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +26,14 @@ class BoxSpecialDeal extends GetView<HomeController> {
                     controller.currentIndexPromotion.value = index;
                   }),
               items: promotions
-                  .map((item) => SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: AppNetworkImage(url: item.thumbnail!),
+                  .map((item) => GestureDetector(
+                        onTap: () => controller.onPressedPromotionItem(item),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: AppNetworkImage(url: item.thumbnail!),
+                          ),
                         ),
                       ))
                   .toList(),
@@ -44,13 +47,10 @@ class BoxSpecialDeal extends GetView<HomeController> {
                   return Container(
                     width: 8.0,
                     height: 8.0,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: controller.currentIndexPromotion.value == index
-                          ? ThemeColors.primaryColor
-                          : Colors.grey,
+                      color: controller.currentIndexPromotion.value == index ? ThemeColors.primaryColor : Colors.grey,
                     ),
                   );
                 },

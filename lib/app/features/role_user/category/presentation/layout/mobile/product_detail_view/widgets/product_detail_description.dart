@@ -29,9 +29,12 @@ class ProductDetailDescription extends GetView<ProductDetailController> {
                   ),
                   Spacer(),
                   AppIcons.locationMap(),
-                  DecoratedBox(
-                      decoration: BoxDecoration(shape: BoxShape.circle, color: Color(0xFFFF1D1D).withOpacity(0.1)),
-                      child: AppPadding.small(child: AppIcons.heart())),
+                  AppPadding(
+                      padding: AppEdgeInsets.only(left: AppGapSize.small),
+                      child: FavoriteItem(
+                        productId: product.id ?? 0,
+                        onPressedFavorite: (v) => controller.onPressedFavorite(v),
+                      ))
                 ],
               ),
               AppPadding(
