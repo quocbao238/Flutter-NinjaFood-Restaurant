@@ -1,7 +1,5 @@
 part of product_detail_mobile_widgets;
 
-
-
 class ProductDetailAppbar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
   final double minExtentHeight;
@@ -48,8 +46,10 @@ class ProductDetailAppbar extends SliverPersistentHeaderDelegate {
             height: 30,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-              color: Theme.of(context).colorScheme.onPrimary,
+              border: Border.all(color: Theme.of(context).colorScheme.background, width: 0),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+              color: Theme.of(context).colorScheme.background,
             ),
           ),
         ),

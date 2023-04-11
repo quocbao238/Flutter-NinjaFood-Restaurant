@@ -17,10 +17,7 @@ class ProfilePerson extends GetView<UserController> {
     final currentUser = controller.getCurrentUser;
     return SliverToBoxAdapter(
       child: AppSizeScale(
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .onPrimary,
+        backgroundColor: Theme.of(context).colorScheme.background,
         child: AppPadding.medium(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

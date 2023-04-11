@@ -38,7 +38,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
         Positioned(
           top: 0,
           left: 0,
-          child: title, // add the title widget
+          child: title,
         ),
         Positioned(
           bottom: 0,
@@ -46,9 +46,10 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
             height: 30,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
+               border: Border.all(color: Theme.of(context).colorScheme.background, width: 0),
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: Theme.of(context).colorScheme.background,
             ),
           ),
         ),
