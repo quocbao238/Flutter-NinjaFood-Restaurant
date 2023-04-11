@@ -21,15 +21,13 @@ class ProfileMobileView extends GetView<UserController> {
         return CustomScrollView(
           slivers: [
             SliverPersistentHeader(
-              pinned: true,
-              delegate: MySliverAppBar(
-                expandedHeight: MediaQuery.of(context).size.height * 0.4,
-                minExtentHeight: MediaQuery.of(context).size.height * 0.2,
-                backgroundImage: CachedNetworkImage(imageUrl: currentUser.photoUrl ?? '', fit: BoxFit.cover),
-                // set the image as the background
-                title: AppButtonDrawer(onPressed: () => tapController.toggleDrawer()),
-              ),
-            ),
+                pinned: true,
+                delegate: MySliverAppBar(
+                    expandedHeight: MediaQuery.of(context).size.height * 0.4,
+                    minExtentHeight: MediaQuery.of(context).size.height * 0.2,
+                    backgroundImage: CachedNetworkImage(imageUrl: currentUser.photoUrl ?? '', fit: BoxFit.cover),
+                    // set the image as the background
+                    title: AppButtonDrawer(onPressed: () => tapController.toggleDrawer()))),
             ProfilePerson(),
           ],
         );

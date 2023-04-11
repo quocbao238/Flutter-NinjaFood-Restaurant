@@ -1,5 +1,5 @@
-
 import 'package:ninjafood/app/helper/helper.dart';
+import 'package:ninjafood/app/models/comment_model.dart';
 
 class ProductModel {
   String? name;
@@ -12,30 +12,32 @@ class ProductModel {
   PriceRange? priceRange;
   Description? description;
   Description? shortDescription;
+  List<CommentModel>? comments = [];
 
   ProductModel(
       {this.name,
-        this.id,
-        this.uid,
-        this.image,
-        this.smallImage,
-        this.mediaGallery,
-        this.sTypename,
-        this.priceRange,
-        this.description,
-        this.shortDescription});
+      this.id,
+      this.uid,
+      this.image,
+      this.smallImage,
+      this.mediaGallery,
+      this.sTypename,
+      this.priceRange,
+      this.description,
+      this.comments,
+      this.shortDescription});
 
   String get getPrice => Common.formatMoney(priceRange?.minimumPrice?.finalPrice?.value ?? 0);
+
   String get currency => priceRange?.minimumPrice?.finalPrice?.currency ?? '';
 
   ProductModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     id = json['id'];
     uid = json['uid'];
+    comments = json['comments'] != null ? (json['comments'] as List).map((i) => CommentModel.fromJson(i)).toList() : [];
     image = json['image'] != null ? new Image.fromJson(json['image']) : null;
-    smallImage = json['small_image'] != null
-        ? new SmallImage.fromJson(json['small_image'])
-        : null;
+    smallImage = json['small_image'] != null ? new SmallImage.fromJson(json['small_image']) : null;
     if (json['media_gallery'] != null) {
       mediaGallery = <MediaGallery>[];
       json['media_gallery'].forEach((v) {
@@ -43,15 +45,9 @@ class ProductModel {
       });
     }
     sTypename = json['__typename'];
-    priceRange = json['price_range'] != null
-        ? new PriceRange.fromJson(json['price_range'])
-        : null;
-    description = json['description'] != null
-        ? new Description.fromJson(json['description'])
-        : null;
-    shortDescription = json['short_description'] != null
-        ? new Description.fromJson(json['short_description'])
-        : null;
+    priceRange = json['price_range'] != null ? new PriceRange.fromJson(json['price_range']) : null;
+    description = json['description'] != null ? new Description.fromJson(json['description']) : null;
+    shortDescription = json['short_description'] != null ? new Description.fromJson(json['short_description']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -66,8 +62,7 @@ class ProductModel {
       data['small_image'] = this.smallImage!.toJson();
     }
     if (this.mediaGallery != null) {
-      data['media_gallery'] =
-          this.mediaGallery!.map((v) => v.toJson()).toList();
+      data['media_gallery'] = this.mediaGallery!.map((v) => v.toJson()).toList();
     }
     data['__typename'] = this.sTypename;
     if (this.priceRange != null) {
@@ -79,7 +74,28 @@ class ProductModel {
     if (this.shortDescription != null) {
       data['short_description'] = this.shortDescription!.toJson();
     }
+    if (this.comments != null) {
+      data['comments'] = this.comments!.map((v) => v.toJson()).toList();
+    }
     return data;
+  }
+
+  ProductModel addComment({required CommentModel comments}) {
+    final currentComments = this.comments ?? [];
+    final newComments = [...currentComments, comments];
+    return ProductModel(
+      name: name ?? this.name,
+      id: id ?? this.id,
+      uid: uid ?? this.uid,
+      image: image ?? this.image,
+      smallImage: smallImage ?? this.smallImage,
+      mediaGallery: mediaGallery ?? this.mediaGallery,
+      sTypename: sTypename ?? this.sTypename,
+      priceRange: priceRange ?? this.priceRange,
+      description: description ?? this.description,
+      shortDescription: shortDescription ?? this.shortDescription,
+      comments: newComments,
+    );
   }
 }
 
@@ -115,8 +131,7 @@ class SmallImage {
   String? url;
   String? sTypename;
 
-  SmallImage(
-      {this.disabled, this.label, this.position, this.url, this.sTypename});
+  SmallImage({this.disabled, this.label, this.position, this.url, this.sTypename});
 
   SmallImage.fromJson(Map<String, dynamic> json) {
     disabled = json['disabled'];
@@ -169,9 +184,7 @@ class PriceRange {
   PriceRange({this.minimumPrice, this.sTypename});
 
   PriceRange.fromJson(Map<String, dynamic> json) {
-    minimumPrice = json['minimum_price'] != null
-        ? new MinimumPrice.fromJson(json['minimum_price'])
-        : null;
+    minimumPrice = json['minimum_price'] != null ? new MinimumPrice.fromJson(json['minimum_price']) : null;
     sTypename = json['__typename'];
   }
 
@@ -192,9 +205,7 @@ class MinimumPrice {
   MinimumPrice({this.finalPrice, this.sTypename});
 
   MinimumPrice.fromJson(Map<String, dynamic> json) {
-    finalPrice = json['final_price'] != null
-        ? new FinalPrice.fromJson(json['final_price'])
-        : null;
+    finalPrice = json['final_price'] != null ? new FinalPrice.fromJson(json['final_price']) : null;
     sTypename = json['__typename'];
   }
 

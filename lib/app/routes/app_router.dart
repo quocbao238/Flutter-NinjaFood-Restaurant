@@ -98,5 +98,9 @@ class AppPages {
       name: AppRouteProvider.imagePreviewScreen,
       page: () => ImagePreviewScreen(url: Get.arguments),
     ),
+    GetPage(
+      name: AppRouteProvider.promotionDetailScreen,
+      page: () => PromotionDetailScreen(promotionModel: Get.arguments),
+    ),
   ];
 }

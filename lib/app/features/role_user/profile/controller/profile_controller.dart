@@ -15,6 +15,11 @@ class ProfileController extends BaseController {
   @override
   void onInit() {
     _getListFavoritesProduct();
+    userController.currentUser.listen((event) {
+      if (event == null) return;
+      return _getListFavoritesProduct();
+    });
+
     super.onInit();
   }
 
@@ -25,8 +30,11 @@ class ProfileController extends BaseController {
 
   void _getListFavoritesProduct() async {
     loading.value = true;
-    final lstFavoriteIds = userController.getCurrentUser?.favorites ?? [];
-    if (lstFavoriteIds.isEmpty) return;
+    final lstFavoriteIds = userController.getCurrentUser?.favoriteIds ?? [];
+    if (lstFavoriteIds.isEmpty) {
+      loading.value = false;
+      return;
+    }
     final response = await databaseService.getListProductByListId(lstFavoriteIds);
     response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) => lstProducts.assignAll(r));
     loading.value = false;

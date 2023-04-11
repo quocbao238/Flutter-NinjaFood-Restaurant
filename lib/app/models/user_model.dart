@@ -28,7 +28,7 @@ class UserModel {
   String? createType;
   String? fcmToken;
   UserType? userType;
-  List<int> favorites;
+  List<int> favoriteIds;
 
   UserModel(
       {required this.uid,
@@ -41,7 +41,7 @@ class UserModel {
       this.role,
       this.createType,
       this.userType,
-      required this.favorites,
+      required this.favoriteIds,
       this.fcmToken});
 
   static UserModel createUserByAuthUser({required User authUser, required createType}) {
@@ -52,7 +52,7 @@ class UserModel {
         phoneNumber: authUser.phoneNumber,
         firstName: authUser.displayName,
         role: ROLE_USER,
-        favorites: [],
+        favoriteIds: [],
         userType: UserType.Sliver,
         createType: createType);
   }
@@ -66,7 +66,7 @@ class UserModel {
       firstName: authUser.displayName,
       userType: UserType.Owners,
       role: ROLE_ADMIN,
-      favorites: [],
+      favoriteIds: [],
       createType: createType,
     );
   }
@@ -88,7 +88,7 @@ class UserModel {
         role = data['role'] ?? '',
         fcmToken = data['fcmToken'] ?? '',
         createType = data['createType'] ?? '',
-        favorites = List<int>.from(data['favorites'] ?? []),
+        favoriteIds = List<int>.from(data['favoriteIds'] ?? []),
         userType = UserType.values[data['userType'] ?? 0];
 
   Map<String, dynamic> toJson() {
@@ -103,7 +103,7 @@ class UserModel {
       'role': role,
       'createType': createType,
       'fcmToken': fcmToken,
-      'favorites': favorites,
+      'favoriteIds': favoriteIds,
       'userType': userType?.json,
     };
   }
@@ -118,7 +118,7 @@ class UserModel {
     String? address,
     String? fcmToken,
     UserType? userType,
-    List<int>? favorites,
+    List<int>? favoriteIds,
   }) {
     return UserModel(
       uid: this.uid,
@@ -131,7 +131,7 @@ class UserModel {
       role: this.role,
       createType: this.createType,
       fcmToken: fcmToken ?? this.fcmToken,
-      favorites: favorites ?? this.favorites,
+      favoriteIds: favoriteIds ?? this.favoriteIds,
       userType: userType ?? this.userType,
     );
   }

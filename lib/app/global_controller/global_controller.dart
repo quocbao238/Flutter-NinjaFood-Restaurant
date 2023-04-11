@@ -8,8 +8,10 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
+import 'package:ninjafood/app/models/comment_model.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/user_model.dart';
 import 'package:ninjafood/app/services/console_service/console_service.dart';
@@ -18,6 +20,7 @@ import 'package:ninjafood/app/services/notification_service/notification_service
 import 'package:ninjafood/app/services/services.dart';
 import 'package:ninjafood/app/widgets/app_dialog.dart';
 import 'package:tuple/tuple.dart' as tuple;
+import 'package:uuid/uuid.dart';
 
 import 'boot_controllers.dart';
 

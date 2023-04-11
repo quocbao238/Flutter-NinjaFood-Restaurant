@@ -5,7 +5,6 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/category/controllers/product_detail_controller.dart';
 import 'widgets/product_detail_mobile_widgets.dart';
 
-
 class FoodDetailMobileView extends GetView<ProductDetailController> {
   const FoodDetailMobileView({super.key});
 
@@ -21,11 +20,12 @@ class FoodDetailMobileView extends GetView<ProductDetailController> {
                 SliverPersistentHeader(
                   pinned: true,
                   delegate: ProductDetailAppbar(
-                      title: AppButtonBack(onPressed: () => Get.back()),
-                      expandedHeight: MediaQuery.of(context).size.height * 0.4,
-                      minExtentHeight: MediaQuery.of(context).size.height * 0.2,
-                      backgroundImage:
-                          CachedNetworkImage(imageUrl: controller.currentProduct.image?.url ?? '', fit: BoxFit.cover)),
+                    title: AppButtonBack(onPressed: () => Get.back()),
+                    expandedHeight: MediaQuery.of(context).size.height * 0.4,
+                    minExtentHeight: MediaQuery.of(context).size.height * 0.2,
+                    backgroundImage:
+                        CachedNetworkImage(imageUrl: controller.currentProduct.image?.url ?? '', fit: BoxFit.cover),
+                  ),
                 ),
                 ProductDetailDescription(),
               ],
