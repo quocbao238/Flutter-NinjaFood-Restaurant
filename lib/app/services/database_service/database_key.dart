@@ -5,4 +5,5 @@ class DatabaseKeys {
   static String promotionPath = '/promotion/';
   static String groupChat = '/groupChat/';
   static String messageChatPath = '/message/';
+  static String commentPath = '/comment/';
 }

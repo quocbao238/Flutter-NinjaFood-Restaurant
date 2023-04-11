@@ -11,7 +11,7 @@ import 'package:ninjafood/app/services/database_service/database_service.dart';
 
 const _logName = 'HomeController';
 
-enum HomeViewType { normal, popularMenu, popularFood }
+enum HomeViewType { normal, popularMenu, popularFood, promotion }
 
 class HomeController extends BaseController {
   final databaseService = DatabaseService.instance;
@@ -122,6 +122,12 @@ class HomeController extends BaseController {
   void onPressedFoodItem(ProductModel product) {
     Get.toNamed(AppRouteProvider.foodDetailScreen, arguments: product);
   }
+
+  void onPressedPromotionItem(PromotionModel promotion) {
+    homeViewType.value = HomeViewType.promotion;
+  }
+
+
 
   void onPressedClearSearch() {
     searchController.clear();

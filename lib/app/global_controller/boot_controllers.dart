@@ -2,7 +2,6 @@
 import 'package:tuple/tuple.dart';
 
 abstract class BootableController {
-  int get priority;
   Future<void> call();
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/layout/mobile/widgets/favorite_item.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 
@@ -10,7 +11,9 @@ class ProfilePerson extends GetView<UserController> {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final isDarkMode = Theme
+        .of(context)
+        .brightness == Brightness.dark;
     final currentUser = controller.getCurrentUser;
     return SliverToBoxAdapter(
       child: AppSizeScale(
@@ -46,12 +49,19 @@ class ProfilePerson extends GetView<UserController> {
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                       color:
-                          isDarkMode ? ThemeColors.backgroundTextFormDark() : Theme.of(context).colorScheme.onPrimary,
+                      isDarkMode ? ThemeColors.backgroundTextFormDark() : Theme
+                          .of(context)
+                          .colorScheme
+                          .onPrimary,
                       borderRadius: BorderRadius.circular(16)),
                   child: Row(
                     children: [
                       AppPadding.medium(child: AppIcons.voucher()),
-                      AppText.bodyLarge(text: 'You Have 3 Voucher', fontWeight: FontWeight.w400)
+                      Obx(() {
+                        final homeController = Get.find<HomeController>();
+                        final lstVoucher = homeController.promotions;
+                        return AppText.bodyLarge(text: 'You Have ${lstVoucher.length} Voucher', fontWeight: FontWeight.w400);
+                      })
                     ],
                   ),
                 ),

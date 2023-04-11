@@ -98,8 +98,6 @@ class UserController extends GetxController implements BootableController {
     });
   }
 
-  int get priority => 0;
-
   Future<Either<Failure, void>> updateUser({
     String? firstName,
     String? lastName,
@@ -107,6 +105,7 @@ class UserController extends GetxController implements BootableController {
     String? address,
     String? photoUrl,
     String? fcmToken,
+    List<int>? favoriteIds,
   }) async {
     final _currentUser = getCurrentUser;
     if (_currentUser == null) return left(Failure.custom('User is null'));
@@ -117,6 +116,7 @@ class UserController extends GetxController implements BootableController {
           phoneNumber: phoneNumber ?? _currentUser.phoneNumber,
           address: address ?? _currentUser.address,
           photoUrl: photoUrl ?? _currentUser.photoUrl,
+          favoriteIds: favoriteIds ?? _currentUser.favoriteIds,
           fcmToken: fcmToken ?? _currentUser.fcmToken);
       await _databaseService.updateUser(userModel: newDataUser);
       return Right(null);
@@ -125,181 +125,39 @@ class UserController extends GetxController implements BootableController {
     }
   }
 
-//
-// void _handleMessage() async {
-//   if (!isAdmin) {
-//     _messageSubscription =
-//         dbController.listenMessageUser(currentUser!.uid).listen((QuerySnapshot<Map<String, dynamic>> event) {
-//       final messages = event.docs.map((e) => MessageChat.fromJson(e.data())).toList();
-//       final chatModel = ChatModel(
-//         senderUser: currentUser!,
-//         receiverUser: adminUser!,
-//         messageChats: messages,
-//       );
-//       chatList.assignAll([chatModel]);
-//     });
-//     return;
-//   }
-//   _messageSubscription = dbController.listenMessageByAdmin().listen((QuerySnapshot<Map<String, dynamic>> event) {
-//     final dataJson = event.docs;
-//     List<ChatModel> listChatModel = dataJson.map((e) {
-//       final json = e.data();
-//       final message = MessageChat.fromJson(json['messageChat']);
-//       UserModel receiverUser = UserModel.fromJson(json['userGroupChat']);
-//
-//       final chatModel = ChatModel(
-//         senderUser: currentUser!,
-//         receiverUser: receiverUser,
-//         messageChats: [message],
-//       );
-//       return chatModel;
-//     }).toList();
-//     chatList.assignAll(listChatModel);
-//     print(event);
-//   });
-// }
-//
-// Future<Either<Failure, void>> registerWithEmailAndPassword({required String email, required String password}) async {
-//   try {
-//     await _authService.registerWithEmail(email: email, password: password);
-//     final userModel = UserModel.createUserByAuthUser(authUser: _authUser, createType: CREATE_TYPE_LOGIN_TYPE_EMAIL);
-//     final response = await dbController.insertUser(userModel);
-//     response.fold((l) => left(l), (r) => r);
-//     return right(null);
-//   } on FirebaseAuthException catch (e, stackTrace) {
-//     return left(Failure(e.message.toString(), stackTrace));
-//   } catch (e, stackTrace) {
-//     return left(Failure(e.toString(), stackTrace));
-//   }
-// }
-//
-// Future<Either<Failure, void>> loginWithEmailAndPassword({required String email, required String password}) async {
-//   try {
-//     await _auth.signInWithEmailAndPassword(email: email, password: password);
-//     return right(null);
-//   } on FirebaseAuthException catch (e, stackTrace) {
-//     return left(Failure(e.toString(), stackTrace));
-//   } catch (e, stackTrace) {
-//     return left(Failure(e.toString(), stackTrace));
-//   }
-// }
-//
-// Future<Either<Failure, void>> signOut() async {
-//   try {
-//     await _auth.signOut();
-//     final AccessToken? accessToken = await FacebookAuth.instance.accessToken;
-//     if (accessToken != null) await FacebookAuth.instance.logOut();
-//     final GoogleSignIn googleSignIn = GoogleSignIn();
-//     if (await googleSignIn.isSignedIn()) await googleSignIn.signOut();
-//     return right(null);
-//   } on FirebaseAuthException catch (e, stackTrace) {
-//     return left(Failure(e.toString(), stackTrace));
-//   } catch (e, stackTrace) {
-//     return left(Failure(e.toString(), stackTrace));
-//   }
-// }
-//
-// Future<Either<Failure, void>> resetPassword({required String email}) async {
-//   try {
-//     await _auth.sendPasswordResetEmail(email: email);
-//     return right(null);
-//   } on FirebaseAuthException catch (e, stackTrace) {
-//     return left(Failure(e.toString(), stackTrace));
-//   } catch (e, stackTrace) {
-//     return left(Failure(e.toString(), stackTrace));
-//   }
-// }
-//
-// Future<Either<Failure, void>> sendEmailVerification() async {
-//   if (authUser.value!.emailVerified) return right(null);
-//
-//   try {
-//     await authUser.value!.sendEmailVerification();
-//     return right(null);
-//   } on FirebaseAuthException catch (e, stackTrace) {
-//     return left(Failure(e.toString(), stackTrace));
-//   } catch (e, stackTrace) {
-//     return left(Failure(e.toString(), stackTrace));
-//   }
-// }
-//
-// Future<Either<Failure, void>> updatePassword({required String newPassword}) async {
-//   try {
-//     await authUser.value!.updatePassword(newPassword);
-//     return right(null);
-//   } on FirebaseAuthException catch (e, stackTrace) {
-//     return left(Failure(e.toString(), stackTrace));
-//   } catch (e, stackTrace) {
-//     return left(Failure(e.toString(), stackTrace));
-//   }
-// }
-//
-// // Return Right true if NewUser
-// // Return Right false if OldUser
-// // Return Left Failure
-// Future<Either<Failure, bool>> registerWithGoogle() async {
-//   try {
-//     final GoogleSignIn googleSignIn = GoogleSignIn();
-//     final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
-//
-//     if (googleSignInAccount == null) return left(Failure('Login with Google Failure', StackTrace.current));
-//
-//     final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-//
-//     final AuthCredential credential = GoogleAuthProvider.credential(
-//       accessToken: googleSignInAuthentication.accessToken,
-//       idToken: googleSignInAuthentication.idToken,
-//     );
-//     final UserCredential userCredential = await _auth.signInWithCredential(credential);
-//
-//     // If Old User
-//     if (!userCredential.additionalUserInfo!.isNewUser) return right(false);
-//
-//     final _authUser = userCredential.user;
-//     if (_authUser == null) return left(Failure('Auth user is null', StackTrace.current));
-//
-//     final userModel = UserModel.createUserByAuthUser(authUser: _authUser, createType: CREATE_TYPE_LOGIN_TYPE_GOOGLE);
-//     await dbController.insertUser(userModel);
-//     return right(true);
-//   } on FirebaseAuthException catch (e) {
-//     if (e.code == 'account-exists-with-different-credential') {}
-//     if (e.code == 'invalid-credential') {}
-//     return left(Failure(e.message.toString(), StackTrace.current));
-//   } catch (e, stackTrace) {
-//     return left(Failure(e.toString(), stackTrace));
-//   }
-// }
-//
-// Future<Either<Failure, bool>> registerWithFacebook() async {
-//   try {
-//     final LoginResult loginResult = await FacebookAuth.instance.login();
-//
-//     if (loginResult.status != LoginStatus.success || loginResult.accessToken == null) {
-//       return left(Failure('Login with Facebook Failure', StackTrace.current));
-//     }
-//
-//     // Create a credential from the access token
-//     final OAuthCredential credential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
-//
-//     // Once signed in, return the UserCredential
-//     final UserCredential userCredential = await _auth.signInWithCredential(credential);
-//
-//     // If Old User
-//     if (!userCredential.additionalUserInfo!.isNewUser) return right(false);
-//
-//     final _authUser = userCredential.user;
-//     if (_authUser == null) return left(Failure('Auth user is null', StackTrace.current));
-//
-//     final userModel =
-//         UserModel.createUserByAuthUser(authUser: _authUser, createType: CREATE_TYPE_LOGIN_TYPE_FACEBOOK);
-//     await dbController.insertUser(userModel);
-//     return right(true);
-//   } on FirebaseAuthException catch (e) {
-//     if (e.code == 'account-exists-with-different-credential') {}
-//     if (e.code == 'invalid-credential') {}
-//     return left(Failure(e.message.toString(), StackTrace.current));
-//   } catch (e, stackTrace) {
-//     return left(Failure(e.toString(), stackTrace));
-//   }
-// }
+  Future<Either<Failure, void>> favoriteProduct({required int productId}) async {
+    final _currentUser = getCurrentUser;
+    if (_currentUser == null) return left(Failure.custom('User is null'));
+    final currentFavoriteProducts = _currentUser.favoriteIds;
+    currentFavoriteProducts.contains(productId)
+        ? currentFavoriteProducts.remove(productId)
+        : currentFavoriteProducts.add(productId);
+    try {
+      await updateUser(favoriteIds: currentFavoriteProducts);
+      return Right(null);
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
   }
+
+  // Comment Product
+  Future<Either<Failure, void>> commentProduct({required String comment, required int productId}) async {
+    final _currentUser = getCurrentUser;
+    if (_currentUser == null) return left(Failure.custom('User is null'));
+    try {
+      final commentModel = CommentModel(
+        comment: comment,
+        commentId: Uuid().v4(),
+        productId: productId,
+        userId: _currentUser.uid,
+        userName: _currentUser.getName(),
+        userImage: _currentUser.photoUrl ?? '',
+        date: DateFormat('dd/MM/yyyy').format(DateTime.now()),
+      );
+      final insertCommentProduct = await _databaseService.insertCommentProduct(commentModel: commentModel);
+      return insertCommentProduct.fold((l) => left(l), (r) => right(null));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+}

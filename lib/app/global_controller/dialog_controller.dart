@@ -80,6 +80,4 @@ class DialogController extends GetxController with GetSingleTickerProviderStateM
     });
   }
 
-  @override
-  int get priority => throw UnimplementedError();
 }
