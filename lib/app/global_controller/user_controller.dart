@@ -106,18 +106,23 @@ class UserController extends GetxController implements BootableController {
     String? photoUrl,
     String? fcmToken,
     List<int>? favoriteIds,
+    List<CartModel>? carts,
+    List<HistoryOrderModel>? historyOrders,
   }) async {
     final _currentUser = getCurrentUser;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     try {
       final newDataUser = _currentUser.copyWith(
-          firstName: firstName ?? _currentUser.firstName,
-          lastName: lastName ?? _currentUser.lastName,
-          phoneNumber: phoneNumber ?? _currentUser.phoneNumber,
-          address: address ?? _currentUser.address,
-          photoUrl: photoUrl ?? _currentUser.photoUrl,
-          favoriteIds: favoriteIds ?? _currentUser.favoriteIds,
-          fcmToken: fcmToken ?? _currentUser.fcmToken);
+        firstName: firstName ?? _currentUser.firstName,
+        lastName: lastName ?? _currentUser.lastName,
+        phoneNumber: phoneNumber ?? _currentUser.phoneNumber,
+        address: address ?? _currentUser.address,
+        photoUrl: photoUrl ?? _currentUser.photoUrl,
+        favoriteIds: favoriteIds ?? _currentUser.favoriteIds,
+        fcmToken: fcmToken ?? _currentUser.fcmToken,
+        carts: carts ?? _currentUser.carts,
+        historyOrders: historyOrders ?? _currentUser.historyOrders,
+      );
       await _databaseService.updateUser(userModel: newDataUser);
       return Right(null);
     } catch (e, stackTrace) {
@@ -134,6 +139,26 @@ class UserController extends GetxController implements BootableController {
         : currentFavoriteProducts.add(productId);
     try {
       await updateUser(favoriteIds: currentFavoriteProducts);
+      return Right(null);
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  Future<Either<Failure, void>> addProductToCard({required ProductModel productModel}) async {
+    final _currentUser = getCurrentUser;
+    if (_currentUser == null) return left(Failure.custom('User is null'));
+    List<CartModel> currentCartsProduct = _currentUser.carts;
+
+    int index = currentCartsProduct.indexWhere((element) => element.productModel.id == productModel.id);
+
+    if (index != -1) {
+      currentCartsProduct[index].increaseQuantity();
+    } else {
+      currentCartsProduct.add(CartModel.createNew(productModel: productModel));
+    }
+    try {
+      await updateUser(carts: currentCartsProduct);
       return Right(null);
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/layout/mobile/widgets/profile_appbar.dart';
-import 'package:ninjafood/app/features/role_user/profile/presentation/layout/mobile/widgets/profile_person.dart';
+import 'package:ninjafood/app/features/role_user/profile/presentation/layout/mobile/widgets/profile_body.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 
@@ -22,13 +22,13 @@ class ProfileMobileView extends GetView<UserController> {
           slivers: [
             SliverPersistentHeader(
                 pinned: true,
-                delegate: MySliverAppBar(
+                delegate: ProfileAppBar(
                     expandedHeight: MediaQuery.of(context).size.height * 0.4,
                     minExtentHeight: MediaQuery.of(context).size.height * 0.2,
                     backgroundImage: CachedNetworkImage(imageUrl: currentUser.photoUrl ?? '', fit: BoxFit.cover),
                     // set the image as the background
                     title: AppButtonDrawer(onPressed: () => tapController.toggleDrawer()))),
-            ProfilePerson(),
+            ProfileBody(),
           ],
         );
       }),

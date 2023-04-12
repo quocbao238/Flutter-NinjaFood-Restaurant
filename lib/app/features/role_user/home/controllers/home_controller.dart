@@ -14,8 +14,10 @@ const _logName = 'HomeController';
 enum HomeViewType { normal, popularMenu, popularFood, promotion }
 
 class HomeController extends BaseController {
-  final databaseService = DatabaseService.instance;
 
+  static HomeController get instant => Get.find<HomeController>();
+
+  final databaseService = DatabaseService.instance;
   final menus = <CategoryModel>[].obs;
   final products = <ProductModel>[].obs;
   final promotions = <PromotionModel>[].obs;

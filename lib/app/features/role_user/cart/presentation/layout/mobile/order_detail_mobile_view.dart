@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/cart/presentation/layout/mobile/widgets/box_detail_price.dart';
-import 'package:ninjafood/app/features/role_user/cart/presentation/layout/mobile/widgets/list_order.dart';
+import 'package:ninjafood/app/features/role_user/cart/presentation/layout/mobile/widgets/order_details_price.dart';
+import 'package:ninjafood/app/features/role_user/cart/presentation/layout/mobile/widgets/order_detail_body.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 
 class OrderDetailsMobileView extends GetView {
@@ -21,12 +21,10 @@ class OrderDetailsMobileView extends GetView {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppPadding(
-                padding: AppEdgeInsets.only(bottom: AppGapSize.small),
-                child: AppText.headlineMedium(
-                    text: 'Order details', fontWeight: FontWeight.bold),
-              ),
-              ListOrder(),
-              BoxDetailprice(),
+                  padding: AppEdgeInsets.only(bottom: AppGapSize.medium),
+                  child: AppText.headlineMedium(text: 'Order details', fontWeight: FontWeight.bold)),
+              OrderDetailBodyView(),
+              OrderDetailBottomView()
             ],
           ),
         ));

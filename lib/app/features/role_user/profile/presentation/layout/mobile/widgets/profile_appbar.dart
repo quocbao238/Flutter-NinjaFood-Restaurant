@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MySliverAppBar extends SliverPersistentHeaderDelegate {
+class ProfileAppBar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
   final double minExtentHeight;
   final Widget title;
   final Widget backgroundImage;
 
-  MySliverAppBar({
+  ProfileAppBar({
     required this.minExtentHeight,
     required this.expandedHeight,
     required this.title,
@@ -64,7 +64,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
   double get minExtent => minExtentHeight;
 
   @override
-  bool shouldRebuild(covariant MySliverAppBar oldDelegate) {
+  bool shouldRebuild(covariant ProfileAppBar oldDelegate) {
     return expandedHeight != oldDelegate.expandedHeight;
     // title != oldDelegate.title;
     // backgroundImage != oldDelegate.backgroundImage;

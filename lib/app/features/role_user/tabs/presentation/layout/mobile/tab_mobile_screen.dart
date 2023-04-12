@@ -13,7 +13,6 @@ class TabsMobileScreen extends GetView<TabsController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return AppScaffoldBackgroundImage.splash(
-        // backgroundColor: Get.isDarkMode ? null : ThemeColors.menuLightColor,
         isLoading: controller.loading.value,
         body: ZoomDrawer(
           controller: controller.zoomDrawerController,
