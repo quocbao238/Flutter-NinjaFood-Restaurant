@@ -5,6 +5,7 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/helper/utils.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/widgets/row_text_value_widget.dart';
 
 class PromotionItem extends StatelessWidget {
   final PromotionModel promotion;
@@ -57,9 +58,9 @@ class PromotionItem extends StatelessWidget {
                               textAlign: TextAlign.start,
                               overflow: TextOverflow.ellipsis,
                               fontWeight: FontWeight.bold),
-                          PromotionText(title: 'Start Date: ', value: promotion.startDate ?? ''),
-                          PromotionText(title: 'End Date: ', value: promotion.endDate ?? ''),
-                          PromotionText(
+                          RowTextValueWidget(title: 'Start Date: ', value: promotion.startDate ?? ''),
+                          RowTextValueWidget(title: 'End Date: ', value: promotion.endDate ?? ''),
+                          RowTextValueWidget(
                               title: 'Expires later: ',
                               value:
                                   getExpiresDayLaterByTwoDateTime(promotion.startDate ?? '', promotion.endDate ?? '') +
@@ -72,34 +73,6 @@ class PromotionItem extends StatelessWidget {
                 ),
               )),
         ),
-      ),
-    );
-  }
-}
-
-class PromotionText extends StatelessWidget {
-  final String title;
-  final String value;
-
-  const PromotionText({Key? key, required this.title, required this.value}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppPadding(
-      padding: AppEdgeInsets.only(top: AppGapSize.small),
-      child: Row(
-        children: [
-          AppText.bodySmall(text: title, fontWeight: FontWeight.normal, maxLines: 1, overflow: TextOverflow.ellipsis),
-          SizedBox(width: AppGapSize.small.size),
-          Expanded(
-            child: AppText.bodySmall(
-                text: value,
-                textAlign: TextAlign.end,
-                fontWeight: FontWeight.bold,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis),
-          ),
-        ],
       ),
     );
   }

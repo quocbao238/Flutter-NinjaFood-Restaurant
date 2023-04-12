@@ -17,6 +17,8 @@ class ProfileController extends BaseController {
   @override
   void onInit() {
     _getListFavoritesProduct();
+    final _lstHistory =  userController.getCurrentUser?.historyOrders ?? [];
+    lstHistory.assignAll(_lstHistory);
     userController.currentUser.listen((event) {
       if (event == null) return;
       _getListFavoritesProduct();

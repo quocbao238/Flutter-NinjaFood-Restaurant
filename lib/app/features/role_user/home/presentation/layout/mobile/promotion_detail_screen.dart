@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/promotion_view/promotion_item.dart';
 import 'package:ninjafood/app/helper/utils.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:ninjafood/app/widgets/row_text_value_widget.dart';
 
 class PromotionDetailScreen extends StatelessWidget {
   final PromotionModel promotionModel;
@@ -38,9 +38,9 @@ class PromotionDetailScreen extends StatelessWidget {
                     padding: AppEdgeInsets.symmetric(vertical: AppGapSize.small),
                     child: AppText.titleLarge(text: promotionModel.title ?? '', textAlign: TextAlign.start)),
                 Divider(color: Theme.of(context).colorScheme.primary, thickness: 1),
-                PromotionText(title: 'Start Date: ', value: promotionModel.startDate ?? ''),
-                PromotionText(title: 'End Date: ', value: promotionModel.endDate ?? ''),
-                PromotionText(
+                RowTextValueWidget(title: 'Start Date: ', value: promotionModel.startDate ?? ''),
+                RowTextValueWidget(title: 'End Date: ', value: promotionModel.endDate ?? ''),
+                RowTextValueWidget(
                     title: 'Expires later: ',
                     value:
                         getExpiresDayLaterByTwoDateTime(promotionModel.startDate ?? '', promotionModel.endDate ?? '') +

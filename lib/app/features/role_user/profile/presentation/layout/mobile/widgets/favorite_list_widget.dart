@@ -34,16 +34,14 @@ class FavoriteList extends GetView<ProfileController> {
                   return AnimationItem(
                     animation: animation,
                     child: AppPadding(
-                      padding: AppEdgeInsets.only(bottom: AppGapSize.medium),
+                      padding: AppEdgeInsets.only(bottom: AppGapSize.small),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16),
                         child: ColoredBox(
                           color: isDarkMode
                               ? ThemeColors.backgroundTextFormDark()
                               : Theme.of(context).colorScheme.onPrimary,
-                          child: AppPadding(
-                            padding:
-                                AppEdgeInsets.symmetric(vertical: AppGapSize.medium, horizontal: AppGapSize.medium),
+                          child: AppPadding.small(
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -51,8 +49,8 @@ class FavoriteList extends GetView<ProfileController> {
                                     borderRadius: BorderRadius.circular(16),
                                     child: CachedNetworkImage(
                                         imageUrl: _favoriteItem.image?.url ?? '',
-                                        width: 64,
-                                        height: 64,
+                                        width: MediaQuery.of(context).size.shortestSide * 0.2,
+                                        height: MediaQuery.of(context).size.shortestSide * 0.2,
                                         fit: BoxFit.cover)),
                                 Expanded(
                                   child: AppPadding(
@@ -62,8 +60,11 @@ class FavoriteList extends GetView<ProfileController> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         AppText.bodyLarge(text: _favoriteItem.name ?? '', textAlign: TextAlign.left),
-                                        AppText.titleMedium(
-                                            text: '\$${_favoriteItem.getPrice}', color: ThemeColors.primaryColor)
+                                        AppPadding(
+                                          padding: AppEdgeInsets.only(top: AppGapSize.small),
+                                          child: AppText.titleMedium(
+                                              text: '\$${_favoriteItem.getPrice}', color: ThemeColors.textPriceColor),
+                                        )
                                       ],
                                     ),
                                   ),

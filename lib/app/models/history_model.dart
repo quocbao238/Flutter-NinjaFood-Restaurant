@@ -21,6 +21,7 @@ class HistoryOrderModel {
   double discount;
   List<CartModel> carts;
   HistoryStatus status;
+  String createdAt;
 
   HistoryOrderModel(
       {required this.uid,
@@ -28,18 +29,21 @@ class HistoryOrderModel {
       required this.serviceFee,
       required this.total,
       required this.discount,
+      required this.createdAt,
       required this.carts,
       required this.status});
 
   factory HistoryOrderModel.fromJson(Map<String, dynamic> json) {
-    return HistoryOrderModel(
+    final historyModel =  HistoryOrderModel(
         uid: json['uid'] as String,
+        createdAt: json['createdAt'] as String,
         subTotal: json['subTotal'] as double,
         serviceFee: json['serviceFee'] as double,
         discount: json['discount'] as double,
         total: json['total'] as double,
         carts: (json['carts'] as List<dynamic>).map((e) => CartModel.fromJson(e as Map<String, dynamic>)).toList(),
         status: HistoryStatus.values.firstWhere((element) => element.json == json['status'] as String));
+    return historyModel;
   }
 
   Map<String, dynamic> toJson() {
@@ -47,6 +51,7 @@ class HistoryOrderModel {
       'uid': uid,
       'subTotal': subTotal,
       'discount': discount,
+      'createdAt': createdAt,
       'serviceFee': serviceFee,
       'total': total,
       'carts': carts.map((e) => e.toJson()).toList(),
