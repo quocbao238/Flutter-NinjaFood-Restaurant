@@ -11,6 +11,7 @@ import 'package:ninjafood/app/services/theme_service/theme_service.dart';
 const _logName = 'TabsController';
 
 class TabsController extends BaseController {
+  static TabsController get instant => Get.find<TabsController>();
   final themeService = ThemeService.instance;
   final zoomDrawerController = ZoomDrawerController();
   final authService = AuthService.instance;
@@ -50,6 +51,12 @@ class TabsController extends BaseController {
         toggleDrawer();
     }
   }
+
+  void onChangeToCartScreen() {
+    currentMenuItem.value = menuItems[2];
+  }
+
+
 
   void _onPressedSettings() {}
 

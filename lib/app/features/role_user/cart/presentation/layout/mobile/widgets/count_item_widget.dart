@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class RemoveAdd extends StatelessWidget {
+class CountItemWidget extends StatelessWidget {
   final Color boxColor;
   final Color iconColor;
   final IconData icon;
   final VoidCallback onTap;
 
-  const RemoveAdd({
+  const CountItemWidget({
     super.key,
     required this.boxColor,
     required this.iconColor,
