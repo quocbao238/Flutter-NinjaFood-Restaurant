@@ -58,6 +58,12 @@ class GetBinding extends Bindings {
       case AppRouteProvider.foodDetailScreen:
         Get.lazyPut(() => ProductDetailController());
         break;
+      case AppRouteProvider.editProfileScreen:
+        Get.lazyPut(() => EditProfileController());
+        break;
+      case AppRouteProvider.notificationScreen:
+        Get.lazyPut(() => NotificationController());
+        break;
     }
   }
 }

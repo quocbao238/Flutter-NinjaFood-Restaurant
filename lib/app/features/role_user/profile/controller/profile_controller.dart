@@ -4,6 +4,7 @@ import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 import 'package:ninjafood/app/models/history_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
+import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/services/database_service/database_service.dart';
 
 const _logName = 'ProfileController';
@@ -43,5 +44,9 @@ class ProfileController extends BaseController {
     final response = await databaseService.getListProductByListId(lstFavoriteIds);
     response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) => lstProducts.assignAll(r));
     loading.value = false;
+  }
+
+  void onPressEditProfile() {
+    Get.toNamed(AppRouteProvider.editProfileScreen);
   }
 }
