@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/features/role_user/profile/controller/profile_controller.dart';
 import 'package:ninjafood/app/global_controller/global_controller.dart';
 
 class ProfileUserInformationWidget extends GetView<UserController> {
@@ -8,6 +10,7 @@ class ProfileUserInformationWidget extends GetView<UserController> {
 
   @override
   Widget build(BuildContext context) {
+    final profileController = Get.find<ProfileController>();
     final currentUser = controller.getCurrentUser;
     if (currentUser == null) return SizedBox();
     return Column(
@@ -15,7 +18,8 @@ class ProfileUserInformationWidget extends GetView<UserController> {
       children: [
         DecoratedBox(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18), color: ThemeColors.textPriceColor.withOpacity(0.1)),
+              borderRadius: BorderRadius.circular(18),
+              color: ThemeColors.textPriceColor.withOpacity(0.1)),
           child: AppPadding.small(
             child: AppText.bodyMedium(
               text: currentUser.userType?.name ?? '',
@@ -29,12 +33,19 @@ class ProfileUserInformationWidget extends GetView<UserController> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AppText.headlineMedium(text: currentUser.getName(), fontWeight: FontWeight.bold),
-              AppIcons.edit()
+              AppText.headlineMedium(
+                  text: currentUser.getName(), fontWeight: FontWeight.bold),
+              IconButton(
+                  onPressed: profileController.onPressEditProfile,
+                  icon: Icon(
+                    FontAwesomeIcons.penToSquare,
+                    color: ThemeColors.primaryColor,
+                  ))
             ],
           ),
         ),
-        AppText.bodyMedium(text: currentUser.email ?? '', fontWeight: FontWeight.w400),
+        AppText.bodyMedium(
+            text: currentUser.email ?? '', fontWeight: FontWeight.w400),
       ],
     );
   }

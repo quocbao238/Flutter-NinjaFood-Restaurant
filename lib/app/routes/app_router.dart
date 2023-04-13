@@ -102,5 +102,15 @@ class AppPages {
       name: AppRouteProvider.promotionDetailScreen,
       page: () => PromotionDetailScreen(promotionModel: Get.arguments),
     ),
+    GetPage(
+      name: AppRouteProvider.editProfileScreen,
+      page: () => EditProfileScreen(),
+      binding: GetBinding(AppRouteProvider.editProfileScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.notificationScreen,
+      page: () => NotificationScreen(),
+      binding: GetBinding(AppRouteProvider.notificationScreen),
+    ),
   ];
 }
