@@ -4,7 +4,7 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:ninjafood/app/widgets/row_text_value_widget.dart';
+import 'package:ninjafood/app/widgets/widgets.dart';
 
 class PromotionMobileView extends StatelessWidget {
   final PromotionModel promotionModel;

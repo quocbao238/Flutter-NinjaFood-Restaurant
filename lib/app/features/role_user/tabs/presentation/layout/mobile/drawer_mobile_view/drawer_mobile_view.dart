@@ -4,9 +4,7 @@ import 'package:get/get.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/features/role_user/tabs/infrastructure/models/menu_models.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
-import 'package:ninjafood/app/widgets/app_network_image.dart';
-
-
+import 'package:ninjafood/app/widgets/widgets.dart';
 part 'drawer_mobile_header_widget.dart';
 part 'drawer_mobile_item_widget.dart';
 part 'drawer_mobile_list_widget.dart';

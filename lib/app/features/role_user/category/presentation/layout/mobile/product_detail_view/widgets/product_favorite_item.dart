@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
 
-class FavoriteItem extends StatelessWidget {
+class ProductFavoriteItem extends StatelessWidget {
   final int productId;
   final Function(int) onPressedFavorite;
 
-  const FavoriteItem({Key? key, required this.productId, required this.onPressedFavorite}) : super(key: key);
+  const ProductFavoriteItem({Key? key, required this.productId, required this.onPressedFavorite}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

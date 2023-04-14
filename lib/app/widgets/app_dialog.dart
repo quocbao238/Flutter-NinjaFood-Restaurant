@@ -1,13 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:ninja_theme/ninja_theme.dart';
+part of 'widgets.dart';
 
-enum AppDialogType {
-  error,
-  success,
-  warning,
-  info,
-}
+
+enum AppDialogType { error, success, warning, info }
 
 class AppDialog extends StatelessWidget {
   final String title;
@@ -28,11 +22,7 @@ class AppDialog extends StatelessWidget {
         leftBtnOnPressed = null;
 
   const AppDialog.success(
-      {required this.title,
-      required this.message,
-      this.rightBtnText,
-      this.rightBtnOnPressed,
-      required this.animation})
+      {required this.title, required this.message, this.rightBtnText, this.rightBtnOnPressed, required this.animation})
       : leftBtnText = null,
         leftBtnOnPressed = null;
 
@@ -67,13 +57,9 @@ class AppDialog extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                    color: Get.theme.colorScheme.primary.withOpacity(0.4),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2)),
+                    color: Get.theme.colorScheme.primary.withOpacity(0.4), blurRadius: 4, offset: const Offset(0, 2)),
                 BoxShadow(
-                    color: Get.theme.colorScheme.primary.withOpacity(0.4),
-                    blurRadius: 4,
-                    offset: const Offset(2, 0)),
+                    color: Get.theme.colorScheme.primary.withOpacity(0.4), blurRadius: 4, offset: const Offset(2, 0)),
               ],
             ),
             child: AppSizeScale(
@@ -85,13 +71,9 @@ class AppDialog extends StatelessWidget {
                   children: [
                     AppPadding.small(
                         child: AppText.titleMedium(
-                            text: title,
-                            fontWeight: FontWeight.bold,
-                            color: ThemeColors.textRedColor)),
+                            text: title, fontWeight: FontWeight.bold, color: ThemeColors.textRedColor)),
                     AppPadding(
-                        padding: AppEdgeInsets.symmetric(
-                            horizontal: AppGapSize.small,
-                            vertical: AppGapSize.medium),
+                        padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small, vertical: AppGapSize.medium),
                         child: AppText.bodyMedium(text: message)),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,13 +82,11 @@ class AppDialog extends StatelessWidget {
                         _txtBtn(
                             text: leftBtnText,
                             onPressed: leftBtnOnPressed,
-                            backgroundColor:
-                                ThemeColors.textRedColor.withOpacity(0.4)),
+                            backgroundColor: ThemeColors.textRedColor.withOpacity(0.4)),
                         _txtBtn(
                             text: rightBtnText,
                             onPressed: rightBtnOnPressed,
-                            backgroundColor:
-                                Get.theme.colorScheme.primary.withOpacity(0.4)),
+                            backgroundColor: Get.theme.colorScheme.primary.withOpacity(0.4)),
                       ],
                     ),
                   ],
@@ -119,14 +99,11 @@ class AppDialog extends StatelessWidget {
     );
   }
 
-  _txtBtn(
-      {String? text, VoidCallback? onPressed, required Color backgroundColor}) {
+  _txtBtn({String? text, VoidCallback? onPressed, required Color backgroundColor}) {
     if (onPressed == null || text == null) return SizedBox.shrink();
     return TextButton(
       style: TextButton.styleFrom(
-          backgroundColor: backgroundColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
+          backgroundColor: backgroundColor, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
       onPressed: onPressed,
       child: AppText.bodySmall(text: text),
     );

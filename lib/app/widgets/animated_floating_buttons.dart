@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+part of 'widgets.dart';
+
 
 class AnimatedFloatingButtons extends StatefulWidget {
   final List<IconData> iconItems;

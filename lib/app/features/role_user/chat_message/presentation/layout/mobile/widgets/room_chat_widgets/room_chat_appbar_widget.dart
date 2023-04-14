@@ -20,14 +20,7 @@ class RoomChatAppBarWidget extends GetView<RoomChatScreenController> {
               left: AppGapSize.paddingMedium,
               right: AppGapSize.paddingMedium,
               bottom: AppGapSize.regular),
-          child: SizedBox(
-            width: 45,
-            height: 45,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(45),
-              child: AppNetworkImage(url: controller.receiverUser.photoUrl ?? ''),
-            ),
-          ),
+          child: AppNetworkImage(borderRadius: 45, width: 45, height: 45, url: controller.receiverUser.photoUrl ?? ''),
         )
       ],
     );

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
 import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/widgets.dart';
-import 'package:ninjafood/app/widgets/app_bar_home_widget.dart';
+import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/home_app_bar.dart';
 
 class HomeMobileView extends GetView<HomeController> {
   const HomeMobileView({Key? key}) : super(key: key);

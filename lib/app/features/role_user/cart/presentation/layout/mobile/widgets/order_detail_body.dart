@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/cart/controllers/cart_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/cart/presentation/layout/mobile/widgets/order_detail_item_count.dart';
-import 'package:ninjafood/app/widgets/app_network_image.dart';
+import 'package:ninjafood/app/widgets/widgets.dart';
 
 class OrderDetailBodyView extends GetView<CartScreenController> {
   const OrderDetailBodyView({
@@ -55,13 +55,11 @@ class OrderDetailBodyView extends GetView<CartScreenController> {
                                 child: SizedBox(
                                   width: 84,
                                   height: 84,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: SizedBox(
-                                        height: MediaQuery.of(context).size.shortestSide * 0.2,
-                                        width: MediaQuery.of(context).size.shortestSide * 0.2,
-                                        child: AppNetworkImage(url: _cartDetail.productModel.image?.url ?? '')),
-                                  ),
+                                  child: AppNetworkImage(
+                                      borderRadius: 8,
+                                      height: MediaQuery.of(context).size.shortestSide * 0.2,
+                                      width: MediaQuery.of(context).size.shortestSide * 0.2,
+                                      url: _cartDetail.productModel.image?.url ?? ''),
                                 ),
                               ),
                               Expanded(

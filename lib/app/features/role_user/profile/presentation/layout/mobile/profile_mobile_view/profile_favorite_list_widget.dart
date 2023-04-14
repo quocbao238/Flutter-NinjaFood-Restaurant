@@ -67,7 +67,7 @@ class FavoriteList extends GetView<ProfileController> {
                                     // Widget Button Icon unFavorite
                                     AppPadding(
                                         padding: AppEdgeInsets.only(bottom: AppGapSize.small),
-                                        child: FavoriteItem(
+                                        child: ProductFavoriteItem(
                                           productId: _favoriteItem.id ?? 0,
                                           onPressedFavorite: (v) =>
                                               userController.favoriteProduct(productId: _favoriteItem.id ?? 0),

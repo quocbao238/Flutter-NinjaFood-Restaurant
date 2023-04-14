@@ -40,24 +40,21 @@ class DrawerHeaderWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(900),
                         border: Border.all(width: 1, color: Theme.of(context).colorScheme.onPrimary),
                       ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.25,
-                        height: MediaQuery.of(context).size.width * 0.25,
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(90),
-                            child: AppNetworkImage(url: currentUser?.photoUrl ?? '')),
-                      ),
+                      child: AppNetworkImage(
+                          width: MediaQuery.of(context).size.width * 0.25,
+                          height: MediaQuery.of(context).size.width * 0.25,
+                          borderRadius: 90,
+                          url: currentUser?.photoUrl ?? ''),
                     ),
                   ),
                 ),
               AppPadding(
                 padding: AppEdgeInsets.only(top: AppGapSize.medium, bottom: AppGapSize.small),
                 child: AppText.titleLarge(
-                  text: (currentUser?.firstName ?? '') + " " + (currentUser?.lastName ?? ''),
-                  fontWeight: FontWeight.bold,
-                  textAlign: TextAlign.start,
-                  color: ThemeColors.primaryColor,
-                ),
+                    text: (currentUser?.firstName ?? '') + " " + (currentUser?.lastName ?? ''),
+                    fontWeight: FontWeight.bold,
+                    textAlign: TextAlign.start,
+                    color: ThemeColors.primaryColor),
               ),
               AppText.labelMedium(
                   text: currentUser?.email ?? '',

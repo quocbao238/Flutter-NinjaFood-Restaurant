@@ -4,8 +4,7 @@ import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
-import 'package:ninjafood/app/widgets/animation_list.dart';
-import 'package:ninjafood/app/widgets/app_network_image.dart';
+import 'package:ninjafood/app/widgets/widgets.dart';
 
 class GroupChatItem extends StatelessWidget {
   final GroupChatModel groupChatItem;
@@ -37,13 +36,12 @@ class GroupChatItem extends StatelessWidget {
                     children: [
                       AppPadding(
                         padding: AppEdgeInsets.only(right: AppGapSize.medium),
-                        child: SizedBox(
-                          width: kToolbarHeight,
-                          height: kToolbarHeight,
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(64),
-                              child: AppNetworkImage(url: _user.photoUrl ?? '', fit: BoxFit.cover)),
-                        ),
+                        child: AppNetworkImage(
+                            borderRadius: 64,
+                            width: kToolbarHeight,
+                            height: kToolbarHeight,
+                            url: _user.photoUrl ?? '',
+                            fit: BoxFit.cover),
                       ),
                       Expanded(
                         flex: 2,

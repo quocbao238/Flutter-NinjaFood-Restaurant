@@ -29,29 +29,22 @@ class ProductItem extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(16),
             child: ColoredBox(
-              color: isDarkMode
-                  ? ThemeColors.backgroundTextFormDark()
-                  : Theme.of(context).colorScheme.onPrimary,
+              color: isDarkMode ? ThemeColors.backgroundTextFormDark() : Theme.of(context).colorScheme.onPrimary,
               child: AppPadding.medium(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppPadding(
                       padding: AppEdgeInsets.only(right: AppGapSize.medium),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: SizedBox(
-                            height:
-                                MediaQuery.of(context).size.shortestSide * 0.2,
-                            width:
-                                MediaQuery.of(context).size.shortestSide * 0.2,
-                            child: AppNetworkImage(url: foodImage)),
-                      ),
+                      child: AppNetworkImage(
+                          height: MediaQuery.of(context).size.shortestSide * 0.2,
+                          width: MediaQuery.of(context).size.shortestSide * 0.2,
+                          borderRadius: 10,
+                          url: foodImage),
                     ),
                     Expanded(
                       flex: 3,
-                      child: AppText.titleSmall(
-                          text: foodName, textAlign: TextAlign.start),
+                      child: AppText.titleSmall(text: foodName, textAlign: TextAlign.start),
                     ),
                     AppPadding(
                       padding: AppEdgeInsets.only(left: AppGapSize.small),

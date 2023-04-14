@@ -6,8 +6,7 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
 import 'package:ninjafood/app/models/product_model.dart';
-import 'package:ninjafood/app/widgets/app_network_image.dart';
-
+import 'package:ninjafood/app/widgets/widgets.dart';
 export 'home_category_view/home_category_view.dart';
 export 'home_mobile_view_type/home_mobile_view_type.dart';
 export 'home_promotion_view/home_promotion_view.dart';

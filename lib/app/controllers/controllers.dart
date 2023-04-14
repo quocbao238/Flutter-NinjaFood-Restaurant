@@ -17,7 +17,7 @@ import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/user_model.dart';
 import 'package:ninjafood/app/services/services.dart';
-import 'package:ninjafood/app/widgets/app_dialog.dart';
+import 'package:ninjafood/app/widgets/widgets.dart';
 import 'package:uuid/uuid.dart';
 part 'dialog_controller.dart';
 part 'message_controller.dart';
