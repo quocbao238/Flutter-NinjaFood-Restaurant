@@ -31,7 +31,7 @@ class OrderDetailBodyView extends GetView<CartScreenController> {
                         extentRatio: 0.2,
                         children: [
                           SlidableAction(
-                            onPressed: (index) {},
+                            onPressed: (context) => controller.onPressedRemoveItem(index),
                             backgroundColor: ThemeColors.orangeColor,
                             borderRadius: BorderRadius.circular(22),
                             icon: Icons.delete_outline_rounded,

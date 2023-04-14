@@ -49,6 +49,14 @@ class CartScreenController extends BaseController {
     userController.updateUser(carts: lstCarts.toList());
   }
 
+  Future<void> onPressedRemoveItem(int index) async {
+    loading.value = true;
+    lstCarts.removeAt(index);
+    await userController.updateUser(carts: lstCarts.toList());
+    loading.value = false;
+  }
+
+
   double _getSubTotalPrice() {
     return lstCarts.fold(
         0,
