@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
-import 'package:ninjafood/app/helper/utils.dart';
+import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/category_model.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/models/comment_model.dart';
@@ -10,11 +10,13 @@ import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
 import 'package:ninjafood/app/models/user_model.dart';
-import 'package:ninjafood/app/services/boot_services.dart';
-import 'database_key.dart';
-import 'database_service_impl.dart';
+import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 
-class DatabaseService extends GetxService implements BootableService, DatabaseServiceImpl {
+part 'database_key.dart';
+part 'database_service_impl.dart';
+
+
+class DatabaseService extends GetxService implements Bootable, DatabaseServiceImpl {
   static DatabaseService get instance => Get.find<DatabaseService>();
   late final FirebaseFirestore _db;
 

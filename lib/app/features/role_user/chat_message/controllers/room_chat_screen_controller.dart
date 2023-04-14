@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/infrastructure/select_chat_files/select_chat_files.dart';
-import 'package:ninjafood/app/global_controller/global_controller.dart';
+import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';

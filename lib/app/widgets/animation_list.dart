@@ -1,5 +1,5 @@
-import 'package:auto_animated/auto_animated.dart';
-import 'package:flutter/material.dart';
+part of 'widgets.dart';
+
 
 class AnimationList extends StatelessWidget {
   final ScrollController? controller;

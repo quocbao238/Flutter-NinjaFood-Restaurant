@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/auth/controllers/signup_preview_photo_controller.dart';
-import 'widgets/photo_preview.dart';
+import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_process_controller.dart';
+import 'sign_up_photo_preview.dart';
 
-class SignUpPhotoPreviewMobileView extends GetView<SignUpPreviewPhotoController> {
+class SignUpPhotoPreviewMobileView extends GetView<SignUpProcessController> {
   const SignUpPhotoPreviewMobileView({super.key});
 
   @override
@@ -34,7 +34,7 @@ class SignUpPhotoPreviewMobileView extends GetView<SignUpPreviewPhotoController>
                   Center(
                       child: AppPadding(
                           padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.large),
-                          child: PhotoPreview(
+                          child: SignUpPhotoPreview(
                             removePhoto: controller.onPressedRemovePhoto,
                           ))),
                 ],

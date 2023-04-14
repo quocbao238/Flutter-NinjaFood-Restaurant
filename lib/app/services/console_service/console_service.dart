@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:ninjafood/app/services/boot_services.dart';
+import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 import 'dart:developer' as developer;
 
-import 'console_service_enum.dart';
+part 'console_service_enum.dart';
 
-class ConsoleService extends GetxService implements BootableService{
+
+class ConsoleService extends GetxService implements Bootable{
 
   static ConsoleService get instance => Get.find<ConsoleService>();
 

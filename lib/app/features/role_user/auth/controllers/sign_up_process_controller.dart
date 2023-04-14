@@ -1,22 +1,31 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/global_controller/global_controller.dart';
+import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/services/cloud_storage_service/cloud_storage_service.dart';
 
 final _logName = 'SignUpProcessController';
 
 class SignUpProcessController extends BaseController {
   final userController = UserController.instance;
+  final CloudStorageService cloudStorageService = CloudStorageService.instance;
 
   late final TextEditingController firstNameController;
   late final TextEditingController lastNameController;
   late final TextEditingController phoneController;
+
+
+  late final File imageFile;
   Rxn<String?> firstNameError = Rxn<String?>(null);
   Rxn<String?> lastNameError = Rxn<String?>(null);
   Rxn<String?> phoneError = Rxn<String?>(null);
+  Rxn<String?> addressLocation = Rxn<String?>(null);
+
 
   @override
   void onInit() {
@@ -70,4 +79,80 @@ class SignUpProcessController extends BaseController {
     });
     loading(false);
   }
+
+  void onPressedSetLocation() {
+    addressLocation.value = '208 Nguyen Huu Canh, Vinhomes Tan Cang, Binh Thanh, Ho Chi Minh City 700000, Vietnam';
+  }
+
+  Future<void> onPressedNextButtonLocation() async {
+    if (addressLocation.value == null) {
+      Get.offNamed(AppRouteProvider.signupSuccessScreen);
+      return;
+    }
+    loading(true);
+    final response = await userController.updateUser(address: addressLocation.value);
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
+      Get.toNamed(AppRouteProvider.signupSuccessScreen);
+    });
+    loading(false);
+  }
+
+  void onPressedNextPayment() {
+    final currentUser = userController.getCurrentUser;
+    if (currentUser?.photoUrl?.isNotEmpty ?? false) {
+      Get.toNamed(AppRouteProvider.setLocationScreen);
+      return;
+    }
+    Get.toNamed(AppRouteProvider.uploadPhotoScreen);
+  }
+
+  Future<void> onPressedPhotoGallery() async {
+    final image = await FileHelper.pickImage();
+    if (image != null) Get.toNamed(AppRouteProvider.uploadPreviewScreen);
+  }
+
+  Future<void> onPressedTakePhoto() async {
+    final image = await FileHelper.takePhoto();
+    if (image != null) Get.toNamed(AppRouteProvider.uploadPreviewScreen);
+  }
+
+  void onPressedSkipPhoto() {
+    Get.toNamed(AppRouteProvider.setLocationScreen);
+  }
+
+  void onPressedRemovePhoto() {
+    Get.back();
+  }
+
+
+  Future<void> onPressedPhotoNext() async {
+    final currentUser = userController.getCurrentUser;
+    if (currentUser == null) return;
+    loading(true);
+    final urlCallBack = await cloudStorageService.uploadAvatarImage(
+      file: imageFile,
+      uid: currentUser.uid,
+    );
+    if (urlCallBack == null) {
+      loading(false);
+      return;
+    }
+    final response = await userController.updateUser(photoUrl: urlCallBack);
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
+      Get.toNamed(AppRouteProvider.setLocationScreen);
+    });
+
+    loading(false);
+  }
+
+
+
+
+
+
+
+
+
+
+
 }

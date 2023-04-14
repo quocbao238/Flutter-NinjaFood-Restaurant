@@ -23,3 +23,4 @@ part 'phoneNumber.dart';
 part 'cryptographic.dart';
 part 'common.dart';
 part 'file_helper.dart';
+part 'utils.dart';

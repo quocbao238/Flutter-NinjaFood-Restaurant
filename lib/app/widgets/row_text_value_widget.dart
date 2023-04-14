@@ -1,6 +1,4 @@
-
-import 'package:flutter/material.dart';
-import 'package:ninja_theme/ninja_theme.dart';
+part of 'widgets.dart';
 
 class RowTextValueWidget extends StatelessWidget {
   final String title;
