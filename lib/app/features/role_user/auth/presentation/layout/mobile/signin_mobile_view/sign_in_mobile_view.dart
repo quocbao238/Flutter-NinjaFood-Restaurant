@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/auth/controllers/sign_in_controller.dart';
-import 'package:ninjafood/app/features/role_user/auth/presentation/layout/mobile/signin_mobile_view/widgets/socical_component.dart';
+import 'package:ninjafood/app/features/role_user/auth/presentation/layout/mobile/signin_mobile_view/sign_in_socical_row_button.dart';
 
 class SignInMobileScreen extends GetView<SignInController> {
   const SignInMobileScreen({super.key});
@@ -55,7 +55,7 @@ class SignInMobileScreen extends GetView<SignInController> {
                 ),
                 AppPadding(
                     padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-                    child: SocialComponent()),
+                    child: SignInRowButton()),
                 AppPadding(
                   padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
                   child: Row(

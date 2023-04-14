@@ -1,4 +1,4 @@
-part of drawer_widgets;
+part of 'drawer_mobile_view.dart';
 
 class DrawerHeaderWidget extends StatelessWidget {
   const DrawerHeaderWidget({Key? key}) : super(key: key);

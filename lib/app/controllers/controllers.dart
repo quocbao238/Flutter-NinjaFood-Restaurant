@@ -18,7 +18,6 @@ import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/user_model.dart';
 import 'package:ninjafood/app/services/services.dart';
 import 'package:ninjafood/app/widgets/app_dialog.dart';
-import 'package:tuple/tuple.dart' as tuple;
 import 'package:uuid/uuid.dart';
 part 'dialog_controller.dart';
 part 'message_controller.dart';

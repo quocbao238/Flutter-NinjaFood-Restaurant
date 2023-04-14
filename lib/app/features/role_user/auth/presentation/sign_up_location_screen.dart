@@ -8,7 +8,7 @@ class SetLocationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppViewLayout(
-      mobileView: SetLocationMobileView(),
+      mobileView: SignUpLocationMobileView(),
     );
   }
 }

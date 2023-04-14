@@ -8,7 +8,6 @@ import 'package:ninjafood/app/app.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 import 'app/services/services.dart';
-// import 'app/services/services.dart';
 
 void main() async {
   runZonedGuarded<Future<void>>(() async {

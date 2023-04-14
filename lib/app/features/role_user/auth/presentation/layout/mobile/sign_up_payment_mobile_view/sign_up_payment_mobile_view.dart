@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_payment_controller.dart';
-import 'package:ninjafood/app/features/role_user/auth/presentation/layout/mobile/sign_up_payment_mobile_view/widgets/payment_button.dart';
+import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_process_controller.dart';
+import 'package:ninjafood/app/features/role_user/auth/presentation/layout/mobile/sign_up_payment_mobile_view/sign_up_payment_button.dart';
 
-class SignUpPaymentMobileView extends GetView<SignUpPaymentController> {
+class SignUpPaymentMobileView extends GetView<SignUpProcessController> {
   const SignUpPaymentMobileView({super.key});
 
   @override
@@ -31,19 +31,19 @@ class SignUpPaymentMobileView extends GetView<SignUpPaymentController> {
                 ),
                 AppPadding(
                     padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-                    child: PaymentMethodButton(
+                    child: SignUpPaymentButton(
                       onPressed: () {},
                       child: AppPadding.medium(child: AppIcons.paypal()),
                     )),
                 AppPadding(
                     padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-                    child: PaymentMethodButton(
+                    child: SignUpPaymentButton(
                       onPressed: () {},
                       child: AppIcons.visa(),
                     )),
                 AppPadding(
                     padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
-                    child: PaymentMethodButton(
+                    child: SignUpPaymentButton(
                       onPressed: () {},
                       child: AppPadding.medium(child: AppIcons.payOneer()),
                     )),

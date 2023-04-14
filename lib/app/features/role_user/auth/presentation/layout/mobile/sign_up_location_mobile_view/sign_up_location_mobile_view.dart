@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_location_controller.dart';
-import 'package:ninjafood/app/features/role_user/auth/presentation/layout/mobile/sign_up_location_mobile_view/widgets/box_location.dart';
+import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_process_controller.dart';
+import 'package:ninjafood/app/features/role_user/auth/presentation/layout/mobile/sign_up_location_mobile_view/sign_up_location_box.dart';
 
-class SetLocationMobileView extends GetView<SignUpLocationController> {
-  const SetLocationMobileView({super.key});
+class SignUpLocationMobileView extends GetView<SignUpProcessController> {
+  const SignUpLocationMobileView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +46,10 @@ class SetLocationMobileView extends GetView<SignUpLocationController> {
               ),
             ),
             AppPadding.regular(
-              child: Obx(() =>
-                  AppButton.max(title: controller.getTitleButton().tr, onPressed: controller.onPressedNextSkipButton)),
+              child: Obx(() {
+                final title = controller.addressLocation.value == null ? 'Skip_Button' : 'Next_Button';
+                return AppButton.max(title: title.tr, onPressed: controller.onPressedNextButtonLocation);
+              }),
             ),
           ],
         ),

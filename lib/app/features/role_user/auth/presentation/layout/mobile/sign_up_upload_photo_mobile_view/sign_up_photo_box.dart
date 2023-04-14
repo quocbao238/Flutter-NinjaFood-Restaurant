@@ -5,6 +5,7 @@ class BoxPhoto extends StatelessWidget {
   final VoidCallback onPressed;
   final Widget iconPhoto;
   final textPhoto;
+
   const BoxPhoto({
     super.key,
     required this.onPressed,
@@ -20,10 +21,7 @@ class BoxPhoto extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-            blurRadius: 8,
-            offset: Offset(-4, 4),
-          ),
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.1), blurRadius: 8, offset: Offset(-4, 4)),
           BoxShadow(color: Theme.of(context).colorScheme.primary.withOpacity(0.2), blurRadius: 8, offset: Offset(4, -4))
         ],
       ),
@@ -37,9 +35,7 @@ class BoxPhoto extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AppPadding(
-                  padding: AppEdgeInsets.only(
-                      top: AppGapSize.medium, bottom: AppGapSize.medium),
-                  child: iconPhoto),
+                  padding: AppEdgeInsets.only(top: AppGapSize.medium, bottom: AppGapSize.medium), child: iconPhoto),
               AppText.bodyMedium(text: textPhoto, fontWeight: FontWeight.bold)
             ],
           ),

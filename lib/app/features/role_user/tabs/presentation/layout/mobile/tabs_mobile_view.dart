@@ -4,10 +4,10 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
-import 'package:ninjafood/app/features/role_user/tabs/presentation/drawer_menus.dart';
+import 'package:ninjafood/app/features/role_user/tabs/presentation/tab_drawer_menus.dart';
 
-class TabsMobileScreen extends GetView<TabsController> {
-  const TabsMobileScreen({Key? key}) : super(key: key);
+class TabsMobileView extends GetView<TabsController> {
+  const TabsMobileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

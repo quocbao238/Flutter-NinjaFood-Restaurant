@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class PaymentMethodButton extends StatelessWidget {
+class SignUpPaymentButton extends StatelessWidget {
   final VoidCallback onPressed;
   final Widget child;
 
-  const PaymentMethodButton({super.key, required this.onPressed, required this.child});
+  const SignUpPaymentButton({super.key, required this.onPressed, required this.child});
 
   @override
   Widget build(BuildContext context) {

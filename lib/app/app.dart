@@ -21,9 +21,8 @@ class MyApp extends StatelessWidget {
           getPages: AppPages.routes,
           locale: TranslationService.fallbackLocale,
           fallbackLocale: TranslationService.fallbackLocale,
-          builder: (context, child) {
-            return MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1), child: child!);
-          },
+          builder: (context, child) =>
+              MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1), child: child!),
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

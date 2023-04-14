@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 
-class BoxViaEmail extends StatelessWidget {
-  const BoxViaEmail({super.key});
+class ResetPasswordBoxEmail extends StatelessWidget {
+  const ResetPasswordBoxEmail({super.key});
 
   @override
   Widget build(BuildContext context) {

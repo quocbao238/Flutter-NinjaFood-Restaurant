@@ -16,9 +16,7 @@ import 'package:ninjafood/app/features/role_user/auth/presentation/reset_passwor
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
 import 'package:ninjafood/app/features/role_user/auth/controllers/onboard_controller.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/onboard_screen.dart';
-import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_payment_controller.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/sign_up_payment_screen.dart';
-import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_location_controller.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/sign_up_location_screen.dart';
 import 'package:ninjafood/app/features/role_user/auth/controllers/sign_in_controller.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/sign_in_screen.dart';
@@ -26,7 +24,6 @@ import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_contro
 import 'package:ninjafood/app/features/role_user/auth/presentation/sign_up_screen.dart';
 import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_process_controller.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/sign_up_process.dart';
-import 'package:ninjafood/app/features/role_user/auth/controllers/signup_success_controller.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/sign_up_success_screen.dart';
 import 'package:ninjafood/app/features/role_user/home/presentation/promotion_detail_screen.dart';
 import 'package:ninjafood/app/features/role_user/notification/controller/notification_controller.dart';
@@ -39,11 +36,8 @@ import 'package:ninjafood/app/features/role_user/splash/presentation/splash_scre
 import 'package:ninjafood/app/features/role_user/auth/presentation/reset_password_success_screen.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/features/role_user/tabs/presentation/tab_screen.dart';
-import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_upload_photo_controller.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/sign_up_upload_photo_screen.dart';
-import 'package:ninjafood/app/features/role_user/auth/controllers/signup_preview_photo_controller.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/sign_up_photo_review_screen.dart';
-import 'package:ninjafood/app/controllers/controllers.dart';
 part 'app_provider.dart';
 part 'app_router.dart';
 part 'bindings.dart';

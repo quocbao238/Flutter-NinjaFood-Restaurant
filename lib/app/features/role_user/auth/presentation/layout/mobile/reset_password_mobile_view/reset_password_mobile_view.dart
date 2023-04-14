@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/auth/controllers/forgot_password_controller.dart';
-import 'widgets/box_via_email.dart';
+import 'reset_password_box_email.dart';
 
-class ForgotPasswordMobileView extends GetView<ForgotPassWordController> {
-  const ForgotPasswordMobileView({super.key});
+class ResetPasswordMobileView extends GetView<ForgotPassWordController> {
+  const ResetPasswordMobileView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class ForgotPasswordMobileView extends GetView<ForgotPassWordController> {
               textAlign: TextAlign.start,
             ),
           ),
-          AppPadding.medium(child: BoxViaEmail()),
+          AppPadding.medium(child: ResetPasswordBoxEmail()),
           AppPadding.regular(
             child: AppButton.max(
                 title: 'Send'.tr, onPressed: controller.onPressedSend),

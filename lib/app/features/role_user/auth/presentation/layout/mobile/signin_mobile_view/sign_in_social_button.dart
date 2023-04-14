@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 
-class SocialButtonWidget extends StatelessWidget {
+class SignInSocialButton extends StatelessWidget {
   final String title;
   final Widget iconWidget;
   final VoidCallback onPressed;
 
-  const SocialButtonWidget({super.key, required this.onPressed, required this.title, required this.iconWidget});
+  const SignInSocialButton({super.key, required this.onPressed, required this.title, required this.iconWidget});
 
   @override
   Widget build(

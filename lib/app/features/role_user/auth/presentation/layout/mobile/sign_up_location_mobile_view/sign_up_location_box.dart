@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_location_controller.dart';
+import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_process_controller.dart';
 
 class BoxLocation extends StatelessWidget {
   final VoidCallback onPressSetLocation;
@@ -10,7 +10,7 @@ class BoxLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final setLocationController = Get.find<SignUpLocationController>();
+    final setLocationController = Get.find<SignUpProcessController>();
 
     return DecoratedBox(
       decoration: BoxDecoration(
