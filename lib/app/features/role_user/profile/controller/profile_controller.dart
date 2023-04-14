@@ -49,4 +49,8 @@ class ProfileController extends BaseController {
   void onPressEditProfile() {
     Get.toNamed(AppRouteProvider.editProfileScreen);
   }
+
+  void onPressRating() {
+    Get.offNamed(AppRouteProvider.rateFoodScreen);
+  }
 }

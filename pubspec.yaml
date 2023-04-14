@@ -45,7 +45,7 @@ dependencies:
   open_file: ^3.2.1
   flutter_html: ^2.2.0
   flutter_slidable: ^2.0.0
-
+  flutter_rating_bar: ^4.0.1
 
 
   ninja_theme:

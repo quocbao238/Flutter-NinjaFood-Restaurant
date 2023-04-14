@@ -22,4 +22,5 @@ class AppRouteProvider {
   static const String promotionDetailScreen = '/promotionDetailScreen';
   static const String editProfileScreen = '/editProfileScreen';
   static const String notificationScreen = '/notificationScreen';
+  static const String rateFoodScreen = '/rateFoodScreen';
 }

@@ -112,5 +112,10 @@ class AppPages {
       page: () => NotificationScreen(),
       binding: GetBinding(AppRouteProvider.notificationScreen),
     ),
+    GetPage(
+      name: AppRouteProvider.rateFoodScreen,
+      page: () => RateFoodScreen(),
+      binding: GetBinding(AppRouteProvider.rateFoodScreen),
+    ),
   ];
 }
