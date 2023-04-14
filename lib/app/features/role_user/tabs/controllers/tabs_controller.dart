@@ -11,7 +11,7 @@ import 'package:ninjafood/app/services/theme_service/theme_service.dart';
 const _logName = 'TabsController';
 
 class TabsController extends BaseController {
-  static TabsController get instant => Get.find<TabsController>();
+  static TabsController get instance => Get.find<TabsController>();
   final themeService = ThemeService.instance;
   final zoomDrawerController = ZoomDrawerController();
   final authService = AuthService.instance;

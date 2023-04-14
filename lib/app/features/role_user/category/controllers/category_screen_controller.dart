@@ -4,7 +4,7 @@ import 'package:ninjafood/app/features/role_user/home/controllers/home_controlle
 import 'package:ninjafood/app/models/category_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 
-class CategoryController extends BaseController {
+class CategoryScreenController extends BaseController {
   final homeController = Get.find<HomeController>();
 
 

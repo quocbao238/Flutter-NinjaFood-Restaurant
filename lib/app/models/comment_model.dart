@@ -1,56 +1,41 @@
 class CommentModel {
-  String comment;
-
-  String commentId;
-
-  String userId;
-
-  int productId;
-
-  String userName;
-
-  String userImage;
-
-  String date;
+  final String uid;
+  final String userId;
+  final String userName;
+  final String userImage;
+  final String createAt;
+  final double rating;
+  final String? comment;
 
   CommentModel(
-      {required this.comment,
-      required this.commentId,
+      {required this.uid,
       required this.userId,
-      required this.productId,
       required this.userName,
       required this.userImage,
-      required this.date});
+      required this.createAt,
+      required this.comment,
+      required this.rating});
 
   factory CommentModel.fromJson(Map<String, dynamic> json) {
     return CommentModel(
-      comment: json['comment'] ?? '',
-      commentId: json['commentId'] ?? '',
-      userId: json['userId'] ?? '',
-      productId: json['productId'] ?? '',
-      userName: json['userName'] ?? '',
-      userImage: json['userImage'] ?? '',
-      date: json['date'] ?? '',
-    );
+        comment: json['comment'] as String,
+        uid: json['uid'] as String,
+        userId: json['userId'] as String,
+        userName: json['userName'] as String,
+        userImage: json['userImage'] as String,
+        createAt: json['createAt'] as String,
+        rating: double.parse(json['rating'].toString()));
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-
-    data['comment'] = this.comment;
-
-    data['commentId'] = this.commentId;
-
-    data['userId'] = this.userId;
-
-    data['productId'] = this.productId;
-
-    data['userName'] = this.userName;
-
-    data['userImage'] = this.userImage;
-
-    data['date'] = this.date;
-
-    return data;
+    return {
+      'comment': comment,
+      'uid': uid,
+      'userId': userId,
+      'userName': userName,
+      'userImage': userImage,
+      'createAt': createAt,
+      'rating': rating
+    };
   }
 }

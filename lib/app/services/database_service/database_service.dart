@@ -171,8 +171,8 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
   @override
   Future<Either<Failure, String>> insertCommentProduct({required CommentModel commentModel}) async {
     try {
-      await _db.doc('${DatabaseKeys.commentPath}${commentModel.commentId}').set(commentModel.toJson());
-      return right(commentModel.commentId);
+      await _db.doc('${DatabaseKeys.commentPath}${commentModel.uid}').set(commentModel.toJson());
+      return right(commentModel.uid);
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }

@@ -18,7 +18,7 @@ class ProfileController extends BaseController {
   @override
   void onInit() {
     _getListFavoritesProduct();
-    final _lstHistory =  userController.getCurrentUser?.historyOrders ?? [];
+    final _lstHistory = userController.getCurrentUser?.historyOrders ?? [];
     lstHistory.assignAll(_lstHistory);
     userController.currentUser.listen((event) {
       if (event == null) return;
@@ -42,7 +42,11 @@ class ProfileController extends BaseController {
       return;
     }
     final response = await databaseService.getListProductByListId(lstFavoriteIds);
-    response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) => lstProducts.assignAll(r));
+    response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
+      if (r.length != lstProducts.length) {
+        lstProducts.assignAll(r);
+      }
+    });
     loading.value = false;
   }
 
@@ -50,7 +54,7 @@ class ProfileController extends BaseController {
     Get.toNamed(AppRouteProvider.editProfileScreen);
   }
 
-  void onPressRating() {
-    Get.offNamed(AppRouteProvider.rateFoodScreen);
+  void onPressRating(HistoryOrderModel historyModel) {
+    Get.toNamed(AppRouteProvider.ratingScreen, arguments: historyModel.uid);
   }
 }

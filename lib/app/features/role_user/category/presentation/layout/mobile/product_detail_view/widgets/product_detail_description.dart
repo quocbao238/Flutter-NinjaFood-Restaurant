@@ -1,6 +1,6 @@
 part of product_detail_mobile_widgets;
 
-class ProductDetailDescription extends GetView<ProductDetailController> {
+class ProductDetailDescription extends GetView<ProductDetailScreenController> {
   const ProductDetailDescription();
 
   @override

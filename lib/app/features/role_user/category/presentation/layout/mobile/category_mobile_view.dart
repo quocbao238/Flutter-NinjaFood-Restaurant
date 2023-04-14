@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/category/controllers/category_controller.dart';
+import 'package:ninjafood/app/features/role_user/category/controllers/category_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/widgets.dart';
 
-class CategoryMobileView extends GetView<CategoryController> {
+class CategoryMobileView extends GetView<CategoryScreenController> {
   const CategoryMobileView({Key? key}) : super(key: key);
 
   @override

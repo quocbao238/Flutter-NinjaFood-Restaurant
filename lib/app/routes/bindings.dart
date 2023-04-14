@@ -34,13 +34,13 @@ class GetBinding extends Bindings {
         Get.lazyPut(() => ForgotPassWordController());
         break;
       case AppRouteProvider.categoryScreen:
-        Get.lazyPut(() => CategoryController());
+        Get.lazyPut(() => CategoryScreenController());
         break;
       case AppRouteProvider.chatDetailsScreen:
         Get.lazyPut(() => RoomChatScreenController());
         break;
       case AppRouteProvider.foodDetailScreen:
-        Get.lazyPut(() => ProductDetailController());
+        Get.lazyPut(() => ProductDetailScreenController());
         break;
       case AppRouteProvider.editProfileScreen:
         Get.lazyPut(() => EditProfileController());
@@ -48,8 +48,8 @@ class GetBinding extends Bindings {
       case AppRouteProvider.notificationScreen:
         Get.lazyPut(() => NotificationController());
         break;
-      case AppRouteProvider.rateFoodScreen:
-        Get.lazyPut(() => RatingController());
+      case AppRouteProvider.ratingScreen:
+        Get.lazyPut(() => RatingScreenController());
         break;
     }
   }

@@ -11,7 +11,7 @@ class FavoriteList extends GetView<ProfileController> {
       () {
         final lstFavorite = controller.lstProducts;
         if (lstFavorite.isEmpty) return SizedBox.shrink();
-        if (controller.loading.value) return Center(child: AppLoading(isLoading: true));
+        // if (controller.loading.value) return Center(child: AppLoading(isLoading: true));
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -63,7 +63,9 @@ class FavoriteList extends GetView<ProfileController> {
                                   ),
                                 ),
                                 Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
+
                                     // Widget Button Icon unFavorite
                                     AppPadding(
                                         padding: AppEdgeInsets.only(bottom: AppGapSize.small),
@@ -72,15 +74,42 @@ class FavoriteList extends GetView<ProfileController> {
                                           onPressedFavorite: (v) =>
                                               userController.favoriteProduct(productId: _favoriteItem.id ?? 0),
                                         )),
-                                    ElevatedButton(
-                                      onPressed: () {},
-                                      child: AppText.bodyMedium(
-                                          text: 'Buy Now',
-                                          fontWeight: FontWeight.w400,
-                                          color: ThemeColors.textDarkColor),
-                                      style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                                          backgroundColor: MaterialStateProperty.all(ThemeColors.primaryColor)),
-                                    ),
+                                    Obx(() {
+                                      bool isExist = (userController.currentUser.value?.carts ?? [])
+                                          .any((element) => element.productModel.id == _favoriteItem.id);
+                                      return !isExist
+                                          ? ElevatedButton(
+                                              onPressed: () =>
+                                                  userController.addProductToCard(productModel: _favoriteItem),
+                                              child: AppText.bodyMedium(
+                                                  text: 'Add to cart',
+                                                  fontWeight: FontWeight.w400,
+                                                  color: ThemeColors.textDarkColor),
+                                              style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(ThemeColors.primaryColor)),
+                                            )
+                                          : SizedBox(
+                                              width: 36,
+                                              height: 36,
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  TabsController.instance.onChangeToCartScreen();
+                                                  Get.until(
+                                                      (route) => Get.currentRoute == AppRouteProvider.tabScreen);
+                                                },
+                                                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                                                    backgroundColor: MaterialStateProperty.all(
+                                                        ThemeColors.backgroundTextFormDark()),
+                                                    fixedSize: MaterialStateProperty.all(Size(24, 24)),
+                                                    padding: MaterialStateProperty.all(EdgeInsets.zero),
+                                                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.circular(96.0)))),
+                                                child: Icon(FontAwesomeIcons.cartArrowDown,
+                                                    color: ThemeColors.primaryColor, size: 12.0),
+                                              ),
+                                            );
+                                    }),
                                   ],
                                 ),
                               ],

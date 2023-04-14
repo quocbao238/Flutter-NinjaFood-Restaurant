@@ -166,21 +166,26 @@ class UserController extends GetxController implements Bootable {
   }
 
   // Comment Product
-  Future<Either<Failure, void>> commentProduct({required String comment, required int productId}) async {
+  Future<Either<Failure, void>> insertComment(
+      {String? comment, required double rating, required String historyId}) async {
+    FocusManager.instance.primaryFocus?.unfocus();
     final _currentUser = getCurrentUser;
     if (_currentUser == null) return left(Failure.custom('User is null'));
+    final createAt = createTimeStamp();
     try {
       final commentModel = CommentModel(
-        comment: comment,
-        commentId: Uuid().v4(),
-        productId: productId,
-        userId: _currentUser.uid,
-        userName: _currentUser.getName(),
-        userImage: _currentUser.photoUrl ?? '',
-        date: DateFormat('dd/MM/yyyy').format(DateTime.now()),
-      );
+          uid: Uuid().v4(),
+          createAt: createAt,
+          userId: _currentUser.uid,
+          userImage: _currentUser.photoUrl ?? '',
+          userName: _currentUser.getName(),
+          comment: comment,
+          rating: rating);
       final insertCommentProduct = await _databaseService.insertCommentProduct(commentModel: commentModel);
-      return insertCommentProduct.fold((l) => left(l), (r) => right(null));
+      return insertCommentProduct.fold((l) => left(l), (r) async {
+        _currentUser.historyOrders.firstWhere((element) => element.uid == historyId).comment = commentModel;
+        return await updateUser(historyOrders: _currentUser.historyOrders);
+      });
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
