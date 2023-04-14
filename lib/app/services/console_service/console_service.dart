@@ -6,7 +6,7 @@ import 'dart:developer' as developer;
 part 'console_service_enum.dart';
 
 
-class ConsoleService extends GetxService implements BootableService{
+class ConsoleService extends GetxService implements Bootable{
 
   static ConsoleService get instance => Get.find<ConsoleService>();
 

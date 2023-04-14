@@ -1,6 +1,6 @@
 
 part of 'boot_services.dart';
 
-abstract class BootableService {
+abstract class Bootable {
   Future<void> call();
 }

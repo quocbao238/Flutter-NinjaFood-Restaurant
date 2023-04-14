@@ -1,6 +1,6 @@
 part of global_controller;
 
-class MessageController extends GetxController implements BootableController {
+class MessageController extends GetxController implements Bootable {
   static MessageController get instance => Get.find<MessageController>();
   late final UserController userController;
   late final DatabaseService databaseService;

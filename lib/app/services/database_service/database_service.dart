@@ -16,7 +16,7 @@ part 'database_key.dart';
 part 'database_service_impl.dart';
 
 
-class DatabaseService extends GetxService implements BootableService, DatabaseServiceImpl {
+class DatabaseService extends GetxService implements Bootable, DatabaseServiceImpl {
   static DatabaseService get instance => Get.find<DatabaseService>();
   late final FirebaseFirestore _db;
 

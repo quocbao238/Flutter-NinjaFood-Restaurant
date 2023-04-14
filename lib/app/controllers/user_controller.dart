@@ -2,7 +2,7 @@ part of global_controller;
 
 const _logName = 'UserController';
 
-class UserController extends GetxController implements BootableController {
+class UserController extends GetxController implements Bootable {
   static UserController get instance => Get.find<UserController>();
   final _authService = AuthService.instance;
   final _databaseService = DatabaseService.instance;

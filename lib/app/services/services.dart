@@ -14,7 +14,7 @@ export 'language_service/language_service.dart';
 export 'notification_service/notification_service.dart';
 export 'boot_service/boot_services.dart';
 
-final Map<BootableService, int> listBootServices = {
+final Map<Bootable, int> listBootServices = {
   ConsoleService(): 1024,
   ThemeService(): 512,
   AuthService(): 256,

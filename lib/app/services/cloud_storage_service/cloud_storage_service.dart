@@ -7,7 +7,7 @@ import 'package:uuid/uuid.dart';
 part 'cloud_storage_impl.dart';
 
 
-class CloudStorageService extends GetxService implements BootableService, CloudStorageServiceImpl {
+class CloudStorageService extends GetxService implements Bootable, CloudStorageServiceImpl {
   static CloudStorageService get instance => Get.find<CloudStorageService>();
 
   late final FirebaseStorage storage;

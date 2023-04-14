@@ -6,7 +6,7 @@ class BootServices {
   /// List of boot services
   /// The first element is the service
   /// The second element is the priority
-  final Map<BootableService, int> boots;
+  final Map<Bootable, int> boots;
 
   BootServices({required this.boots});
 

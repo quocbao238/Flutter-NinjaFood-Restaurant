@@ -4,7 +4,7 @@ import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 
 part 'notification_service_impl.dart';
 
-class NotificationService extends GetxService implements BootableService, NotificationServiceImpl {
+class NotificationService extends GetxService implements Bootable, NotificationServiceImpl {
   static NotificationService get instance => Get.find<NotificationService>();
   late final FirebaseMessaging _firebaseMessaging;
 
