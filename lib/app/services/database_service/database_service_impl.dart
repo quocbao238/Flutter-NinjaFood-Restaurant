@@ -1,13 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fpdart/fpdart.dart';
-import 'package:ninjafood/app/constants/contains.dart';
-import 'package:ninjafood/app/models/category_model.dart';
-import 'package:ninjafood/app/models/chat_model.dart';
-import 'package:ninjafood/app/models/comment_model.dart';
-import 'package:ninjafood/app/models/message_chat_model.dart';
-import 'package:ninjafood/app/models/product_model.dart';
-import 'package:ninjafood/app/models/promotion_model.dart';
-import 'package:ninjafood/app/models/user_model.dart';
+part of 'database_service.dart';
+
 
 abstract class DatabaseServiceImpl {
   /* User */

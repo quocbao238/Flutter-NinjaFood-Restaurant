@@ -1,3 +1,4 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -5,8 +6,9 @@ import 'package:fpdart/fpdart.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ninjafood/app/constants/contains.dart';
-import 'package:ninjafood/app/services/auth_service/auth_service_impl.dart';
-import 'package:ninjafood/app/services/boot_services.dart';
+import 'package:ninjafood/app/services/boot_service/boot_services.dart';
+
+part 'auth_service_impl.dart';
 
 class AuthService extends GetxService implements BootableService, AuthServiceImpl {
   static AuthService get instance => Get.find<AuthService>();

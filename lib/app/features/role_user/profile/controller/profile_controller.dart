@@ -23,7 +23,7 @@ class ProfileController extends BaseController {
     userController.currentUser.listen((event) {
       if (event == null) return;
       _getListFavoritesProduct();
-      lstHistory.assignAll(event.historyOrders ?? []);
+      lstHistory.assignAll(event.historyOrders);
     });
 
     super.onInit();
@@ -49,4 +49,6 @@ class ProfileController extends BaseController {
   void onPressEditProfile() {
     Get.toNamed(AppRouteProvider.editProfileScreen);
   }
+
+
 }

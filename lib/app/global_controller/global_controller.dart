@@ -17,20 +17,13 @@ import 'package:ninjafood/app/models/history_model.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/user_model.dart';
-import 'package:ninjafood/app/services/console_service/console_service.dart';
-import 'package:ninjafood/app/services/database_service/database_service.dart';
-import 'package:ninjafood/app/services/notification_service/notification_service.dart';
 import 'package:ninjafood/app/services/services.dart';
 import 'package:ninjafood/app/widgets/app_dialog.dart';
 import 'package:tuple/tuple.dart' as tuple;
 import 'package:uuid/uuid.dart';
-
 import 'boot_controllers.dart';
-
 part 'dialog_controller.dart';
-
 part 'message_controller.dart';
-
 part 'user_controller.dart';
 
 final List<tuple.Tuple2<BootableController, int>> listControllerBoots = [

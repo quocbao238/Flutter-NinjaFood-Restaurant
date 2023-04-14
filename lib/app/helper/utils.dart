@@ -1,4 +1,5 @@
-import 'package:intl/intl.dart';
+part of 'helper.dart';
+
 
 String formatPriceToVND(dynamic price) {
   String _result = '';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
-import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/product_search_bar.dart';
+import 'package:ninjafood/app/features/role_user/home/presentation/layout/mobile/widgets/widgets.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 
 class AppBarHomeWidget extends GetView<TabsController> {
@@ -16,8 +16,7 @@ class AppBarHomeWidget extends GetView<TabsController> {
           children: [
             Obx(() {
               final homeController = Get.find<HomeController>();
-              final isViewTypeNormal =
-                  homeController.homeViewType.value == HomeViewType.normal;
+              final isViewTypeNormal = homeController.homeViewType.value == HomeViewType.normal;
               if (!isViewTypeNormal) {
                 return AppButtonBack(onPressed: () {
                   homeController.onPressedBackToNormalHome();
@@ -28,9 +27,7 @@ class AppBarHomeWidget extends GetView<TabsController> {
               });
             }),
             const Expanded(
-              child: AppPadding.medium(
-                  child:
-                      AppText.headlineSmall(text: 'Find Your\nFavorite Food')),
+              child: AppPadding.medium(child: AppText.headlineSmall(text: 'Find Your\nFavorite Food')),
             ),
             AppButtonNotification(onPressed: () {
               controller.onPressedNotification();
@@ -45,11 +42,7 @@ class AppBarHomeWidget extends GetView<TabsController> {
               children: [
                 Expanded(child: ProductSearchBar()),
                 AppPadding(
-                  padding: AppEdgeInsets.only(left: AppGapSize.small),
-                  child: AppFilterButton(
-                    onPressed: () {},
-                  ),
-                )
+                    padding: AppEdgeInsets.only(left: AppGapSize.small), child: AppFilterButton(onPressed: () {}))
               ],
             ),
           ),

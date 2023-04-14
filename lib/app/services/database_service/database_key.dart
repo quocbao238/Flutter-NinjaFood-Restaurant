@@ -1,3 +1,6 @@
+
+part of 'database_service.dart';
+
 class DatabaseKeys {
   static String userPath = '/user/';
   static String productPath = '/product/';
