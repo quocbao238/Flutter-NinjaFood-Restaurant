@@ -41,9 +41,7 @@ class RateFoodMobileView extends GetView {
                       itemBuilder: (context, _) => AppIcons.star(
                         color: ThemeColors.textPriceColor,
                       ),
-                      onRatingUpdate: (rating) {
-                        print(rating);
-                      },
+                      onRatingUpdate: (rating) => print(rating),
                     ),
                   ),
                 ],
