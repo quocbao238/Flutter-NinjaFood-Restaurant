@@ -10,7 +10,7 @@ class DrawerHeaderWidget extends StatelessWidget {
       ratioWidth: 0.5,
       child: AppPadding.small(
         child: Obx(() {
-          final currentUser = userController.getCurrentUser;
+          final currentUser = userController.currentUser.value;
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,

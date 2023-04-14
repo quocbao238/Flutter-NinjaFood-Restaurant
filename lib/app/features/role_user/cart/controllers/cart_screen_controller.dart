@@ -66,6 +66,10 @@ class CartScreenController extends BaseController {
   }
 
   Future<void> onPressedPlaceMyOrder() async {
+    if (lstCarts.isEmpty) {
+      Get.snackbar('Error', 'Your cart is empty');
+      return;
+    }
     final HistoryOrderModel historyOrderModel = HistoryOrderModel(
         uid: Uuid().v4(),
         createdAt: createTimeStamp(),

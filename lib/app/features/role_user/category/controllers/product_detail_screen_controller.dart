@@ -7,7 +7,7 @@ import 'package:ninjafood/app/models/product_model.dart';
 
 const _logName = 'ProductDetailController';
 
-class ProductDetailController extends BaseController {
+class ProductDetailScreenController extends BaseController {
   final ProductModel currentProduct = Get.arguments;
   final UserController userController = UserController.instance;
   final RxList<CartModel> lstCurrentCart = <CartModel>[].obs;

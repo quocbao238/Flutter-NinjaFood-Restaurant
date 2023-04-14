@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/category/controllers/product_detail_controller.dart';
+import 'package:ninjafood/app/features/role_user/category/controllers/product_detail_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 import 'widgets/product_detail_mobile_widgets.dart';
 
-class FoodDetailMobileView extends GetView<ProductDetailController> {
+class FoodDetailMobileView extends GetView<ProductDetailScreenController> {
   const FoodDetailMobileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final tabsController = TabsController.instant;
+    final tabsController = TabsController.instance;
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -73,46 +73,12 @@ class FoodDetailMobileView extends GetView<ProductDetailController> {
                           if (isInCurrentCarts && !loading)
                             Obx(() {
                               final counterCarts = controller.lstCurrentCart.length;
-                              return Container(
-                                margin: const EdgeInsets.only(left: 16.0),
-                                height: 80,
-                                child: Stack(
-                                  alignment: Alignment.bottomRight,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        tabsController.onChangeToCartScreen();
-                                        Get.until((route) => Get.currentRoute == AppRouteProvider.tabScreen);
-                                      },
-                                      style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(ThemeColors.backgroundTextFormDark()),
-                                          fixedSize: MaterialStateProperty.all(Size(64, 64)),
-                                          maximumSize: MaterialStateProperty.all(Size(64, 64)),
-                                          minimumSize: MaterialStateProperty.all(Size(64, 64)),
-                                          padding: MaterialStateProperty.all(EdgeInsets.zero),
-                                          shape: MaterialStateProperty.all(
-                                            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-                                          )),
-                                      child: Icon(FontAwesomeIcons.cartShopping, color: ThemeColors.primaryColor),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.topRight,
-                                      child: Container(
-                                        margin: const EdgeInsets.only(top: 16.0),
-                                        padding: const EdgeInsets.all(4.0),
-                                        decoration: BoxDecoration(
-                                            color: ThemeColors.primaryColor.withOpacity(0.6),
-                                            borderRadius: BorderRadius.circular(16)),
-                                        child: AppText.bodySmall(
-                                          text: counterCarts.toString(),
-                                          textAlign: TextAlign.center,
-                                          color: Theme.of(context).textTheme.bodySmall?.color,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                              return CartItemWidget(
+                                counterCarts: counterCarts,
+                                onPressed: () {
+                                  tabsController.onChangeToCartScreen();
+                                  Get.until((route) => Get.currentRoute == AppRouteProvider.tabScreen);
+                                },
                               );
                             })
                         ],
@@ -123,6 +89,50 @@ class FoodDetailMobileView extends GetView<ProductDetailController> {
               },
             ),
           )
+        ],
+      ),
+    );
+  }
+}
+
+class CartItemWidget extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final int counterCarts;
+  final double? size;
+
+  const CartItemWidget({Key? key, this.onPressed, required this.counterCarts, this.size}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(left: 16.0),
+      height: 80,
+      child: Stack(
+        alignment: Alignment.bottomRight,
+        children: [
+          ElevatedButton(
+            onPressed: () => onPressed?.call(),
+            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                backgroundColor: MaterialStateProperty.all(ThemeColors.backgroundTextFormDark()),
+                fixedSize: MaterialStateProperty.all(Size(64, 64)),
+                maximumSize: MaterialStateProperty.all(Size(64, 64)),
+                minimumSize: MaterialStateProperty.all(Size(64, 64)),
+                padding: MaterialStateProperty.all(EdgeInsets.zero),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)))),
+            child: Icon(FontAwesomeIcons.cartShopping, color: ThemeColors.primaryColor),
+          ),
+          if (counterCarts > 0)
+            Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                    margin: const EdgeInsets.only(top: 16.0),
+                    padding: const EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(
+                        color: ThemeColors.primaryColor.withOpacity(0.6), borderRadius: BorderRadius.circular(16)),
+                    child: AppText.bodySmall(
+                        text: counterCarts.toString(),
+                        textAlign: TextAlign.center,
+                        color: Theme.of(context).textTheme.bodySmall?.color)))
         ],
       ),
     );

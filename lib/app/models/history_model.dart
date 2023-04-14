@@ -1,4 +1,5 @@
 import 'package:ninjafood/app/models/cart_model.dart';
+import 'package:ninjafood/app/models/comment_model.dart';
 
 enum HistoryStatus {
   pending('Pending', 'pending'),
@@ -22,6 +23,7 @@ class HistoryOrderModel {
   List<CartModel> carts;
   HistoryStatus status;
   String createdAt;
+  CommentModel? comment;
 
   HistoryOrderModel(
       {required this.uid,
@@ -31,16 +33,18 @@ class HistoryOrderModel {
       required this.discount,
       required this.createdAt,
       required this.carts,
+      this.comment,
       required this.status});
 
   factory HistoryOrderModel.fromJson(Map<String, dynamic> json) {
-    final historyModel =  HistoryOrderModel(
+    final historyModel = HistoryOrderModel(
         uid: json['uid'] as String,
         createdAt: json['createdAt'] as String,
-        subTotal: json['subTotal'] as double,
-        serviceFee: json['serviceFee'] as double,
-        discount: json['discount'] as double,
-        total: json['total'] as double,
+        subTotal: double.parse(json['subTotal'].toString()),
+        serviceFee: double.parse(json['serviceFee'].toString()),
+        discount: double.parse(json['discount'].toString()),
+        total: double.parse(json['total'].toString()),
+        comment: json['comment'] != null ? CommentModel.fromJson(json['comment'] as Map<String, dynamic>) : null,
         carts: (json['carts'] as List<dynamic>).map((e) => CartModel.fromJson(e as Map<String, dynamic>)).toList(),
         status: HistoryStatus.values.firstWhere((element) => element.json == json['status'] as String));
     return historyModel;
@@ -55,32 +59,20 @@ class HistoryOrderModel {
       'serviceFee': serviceFee,
       'total': total,
       'carts': carts.map((e) => e.toJson()).toList(),
+      'comment': comment?.toJson(),
       'status': status.json
     };
   }
 
-// HistoryOrderModel copyWidth({List<CartModel>? carts, HistoryStatus? status}) {
-//   final _subTotal = _getSubTotal(carts ?? this.carts);
-//   final _serviceFee = _calculateServiceFee(serviceFee, _subTotal);
-//   return HistoryOrderModel(
-//       uid: this.uid,
-//       subTotal: _subTotal,
-//       serviceFee: _serviceFee,
-//       total: _subTotal + _serviceFee,
-//       carts: carts ?? this.carts,
-//       status: status ?? this.status);
-// }
-//
-// double _getSubTotal(List<CartModel> _carts) {
-//   if (_carts.isEmpty) return total;
-//   return _carts.fold(
-//       total,
-//       (previousValue, element) =>
-//           previousValue +
-//           (element.quantity * (element.productModel.priceRange?.minimumPrice?.finalPrice?.value ?? 0)));
-// }
-//
-// double _calculateServiceFee(double _serviceFee, double _subTotal) {
-//   return (_subTotal * _serviceFee) / 100;
-// }
+  void updateStatus(HistoryStatus status) {
+    this.status = status;
+  }
+
+  void updateComment(CommentModel comment) {
+    this.comment = comment;
+  }
+
+
+
+
 }
