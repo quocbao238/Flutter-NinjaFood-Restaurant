@@ -31,6 +31,8 @@ import 'package:ninjafood/app/features/role_user/notification/presentation/notif
 import 'package:ninjafood/app/features/role_user/profile/controller/edit_profile_controller.dart';
 import 'package:ninjafood/app/features/role_user/profile/controller/profile_controller.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/edit_profile_screen.dart';
+import 'package:ninjafood/app/features/role_user/rate_food/controller/rating_controller.dart';
+import 'package:ninjafood/app/features/role_user/rate_food/presentation/rate_food_screen.dart';
 import 'package:ninjafood/app/features/role_user/splash/controllers/splash_controller.dart';
 import 'package:ninjafood/app/features/role_user/splash/presentation/splash_screen.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/reset_password_success_screen.dart';

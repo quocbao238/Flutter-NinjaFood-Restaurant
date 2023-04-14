@@ -50,5 +50,7 @@ class ProfileController extends BaseController {
     Get.toNamed(AppRouteProvider.editProfileScreen);
   }
 
-
+  void onPressRating() {
+    Get.offNamed(AppRouteProvider.rateFoodScreen);
+  }
 }
