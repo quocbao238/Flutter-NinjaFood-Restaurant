@@ -34,7 +34,7 @@ class UserModel {
   List<int> favoriteIds;
   List<CartModel> carts;
   List<HistoryOrderModel> historyOrders;
-
+  List<String> commentIds = [];
 
   UserModel(
       {required this.uid,
@@ -49,6 +49,7 @@ class UserModel {
       this.createType,
       this.userType,
       required this.carts,
+      required this.commentIds,
       required this.favoriteIds,
       this.fcmToken});
 
@@ -64,6 +65,7 @@ class UserModel {
         favoriteIds: [],
         carts: [],
         userType: UserType.Sliver,
+        commentIds: [],
         createType: createType);
   }
 
@@ -78,6 +80,7 @@ class UserModel {
       userType: UserType.Owners,
       role: ROLE_ADMIN,
       favoriteIds: [],
+      commentIds: [],
       carts: [],
       createType: createType,
     );
@@ -100,6 +103,7 @@ class UserModel {
         photoUrl = data['photoUrl'] ?? '',
         address = data['address'] ?? '',
         role = data['role'] ?? '',
+        commentIds = List<String>.from(data['commentIds'] ?? []),
         fcmToken = data['fcmToken'] ?? '',
         createType = data['createType'] ?? '',
         favoriteIds = List<int>.from(data['favoriteIds'] ?? []),
@@ -120,6 +124,7 @@ class UserModel {
       'role': role,
       'createType': createType,
       'fcmToken': fcmToken,
+      'commentIds': commentIds,
       'historyOrders': historyOrders.map((x) => x.toJson()).toList(),
       'carts': carts.map((x) => x.toJson()).toList(),
       'favoriteIds': favoriteIds,
@@ -140,6 +145,7 @@ class UserModel {
     List<HistoryOrderModel>? historyOrders,
     UserType? userType,
     List<int>? favoriteIds,
+    List<String>? commentIds,
   }) {
     return UserModel(
       uid: this.uid,
@@ -154,6 +160,7 @@ class UserModel {
       createType: this.createType,
       fcmToken: fcmToken ?? this.fcmToken,
       favoriteIds: favoriteIds ?? this.favoriteIds,
+      commentIds: commentIds ?? this.commentIds,
       userType: userType ?? this.userType,
       carts: carts ?? this.carts,
     );

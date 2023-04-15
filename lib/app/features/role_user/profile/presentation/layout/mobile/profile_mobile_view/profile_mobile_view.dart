@@ -27,8 +27,7 @@ class ProfileMobileView extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     final tapController = Get.find<TabsController>();
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.onPrimary,
+    return AppScaffold(
       body: Obx(() {
         final currentUser = controller.currentUser.value;
         if (currentUser == null) return Container();

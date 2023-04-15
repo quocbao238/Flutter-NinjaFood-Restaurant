@@ -60,13 +60,15 @@ class HistoryList extends GetView<ProfileController> {
                                           textAlign: TextAlign.left,
                                         ),
                                         AppPadding(
-                                            padding: AppEdgeInsets.only(top: AppGapSize.small),
-                                            child: FittedBox(
-                                                child: AppText.bodyMedium(
-                                                    text: createAt,
-                                                    fontWeight: FontWeight.w400,
-                                                    maxLines: 1,
-                                                    overflow: TextOverflow.ellipsis)))
+                                          padding: AppEdgeInsets.only(top: AppGapSize.small),
+                                          child: FittedBox(
+                                            child: AppText.bodyMedium(
+                                                text: createAt,
+                                                fontWeight: FontWeight.w400,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -83,7 +85,7 @@ class HistoryList extends GetView<ProfileController> {
                                   children: [
                                     AppText.bodyLarge(
                                         text: totalPrice, color: ThemeColors.textRedColor, fontWeight: FontWeight.bold),
-                                    _historyItem.comment != null
+                                    !_historyItem.isRating
                                         ? SizedBox()
                                         : ElevatedButton(
                                             onPressed: () => controller.onPressRating(_historyItem),

@@ -56,12 +56,11 @@ class CartScreenController extends BaseController {
     loading.value = false;
   }
 
-
   double _getSubTotalPrice() {
     return lstCarts.fold(
         0,
-            (previousValue, element) =>
-        previousValue +
+        (previousValue, element) =>
+            previousValue +
             (element.quantity * (element.productModel.priceRange?.minimumPrice?.finalPrice?.value ?? 0)));
   }
 
@@ -80,6 +79,7 @@ class CartScreenController extends BaseController {
     }
     final HistoryOrderModel historyOrderModel = HistoryOrderModel(
         uid: Uuid().v4(),
+        isRating: false,
         createdAt: createTimeStamp(),
         subTotal: subTotalPrice.value,
         serviceFee: serviceFee,
@@ -96,6 +96,5 @@ class CartScreenController extends BaseController {
       userController.updateUser(carts: []);
     });
     loading(false);
-
   }
 }
