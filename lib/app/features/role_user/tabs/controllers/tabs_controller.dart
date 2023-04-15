@@ -57,6 +57,10 @@ class TabsController extends BaseController {
     currentMenuItem.value = menuItems[2];
   }
 
+  void onChangeToHomeScreen() {
+    currentMenuItem.value = menuItems[0];
+  }
+
   void _onPressedChangeLanguage() {
     TranslationService.updateLocale(
       Get.locale == Locale('en') ? Locale('vi') : Locale('en'),

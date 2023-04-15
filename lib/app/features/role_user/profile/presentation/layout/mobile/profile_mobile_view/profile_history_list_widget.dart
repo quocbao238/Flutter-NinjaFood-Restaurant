@@ -85,7 +85,7 @@ class HistoryList extends GetView<ProfileController> {
                                   children: [
                                     AppText.bodyLarge(
                                         text: totalPrice, color: ThemeColors.textRedColor, fontWeight: FontWeight.bold),
-                                    !_historyItem.isRating
+                                    _historyItem.isRating
                                         ? SizedBox()
                                         : ElevatedButton(
                                             onPressed: () => controller.onPressRating(_historyItem),
