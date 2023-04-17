@@ -43,7 +43,7 @@ class HistoryOrderModel {
         serviceFee: double.parse(json['serviceFee'].toString()),
         discount: double.parse(json['discount'].toString()),
         total: double.parse(json['total'].toString()),
-        isRating: json['isRating'] as bool,
+        isRating: json['isRating'] ?? false,
         carts: (json['carts'] as List<dynamic>).map((e) => CartModel.fromJson(e as Map<String, dynamic>)).toList(),
         status: HistoryStatus.values.firstWhere((element) => element.json == json['status'] as String));
     return historyModel;
