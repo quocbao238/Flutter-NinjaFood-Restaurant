@@ -9,8 +9,6 @@ import 'package:ninjafood/app/features/role_user/chat_message/controllers/room_c
 import 'package:ninjafood/app/features/role_user/chat_message/infrastructure/select_chat_files/select_chat_files.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/presentation/layout/mobile/widgets/message/message_item_widget.dart';
 import 'package:ninjafood/app/helper/helper.dart';
-import 'package:ninjafood/app/widgets/animated_floating_buttons.dart';
-import 'package:ninjafood/app/widgets/app_network_image.dart';
 
 part 'room_chat_button_select_file_widget.dart';
 

@@ -1,3 +1,6 @@
+
+part of 'database_service.dart';
+
 class DatabaseKeys {
   static String userPath = '/user/';
   static String productPath = '/product/';
@@ -5,4 +8,5 @@ class DatabaseKeys {
   static String promotionPath = '/promotion/';
   static String groupChat = '/groupChat/';
   static String messageChatPath = '/message/';
+  static String commentPath = '/comment/';
 }

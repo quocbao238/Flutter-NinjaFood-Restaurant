@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
-import 'package:ninjafood/app/services/boot_services.dart';
+import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ThemeService extends GetxService implements BootableService {
+class ThemeService extends GetxService implements Bootable {
   static ThemeService get instance => Get.find<ThemeService>();
   late final SharedPreferences _sharedPreferences;
   Rx<bool> isDarkTheme = false.obs;

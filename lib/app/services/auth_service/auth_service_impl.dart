@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fpdart/fpdart.dart';
-import 'package:ninjafood/app/constants/contains.dart';
+part of 'auth_service.dart';
 
 abstract class AuthServiceImpl {
   Stream<User?> get firebaseAuthUserStream;

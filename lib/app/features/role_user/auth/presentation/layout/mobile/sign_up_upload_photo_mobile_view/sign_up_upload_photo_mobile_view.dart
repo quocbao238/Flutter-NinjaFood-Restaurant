@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_upload_photo_controller.dart';
-import 'package:ninjafood/app/features/role_user/auth/presentation/layout/mobile/sign_up_upload_photo_mobile_view/widgets/box_photo.dart';
+import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_process_controller.dart';
+import 'package:ninjafood/app/features/role_user/auth/presentation/layout/mobile/sign_up_upload_photo_mobile_view/sign_up_photo_box.dart';
 
-class SignUpUploadPhotoMobileView extends GetView<SignUpUploadPhotoController> {
+class SignUpUploadPhotoMobileView extends GetView<SignUpProcessController> {
   const SignUpUploadPhotoMobileView({super.key});
 
   @override
@@ -33,7 +33,7 @@ class SignUpUploadPhotoMobileView extends GetView<SignUpUploadPhotoController> {
                   child: BoxPhoto(
                     iconPhoto: AppIcons.gallery(),
                     textPhoto: 'Form Gallery',
-                    onPressed: controller.onPressedFromGallery,
+                    onPressed: controller.onPressedPhotoGallery,
                   ),
                 ),
                 AppPadding(
@@ -48,7 +48,7 @@ class SignUpUploadPhotoMobileView extends GetView<SignUpUploadPhotoController> {
             ),
           ),
           AppPadding.regular(
-            child: AppButton.max(title: 'Skip_Button'.tr, onPressed: controller.onPressedSkip),
+            child: AppButton.max(title: 'Skip_Button'.tr, onPressed: controller.onPressedSkipPhoto),
           ),
         ],
       ),

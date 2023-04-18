@@ -1,12 +1,13 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
+import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 import 'package:uuid/uuid.dart';
 
-import '../boot_services.dart';
-import 'cloud_storage_impl.dart';
+part 'cloud_storage_impl.dart';
 
-class CloudStorageService extends GetxService implements BootableService, CloudStorageServiceImpl {
+
+class CloudStorageService extends GetxService implements Bootable, CloudStorageServiceImpl {
   static CloudStorageService get instance => Get.find<CloudStorageService>();
 
   late final FirebaseStorage storage;

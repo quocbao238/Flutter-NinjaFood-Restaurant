@@ -8,7 +8,7 @@ class OnboardMobileScreen extends GetView<OnboardController> {
 
   @override
   Widget build(BuildContext context) {
-    final _onboardListData = controller.datas;
+    final _onboardListData = controller.onboardsList;
     final _pageController = controller.pageController;
     return AppScaffold(
       body: SafeArea(

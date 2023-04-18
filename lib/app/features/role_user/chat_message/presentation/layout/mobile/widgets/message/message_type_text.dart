@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/helper/utils.dart';
+import 'package:ninjafood/app/helper/helper.dart';
 
 class ChatMessageText extends StatelessWidget {
   final String message;

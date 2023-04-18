@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/presentation/layout/mobile/widgets/message/message_item_type.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
-import 'package:ninjafood/app/widgets/app_network_image.dart';
 
 class MessageItemWidget extends StatelessWidget {
   final MessageChat messageChat;
@@ -34,10 +33,7 @@ class MessageItemWidget extends StatelessWidget {
               if (avatarUrl != null)
                 AppPadding(
                   padding: AppEdgeInsets.only(right: AppGapSize.medium),
-                  child: SizedBox(
-                      width: kToolbarHeight / 2,
-                      height: kToolbarHeight / 2,
-                      child: AppNetworkImage(url: avatarUrl ?? '')),
+                  child: AppNetworkImage(width: kToolbarHeight / 2, height: kToolbarHeight / 2, url: avatarUrl ?? ''),
                 ),
               Expanded(
                   child: MessageItemType(messageChat: messageChat, gradientColor: gradientColor, boxColor: boxColor)),

@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class PromotionModel {
   String? id;
   String? title;
@@ -82,8 +84,18 @@ class PromotionModel {
     excerpt = json['excerpt'];
     thumbnail = json['thumbnail'];
     condition = json['condition'];
-    startDate = json['startDate'];
-    endDate = json['endDate'];
+    if (json['startDate'] != null) {
+      startDate = json['startDate'];
+      startDate = DateFormat('dd/MM/yyyy').format(DateTime.parse(startDate!));
+    } else {
+      startDate = json['startDate'];
+    }
+    if (json['endDate'] != null) {
+      endDate = json['endDate'];
+      endDate = DateFormat('dd/MM/yyyy').format(DateTime.parse(endDate!));
+    } else {
+      endDate = json['endDate'];
+    }
     type = json['type'];
     externalUrl = json['externalUrl'];
     externalTitle = json['externalTitle'];
@@ -148,8 +160,7 @@ class PromotionModel {
     data['limitedEndTime'] = this.limitedEndTime;
     data['limitedEndTimeInTimeStamp'] = this.limitedEndTimeInTimeStamp;
     data['limitedAmountPerCustomer'] = this.limitedAmountPerCustomer;
-    data['limitedAmountPerCustomerPerDay'] =
-        this.limitedAmountPerCustomerPerDay;
+    data['limitedAmountPerCustomerPerDay'] = this.limitedAmountPerCustomerPerDay;
     data['isHot'] = this.isHot;
     data['urlSlugs'] = this.urlSlugs;
     data['showOnWebsiteBrand'] = this.showOnWebsiteBrand;
@@ -158,4 +169,3 @@ class PromotionModel {
     return data;
   }
 }
-

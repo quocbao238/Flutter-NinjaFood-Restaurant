@@ -1,10 +1,10 @@
-import 'package:intl/intl.dart';
+part of 'helper.dart';
 
 
 String formatPriceToVND(dynamic price) {
   String _result = '';
-  final formatter = NumberFormat.currency(locale: 'vi_VN',symbol: '');
-  _result =  formatter.format(price);
+  final formatter = NumberFormat.currency(locale: 'vi_VN', symbol: '');
+  _result = formatter.format(price);
   return _result.trim();
 }
 
@@ -26,5 +26,9 @@ String convertTimeStampToHour(String timestamp) {
   return formatted;
 }
 
-
-
+String getExpiresDayLaterByTwoDateTime(String timeStart, String timeEnd) {
+  final _dateStart = DateFormat('dd/MM/yyyy').parse(timeStart);
+  final _dateEnd = DateFormat('dd/MM/yyyy').parse(timeEnd);
+  final difference = _dateEnd.difference(_dateStart).inDays;
+  return difference.toString();
+}

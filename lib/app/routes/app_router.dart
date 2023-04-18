@@ -98,5 +98,24 @@ class AppPages {
       name: AppRouteProvider.imagePreviewScreen,
       page: () => ImagePreviewScreen(url: Get.arguments),
     ),
+    GetPage(
+      name: AppRouteProvider.promotionDetailScreen,
+      page: () => PromotionDetailScreen(promotionModel: Get.arguments),
+    ),
+    GetPage(
+      name: AppRouteProvider.editProfileScreen,
+      page: () => EditProfileScreen(),
+      binding: GetBinding(AppRouteProvider.editProfileScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.notificationScreen,
+      page: () => NotificationScreen(),
+      binding: GetBinding(AppRouteProvider.notificationScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.ratingScreen,
+      page: () => RatingScreen(),
+      binding: GetBinding(AppRouteProvider.ratingScreen),
+    ),
   ];
 }

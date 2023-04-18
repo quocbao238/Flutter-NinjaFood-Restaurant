@@ -1,12 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fpdart/fpdart.dart';
-import 'package:ninjafood/app/constants/contains.dart';
-import 'package:ninjafood/app/models/category_model.dart';
-import 'package:ninjafood/app/models/chat_model.dart';
-import 'package:ninjafood/app/models/message_chat_model.dart';
-import 'package:ninjafood/app/models/product_model.dart';
-import 'package:ninjafood/app/models/promotion_model.dart';
-import 'package:ninjafood/app/models/user_model.dart';
+part of 'database_service.dart';
+
 
 abstract class DatabaseServiceImpl {
   /* User */
@@ -21,6 +14,7 @@ abstract class DatabaseServiceImpl {
   Future<Either<Failure, void>> updateUser({required UserModel userModel});
 
   /* CategoryList */
+
   Future<Either<Failure, List<CategoryModel>>> getListCategories();
 
   /* ProductList */
@@ -28,8 +22,6 @@ abstract class DatabaseServiceImpl {
 
   /* Filter Product */
   Future<Either<Failure, List<ProductModel>>> getListProductByListId(List<int> listProductsIds);
-
-  /* Product Detail */
 
   /* Promotion */
   Future<Either<Failure, List<PromotionModel>>> getListPromotions();
@@ -42,4 +34,7 @@ abstract class DatabaseServiceImpl {
   Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat({required String groupChatId});
 
   Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat();
+
+  // Comment Product
+  Future<Either<Failure, void>> insertCommentProduct({required CommentModel commentModel});
 }

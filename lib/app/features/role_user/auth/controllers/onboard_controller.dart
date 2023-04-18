@@ -5,7 +5,7 @@ import 'package:ninjafood/app/features/role_user/auth/infrastructure/models/onbo
 import 'package:ninjafood/app/routes/routes.dart';
 
 class OnboardController extends BaseController {
-  List<OnboardModel> datas = OnboardModel.lstData;
+  List<OnboardModel> onboardsList = OnboardModel.lstData;
   late final PageController pageController;
   late final int lastCounter;
 

@@ -8,7 +8,7 @@ class ResetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppViewLayout(
-      mobileView: ForgotPasswordMobileView(),
+      mobileView: ResetPasswordMobileView(),
     );
   }
 }

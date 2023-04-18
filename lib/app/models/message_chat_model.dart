@@ -1,4 +1,4 @@
-import 'package:ninjafood/app/helper/utils.dart';
+import 'package:ninjafood/app/helper/helper.dart';
 
 enum MessageChatType {
   text(0),

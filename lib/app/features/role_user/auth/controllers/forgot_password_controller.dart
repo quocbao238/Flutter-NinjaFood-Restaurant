@@ -4,7 +4,6 @@ import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 
-
 class ForgotPassWordController extends BaseController {
 
   late final TextEditingController emailController;

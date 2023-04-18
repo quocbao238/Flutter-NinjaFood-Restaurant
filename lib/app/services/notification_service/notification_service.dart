@@ -1,10 +1,10 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
-import 'package:ninjafood/app/services/boot_services.dart';
+import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 
-import 'notification_service_impl.dart';
+part 'notification_service_impl.dart';
 
-class NotificationService extends GetxService implements BootableService, NotificationServiceImpl {
+class NotificationService extends GetxService implements Bootable, NotificationServiceImpl {
   static NotificationService get instance => Get.find<NotificationService>();
   late final FirebaseMessaging _firebaseMessaging;
 
@@ -51,5 +51,4 @@ class NotificationService extends GetxService implements BootableService, Notifi
 
   @override
   void handleMessage(RemoteMessage message) {}
-
 }
