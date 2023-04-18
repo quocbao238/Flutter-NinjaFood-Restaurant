@@ -14,7 +14,7 @@ class RoomChatButtonSelectFileWidget extends GetView<RoomChatScreenController> {
       return SizedBox(
         height: kToolbarHeight * 10,
         width: kToolbarHeight,
-        child: AnimatedFloatingButtons(
+        child: AppAnimatedFloatingButtons(
             onPressedCallBack: (index) {
               if (index == 0) {
                 controller.onSelectedFile(SelectAnotherFiles());

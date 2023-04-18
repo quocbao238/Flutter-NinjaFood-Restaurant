@@ -5,7 +5,6 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/features/role_user/rating/controller/rating_screen_controller.dart';
-import 'package:ninjafood/app/widgets/widgets.dart';
 
 class RatingMobileView extends GetView<RatingScreenController> {
   const RatingMobileView({super.key});

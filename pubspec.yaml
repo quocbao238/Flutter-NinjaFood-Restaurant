@@ -34,9 +34,7 @@ dependencies:
   #  sign_in_with_apple: ^4.3.0
   flutter_facebook_auth: ^5.0.8
   carousel_slider: ^4.2.1
-  auto_animated: ^3.1.0
   flutter_typeahead: ^4.3.7
-  cached_network_image: ^3.2.3
   firebase_messaging: ^14.4.0
   uuid: ^3.0.7
   tuple: ^2.0.1
@@ -51,10 +49,10 @@ dependencies:
 
 
   ninja_theme:
-#    git:
-#      url: https://github.com/quocbao238/ninjafood_theme.git
-#      ref: devMaster
-    path: ../NinjaFood_Theme
+    git:
+      url: https://github.com/quocbao238/ninjafood_theme.git
+      ref: devMaster
+#    path: ../NinjaFood_Theme
 
 
 flutter_icons:

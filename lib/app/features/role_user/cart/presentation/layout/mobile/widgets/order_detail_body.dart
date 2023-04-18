@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/cart/controllers/cart_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/cart/presentation/layout/mobile/widgets/order_detail_item_count.dart';
-import 'package:ninjafood/app/widgets/widgets.dart';
 
 class OrderDetailBodyView extends GetView<CartScreenController> {
   const OrderDetailBodyView({

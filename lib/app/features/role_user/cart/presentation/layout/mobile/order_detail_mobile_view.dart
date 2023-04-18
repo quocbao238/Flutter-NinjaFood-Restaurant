@@ -13,7 +13,8 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
   Widget build(BuildContext context) {
     final tapController = Get.find<TabsController>();
     return AppScaffoldBackgroundImage.pattern(
-        appBarWidget: AppButtonDrawer(onPressed: () => tapController.toggleDrawer()),
+        appBarWidget:
+            AppButtonDrawer(onPressed: () => tapController.toggleDrawer()),
         body: AppPadding(
           padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
           child: Column(
@@ -21,43 +22,25 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
             children: [
               AppPadding(
                   padding: AppEdgeInsets.only(bottom: AppGapSize.medium),
-                  child: AppText.headlineMedium(text: 'Order details', fontWeight: FontWeight.bold)),
+                  child: AppText.headlineMedium(
+                      text: 'Order details', fontWeight: FontWeight.bold)),
               OrderDetailBodyView(),
               OrderDetailBottom(),
               AppPadding(
                 padding: AppEdgeInsets.only(top: AppGapSize.small),
-                child: Obx(() {
-                  final loading = controller.loading.value;
-                  return Center(
-                    child: AnimationButton(
-                        onPressed: () => controller.onPressedPlaceMyOrder(),
-                        textDone: 'Done',
-                        onDone: () => controller.onPressedDone(),
-                        textLoading: 'Loading...',
-                        textButton: 'Place my orders',
-                        loading: controller.loading.value),
-                  );
-                  return !controller.loading.value
-                      ? Center(
-                          child: CircularProgressIndicator(
-                          color: ThemeColors.primaryColor,
-                        ))
-                      : SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          height: kToolbarHeight,
-                          child: ElevatedButton(
-                            onPressed: () => controller.onPressedPlaceMyOrder(),
-                            child: FittedBox(
-                              child: Text('Place My Order',
-                                  style: ThemeText.bodyLarge
-                                      .copyWith(fontWeight: FontWeight.bold, color: ThemeColors.primaryColor)),
-                            ),
-                            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                                  backgroundColor: MaterialStateProperty.all(ThemeColors.textDarkColor),
-                                ),
-                          ),
-                        );
-                }),
+                child: Obx(
+                  () {
+                    return Center(
+                      child: AnimationButton(
+                          onPressed: () => controller.onPressedPlaceMyOrder(),
+                          textDone: 'Done',
+                          onDone: () => controller.onPressedDone(),
+                          textLoading: 'Loading...',
+                          textButton: 'Place my orders',
+                          loading: controller.loading.value),
+                    );
+                  },
+                ),
               ),
             ],
           ),

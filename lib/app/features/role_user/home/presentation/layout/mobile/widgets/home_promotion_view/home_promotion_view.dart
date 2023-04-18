@@ -12,7 +12,6 @@ import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/widgets/widgets.dart';
-
 part 'home_promotion_deal.dart';
 part 'home_promotion_item.dart';
 part 'home_promotion_list.dart';

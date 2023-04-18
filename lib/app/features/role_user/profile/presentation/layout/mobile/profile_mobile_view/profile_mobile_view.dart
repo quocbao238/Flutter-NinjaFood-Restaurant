@@ -12,8 +12,6 @@ import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controlle
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/features/role_user/category/presentation/layout/mobile/product_detail_view/widgets/product_favorite_item.dart';
 import 'package:ninjafood/app/routes/routes.dart';
-import 'package:ninjafood/app/widgets/widgets.dart';
-
 part 'profile_appbar.dart';
 part 'profile_body.dart';
 part 'profile_favorite_list_widget.dart';

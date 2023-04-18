@@ -13,7 +13,7 @@ class CategoryListView extends StatelessWidget {
     return AppSizeScale(
       ratioWidth: 1,
       ratioHeight: 0.2,
-      child: AnimationList(
+      child: AppAnimationList(
         scrollDirection: Axis.horizontal,
         itemCount: menuList.length,
         physics: AlwaysScrollableScrollPhysics(),

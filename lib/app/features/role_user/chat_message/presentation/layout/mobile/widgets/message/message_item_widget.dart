@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/presentation/layout/mobile/widgets/message/message_item_type.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
-import 'package:ninjafood/app/widgets/widgets.dart';
 
 class MessageItemWidget extends StatelessWidget {
   final MessageChat messageChat;
