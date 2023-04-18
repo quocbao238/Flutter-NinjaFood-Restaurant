@@ -6,6 +6,7 @@ import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/features/role_user/tabs/infrastructure/models/menu_models.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/services/auth_service/auth_service.dart';
+import 'package:ninjafood/app/services/language_service/language_service.dart';
 import 'package:ninjafood/app/services/theme_service/theme_service.dart';
 
 const _logName = 'TabsController';
@@ -34,8 +35,8 @@ class TabsController extends BaseController {
 
   void onPressedMenuItem(MenuItem menuItem) {
     switch (menuItem.menuType) {
-      case MenuType.settings:
-        _onPressedSettings();
+      case MenuType.language:
+        _onPressedChangeLanguage();
         break;
       case MenuType.logout:
         _onPressedLogout();
@@ -56,9 +57,15 @@ class TabsController extends BaseController {
     currentMenuItem.value = menuItems[2];
   }
 
+  void onChangeToHomeScreen() {
+    currentMenuItem.value = menuItems[0];
+  }
 
-
-  void _onPressedSettings() {}
+  void _onPressedChangeLanguage() {
+    TranslationService.updateLocale(
+      Get.locale == Locale('en') ? Locale('vi') : Locale('en'),
+    );
+  }
 
   void _onPressedAbout() {}
 

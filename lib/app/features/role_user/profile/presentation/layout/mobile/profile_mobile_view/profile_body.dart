@@ -11,7 +11,12 @@ class ProfileBody extends StatelessWidget {
         child: AppPadding.medium(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [ProfileUserInformationWidget(), ProfileVoucherWidget(), FavoriteList(), HistoryList()],
+            children: [
+              ProfileUserInformationWidget(),
+              ProfileVoucherWidget(),
+              FavoriteList(),
+              HistoryList(),
+            ],
           ),
         ),
       ),

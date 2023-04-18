@@ -55,26 +55,7 @@ class OrderDetailBottom extends GetView<CartScreenController> {
                     ],
                   ),
                 ),
-                AppPadding(
-                  padding: AppEdgeInsets.only(top: AppGapSize.small),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: kToolbarHeight,
-                    child: ElevatedButton(
-                      onPressed: () => controller.onPressedPlaceMyOrder(),
-                      child: FittedBox(
-                        child: Text(
-                          'Place My Order',
-                          style: ThemeText.bodyLarge
-                              .copyWith(fontWeight: FontWeight.bold, color: ThemeColors.primaryColor),
-                        ),
-                      ),
-                      style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                            backgroundColor: MaterialStateProperty.all(ThemeColors.textDarkColor),
-                          ),
-                    ),
-                  ),
-                ),
+
               ],
             );
           }),

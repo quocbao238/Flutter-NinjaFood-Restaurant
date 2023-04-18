@@ -10,7 +10,7 @@ class CategoryGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimationGridView(
+    return AppAnimationGridView(
       padding: EdgeInsets.zero,
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

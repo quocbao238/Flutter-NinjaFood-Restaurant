@@ -14,6 +14,7 @@ abstract class DatabaseServiceImpl {
   Future<Either<Failure, void>> updateUser({required UserModel userModel});
 
   /* CategoryList */
+
   Future<Either<Failure, List<CategoryModel>>> getListCategories();
 
   /* ProductList */
@@ -21,8 +22,6 @@ abstract class DatabaseServiceImpl {
 
   /* Filter Product */
   Future<Either<Failure, List<ProductModel>>> getListProductByListId(List<int> listProductsIds);
-
-  /* Product Detail */
 
   /* Promotion */
   Future<Either<Failure, List<PromotionModel>>> getListPromotions();

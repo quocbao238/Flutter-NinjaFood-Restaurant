@@ -1,5 +1,6 @@
 class CommentModel {
   final String uid;
+  /// will be mapping with user id
   final String userId;
   final String userName;
   final String userImage;

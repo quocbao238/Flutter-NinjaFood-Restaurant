@@ -5,7 +5,6 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/features/role_user/rating/controller/rating_screen_controller.dart';
-import 'package:ninjafood/app/widgets/widgets.dart';
 
 class RatingMobileView extends GetView<RatingScreenController> {
   const RatingMobileView({super.key});
@@ -56,31 +55,33 @@ class RatingMobileView extends GetView<RatingScreenController> {
             ),
             AppPadding(
               padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: Obx(() {
-                      return AnimationButton(
-                        ratioWidthButton: 0.65,
-                        ratioWidthDone: 0.45,
-                        ratioWidthLoading: 0.55,
-                        textButton: 'Submit',
-                        onPressed: controller.enableSubmit.value ? () => controller.onPressedSubmit() : null,
-                        textDone: 'Done',
-                        onDone: () => controller.onPressedSkip(),
-                        textLoading: 'Loading',
-                        loading: controller.loading.value,
-                      );
-                    }),
-                  ),
-                  Expanded(
-                      flex: 2,
-                      child: AppPadding(
-                          padding: AppEdgeInsets.only(left: AppGapSize.medium),
-                          child: AppButton.min(title: 'Skip', onPressed: () => controller.onPressedSkip())))
-                ],
-              ),
+              child: Obx(() {
+                final enableSubmit = controller.enableSubmit.value;
+                return Row(
+                  children: [
+                    if (enableSubmit)
+                      Expanded(
+                        flex: 3,
+                        child: AnimationButton(
+                          ratioWidthButton: 0.65,
+                          ratioWidthDone: 0.45,
+                          ratioWidthLoading: 0.55,
+                          textButton: 'Submit',
+                          onPressed: () => controller.onPressedSubmit(),
+                          textDone: 'Done',
+                          onDone: () => controller.onPressedSkip(),
+                          textLoading: 'Loading',
+                          loading: controller.loading.value,
+                        ),
+                      ),
+                    Expanded(
+                        flex: 2,
+                        child: AppPadding(
+                            padding: AppEdgeInsets.only(left: AppGapSize.medium),
+                            child: AppButton.min(title: 'Skip', onPressed: () => controller.onPressedSkip())))
+                  ],
+                );
+              }),
             ),
           ],
         ),

@@ -108,6 +108,7 @@ class UserController extends GetxController implements Bootable {
     List<int>? favoriteIds,
     List<CartModel>? carts,
     List<HistoryOrderModel>? historyOrders,
+    List<String>? cmtIds,
   }) async {
     final _currentUser = getCurrentUser;
     if (_currentUser == null) return left(Failure.custom('User is null'));
@@ -122,6 +123,7 @@ class UserController extends GetxController implements Bootable {
         fcmToken: fcmToken ?? _currentUser.fcmToken,
         carts: carts ?? _currentUser.carts,
         historyOrders: historyOrders ?? _currentUser.historyOrders,
+        commentIds: cmtIds ?? _currentUser.commentIds,
       );
       await _databaseService.updateUser(userModel: newDataUser);
       return Right(null);
@@ -183,8 +185,11 @@ class UserController extends GetxController implements Bootable {
           rating: rating);
       final insertCommentProduct = await _databaseService.insertCommentProduct(commentModel: commentModel);
       return insertCommentProduct.fold((l) => left(l), (r) async {
-        _currentUser.historyOrders.firstWhere((element) => element.uid == historyId).comment = commentModel;
-        return await updateUser(historyOrders: _currentUser.historyOrders);
+        _currentUser.historyOrders.firstWhere((element) => element.uid == historyId).isRating = true;
+        final currentCommentIds = _currentUser.commentIds;
+        currentCommentIds.add(commentModel.uid);
+
+        return await updateUser(historyOrders: _currentUser.historyOrders, cmtIds: currentCommentIds);
       });
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));

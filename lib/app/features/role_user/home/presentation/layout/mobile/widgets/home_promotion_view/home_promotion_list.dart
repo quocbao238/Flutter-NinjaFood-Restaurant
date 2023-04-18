@@ -13,7 +13,7 @@ class PromotionListView extends GetView<HomeController> {
           return const SizedBox();
         }
         return AppPadding.medium(
-          child: AnimationList(
+          child: AppAnimationList(
             physics: AlwaysScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
             itemCount: lstPromotions.length,

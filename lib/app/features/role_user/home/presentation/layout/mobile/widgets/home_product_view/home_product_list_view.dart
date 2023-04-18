@@ -6,7 +6,7 @@ class ProductList extends GetView<HomeController> {
   const ProductList({Key? key, required this.productList}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return AnimationList(
+    return AppAnimationList(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: productList.length,

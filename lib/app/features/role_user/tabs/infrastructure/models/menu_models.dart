@@ -5,7 +5,7 @@ import 'package:ninjafood/app/features/role_user/chat_message/presentation/group
 import 'package:ninjafood/app/features/role_user/home/presentation/home_screen.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/profile_screen.dart';
 
-enum MenuType { home, chat, profile, cart, settings, logout, about, changeTheme }
+enum MenuType { home, chat, profile, cart, language, logout, about, changeTheme }
 
 class MenuItem {
   final String title;
@@ -38,7 +38,7 @@ class MenuItem {
         menuType: MenuType.cart),
     MenuItem(
         index: 3, title: 'Chat', iconData: FontAwesomeIcons.message, screen: GroupChatScreen(), menuType: MenuType.chat),
-    MenuItem(index: 4, title: 'Settings', iconData: FontAwesomeIcons.gear, screen: null, menuType: MenuType.settings),
+    MenuItem(index: 4, title: 'Change language', iconData: FontAwesomeIcons.gear, screen: null, menuType: MenuType.language),
     MenuItem(
         index: 5,
         title: 'Change Theme',

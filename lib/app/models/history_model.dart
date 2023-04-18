@@ -1,5 +1,4 @@
 import 'package:ninjafood/app/models/cart_model.dart';
-import 'package:ninjafood/app/models/comment_model.dart';
 
 enum HistoryStatus {
   pending('Pending', 'pending'),
@@ -23,7 +22,7 @@ class HistoryOrderModel {
   List<CartModel> carts;
   HistoryStatus status;
   String createdAt;
-  CommentModel? comment;
+  bool isRating;
 
   HistoryOrderModel(
       {required this.uid,
@@ -33,7 +32,7 @@ class HistoryOrderModel {
       required this.discount,
       required this.createdAt,
       required this.carts,
-      this.comment,
+      required this.isRating,
       required this.status});
 
   factory HistoryOrderModel.fromJson(Map<String, dynamic> json) {
@@ -44,7 +43,7 @@ class HistoryOrderModel {
         serviceFee: double.parse(json['serviceFee'].toString()),
         discount: double.parse(json['discount'].toString()),
         total: double.parse(json['total'].toString()),
-        comment: json['comment'] != null ? CommentModel.fromJson(json['comment'] as Map<String, dynamic>) : null,
+        isRating: json['isRating'] ?? false,
         carts: (json['carts'] as List<dynamic>).map((e) => CartModel.fromJson(e as Map<String, dynamic>)).toList(),
         status: HistoryStatus.values.firstWhere((element) => element.json == json['status'] as String));
     return historyModel;
@@ -58,8 +57,8 @@ class HistoryOrderModel {
       'createdAt': createdAt,
       'serviceFee': serviceFee,
       'total': total,
+      'isRating': isRating,
       'carts': carts.map((e) => e.toJson()).toList(),
-      'comment': comment?.toJson(),
       'status': status.json
     };
   }
@@ -68,11 +67,7 @@ class HistoryOrderModel {
     this.status = status;
   }
 
-  void updateComment(CommentModel comment) {
-    this.comment = comment;
+  void updateRating(bool isRating) {
+    this.isRating = isRating;
   }
-
-
-
-
 }

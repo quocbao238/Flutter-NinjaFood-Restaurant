@@ -4,7 +4,6 @@ import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
-import 'package:ninjafood/app/widgets/widgets.dart';
 
 class GroupChatItem extends StatelessWidget {
   final GroupChatModel groupChatItem;

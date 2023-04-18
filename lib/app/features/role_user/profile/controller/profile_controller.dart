@@ -34,6 +34,7 @@ class ProfileController extends BaseController {
     super.onClose();
   }
 
+
   void _getListFavoritesProduct() async {
     loading.value = true;
     final lstFavoriteIds = userController.getCurrentUser?.favoriteIds ?? [];

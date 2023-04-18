@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
 import 'package:ninjafood/app/models/category_model.dart';
-import 'package:ninjafood/app/widgets/widgets.dart';
 part 'home_category_grid_view.dart';
 part 'home_category_item.dart';
 part 'home_category_list_view.dart';
