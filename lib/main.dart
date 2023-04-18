@@ -17,7 +17,6 @@ void main() async {
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     await BootServices(boots: listBootServices)();
-    await BootServices(boots: listBootsController)();
     await AppPages.navigateDefaultPage();
     runApp(MyApp());
   }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
