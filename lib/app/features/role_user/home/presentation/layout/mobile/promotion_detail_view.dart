@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:ninjafood/app/widgets/widgets.dart';
 
 class PromotionMobileView extends StatelessWidget {
@@ -46,20 +45,6 @@ class PromotionMobileView extends StatelessWidget {
                         getExpiresDayLaterByTwoDateTime(promotionModel.startDate ?? '', promotionModel.endDate ?? '') +
                             ' days'),
                 Divider(color: Theme.of(context).colorScheme.primary, thickness: 1),
-                AppPadding(
-                    padding: AppEdgeInsets.only(top: AppGapSize.small),
-                    child: Builder(builder: (context) {
-                      final textStyle = Theme.of(context).textTheme.bodyMedium!;
-                      return Html(
-                        data: promotionModel.content ?? '',
-                        style: {
-                          "span": Style(
-                            fontSize: FontSize(textStyle.fontSize ?? 0),
-                            color: textStyle.color,
-                          ),
-                        },
-                      );
-                    })),
               ],
             ),
           ),

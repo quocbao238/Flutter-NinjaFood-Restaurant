@@ -2,8 +2,7 @@ const Map<String, String> vi = {
   // Onboard Screen
   "OnboardScreen_Title1": "Ninja Food",
   "OnboardScreen_Title2": "Food Ninja - Nơi ẩm thực của bạn",
-  "OnboardScreen_Description1":
-      "Bạn có thể tìm thấy mọi món ăn cho mọi khẩu vị và màu sắc. Hãy thưởng thức!",
+  "OnboardScreen_Description1": "Bạn có thể tìm thấy mọi món ăn cho mọi khẩu vị và màu sắc. Hãy thưởng thức!",
   "OnboardScreen_Description2": "Thưởng thức đồ ăn một cách nhanh chóng",
 
   // Button
@@ -42,38 +41,36 @@ const Map<String, String> vi = {
 
   //SignUp Process
   "SignUpProcessScreen_Title": "Nhập thông tin của bạn để bắt đầu",
-  "SignUpProcessScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
+  "SignUpProcessScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
   "SignUpProcessScreen_FirstName": "Họ",
   "SignUpProcessScreen_LastName": "Tên",
   "SignUpProcessScreen_MobileNumber": "Số Điện Thoại",
 
   //Payment Method
   "PaymentMethodScreen_Title": "Phương thức thanh toán",
-  "PaymentMethodScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
+  "PaymentMethodScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
 
   //Upload Photo
   "UploadPhotoScreen_Title": "Tải ảnh đại diện của bạn lên",
-  "UploadPhotoScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
+  "UploadPhotoScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
 
   //Upload Preview
   "UploadPreviewScreen_Title": "Tải ảnh của bạn lên",
-  "UploadPreviewScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
+  "UploadPreviewScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
 
   //Set Location
   "SetLocationScreen_Title": "Thiết lập vị trí của bạn",
-  "SetLocationScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
+  "SetLocationScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
   "SetLocationScreen_YourLocation": "  Vị trí của bạn",
   "SetLocationScreen_SetLocation": "Thiết lập vị trí",
   "SetLocationScreen_Next": "Tiếp Theo",
 
-  "CongratsScreen_Title:": "Chúc mừng bạn đã đăng ký thành công",
-  "Congrats_Description":
-      "Bây giờ bạn có thể đăng nhập vào ứng dụng và thưởng thức các món ăn tuyệt vời của chúng tôi",
+  "Congrats_Title": "Bạn đã đăng ký thành công",
+  "Congrats_Description": "Bây giờ bạn có thể đăng nhập vào ứng dụng và thưởng thức các món ăn tuyệt vời của chúng tôi",
+
+  "ForgotPasswordScreen_Title": "Quên mật khẩu",
+  "ForgotPasswordScreen_Description": "Vui lòng nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn một liên kết để đặt lại mật khẩu của bạn",
+  "Send_Button": "Gửi",
 
   "Drawer_Home": "Trang chủ",
   "Drawer_Profile": "Hồ sơ",
@@ -87,7 +84,4 @@ const Map<String, String> vi = {
   "Drawer_Theme_Dark": "Chủ đề tối",
   "Drawer_About": "Về chúng tôi",
   "Drawer_Logout": "Đăng xuất",
-
-
-
 };

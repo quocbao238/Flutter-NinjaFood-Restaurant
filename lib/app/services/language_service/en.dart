@@ -69,7 +69,7 @@ const Map<String, String> en = {
   "SetLocationScreen_SetLocation": "Set Location",
   "SetLocationScreen_Next": "Next",
 
-  "CongratsScreen_Title": "Congrats!",
+  "Congrats_Title": "Congrats!",
   "CongratsScreen_Description": "Your account has been created successfully",
 
   //

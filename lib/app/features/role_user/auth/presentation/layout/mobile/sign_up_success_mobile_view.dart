@@ -8,9 +8,9 @@ class SignupSuccessMobileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 4)).then((value) {
-      Get.offAllNamed(AppRouteProvider.tabScreen);
-    });
+    // Future.delayed(Duration(seconds: 4)).then((value) {
+    //   Get.offAllNamed(AppRouteProvider.tabScreen);
+    // });
     return AppScaffoldBackgroundImage.splash(
       body: AppSizeScale(
         ratioWidth: 1,
@@ -19,26 +19,20 @@ class SignupSuccessMobileView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                child: AppPadding.medium(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
                   AppIcons.success(),
                   AppPadding.regular(
-                    child: AppText.headlineLarge(
-                      text: 'CongratsScreen_Title'.tr,
-                      color: ThemeColors.primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  AppText.titleLarge(
-                    text: 'Congrats_Description'.tr,
-                  ),
-                ],
-              ),
-            ),
+                      child: AppText.headlineLarge(
+                          text: 'Congrats_Title'.tr, color: ThemeColors.primaryColor, fontWeight: FontWeight.bold)),
+                  AppText.titleLarge(text: 'Congrats_Description'.tr)
+                ]))),
             AppPadding.regular(
-                child: AppButton.max(title: 'Next_Button'.tr, onPressed: () => Get.offAllNamed(AppRouteProvider.tabScreen))),
+                child: AppButton.max(
+                    title: 'Next_Button'.tr, onPressed: () => Get.offAllNamed(AppRouteProvider.tabScreen)))
           ],
         ),
       ),
