@@ -19,7 +19,7 @@ class SignUpPhotoPreview extends GetView<SignUpProcessController> {
             decoration: BoxDecoration(
                 color: Color(0xFFC4C4C4),
                 borderRadius: BorderRadius.circular(16),
-                image: DecorationImage(image: Image.file(controller.imageFile).image, fit: BoxFit.cover)),
+                image: DecorationImage(image: Image.file(controller.imageFile!).image, fit: BoxFit.cover)),
           ),
         ),
         Positioned(

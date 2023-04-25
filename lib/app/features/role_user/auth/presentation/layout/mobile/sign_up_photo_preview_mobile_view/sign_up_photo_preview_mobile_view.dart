@@ -43,7 +43,7 @@ class SignUpPhotoPreviewMobileView extends GetView<SignUpProcessController> {
             AppPadding.regular(
               child: AppButton.max(
                 title: 'Next_Button'.tr,
-                onPressed: controller.onPressedNext,
+                onPressed: controller.onPressedPhotoNext,
               ),
             ),
           ],

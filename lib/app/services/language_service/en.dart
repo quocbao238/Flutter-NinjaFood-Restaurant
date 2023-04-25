@@ -18,7 +18,6 @@ const Map<String, String> en = {
   "Validate.Address_Required": "Address is required",
   "Validate.Address_Invalid": "Address is invalid",
 
-
   // Button
   "Next_Button": "Next",
   "Skip_Button": "Skip",
@@ -59,14 +58,31 @@ const Map<String, String> en = {
 
   //Upload Preview
   "UploadPreviewScreen_Title": "Upload Your Photo Profile",
-  "UploadPreviewScreen_Description": "This data will be displayed in your account\nprofile for security",
+  "UploadPreviewScreen_Description":
+      "This data will be displayed in your account\nprofile for security",
 
-  //Set Location 
+  //Set Location
   "SetLocationScreen_Title": "Set Your Location",
-  "SetLocationScreen_Description": "This data will be displayed in your account profile for security",
+  "SetLocationScreen_Description":
+      "This data will be displayed in your account profile for security",
   "SetLocationScreen_YourLocation": "  Your Location",
   "SetLocationScreen_SetLocation": "Set Location",
   "SetLocationScreen_Next": "Next",
 
+  "CongratsScreen_Title": "Congrats!",
+  "CongratsScreen_Description": "Your account has been created successfully",
+
   //
+  "Drawer_Home": "Home",
+  "Drawer_Profile": "Profile",
+  "Drawer_Cart": "Cart",
+  "Drawer_Chat": "Chat",
+  "Drawer_Language_Change": "Language Change",
+  "Drawer_Language_English": "English",
+  "Drawer_Language_Vietnamese": "Vietnamese",
+  "Drawer_Theme_Change": "Theme Change",
+  "Drawer_Theme_Light": "Light Theme",
+  "Drawer_Theme_Dark": "Dark Theme",
+  "Drawer_About": "About",
+  "Drawer_Logout": "Logout",
 };

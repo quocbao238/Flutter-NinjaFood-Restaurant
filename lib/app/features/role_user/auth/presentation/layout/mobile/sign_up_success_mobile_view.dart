@@ -26,19 +26,19 @@ class SignupSuccessMobileView extends StatelessWidget {
                   AppIcons.success(),
                   AppPadding.regular(
                     child: AppText.headlineLarge(
-                      text: 'Congrats!',
+                      text: 'CongratsScreen_Title'.tr,
                       color: ThemeColors.primaryColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   AppText.titleLarge(
-                    text: 'Your Profile Is Ready To Use',
+                    text: 'Congrats_Description'.tr,
                   ),
                 ],
               ),
             ),
             AppPadding.regular(
-                child: AppButton.max(title: 'Next', onPressed: () => Get.offAllNamed(AppRouteProvider.tabScreen))),
+                child: AppButton.max(title: 'Next_Button'.tr, onPressed: () => Get.offAllNamed(AppRouteProvider.tabScreen))),
           ],
         ),
       ),

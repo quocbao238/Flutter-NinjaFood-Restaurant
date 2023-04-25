@@ -18,7 +18,7 @@ const Map<String, String> vi = {
 
   "Validate.Phone_required": "Số điện thoại là bắt buộc",
   "Validate.Phone_invalid": "Số điện thoại không hợp lệ",
-  
+
   "Validate.Name_required": "Tên là bắt buộc",
   "Validate.Name_Invalid": "Tên không hợp lệ",
   "Validate.Address_Required": "Địa chỉ là bắt buộc",
@@ -41,9 +41,9 @@ const Map<String, String> vi = {
   "SignUpScreen_HaveAnAccount": "Bạn đã có sẵn một tài khoản?",
 
   //SignUp Process
-  "SignUpProcessScreen_Title": "Điền vào tiểu sử của bạn để bắt đầu",
+  "SignUpProcessScreen_Title": "Nhập thông tin của bạn để bắt đầu",
   "SignUpProcessScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
+      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
   "SignUpProcessScreen_FirstName": "Họ",
   "SignUpProcessScreen_LastName": "Tên",
   "SignUpProcessScreen_MobileNumber": "Số Điện Thoại",
@@ -51,23 +51,43 @@ const Map<String, String> vi = {
   //Payment Method
   "PaymentMethodScreen_Title": "Phương thức thanh toán",
   "PaymentMethodScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
+      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
 
   //Upload Photo
   "UploadPhotoScreen_Title": "Tải ảnh đại diện của bạn lên",
   "UploadPhotoScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
+      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
 
   //Upload Preview
   "UploadPreviewScreen_Title": "Tải ảnh của bạn lên",
   "UploadPreviewScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
+      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
 
   //Set Location
   "SetLocationScreen_Title": "Thiết lập vị trí của bạn",
   "SetLocationScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn để bảo mật",
+      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
   "SetLocationScreen_YourLocation": "  Vị trí của bạn",
   "SetLocationScreen_SetLocation": "Thiết lập vị trí",
   "SetLocationScreen_Next": "Tiếp Theo",
+
+  "CongratsScreen_Title:": "Chúc mừng bạn đã đăng ký thành công",
+  "Congrats_Description":
+      "Bây giờ bạn có thể đăng nhập vào ứng dụng và thưởng thức các món ăn tuyệt vời của chúng tôi",
+
+  "Drawer_Home": "Trang chủ",
+  "Drawer_Profile": "Hồ sơ",
+  "Drawer_Cart": "Giỏ hàng",
+  "Drawer_Chat": "Trò chuyện",
+  "Drawer_Language_Change": "Thay đổi ngôn ngữ",
+  "Drawer_Language_English": "Tiếng Anh",
+  "Drawer_Language_Vietnamese": "Tiếng Việt",
+  "Drawer_Theme_Change": "Thay đổi chủ đề",
+  "Drawer_Theme_Light": "Chủ đề sáng",
+  "Drawer_Theme_Dark": "Chủ đề tối",
+  "Drawer_About": "Về chúng tôi",
+  "Drawer_Logout": "Đăng xuất",
+
+
+
 };
