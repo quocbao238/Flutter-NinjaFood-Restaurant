@@ -2,8 +2,9 @@ part of 'helper.dart';
 
 class Validator {
   static String? validateEmail(String? email) {
-    if (email == null || email.trim() == "") return null;
-    var isValid = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+    if (email == null || email.trim() == "") return "Validate.Email_Invalid".tr;
+    var isValid =
+        RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
     if (!isValid) return "Validate.Email_Invalid".tr;
     return null;
   }

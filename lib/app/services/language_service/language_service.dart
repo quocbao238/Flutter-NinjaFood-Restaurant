@@ -6,7 +6,7 @@ import 'en.dart';
 import 'vi.dart';
 
 class TranslationService extends Translations {
-  static var fallbackLocale = Locale('en', 'EN');
+  static var fallbackLocale = Locale('vi', 'VN');
 
   static String localToString(Locale locale) {
     return locale.languageCode + "-" + locale.countryCode.toString();

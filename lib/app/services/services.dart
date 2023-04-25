@@ -22,5 +22,5 @@ final Map<Bootable, int> listBootServices = {
   DatabaseService(): 128,
   NotificationService(): 64,
   CloudStorageService(): 32,
-  ...listBootsController
+
 };
