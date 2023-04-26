@@ -19,6 +19,6 @@ final Map<Bootable, int> listBootServices = {
   ThemeService(): 512,
   AuthService(): 256,
   DatabaseService(): 128,
-  NotificationService(): 64,
+  // NotificationService(): 64,
   CloudStorageService(): 32,
 };

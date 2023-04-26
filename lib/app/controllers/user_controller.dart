@@ -7,7 +7,7 @@ class UserController extends GetxController implements Bootable {
   final _authService = AuthService.instance;
   final _databaseService = DatabaseService.instance;
   final _consoleService = ConsoleService.instance;
-  final _notificationService = NotificationService.instance;
+  // final _notificationService = NotificationService.instance;
 
   // Firebase Auth User
   late Rx<User?> _firebaseAuthUser = Rx<User?>(null);
@@ -74,13 +74,13 @@ class UserController extends GetxController implements Bootable {
           setAdminUser(r);
         });
 
-        final fcmToken = await _notificationService.getFCMToken();
-        if (fcmToken != null) {
-          getCurrentUser!.fcmToken = fcmToken;
-          await _databaseService.updateUser(userModel: getCurrentUser!);
-          _consoleService.show(_logName, 'Update FCM Token to Cloud');
-          _userStream?.cancel();
-        }
+        // final fcmToken = await _notificationService.getFCMToken();
+        // if (fcmToken != null) {
+        //   getCurrentUser!.fcmToken = fcmToken;
+        //   await _databaseService.updateUser(userModel: getCurrentUser!);
+        //   _consoleService.show(_logName, 'Update FCM Token to Cloud');
+        //   _userStream?.cancel();
+        // }
       });
       if (currentUser.value == null) return;
 
