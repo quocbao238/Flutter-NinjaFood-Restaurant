@@ -4,7 +4,6 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
-import 'package:ninjafood/app/features/role_user/tabs/infrastructure/models/menu_models.dart';
 import 'package:ninjafood/app/features/role_user/tabs/presentation/tab_drawer_menus.dart';
 
 class TabsMobileView extends GetView<TabsController> {
@@ -21,25 +20,24 @@ class TabsMobileView extends GetView<TabsController> {
             wrapBodyWithSafeArea: currentMenuItem.index != 1,
             isLoading: loading,
             body: ZoomDrawer(
-              controller: controller.zoomDrawerController,
-              androidCloseOnBackTap: true,
-              style: DrawerStyle.defaultStyle,
-              menuScreenTapClose: true,
-              menuScreen: DrawerWidget(),
-              mainScreen: Obx(() => IndexedStack(
-                  index: controller.currentMenuItem.value.index,
-                  children: controller.screens)),
-              shadowLayer1Color: Get.isDarkMode
-                  ? ThemeColors.shadowLayer1ColorDark()
-                  : ThemeColors.shadowLayer1Color,
-              shadowLayer2Color: Get.isDarkMode
-                  ? ThemeColors.shadowLayer2ColorDark()
-                  : ThemeColors.shadowLayer2Color,
-              borderRadius: 32.0,
-              showShadow: true,
-              angle: -8.0,
-              slideWidth: MediaQuery.of(context).size.width * 0.8,
-            ),
+                controller: controller.zoomDrawerController,
+                androidCloseOnBackTap: true,
+                style: DrawerStyle.defaultStyle,
+                menuScreenTapClose: true,
+                menuScreen: DrawerWidget(),
+                mainScreen: Obx(() => IndexedStack(
+                    index: controller.currentMenuItem.value.index,
+                    children: controller.screens)),
+                shadowLayer1Color: Get.isDarkMode
+                    ? ThemeColors.shadowLayer1ColorDark()
+                    : ThemeColors.shadowLayer1Color,
+                shadowLayer2Color: Get.isDarkMode
+                    ? ThemeColors.shadowLayer2ColorDark()
+                    : ThemeColors.shadowLayer2Color,
+                borderRadius: 32.0,
+                showShadow: true,
+                angle: -8.0,
+                slideWidth: MediaQuery.of(context).size.width * 0.8),
           );
         },
       );

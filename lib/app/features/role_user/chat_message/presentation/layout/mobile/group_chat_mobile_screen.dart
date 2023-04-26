@@ -12,22 +12,48 @@ class GroupChatMobileScreen extends GetView<GroupChatScreenController> {
   Widget build(BuildContext context) {
     final tabController = Get.find<TabsController>();
     return AppScaffoldBackgroundImage.pattern(
-        floatActionButton: FloatingActionButton(
-          heroTag: null,
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          onPressed: () => controller.handleOnTapChat(),
-          child: Icon(Icons.message, color: Colors.white),
+        floatActionButton: Obx(() {
+          return controller.groupChats.isNotEmpty
+              ? SizedBox.shrink()
+              : FloatingActionButton(
+                  heroTag: null,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  onPressed: () => controller.handleOnTapChat(),
+                  child: Icon(Icons.message, color: Colors.white),
+                );
+        }),
+        appBarWidget: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppButtonDrawer(onPressed: () => tabController.toggleDrawer()),
+            Expanded(
+                child: AppPadding(
+                    padding: const AppEdgeInsets.only(
+                        top: AppGapSize.paddingMedium,
+                        left: AppGapSize.paddingMedium,
+                        right: AppGapSize.paddingMedium,
+                        bottom: AppGapSize.regular),
+                    child: Center(
+                        child: AppText.headlineSmall(
+                            maxLines: 1, text: 'Drawer_Chat'.tr)))),
+            AppPadding(
+                padding: const AppEdgeInsets.only(
+                    top: AppGapSize.paddingMedium,
+                    left: AppGapSize.paddingMedium,
+                    right: AppGapSize.paddingMedium,
+                    bottom: AppGapSize.regular),
+                child: SizedBox(width: 45, height: 45))
+          ],
         ),
-        appBarWidget: AppButtonDrawer(onPressed: () => tabController.toggleDrawer()),
         body: AppPadding(
           padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppPadding(
-                  padding: AppEdgeInsets.only(bottom: AppGapSize.small),
-                  child: AppText.headlineSmall(text: 'Chat', fontWeight: FontWeight.bold)),
-              Obx(() => GroupChatList(groupChats: controller.groupChats.toList(), onTap: controller.onTapChat))
+              Obx(() => GroupChatList(
+                  groupChats: controller.groupChats.toList(),
+                  onTap: controller.onTapChat))
             ],
           ),
         ));

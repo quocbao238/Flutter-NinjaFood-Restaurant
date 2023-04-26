@@ -120,7 +120,6 @@ class CartScreenController extends BaseController {
     response.fold(
         (l) => handleFailure('Cart Screen Controller', l, showDialog: true),
         (r) {
-      Get.snackbar('Success', 'Place my order successfully');
       userController.updateUser(carts: []);
     });
     loading(false);

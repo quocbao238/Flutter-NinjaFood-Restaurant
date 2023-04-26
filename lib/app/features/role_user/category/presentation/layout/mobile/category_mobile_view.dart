@@ -9,29 +9,35 @@ class CategoryMobileView extends GetView<CategoryScreenController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldBackgroundImage.pattern(
-      appBarWidget: Row(children: [
-        AppButtonBack(onPressed: () => Get.back()),
-        Expanded(
-          child: AppPadding.medium(child: AppText.headlineSmall(text: controller.currentMenu.name ?? '')),
-        ),
-        AppPadding(
-            padding: const AppEdgeInsets.only(
-                top: AppGapSize.paddingMedium,
-                left: AppGapSize.paddingMedium,
-                right: AppGapSize.paddingMedium,
-                bottom: AppGapSize.regular),
-            child: SizedBox(width: 45, height: 45))
-      ]),
-      // onPressBackButton: () => Get.back(),
+    return SafeArea(
+      child: AppScaffoldBackgroundImage.pattern(
+        appBarWidget:
+            Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          AppButtonBack(onPressed: () => Get.back()),
+          Expanded(
+            child: AppPadding(
+                padding: AppEdgeInsets.only(
+                    top: AppGapSize.paddingMedium,
+                    bottom: AppGapSize.regular,
+                    right: AppGapSize.paddingMedium),
+                child: AppText.headlineSmall(
+                    textAlign: TextAlign.start,
+                    maxLines: 1,
+                    text: controller.currentMenu.name ?? '')),
+          ),
+        ]),
+        // onPressBackButton: () => Get.back(),
 
-      body: Obx(() {
-        final isLoading = controller.loading.value;
-        if (isLoading) {
-          return const Center(child: AppLoading(isLoading: true));
-        }
-        return AppPadding.medium(child: SingleChildScrollView(child: ProductList(productList: controller.products)));
-      }),
+        body: Obx(() {
+          final isLoading = controller.loading.value;
+          if (isLoading) {
+            return const Center(child: AppLoading(isLoading: true));
+          }
+          return AppPadding.medium(
+              child: SingleChildScrollView(
+                  child: ProductList(productList: controller.products)));
+        }),
+      ),
     );
   }
 }

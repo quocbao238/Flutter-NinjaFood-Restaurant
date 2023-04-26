@@ -1,7 +1,4 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:get/get.dart';
-import 'package:ninjafood/app/services/boot_service/boot_services.dart';
-
 part 'notification_service_impl.dart';
 
 // class NotificationService extends GetxService implements Bootable, NotificationServiceImpl {

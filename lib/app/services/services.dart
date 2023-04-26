@@ -4,7 +4,6 @@ import 'package:ninjafood/app/services/console_service/console_service.dart';
 import 'package:ninjafood/app/services/database_service/database_service.dart';
 import 'package:ninjafood/app/services/theme_service/theme_service.dart';
 import 'boot_service/boot_services.dart';
-import 'notification_service/notification_service.dart';
 export 'auth_service/auth_service.dart';
 export 'cloud_storage_service/cloud_storage_service.dart';
 export 'console_service/console_service.dart';
