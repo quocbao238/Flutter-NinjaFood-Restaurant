@@ -20,16 +20,24 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
           AppButtonDrawer(onPressed: () => tapController.toggleDrawer()),
           Expanded(
             child: AppPadding(
-                padding: AppEdgeInsets.only(
-                    top: AppGapSize.paddingMedium,
-                    bottom: AppGapSize.regular,
-                    right: AppGapSize.paddingMedium),
-                child: AppText.headlineMedium(
-                    textAlign: TextAlign.start,
-                    maxLines: 1,
-                    fontWeight: FontWeight.bold,
-                    text: 'Cart_Title'.tr)),
+              padding: AppEdgeInsets.only(
+                  top: AppGapSize.paddingMedium,
+                  bottom: AppGapSize.regular,
+                  right: AppGapSize.paddingMedium),
+              child: AppText.headlineMedium(
+                  textAlign: TextAlign.start,
+                  maxLines: 1,
+                  fontWeight: FontWeight.bold,
+                  text: 'Cart_Title'.tr),
+            ),
           ),
+          AppPadding(
+              padding: const AppEdgeInsets.only(
+                  top: AppGapSize.paddingMedium,
+                  left: AppGapSize.paddingMedium,
+                  right: AppGapSize.paddingMedium,
+                  bottom: AppGapSize.regular),
+              child: SizedBox(width: 45, height: 45)),
         ],
       ),
       body: AppPadding(

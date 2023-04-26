@@ -182,7 +182,6 @@ const Map<String, String> en = {
   "Edit_Profile_Updating": "Updating...",
   "Edit_Profile_Update_Success": "Update Success",
 
-
 // Cart
   "Cart_Title": "Cart",
   "Cart_Empty": "Your cart is empty",
@@ -200,6 +199,7 @@ const Map<String, String> en = {
   "Delivering": "Your order is being delivered...",
   "Delivered": "The order has arrived. Please check and confirm your order...",
   "Cancelled": "Order canceled",
+  "OrderReceived": "Order received",
   "Done": "Order completed",
 
   "Cart_Remove_Item_Message": "Are you sure you want to remove this item?",

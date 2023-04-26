@@ -289,6 +289,7 @@ class DatabaseService extends GetxService
     return _db
         .collection(DatabaseKeys.orderPath)
         .where('userId', isEqualTo: userId)
+        .orderBy('createdAt', descending: true).limit(2)
         .snapshots();
   }
 }

@@ -207,6 +207,7 @@ const Map<String, String> vi = {
   "Delivering": "Đơn hàng đang trên đường giao hàng đến bạn...",
   "Delivered": "Đơn hàng đã đến nơi. Vui lòng kiểm tra và xác nhận đơn hàng...",
   "Cancelled": "Đã hủy",
+  "OrderReceived": "Đã nhận đơn hàng!",
   "Done": "Đơn hàng đã hoàn thành",
 
   "Cart_Remove_Item_Message": "Bạn có muốn xóa món ăn này khỏi giỏ hàng?",

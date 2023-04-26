@@ -107,14 +107,9 @@ class UserController extends GetxController implements Bootable {
       _orderSubscription = _databaseService
           .listenCurrentOrder(currentUser.value!.uid)
           .listen((event) {
-        final _order = OrderModel.fromJson(event.docs.first.data()!);
-        if (_order.status == HistoryStatus.done) {
-          currentOrder.value = null;
-          return;
-        }
-        currentOrder.value = OrderModel.fromJson(event.docs.first.data()!);
-        _consoleService.show(
-            _logName, '_handleCloudUserChanged ${currentUser.value!.toJson()}');
+        if (event.docs.isEmpty || event.docs.last.data().isEmpty) return;
+        final _order = OrderModel.fromJson(event.docs.first.data());
+        currentOrder.value = _order;
       });
     });
   }
@@ -222,6 +217,18 @@ class UserController extends GetxController implements Bootable {
             historyOrders: _currentUser.historyOrders,
             cmtIds: currentCommentIds);
       });
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  Future<Either<Failure, void>> updateStatusOrder(OrderModel orderModel) async {
+    try {
+      orderModel.status = HistoryStatus.done;
+      await _databaseService.updateOrder(orderModel: orderModel);
+      final historyOrders = currentUser.value?.historyOrders ?? [];
+      await updateUser(historyOrders: [...historyOrders, orderModel]);
+      return right(null);
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }

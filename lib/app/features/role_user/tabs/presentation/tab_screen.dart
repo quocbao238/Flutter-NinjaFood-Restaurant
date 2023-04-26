@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
+import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
+import 'package:ninjafood/app/models/history_model.dart';
 import 'layout/mobile/tabs_mobile_view.dart';
 
 class TabScreen extends GetView<UserController> {
@@ -13,7 +15,7 @@ class TabScreen extends GetView<UserController> {
     return Obx(
       () {
         final currentOrder = controller.currentOrder.value;
-        if (currentOrder != null) {
+        if (currentOrder != null && currentOrder.status != HistoryStatus.done) {
           final historyStatus = currentOrder.status;
           return Scaffold(
             body: Column(
@@ -35,6 +37,21 @@ class TabScreen extends GetView<UserController> {
                       text: historyStatus.status.tr,
                       fontWeight: FontWeight.bold),
                 ),
+                if (historyStatus == HistoryStatus.delivered)
+                  AppPadding(
+                      padding: const AppEdgeInsets.symmetric(
+                          horizontal: AppGapSize.veryLarge,
+                          vertical: AppGapSize.large),
+                      child: AppButton.max(
+                        title: 'OrderReceived'.tr,
+                        onPressed: () {
+                          controller
+                              .updateStatusOrder(currentOrder)
+                              .then((value) {
+                            TabsController.instance.onChangeToHomeScreen();
+                          });
+                        },
+                      )),
               ],
             ),
           );
