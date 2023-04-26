@@ -115,7 +115,7 @@ class CartScreenController extends BaseController {
     await Future.delayed(Duration(seconds: 1));
     loading(false);
 
-    Future.delayed(Duration(seconds: 5)).then((value) async {
+    Future.delayed(Duration(seconds: 3)).then((value) async {
       final response =
           await databaseService.insertOrder(orderModel: orderModel);
       response.fold(

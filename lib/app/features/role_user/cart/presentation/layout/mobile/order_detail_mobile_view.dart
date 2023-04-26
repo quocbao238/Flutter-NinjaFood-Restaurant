@@ -79,6 +79,9 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
                     () {
                       return Center(
                         child: AnimationButton(
+                            ratioWidthDone: 0.9,
+                            ratioWidthLoading: 0.8,
+                            ratioWidthButton: 0.95,
                             onPressed: () => controller.onPressedPlaceMyOrder(),
                             textDone: 'Cart_Order_Success'.tr,
                             onDone: () => controller.onPressedDone(),
