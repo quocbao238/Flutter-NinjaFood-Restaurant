@@ -43,15 +43,9 @@ class TabScreen extends GetView<UserController> {
                           horizontal: AppGapSize.veryLarge,
                           vertical: AppGapSize.large),
                       child: AppButton.max(
-                        title: 'OrderReceived'.tr,
-                        onPressed: () {
-                          controller
-                              .updateStatusOrder(currentOrder)
-                              .then((value) {
-                            TabsController.instance.onChangeToHomeScreen();
-                          });
-                        },
-                      )),
+                          title: 'OrderReceived'.tr,
+                          onPressed: () =>
+                              controller.updateStatusOrder(currentOrder)))
               ],
             ),
           );

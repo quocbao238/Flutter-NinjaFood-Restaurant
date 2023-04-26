@@ -45,7 +45,6 @@ class CartScreenController extends BaseController {
   Future<void> decreaseQuantity(CartModel cartModel, int index) async {
     bool nextStep = true;
     if (cartModel.quantity == 1) {
-      // DialogController.instance.showSuccess(message: 'Are you sure?');
       await DialogController.instance.showCustomizedDialog(
           message: 'Cart_Remove_Item_Message'.tr,
           leftBtnOnPressed: () {
@@ -113,13 +112,18 @@ class CartScreenController extends BaseController {
         discount: promotion.value,
         carts: lstCarts.toList(),
         status: HistoryStatus.pending);
-
-    final response = await databaseService.insertOrder(orderModel: orderModel);
-    response.fold(
-        (l) => handleFailure('Cart Screen Controller', l, showDialog: true),
-        (r) {
-      userController.updateUser(carts: []);
-    });
+    await Future.delayed(Duration(seconds: 1));
     loading(false);
+
+    Future.delayed(Duration(seconds: 5)).then((value) async {
+      final response =
+          await databaseService.insertOrder(orderModel: orderModel);
+      response.fold(
+          (l) => handleFailure('Cart Screen Controller', l, showDialog: true),
+          (r) {
+        userController.updateUser(carts: []);
+      });
+      loading(false);
+    });
   }
 }
