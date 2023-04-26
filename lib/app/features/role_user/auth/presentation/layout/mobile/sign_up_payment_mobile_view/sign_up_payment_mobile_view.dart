@@ -19,9 +19,12 @@ class SignUpPaymentMobileView extends GetView<SignUpProcessController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppPadding(
-                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+                  padding:
+                      AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
                   child: AppText.headlineSmall(
-                      fontWeight: FontWeight.bold, textAlign: TextAlign.start, text: 'PaymentMethodScreen_Title'.tr),
+                      fontWeight: FontWeight.bold,
+                      textAlign: TextAlign.start,
+                      text: 'PaymentMethodScreen_Title'.tr),
                 ),
                 AppPadding.medium(
                   child: AppText.bodyMedium(
@@ -30,19 +33,25 @@ class SignUpPaymentMobileView extends GetView<SignUpProcessController> {
                       text: 'PaymentMethodScreen_Description'.tr),
                 ),
                 AppPadding(
-                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                    padding: AppEdgeInsets.symmetric(
+                        horizontal: AppGapSize.medium,
+                        vertical: AppGapSize.small),
                     child: SignUpPaymentButton(
                       onPressed: () {},
                       child: AppPadding.medium(child: AppIcons.paypal()),
                     )),
                 AppPadding(
-                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                    padding: AppEdgeInsets.symmetric(
+                        horizontal: AppGapSize.medium,
+                        vertical: AppGapSize.small),
                     child: SignUpPaymentButton(
                       onPressed: () {},
                       child: AppIcons.visa(),
                     )),
                 AppPadding(
-                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                    padding: AppEdgeInsets.symmetric(
+                        horizontal: AppGapSize.medium,
+                        vertical: AppGapSize.small),
                     child: SignUpPaymentButton(
                       onPressed: () {},
                       child: AppPadding.medium(child: AppIcons.payOneer()),
@@ -52,9 +61,8 @@ class SignUpPaymentMobileView extends GetView<SignUpProcessController> {
           ),
           AppPadding.regular(
             child: AppButton.max(
-              title: 'Next_Button'.tr,
-              onPressed: controller.onPressedNextPayment,
-            ),
+                title: 'Next_Button'.tr,
+                onPressed: controller.onPressedNextPayment),
           ),
         ],
       ),

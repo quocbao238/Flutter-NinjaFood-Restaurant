@@ -44,7 +44,7 @@ class AuthService extends GetxService implements Bootable, AuthServiceImpl {
       final userCredential = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
       return right(userCredential);
     } on FirebaseAuthException catch (e, stackTrace) {
-      return left(Failure(e.toString(), stackTrace));
+      return left(Failure(e.code.tr, stackTrace));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }

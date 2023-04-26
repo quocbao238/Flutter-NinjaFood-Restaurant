@@ -13,10 +13,13 @@ import 'package:ninjafood/app/models/user_model.dart';
 import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 
 part 'database_key.dart';
+
 part 'database_service_impl.dart';
 
+const _logName = 'DatabaseService';
 
-class DatabaseService extends GetxService implements Bootable, DatabaseServiceImpl {
+class DatabaseService extends GetxService
+    implements Bootable, DatabaseServiceImpl {
   static DatabaseService get instance => Get.find<DatabaseService>();
   late final FirebaseFirestore _db;
 
@@ -33,31 +36,45 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
     return docRef.snapshots();
   }
 
-  Future<Either<Failure, UserModel>> getUserById({required String userModel}) async {
+  Future<Either<Failure, UserModel>> getUserById(
+      {required String userModel}) async {
     try {
       final _result = await _db.doc('${DatabaseKeys.userPath}$userModel').get();
-      if (_result.data() == null) return left(Failure('User is null', StackTrace.current));
+      if (_result.data() == null)
+        return left(Failure('User is null', StackTrace.current));
       return right(UserModel.fromJson(_result.data()!));
+    } on FirebaseException catch (error) {
+      return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
   }
 
   @override
-  Future<Either<Failure, void>> insertUser({required UserModel userModel}) async {
+  Future<Either<Failure, void>> insertUser(
+      {required UserModel userModel}) async {
     try {
-      await _db.doc('${DatabaseKeys.userPath}${userModel.uid}').set(userModel.toJson());
+      await _db
+          .doc('${DatabaseKeys.userPath}${userModel.uid}')
+          .set(userModel.toJson());
       return right(null);
+    } on FirebaseException catch (error) {
+      return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
   }
 
   @override
-  Future<Either<Failure, void>> updateUser({required UserModel userModel}) async {
+  Future<Either<Failure, void>> updateUser(
+      {required UserModel userModel}) async {
     try {
-      await _db.doc('${DatabaseKeys.userPath}${userModel.uid}').update(userModel.toJson());
+      await _db
+          .doc('${DatabaseKeys.userPath}${userModel.uid}')
+          .update(userModel.toJson());
       return right(null);
+    } on FirebaseException catch (error) {
+      return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
@@ -66,9 +83,15 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
   @override
   Future<Either<Failure, UserModel>> getAdminUser() async {
     try {
-      final _result = await _db.collection(DatabaseKeys.userPath).where("role", isEqualTo: ROLE_ADMIN).get();
-      if (_result.docs.isEmpty) return left(Failure('Admin user is null', StackTrace.current));
+      final _result = await _db
+          .collection(DatabaseKeys.userPath)
+          .where("role", isEqualTo: ROLE_ADMIN)
+          .get();
+      if (_result.docs.isEmpty)
+        return left(Failure('Admin user is null', StackTrace.current));
       return right(UserModel.fromJson(_result.docs.first.data()));
+    } on FirebaseException catch (error) {
+      return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
@@ -79,25 +102,37 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
   Future<Either<Failure, List<CategoryModel>>> getListCategories() async {
     try {
       List<CategoryModel> _result;
-      final querySnapshot = await _db.collection(DatabaseKeys.categoryPath).get();
+      final querySnapshot =
+          await _db.collection(DatabaseKeys.categoryPath).get();
       _result = querySnapshot.docs.map((e) {
         final _data = CategoryModel.fromJson(e.data());
-        final _category = _data.copyWith(name: _data.name?.replaceAll('GG_HCM_', ''));
+        final _category =
+            _data.copyWith(name: _data.name?.replaceAll('GG_HCM_', ''));
         return _category;
       }).toList();
       return right(_result);
+    } on FirebaseException catch (error) {
+      return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
   }
 
   @override
-  Future<Either<Failure, List<ProductModel>>> getListProductByListId(List<int> listProductsIds) async {
+  Future<Either<Failure, List<ProductModel>>> getListProductByListId(
+      List<int> listProductsIds) async {
     try {
       List<ProductModel> _result = [];
-      final querySnapshot = await _db.collection(DatabaseKeys.productPath).where('id', whereIn: listProductsIds).get();
-      _result = querySnapshot.docs.map((e) => ProductModel.fromJson(e.data())).toList();
+      final querySnapshot = await _db
+          .collection(DatabaseKeys.productPath)
+          .where('id', whereIn: listProductsIds)
+          .get();
+      _result = querySnapshot.docs
+          .map((e) => ProductModel.fromJson(e.data()))
+          .toList();
       return right(_result);
+    } on FirebaseException catch (error) {
+      return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
@@ -107,9 +142,14 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
   Future<Either<Failure, List<ProductModel>>> getListProducts() async {
     try {
       List<ProductModel> _result = [];
-      final querySnapshot = await _db.collection(DatabaseKeys.productPath).get();
-      _result = querySnapshot.docs.map((e) => ProductModel.fromJson(e.data())).toList();
+      final querySnapshot =
+          await _db.collection(DatabaseKeys.productPath).get();
+      _result = querySnapshot.docs
+          .map((e) => ProductModel.fromJson(e.data()))
+          .toList();
       return right(_result);
+    } on FirebaseException catch (error) {
+      return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
@@ -121,9 +161,14 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
   Future<Either<Failure, List<PromotionModel>>> getListPromotions() async {
     try {
       List<PromotionModel> _result = [];
-      final querySnapshot = await _db.collection(DatabaseKeys.promotionPath).get();
-      _result = querySnapshot.docs.map((e) => PromotionModel.fromJson(e.data())).toList();
+      final querySnapshot =
+          await _db.collection(DatabaseKeys.promotionPath).get();
+      _result = querySnapshot.docs
+          .map((e) => PromotionModel.fromJson(e.data()))
+          .toList();
       return right(_result);
+    } on FirebaseException catch (error) {
+      return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
@@ -133,28 +178,39 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
 
   // Only User
   @override
-  Future<Either<Failure, void>> insertMessageChat({required MessageChat messageChat}) async {
+  Future<Either<Failure, void>> insertMessageChat(
+      {required MessageChat messageChat}) async {
     final createUid = createTimeStamp();
     try {
-      await _db.doc('${DatabaseKeys.messageChatPath}$createUid').set(messageChat.toJson());
+      await _db
+          .doc('${DatabaseKeys.messageChatPath}$createUid')
+          .set(messageChat.toJson());
       return right(null);
+    } on FirebaseException catch (error) {
+      return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
   }
 
   @override
-  Future<Either<Failure, void>> insertGroupChat({required GroupChatModel groupChatModel}) async {
+  Future<Either<Failure, void>> insertGroupChat(
+      {required GroupChatModel groupChatModel}) async {
     try {
-      await _db.doc('${DatabaseKeys.groupChat}${groupChatModel.groupChatId}').set(groupChatModel.toJson());
+      await _db
+          .doc('${DatabaseKeys.groupChat}${groupChatModel.groupChatId}')
+          .set(groupChatModel.toJson());
       return right(null);
+    } on FirebaseException catch (error) {
+      return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
   }
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat({required String groupChatId}) {
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat(
+      {required String groupChatId}) {
     return _db
         .collection(DatabaseKeys.messageChatPath)
         .where('groupChatId', isEqualTo: groupChatId)
@@ -169,10 +225,15 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
   }
 
   @override
-  Future<Either<Failure, String>> insertCommentProduct({required CommentModel commentModel}) async {
+  Future<Either<Failure, String>> insertCommentProduct(
+      {required CommentModel commentModel}) async {
     try {
-      await _db.doc('${DatabaseKeys.commentPath}${commentModel.uid}').set(commentModel.toJson());
+      await _db
+          .doc('${DatabaseKeys.commentPath}${commentModel.uid}')
+          .set(commentModel.toJson());
       return right(commentModel.uid);
+    } on FirebaseException catch (error) {
+      return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }

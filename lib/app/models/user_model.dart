@@ -5,6 +5,7 @@ import 'package:ninjafood/app/models/history_model.dart';
 const ROLE_USER = 'role_user';
 const ROLE_ADMIN = 'role_admin';
 
+
 enum UserType {
   Sliver('Member Sliver', 0),
   Gold('Member Gold', 1),

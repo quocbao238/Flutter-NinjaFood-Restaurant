@@ -1,4 +1,3 @@
-import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/services/auth_service/auth_service.dart';
 import 'package:ninjafood/app/services/cloud_storage_service/cloud_storage_service.dart';
 import 'package:ninjafood/app/services/console_service/console_service.dart';
@@ -22,5 +21,4 @@ final Map<Bootable, int> listBootServices = {
   DatabaseService(): 128,
   NotificationService(): 64,
   CloudStorageService(): 32,
-
 };

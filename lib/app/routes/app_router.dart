@@ -4,13 +4,13 @@ class AppPages {
   static String initial = AppRouteProvider.splashScreen;
 
   static navigateDefaultPage() async {
-    // final userController = UserController.instance;
-    // if (userController.getFirebaseAuthUser != null) {
-    //   initial = AppRouteProvider.tabScreen;
-    //   return;
-    // }
-    // initial = AppRouteProvider.splashScreen;
-    initial = AppRouteProvider.signupSuccessScreen;
+    final userController = UserController.instance;
+    if (userController.getFirebaseAuthUser != null) {
+      initial = AppRouteProvider.tabScreen;
+      return;
+    }
+    initial = AppRouteProvider.splashScreen;
+    // initial = AppRouteProvider.signupSuccessScreen;
   }
 
   //

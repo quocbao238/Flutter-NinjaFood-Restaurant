@@ -18,24 +18,21 @@ class ResetPasswordMobileView extends GetView<ForgotPassWordController> {
           AppPadding(
             padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
             child: AppText.headlineSmall(
-              fontWeight: FontWeight.bold,
-              textAlign: TextAlign.start,
-              text: 'ForgotPasswordScreen_Title'.tr,
-            ),
+                fontWeight: FontWeight.bold,
+                textAlign: TextAlign.start,
+                text: 'ResetPassword_Title'.tr),
           ),
           AppPadding.medium(
             child: AppText.bodyMedium(
-              text: 'ForgotPasswordScreen_Description'.tr,
-              fontWeight: FontWeight.w400,
-              textAlign: TextAlign.start,
-            ),
+                text: 'ResetPassword_Description'.tr,
+                fontWeight: FontWeight.w400,
+                textAlign: TextAlign.start),
           ),
           AppPadding.medium(child: ResetPasswordBoxEmail()),
           AppPadding.regular(
             child: AppButton.max(
-              title: 'Send_Button'.tr,
-              onPressed: controller.onPressedSend,
-            ),
+                title: 'ResetPassword_Send_Button'.tr,
+                onPressed: controller.onPressedSend),
           ),
         ],
       ),

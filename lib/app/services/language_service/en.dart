@@ -1,4 +1,9 @@
 const Map<String, String> en = {
+  "Dialog_Error": "Error",
+  "Dialog_Warning": "Warning",
+  "Dialog_Success": "Success",
+  "Dialog_OK": "OK",
+
   // Onboard Screen
   "OnboardScreen_Title1": "Find your Comfort Food here",
   "OnboardScreen_Title2": "Food Ninja is Where Your Comfort Food Lives",
@@ -69,10 +74,61 @@ const Map<String, String> en = {
   "SetLocationScreen_SetLocation": "Set Location",
   "SetLocationScreen_Next": "Next",
 
+  //Congrats
   "Congrats_Title": "Congrats!",
   "CongratsScreen_Description": "Your account has been created successfully",
 
-  //
+  // Reset Password
+  "ResetPassword_Title": "Reset Password",
+  "ResetPassword_Description":
+      "Enter your email address to reset your password",
+  "ResetPassword_Send_Button": "Send",
+  "ResetPassword_Send_Success": "Send Ssuccess",
+  "ResetPassword_Send_Success_Detail":
+      "Please check your email to reset password",
+
+  // Firebase Auth Exception
+  "email-already-in-use":
+      "The email address is already in use by another account.",
+  "invalid-email": "The email address is badly formatted.",
+  "operation-not-allowed": "The operation is not allowed.",
+  "weak-password": "The password must be 6 characters long or more.",
+  "user-not-found":
+      "There is no user corresponding to the given email address.",
+  "wrong-password": "The password is invalid for the given email address.",
+
+  // Firebase Storage Exception
+  "bucket-not-found": "No bucket is configured for Firebase Storage.",
+  "cancelled": "The user cancelled the operation.",
+  "canceled": "The operation was cancelled.",
+  "invalid-checksum":
+      "The uploaded or downloaded object has an invalid checksum.",
+  "not-authenticated":
+      "User is not authenticated, please authenticate and try again.",
+  "not-authorized": "User is not authorized to perform the desired action.",
+  "object-not-found": "The specified object could not be found.",
+  "quota-exceeded": "Quota on your Firebase Storage bucket has been exceeded.",
+  "retry-limit-exceeded":
+      "The maximum time limit on an operation (upload, download, delete, etc.) has been reached.",
+  "unauthenticated":
+      "User is unauthenticated, please authenticate and try again.",
+  "unauthorized": "User is not authorized to perform the desired action.",
+
+
+  // Firebase Cloud Firestore Exception
+  "data-loss": "Unrecoverable data loss or corruption.",
+  "deadline-exceeded": "Deadline expired before operation could complete.",
+  "failed-precondition": "Operation was rejected because the system is not in a state required for the operation.",
+  "internal": "An internal error occurred.",
+  "invalid-argument": "Client specified an invalid argument.",
+  "not-found": "Some requested document was not found.",
+  "out-of-range": "Client specified an invalid range.",
+  "permission-denied": "The caller does not have permission to execute the specified operation.",
+  "resource-exhausted": "Some resource has been exhausted, perhaps a per-user quota, or perhaps the entire file system is out of space.",
+  "unavailable": "The service is currently unavailable.",
+  "unimplemented": "Operation is not implemented or not supported/enabled.",
+  "unknown": "Unknown error occurred.",
+
   "Drawer_Home": "Home",
   "Drawer_Profile": "Profile",
   "Drawer_Cart": "Cart",

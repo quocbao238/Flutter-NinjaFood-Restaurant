@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/services/auth_service/auth_service.dart';
 
 class ForgotPassWordController extends BaseController {
-
+  final AuthService authService = AuthService.instance;
   late final TextEditingController emailController;
   Rxn<String?> emailError = Rxn<String?>(null);
 
@@ -14,9 +16,7 @@ class ForgotPassWordController extends BaseController {
     emailController = TextEditingController();
 
     emailController.addListener(() {
-      final email = emailController.text;
-      final isValid = Validator.validateEmail(email);
-      emailError.value = isValid;
+      checkValidEmail();
     });
 
     super.onInit();
@@ -32,12 +32,23 @@ class ForgotPassWordController extends BaseController {
     Get.back();
   }
 
-  void onPressedSend(){
-    Get.toNamed(AppRouteProvider.successNotificationScreen);
+  Future<void> onPressedSend() async {
+    if (!checkValidEmail()) return;
+    final response =
+        await authService.sendEmailResetPassword(email: emailController.text);
+    response.fold((l) => handleFailure("ForgotPassWordController", l), (r) {
+      Get.toNamed(AppRouteProvider.successNotificationScreen);
+    });
   }
 
-  void onPressedBackSuccess() {
+  bool checkValidEmail() {
+    final email = emailController.text;
+    final isValid = Validator.validateEmail(email);
+    emailError.value = isValid;
+    return isValid == null;
+  }
+
+  Future<void> onPressedBackSuccess() async {
     Get.offAllNamed(AppRouteProvider.signInScreen);
   }
-
 }
