@@ -42,7 +42,21 @@ class CartScreenController extends BaseController {
     userController.updateUser(carts: lstCarts.toList());
   }
 
-  void decreaseQuantity(CartModel cartModel, int index) {
+  Future<void> decreaseQuantity(CartModel cartModel, int index) async {
+    bool nextStep = true;
+    if (cartModel.quantity == 1) {
+      // DialogController.instance.showSuccess(message: 'Are you sure?');
+      await DialogController.instance.showCustomizedDialog(
+          message: 'Cart_Remove_Item_Message'.tr,
+          leftBtnOnPressed: () {
+            Get.back();
+            nextStep = false;
+          },
+          rightBtnText: 'Cart_Remove_Item'.tr,
+          leftBtnText: 'Dialog_Cancel'.tr,
+          rightBtnOnPressed: () => {});
+      if (!nextStep) return;
+    }
     cartModel.decreaseQuantity();
     lstCarts[index] = cartModel;
     if (cartModel.quantity == 0) {
@@ -63,7 +77,10 @@ class CartScreenController extends BaseController {
         0,
         (previousValue, element) =>
             previousValue +
-            (element.quantity * (element.productModel.priceRange?.minimumPrice?.finalPrice?.value ?? 0)));
+            (element.quantity *
+                (element.productModel.priceRange?.minimumPrice?.finalPrice
+                        ?.value ??
+                    0)));
   }
 
   double _calculatorServiceFee(double subTotal) {
@@ -95,11 +112,14 @@ class CartScreenController extends BaseController {
         discount: promotion.value,
         carts: lstCarts.toList(),
         status: HistoryStatus.pending);
-    final List<HistoryOrderModel> lstHistory = userController.getCurrentUser?.historyOrders ?? [];
+    final List<HistoryOrderModel> lstHistory =
+        userController.getCurrentUser?.historyOrders ?? [];
     lstHistory.add(historyOrderModel);
 
     final response = await userController.updateUser(historyOrders: lstHistory);
-    response.fold((l) => handleFailure('Cart Screen Controller', l, showDialog: true), (r) {
+    response.fold(
+        (l) => handleFailure('Cart Screen Controller', l, showDialog: true),
+        (r) {
       Get.snackbar('Success', 'Place my order successfully');
       userController.updateUser(carts: []);
     });

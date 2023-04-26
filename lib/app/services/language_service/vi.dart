@@ -1,11 +1,12 @@
 const Map<String, String> vi = {
-
-
   // Dialog
   "Dialog_Error": "Lỗi",
   "Dialog_Warning": "Cảnh báo",
   "Dialog_Success": "Thành công",
+  "Dialog_Notification": "Thông báo",
   "Dialog_OK": "OK",
+  "Dialog_Cancel": "Hủy",
+  "Dialog_Yes": "Có",
 
 
   // Onboard Screen
@@ -107,32 +108,39 @@ const Map<String, String> vi = {
   "bucket-not-found": "Không có bucket được cấu hình cho Firebase Storage.",
   "cancelled": "Người dùng đã hủy thao tác.",
   "canceled": "Thao tác đã bị hủy.",
-  "invalid-checksum": "Đối tượng được tải lên hoặc tải xuống có checksum không hợp lệ.",
-  "not-authenticated": "Người dùng chưa được xác thực, vui lòng xác thực và thử lại.",
+  "invalid-checksum":
+      "Đối tượng được tải lên hoặc tải xuống có checksum không hợp lệ.",
+  "not-authenticated":
+      "Người dùng chưa được xác thực, vui lòng xác thực và thử lại.",
   "not-authorized": "Người dùng không được phép thực hiện hành động mong muốn.",
   "object-not-found": "Không thể tìm thấy đối tượng được chỉ định.",
-  "quota-exceeded": "Đã vượt quá hạn mức cho phép trên bucket Firebase Storage của bạn.",
-  "retry-limit-exceeded": "Đã đạt đến giới hạn thời gian tối đa trên một thao tác (tải lên, tải xuống, xóa, vv.).",
-  "unauthenticated": "Người dùng chưa được xác thực, vui lòng xác thực và thử lại.",
+  "quota-exceeded":
+      "Đã vượt quá hạn mức cho phép trên bucket Firebase Storage của bạn.",
+  "retry-limit-exceeded":
+      "Đã đạt đến giới hạn thời gian tối đa trên một thao tác (tải lên, tải xuống, xóa, vv.).",
+  "unauthenticated":
+      "Người dùng chưa được xác thực, vui lòng xác thực và thử lại.",
   "unauthorized": "Người dùng không được phép thực hiện hành động mong muốn.",
 
   // Firebase Cloud Firestore Exception
   "data-loss": "Mất mát hoặc hỏng dữ liệu không thể khôi phục được.",
   "deadline-exceeded": "Đã hết hạn trước khi thao tác có thể hoàn thành.",
-  "failed-precondition": "Thao tác bị từ chối vì hệ thống không ở trạng thái cần thiết cho thao tác đó.",
+  "failed-precondition":
+      "Thao tác bị từ chối vì hệ thống không ở trạng thái cần thiết cho thao tác đó.",
   "internal": "Đã xảy ra lỗi nội bộ.",
   "invalid-argument": "Khách hàng chỉ định một đối số không hợp lệ.",
   "not-found": "Không tìm thấy một số tài liệu được yêu cầu.",
   "out-of-range": "Khách hàng chỉ định một phạm vi không hợp lệ.",
-  "permission-denied": "Người gọi không có quyền thực thi thao tác được chỉ định.",
-  "resource-exhausted": "Một số tài nguyên đã bị kiệt quệ, có thể là hạn ngạch cho mỗi người dùng hoặc toàn bộ hệ thống tập tin đã hết dung lượng.",
+  "permission-denied":
+      "Người gọi không có quyền thực thi thao tác được chỉ định.",
+  "resource-exhausted":
+      "Một số tài nguyên đã bị kiệt quệ, có thể là hạn ngạch cho mỗi người dùng hoặc toàn bộ hệ thống tập tin đã hết dung lượng.",
   "unavailable": "Dịch vụ hiện không khả dụng.",
-  "unimplemented": "Thao tác không được triển khai hoặc không được hỗ trợ / kích hoạt.",
+  "unimplemented":
+      "Thao tác không được triển khai hoặc không được hỗ trợ / kích hoạt.",
   "unknown": "Đã xảy ra lỗi không xác định.",
 
-
-
-
+  // Drawer
   "Drawer_Home": "Trang chủ",
   "Drawer_Profile": "Hồ sơ",
   "Drawer_Cart": "Giỏ hàng",
@@ -145,4 +153,34 @@ const Map<String, String> vi = {
   "Drawer_Theme_Dark": "Chủ đề tối",
   "Drawer_About": "Về chúng tôi",
   "Drawer_Logout": "Đăng xuất",
+
+  // Home
+  "SearchBar_Title": "Bạn đang tìm kiếm món ăn nào?",
+  "SearchBar_NoItem": "Không tìm thấy món ăn nào",
+
+  "Home_Popular_Menu": "Thực đơn yêu thích",
+  "Home_Popular_Food": "Món ăn yêu thích",
+  "Home_ViewMore": "Xem thêm",
+
+  //
+  "Favorite_Food": "Món ăn yêu thích",
+  "Add_To_Cart": "Thêm vào giỏ hàng",
+  "Adding_To_Cart": "Đang thêm vào giỏ hàng...",
+  "Added_To_Cart": "Đã thêm vào giỏ hàng...",
+  "Food_Already_In_Cart": "Món ăn đã có trong giỏ hàng",
+
+  // Cart
+  "Cart_Title": "Giỏ hàng",
+  "Cart_Empty": "Giỏ hàng trống",
+  "Cart_Sub_Total": "Tổng phụ",
+  "Cart_Total_Price": "Tổng tiền",
+  "Cart_Total_Quantity": "Số lượng",
+  "Cart_Total_Discount": "Giảm giá",
+  "Cart_Total_Tax": "Thuế",
+  "Cart_Order_Now": "Đặt hàng ngay",
+  "Cart_Oder_Loading": "Đang đặt hàng...",
+  "Cart_Order_Success": "Đặt hàng thành công",
+
+  "Cart_Remove_Item_Message": "Bạn có muốn xóa món ăn này khỏi giỏ hàng?",
+  "Cart_Remove_Item": "Xóa món ăn",
 };

@@ -34,7 +34,6 @@ class ProfileController extends BaseController {
     super.onClose();
   }
 
-
   void _getListFavoritesProduct() async {
     loading.value = true;
     final lstFavoriteIds = userController.getCurrentUser?.favoriteIds ?? [];
@@ -42,7 +41,8 @@ class ProfileController extends BaseController {
       loading.value = false;
       return;
     }
-    final response = await databaseService.getListProductByListId(lstFavoriteIds);
+    final response =
+        await databaseService.getListProductByListId(lstFavoriteIds);
     response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
       if (r.length != lstProducts.length) {
         lstProducts.assignAll(r);
@@ -57,5 +57,9 @@ class ProfileController extends BaseController {
 
   void onPressRating(HistoryOrderModel historyModel) {
     Get.toNamed(AppRouteProvider.ratingScreen, arguments: historyModel.uid);
+  }
+
+  void onPressedFavoriteItem(ProductModel productModel) {
+    Get.toNamed(AppRouteProvider.foodDetailScreen, arguments: productModel);
   }
 }

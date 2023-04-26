@@ -44,6 +44,7 @@ class DatabaseService extends GetxService
         return left(Failure('User is null', StackTrace.current));
       return right(UserModel.fromJson(_result.data()!));
     } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
@@ -59,6 +60,7 @@ class DatabaseService extends GetxService
           .set(userModel.toJson());
       return right(null);
     } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
@@ -74,6 +76,7 @@ class DatabaseService extends GetxService
           .update(userModel.toJson());
       return right(null);
     } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
@@ -91,6 +94,7 @@ class DatabaseService extends GetxService
         return left(Failure('Admin user is null', StackTrace.current));
       return right(UserModel.fromJson(_result.docs.first.data()));
     } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
@@ -112,6 +116,7 @@ class DatabaseService extends GetxService
       }).toList();
       return right(_result);
     } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
@@ -132,6 +137,7 @@ class DatabaseService extends GetxService
           .toList();
       return right(_result);
     } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
@@ -149,6 +155,7 @@ class DatabaseService extends GetxService
           .toList();
       return right(_result);
     } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
@@ -168,6 +175,7 @@ class DatabaseService extends GetxService
           .toList();
       return right(_result);
     } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
@@ -187,6 +195,7 @@ class DatabaseService extends GetxService
           .set(messageChat.toJson());
       return right(null);
     } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
@@ -202,6 +211,7 @@ class DatabaseService extends GetxService
           .set(groupChatModel.toJson());
       return right(null);
     } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
@@ -220,9 +230,8 @@ class DatabaseService extends GetxService
   }
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat() {
-    return _db.collection(DatabaseKeys.groupChat).snapshots();
-  }
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat() =>
+      _db.collection(DatabaseKeys.groupChat).snapshots();
 
   @override
   Future<Either<Failure, String>> insertCommentProduct(
@@ -233,6 +242,7 @@ class DatabaseService extends GetxService
           .set(commentModel.toJson());
       return right(commentModel.uid);
     } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));

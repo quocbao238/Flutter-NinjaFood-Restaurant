@@ -18,6 +18,14 @@ class OrderDetailBodyView extends GetView<CartScreenController> {
         child: Obx(
           () {
             final _listCarts = controller.lstCarts.toList();
+            if (_listCarts.isEmpty) {
+              return Center(
+                child: AppText.bodyLarge(
+                  text: 'Cart_Empty'.tr,
+                  textAlign: TextAlign.center,
+                ),
+              );
+            }
             return ListView.builder(
                 itemCount: _listCarts.length,
                 itemBuilder: (context, index) {
@@ -30,7 +38,8 @@ class OrderDetailBodyView extends GetView<CartScreenController> {
                         extentRatio: 0.2,
                         children: [
                           SlidableAction(
-                            onPressed: (context) => controller.onPressedRemoveItem(index),
+                            onPressed: (context) =>
+                                controller.onPressedRemoveItem(index),
                             backgroundColor: ThemeColors.orangeColor,
                             borderRadius: BorderRadius.circular(22),
                             icon: Icons.delete_outline_rounded,
@@ -50,20 +59,30 @@ class OrderDetailBodyView extends GetView<CartScreenController> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               AppPadding(
-                                padding: AppEdgeInsets.only(right: AppGapSize.small),
+                                padding:
+                                    AppEdgeInsets.only(right: AppGapSize.small),
                                 child: SizedBox(
                                   width: 84,
                                   height: 84,
                                   child: AppNetworkImage(
                                       borderRadius: 8,
-                                      height: MediaQuery.of(context).size.shortestSide * 0.2,
-                                      width: MediaQuery.of(context).size.shortestSide * 0.2,
-                                      url: _cartDetail.productModel.image?.url ?? ''),
+                                      height: MediaQuery.of(context)
+                                              .size
+                                              .shortestSide *
+                                          0.2,
+                                      width: MediaQuery.of(context)
+                                              .size
+                                              .shortestSide *
+                                          0.2,
+                                      url:
+                                          _cartDetail.productModel.image?.url ??
+                                              ''),
                                 ),
                               ),
                               Expanded(
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -79,19 +98,27 @@ class OrderDetailBodyView extends GetView<CartScreenController> {
                                 ),
                               ),
                               AppPadding(
-                                padding: AppEdgeInsets.only(left: AppGapSize.medium),
+                                padding:
+                                    AppEdgeInsets.only(left: AppGapSize.medium),
                                 child: Row(
                                   children: [
                                     OrderDetailItemCount(
-                                        onTap: () => controller.decreaseQuantity(_cartDetail, index),
+                                        onTap: () =>
+                                            controller.decreaseQuantity(
+                                                _cartDetail, index),
                                         icon: Icons.remove,
                                         iconColor: ThemeColors.primaryColor,
-                                        boxColor: ThemeColors.primaryColor.withOpacity(0.1)),
+                                        boxColor: ThemeColors.primaryColor
+                                            .withOpacity(0.1)),
                                     AppPadding(
-                                        padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
-                                        child: AppText.bodyLarge(text: '${_cartDetail.quantity}')),
+                                        padding: AppEdgeInsets.symmetric(
+                                            horizontal: AppGapSize.medium),
+                                        child: AppText.bodyLarge(
+                                            text: '${_cartDetail.quantity}')),
                                     OrderDetailItemCount(
-                                        onTap: () => controller.increaseQuantity(_cartDetail, index),
+                                        onTap: () =>
+                                            controller.increaseQuantity(
+                                                _cartDetail, index),
                                         icon: Icons.add,
                                         iconColor: ThemeColors.textDarkColor,
                                         boxColor: ThemeColors.primaryColor),

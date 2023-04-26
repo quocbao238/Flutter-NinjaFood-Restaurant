@@ -1,6 +1,5 @@
 part of 'drawer_mobile_view.dart';
 
-
 class DrawerItemWidget extends StatelessWidget {
   final bool isSelected;
   final MenuItem menuItem;
@@ -10,14 +9,21 @@ class DrawerItemWidget extends StatelessWidget {
   final AlignmentGeometry? alignment;
 
   const DrawerItemWidget(
-      {Key? key, required this.isSelected, required this.menuItem, this.onTap, this.backgroundColor, this.border, this.alignment})
+      {Key? key,
+      required this.isSelected,
+      required this.menuItem,
+      this.onTap,
+      this.backgroundColor,
+      this.border,
+      this.alignment})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     String title = menuItem.title;
     if (menuItem.menuType == MenuType.changeTheme) {
-      title = Get.isDarkMode ? "Light Theme" : "Dark Theme";
+      title = Get.isDarkMode ? "Drawer_Theme_Light" : "Drawer_Theme_Dark";
+      title = title.tr;
     }
     final shadowColor = Get.isDarkMode ? Colors.white : Colors.black;
     return AppPadding(
@@ -27,7 +33,10 @@ class DrawerItemWidget extends StatelessWidget {
       ),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: backgroundColor ?? (isSelected ? Theme.of(context).colorScheme.primary.withOpacity(0.8) : null),
+          color: backgroundColor ??
+              (isSelected
+                  ? Theme.of(context).colorScheme.primary.withOpacity(0.8)
+                  : null),
           borderRadius: BorderRadius.circular(8),
           border: border,
           boxShadow: !isSelected
@@ -70,14 +79,20 @@ class DrawerItemWidget extends StatelessWidget {
                   size: Theme.of(context).textTheme.bodyMedium!.fontSize,
                 ),
                 AppPadding(
-                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small),
+                  padding:
+                      AppEdgeInsets.symmetric(horizontal: AppGapSize.small),
                   child: Text(
-                    title,
+                    title.tr,
                     maxLines: 1,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                          color:
-                              isSelected ? ThemeColors.textDarkColor : Theme.of(context).textTheme.headlineSmall!.color,
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                          color: isSelected
+                              ? ThemeColors.textDarkColor
+                              : Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .color,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
                   ),
                 ),

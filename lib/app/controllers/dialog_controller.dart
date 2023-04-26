@@ -42,4 +42,29 @@ class DialogController extends GetxController
             rightBtnOnPressed: () => _hide()),
         barrierDismissible: false);
   }
+
+  Future<void> showCustomizedDialog({
+    String? title,
+    required String message,
+    String? leftBtnText,
+    String? rightBtnText,
+    VoidCallback? leftBtnOnPressed,
+    VoidCallback? rightBtnOnPressed,
+  }) async {
+    _animationController.forward();
+    await Get.dialog(
+      AppDialog(
+          title: title ?? 'Dialog_Notification'.tr,
+          message: message,
+          animation: _animation,
+          leftBtnText: leftBtnText,
+          rightBtnText: rightBtnText,
+          leftBtnOnPressed: leftBtnOnPressed,
+          rightBtnOnPressed: () {
+            rightBtnOnPressed?.call();
+            _hide();
+          }),
+      barrierDismissible: false,
+    );
+  }
 }

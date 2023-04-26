@@ -13,7 +13,7 @@ class ProductPopular extends GetView<HomeController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppText.bodyLarge(
-                text: 'Popular Food'.tr,
+                text: 'Home_Popular_Food'.tr,
                 fontWeight: FontWeight.bold,
               ),
               Obx(() {
@@ -23,13 +23,11 @@ class ProductPopular extends GetView<HomeController> {
                   return SizedBox.shrink();
                 }
                 return InkWell(
-                  onTap: () => controller.onPressedViewMorePopularFood(),
-                  child: AppText.bodySmall(
-                    text: 'View More'.tr,
-                    fontWeight: FontWeight.w400,
-                    color: ThemeColors.orangeColor,
-                  ),
-                );
+                    onTap: () => controller.onPressedViewMorePopularFood(),
+                    child: AppText.bodySmall(
+                        text: 'Home_ViewMore'.tr,
+                        fontWeight: FontWeight.w400,
+                        color: ThemeColors.orangeColor));
               }),
             ],
           ),
@@ -43,10 +41,9 @@ class ProductPopular extends GetView<HomeController> {
                 final isNormalViewType =
                     controller.homeViewType.value == HomeViewType.normal;
                 return ProductList(
-                  productList: isNormalViewType
-                      ? popularFoodList.sublist(0, 3)
-                      : popularFoodList,
-                );
+                    productList: isNormalViewType
+                        ? popularFoodList.sublist(0, 3)
+                        : popularFoodList);
               }),
             ),
           ),

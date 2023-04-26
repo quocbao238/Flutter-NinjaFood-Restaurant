@@ -704,11 +704,9 @@ packages:
   ninja_theme:
     dependency: "direct main"
     description:
-      path: "."
-      ref: devMaster
-      resolved-ref: "04745b6525a4859c5f64e0b4ba4ccb5ddeb8ce7b"
-      url: "https://github.com/quocbao238/ninjafood_theme.git"
-    source: git
+      path: "../NinjaFood_Theme"
+      relative: true
+    source: path
     version: "0.0.1"
   octo_image:
     dependency: transitive

@@ -23,7 +23,7 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
               AppPadding(
                   padding: AppEdgeInsets.only(bottom: AppGapSize.medium),
                   child: AppText.headlineMedium(
-                      text: 'Order details', fontWeight: FontWeight.bold)),
+                      text: 'Cart_Title'.tr, fontWeight: FontWeight.bold)),
               OrderDetailBodyView(),
               OrderDetailBottom(),
               AppPadding(
@@ -33,10 +33,10 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
                     return Center(
                       child: AnimationButton(
                           onPressed: () => controller.onPressedPlaceMyOrder(),
-                          textDone: 'Done',
+                          textDone: 'Cart_Order_Success'.tr,
                           onDone: () => controller.onPressedDone(),
-                          textLoading: 'Loading...',
-                          textButton: 'Place my orders',
+                          textLoading: 'Cart_Oder_Loading'.tr,
+                          textButton: 'Cart_Order_Now'.tr,
                           loading: controller.loading.value),
                     );
                   },

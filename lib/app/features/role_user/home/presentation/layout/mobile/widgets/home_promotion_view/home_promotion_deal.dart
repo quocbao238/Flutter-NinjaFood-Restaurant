@@ -23,13 +23,11 @@ class PromotionDeal extends GetView<HomeController> {
               items: promotions
                   .map((item) => GestureDetector(
                         onTap: () => controller.onPressedPromotionItem(item),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: AppNetworkImage(url: item.thumbnail!),
-                          ),
-                        ),
+                        child: AppNetworkImage(
+                            borderRadius: 16,
+                            width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.fill,
+                            url: item.thumbnail!),
                       ))
                   .toList(),
             ),
@@ -42,10 +40,13 @@ class PromotionDeal extends GetView<HomeController> {
                   return Container(
                     width: 8.0,
                     height: 8.0,
-                    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                    margin:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: controller.currentIndexPromotion.value == index ? ThemeColors.primaryColor : Colors.grey,
+                      color: controller.currentIndexPromotion.value == index
+                          ? ThemeColors.primaryColor
+                          : Colors.grey,
                     ),
                   );
                 },

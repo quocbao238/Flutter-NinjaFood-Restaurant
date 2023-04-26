@@ -9,7 +9,8 @@ class ProductDetailDescription extends GetView<ProductDetailScreenController> {
     return SliverToBoxAdapter(
       child: AppSizeScale(
         backgroundColor: Theme.of(context).colorScheme.background,
-        child: AppPadding.medium(
+        child: AppPadding(
+          padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

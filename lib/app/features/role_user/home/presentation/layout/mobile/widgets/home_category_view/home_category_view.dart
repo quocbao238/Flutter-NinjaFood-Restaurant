@@ -25,12 +25,12 @@ class CategoryPopular extends GetView<HomeController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppText.bodyLarge(
-                  text: 'Popular Menu'.tr, fontWeight: FontWeight.bold),
+                  text: 'Home_Popular_Menu'.tr, fontWeight: FontWeight.bold),
               if (!isViewMore)
                 InkWell(
                     onTap: () => controller.onPressedViewMorePopularMenu(),
                     child: AppText.bodySmall(
-                        text: 'View More'.tr,
+                        text: 'Home_ViewMore'.tr,
                         fontWeight: FontWeight.w400,
                         color: ThemeColors.orangeColor)),
             ],

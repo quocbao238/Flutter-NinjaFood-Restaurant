@@ -16,37 +16,27 @@ class AppBarHomeWidget extends GetView<TabsController> {
           children: [
             Obx(() {
               final homeController = Get.find<HomeController>();
-              final isViewTypeNormal = homeController.homeViewType.value == HomeViewType.normal;
+              final isViewTypeNormal =
+                  homeController.homeViewType.value == HomeViewType.normal;
               if (!isViewTypeNormal) {
                 return AppButtonBack(onPressed: () {
                   homeController.onPressedBackToNormalHome();
                 });
               }
-              return AppButtonDrawer(onPressed: () {
-                controller.toggleDrawer();
-              });
+              return AppButtonDrawer(
+                  onPressed: () => controller.toggleDrawer());
             }),
             const Expanded(
-              child: AppPadding.medium(child: AppText.headlineSmall(text: 'Find Your\nFavorite Food')),
+              child: AppPadding.medium(
+                  child: AppText.headlineSmall(text: 'Ninja Food')),
             ),
-            AppButtonNotification(onPressed: () {
-              controller.onPressedNotification();
-            }),
+            AppButtonNotification(
+                onPressed: () => controller.onPressedNotification()),
           ],
         ),
         AppPadding(
-          padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
-          child: SizedBox(
-            height: kToolbarHeight,
-            child: Row(
-              children: [
-                Expanded(child: ProductSearchBar()),
-                AppPadding(
-                    padding: AppEdgeInsets.only(left: AppGapSize.small), child: AppFilterButton(onPressed: () {}))
-              ],
-            ),
-          ),
-        ),
+            padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+            child: ProductSearchBar()),
         AppPadding.small()
       ],
     );

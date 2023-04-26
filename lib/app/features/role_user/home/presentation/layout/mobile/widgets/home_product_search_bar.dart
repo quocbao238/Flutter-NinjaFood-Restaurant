@@ -30,7 +30,7 @@ class ProductSearchBar extends GetView<HomeController> {
             ),
             border: OutlineInputBorder(),
             hintStyle: Theme.of(context).textTheme.labelLarge,
-            hintText: 'What are you looking for?'),
+            hintText: 'SearchBar_Title'.tr),
       ),
       suggestionsCallback: (pattern) async => await controller.searchFood(pattern),
       errorBuilder: (context, error) => AppPadding.small(child: Text('No')),
@@ -39,7 +39,7 @@ class ProductSearchBar extends GetView<HomeController> {
             child: AppSizeScale(
           ratioWidth: 1,
           child: AppText.bodyMedium(
-            text: 'No items found',
+            text: 'SearchBar_NoItem'.tr,
             textAlign: TextAlign.center,
           ),
         ));
