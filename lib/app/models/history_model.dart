@@ -1,20 +1,22 @@
 import 'package:ninjafood/app/models/cart_model.dart';
 
 enum HistoryStatus {
-  pending('Pending', 'pending'),
-  confirmed('Confirmed', 'confirmed'),
-  shipped('Shipped', 'shipped'),
-  delivered('Delivered', 'delivered'),
-  cancelled('Cancelled', 'cancelled');
+  pending('Pending', 'pending', 'assets/lottie/order_pending.json'),
+  delivering('Delivering', 'delivering', 'assets/lottie/order_delivering.json'),
+  delivered('Delivered', 'delivered', 'assets/lottie/order_delivered.json'),
+  cancelled('Cancelled', 'cancelled', 'assets/lottie/order_cancel.json'),
+  done('Done', 'done', '');
 
   final String status;
   final String json;
+  final String lottieUrl;
 
-  const HistoryStatus(this.status, this.json);
+  const HistoryStatus(this.status, this.json, this.lottieUrl);
 }
 
-class HistoryOrderModel {
+class OrderModel {
   String uid;
+  String userId;
   double subTotal;
   double serviceFee;
   double total;
@@ -24,9 +26,10 @@ class HistoryOrderModel {
   String createdAt;
   bool isRating;
 
-  HistoryOrderModel(
+  OrderModel(
       {required this.uid,
       required this.subTotal,
+      required this.userId,
       required this.serviceFee,
       required this.total,
       required this.discount,
@@ -35,17 +38,21 @@ class HistoryOrderModel {
       required this.isRating,
       required this.status});
 
-  factory HistoryOrderModel.fromJson(Map<String, dynamic> json) {
-    final historyModel = HistoryOrderModel(
+  factory OrderModel.fromJson(Map<String, dynamic> json) {
+    final historyModel = OrderModel(
         uid: json['uid'] as String,
+        userId: json['userId'] == null ? '' : json['userId'] as String,
         createdAt: json['createdAt'] as String,
         subTotal: double.parse(json['subTotal'].toString()),
         serviceFee: double.parse(json['serviceFee'].toString()),
         discount: double.parse(json['discount'].toString()),
         total: double.parse(json['total'].toString()),
         isRating: json['isRating'] ?? false,
-        carts: (json['carts'] as List<dynamic>).map((e) => CartModel.fromJson(e as Map<String, dynamic>)).toList(),
-        status: HistoryStatus.values.firstWhere((element) => element.json == json['status'] as String));
+        carts: (json['carts'] as List<dynamic>)
+            .map((e) => CartModel.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        status: HistoryStatus.values
+            .firstWhere((element) => element.json == json['status'] as String));
     return historyModel;
   }
 
@@ -53,6 +60,7 @@ class HistoryOrderModel {
     return {
       'uid': uid,
       'subTotal': subTotal,
+      'userId': userId,
       'discount': discount,
       'createdAt': createdAt,
       'serviceFee': serviceFee,

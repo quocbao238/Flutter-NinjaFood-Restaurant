@@ -46,6 +46,7 @@ dependencies:
 #  flutter_html: ^2.2.0
   flutter_slidable: ^2.0.0
   flutter_rating_bar: ^4.0.1
+  lottie: ^2.3.2
 
 
   ninja_theme:
@@ -77,3 +78,4 @@ flutter:
 
   assets:
     - assets/icons/
+    - assets/lottie/

@@ -13,7 +13,7 @@ class ProfileController extends BaseController {
   final DatabaseService databaseService = DatabaseService.instance;
   final UserController userController = UserController.instance;
   final lstProducts = <ProductModel>[].obs;
-  final lstHistory = <HistoryOrderModel>[].obs;
+  final lstHistory = <OrderModel>[].obs;
 
   @override
   void onInit() {
@@ -55,7 +55,7 @@ class ProfileController extends BaseController {
     Get.toNamed(AppRouteProvider.editProfileScreen);
   }
 
-  void onPressRating(HistoryOrderModel historyModel) {
+  void onPressRating(OrderModel historyModel) {
     Get.toNamed(AppRouteProvider.ratingScreen, arguments: historyModel.uid);
   }
 

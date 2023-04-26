@@ -102,21 +102,19 @@ class CartScreenController extends BaseController {
     }
     loading(true);
 
-    final HistoryOrderModel historyOrderModel = HistoryOrderModel(
+    final OrderModel orderModel = OrderModel(
         uid: Uuid().v4(),
         isRating: false,
         createdAt: createTimeStamp(),
         subTotal: subTotalPrice.value,
         serviceFee: serviceFee,
+        userId: userController.getCurrentUser?.uid ?? '',
         total: totalPrice.value,
         discount: promotion.value,
         carts: lstCarts.toList(),
         status: HistoryStatus.pending);
-    final List<HistoryOrderModel> lstHistory =
-        userController.getCurrentUser?.historyOrders ?? [];
-    lstHistory.add(historyOrderModel);
 
-    final response = await userController.updateUser(historyOrders: lstHistory);
+    final response = await databaseService.insertOrder(orderModel: orderModel);
     response.fold(
         (l) => handleFailure('Cart Screen Controller', l, showDialog: true),
         (r) {

@@ -3,9 +3,11 @@ import 'package:fpdart/fpdart.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/helper/helper.dart';
+import 'package:ninjafood/app/models/cart_model.dart';
 import 'package:ninjafood/app/models/category_model.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/models/comment_model.dart';
+import 'package:ninjafood/app/models/history_model.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
@@ -242,10 +244,51 @@ class DatabaseService extends GetxService
           .set(commentModel.toJson());
       return right(commentModel.uid);
     } on FirebaseException catch (error) {
-      handleFailure(_logName, Failure(error.code, StackTrace.current));
+      handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
+  }
+
+  @override
+  Future<Either<Failure, String>> insertOrder(
+      {required OrderModel orderModel}) async {
+    try {
+      await _db
+          .doc('${DatabaseKeys.orderPath}${orderModel.uid}')
+          .set(orderModel.toJson());
+      return right(orderModel.uid);
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> updateOrder(
+      {required OrderModel orderModel}) async {
+    try {
+      await _db
+          .doc('${DatabaseKeys.orderPath}${orderModel.uid}')
+          .update(orderModel.toJson());
+      return right(orderModel.uid);
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenCurrentOrder(
+      String userId) {
+    return _db
+        .collection(DatabaseKeys.orderPath)
+        .where('userId', isEqualTo: userId)
+        .snapshots();
   }
 }

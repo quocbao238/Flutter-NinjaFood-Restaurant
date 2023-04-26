@@ -194,6 +194,13 @@ const Map<String, String> en = {
   "Cart_Order_Now": "Order Now",
   "Cart_Oder_Loading": "Ordering...",
   "Cart_Order_Success": "Order Success",
+  "Cart_Go_To_Home": "Go To Home Now",
+
+  "Pending": "Order is being processed...",
+  "Delivering": "Your order is being delivered...",
+  "Delivered": "The order has arrived. Please check and confirm your order...",
+  "Cancelled": "Order canceled",
+  "Done": "Order completed",
 
   "Cart_Remove_Item_Message": "Are you sure you want to remove this item?",
   "Cart_Remove_Item": "Remove Item",

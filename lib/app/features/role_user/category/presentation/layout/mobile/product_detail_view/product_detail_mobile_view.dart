@@ -19,7 +19,7 @@ class FoodDetailMobileView extends GetView<ProductDetailScreenController> {
         alignment: Alignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 64),
+            padding: EdgeInsets.only(bottom: kTextTabBarHeight * 2),
             child: CustomScrollView(
               slivers: [
                 SliverPersistentHeader(
