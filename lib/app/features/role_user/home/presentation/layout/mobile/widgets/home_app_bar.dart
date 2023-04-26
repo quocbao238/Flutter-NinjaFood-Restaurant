@@ -10,35 +10,37 @@ class AppBarHomeWidget extends GetView<TabsController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Obx(() {
-              final homeController = Get.find<HomeController>();
-              final isViewTypeNormal =
-                  homeController.homeViewType.value == HomeViewType.normal;
-              if (!isViewTypeNormal) {
-                return AppButtonBack(onPressed: () {
-                  homeController.onPressedBackToNormalHome();
-                });
-              }
-              return AppButtonDrawer(
-                  onPressed: () => controller.toggleDrawer());
-            }),
-            const Expanded(
-              child: AppPadding.medium(
-                  child: AppText.headlineSmall(text: 'Ninja Food')),
-            ),
-            AppButtonNotification(
-                onPressed: () => controller.onPressedNotification()),
-          ],
-        ),
-        AppPadding(
-            padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
-            child: ProductSearchBar()),
-        AppPadding.small()
-      ],
+    return SafeArea(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Obx(() {
+                final homeController = Get.find<HomeController>();
+                final isViewTypeNormal =
+                    homeController.homeViewType.value == HomeViewType.normal;
+                if (!isViewTypeNormal) {
+                  return AppButtonBack(onPressed: () {
+                    homeController.onPressedBackToNormalHome();
+                  });
+                }
+                return AppButtonDrawer(
+                    onPressed: () => controller.toggleDrawer());
+              }),
+              const Expanded(
+                child: AppPadding.medium(
+                    child: AppText.headlineSmall(text: 'Ninja Food')),
+              ),
+              AppButtonNotification(
+                  onPressed: () => controller.onPressedNotification()),
+            ],
+          ),
+          AppPadding(
+              padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+              child: ProductSearchBar()),
+          AppPadding.small()
+        ],
+      ),
     );
   }
 }

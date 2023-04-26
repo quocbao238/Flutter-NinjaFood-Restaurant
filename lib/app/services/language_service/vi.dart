@@ -8,6 +8,15 @@ const Map<String, String> vi = {
   "Dialog_Cancel": "Hủy",
   "Dialog_Yes": "Có",
 
+  // Member
+  "Member Sliver": "Thành viên Sliver",
+  "Member Gold": "Thành viên Gold",
+  "Member Diamond": "Thành viên Diamond",
+  "Member Platinum": "Thành viên Platinum",
+  "Restaurant Owners": "Chủ nhà hàng",
+
+  // Voucher
+  "Voucher": "Phiếu giảm giá",
 
   // Onboard Screen
   "OnboardScreen_Title1": "Ninja Food",
@@ -162,12 +171,23 @@ const Map<String, String> vi = {
   "Home_Popular_Food": "Món ăn yêu thích",
   "Home_ViewMore": "Xem thêm",
 
-  //
+  // Profile
   "Favorite_Food": "Món ăn yêu thích",
   "Add_To_Cart": "Thêm vào giỏ hàng",
   "Adding_To_Cart": "Đang thêm vào giỏ hàng...",
   "Added_To_Cart": "Đã thêm vào giỏ hàng...",
   "Food_Already_In_Cart": "Món ăn đã có trong giỏ hàng",
+
+  // Edit Profile
+  "Edit_Profile_Title": "Chỉnh sửa hồ sơ",
+  "Edit_Profile_FirstName": "Tên",
+  "Edit_Profile_LastName": "Họ",
+  "Edit_Profile_Email": "Email",
+  "Edit_Profile_Phone": "Số điện thoại",
+  "Edit_Profile_Address": "Địa chỉ",
+  "Edit_Profile_Update": "Cập nhật",
+  "Edit_Profile_Updating": "Đang cập nhật...",
+  "Edit_Profile_Update_Success": "Cập nhật thành công",
 
   // Cart
   "Cart_Title": "Giỏ hàng",

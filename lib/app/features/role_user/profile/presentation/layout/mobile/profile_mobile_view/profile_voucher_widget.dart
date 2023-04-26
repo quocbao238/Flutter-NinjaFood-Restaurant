@@ -1,6 +1,5 @@
 part of 'profile_mobile_view.dart';
 
-
 class ProfileVoucherWidget extends GetView<HomeController> {
   const ProfileVoucherWidget({Key? key}) : super(key: key);
 
@@ -11,14 +10,18 @@ class ProfileVoucherWidget extends GetView<HomeController> {
       padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
       child: DecoratedBox(
         decoration: BoxDecoration(
-            color: isDarkMode ? ThemeColors.backgroundTextFormDark() : Theme.of(context).colorScheme.onPrimary,
+            color: isDarkMode
+                ? ThemeColors.backgroundTextFormDark()
+                : Theme.of(context).colorScheme.onPrimary,
             borderRadius: BorderRadius.circular(16)),
         child: Row(
           children: [
             AppPadding.medium(child: AppIcons.voucher()),
             Obx(() {
               final lstVoucher = controller.promotions;
-              return AppText.bodyLarge(text: 'You Have ${lstVoucher.length} Voucher', fontWeight: FontWeight.w400);
+              return AppText.bodyLarge(
+                  text: '${lstVoucher.length} ' + 'Voucher'.tr,
+                  fontWeight: FontWeight.w400);
             })
           ],
         ),

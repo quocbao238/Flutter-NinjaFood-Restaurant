@@ -28,25 +28,19 @@ class ProductDetailAppbar extends SliverPersistentHeaderDelegate {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Colors.transparent,
-                Colors.black.withOpacity(0.7),
-              ],
+              colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
             ),
           ),
         ),
-        Positioned(
-          top: 0,
-          left: 0,
-          child: title, // add the title widget
-        ),
+        Positioned(top: 0, left: 0, child: title),
         Positioned(
           bottom: 0,
           child: Container(
             height: 30,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              border: Border.all(color: Theme.of(context).colorScheme.background, width: 0),
+              border: Border.all(
+                  color: Theme.of(context).colorScheme.background, width: 0),
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20), topRight: Radius.circular(20)),
               color: Theme.of(context).colorScheme.background,

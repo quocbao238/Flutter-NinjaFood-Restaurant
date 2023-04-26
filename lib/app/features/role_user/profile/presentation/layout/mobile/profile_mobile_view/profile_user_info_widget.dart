@@ -16,7 +16,7 @@ class ProfileUserInformationWidget extends GetView<UserController> {
               borderRadius: BorderRadius.circular(18), color: ThemeColors.textPriceColor.withOpacity(0.1)),
           child: AppPadding.small(
             child: AppText.bodyMedium(
-              text: currentUser.userType?.name ?? '',
+              text: currentUser.userType?.name.tr ?? '',
               fontWeight: FontWeight.w400,
               color: ThemeColors.textPriceColor,
             ),

@@ -15,7 +15,7 @@ class EditProfileAppBarWidget extends StatelessWidget {
                 padding: const AppEdgeInsets.only(
                     top: AppGapSize.paddingMedium, right: AppGapSize.paddingMedium, bottom: AppGapSize.regular),
                 child: AppText.headlineSmall(
-                    text: 'Edit Profile', fontWeight: FontWeight.bold, maxLines: 1, overflow: TextOverflow.ellipsis))),
+                    text: 'Edit_Profile_Title'.tr, fontWeight: FontWeight.bold, maxLines: 1, overflow: TextOverflow.ellipsis))),
         SizedBox(width: 45)
       ],
     );

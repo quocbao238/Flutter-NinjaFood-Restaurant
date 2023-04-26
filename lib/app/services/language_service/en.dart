@@ -5,6 +5,16 @@ const Map<String, String> en = {
   "Dialog_Success": "Success",
   "Dialog_OK": "OK",
 
+  // Member
+  "Member Sliver": "Member Sliver",
+  "Member Gold": "Member Gold",
+  "Member Diamond": "Member Diamond",
+  "Member Platinum": "Member Platinum",
+  "Restaurant Owners": "Restaurant Owners",
+
+  // Voucher
+  "Voucher": "voucher number",
+
 // Onboard Screen
   "OnboardScreen_Title1": "Find your Comfort Food here",
   "OnboardScreen_Title2": "Food Ninja is Where Your Comfort Food Lives",
@@ -154,11 +164,24 @@ const Map<String, String> en = {
   "Home_Popular_Food": "Popular Food",
   "Home_ViewMore": "View More",
 
+  // Profile
   "Favorite_Food": "Favorite Food",
   "Add_To_Cart": "Add To Cart",
   "Adding_To_Cart": "Adding To Cart",
   "Added_To_Cart": "Added To Cart",
   "Food_Already_In_Cart": "Food is already in your cart",
+
+  // Edit Profile
+  "Edit_Profile_Title": "Edit Profile",
+  "Edit_Profile_FirstName": 'First Name',
+  "Edit_Profile_LastName": "Last Name",
+  "Edit_Profile_Email": "Email",
+  "Edit_Profile_Phone": "Phone Number",
+  "Edit_Profile_Address": "Address",
+  "Edit_Profile_Update": "Update",
+  "Edit_Profile_Updating": "Updating...",
+  "Edit_Profile_Update_Success": "Update Success",
+
 
 // Cart
   "Cart_Title": "Cart",
