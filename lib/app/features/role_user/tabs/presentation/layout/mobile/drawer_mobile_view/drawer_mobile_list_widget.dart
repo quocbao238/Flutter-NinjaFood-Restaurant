@@ -1,6 +1,5 @@
 part of 'drawer_mobile_view.dart';
 
-
 class DrawerListWidget extends GetView<TabsController> {
   const DrawerListWidget({Key? key}) : super(key: key);
 
@@ -9,12 +8,13 @@ class DrawerListWidget extends GetView<TabsController> {
     final menuItems = controller.menuItems;
 
     return Obx(
-          () {
+      () {
         final currentMenuItem = controller.currentMenuItem.value;
         return AppSizeScale(
             ratioWidth: 0.5,
             child: ListView.builder(
                 shrinkWrap: true,
+                padding: EdgeInsets.zero,
                 itemCount: menuItems.length,
                 itemBuilder: (context, index) {
                   final menuItem = menuItems[index];
@@ -26,12 +26,12 @@ class DrawerListWidget extends GetView<TabsController> {
                         isSelected: false,
                         alignment: Alignment.center,
                         menuItem: menuItems.last,
-                        border: Border.all(width: 1, color: Theme
-                            .of(context)
-                            .colorScheme
-                            .primary),
+                        border: Border.all(
+                            width: 1,
+                            color: Theme.of(context).colorScheme.primary),
                         backgroundColor: Colors.transparent,
-                        onTap: () => controller.onPressedMenuItem(menuItems.last),
+                        onTap: () =>
+                            controller.onPressedMenuItem(menuItems.last),
                       ),
                     );
                   }
@@ -39,11 +39,8 @@ class DrawerListWidget extends GetView<TabsController> {
                   return DrawerItemWidget(
                       isSelected: isSelected,
                       menuItem: menuItem,
-                      onTap: () => controller.onPressedMenuItem(menuItem)
-                  );
-                }
-            )
-        );
+                      onTap: () => controller.onPressedMenuItem(menuItem));
+                }));
       },
     );
   }
