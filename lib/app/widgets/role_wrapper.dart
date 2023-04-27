@@ -19,7 +19,7 @@ class RoleWrapper extends GetView<UserController> {
 
     return Obx(
       () {
-        final currentUser = controller.currentUser?.value;
+        final currentUser = controller.currentUser.value;
         return Builder(
           builder: (context) {
             if (currentUser == null) {

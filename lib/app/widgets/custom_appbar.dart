@@ -89,6 +89,6 @@ class CustomAppButtonDrawer extends StatelessWidget {
           onPressed: () => adminTabsController.toggleDrawer());
     }
     final tabsController = Get.find<TabsController>();
-    return AppButtonDrawer(onPressed: () => tabsController!.toggleDrawer());
+    return AppButtonDrawer(onPressed: () => tabsController.toggleDrawer());
   }
 }

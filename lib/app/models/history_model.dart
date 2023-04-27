@@ -9,13 +9,14 @@ enum HistoryStatus {
   delivered('Delivered', 'delivered', 'assets/lottie/order_delivered.json',
       Colors.purple),
   cancelled('Cancelled', 'cancel', 'assets/lottie/order_cancel.json',
-      Colors.green),
-  done('Done', 'done', '', Colors.redAccent);
+      Colors.redAccent),
+  done('Done', 'done', '', Colors.greenAccent);
 
   final String status;
   final String json;
   final String lottieUrl;
   final Color color;
+
 
   const HistoryStatus(this.status, this.json, this.lottieUrl, this.color);
 }

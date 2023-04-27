@@ -6,13 +6,12 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_admin/tabs/controllers/admin_tabs_controller.dart';
 import 'package:ninjafood/app/features/role_admin/tabs/presentation/admin_tab_drawer_menus.dart';
 
-class AdminTabsMobileView extends GetView<AdminTabsController> {
+class AdminTabsMobileView extends StatelessWidget {
   const AdminTabsMobileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final AdminTabsController adminTabsController =
-        Get.put(AdminTabsController());
+    final AdminTabsController controller = Get.put(AdminTabsController());
     controller.context = context;
     return Obx(
       () {
