@@ -41,22 +41,19 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
               children: [
                 OrderDetailBodyView(),
                 OrderDetailBottom(),
-                AppPadding(
-                  padding: AppEdgeInsets.only(top: AppGapSize.small),
+                SafeArea(
                   child: Obx(
                     () {
-                      return SafeArea(
-                        child: AnimationButton(
-                            ratioWidthDone: 0.95,
-                            ratioWidthLoading: 0.9,
-                            ratioWidthButton: 0.95,
-                            onPressed: () => controller.onPressedPlaceMyOrder(),
-                            textDone: 'Cart_Order_Success'.tr,
-                            onDone: () => controller.onPressedDone(),
-                            textLoading: 'Cart_Oder_Loading'.tr,
-                            textButton: 'Cart_Order_Now'.tr,
-                            loading: controller.loading.value),
-                      );
+                      return AnimationButton(
+                          ratioWidthDone: 0.95,
+                          ratioWidthLoading: 0.9,
+                          ratioWidthButton: 0.95,
+                          onPressed: () => controller.onPressedPlaceMyOrder(),
+                          textDone: 'Cart_Order_Success'.tr,
+                          onDone: () => controller.onPressedDone(),
+                          textLoading: 'Cart_Oder_Loading'.tr,
+                          textButton: 'Cart_Order_Now'.tr,
+                          loading: controller.loading.value);
                     },
                   ),
                 ),

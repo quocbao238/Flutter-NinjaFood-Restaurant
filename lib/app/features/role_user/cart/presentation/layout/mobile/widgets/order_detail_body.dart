@@ -17,6 +17,7 @@ class OrderDetailBodyView extends GetView<CartScreenController> {
     return Expanded(
         flex: 2,
         child: ListView.builder(
+          padding: EdgeInsets.zero,
           itemCount: _listCarts.length,
           itemBuilder: (context, index) {
             final _cartDetail = _listCarts[index];
@@ -28,8 +29,7 @@ class OrderDetailBodyView extends GetView<CartScreenController> {
                   extentRatio: 0.2,
                   children: [
                     SlidableAction(
-                      onPressed: (context) =>
-                          controller.onPressedRemoveItem(index),
+                      onPressed: (context) => controller.onPressedRemoveItem(index),
                       backgroundColor: ThemeColors.orangeColor,
                       borderRadius: BorderRadius.circular(22),
                       icon: Icons.delete_outline_rounded,
@@ -39,9 +39,7 @@ class OrderDetailBodyView extends GetView<CartScreenController> {
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: isDarkMode
-                        ? ThemeColors.backgroundTextFormDark()
-                        : Theme.of(context).colorScheme.onPrimary,
+                    color: isDarkMode ? ThemeColors.backgroundTextFormDark() : Theme.of(context).colorScheme.onPrimary,
                   ),
                   child: AppPadding.small(
                     child: Row(
@@ -55,12 +53,8 @@ class OrderDetailBodyView extends GetView<CartScreenController> {
                             height: 84,
                             child: AppNetworkImage(
                                 borderRadius: 8,
-                                height:
-                                    MediaQuery.of(context).size.shortestSide *
-                                        0.2,
-                                width:
-                                    MediaQuery.of(context).size.shortestSide *
-                                        0.2,
+                                height: MediaQuery.of(context).size.shortestSide * 0.2,
+                                width: MediaQuery.of(context).size.shortestSide * 0.2,
                                 url: _cartDetail.productModel.image?.url ?? ''),
                           ),
                         ),
@@ -75,8 +69,7 @@ class OrderDetailBodyView extends GetView<CartScreenController> {
                                 textAlign: TextAlign.left,
                               ),
                               AppText.titleMedium(
-                                  text:
-                                      '${_cartDetail.productModel.getPrice} ${_cartDetail.productModel.currency}',
+                                  text: '${_cartDetail.productModel.getPrice} ${_cartDetail.productModel.currency}',
                                   color: ThemeColors.textPriceColor),
                             ],
                           ),
@@ -86,20 +79,15 @@ class OrderDetailBodyView extends GetView<CartScreenController> {
                           child: Row(
                             children: [
                               OrderDetailItemCount(
-                                  onTap: () => controller.decreaseQuantity(
-                                      _cartDetail, index),
+                                  onTap: () => controller.decreaseQuantity(_cartDetail, index),
                                   icon: Icons.remove,
                                   iconColor: ThemeColors.primaryColor,
-                                  boxColor: ThemeColors.primaryColor
-                                      .withOpacity(0.1)),
+                                  boxColor: ThemeColors.primaryColor.withOpacity(0.1)),
                               AppPadding(
-                                  padding: AppEdgeInsets.symmetric(
-                                      horizontal: AppGapSize.medium),
-                                  child: AppText.bodyLarge(
-                                      text: '${_cartDetail.quantity}')),
+                                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+                                  child: AppText.bodyLarge(text: '${_cartDetail.quantity}')),
                               OrderDetailItemCount(
-                                  onTap: () => controller.increaseQuantity(
-                                      _cartDetail, index),
+                                  onTap: () => controller.increaseQuantity(_cartDetail, index),
                                   icon: Icons.add,
                                   iconColor: ThemeColors.textDarkColor,
                                   boxColor: ThemeColors.primaryColor),

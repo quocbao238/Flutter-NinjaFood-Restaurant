@@ -2,23 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:ninjafood/app/models/cart_model.dart';
 
 enum HistoryStatus {
-  pending(
-      'Pending', 'pending', 'assets/lottie/order_pending.json', Colors.orange),
-  delivering('Delivering', 'delivering', 'assets/lottie/order_delivering.json',
-      Colors.blueAccent),
-  delivered('Delivered', 'delivered', 'assets/lottie/order_delivered.json',
-      Colors.purple),
-  cancelled('Cancelled', 'cancel', 'assets/lottie/order_cancel.json',
-      Colors.redAccent),
-  done('Done', 'done', '', Colors.greenAccent);
+  request('Request', 'request', 'assets/lottie/order_request.json', Colors.blue, ''),
+  pending('Pending', 'pending', 'assets/lottie/order_pending.json', Colors.orange, 'admin_pending'),
+  delivering('Delivering', 'delivering', 'assets/lottie/order_delivering.json', Colors.blueAccent, 'admin_delivering'),
+  delivered('Delivered', 'delivered', 'assets/lottie/order_delivered.json', Colors.lightBlueAccent, 'admin_delivered'),
+  cancelled('Cancelled', 'cancel', 'assets/lottie/order_cancel.json', Colors.redAccent, 'admin_cancel'),
+  done('Done', 'done', '', Colors.greenAccent, ''),
+  all('All', 'all', '', Colors.greenAccent, '');
 
   final String status;
   final String json;
   final String lottieUrl;
   final Color color;
+  final String adminStatus;
 
-
-  const HistoryStatus(this.status, this.json, this.lottieUrl, this.color);
+  const HistoryStatus(this.status, this.json, this.lottieUrl, this.color, this.adminStatus);
 }
 
 class OrderModel {
@@ -55,11 +53,8 @@ class OrderModel {
         discount: double.parse(json['discount'].toString()),
         total: double.parse(json['total'].toString()),
         isRating: json['isRating'] ?? false,
-        carts: (json['carts'] as List<dynamic>)
-            .map((e) => CartModel.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        status: HistoryStatus.values
-            .firstWhere((element) => element.json == json['status'] as String));
+        carts: (json['carts'] as List<dynamic>).map((e) => CartModel.fromJson(e as Map<String, dynamic>)).toList(),
+        status: HistoryStatus.values.firstWhere((element) => element.json == json['status'] as String));
     return historyModel;
   }
 

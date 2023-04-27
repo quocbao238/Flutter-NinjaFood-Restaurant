@@ -11,12 +11,6 @@ class RoleWrapper extends GetView<UserController> {
 
   @override
   Widget build(BuildContext context) {
-    // if (controller.currentUser?.value == null) {
-    //   return AppLoading(isLoading: true);
-    // }
-    // final isAdmin = controller.currentUser?.value?.isAdmin() ?? false;
-    // return isAdmin ? adminView ?? SizedBox() : userView ?? SizedBox();
-
     return Obx(
       () {
         final currentUser = controller.currentUser.value;
