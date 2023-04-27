@@ -27,7 +27,7 @@ class SignUpProcessController extends BaseController {
 
   @override
   void onInit() {
-    final currentUser = userController.getCurrentUser;
+    final currentUser = userController.currentUser.value;
     firstNameController =
         TextEditingController(text: currentUser?.firstName ?? '');
     lastNameController =
@@ -106,7 +106,7 @@ class SignUpProcessController extends BaseController {
   }
 
   void onPressedNextPayment() {
-    final currentUser = userController.getCurrentUser;
+    final currentUser = userController.currentUser.value;
     if (currentUser?.photoUrl?.isNotEmpty ?? false) {
       Get.toNamed(AppRouteProvider.setLocationScreen);
       return;
@@ -137,7 +137,7 @@ class SignUpProcessController extends BaseController {
   }
 
   Future<void> onPressedPhotoNext() async {
-    final currentUser = userController.getCurrentUser;
+    final currentUser = userController.currentUser.value;
     if (currentUser == null) return;
     loading(true);
     final urlCallBack = await cloudStorageService.uploadAvatarImage(

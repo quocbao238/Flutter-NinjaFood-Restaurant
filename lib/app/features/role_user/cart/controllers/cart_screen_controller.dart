@@ -23,7 +23,7 @@ class CartScreenController extends BaseController {
   void onInit() {
     userController.currentUser.listen((event) {
       if (event == null) return;
-      serviceFee = userController.getCurrentUser?.serviceFee ?? 0.0;
+      serviceFee = userController.currentUser.value?.serviceFee ?? 0.0;
       lstCarts.assignAll(event.carts);
       subTotalPrice.value = _getSubTotalPrice();
       totalPrice.value = _getTotalPrice();
@@ -107,7 +107,7 @@ class CartScreenController extends BaseController {
         createdAt: createTimeStamp(),
         subTotal: subTotalPrice.value,
         serviceFee: serviceFee,
-        userId: userController.getCurrentUser?.uid ?? '',
+        userId: userController.currentUser.value?.uid ?? '',
         total: totalPrice.value,
         discount: promotion.value,
         carts: lstCarts.toList(),

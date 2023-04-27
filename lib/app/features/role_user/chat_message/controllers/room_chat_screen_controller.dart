@@ -41,7 +41,7 @@ class RoomChatScreenController extends BaseController {
   @override
   void onInit() {
     groupChatModel = Get.arguments;
-    final currentUser = userController.getCurrentUser!;
+    final currentUser = userController.currentUser.value!;
     receiverUser = {groupChatModel.receiverUser, groupChatModel.senderUser}
         .firstWhere((element) => element.uid != currentUser.uid);
     senderUser = {groupChatModel.receiverUser, groupChatModel.senderUser}
@@ -101,7 +101,7 @@ class RoomChatScreenController extends BaseController {
   Future<void> onSendMessage() async {
     FocusManager.instance.primaryFocus?.unfocus();
 
-    final isAdmin = userController.getCurrentUser?.isAdmin() ?? false;
+    final isAdmin = userController.currentUser.value?.isAdmin() ?? false;
     final _receiverUser = isAdmin ? receiverUser : null;
     if (selectChatFiles.value is SelectChatTextOnly) {
       if (textEditingController.text.isEmpty) return;

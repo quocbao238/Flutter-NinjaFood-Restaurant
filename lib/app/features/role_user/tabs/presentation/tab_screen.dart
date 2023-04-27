@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
-import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
+import 'package:ninjafood/app/controllers/delivery_controller.dart';
 import 'package:ninjafood/app/models/history_model.dart';
 import 'layout/mobile/tabs_mobile_view.dart';
 
-class TabScreen extends GetView<UserController> {
+class TabScreen extends GetView<DeliveryController> {
   const TabScreen({Key? key}) : super(key: key);
 
   @override
@@ -44,8 +44,8 @@ class TabScreen extends GetView<UserController> {
                           vertical: AppGapSize.large),
                       child: AppButton.max(
                           title: 'OrderReceived'.tr,
-                          onPressed: () =>
-                              controller.updateStatusOrder(currentOrder)))
+                          onPressed: () => UserController.instance
+                              .updateStatusOrder(currentOrder)))
               ],
             ),
           );

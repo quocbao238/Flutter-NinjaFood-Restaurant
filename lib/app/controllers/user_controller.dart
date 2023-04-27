@@ -8,8 +8,6 @@ class UserController extends GetxController implements Bootable {
   final _databaseService = DatabaseService.instance;
   final _consoleService = ConsoleService.instance;
 
-  // final _notificationService = NotificationService.instance;
-
   // Firebase Auth User
   late Rx<User?> _firebaseAuthUser = Rx<User?>(null);
 
@@ -19,27 +17,9 @@ class UserController extends GetxController implements Bootable {
 
   // Database User
   final currentUser = Rx<UserModel?>(null);
-  final adminUser = Rx<UserModel?>(null);
-
-  UserModel? get getCurrentUser => currentUser.value;
-
-  UserModel? get getAdminUser => adminUser.value;
-
-  final currentOrder = Rx<OrderModel?>(null);
-
-  void setAdminUser(UserModel? user) => adminUser.value = user;
-
-  void setCurrentUser(UserModel? user) => currentUser.value = user;
-
-  bool isUser() => currentUser.value?.role == ROLE_USER;
-
-  bool isAdmin() => currentUser.value?.role == ROLE_ADMIN;
 
   late StreamSubscription<UserModel?>? _userStream;
-
   StreamSubscription? _cloudUserSubscription;
-
-  StreamSubscription? _orderSubscription;
 
   Future<void> call() async {
     Get.put(this, permanent: true);
@@ -55,7 +35,6 @@ class UserController extends GetxController implements Bootable {
   void onClose() {
     _userStream?.cancel();
     _cloudUserSubscription?.cancel();
-    _orderSubscription?.cancel();
     super.onClose();
   }
 
@@ -65,30 +44,9 @@ class UserController extends GetxController implements Bootable {
       if (firebaseUser == null) {
         _consoleService.show(_logName, 'User is currently signed out!');
         _cloudUserSubscription = null;
-        _orderSubscription = null;
         return;
       }
       _handleCloudUserChanged();
-
-      // Update FCM Token to Cloud
-      _userStream = currentUser.listen((value) async {
-        if (value == null) return;
-        final response = await _databaseService.getAdminUser();
-        response.fold((l) => _consoleService.show(_logName, l.message), (r) {
-          setAdminUser(r);
-        });
-
-        // final fcmToken = await _notificationService.getFCMToken();
-        // if (fcmToken != null) {
-        //   getCurrentUser!.fcmToken = fcmToken;
-        //   await _databaseService.updateUser(userModel: getCurrentUser!);
-        //   _consoleService.show(_logName, 'Update FCM Token to Cloud');
-        //   _userStream?.cancel();
-        // }
-      });
-      if (currentUser.value == null) return;
-
-      _consoleService.show(_logName, 'User is signed in!');
     });
   }
 
@@ -102,15 +60,7 @@ class UserController extends GetxController implements Bootable {
       _consoleService.show(
           _logName, '_handleCloudUserChanged ${currentUser.value!.toJson()}');
       FirebaseCrashlytics.instance.setUserIdentifier(currentUser.value!.uid);
-      if (isAdmin()) return;
-      if (_orderSubscription != null) return;
-      _orderSubscription = _databaseService
-          .listenCurrentOrder(currentUser.value!.uid)
-          .listen((event) {
-        if (event.docs.isEmpty || event.docs.last.data().isEmpty) return;
-        final _order = OrderModel.fromJson(event.docs.first.data());
-        currentOrder.value = _order;
-      });
+      if (currentUser.value!.isAdmin()) return;
     });
   }
 
@@ -126,7 +76,7 @@ class UserController extends GetxController implements Bootable {
     List<OrderModel>? historyOrders,
     List<String>? cmtIds,
   }) async {
-    final _currentUser = getCurrentUser;
+    final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     try {
       final newDataUser = _currentUser.copyWith(
@@ -150,7 +100,7 @@ class UserController extends GetxController implements Bootable {
 
   Future<Either<Failure, void>> favoriteProduct(
       {required int productId}) async {
-    final _currentUser = getCurrentUser;
+    final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     final currentFavoriteProducts = _currentUser.favoriteIds;
     currentFavoriteProducts.contains(productId)
@@ -166,7 +116,7 @@ class UserController extends GetxController implements Bootable {
 
   Future<Either<Failure, void>> addProductToCard(
       {required ProductModel productModel}) async {
-    final _currentUser = getCurrentUser;
+    final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     List<CartModel> currentCartsProduct = _currentUser.carts;
 
@@ -192,7 +142,7 @@ class UserController extends GetxController implements Bootable {
       required double rating,
       required String historyId}) async {
     FocusManager.instance.primaryFocus?.unfocus();
-    final _currentUser = getCurrentUser;
+    final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     final createAt = createTimeStamp();
     try {

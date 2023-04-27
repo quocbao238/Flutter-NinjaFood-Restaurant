@@ -6,7 +6,7 @@ class ProfileUserInformationWidget extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     final profileController = Get.find<ProfileController>();
-    final currentUser = controller.getCurrentUser;
+    final currentUser = controller.currentUser.value;
     if (currentUser == null) return SizedBox();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

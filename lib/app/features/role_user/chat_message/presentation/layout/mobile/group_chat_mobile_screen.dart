@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/controllers/group_chat_screen_controller.dart';
-import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/widgets/custom_appbar.dart';
 import 'widgets/group_chat/group_chat_list.dart';
 

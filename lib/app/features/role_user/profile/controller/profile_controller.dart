@@ -18,7 +18,7 @@ class ProfileController extends BaseController {
   @override
   void onInit() {
     _getListFavoritesProduct();
-    final _lstHistory = userController.getCurrentUser?.historyOrders ?? [];
+    final _lstHistory = userController.currentUser.value?.historyOrders ?? [];
     lstHistory.assignAll(_lstHistory);
     userController.currentUser.listen((event) {
       if (event == null) return;
@@ -36,7 +36,7 @@ class ProfileController extends BaseController {
 
   void _getListFavoritesProduct() async {
     loading.value = true;
-    final lstFavoriteIds = userController.getCurrentUser?.favoriteIds ?? [];
+    final lstFavoriteIds = userController.currentUser.value?.favoriteIds ?? [];
     if (lstFavoriteIds.isEmpty) {
       loading.value = false;
       return;

@@ -3,7 +3,6 @@ import 'package:fpdart/fpdart.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/helper/helper.dart';
-import 'package:ninjafood/app/models/cart_model.dart';
 import 'package:ninjafood/app/models/category_model.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/models/comment_model.dart';
