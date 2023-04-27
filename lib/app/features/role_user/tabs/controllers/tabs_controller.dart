@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:get/get.dart';
+import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/features/role_user/tabs/infrastructure/models/menu_models.dart';
@@ -19,8 +20,11 @@ class TabsController extends BaseController {
 
   List<MenuItem> menuItems = MenuItem.listMenu;
 
-  List<Widget> screens =
-      MenuItem.listMenu.where((element) => element.screen != null).toList().map((e) => e.screen!).toList();
+  List<Widget> screens = MenuItem.listMenu
+      .where((element) => element.screen != null)
+      .toList()
+      .map((e) => e.screen!)
+      .toList();
 
   Rx<MenuItem> currentMenuItem = MenuItem.listMenu.first.obs;
 
@@ -61,9 +65,46 @@ class TabsController extends BaseController {
     currentMenuItem.value = menuItems[0];
   }
 
-  void _onPressedChangeLanguage() {
-    TranslationService.updateLocale(
-      Get.locale == Locale('en') ? Locale('vi') : Locale('en'),
+  Future<void> _onPressedChangeLanguage() async {
+    final currentLocale = Get.locale;
+    await showModalBottomSheet(
+      context: this.context,
+      builder: (ctx) => AppPadding.medium(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AppText.titleMedium(text: 'Drawer_Language_Change'.tr),
+            AppPadding.small(),
+            ...TranslationService.lstLanguage.entries.map(
+              (e) {
+                return InkWell(
+                  onTap: () {
+                    Get.back();
+                    TranslationService.updateLocale(Locale(e.key));
+                  },
+                  child: ListTile(
+                    leading: Icon(Icons.language,
+                        color: currentLocale!.languageCode == e.key
+                            ? ThemeColors.primaryColor
+                            : Theme.of(this.context)
+                                .textTheme
+                                .bodyMedium!
+                                .color),
+                    title: Text(e.value.tr,
+                        style: Theme.of(this.context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(
+                                color: currentLocale.languageCode == e.key
+                                    ? ThemeColors.primaryColor
+                                    : null)),
+                  ),
+                );
+              },
+            ).toList()
+          ],
+        ),
+      ),
     );
   }
 

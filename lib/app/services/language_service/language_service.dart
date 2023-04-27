@@ -36,4 +36,9 @@ class TranslationService extends Translations {
     fallbackLocale = locale;
     prefs.setString(LocalStorageKey.currentLanguage, localToString(locale));
   }
+
+  static Map<String, String> lstLanguage = {
+    'en': 'Drawer_Language_English',
+    'vi': 'Drawer_Language_Vietnamese',
+  };
 }

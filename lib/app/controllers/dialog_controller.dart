@@ -45,7 +45,8 @@ class DialogController extends GetxController
 
   Future<void> showCustomizedDialog({
     String? title,
-    required String message,
+    String? message,
+    Widget? child,
     String? leftBtnText,
     String? rightBtnText,
     VoidCallback? leftBtnOnPressed,
@@ -56,6 +57,7 @@ class DialogController extends GetxController
       AppDialog(
           title: title ?? 'Dialog_Notification'.tr,
           message: message,
+          child: child,
           animation: _animation,
           leftBtnText: leftBtnText,
           rightBtnText: rightBtnText,

@@ -11,6 +11,7 @@ class TabsMobileView extends GetView<TabsController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.context = context;
     return Obx(
       () {
         final loading = controller.loading.value;
