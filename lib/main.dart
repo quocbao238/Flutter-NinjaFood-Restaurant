@@ -15,9 +15,28 @@ void main() async {
     await Firebase.initializeApp();
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     await BootServices(boots: listBootServices)();
+    await BootServices(boots: listBootsController)();
     await AppPages.navigateDefaultPage();
     runApp(MyApp());
   }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
 }
+
+// class Demo extends StatefulWidget {
+//   const Demo({Key? key}) : super(key: key);
+//
+//   @override
+//   State<Demo> createState() => _DemoState();
+// }
+//
+// class _DemoState extends State<Demo> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         body: Center(
+//       child: Lottie.asset('assets/lottie/order_delivered.json'),
+//     ));
+//   }
+// }

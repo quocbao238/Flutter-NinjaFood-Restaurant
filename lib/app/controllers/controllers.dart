@@ -9,6 +9,8 @@ import 'package:fpdart/fpdart.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/constants/contains.dart';
+import 'package:ninjafood/app/controllers/delivery_controller.dart';
+import 'package:ninjafood/app/controllers/restaurant_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/cart_model.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
@@ -26,5 +28,7 @@ part 'user_controller.dart';
 final Map<Bootable, int> listBootsController = {
   DialogController(): 1024,
   UserController(): 512,
-  MessageController(): 124,
+  RestaurantController(): 256,
+  DeliveryController(): 128,
+  MessageController(): 64,
 };

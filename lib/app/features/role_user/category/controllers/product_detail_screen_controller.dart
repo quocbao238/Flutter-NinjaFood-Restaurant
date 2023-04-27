@@ -15,7 +15,8 @@ class ProductDetailScreenController extends BaseController {
 
   @override
   void onInit() {
-    lstCurrentCart.value = userController.currentUser.value?.carts ?? <CartModel>[];
+    lstCurrentCart.value =
+        userController.currentUser.value?.carts ?? <CartModel>[];
     isInCarts.value = checkInCurrentCart();
     userController.currentUser.listen((event) {
       if (event == null) return;
@@ -37,15 +38,14 @@ class ProductDetailScreenController extends BaseController {
     response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {});
   }
 
-  bool checkInCurrentCart() => lstCurrentCart.any((element) => element.productModel.id == currentProduct.id);
+  bool checkInCurrentCart() => lstCurrentCart
+      .any((element) => element.productModel.id == currentProduct.id);
 
   Future<void> addToCart() async {
     loading(true);
-    final response = await userController.addProductToCard(productModel: currentProduct);
-    response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
-      Get.snackbar('Notification', 'Add \"${currentProduct.name}\" to cart success',
-          backgroundColor: Get.theme.colorScheme.onBackground, colorText: Get.theme.colorScheme.background);
-    });
+    final response =
+        await userController.addProductToCard(productModel: currentProduct);
+    response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {});
     loading(false);
   }
 }

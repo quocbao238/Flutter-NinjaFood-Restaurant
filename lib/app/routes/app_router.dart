@@ -10,6 +10,7 @@ class AppPages {
       return;
     }
     initial = AppRouteProvider.splashScreen;
+    // initial = AppRouteProvider.signupSuccessScreen;
   }
 
   //

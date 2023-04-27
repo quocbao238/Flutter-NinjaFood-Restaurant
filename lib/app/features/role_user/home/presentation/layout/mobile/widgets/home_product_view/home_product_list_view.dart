@@ -9,6 +9,7 @@ class ProductList extends GetView<HomeController> {
     return AppAnimationList(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
+
       itemCount: productList.length,
       itemBuilder: (context, index, animation) {
         final productItem = productList[index];

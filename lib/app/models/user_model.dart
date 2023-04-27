@@ -33,7 +33,7 @@ class UserModel {
   double? serviceFee = 6.0;
   List<int> favoriteIds;
   List<CartModel> carts;
-  List<HistoryOrderModel> historyOrders;
+  List<OrderModel> historyOrders;
   List<String> commentIds = [];
 
   UserModel(
@@ -53,7 +53,8 @@ class UserModel {
       required this.favoriteIds,
       this.fcmToken});
 
-  static UserModel createUserByAuthUser({required User authUser, required createType}) {
+  static UserModel createUserByAuthUser(
+      {required User authUser, required createType}) {
     return UserModel(
         uid: authUser.uid,
         email: authUser.email,
@@ -69,7 +70,8 @@ class UserModel {
         createType: createType);
   }
 
-  static UserModel createAdminByAuthUser({required User authUser, required createType}) {
+  static UserModel createAdminByAuthUser(
+      {required User authUser, required createType}) {
     return UserModel(
       uid: authUser.uid,
       historyOrders: [],
@@ -107,9 +109,10 @@ class UserModel {
         fcmToken = data['fcmToken'] ?? '',
         createType = data['createType'] ?? '',
         favoriteIds = List<int>.from(data['favoriteIds'] ?? []),
-        historyOrders =
-            List<HistoryOrderModel>.from(data['historyOrders']?.map((x) => HistoryOrderModel.fromJson(x)) ?? []),
-        carts = List<CartModel>.from(data['carts']?.map((x) => CartModel.fromJson(x)) ?? []),
+        historyOrders = List<OrderModel>.from(
+            data['historyOrders']?.map((x) => OrderModel.fromJson(x)) ?? []),
+        carts = List<CartModel>.from(
+            data['carts']?.map((x) => CartModel.fromJson(x)) ?? []),
         userType = UserType.values[data['userType'] ?? 0];
 
   Map<String, dynamic> toJson() {
@@ -142,7 +145,7 @@ class UserModel {
     String? address,
     List<CartModel>? carts,
     String? fcmToken,
-    List<HistoryOrderModel>? historyOrders,
+    List<OrderModel>? historyOrders,
     UserType? userType,
     List<int>? favoriteIds,
     List<String>? commentIds,

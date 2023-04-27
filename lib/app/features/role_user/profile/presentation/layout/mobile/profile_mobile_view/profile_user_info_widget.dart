@@ -6,7 +6,7 @@ class ProfileUserInformationWidget extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     final profileController = Get.find<ProfileController>();
-    final currentUser = controller.getCurrentUser;
+    final currentUser = controller.currentUser.value;
     if (currentUser == null) return SizedBox();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -16,7 +16,7 @@ class ProfileUserInformationWidget extends GetView<UserController> {
               borderRadius: BorderRadius.circular(18), color: ThemeColors.textPriceColor.withOpacity(0.1)),
           child: AppPadding.small(
             child: AppText.bodyMedium(
-              text: currentUser.userType?.name ?? '',
+              text: currentUser.userType?.name.tr ?? '',
               fontWeight: FontWeight.w400,
               color: ThemeColors.textPriceColor,
             ),

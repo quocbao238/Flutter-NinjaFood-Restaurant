@@ -1,6 +1,5 @@
 part of 'home_promotion_view.dart';
 
-
 class PromotionListView extends GetView<HomeController> {
   const PromotionListView({Key? key}) : super(key: key);
 
@@ -12,7 +11,8 @@ class PromotionListView extends GetView<HomeController> {
         if (lstPromotions.isEmpty) {
           return const SizedBox();
         }
-        return AppPadding.medium(
+        return AppPadding(
+          padding: const AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
           child: AppAnimationList(
             physics: AlwaysScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,

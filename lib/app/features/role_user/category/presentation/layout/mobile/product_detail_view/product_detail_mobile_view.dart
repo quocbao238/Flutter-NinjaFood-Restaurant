@@ -19,7 +19,7 @@ class FoodDetailMobileView extends GetView<ProductDetailScreenController> {
         alignment: Alignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 64),
+            padding: EdgeInsets.only(bottom: kTextTabBarHeight * 2),
             child: CustomScrollView(
               slivers: [
                 SliverPersistentHeader(
@@ -28,8 +28,9 @@ class FoodDetailMobileView extends GetView<ProductDetailScreenController> {
                     title: AppButtonBack(onPressed: () => Get.back()),
                     expandedHeight: MediaQuery.of(context).size.height * 0.4,
                     minExtentHeight: MediaQuery.of(context).size.height * 0.2,
-                    backgroundImage:
-                        CachedNetworkImage(imageUrl: controller.currentProduct.image?.url ?? '', fit: BoxFit.cover),
+                    backgroundImage: CachedNetworkImage(
+                        imageUrl: controller.currentProduct.image?.url ?? '',
+                        fit: BoxFit.cover),
                   ),
                 ),
                 ProductDetailDescription(),
@@ -40,13 +41,15 @@ class FoodDetailMobileView extends GetView<ProductDetailScreenController> {
             alignment: Alignment.bottomCenter,
             child: Obx(
               () {
-                print("Rebuild button");
                 final loading = controller.loading.value;
                 return Obx(() {
                   final isInCurrentCarts = controller.isInCarts.value;
-                  final String textButton = isInCurrentCarts ? 'This item is already in your cart' : 'Add To Cart';
+                  final String textButton = isInCurrentCarts
+                      ? 'Food_Already_In_Cart'.tr
+                      : 'Add_To_Cart'.tr;
                   return AppPadding(
-                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.regular),
+                    padding:
+                        AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
                     child: SafeArea(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -58,8 +61,8 @@ class FoodDetailMobileView extends GetView<ProductDetailScreenController> {
                               duration: Duration(milliseconds: 300),
                               loading: loading,
                               textButton: textButton,
-                              textDone: 'Added..',
-                              textLoading: 'Adding...',
+                              textDone: 'Add_To_Cart'.tr,
+                              textLoading: 'Adding_To_Cart'.tr,
                               ratioWidthButton: isInCurrentCarts ? 0.65 : 0.85,
                               ratioWidthDone: 0.3,
                               ratioWidthLoading: 0.55,
@@ -72,12 +75,15 @@ class FoodDetailMobileView extends GetView<ProductDetailScreenController> {
                           ),
                           if (isInCurrentCarts && !loading)
                             Obx(() {
-                              final counterCarts = controller.lstCurrentCart.length;
+                              final counterCarts =
+                                  controller.lstCurrentCart.length;
                               return CartItemWidget(
                                 counterCarts: counterCarts,
                                 onPressed: () {
                                   tabsController.onChangeToCartScreen();
-                                  Get.until((route) => Get.currentRoute == AppRouteProvider.tabScreen);
+                                  Get.until((route) =>
+                                      Get.currentRoute ==
+                                      AppRouteProvider.tabScreen);
                                 },
                               );
                             })
@@ -100,7 +106,9 @@ class CartItemWidget extends StatelessWidget {
   final int counterCarts;
   final double? size;
 
-  const CartItemWidget({Key? key, this.onPressed, required this.counterCarts, this.size}) : super(key: key);
+  const CartItemWidget(
+      {Key? key, this.onPressed, required this.counterCarts, this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -113,13 +121,16 @@ class CartItemWidget extends StatelessWidget {
           ElevatedButton(
             onPressed: () => onPressed?.call(),
             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                backgroundColor: MaterialStateProperty.all(ThemeColors.backgroundTextFormDark()),
+                backgroundColor: MaterialStateProperty.all(
+                    ThemeColors.backgroundTextFormDark()),
                 fixedSize: MaterialStateProperty.all(Size(64, 64)),
                 maximumSize: MaterialStateProperty.all(Size(64, 64)),
                 minimumSize: MaterialStateProperty.all(Size(64, 64)),
                 padding: MaterialStateProperty.all(EdgeInsets.zero),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)))),
-            child: Icon(FontAwesomeIcons.cartShopping, color: ThemeColors.primaryColor),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0)))),
+            child: Icon(FontAwesomeIcons.cartShopping,
+                color: ThemeColors.primaryColor),
           ),
           if (counterCarts > 0)
             Align(
@@ -128,7 +139,8 @@ class CartItemWidget extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 16.0),
                     padding: const EdgeInsets.all(4.0),
                     decoration: BoxDecoration(
-                        color: ThemeColors.primaryColor.withOpacity(0.6), borderRadius: BorderRadius.circular(16)),
+                        color: ThemeColors.primaryColor.withOpacity(0.6),
+                        borderRadius: BorderRadius.circular(16)),
                     child: AppText.bodySmall(
                         text: counterCarts.toString(),
                         textAlign: TextAlign.center,

@@ -37,4 +37,13 @@ abstract class DatabaseServiceImpl {
 
   // Comment Product
   Future<Either<Failure, void>> insertCommentProduct({required CommentModel commentModel});
+
+  //Order
+  Future<Either<Failure, void>> insertOrder({required OrderModel orderModel});
+
+  Future<Either<Failure, void>> updateOrder({required OrderModel orderModel});
+
+  //Listen CurrentOder By userId
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenCurrentOrder(String userId);
+
 }

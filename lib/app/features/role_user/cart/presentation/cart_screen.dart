@@ -7,6 +7,6 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppViewLayout(mobileView: OrderDetailsMobileView(),);
+    return AppViewLayout(mobileView: OrderDetailsMobileView());
   }
 }

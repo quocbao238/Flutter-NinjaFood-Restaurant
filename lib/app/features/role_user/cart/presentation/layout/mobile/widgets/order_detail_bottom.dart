@@ -35,16 +35,16 @@ class OrderDetailBottom extends GetView<CartScreenController> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                OrderTitleValueText(title: 'Sub-Total', value: subTotal),
-                OrderTitleValueText(title: 'Service Fee', value: serviceFee),
-                OrderTitleValueText(title: 'Discount', value: discount),
+                OrderTitleValueText(title: 'Cart_Sub_Total'.tr, value: subTotal),
+                OrderTitleValueText(title: 'Cart_Total_Tax'.tr, value: serviceFee),
+                OrderTitleValueText(title: 'Cart_Total_Discount'.tr, value: discount),
                 AppPadding(
                   padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      AppText.titleSmall(text: 'Total', color: ThemeColors.textDarkColor, fontWeight: FontWeight.bold),
+                      AppText.titleSmall(text: 'Cart_Total_Price'.tr, color: ThemeColors.textDarkColor, fontWeight: FontWeight.bold),
                       Expanded(
                         child: AppText.titleMedium(
                             textAlign: TextAlign.end,

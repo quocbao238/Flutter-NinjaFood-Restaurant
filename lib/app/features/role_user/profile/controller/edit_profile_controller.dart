@@ -30,7 +30,7 @@ class EditProfileController extends BaseController {
 
   @override
   void onInit() {
-    currentUser.value = userController.getCurrentUser;
+    currentUser.value = userController.currentUser.value;
     firstNameController = TextEditingController(text: currentUser.value?.firstName ?? '');
     lastNameController = TextEditingController(text: currentUser.value?.lastName ?? '');
     phoneController = TextEditingController(text: currentUser.value?.phoneNumber ?? '');

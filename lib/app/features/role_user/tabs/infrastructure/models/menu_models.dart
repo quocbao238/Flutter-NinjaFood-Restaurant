@@ -23,32 +23,32 @@ class MenuItem {
   });
 
   static List<MenuItem> listMenu = [
-    MenuItem(index: 0, title: 'Home', iconData: FontAwesomeIcons.house, screen: HomeScreen(), menuType: MenuType.home),
+    MenuItem(index: 0, title: 'Drawer_Home', iconData: FontAwesomeIcons.house, screen: HomeScreen(), menuType: MenuType.home),
     MenuItem(
         index: 1,
-        title: 'Profile',
+        title: 'Drawer_Profile',
         iconData: FontAwesomeIcons.user,
         screen: ProfileScreen(),
         menuType: MenuType.profile),
     MenuItem(
         index: 2,
-        title: 'Cart',
+        title: 'Drawer_Cart',
         iconData: FontAwesomeIcons.cartShopping,
         screen: CartScreen(),
         menuType: MenuType.cart),
     MenuItem(
-        index: 3, title: 'Chat', iconData: FontAwesomeIcons.message, screen: GroupChatScreen(), menuType: MenuType.chat),
-    MenuItem(index: 4, title: 'Change language', iconData: FontAwesomeIcons.gear, screen: null, menuType: MenuType.language),
+        index: 3, title: 'Drawer_Chat', iconData: FontAwesomeIcons.message, screen: GroupChatScreen(), menuType: MenuType.chat),
+    MenuItem(index: 4, title: 'Drawer_Language_Change', iconData: FontAwesomeIcons.gear, screen: null, menuType: MenuType.language),
     MenuItem(
         index: 5,
-        title: 'Change Theme',
+        title: 'Drawer_Theme_Change',
         iconData: FontAwesomeIcons.themeisle,
         screen: null,
         menuType: MenuType.changeTheme),
-    MenuItem(index: 6, title: 'About', iconData: FontAwesomeIcons.info, screen: null, menuType: MenuType.about),
+    MenuItem(index: 6, title: 'Drawer_About', iconData: FontAwesomeIcons.info, screen: null, menuType: MenuType.about),
     MenuItem(
         index: 7,
-        title: 'Logout',
+        title: 'Drawer_Logout',
         iconData: FontAwesomeIcons.rightFromBracket,
         screen: null,
         menuType: MenuType.logout),

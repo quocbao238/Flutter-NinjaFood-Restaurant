@@ -42,7 +42,8 @@ class SignUpController extends BaseController {
     confirmPasswordController.addListener(() {
       final password = passwordController.text;
       final confirmPassword = confirmPasswordController.text;
-      confirmPasswordError.value = Validator.validatePasswordConfirm(password, confirmPassword);
+      confirmPasswordError.value =
+          Validator.validatePasswordConfirm(password, confirmPassword);
     });
 
     super.onInit();
@@ -53,27 +54,44 @@ class SignUpController extends BaseController {
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
-
     super.dispose();
   }
 
+  bool _checkValidEmailAndPassword() {
+    final email = emailController.text;
+    final password = passwordController.text;
+    final confirmPassword = confirmPasswordController.text;
+    emailError.value = Validator.validateEmail(email);
+    passwordError.value = Validator.validatePassword(password);
+    confirmPasswordError.value =
+        Validator.validatePasswordConfirm(password, confirmPassword);
+    return emailError.value == null &&
+        passwordError.value == null &&
+        confirmPasswordError.value == null;
+  }
+
   Future<void> onPressedCreateAccount() async {
-    if (emailError.value != null || passwordError.value != null || confirmPasswordError.value != null) {
-      return;
-    }
+    if (!_checkValidEmailAndPassword()) return;
+
     final email = emailController.text;
     final password = passwordController.text;
     loading(true);
-    final response = await authService.registerWithEmail(email: email, password: password);
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) => _createInsertUserDatabase(firebaseAuthUser: r.user!, createType: UserCreateType.email));
+    final response =
+        await authService.registerWithEmail(email: email, password: password);
+    await response.fold(
+        (l) => handleFailure(_logName, l, showDialog: true),
+        (r) => _createInsertUserDatabase(
+            firebaseAuthUser: r.user!, createType: UserCreateType.email));
     loading(false);
   }
 
-  Future<void> _createInsertUserDatabase({required User firebaseAuthUser, required String createType}) async {
-    final newUser = UserModel.createUserByAuthUser(authUser: firebaseAuthUser, createType: createType);
+  Future<void> _createInsertUserDatabase(
+      {required User firebaseAuthUser, required String createType}) async {
+    final newUser = UserModel.createUserByAuthUser(
+        authUser: firebaseAuthUser, createType: createType);
     final response = await dbService.insertUser(userModel: newUser);
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
+        (r) {
       Get.offAllNamed(AppRouteProvider.signupProcessScreen);
     });
   }

@@ -13,12 +13,12 @@ class ProfileController extends BaseController {
   final DatabaseService databaseService = DatabaseService.instance;
   final UserController userController = UserController.instance;
   final lstProducts = <ProductModel>[].obs;
-  final lstHistory = <HistoryOrderModel>[].obs;
+  final lstHistory = <OrderModel>[].obs;
 
   @override
   void onInit() {
     _getListFavoritesProduct();
-    final _lstHistory = userController.getCurrentUser?.historyOrders ?? [];
+    final _lstHistory = userController.currentUser.value?.historyOrders ?? [];
     lstHistory.assignAll(_lstHistory);
     userController.currentUser.listen((event) {
       if (event == null) return;
@@ -34,15 +34,15 @@ class ProfileController extends BaseController {
     super.onClose();
   }
 
-
   void _getListFavoritesProduct() async {
     loading.value = true;
-    final lstFavoriteIds = userController.getCurrentUser?.favoriteIds ?? [];
+    final lstFavoriteIds = userController.currentUser.value?.favoriteIds ?? [];
     if (lstFavoriteIds.isEmpty) {
       loading.value = false;
       return;
     }
-    final response = await databaseService.getListProductByListId(lstFavoriteIds);
+    final response =
+        await databaseService.getListProductByListId(lstFavoriteIds);
     response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
       if (r.length != lstProducts.length) {
         lstProducts.assignAll(r);
@@ -55,7 +55,11 @@ class ProfileController extends BaseController {
     Get.toNamed(AppRouteProvider.editProfileScreen);
   }
 
-  void onPressRating(HistoryOrderModel historyModel) {
+  void onPressRating(OrderModel historyModel) {
     Get.toNamed(AppRouteProvider.ratingScreen, arguments: historyModel.uid);
+  }
+
+  void onPressedFavoriteItem(ProductModel productModel) {
+    Get.toNamed(AppRouteProvider.foodDetailScreen, arguments: productModel);
   }
 }

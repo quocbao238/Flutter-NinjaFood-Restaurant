@@ -7,7 +7,6 @@ class UserController extends GetxController implements Bootable {
   final _authService = AuthService.instance;
   final _databaseService = DatabaseService.instance;
   final _consoleService = ConsoleService.instance;
-  final _notificationService = NotificationService.instance;
 
   // Firebase Auth User
   late Rx<User?> _firebaseAuthUser = Rx<User?>(null);
@@ -18,26 +17,9 @@ class UserController extends GetxController implements Bootable {
 
   // Database User
   final currentUser = Rx<UserModel?>(null);
-  final adminUser = Rx<UserModel?>(null);
 
-  UserModel? get getCurrentUser => currentUser.value;
-
-  UserModel? get getAdminUser => adminUser.value;
-
-  void setAdminUser(UserModel? user) => adminUser.value = user;
-
-  void setCurrentUser(UserModel? user) => currentUser.value = user;
-
-  bool isUser() => currentUser.value?.role == ROLE_USER;
-
-  bool isAdmin() => currentUser.value?.role == ROLE_ADMIN;
   late StreamSubscription<UserModel?>? _userStream;
-
-  // RxList<ChatModel> chatList = RxList<ChatModel>([]);
-
   StreamSubscription? _cloudUserSubscription;
-
-  // StreamSubscription? _messageSubscription;
 
   Future<void> call() async {
     Get.put(this, permanent: true);
@@ -65,36 +47,20 @@ class UserController extends GetxController implements Bootable {
         return;
       }
       _handleCloudUserChanged();
-
-      // Update FCM Token to Cloud
-      _userStream = currentUser.listen((value) async {
-        if (value == null) return;
-        final response = await _databaseService.getAdminUser();
-        response.fold((l) => _consoleService.show(_logName, l.message), (r) {
-          setAdminUser(r);
-        });
-
-        final fcmToken = await _notificationService.getFCMToken();
-        if (fcmToken != null) {
-          getCurrentUser!.fcmToken = fcmToken;
-          await _databaseService.updateUser(userModel: getCurrentUser!);
-          _consoleService.show(_logName, 'Update FCM Token to Cloud');
-          _userStream?.cancel();
-        }
-      });
-      if (currentUser.value == null) return;
-
-      _consoleService.show(_logName, 'User is signed in!');
     });
   }
 
   void _handleCloudUserChanged() async {
     if (_cloudUserSubscription != null || getFirebaseAuthUser == null) return;
     _consoleService.show(_logName, '_handleCloudUserChanged Run');
-    _cloudUserSubscription = _databaseService.getUserDataStream(getFirebaseAuthUser!.uid).listen((event) {
+    _cloudUserSubscription = _databaseService
+        .getUserDataStream(getFirebaseAuthUser!.uid)
+        .listen((event) {
       currentUser.value = UserModel.fromJson(event.data()!);
-      _consoleService.show(_logName, '_handleCloudUserChanged ${currentUser.value!.toJson()}');
+      _consoleService.show(
+          _logName, '_handleCloudUserChanged ${currentUser.value!.toJson()}');
       FirebaseCrashlytics.instance.setUserIdentifier(currentUser.value!.uid);
+      if (currentUser.value!.isAdmin()) return;
     });
   }
 
@@ -107,10 +73,10 @@ class UserController extends GetxController implements Bootable {
     String? fcmToken,
     List<int>? favoriteIds,
     List<CartModel>? carts,
-    List<HistoryOrderModel>? historyOrders,
+    List<OrderModel>? historyOrders,
     List<String>? cmtIds,
   }) async {
-    final _currentUser = getCurrentUser;
+    final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     try {
       final newDataUser = _currentUser.copyWith(
@@ -132,8 +98,9 @@ class UserController extends GetxController implements Bootable {
     }
   }
 
-  Future<Either<Failure, void>> favoriteProduct({required int productId}) async {
-    final _currentUser = getCurrentUser;
+  Future<Either<Failure, void>> favoriteProduct(
+      {required int productId}) async {
+    final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     final currentFavoriteProducts = _currentUser.favoriteIds;
     currentFavoriteProducts.contains(productId)
@@ -147,12 +114,14 @@ class UserController extends GetxController implements Bootable {
     }
   }
 
-  Future<Either<Failure, void>> addProductToCard({required ProductModel productModel}) async {
-    final _currentUser = getCurrentUser;
+  Future<Either<Failure, void>> addProductToCard(
+      {required ProductModel productModel}) async {
+    final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     List<CartModel> currentCartsProduct = _currentUser.carts;
 
-    int index = currentCartsProduct.indexWhere((element) => element.productModel.id == productModel.id);
+    int index = currentCartsProduct
+        .indexWhere((element) => element.productModel.id == productModel.id);
 
     if (index != -1) {
       currentCartsProduct[index].increaseQuantity();
@@ -167,11 +136,13 @@ class UserController extends GetxController implements Bootable {
     }
   }
 
-  // Comment Product
+// Comment Product
   Future<Either<Failure, void>> insertComment(
-      {String? comment, required double rating, required String historyId}) async {
+      {String? comment,
+      required double rating,
+      required String historyId}) async {
     FocusManager.instance.primaryFocus?.unfocus();
-    final _currentUser = getCurrentUser;
+    final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     final createAt = createTimeStamp();
     try {
@@ -183,14 +154,31 @@ class UserController extends GetxController implements Bootable {
           userName: _currentUser.getName(),
           comment: comment,
           rating: rating);
-      final insertCommentProduct = await _databaseService.insertCommentProduct(commentModel: commentModel);
+      final insertCommentProduct = await _databaseService.insertCommentProduct(
+          commentModel: commentModel);
       return insertCommentProduct.fold((l) => left(l), (r) async {
-        _currentUser.historyOrders.firstWhere((element) => element.uid == historyId).isRating = true;
+        _currentUser.historyOrders
+            .firstWhere((element) => element.uid == historyId)
+            .isRating = true;
         final currentCommentIds = _currentUser.commentIds;
         currentCommentIds.add(commentModel.uid);
 
-        return await updateUser(historyOrders: _currentUser.historyOrders, cmtIds: currentCommentIds);
+        return await updateUser(
+            historyOrders: _currentUser.historyOrders,
+            cmtIds: currentCommentIds);
       });
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  Future<Either<Failure, void>> updateStatusOrder(OrderModel orderModel) async {
+    try {
+      orderModel.status = HistoryStatus.done;
+      await _databaseService.updateOrder(orderModel: orderModel);
+      final historyOrders = currentUser.value?.historyOrders ?? [];
+      await updateUser(historyOrders: [...historyOrders, orderModel]);
+      return right(null);
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }

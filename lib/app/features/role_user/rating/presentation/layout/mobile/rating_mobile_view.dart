@@ -11,7 +11,7 @@ class RatingMobileView extends GetView<RatingScreenController> {
 
   @override
   Widget build(BuildContext context) {
-    final restaurantImage = UserController.instance.getAdminUser?.photoUrl ?? '';
+    final restaurantImage = UserController.instance.currentUser.value?.photoUrl ?? '';
     return AppScaffoldBackgroundImage.pattern(
       appBarWidget: AppButtonBack(onPressed: () => Get.back()),
       body: AppPadding(

@@ -43,16 +43,17 @@ dependencies:
   permission_handler: ^10.2.0
   path_provider: ^2.0.14
   open_file: ^3.2.1
-  flutter_html: ^2.2.0
+#  flutter_html: ^2.2.0
   flutter_slidable: ^2.0.0
   flutter_rating_bar: ^4.0.1
+  lottie: ^2.3.2
 
 
   ninja_theme:
-    git:
-      url: https://github.com/quocbao238/ninjafood_theme.git
-      ref: devMaster
-#    path: ../NinjaFood_Theme
+#    git:
+#      url: https://github.com/quocbao238/ninjafood_theme.git
+#      ref: devMaster
+    path: ../NinjaFood_Theme
 
 
 flutter_icons:
@@ -77,3 +78,4 @@ flutter:
 
   assets:
     - assets/icons/
+    - assets/lottie/

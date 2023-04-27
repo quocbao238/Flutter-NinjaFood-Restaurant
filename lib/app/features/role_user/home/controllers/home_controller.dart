@@ -102,7 +102,7 @@ class HomeController extends BaseController {
 
   void onSuggestionSelected(ProductModel product) {
     lastSearch = product.name ?? '';
-    // Get.toNamed(AppRouteProvider.searchScreen, arguments: suggestion);
+    Get.toNamed(AppRouteProvider.foodDetailScreen, arguments: product);
   }
 
   void onPressedViewMorePopularMenu() {
