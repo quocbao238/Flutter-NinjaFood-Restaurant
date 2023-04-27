@@ -11,6 +11,7 @@ class GroupChatScreenController extends BaseController {
 
   @override
   void onInit() {
+    groupChats.assignAll(messageController.groupChats.toList());
     messageController.groupChats.listen((event) => groupChats.assignAll(event));
     super.onInit();
   }
@@ -25,10 +26,12 @@ class GroupChatScreenController extends BaseController {
   }
 
   Future<void> handleOnTapChat() async {
-    final response = await messageController.sendMessage(message: 'Hello', messageChatType: MessageChatType.text);
+    final response = await messageController.sendMessage(
+        message: 'Hello', messageChatType: MessageChatType.text);
     response.fold((l) => print(l), (r) {
       if (groupChats.isNotEmpty) {
-        Get.toNamed(AppRouteProvider.chatDetailsScreen, arguments: groupChats[0]);
+        Get.toNamed(AppRouteProvider.chatDetailsScreen,
+            arguments: groupChats[0]);
       }
     });
   }

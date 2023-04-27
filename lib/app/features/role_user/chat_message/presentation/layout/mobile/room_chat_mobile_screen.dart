@@ -27,11 +27,7 @@ class RoomChatMobileScreen extends GetView<RoomChatScreenController> {
                   height: 45,
                   url: controller.receiverUser.photoUrl ?? '')),
         ),
-        body: AppPadding(
-          padding: AppEdgeInsets.only(
-              left: AppGapSize.medium,
-              right: AppGapSize.medium,
-              bottom: AppGapSize.medium),
+        body: AppPadding.medium(
           child: Stack(
             alignment: Alignment.bottomLeft,
             children: [

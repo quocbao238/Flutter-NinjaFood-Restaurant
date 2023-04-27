@@ -9,8 +9,6 @@ class MessageController extends GetxController implements Bootable {
   RxList<MessageChat> messageList = <MessageChat>[].obs;
   StreamSubscription? _messageSubscription;
 
-
-
   @override
   Future<void> call() async {
     Get.put(this, permanent: true);
@@ -20,10 +18,12 @@ class MessageController extends GetxController implements Bootable {
     userController.currentUser.listen((user) {
       if (user == null) {
         _messageSubscription?.cancel();
+        messageList.clear();
+        groupChats.clear();
+        return;
       }
-      if (user != null) {
-        _handleStreamGroupChat();
-      }
+
+      _handleStreamGroupChat();
     });
   }
 

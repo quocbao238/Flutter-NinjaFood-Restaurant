@@ -1,17 +1,23 @@
+import 'package:flutter/material.dart';
 import 'package:ninjafood/app/models/cart_model.dart';
 
 enum HistoryStatus {
-  pending('Pending', 'pending', 'assets/lottie/order_pending.json'),
-  delivering('Delivering', 'delivering', 'assets/lottie/order_delivering.json'),
-  delivered('Delivered', 'delivered', 'assets/lottie/order_delivered.json'),
-  cancelled('Cancelled', 'cancelled', 'assets/lottie/order_cancel.json'),
-  done('Done', 'done', '');
+  pending(
+      'Pending', 'pending', 'assets/lottie/order_pending.json', Colors.orange),
+  delivering('Delivering', 'delivering', 'assets/lottie/order_delivering.json',
+      Colors.blueAccent),
+  delivered('Delivered', 'delivered', 'assets/lottie/order_delivered.json',
+      Colors.purple),
+  cancelled('Cancelled', 'cancel', 'assets/lottie/order_cancel.json',
+      Colors.green),
+  done('Done', 'done', '', Colors.redAccent);
 
   final String status;
   final String json;
   final String lottieUrl;
+  final Color color;
 
-  const HistoryStatus(this.status, this.json, this.lottieUrl);
+  const HistoryStatus(this.status, this.json, this.lottieUrl, this.color);
 }
 
 class OrderModel {

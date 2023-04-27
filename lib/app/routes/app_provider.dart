@@ -23,4 +23,5 @@ class AppRouteProvider {
   static const String editProfileScreen = '/editProfileScreen';
   static const String notificationScreen = '/notificationScreen';
   static const String ratingScreen = '/rateFoodScreen';
+
 }
