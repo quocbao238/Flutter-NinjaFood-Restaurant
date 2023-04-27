@@ -11,17 +11,25 @@ class RoomChatMobileScreen extends GetView<RoomChatScreenController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return AppScaffoldBackgroundImage.pattern(
-        isLoading: controller.loading.value,
-        appBarWidget: RoomChatAppBarWidget(),
-        body: AppPadding(
-          padding: AppEdgeInsets.only(left: AppGapSize.medium, right: AppGapSize.medium, bottom: AppGapSize.medium),
-          child: Stack(
-            alignment: Alignment.bottomLeft,
-            children: [
-              Column(children: [RoomChatListMessageWidget(), RoomChatBottomSendWidget()]),
-              RoomChatButtonSelectFileWidget(),
-            ],
+      return SafeArea(
+        child: AppScaffoldBackgroundImage.pattern(
+          isLoading: controller.loading.value,
+          appBarWidget: RoomChatAppBarWidget(),
+          body: AppPadding(
+            padding: AppEdgeInsets.only(
+                left: AppGapSize.medium,
+                right: AppGapSize.medium,
+                bottom: AppGapSize.medium),
+            child: Stack(
+              alignment: Alignment.bottomLeft,
+              children: [
+                Column(children: [
+                  RoomChatListMessageWidget(),
+                  RoomChatBottomSendWidget()
+                ]),
+                RoomChatButtonSelectFileWidget(),
+              ],
+            ),
           ),
         ),
       );

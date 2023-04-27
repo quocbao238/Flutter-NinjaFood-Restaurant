@@ -8,7 +8,7 @@ class SuccessNotificationMobileView extends GetView<ForgotPassWordController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldBackgroundImage.splash(
+    return AppScaffoldBackgroundImage.pattern(
       body: AppSizeScale(
         ratioWidth: 1,
         child: Column(

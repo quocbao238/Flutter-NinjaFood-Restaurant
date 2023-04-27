@@ -28,7 +28,10 @@ class AppBarHomeWidget extends GetView<TabsController> {
                     onPressed: () => controller.toggleDrawer());
               }),
               const Expanded(
-                child: AppPadding.medium(
+                child: AppPadding(
+                    padding: const AppEdgeInsets.only(
+                        top: AppGapSize.paddingMedium,
+                        bottom: AppGapSize.regular),
                     child: AppText.headlineSmall(text: 'Ninja Food')),
               ),
               AppButtonNotification(

@@ -9,7 +9,7 @@ class SignUpMobileScreen extends GetView<SignUpController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => AppScaffoldBackgroundImage.splash(
+      () => AppScaffoldBackgroundImage.pattern(
         isLoading: controller.loading.value,
         body: SingleChildScrollView(
           child: SafeArea(

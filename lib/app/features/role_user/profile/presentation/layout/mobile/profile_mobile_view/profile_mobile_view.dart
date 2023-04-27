@@ -44,9 +44,11 @@ class ProfileMobileView extends GetView<UserController> {
                 delegate: ProfileAppBar(
                   expandedHeight: MediaQuery.of(context).size.height * 0.4,
                   minExtentHeight: MediaQuery.of(context).size.height * 0.2,
-                  backgroundImage: CachedNetworkImage(
-                      imageUrl: currentUser.photoUrl ?? '', fit: BoxFit.cover),
-                  // set the image as the background
+                  backgroundImage: Obx(
+                    () => CachedNetworkImage(
+                        imageUrl: controller.currentUser.value?.photoUrl ?? '',
+                        fit: BoxFit.fill),
+                  ),
                   title: AppButtonDrawer(
                       onPressed: () => tabsController.toggleDrawer()),
                 )),

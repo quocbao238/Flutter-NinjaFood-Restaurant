@@ -11,7 +11,7 @@ class SignupSuccessMobileView extends StatelessWidget {
     // Future.delayed(Duration(seconds: 4)).then((value) {
     //   Get.offAllNamed(AppRouteProvider.tabScreen);
     // });
-    return AppScaffoldBackgroundImage.splash(
+    return AppScaffoldBackgroundImage.pattern(
       body: AppSizeScale(
         ratioWidth: 1,
         child: Column(
@@ -27,12 +27,18 @@ class SignupSuccessMobileView extends StatelessWidget {
                   AppIcons.success(),
                   AppPadding.regular(
                       child: AppText.headlineLarge(
-                          text: 'Congrats_Title'.tr, color: ThemeColors.primaryColor, fontWeight: FontWeight.bold)),
+                          text: 'Congrats_Title'.tr,
+                          color: ThemeColors.primaryColor,
+                          fontWeight: FontWeight.bold)),
                   AppText.titleLarge(text: 'Congrats_Description'.tr)
                 ]))),
-            AppPadding.regular(
-                child: AppButton.max(
-                    title: 'Next_Button'.tr, onPressed: () => Get.offAllNamed(AppRouteProvider.tabScreen)))
+            SafeArea(
+              child: AppPadding.regular(
+                  child: AppButton.max(
+                      title: 'Next_Button'.tr,
+                      onPressed: () =>
+                          Get.offAllNamed(AppRouteProvider.tabScreen))),
+            )
           ],
         ),
       ),

@@ -17,7 +17,6 @@ class TabsMobileView extends GetView<TabsController> {
         () {
           final currentMenuItem = controller.currentMenuItem.value;
           return AppScaffoldBackgroundImage.splash(
-            wrapBodyWithSafeArea: currentMenuItem.index != 1,
             isLoading: loading,
             body: ZoomDrawer(
                 controller: controller.zoomDrawerController,

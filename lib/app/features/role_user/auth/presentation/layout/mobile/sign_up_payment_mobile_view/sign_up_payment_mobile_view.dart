@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_process_controller.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/layout/mobile/sign_up_payment_mobile_view/sign_up_payment_button.dart';
+import 'package:ninjafood/app/widgets/custom_appbar.dart';
 
 class SignUpPaymentMobileView extends GetView<SignUpProcessController> {
   const SignUpPaymentMobileView({super.key});
@@ -10,7 +11,8 @@ class SignUpPaymentMobileView extends GetView<SignUpProcessController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage.pattern(
-      onPressBackButton: controller.onPressBack,
+      appBarWidget: CustomAppBar.back(),
+      // onPressBackButton: controller.onPressBack,
       body: Column(
         children: [
           Expanded(
@@ -59,10 +61,11 @@ class SignUpPaymentMobileView extends GetView<SignUpProcessController> {
               ],
             ),
           ),
-          AppPadding.regular(
-            child: AppButton.max(
-                title: 'Next_Button'.tr,
-                onPressed: controller.onPressedNextPayment),
+          SafeArea(
+            child: AppPadding.regular(
+              child: AppButton.max(
+                  title: 'Next_Button'.tr, onPressed: controller.onPressedNextPayment),
+            ),
           ),
         ],
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_process_controller.dart';
+import 'package:ninjafood/app/widgets/custom_appbar.dart';
 
 class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
   const SignUpProcessMobileScreen({super.key});
@@ -9,9 +10,9 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => AppScaffoldBackgroundImage.splash(
+      () => AppScaffoldBackgroundImage.pattern(
         isLoading: controller.loading.value,
-        onPressBackButton: controller.onPressBack,
+        appBarWidget: CustomAppBar.back(),
         body: Column(
           children: [
             Expanded(
@@ -21,7 +22,8 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppPadding(
-                      padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+                      padding: AppEdgeInsets.symmetric(
+                          horizontal: AppGapSize.medium),
                       child: AppText.headlineSmall(
                         textAlign: TextAlign.start,
                         text: 'SignUpProcessScreen_Title'.tr,
@@ -35,7 +37,9 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
                           fontWeight: FontWeight.w400),
                     ),
                     AppPadding(
-                      padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                      padding: AppEdgeInsets.symmetric(
+                          horizontal: AppGapSize.medium,
+                          vertical: AppGapSize.small),
                       child: AppTextFormField(
                         controller: controller.firstNameController,
                         errorText: controller.firstNameError.value,
@@ -43,7 +47,9 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
                       ),
                     ),
                     AppPadding(
-                      padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                      padding: AppEdgeInsets.symmetric(
+                          horizontal: AppGapSize.medium,
+                          vertical: AppGapSize.small),
                       child: AppTextFormField(
                         controller: controller.lastNameController,
                         errorText: controller.lastNameError.value,
@@ -51,7 +57,9 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
                       ),
                     ),
                     AppPadding(
-                      padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium, vertical: AppGapSize.small),
+                      padding: AppEdgeInsets.symmetric(
+                          horizontal: AppGapSize.medium,
+                          vertical: AppGapSize.small),
                       child: AppTextFormField.phone(
                         controller: controller.phoneController,
                         errorText: controller.phoneError.value,
@@ -62,8 +70,11 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
                 ),
               ),
             ),
-            AppPadding.regular(
-              child: AppButton.max(title: 'Next_Button'.tr, onPressed: controller.onPressedNext),
+            SafeArea(
+              child: AppPadding.regular(
+                child: AppButton.max(
+                    title: 'Next_Button'.tr, onPressed: controller.onPressedNext),
+              ),
             ),
           ],
         ),

@@ -12,21 +12,23 @@ class SignUpPhotoPreview extends GetView<SignUpProcessController> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SizedBox(
-          height: 250,
-          width: 250,
+        Positioned.fill(
           child: DecoratedBox(
             decoration: BoxDecoration(
                 color: Color(0xFFC4C4C4),
                 borderRadius: BorderRadius.circular(16),
-                image: DecorationImage(image: Image.file(controller.imageFile!).image, fit: BoxFit.cover)),
+                image: DecorationImage(
+                    image: Image.file(controller.imageFile!).image,
+                    fit: BoxFit.cover)),
           ),
         ),
         Positioned(
-            top: 10,
-            right: 11,
-            child:
-                GestureDetector(onTap: removePhoto, child: SizedBox(height: 30, width: 30, child: AppIcons.close()))),
+            top: 8,
+            right: 8,
+            child: GestureDetector(
+                onTap: removePhoto,
+                child:
+                    SizedBox(height: 30, width: 30, child: AppIcons.close()))),
       ],
     );
   }
