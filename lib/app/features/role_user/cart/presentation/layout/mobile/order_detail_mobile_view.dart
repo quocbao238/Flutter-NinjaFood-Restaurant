@@ -21,7 +21,7 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
             final _listCarts = controller.lstCarts;
             if (_listCarts.isEmpty) {
               return Container(
-                margin: EdgeInsets.only(bottom: kToolbarHeight  * 2),
+                margin: EdgeInsets.only(bottom: kToolbarHeight * 2),
                 alignment: Alignment.center,
                 width: double.infinity,
                 height: double.infinity,
@@ -45,7 +45,7 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
                   padding: AppEdgeInsets.only(top: AppGapSize.small),
                   child: Obx(
                     () {
-                      return Center(
+                      return SafeArea(
                         child: AnimationButton(
                             ratioWidthDone: 0.95,
                             ratioWidthLoading: 0.9,

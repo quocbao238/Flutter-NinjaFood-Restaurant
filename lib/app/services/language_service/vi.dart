@@ -210,6 +210,8 @@ const Map<String, String> vi = {
   "OrderReceived": "Đã nhận đơn hàng!",
   "Done": "Đơn hàng đã hoàn thành",
 
+  "Image_Preview": "Xem hình ảnh",
+
   "Cart_Remove_Item_Message": "Bạn có muốn xóa món ăn này khỏi giỏ hàng?",
   "Cart_Remove_Item": "Xóa món ăn",
 };

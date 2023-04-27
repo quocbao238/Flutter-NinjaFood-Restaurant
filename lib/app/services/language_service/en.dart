@@ -202,6 +202,8 @@ const Map<String, String> en = {
   "OrderReceived": "Order received",
   "Done": "Order completed",
 
+  "Image_Preview": "Image Preview",
+
   "Cart_Remove_Item_Message": "Are you sure you want to remove this item?",
   "Cart_Remove_Item": "Remove Item",
 };

@@ -6,12 +6,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/profile/controller/edit_profile_controller.dart';
+import 'package:ninjafood/app/widgets/custom_appbar.dart';
 
 part 'edit_profile_avatar.dart';
 
 part 'edit_profile_input_title.dart';
 
-part 'edit_profile_app_bar.dart';
 
 class EditProfileMobileScreen extends GetView<EditProfileController> {
   const EditProfileMobileScreen({super.key});
@@ -19,7 +19,7 @@ class EditProfileMobileScreen extends GetView<EditProfileController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage.pattern(
-      appBarWidget: EditProfileAppBarWidget(),
+      appBarWidget: CustomAppBar.back(title: 'Edit_Profile_Title'.tr),
       body: AppPadding(
         padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
         child: Obx(() {
@@ -78,18 +78,20 @@ class EditProfileMobileScreen extends GetView<EditProfileController> {
                   ),
                 ),
               ),
-              AppPadding(
-                padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
-                child: AnimationButton(
-                  ratioWidthButton: 0.95,
-                  ratioWidthDone: 0.8,
-                  ratioWidthLoading: 0.9,
-                  textButton: 'Edit_Profile_Update'.tr,
-                  onDone: () => Get.back(),
-                  loading: controller.loading.value,
-                  onPressed: () => controller.updateUser(),
-                  textDone: 'Edit_Profile_Update_Success'.tr,
-                  textLoading: 'Edit_Profile_Updating'.tr,
+              SafeArea(
+                child: AppPadding(
+                  padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
+                  child: AnimationButton(
+                    ratioWidthButton: 0.95,
+                    ratioWidthDone: 0.8,
+                    ratioWidthLoading: 0.9,
+                    textButton: 'Edit_Profile_Update'.tr,
+                    onDone: () => Get.back(),
+                    loading: controller.loading.value,
+                    onPressed: () => controller.updateUser(),
+                    textDone: 'Edit_Profile_Update_Success'.tr,
+                    textLoading: 'Edit_Profile_Updating'.tr,
+                  ),
                 ),
               )
             ],

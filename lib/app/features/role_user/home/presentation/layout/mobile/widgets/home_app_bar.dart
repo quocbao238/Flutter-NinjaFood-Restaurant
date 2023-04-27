@@ -10,40 +10,38 @@ class AppBarHomeWidget extends GetView<TabsController> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Obx(() {
-                final homeController = Get.find<HomeController>();
-                final isViewTypeNormal =
-                    homeController.homeViewType.value == HomeViewType.normal;
-                if (!isViewTypeNormal) {
-                  return AppButtonBack(onPressed: () {
-                    homeController.onPressedBackToNormalHome();
-                  });
-                }
-                return AppButtonDrawer(
-                    onPressed: () => controller.toggleDrawer());
-              }),
-              const Expanded(
-                child: AppPadding(
-                    padding: const AppEdgeInsets.only(
-                        top: AppGapSize.paddingMedium,
-                        bottom: AppGapSize.regular),
-                    child: AppText.headlineSmall(text: 'Ninja Food')),
-              ),
-              AppButtonNotification(
-                  onPressed: () => controller.onPressedNotification()),
-            ],
-          ),
-          AppPadding(
-              padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
-              child: ProductSearchBar()),
-          AppPadding.small()
-        ],
-      ),
+    return Column(
+      children: [
+        Row(
+          children: [
+            Obx(() {
+              final homeController = Get.find<HomeController>();
+              final isViewTypeNormal =
+                  homeController.homeViewType.value == HomeViewType.normal;
+              if (!isViewTypeNormal) {
+                return AppButtonBack(onPressed: () {
+                  homeController.onPressedBackToNormalHome();
+                });
+              }
+              return AppButtonDrawer(
+                  onPressed: () => controller.toggleDrawer());
+            }),
+            const Expanded(
+              child: AppPadding(
+                  padding: const AppEdgeInsets.only(top: AppGapSize.medium),
+                  child: AppText.headlineSmall(text: 'Ninja Food')),
+            ),
+            AppButtonNotification(
+                onPressed: () => controller.onPressedNotification()),
+          ],
+        ),
+        AppPadding(
+            padding: AppEdgeInsets.only(
+                left: AppGapSize.medium,
+                right: AppGapSize.medium,
+                top: AppGapSize.medium),
+            child: ProductSearchBar()),
+      ],
     );
   }
 }

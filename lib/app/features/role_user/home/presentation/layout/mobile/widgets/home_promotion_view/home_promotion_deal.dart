@@ -6,7 +6,7 @@ class PromotionDeal extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return AppPadding(
-      padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
+      padding: AppEdgeInsets.symmetric(vertical: AppGapSize.small),
       child: Obx(() {
         final promotions = controller.promotions;
         if (promotions.isEmpty) return SizedBox();

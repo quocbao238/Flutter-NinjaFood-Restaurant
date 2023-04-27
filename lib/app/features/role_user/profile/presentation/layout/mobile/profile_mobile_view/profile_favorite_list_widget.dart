@@ -9,8 +9,7 @@ class FavoriteList extends GetView<ProfileController> {
     final userController = UserController.instance;
     return Obx(
       () {
-        final user = userController.currentUser;
-        final lstFavorite = controller.lstProducts;
+        final lstFavorite = controller.lstProducts.toList();
         if (lstFavorite.isEmpty) return SizedBox.shrink();
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

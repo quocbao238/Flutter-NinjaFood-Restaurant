@@ -46,8 +46,7 @@ class CustomTrailingAppbar extends StatelessWidget {
             padding: const AppEdgeInsets.only(
                 top: AppGapSize.paddingMedium,
                 left: AppGapSize.paddingMedium,
-                right: AppGapSize.paddingMedium,
-                bottom: AppGapSize.regular),
+                right: AppGapSize.paddingMedium),
             child: SizedBox(width: 45, height: 45));
   }
 }

@@ -12,6 +12,7 @@ import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controlle
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/features/role_user/category/presentation/layout/mobile/product_detail_view/widgets/product_favorite_item.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/widgets/custom_appbar.dart';
 
 part 'profile_appbar.dart';
 
@@ -30,8 +31,8 @@ class ProfileMobileView extends GetView<UserController> {
 
   @override
   Widget build(BuildContext context) {
-    final tabsController = TabsController.instance;
     return Obx(() {
+      
       final currentUser = controller.currentUser.value;
       if (currentUser == null) return Container();
       return ColoredBox(
@@ -49,8 +50,7 @@ class ProfileMobileView extends GetView<UserController> {
                         imageUrl: controller.currentUser.value?.photoUrl ?? '',
                         fit: BoxFit.fill),
                   ),
-                  title: AppButtonDrawer(
-                      onPressed: () => tabsController.toggleDrawer()),
+                  title: CustomAppBar.drawer(),
                 )),
             ProfileBody(),
           ],

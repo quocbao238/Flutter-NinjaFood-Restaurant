@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
+import 'package:ninjafood/app/widgets/custom_appbar.dart';
 import 'package:ninjafood/app/widgets/widgets.dart';
 
 class PromotionMobileView extends StatelessWidget {
@@ -14,8 +15,7 @@ class PromotionMobileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage.pattern(
-        appBarWidget:
-            AppButtonBack(onPressed: () => Navigator.of(context).pop()),
+        appBarWidget: CustomAppBar.back(),
         body: AppPadding(
           padding: AppEdgeInsets.only(
             left: AppGapSize.medium,
