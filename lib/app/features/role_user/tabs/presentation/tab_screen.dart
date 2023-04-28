@@ -20,66 +20,90 @@ class TabScreen extends GetView<DeliveryController> {
       userView: Obx(
         () {
           final currentOrder = controller.currentOrder.value;
-          if (currentOrder != null && currentOrder.status != HistoryStatus.done) {
-            final historyStatus = currentOrder.status;
-            return Scaffold(
-              body: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AppText.bodyLarge(
-                          textAlign: TextAlign.center, text: 'Code_Order'.tr + ':  ', fontWeight: FontWeight.bold),
-                      AppText.titleSmall(
-                          textAlign: TextAlign.center,
-                          text: currentOrder.createdAt,
-                          fontWeight: FontWeight.bold,
-                          color: ThemeColors.textRedColor),
-                    ],
-                  ),
-                  AppPadding.small(),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AppText.bodyLarge(
-                          textAlign: TextAlign.center, text: 'Tổng đơn hàng'.tr + ':  ', fontWeight: FontWeight.bold),
-                      AppText.titleSmall(
-                          textAlign: TextAlign.center,
-                          text: formatPriceToVND(currentOrder.total) + ' \đ',
-                          fontWeight: FontWeight.bold,
-                          color: ThemeColors.textPriceColor),
-                    ],
-                  ),
-                  AppPadding.small(),
-                  Center(
-                      child: Lottie.asset(historyStatus.lottieUrl,
-                          width: MediaQuery.of(context).size.shortestSide * 0.8,
-                          height: MediaQuery.of(context).size.shortestSide * 0.8,
-                          fit: BoxFit.fill)),
-                  // AppPadding.small(),
-                  AppPadding(
-                    padding:
-                        const AppEdgeInsets.symmetric(horizontal: AppGapSize.veryLarge, vertical: AppGapSize.large),
-                    child: AppText.bodyLarge(
-                        textAlign: TextAlign.center, text: historyStatus.status.tr, fontWeight: FontWeight.bold),
-                  ),
-                  if (historyStatus == HistoryStatus.delivered || historyStatus == HistoryStatus.cancelled)
-                    AppPadding(
-                        padding:
-                            const AppEdgeInsets.symmetric(horizontal: AppGapSize.veryLarge, vertical: AppGapSize.large),
-                        child: AppButton.max(
-                            title: historyStatus == HistoryStatus.delivered ? 'OrderReceived'.tr : 'Dialog_OK'.tr,
-                            onPressed: () => UserController.instance.updateStatusOrder(currentOrder)))
-                ],
-              ),
-            );
-          }
-          return AppViewLayout(mobileView: TabsMobileView());
+          return (currentOrder != null &&
+                  currentOrder.status != HistoryStatus.done)
+              ? DeliveryStatusWidget(currentOrder: currentOrder)
+              : AppViewLayout(mobileView: TabsMobileView());
         },
+      ),
+    );
+  }
+}
+
+class DeliveryStatusWidget extends StatelessWidget {
+  const DeliveryStatusWidget({
+    super.key,
+    required this.currentOrder,
+  });
+
+  final OrderModel currentOrder;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AppText.bodyLarge(
+                  textAlign: TextAlign.center,
+                  text: 'Code_Order'.tr + ':  ',
+                  fontWeight: FontWeight.bold),
+              AppText.titleSmall(
+                  textAlign: TextAlign.center,
+                  text: currentOrder.createdAt,
+                  fontWeight: FontWeight.bold,
+                  color: ThemeColors.textRedColor),
+            ],
+          ),
+          AppPadding.small(),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AppText.bodyLarge(
+                  textAlign: TextAlign.center,
+                  text: 'Tổng đơn hàng'.tr + ':  ',
+                  fontWeight: FontWeight.bold),
+              AppText.titleSmall(
+                  textAlign: TextAlign.center,
+                  text: formatPriceToVND(currentOrder.total) + ' \đ',
+                  fontWeight: FontWeight.bold,
+                  color: ThemeColors.textPriceColor),
+            ],
+          ),
+          AppPadding.small(),
+          Center(
+              child: Lottie.asset(currentOrder.status.lottieUrl,
+                  width: MediaQuery.of(context).size.shortestSide * 0.8,
+                  height: MediaQuery.of(context).size.shortestSide * 0.8,
+                  fit: BoxFit.fill)),
+          // AppPadding.small(),
+          AppPadding(
+            padding: const AppEdgeInsets.symmetric(
+                horizontal: AppGapSize.veryLarge, vertical: AppGapSize.large),
+            child: AppText.bodyLarge(
+                textAlign: TextAlign.center,
+                text: currentOrder.status.status.tr,
+                fontWeight: FontWeight.bold),
+          ),
+          if (currentOrder.status == HistoryStatus.delivered ||
+              currentOrder.status == HistoryStatus.cancelled)
+            AppPadding(
+                padding: const AppEdgeInsets.symmetric(
+                    horizontal: AppGapSize.veryLarge,
+                    vertical: AppGapSize.large),
+                child: AppButton.max(
+                    title: currentOrder.status == HistoryStatus.delivered
+                        ? 'OrderReceived'.tr
+                        : 'Dialog_OK'.tr,
+                    onPressed: () => UserController.instance
+                        .updateStatusOrder(currentOrder)))
+        ],
       ),
     );
   }

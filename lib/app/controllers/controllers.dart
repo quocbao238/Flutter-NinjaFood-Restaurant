@@ -19,6 +19,7 @@ import 'package:ninjafood/app/models/history_model.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/user_model.dart';
+import 'package:ninjafood/app/services/one_signal_service/one_signal_service.dart';
 import 'package:ninjafood/app/services/services.dart';
 import 'package:uuid/uuid.dart';
 part 'dialog_controller.dart';

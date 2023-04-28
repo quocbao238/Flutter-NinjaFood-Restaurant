@@ -54,10 +54,14 @@ class UserController extends GetxController implements Bootable {
     _consoleService.show(_logName, '_handleCloudUserChanged Run');
     _cloudUserSubscription = _databaseService
         .getUserDataStream(getFirebaseAuthUser!.uid)
-        .listen((event) {
+        .listen((event) async {
       currentUser.value = UserModel.fromJson(event.data()!);
-      _consoleService.show(
-          _logName, '_handleCloudUserChanged ${currentUser.value!.toJson()}');
+      final playerId = await OneSignalService.instance
+          .setPlayerId(currentUser.value?.uid ?? '');
+      if (playerId != null && currentUser.value?.fcmToken != playerId) {
+        await updateUser(fcmToken: playerId);
+      }
+      _consoleService.show(_logName, '_handleCloudUserChanged');
       FirebaseCrashlytics.instance.setUserIdentifier(currentUser.value!.uid);
     });
   }

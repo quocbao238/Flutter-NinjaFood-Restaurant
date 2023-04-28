@@ -1,3 +1,4 @@
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
@@ -20,18 +21,25 @@ class AdminHomeMobileView extends StatelessWidget {
             trailingWidget: PopupMenuButton<HistoryStatus>(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18),
-                  side: BorderSide(color: ThemeColors.backgroundIconColor(), width: 1)),
+                  side: BorderSide(
+                      color: ThemeColors.backgroundIconColor(), width: 1)),
               padding: EdgeInsets.zero,
               splashRadius: 18,
               color: Theme.of(context).colorScheme.onPrimary,
               itemBuilder: (BuildContext context) {
-                return controller.filterHistoryStatus.toList().map((HistoryStatus historyStatus) {
+                return controller.filterHistoryStatus
+                    .toList()
+                    .map((HistoryStatus historyStatus) {
                   return CustomPopupMenuItem<HistoryStatus>(
                     value: historyStatus,
-                    showDivider: historyStatus != controller.filterHistoryStatus.toList().last,
+                    showDivider: historyStatus !=
+                        controller.filterHistoryStatus.toList().last,
                     child: AppText.bodySmall(
                         text: historyStatus.json.tr,
-                        color: controller.currentHistoryStatus.value == historyStatus ? historyStatus.color : null),
+                        color: controller.currentHistoryStatus.value ==
+                                historyStatus
+                            ? historyStatus.color
+                            : null),
                     onTap: () {
                       controller.filterOrderByHistoryStatus(historyStatus);
                       Navigator.of(context).pop();
@@ -43,7 +51,9 @@ class AdminHomeMobileView extends StatelessWidget {
               child: SafeArea(
                 child: AppPadding(
                   padding: const AppEdgeInsets.only(
-                      top: AppGapSize.paddingMedium, left: AppGapSize.paddingMedium, right: AppGapSize.paddingMedium),
+                      top: AppGapSize.medium,
+                      left: AppGapSize.paddingMedium,
+                      right: AppGapSize.paddingMedium),
                   child: Container(
                     width: 45,
                     height: 45,
@@ -62,11 +72,16 @@ class AdminHomeMobileView extends StatelessWidget {
             () {
               final ordersFilter = controller.ordersFilter.toList();
               return AppPadding(
-                padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+                padding: AppEdgeInsets.symmetric(
+                    horizontal: AppGapSize.medium,
+                    vertical: Platform.isIOS
+                        ? AppGapSize.none
+                        : AppGapSize.paddingMedium),
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
                   itemCount: ordersFilter.length,
-                  itemBuilder: (context, index) => OrderItems(orderModel: ordersFilter[index]),
+                  itemBuilder: (context, index) =>
+                      OrderItems(orderModel: ordersFilter[index]),
                 ),
               );
             },
