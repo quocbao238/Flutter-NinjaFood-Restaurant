@@ -115,7 +115,7 @@ class OneSignalService extends GetxService implements Bootable {
         _logName, 'USER PROVIDED PRIVACY CONSENT: $userProvidedPrivacyConsent');
   }
 
-  void sendNotification(OSCreateNotification notification) async {
+  Future<void> sendNotification(OSCreateNotification notification) async {
     try {
       var response = await OneSignal.shared.postNotification(notification);
 

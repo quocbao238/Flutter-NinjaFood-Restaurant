@@ -120,8 +120,9 @@ class CartScreenController extends BaseController {
           await databaseService.insertOrder(orderModel: orderModel);
       response.fold(
           (l) => handleFailure('Cart Screen Controller', l, showDialog: true),
-          (r) {
+          (r) async {
         userController.updateUser(carts: []);
+        await userController.sendDeliveryNotificationToRestaurant(orderModel);
       });
       loading(false);
     });

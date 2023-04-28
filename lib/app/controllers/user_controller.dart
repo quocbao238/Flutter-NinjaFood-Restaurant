@@ -180,6 +180,31 @@ class UserController extends GetxController implements Bootable {
       await _databaseService.updateOrder(orderModel: orderModel);
       final historyOrders = currentUser.value?.historyOrders ?? [];
       await updateUser(historyOrders: [...historyOrders, orderModel]);
+      sendDeliveryNotificationToRestaurant(orderModel);
+      return right(null);
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  // Send Notification to Restaurant when create and  complete order
+  Future<Either<Failure, void>> sendDeliveryNotificationToRestaurant(
+      OrderModel orderModel) async {
+    final restaurantPlayerId =
+        RestaurantController.instance.restaurantProfile.value?.fcmToken;
+    if (restaurantPlayerId == null)
+      return left(Failure.custom('Restaurant player id is null'));
+
+    try {
+      final cartImage = orderModel.carts[0].productModel.image?.url ?? '';
+      final OSCreateNotification notification = OSCreateNotification(
+        playerIds: [restaurantPlayerId],
+        content: orderModel.status.status.tr,
+        heading: "Code_Order".tr + ": ${orderModel.createdAt}",
+        bigPicture: cartImage,
+        androidLargeIcon: cartImage,
+      );
+      await OneSignalService.instance.sendNotification(notification);
       return right(null);
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));

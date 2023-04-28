@@ -21,6 +21,7 @@ import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/user_model.dart';
 import 'package:ninjafood/app/services/one_signal_service/one_signal_service.dart';
 import 'package:ninjafood/app/services/services.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:uuid/uuid.dart';
 part 'dialog_controller.dart';
 part 'message_controller.dart';
