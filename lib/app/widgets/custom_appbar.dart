@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/controllers/controllers.dart';
+import 'package:ninjafood/app/features/role_admin/tabs/controllers/admin_tabs_controller.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 
 enum CustomAppBarType { drawer, back }
@@ -73,10 +75,20 @@ class CustomTitleAppbar extends StatelessWidget {
   }
 }
 
-class CustomAppButtonDrawer extends GetView<TabsController> {
+class CustomAppButtonDrawer extends StatelessWidget {
   const CustomAppButtonDrawer({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      AppButtonDrawer(onPressed: () => controller.toggleDrawer());
+  Widget build(BuildContext context) {
+    final isAdmin =
+        UserController.instance.currentUser.value?.isAdmin() ?? false;
+
+    if (isAdmin) {
+      final adminTabsController = Get.find<AdminTabsController>();
+      return AppButtonDrawer(
+          onPressed: () => adminTabsController.toggleDrawer());
+    }
+    final tabsController = Get.find<TabsController>();
+    return AppButtonDrawer(onPressed: () => tabsController.toggleDrawer());
+  }
 }

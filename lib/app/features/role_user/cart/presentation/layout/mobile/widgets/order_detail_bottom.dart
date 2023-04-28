@@ -10,7 +10,7 @@ class OrderDetailBottom extends GetView<CartScreenController> {
   @override
   Widget build(BuildContext context) {
     return AppPadding(
-      padding: AppEdgeInsets.only(bottom: AppGapSize.medium),
+      padding: AppEdgeInsets.only(bottom: AppGapSize.small),
       child: DecoratedBox(
         decoration: BoxDecoration(
             image: DecorationImage(image: AssetImage('assets/icons/placeOrder.png'), fit: BoxFit.cover, opacity: 0.4),
@@ -44,7 +44,8 @@ class OrderDetailBottom extends GetView<CartScreenController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      AppText.titleSmall(text: 'Cart_Total_Price'.tr, color: ThemeColors.textDarkColor, fontWeight: FontWeight.bold),
+                      AppText.titleSmall(
+                          text: 'Cart_Total_Price'.tr, color: ThemeColors.textDarkColor, fontWeight: FontWeight.bold),
                       Expanded(
                         child: AppText.titleMedium(
                             textAlign: TextAlign.end,
@@ -55,7 +56,6 @@ class OrderDetailBottom extends GetView<CartScreenController> {
                     ],
                   ),
                 ),
-
               ],
             );
           }),

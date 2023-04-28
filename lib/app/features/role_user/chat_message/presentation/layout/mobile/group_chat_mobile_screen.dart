@@ -22,8 +22,7 @@ class GroupChatMobileScreen extends GetView<GroupChatScreenController> {
                 );
         }),
         appBarWidget: CustomAppBar.drawer(title: 'Drawer_Chat'.tr),
-        body: AppPadding(
-          padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+        body: AppPadding.medium(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -288,7 +288,52 @@ class DatabaseService extends GetxService
     return _db
         .collection(DatabaseKeys.orderPath)
         .where('userId', isEqualTo: userId)
-        .orderBy('createdAt', descending: true).limit(2)
+        .orderBy('createdAt', descending: true)
+        .limit(2)
         .snapshots();
+  }
+
+  @override
+  /// Listen order by status in day
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenOrders() {
+    final dateTime = DateTime.now();
+    final beginningOfDay =
+        DateTime(dateTime.year, dateTime.month, dateTime.day);
+    final endOfDay = beginningOfDay
+        .add(Duration(days: 1))
+        .subtract(Duration(milliseconds: 1));
+    final timeStampStart = beginningOfDay.millisecondsSinceEpoch.toString();
+    final endStampEnd = endOfDay.millisecondsSinceEpoch.toString();
+    return _db
+        .collection(DatabaseKeys.orderPath)
+        // .where('status', isNotEqualTo: HistoryStatus.done.json)
+        .where('createdAt', isGreaterThanOrEqualTo: timeStampStart)
+        .where('createdAt', isLessThanOrEqualTo: endStampEnd)
+        .orderBy('createdAt', descending: true)
+        .snapshots();
+  }
+
+  @override
+  Future<Either<Failure, List<OrderModel>>> getListOrderModelByStatus(
+      {required HistoryStatus status,
+      required String timeStampStart,
+      required String timeStampEnd}) async {
+    try {
+      List<OrderModel> _result = [];
+      final querySnapshot = await _db
+          .collection(DatabaseKeys.orderPath)
+          .where('status', isEqualTo: status.json)
+          .where('createdAt', isGreaterThanOrEqualTo: timeStampStart)
+          .where('createdAt', isLessThanOrEqualTo: timeStampEnd)
+          .get();
+      _result =
+          querySnapshot.docs.map((e) => OrderModel.fromJson(e.data())).toList();
+      return right(_result);
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
   }
 }

@@ -16,9 +16,9 @@ class ProfileBody extends StatelessWidget {
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ProfileUserInformationWidget(),
-              ProfileVoucherWidget(),
-              FavoriteList(),
-              HistoryList(),
+              RoleWrapper(userView: ProfileVoucherWidget()),
+              RoleWrapper(userView:  FavoriteList()),
+              RoleWrapper(userView:  HistoryList()),
             ],
           ),
         ),

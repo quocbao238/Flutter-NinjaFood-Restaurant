@@ -18,7 +18,6 @@ class UserController extends GetxController implements Bootable {
   // Database User
   final currentUser = Rx<UserModel?>(null);
 
-  late StreamSubscription<UserModel?>? _userStream;
   StreamSubscription? _cloudUserSubscription;
 
   Future<void> call() async {
@@ -33,7 +32,6 @@ class UserController extends GetxController implements Bootable {
 
   @override
   void onClose() {
-    _userStream?.cancel();
     _cloudUserSubscription?.cancel();
     super.onClose();
   }
@@ -43,6 +41,7 @@ class UserController extends GetxController implements Bootable {
       setFirebaseAuthUser(firebaseUser);
       if (firebaseUser == null) {
         _consoleService.show(_logName, 'User is currently signed out!');
+        currentUser.value = null;
         _cloudUserSubscription = null;
         return;
       }
@@ -60,7 +59,6 @@ class UserController extends GetxController implements Bootable {
       _consoleService.show(
           _logName, '_handleCloudUserChanged ${currentUser.value!.toJson()}');
       FirebaseCrashlytics.instance.setUserIdentifier(currentUser.value!.uid);
-      if (currentUser.value!.isAdmin()) return;
     });
   }
 

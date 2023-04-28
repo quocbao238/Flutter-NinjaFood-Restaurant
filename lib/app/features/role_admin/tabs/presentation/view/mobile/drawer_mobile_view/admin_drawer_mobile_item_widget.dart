@@ -1,6 +1,6 @@
-part of 'drawer_mobile_view.dart';
+part of 'admin_drawer_mobile_view.dart';
 
-class DrawerItemWidget extends StatelessWidget {
+class AdminDrawerItemWidget extends StatelessWidget {
   final bool isSelected;
   final MenuItem menuItem;
   final VoidCallback? onTap;
@@ -8,7 +8,7 @@ class DrawerItemWidget extends StatelessWidget {
   final BoxBorder? border;
   final AlignmentGeometry? alignment;
 
-  const DrawerItemWidget(
+  const AdminDrawerItemWidget(
       {Key? key,
       required this.isSelected,
       required this.menuItem,
@@ -62,9 +62,6 @@ class DrawerItemWidget extends StatelessWidget {
           child: GestureDetector(
             onTap: () => onTap?.call(),
             child: ListTile(
-              splashColor: Colors.pink,
-              hoverColor: Colors.green,
-              focusColor: Colors.amber,
               iconColor: ThemeColors.primaryColor,
               title: FittedBox(
                 fit: BoxFit.scaleDown,
@@ -79,8 +76,8 @@ class DrawerItemWidget extends StatelessWidget {
                       size: Theme.of(context).textTheme.bodyMedium!.fontSize,
                     ),
                     AppPadding(
-                      padding:
-                          AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+                      padding: AppEdgeInsets.symmetric(
+                          horizontal: AppGapSize.medium),
                       child: Text(
                         title.tr,
                         maxLines: 1,

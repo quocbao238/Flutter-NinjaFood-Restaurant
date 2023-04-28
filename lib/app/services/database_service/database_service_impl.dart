@@ -1,6 +1,5 @@
 part of 'database_service.dart';
 
-
 abstract class DatabaseServiceImpl {
   /* User */
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUserDataStream(String uid);
@@ -21,22 +20,27 @@ abstract class DatabaseServiceImpl {
   Future<Either<Failure, List<ProductModel>>> getListProducts();
 
   /* Filter Product */
-  Future<Either<Failure, List<ProductModel>>> getListProductByListId(List<int> listProductsIds);
+  Future<Either<Failure, List<ProductModel>>> getListProductByListId(
+      List<int> listProductsIds);
 
   /* Promotion */
   Future<Either<Failure, List<PromotionModel>>> getListPromotions();
 
   /* Chat */
-  Future<Either<Failure, void>> insertMessageChat({required MessageChat messageChat});
+  Future<Either<Failure, void>> insertMessageChat(
+      {required MessageChat messageChat});
 
-  Future<Either<Failure, void>> insertGroupChat({required GroupChatModel groupChatModel});
+  Future<Either<Failure, void>> insertGroupChat(
+      {required GroupChatModel groupChatModel});
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat({required String groupChatId});
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat(
+      {required String groupChatId});
 
   Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat();
 
   // Comment Product
-  Future<Either<Failure, void>> insertCommentProduct({required CommentModel commentModel});
+  Future<Either<Failure, void>> insertCommentProduct(
+      {required CommentModel commentModel});
 
   //Order
   Future<Either<Failure, void>> insertOrder({required OrderModel orderModel});
@@ -46,4 +50,11 @@ abstract class DatabaseServiceImpl {
   //Listen CurrentOder By userId
   Stream<QuerySnapshot<Map<String, dynamic>>> listenCurrentOrder(String userId);
 
+  //Listen CurrentOder By userId
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenOrders();
+
+  Future<Either<Failure, List<OrderModel>>> getListOrderModelByStatus(
+      {required HistoryStatus status,
+      required String timeStampStart,
+      required String timeStampEnd});
 }

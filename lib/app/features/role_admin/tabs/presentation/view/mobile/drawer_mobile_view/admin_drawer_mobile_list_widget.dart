@@ -1,7 +1,7 @@
-part of 'drawer_mobile_view.dart';
+part of 'admin_drawer_mobile_view.dart';
 
-class DrawerListWidget extends GetView<TabsController> {
-  const DrawerListWidget({Key? key}) : super(key: key);
+class AdminDrawerListWidget extends GetView<AdminTabsController> {
+  const AdminDrawerListWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class DrawerListWidget extends GetView<TabsController> {
                   if (menuItem.menuType == MenuType.logout) {
                     return AppSizeScale(
                       ratioWidth: 0.5,
-                      child: DrawerItemWidget(
+                      child: AdminDrawerItemWidget(
                         isSelected: false,
                         alignment: Alignment.center,
                         menuItem: menuItems.last,
@@ -36,7 +36,7 @@ class DrawerListWidget extends GetView<TabsController> {
                     );
                   }
 
-                  return DrawerItemWidget(
+                  return AdminDrawerItemWidget(
                       isSelected: isSelected,
                       menuItem: menuItem,
                       onTap: () => controller.onPressedMenuItem(menuItem));

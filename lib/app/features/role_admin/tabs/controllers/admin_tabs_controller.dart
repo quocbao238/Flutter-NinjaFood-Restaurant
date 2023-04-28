@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/features/role_user/tabs/infrastructure/models/menu_models.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/services/auth_service/auth_service.dart';
@@ -12,21 +13,21 @@ import 'package:ninjafood/app/services/theme_service/theme_service.dart';
 
 const _logName = 'TabsController';
 
-class TabsController extends BaseController {
+class AdminTabsController extends BaseController {
   static TabsController get instance => Get.find<TabsController>();
   final themeService = ThemeService.instance;
   final zoomDrawerController = ZoomDrawerController();
   final authService = AuthService.instance;
 
-  List<MenuItem> menuItems = MenuItem.listMenu;
+  List<MenuItem> menuItems = MenuItem.listAdminMenu;
 
-  List<Widget> screens = MenuItem.listMenu
+  List<Widget> screens = MenuItem.listAdminMenu
       .where((element) => element.screen != null)
       .toList()
       .map((e) => e.screen!)
       .toList();
 
-  Rx<MenuItem> currentMenuItem = MenuItem.listMenu.first.obs;
+  Rx<MenuItem> currentMenuItem = MenuItem.listAdminMenu.first.obs;
 
   @override
   void onInit() {
@@ -76,7 +77,7 @@ class TabsController extends BaseController {
             AppText.titleMedium(text: 'Drawer_Language_Change'.tr),
             AppPadding.small(),
             ...TranslationService.lstLanguage.entries.map(
-              (e) {
+                  (e) {
                 return InkWell(
                   onTap: () {
                     Get.back();
@@ -87,17 +88,17 @@ class TabsController extends BaseController {
                         color: currentLocale!.languageCode == e.key
                             ? ThemeColors.primaryColor
                             : Theme.of(this.context)
-                                .textTheme
-                                .bodyMedium!
-                                .color),
+                            .textTheme
+                            .bodyMedium!
+                            .color),
                     title: Text(e.value.tr,
                         style: Theme.of(this.context)
                             .textTheme
                             .bodyMedium!
                             .copyWith(
-                                color: currentLocale.languageCode == e.key
-                                    ? ThemeColors.primaryColor
-                                    : null)),
+                            color: currentLocale.languageCode == e.key
+                                ? ThemeColors.primaryColor
+                                : null)),
                   ),
                 );
               },
@@ -118,8 +119,8 @@ class TabsController extends BaseController {
     loading.value = true;
     final response = await authService.signOut();
     response.fold(
-      (l) => handleFailure(_logName, l),
-      (r) => Get.offAllNamed(AppRouteProvider.splashScreen),
+          (l) => handleFailure(_logName, l),
+          (r) => Get.offAllNamed(AppRouteProvider.splashScreen),
     );
     loading.value = false;
   }
@@ -128,4 +129,6 @@ class TabsController extends BaseController {
   void onPressedNotification() {
     Get.toNamed(AppRouteProvider.notificationScreen);
   }
+
+
 }

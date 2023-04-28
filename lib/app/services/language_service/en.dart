@@ -18,10 +18,8 @@ const Map<String, String> en = {
 // Onboard Screen
   "OnboardScreen_Title1": "Find your Comfort Food here",
   "OnboardScreen_Title2": "Food Ninja is Where Your Comfort Food Lives",
-  "OnboardScreen_Description1":
-      "Here You Can find a chef or dish for every taste and color. Enjoy!",
-  "OnboardScreen_Description2":
-      "Enjoy a fast and smooth food delivery at your doorstep",
+  "OnboardScreen_Description1": "Here You Can find a chef or dish for every taste and color. Enjoy!",
+  "OnboardScreen_Description2": "Enjoy a fast and smooth food delivery at your doorstep",
 
 // Validate
   "Validate.Email_Invalid": "Email is invalid",
@@ -56,31 +54,26 @@ const Map<String, String> en = {
 
 //SignUp Process
   "SignUpProcessScreen_Title": "Fill in your bio to get\nstarted",
-  "SignUpProcessScreen_Description":
-      "This data will be displayed in your account\nprofile for security",
+  "SignUpProcessScreen_Description": "This data will be displayed in your account\nprofile for security",
   "SignUpProcessScreen_FirstName": "First Name",
   "SignUpProcessScreen_LastName": "Last Name",
   "SignUpProcessScreen_MobileNumber": "Mobile Number",
 
 //Payment Method
   "PaymentMethodScreen_Title": "Payment Method",
-  "PaymentMethodScreen_Description":
-      "This data will be displayed in your account profile for security",
+  "PaymentMethodScreen_Description": "This data will be displayed in your account profile for security",
 
 //Upload Photo
   "UploadPhotoScreen_Title": "Upload Your Photo Profile",
-  "UploadPhotoScreen_Description":
-      "This data will be displayed in your account profile for security",
+  "UploadPhotoScreen_Description": "This data will be displayed in your account profile for security",
 
 //Upload Preview
   "UploadPreviewScreen_Title": "Upload Your Photo Profile",
-  "UploadPreviewScreen_Description":
-      "This data will be displayed in your account\nprofile for security",
+  "UploadPreviewScreen_Description": "This data will be displayed in your account\nprofile for security",
 
 //Set Location
   "SetLocationScreen_Title": "Set Your Location",
-  "SetLocationScreen_Description":
-      "This data will be displayed in your account profile for security",
+  "SetLocationScreen_Description": "This data will be displayed in your account profile for security",
   "SetLocationScreen_YourLocation": "  Your Location",
   "SetLocationScreen_SetLocation": "Set Location",
   "SetLocationScreen_Next": "Next",
@@ -91,51 +84,41 @@ const Map<String, String> en = {
 
 // Reset Password
   "ResetPassword_Title": "Reset Password",
-  "ResetPassword_Description":
-      "Enter your email address to reset your password",
+  "ResetPassword_Description": "Enter your email address to reset your password",
   "ResetPassword_Send_Button": "Send",
   "ResetPassword_Send_Success": "Send Ssuccess",
-  "ResetPassword_Send_Success_Detail":
-      "Please check your email to reset password",
+  "ResetPassword_Send_Success_Detail": "Please check your email to reset password",
 
 // Firebase Auth Exception
-  "email-already-in-use":
-      "The email address is already in use by another account.",
+  "email-already-in-use": "The email address is already in use by another account.",
   "invalid-email": "The email address is badly formatted.",
   "operation-not-allowed": "The operation is not allowed.",
   "weak-password": "The password must be 6 characters long or more.",
-  "user-not-found":
-      "There is no user corresponding to the given email address.",
+  "user-not-found": "There is no user corresponding to the given email address.",
   "wrong-password": "The password is invalid for the given email address.",
 
 // Firebase Storage Exception
   "bucket-not-found": "No bucket is configured for Firebase Storage.",
   "cancelled": "The user cancelled the operation.",
   "canceled": "The operation was cancelled.",
-  "invalid-checksum":
-      "The uploaded or downloaded object has an invalid checksum.",
-  "not-authenticated":
-      "User is not authenticated, please authenticate and try again.",
+  "invalid-checksum": "The uploaded or downloaded object has an invalid checksum.",
+  "not-authenticated": "User is not authenticated, please authenticate and try again.",
   "not-authorized": "User is not authorized to perform the desired action.",
   "object-not-found": "The specified object could not be found.",
   "quota-exceeded": "Quota on your Firebase Storage bucket has been exceeded.",
-  "retry-limit-exceeded":
-      "The maximum time limit on an operation (upload, download, delete, etc.) has been reached.",
-  "unauthenticated":
-      "User is unauthenticated, please authenticate and try again.",
+  "retry-limit-exceeded": "The maximum time limit on an operation (upload, download, delete, etc.) has been reached.",
+  "unauthenticated": "User is unauthenticated, please authenticate and try again.",
   "unauthorized": "User is not authorized to perform the desired action.",
 
 // Firebase Cloud Firestore Exception
   "data-loss": "Unrecoverable data loss or corruption.",
   "deadline-exceeded": "Deadline expired before operation could complete.",
-  "failed-precondition":
-      "Operation was rejected because the system is not in a state required for the operation.",
+  "failed-precondition": "Operation was rejected because the system is not in a state required for the operation.",
   "internal": "An internal error occurred.",
   "invalid-argument": "Client specified an invalid argument.",
   "not-found": "Some requested document was not found.",
   "out-of-range": "Client specified an invalid range.",
-  "permission-denied":
-      "The caller does not have permission to execute the specified operation.",
+  "permission-denied": "The caller does not have permission to execute the specified operation.",
   "resource-exhausted":
       "Some resource has been exhausted, perhaps a per-user quota, or perhaps the entire file system is out of space.",
   "unavailable": "The service is currently unavailable.",
@@ -201,6 +184,15 @@ const Map<String, String> en = {
   "Cancelled": "Order canceled",
   "OrderReceived": "Order received",
   "Done": "Order completed",
+
+  "pending": "Pending",
+  "delivering": "Delivering",
+  "delivered": "Delivered",
+  "cancel": "Cancelled",
+  "done": "Done",
+  "all": "All",
+
+  "Code_Order": "Code Order",
 
   "Image_Preview": "Image Preview",
 
