@@ -111,7 +111,7 @@ class CartScreenController extends BaseController {
         total: totalPrice.value,
         discount: promotion.value,
         carts: lstCarts.toList(),
-        status: HistoryStatus.pending);
+        status: HistoryStatus.request);
     await Future.delayed(Duration(seconds: 1));
     loading(false);
 

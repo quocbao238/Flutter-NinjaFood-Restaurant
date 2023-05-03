@@ -81,7 +81,7 @@ class AdminHomeController extends BaseController {
     final List<HistoryStatus> listStatus = lstHistoryStatus
         .where((element) => element != orderModel.status)
         .toList();
-    return listStatus;
+    // return listStatus;
     return listStatus
         .where((element) => element.index > orderModel.status.index)
         .toList();

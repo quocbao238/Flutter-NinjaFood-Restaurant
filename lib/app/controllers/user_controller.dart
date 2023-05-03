@@ -195,6 +195,7 @@ class UserController extends GetxController implements Bootable {
     if (restaurantPlayerId == null)
       return left(Failure.custom('Restaurant player id is null'));
 
+
     try {
       final cartImage = orderModel.carts[0].productModel.image?.url ?? '';
       final OSCreateNotification notification = OSCreateNotification(

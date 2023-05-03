@@ -9,8 +9,7 @@ import 'package:ninjafood/app/widgets/widgets.dart';
 class PromotionMobileView extends StatelessWidget {
   final PromotionModel promotionModel;
 
-  const PromotionMobileView({Key? key, required this.promotionModel})
-      : super(key: key);
+  const PromotionMobileView({Key? key, required this.promotionModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +17,7 @@ class PromotionMobileView extends StatelessWidget {
         appBarWidget: CustomAppBar.back(),
         body: AppPadding(
           padding: AppEdgeInsets.only(
+            top: isIos ? AppGapSize.none : AppGapSize.medium,
             left: AppGapSize.medium,
             right: AppGapSize.medium,
             bottom: AppGapSize.medium,
@@ -32,30 +32,19 @@ class PromotionMobileView extends StatelessWidget {
                     ratioWidth: 1,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: CachedNetworkImage(
-                            imageUrl: promotionModel.thumbnail ?? '',
-                            fit: BoxFit.fill))),
+                        child: CachedNetworkImage(imageUrl: promotionModel.thumbnail ?? '', fit: BoxFit.fill))),
                 AppPadding(
-                    padding:
-                        AppEdgeInsets.symmetric(vertical: AppGapSize.small),
-                    child: AppText.titleLarge(
-                        text: promotionModel.title ?? '',
-                        textAlign: TextAlign.start)),
-                Divider(
-                    color: Theme.of(context).colorScheme.primary, thickness: 1),
-                RowTextValueWidget(
-                    title: 'Start Date: ',
-                    value: promotionModel.startDate ?? ''),
-                RowTextValueWidget(
-                    title: 'End Date: ', value: promotionModel.endDate ?? ''),
+                    padding: AppEdgeInsets.symmetric(vertical: AppGapSize.small),
+                    child: AppText.titleLarge(text: promotionModel.title ?? '', textAlign: TextAlign.start)),
+                Divider(color: Theme.of(context).colorScheme.primary, thickness: 1),
+                RowTextValueWidget(title: 'Start Date: ', value: promotionModel.startDate ?? ''),
+                RowTextValueWidget(title: 'End Date: ', value: promotionModel.endDate ?? ''),
                 RowTextValueWidget(
                     title: 'Expires later: ',
-                    value: getExpiresDayLaterByTwoDateTime(
-                            promotionModel.startDate ?? '',
-                            promotionModel.endDate ?? '') +
-                        ' days'),
-                Divider(
-                    color: Theme.of(context).colorScheme.primary, thickness: 1),
+                    value:
+                        getExpiresDayLaterByTwoDateTime(promotionModel.startDate ?? '', promotionModel.endDate ?? '') +
+                            ' days'),
+                Divider(color: Theme.of(context).colorScheme.primary, thickness: 1),
               ],
             ),
           ),
