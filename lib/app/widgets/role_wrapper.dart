@@ -14,15 +14,11 @@ class RoleWrapper extends GetView<UserController> {
     return Obx(
       () {
         final currentUser = controller.currentUser.value;
-        return Builder(
-          builder: (context) {
-            if (currentUser == null) {
-              return AppLoading(isLoading: true);
-            }
-            final isAdmin = currentUser.isAdmin();
-            return isAdmin ? adminView ?? SizedBox() : userView ?? SizedBox();
-          },
-        );
+        if (currentUser == null) {
+          return AppLoading(isLoading: true);
+        }
+        final isAdmin = currentUser.isAdmin();
+        return isAdmin ? adminView ?? SizedBox() : userView ?? SizedBox();
       },
     );
   }

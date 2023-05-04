@@ -47,6 +47,8 @@ dependencies:
   flutter_slidable: ^2.0.0
   flutter_rating_bar: ^4.0.1
   lottie: ^2.3.2
+  onesignal_flutter: ^3.5.1
+
 
   ninja_theme:
 #    git:

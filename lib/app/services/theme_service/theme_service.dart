@@ -12,7 +12,8 @@ class ThemeService extends GetxService implements Bootable {
   Future<void> call() async {
     Get.put(this, permanent: true);
     _sharedPreferences = await SharedPreferences.getInstance();
-    final localTheme = _sharedPreferences.getBool(LocalStorageKey.isDarkThemeKey) ?? false;
+    final localTheme =
+        _sharedPreferences.getBool(LocalStorageKey.isDarkThemeKey) ?? false;
     isDarkTheme.value = localTheme;
     if (isDarkTheme.value) {
       Get.changeThemeMode(ThemeMode.dark);
@@ -31,8 +32,7 @@ class ThemeService extends GetxService implements Bootable {
     Get.changeThemeMode(ThemeMode.dark);
   }
 
-  Future<void> _writeCurrentThemeToLocal(bool isDarkTheme) async {
-    await _sharedPreferences.setBool(LocalStorageKey.isDarkThemeKey, isDarkTheme);
-  }
-
+  Future<void> _writeCurrentThemeToLocal(bool isDarkTheme) async =>
+      await _sharedPreferences.setBool(
+          LocalStorageKey.isDarkThemeKey, isDarkTheme);
 }

@@ -5,6 +5,7 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/cart/controllers/cart_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/cart/presentation/layout/mobile/widgets/order_detail_bottom.dart';
 import 'package:ninjafood/app/features/role_user/cart/presentation/layout/mobile/widgets/order_detail_body.dart';
+import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/widgets/custom_appbar.dart';
 
 class OrderDetailsMobileView extends GetView<CartScreenController> {
@@ -15,7 +16,8 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
     return AppScaffoldBackgroundImage.pattern(
       appBarWidget: CustomAppBar.drawer(title: 'Cart_Title'.tr),
       body: AppPadding(
-        padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+        padding: AppEdgeInsets.symmetric(
+            horizontal: AppGapSize.medium, vertical: isIos ? AppGapSize.none : AppGapSize.medium),
         child: Obx(
           () {
             final _listCarts = controller.lstCarts;
