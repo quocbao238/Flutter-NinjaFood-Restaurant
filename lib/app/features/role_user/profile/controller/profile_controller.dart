@@ -18,12 +18,11 @@ class ProfileController extends BaseController {
   @override
   void onInit() {
     _getListFavoritesProduct();
-    final _lstHistory = userController.currentUser.value?.historyOrders ?? [];
-    lstHistory.assignAll(_lstHistory);
+    _getListOrderHistory();
     userController.currentUser.listen((event) {
       if (event == null) return;
       _getListFavoritesProduct();
-      lstHistory.assignAll(event.historyOrders);
+      _getListOrderHistory();
     });
 
     super.onInit();
@@ -46,6 +45,22 @@ class ProfileController extends BaseController {
     response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
       if (r.length != lstProducts.length) {
         lstProducts.assignAll(r);
+      }
+    });
+    loading.value = false;
+  }
+
+  Future<void> _getListOrderHistory() async {
+    final lstOrderId = userController.currentUser.value?.orderIds ?? [];
+
+    if (lstOrderId.isEmpty) {
+      loading.value = false;
+      return;
+    }
+    final response = await databaseService.getListOrdersByListId(lstOrderId);
+    response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
+      if (r.length != lstHistory.length) {
+        lstHistory.assignAll(r);
       }
     });
     loading.value = false;

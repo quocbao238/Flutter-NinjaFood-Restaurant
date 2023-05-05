@@ -23,6 +23,9 @@ abstract class DatabaseServiceImpl {
   Future<Either<Failure, List<ProductModel>>> getListProductByListId(
       List<int> listProductsIds);
 
+  Future<Either<Failure, List<OrderModel>>> getListOrdersByListId(
+      List<String> orderIds);
+
   /* Promotion */
   Future<Either<Failure, List<PromotionModel>>> getListPromotions();
 

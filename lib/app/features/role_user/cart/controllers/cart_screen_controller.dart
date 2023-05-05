@@ -121,7 +121,9 @@ class CartScreenController extends BaseController {
       response.fold(
           (l) => handleFailure('Cart Screen Controller', l, showDialog: true),
           (r) async {
-        userController.updateUser(carts: []);
+            final orderIds = userController.currentUser.value?.orderIds ?? [];
+            userController
+                .updateUser(carts: [], orderIds: [...orderIds, orderModel.uid]);
         await userController.sendDeliveryNotificationToRestaurant(orderModel);
       });
       loading(false);
