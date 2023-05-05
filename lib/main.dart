@@ -12,6 +12,7 @@ import 'app/services/services.dart';
 void main() async {
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    await TranslationService.init();
     await Firebase.initializeApp();
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
@@ -23,20 +24,3 @@ void main() async {
     runApp(MyApp());
   }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
 }
-
-// class Demo extends StatefulWidget {
-//   const Demo({Key? key}) : super(key: key);
-//
-//   @override
-//   State<Demo> createState() => _DemoState();
-// }
-//
-// class _DemoState extends State<Demo> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         body: Center(
-//       child: Lottie.asset('assets/lottie/order_delivered.json'),
-//     ));
-//   }
-// }

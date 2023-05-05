@@ -79,7 +79,7 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                 children: [
                   AppText.bodyLarge(
                       textAlign: TextAlign.start,
-                      text: 'Tổng đơn hàng'.tr + ':  ',
+                      text: 'Cart_Total_Price'.tr + ':  ',
                       fontWeight: FontWeight.bold),
                   AppText.titleSmall(
                       textAlign: TextAlign.start,
@@ -121,7 +121,7 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                   height: AppGapSize.veryLarge.size),
               if (!_showListFood && !isDone)
                 AppButton.max(
-                    title: 'Xem chi tiết đơn hàng'.tr,
+                    title: 'Cart_Detail_Show'.tr,
                     onPressed: () =>
                         setState(() => _showListFood = !_showListFood)),
               if (_showListFood)
@@ -232,7 +232,7 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                 AppPadding(
                   padding: AppEdgeInsets.only(top: AppGapSize.medium),
                   child: AppButton.max(
-                      title: 'Ẩn chi tiết đơn hàng'.tr,
+                      title: 'Cart_Detail_Hide'.tr,
                       onPressed: () {
                         setState(() {
                           _showListFood = !_showListFood;

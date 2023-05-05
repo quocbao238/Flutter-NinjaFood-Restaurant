@@ -201,6 +201,8 @@ const Map<String, String> vi = {
   "Cart_Oder_Loading": "Đang đặt hàng...",
   "Cart_Order_Success": "Đặt hàng thành công",
   "Cart_Go_To_Home": "Đến trang chủ",
+  "Cart_Detail_Show": "Chi tiết đơn hàng",
+  "Cart_Detail_Hide": "Ẩn chi tiết đơn ahfng",
 
   // History Status
   "Request": "Đang đợi nhà hàng xác nhận...",
@@ -219,6 +221,7 @@ const Map<String, String> vi = {
   "cancel": "Đã hủy",
   "done": "Đã hoàn thành",
   "all": "Tất cả",
+
 
   "admin_pending": "Chuẩn bị đồ ăn",
   "admin_delivering": "Tiến hành giao hàng",
