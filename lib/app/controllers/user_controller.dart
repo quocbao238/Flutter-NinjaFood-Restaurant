@@ -52,12 +52,9 @@ class UserController extends GetxController implements Bootable {
   void _handleCloudUserChanged() async {
     if (_cloudUserSubscription != null || getFirebaseAuthUser == null) return;
     _consoleService.show(_logName, '_handleCloudUserChanged Run');
-    _cloudUserSubscription = _databaseService
-        .getUserDataStream(getFirebaseAuthUser!.uid)
-        .listen((event) async {
+    _cloudUserSubscription = _databaseService.getUserDataStream(getFirebaseAuthUser!.uid).listen((event) async {
       currentUser.value = UserModel.fromJson(event.data()!);
-      final playerId = await OneSignalService.instance
-          .setPlayerId(currentUser.value?.uid ?? '');
+      final playerId = await OneSignalService.instance.setPlayerId(currentUser.value?.uid ?? '');
       if (playerId != null && currentUser.value?.fcmToken != playerId) {
         await updateUser(fcmToken: playerId);
       }
@@ -100,8 +97,7 @@ class UserController extends GetxController implements Bootable {
     }
   }
 
-  Future<Either<Failure, void>> favoriteProduct(
-      {required int productId}) async {
+  Future<Either<Failure, void>> favoriteProduct({required int productId}) async {
     final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     final currentFavoriteProducts = _currentUser.favoriteIds;
@@ -116,14 +112,12 @@ class UserController extends GetxController implements Bootable {
     }
   }
 
-  Future<Either<Failure, void>> addProductToCard(
-      {required ProductModel productModel}) async {
+  Future<Either<Failure, void>> addProductToCard({required ProductModel productModel}) async {
     final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     List<CartModel> currentCartsProduct = _currentUser.carts;
 
-    int index = currentCartsProduct
-        .indexWhere((element) => element.productModel.id == productModel.id);
+    int index = currentCartsProduct.indexWhere((element) => element.productModel.id == productModel.id);
 
     if (index != -1) {
       currentCartsProduct[index].increaseQuantity();
@@ -140,9 +134,7 @@ class UserController extends GetxController implements Bootable {
 
 // Comment Product
   Future<Either<Failure, void>> insertComment(
-      {String? comment,
-      required double rating,
-      required String historyId}) async {
+      {String? comment, required double rating, required String historyId}) async {
     FocusManager.instance.primaryFocus?.unfocus();
 
     // TODO: Update later
@@ -189,25 +181,33 @@ class UserController extends GetxController implements Bootable {
     }
   }
 
-  // Send Notification to Restaurant when create and  complete order
-  Future<Either<Failure, void>> sendDeliveryNotificationToRestaurant(
-      OrderModel orderModel) async {
-    final restaurantPlayerId =
-        RestaurantController.instance.restaurantProfile.value?.fcmToken;
-    if (restaurantPlayerId == null)
-      return left(Failure.custom('Restaurant player id is null'));
+  // Send Notification to Restaurant when create and complete order
+  Future<Either<Failure, void>> sendDeliveryNotificationToRestaurant(OrderModel orderModel) async {
+    final restaurantProfile = RestaurantController.instance.restaurantProfile.value;
+    if (restaurantProfile == null) return left(Failure.custom('Restaurant profile is null'));
+    final restaurantPlayerId = restaurantProfile.fcmToken;
+    if (restaurantPlayerId == null) return left(Failure.custom('Restaurant player id is null'));
 
+    final content = orderModel.status == HistoryStatus.request ? 'Notification_Request'.tr : 'Notification_Done'.tr;
 
     try {
       final cartImage = orderModel.carts[0].productModel.image?.url ?? '';
       final OSCreateNotification notification = OSCreateNotification(
-        playerIds: [restaurantPlayerId],
-        content: orderModel.status.status.tr,
-        heading: "Code_Order".tr + ": ${orderModel.createdAt}",
-        bigPicture: cartImage,
-        androidLargeIcon: cartImage,
+          playerIds: [restaurantPlayerId],
+          content: content,
+          heading: "Code_Order".tr + ": ${orderModel.createdAt}",
+          bigPicture: cartImage,
+          androidLargeIcon: cartImage);
+
+      final notificationModel = NotificationModel.createNotificationModelByOSCreateNotification(
+        notification: notification,
+        receiverId: restaurantProfile.uid,
+        type: NotificationType.order,
       );
-      await OneSignalService.instance.sendNotification(notification);
+
+      await OneSignalService.instance.sendNotification(notification).then((value) async {
+        await _databaseService.insertNotification(notificationModel: notificationModel);
+      });
       return right(null);
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));

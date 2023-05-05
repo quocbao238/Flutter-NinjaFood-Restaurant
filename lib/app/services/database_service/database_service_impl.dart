@@ -23,8 +23,6 @@ abstract class DatabaseServiceImpl {
   Future<Either<Failure, List<ProductModel>>> getListProductByListId(
       List<int> listProductsIds);
 
-  Future<Either<Failure, List<OrderModel>>> getListOrdersByListId(
-      List<String> orderIds);
 
   /* Promotion */
   Future<Either<Failure, List<PromotionModel>>> getListPromotions();
@@ -46,6 +44,10 @@ abstract class DatabaseServiceImpl {
       {required CommentModel commentModel});
 
   //Order
+
+  Future<Either<Failure, List<OrderModel>>> getListOrdersByListId(
+      List<String> orderIds);
+
   Future<Either<Failure, void>> insertOrder({required OrderModel orderModel});
 
   Future<Either<Failure, void>> updateOrder({required OrderModel orderModel});
@@ -60,4 +62,17 @@ abstract class DatabaseServiceImpl {
       {required HistoryStatus status,
       required String timeStampStart,
       required String timeStampEnd});
+
+  // Notification
+  Future<Either<Failure, void>> insertNotification(
+      {required NotificationModel notificationModel});
+
+  // update status notification
+  Future<Either<Failure, void>> updateNotification(
+      {required NotificationModel notificationModel});
+
+  // listen notification
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenNotification(
+      {required String userId});
+
 }
