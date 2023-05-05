@@ -13,6 +13,7 @@ class DeliveryController extends GetxController implements Bootable {
   late final DatabaseService _databaseService;
   final currentOrder = Rx<OrderModel?>(null);
   final lstOrderModel = RxList<OrderModel>([]);
+  final disableShowDelivery = Rx<bool>(false);
 
   @override
   Future<void> call() async {
@@ -45,9 +46,14 @@ class DeliveryController extends GetxController implements Bootable {
         _databaseService.listenCurrentOrder(userUid).listen((event) {
       if (event.docs.isEmpty || event.docs.last.data().isEmpty) return;
       final _order = OrderModel.fromJson(event.docs.first.data());
+      if (_order.status != currentOrder.value?.status) {
+        disableShowDelivery.value = false;
+      }
       currentOrder.value = _order;
     });
   }
+
+  void onPressedDisableShowDelivery() => disableShowDelivery.value = true;
 
   @override
   void dispose() {

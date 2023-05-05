@@ -18,8 +18,10 @@ class TabScreen extends GetView<DeliveryController> {
       userView: Obx(
         () {
           final currentOrder = controller.currentOrder.value;
+          final disableShowDelivery = controller.disableShowDelivery.value;
           return (currentOrder != null &&
-                  currentOrder.status != HistoryStatus.done)
+                  currentOrder.status != HistoryStatus.done &&
+                  !disableShowDelivery)
               ? DeliveryStatusWidget(currentOrder: currentOrder)
               : AppViewLayout(mobileView: TabsMobileView());
         },

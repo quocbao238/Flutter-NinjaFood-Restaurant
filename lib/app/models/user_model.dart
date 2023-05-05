@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ninjafood/app/models/cart_model.dart';
-import 'package:ninjafood/app/models/history_model.dart';
 
 const ROLE_USER = 'role_user';
 const ROLE_ADMIN = 'role_admin';

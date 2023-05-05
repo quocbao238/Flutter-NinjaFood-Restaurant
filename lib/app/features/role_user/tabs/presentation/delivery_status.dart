@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
+import 'package:ninjafood/app/controllers/delivery_controller.dart';
 import 'package:ninjafood/app/features/role_user/cart/presentation/layout/mobile/widgets/order_detail_bottom.dart';
 import 'package:ninjafood/app/features/role_user/tabs/presentation/layout/mobile/delivery_process_view.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/history_model.dart';
-import 'package:ninjafood/app/widgets/custom_appbar.dart';
 
 class DeliveryStatusWidget extends StatefulWidget {
   const DeliveryStatusWidget({
@@ -36,8 +36,14 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
     final serviceFee = widget.currentOrder.serviceFee.toString() + "%";
     final discount = formatPriceToVND(widget.currentOrder.discount) + " VND";
     final total = formatPriceToVND(widget.currentOrder.total) + " VND";
+    final isDone = (widget.currentOrder.status == HistoryStatus.delivered ||
+        widget.currentOrder.status == HistoryStatus.cancelled);
+
     return AppScaffoldBackgroundImage.pattern(
-      appBarWidget: CustomAppBar.back(),
+      appBarWidget: AppButtonBack(
+        onPressed: () =>
+            DeliveryController.instance.onPressedDisableShowDelivery(),
+      ),
       body: AppPadding.medium(
         child: SingleChildScrollView(
           child: Column(
@@ -92,6 +98,7 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                   child: AppText.bodyLarge(
                       textAlign: TextAlign.center,
                       text: widget.currentOrder.status.status.tr,
+                      color: ThemeColors.primaryColor,
                       fontWeight: FontWeight.bold),
                 ),
               ),
@@ -99,14 +106,11 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                   color: ThemeColors.textDarkColor.withOpacity(0.1),
                   thickness: 1,
                   height: AppGapSize.veryLarge.size),
-              if (!_showListFood)
+              if (!_showListFood && !isDone)
                 AppButton.max(
                     title: 'Xem chi tiết đơn hàng'.tr,
-                    onPressed: () {
-                      setState(() {
-                        _showListFood = !_showListFood;
-                      });
-                    }),
+                    onPressed: () =>
+                        setState(() => _showListFood = !_showListFood)),
               if (_showListFood)
                 ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
@@ -115,76 +119,81 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                   itemCount: widget.currentOrder.carts.length,
                   itemBuilder: (context, index) {
                     final _cartDetail = widget.currentOrder.carts[index];
-                    return DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: isDarkMode
-                            ? ThemeColors.backgroundTextFormDark()
-                            : Theme.of(context).colorScheme.onPrimary,
-                      ),
-                      child: AppPadding.small(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            AppPadding(
-                              padding:
-                                  AppEdgeInsets.only(right: AppGapSize.small),
-                              child: SizedBox(
-                                width: 84,
-                                height: 84,
-                                child: AppNetworkImage(
-                                    borderRadius: 8,
-                                    height: MediaQuery.of(context)
-                                            .size
-                                            .shortestSide *
-                                        0.2,
-                                    width: MediaQuery.of(context)
-                                            .size
-                                            .shortestSide *
-                                        0.2,
-                                    url: _cartDetail.productModel.image?.url ??
-                                        ''),
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: AppGapSize.small.size),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: isDarkMode
+                              ? ThemeColors.backgroundTextFormDark()
+                              : Theme.of(context).colorScheme.onPrimary,
+                        ),
+                        child: AppPadding.small(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              AppPadding(
+                                padding:
+                                    AppEdgeInsets.only(right: AppGapSize.small),
+                                child: SizedBox(
+                                  width: 84,
+                                  height: 84,
+                                  child: AppNetworkImage(
+                                      borderRadius: 8,
+                                      height: MediaQuery.of(context)
+                                              .size
+                                              .shortestSide *
+                                          0.2,
+                                      width: MediaQuery.of(context)
+                                              .size
+                                              .shortestSide *
+                                          0.2,
+                                      url:
+                                          _cartDetail.productModel.image?.url ??
+                                              ''),
+                                ),
                               ),
-                            ),
-                            SizedBox(width: AppGapSize.medium.size),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  AppText.bodyLarge(
-                                      text: _cartDetail.productModel.name ?? '',
-                                      textAlign: TextAlign.left),
-                                  AppText.titleMedium(
-                                      text:
-                                          '${_cartDetail.productModel.getPrice} ${_cartDetail.productModel.currency}',
-                                      color: ThemeColors.textPriceColor),
-                                ],
+                              SizedBox(width: AppGapSize.medium.size),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    AppText.bodyLarge(
+                                        text:
+                                            _cartDetail.productModel.name ?? '',
+                                        textAlign: TextAlign.left),
+                                    AppText.titleMedium(
+                                        text:
+                                            '${_cartDetail.productModel.getPrice} ${_cartDetail.productModel.currency}',
+                                        color: ThemeColors.textPriceColor),
+                                  ],
+                                ),
                               ),
-                            ),
-                            AppPadding(
-                              padding: AppEdgeInsets.symmetric(
-                                  horizontal: AppGapSize.medium),
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onPrimaryContainer
-                                        .withOpacity(0.6),
-                                    shape: BoxShape.circle),
-                                child: AppPadding.medium(
-                                  child: AppText.bodyLarge(
-                                    text: '${_cartDetail.quantity}',
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
+                              AppPadding(
+                                padding: AppEdgeInsets.symmetric(
+                                    horizontal: AppGapSize.medium),
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimaryContainer
+                                          .withOpacity(0.6),
+                                      shape: BoxShape.circle),
+                                  child: AppPadding.medium(
+                                    child: AppText.bodyLarge(
+                                      text: '${_cartDetail.quantity}',
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -206,7 +215,7 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                     ],
                   ),
                 ),
-              if (_showListFood)
+              if (_showListFood && !isDone)
                 AppPadding(
                   padding: AppEdgeInsets.only(top: AppGapSize.medium),
                   child: AppButton.max(
@@ -217,8 +226,7 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                         });
                       }),
                 ),
-              if (widget.currentOrder.status == HistoryStatus.delivered ||
-                  widget.currentOrder.status == HistoryStatus.cancelled)
+              if (isDone)
                 AppPadding(
                     padding: const AppEdgeInsets.symmetric(
                         // horizontal: AppGapSize.veryLarge,

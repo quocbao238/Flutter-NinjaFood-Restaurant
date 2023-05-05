@@ -13,6 +13,7 @@ class CustomAppBar extends StatelessWidget {
   final Widget? trailingWidget;
   final CustomAppBarType _type;
 
+
   const CustomAppBar.drawer(
       {super.key, this.title, this.trailingWidget, this.centerTitle = true})
       : _type = CustomAppBarType.drawer;
