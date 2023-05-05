@@ -328,8 +328,8 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
     return _db
         .collection(DatabaseKeys.notificationPath)
         .where('receiverId', isEqualTo: userId)
-        .where('createdAt', isGreaterThanOrEqualTo: timeStampStart)
-        .where('createdAt', isLessThanOrEqualTo: endStampEnd)
+        // .where('createdAt', isGreaterThanOrEqualTo: timeStampStart)
+        // .where('createdAt', isLessThanOrEqualTo: endStampEnd)
         .orderBy('createdAt', descending: true)
         .snapshots();
   }

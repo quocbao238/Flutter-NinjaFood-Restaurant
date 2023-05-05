@@ -46,7 +46,7 @@ class GetBinding extends Bindings {
         Get.lazyPut(() => EditProfileController());
         break;
       case AppRouteProvider.notificationScreen:
-        Get.lazyPut(() => NotificationScreenController());
+        // Get.lazyPut(() => NotificationScreenController());
         break;
       case AppRouteProvider.ratingScreen:
         Get.lazyPut(() => RatingScreenController());
