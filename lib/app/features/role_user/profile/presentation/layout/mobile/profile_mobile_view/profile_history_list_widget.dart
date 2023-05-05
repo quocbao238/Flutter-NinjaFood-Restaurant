@@ -91,13 +91,12 @@ class HistoryList extends GetView<ProfileController> {
                                   padding: AppEdgeInsets.symmetric(
                                       horizontal: AppGapSize.medium),
                                   child: Container(
-                                    width: 1,
-                                    height: MediaQuery.of(context)
-                                            .size
-                                            .shortestSide *
-                                        0.15,
-                                    color: Colors.white,
-                                  ),
+                                      width: 1,
+                                      height: MediaQuery.of(context)
+                                              .size
+                                              .shortestSide *
+                                          0.15,
+                                      color: Colors.white),
                                 ),
                                 Column(
                                   children: [
@@ -105,25 +104,28 @@ class HistoryList extends GetView<ProfileController> {
                                         text: totalPrice,
                                         color: ThemeColors.textRedColor,
                                         fontWeight: FontWeight.bold),
-                                    _historyItem.isRating
-                                        ? SizedBox()
-                                        : ElevatedButton(
-                                            onPressed: () => controller
-                                                .onPressRating(_historyItem),
-                                            child: AppText.bodyMedium(
-                                                text: 'Rating',
-                                                fontWeight: FontWeight.w400,
-                                                color:
-                                                    ThemeColors.textDarkColor),
-                                            style: Theme.of(context)
-                                                .elevatedButtonTheme
-                                                .style
-                                                ?.copyWith(
-                                                    backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all(ThemeColors
-                                                                .primaryColor)),
-                                          ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        if (_historyItem.status !=
+                                            HistoryStatus.done) {
+                                          return DeliveryController.instance
+                                              .onChangeDeliveryStatus();
+                                        }
+                                        controller.onPressRating(_historyItem);
+                                      },
+                                      child: AppText.labelSmall(
+                                          text: _historyItem.status.json.tr,
+                                          fontWeight: FontWeight.bold,
+                                          color: ThemeColors.textDarkColor),
+                                      style: Theme.of(context)
+                                          .elevatedButtonTheme
+                                          .style
+                                          ?.copyWith(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all(
+                                                      _historyItem
+                                                          .status.color)),
+                                    ),
                                   ],
                                 )
                               ],

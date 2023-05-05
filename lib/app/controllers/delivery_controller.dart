@@ -25,6 +25,7 @@ class DeliveryController extends GetxController implements Bootable {
         _orderSubscription?.cancel();
         currentOrder.value = null;
         lstOrderModel.clear();
+        disableShowDelivery.value = false;
       }
       if (user != null) {
         _handleDelivery(user.uid);
@@ -53,7 +54,8 @@ class DeliveryController extends GetxController implements Bootable {
     });
   }
 
-  void onPressedDisableShowDelivery() => disableShowDelivery.value = true;
+  void onChangeDeliveryStatus() =>
+      disableShowDelivery.value = !disableShowDelivery.value;
 
   @override
   void dispose() {

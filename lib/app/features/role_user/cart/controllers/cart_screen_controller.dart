@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
+import 'package:ninjafood/app/controllers/delivery_controller.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
@@ -95,10 +96,21 @@ class CartScreenController extends BaseController {
   }
 
   Future<void> onPressedPlaceMyOrder() async {
+    //
+
     if (lstCarts.isEmpty) {
       Get.snackbar('Error', 'Your cart is empty');
       return;
     }
+
+    // Show dialog if already have odering...
+    if (loading.value) {
+      await DialogController.instance
+          .showError(message: 'You already have ordering');
+      DeliveryController.instance.onChangeDeliveryStatus();
+      return;
+    }
+
     loading(true);
 
     final OrderModel orderModel = OrderModel(
@@ -121,9 +133,9 @@ class CartScreenController extends BaseController {
       response.fold(
           (l) => handleFailure('Cart Screen Controller', l, showDialog: true),
           (r) async {
-            final orderIds = userController.currentUser.value?.orderIds ?? [];
-            userController
-                .updateUser(carts: [], orderIds: [...orderIds, orderModel.uid]);
+        final orderIds = userController.currentUser.value?.orderIds ?? [];
+        userController
+            .updateUser(carts: [], orderIds: [...orderIds, orderModel.uid]);
         await userController.sendDeliveryNotificationToRestaurant(orderModel);
       });
       loading(false);

@@ -40,10 +40,17 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
         widget.currentOrder.status == HistoryStatus.cancelled);
 
     return AppScaffoldBackgroundImage.pattern(
-      appBarWidget: AppButtonBack(
-        onPressed: () =>
-            DeliveryController.instance.onPressedDisableShowDelivery(),
-      ),
+      appBarWidget: !isDone
+          ? AppButtonBack(
+              onPressed: () =>
+                  DeliveryController.instance.onChangeDeliveryStatus(),
+            )
+          : AppPadding(
+              padding: const AppEdgeInsets.only(
+                  top: AppGapSize.paddingMedium,
+                  left: AppGapSize.paddingMedium,
+                  right: AppGapSize.paddingMedium),
+              child: SizedBox(width: 45, height: 45)),
       body: AppPadding.medium(
         child: SingleChildScrollView(
           child: Column(
@@ -82,18 +89,24 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                 ],
               ),
               Center(
-                  child: Lottie.asset(widget.currentOrder.status.lottieUrl,
-                      width: MediaQuery.of(context).size.height * 0.3,
-                      height: MediaQuery.of(context).size.height * 0.3,
-                      fit: BoxFit.fill)),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.25,
-                child: ProcessTimelinePage(currentOrder: widget.currentOrder),
-              ),
+                  child: AppPadding(
+                padding: AppEdgeInsets.symmetric(
+                  vertical: isDone ? AppGapSize.veryLarge : AppGapSize.none,
+                ),
+                child: Lottie.asset(widget.currentOrder.status.lottieUrl,
+                    width: MediaQuery.of(context).size.height * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    fit: BoxFit.fill),
+              )),
+              if (widget.currentOrder.status != HistoryStatus.cancelled)
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.25,
+                  child: ProcessTimelinePage(currentOrder: widget.currentOrder),
+                ),
               AppPadding(
                 padding: const AppEdgeInsets.symmetric(
-                    horizontal: AppGapSize.medium),
+                    horizontal: AppGapSize.medium, vertical: AppGapSize.medium),
                 child: Center(
                   child: AppText.bodyLarge(
                       textAlign: TextAlign.center,
