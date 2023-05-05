@@ -330,7 +330,7 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
         .where('receiverId', isEqualTo: userId)
         // .where('createdAt', isGreaterThanOrEqualTo: timeStampStart)
         // .where('createdAt', isLessThanOrEqualTo: endStampEnd)
-        .orderBy('createdAt', descending: true)
+        // .orderBy('createdAt', descending: true)
         .snapshots();
   }
 

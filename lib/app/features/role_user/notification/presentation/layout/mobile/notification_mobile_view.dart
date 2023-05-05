@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/features/role_user/notification/presentation/layout/mobile/widgets/box_notification.dart';
+import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/widgets/custom_appbar.dart';
 
 class NotificationMobileView extends GetView<NotificationController> {
@@ -26,10 +27,9 @@ class NotificationMobileView extends GetView<NotificationController> {
               itemBuilder: (context, index) {
                 final notification = notifications[index];
                 return BoxNotification(
-                  child: AppIcons.camera(),
-                  notice: notification.message,
-                  time: notification.createAt,
-                );
+                    child: AppIcons.notification(),
+                    notice: notification.message,
+                    time: convertTimeStamp(notification.createAt));
               }
 
               // Column(

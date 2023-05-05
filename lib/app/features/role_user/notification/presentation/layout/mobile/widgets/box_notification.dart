@@ -21,9 +21,7 @@ class BoxNotification extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            color: isDarkMode
-                ? ThemeColors.backgroundTextFormDark()
-                : Theme.of(context).colorScheme.onPrimary),
+            color: isDarkMode ? ThemeColors.backgroundTextFormDark() : Theme.of(context).colorScheme.onPrimary),
         child: Row(
           children: [
             AppPadding.medium(
@@ -44,6 +42,7 @@ class BoxNotification extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       textAlign: TextAlign.start,
                     ),
+                    AppPadding.small(),
                     AppText.bodyMedium(
                       text: time,
                       color: isDarkMode

@@ -1,6 +1,5 @@
 part of global_controller;
 
-
 class NotificationController extends GetxController implements Bootable {
   static NotificationController get instance => Get.find<NotificationController>();
   late final DatabaseService _databaseService;
@@ -26,7 +25,10 @@ class NotificationController extends GetxController implements Bootable {
 
   void _handleNotifications(String userId) async {
     _notificationSubscription = _databaseService.listenNotification(userId: userId).listen((event) async {
-      final result = event.docs.map((e) => NotificationModel.fromJson(e.data())).toList();
+      final result = event.docs.map((e) {
+        final _data = e.data();
+        return NotificationModel.fromJson(_data);
+      }).toList();
       notifications.assignAll(result);
     });
   }
