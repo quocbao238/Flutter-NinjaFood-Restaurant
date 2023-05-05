@@ -55,6 +55,7 @@ dependencies:
 #      url: https://github.com/quocbao238/ninjafood_theme.git
 #      ref: devMaster
     path: ../NinjaFood_Theme
+  timelines: ^0.1.0
 
 
 flutter_icons:

@@ -28,6 +28,8 @@ class HistoryList extends GetView<ProfileController> {
                   final totalPrice =
                       formatPriceToVND(_historyItem.total) + '\nVND';
                   final createAt = convertTimeStamp(_historyItem.createdAt);
+                  final _avatarSize =
+                      MediaQuery.of(context).size.shortestSide * 0.2;
                   return AnimationItem(
                     animation: animation,
                     child: AppPadding(
@@ -44,18 +46,14 @@ class HistoryList extends GetView<ProfileController> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 ClipRRect(
-                                    borderRadius: BorderRadius.circular(16),
-                                    child: CachedNetworkImage(
-                                        imageUrl: _image,
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .shortestSide *
-                                            0.2,
-                                        height: MediaQuery.of(context)
-                                                .size
-                                                .shortestSide *
-                                            0.2,
-                                        fit: BoxFit.cover)),
+                                  borderRadius: BorderRadius.circular(16),
+                                  child: CachedNetworkImage(
+                                    imageUrl: _image,
+                                    width: _avatarSize,
+                                    height: _avatarSize,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                                 Expanded(
                                   child: AppPadding(
                                     padding: AppEdgeInsets.only(

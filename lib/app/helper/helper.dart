@@ -1,7 +1,5 @@
 library helper;
 
-import 'dart:io' show Platform;
-
 import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
