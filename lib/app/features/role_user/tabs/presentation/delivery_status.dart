@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
+import 'package:ninjafood/app/features/role_user/cart/presentation/layout/mobile/widgets/order_detail_bottom.dart';
 import 'package:ninjafood/app/features/role_user/tabs/presentation/layout/mobile/delivery_process_view.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/history_model.dart';
@@ -31,6 +32,10 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final subTotal = formatPriceToVND(widget.currentOrder.subTotal) + " VND";
+    final serviceFee = widget.currentOrder.serviceFee.toString() + "%";
+    final discount = formatPriceToVND(widget.currentOrder.discount) + " VND";
+    final total = formatPriceToVND(widget.currentOrder.total) + " VND";
     return AppScaffoldBackgroundImage.pattern(
       appBarWidget: CustomAppBar.back(),
       body: AppPadding.medium(
@@ -184,6 +189,22 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                       ),
                     );
                   },
+                ),
+              if (_showListFood)
+                AppPadding(
+                  padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
+                  child: Column(
+                    children: [
+                      OrderTitleValueText(
+                          title: 'Cart_Sub_Total'.tr, value: subTotal),
+                      OrderTitleValueText(
+                          title: 'Cart_Total_Tax'.tr, value: serviceFee),
+                      OrderTitleValueText(
+                          title: 'Cart_Total_Discount'.tr, value: discount),
+                      OrderTitleValueText(
+                          title: 'Cart_Total_Price'.tr, value: total),
+                    ],
+                  ),
                 ),
               if (_showListFood)
                 AppPadding(
