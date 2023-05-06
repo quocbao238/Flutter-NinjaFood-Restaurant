@@ -337,9 +337,20 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
   @override
   Future<Either<Failure, void>> updateNotification({required NotificationModel notificationModel}) async {
     try {
-      await _db
-          .doc('${DatabaseKeys.notificationPath}${notificationModel.receiverId}')
-          .update(notificationModel.toJson());
+      await _db.doc('${DatabaseKeys.notificationPath}${notificationModel.uid}').update(notificationModel.toJson());
+      return right(null);
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteNotification({required NotificationModel notificationModel}) async {
+    try {
+      await _db.doc('${DatabaseKeys.notificationPath}${notificationModel.uid}').delete();
       return right(null);
     } on FirebaseException catch (error) {
       handleFailure(_logName, Failure(error.code.tr, StackTrace.current));

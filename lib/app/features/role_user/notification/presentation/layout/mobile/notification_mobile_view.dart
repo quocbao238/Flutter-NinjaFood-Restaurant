@@ -13,7 +13,7 @@ class NotificationMobileView extends GetView<NotificationController> {
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage.pattern(
       appBarWidget: CustomAppBar.back(
-        title: 'Notification',
+        title: 'Notification_Title'.tr,
       ),
       body: AppPadding(
         padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
@@ -27,34 +27,19 @@ class NotificationMobileView extends GetView<NotificationController> {
               itemBuilder: (context, index) {
                 final notification = notifications[index];
                 return BoxNotification(
-                    child: AppIcons.notification(),
-                    notice: notification.message,
+                    child: AppNetworkImage(
+                        borderRadius: 16,
+                        width: MediaQuery.of(context).size.shortestSide * 0.15,
+                        height: MediaQuery.of(context).size.shortestSide * 0.15,
+                        fit: BoxFit.fill,
+                        url: notification.image),
+                    onPressedItem: () => controller.readNotification(notification),
+                    onPressedMore: () => controller.showBottomSheet(notification, context),
+                    title: notification.title,
+                    isRead: notification.isRead,
+                    message: notification.message,
                     time: convertTimeStamp(notification.createAt));
-              }
-
-              // Column(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: [
-              //     BoxNotification(
-              //       child: AppIcons.camera(),
-              //       notice: 'Your order has been taken by the driver',
-              //       time: 'Recently',
-              //     ),
-              //     BoxNotification(
-              //       child: AppIcons.edit(
-              //         color: Colors.black,
-              //       ),
-              //       notice: 'Topup for \$100 was successful',
-              //       time: '10.00 Am',
-              //     ),
-              //     BoxNotification(
-              //       child: AppIcons.checkbox(),
-              //       notice: 'Your order has been canceled',
-              //       time: '22 Juny 2021',
-              //     ),
-              //   ],
-              // ),2021
-              );
+              });
         }),
       ),
     );

@@ -187,6 +187,7 @@ const Map<String, String> vi = {
   "Cart_Detail_Show": "Chi tiết đơn hàng",
   "Cart_Detail_Hide": "Ẩn chi tiết đơn hàng",
 
+
   // History Status
   "Request": "Đang đợi nhà hàng xác nhận...",
   "Pending": "Đơn hàng đang được chuẩn bị...",
@@ -218,6 +219,9 @@ const Map<String, String> vi = {
   "Cart_Remove_Item": "Xóa món ăn",
 
   // Only Restaurant
+
+  // Notification
+  "Notification_Title": "Thông báo",
   "Notification_Request": "Bạn có một đơn hàng mới",
   "Notification_Done": "Đơn hàng đã hoàn thành",
 

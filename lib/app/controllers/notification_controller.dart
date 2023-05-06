@@ -6,6 +6,7 @@ class NotificationController extends GetxController implements Bootable {
   late final UserController _userController;
 
   final notifications = <NotificationModel>[].obs;
+  final notificationNews = <NotificationModel>[].obs;
   StreamSubscription? _notificationSubscription;
 
   @override
@@ -21,6 +22,10 @@ class NotificationController extends GetxController implements Bootable {
       }
       _handleNotifications(user.uid);
     });
+
+    notifications.listen((_data) {
+      notificationNews.assignAll(notifications.where((element) => element.isRead == false).toList());
+    });
   }
 
   void _handleNotifications(String userId) async {
@@ -34,8 +39,62 @@ class NotificationController extends GetxController implements Bootable {
   }
 
   Future<void> readNotification(NotificationModel notificationModel) async {
-    notificationModel.changeIsRead(true);
+    // GoTo Page
+    if (notificationModel.type == NotificationType.order) {
+      DeliveryController.instance.onChangeDeliveryStatus();
+    }
+    notificationModel = notificationModel.changeIsRead(true);
     final _response = await _databaseService.updateNotification(notificationModel: notificationModel);
+    _response.fold((l) => handleFailure(_logName, l), (r) => null);
+  }
+
+  Future<void> showBottomSheet(NotificationModel notification, BuildContext buildContext) async {
+    final result = await showModalBottomSheet(
+        context: buildContext,
+        builder: (context) => AppPadding.medium(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AppNetworkImage(
+                      borderRadius: 16,
+                      width: MediaQuery.of(context).size.shortestSide * 0.2,
+                      height: MediaQuery.of(context).size.shortestSide * 0.2,
+                      fit: BoxFit.fill,
+                      url: notification.image),
+                  AppPadding.small(
+                    child: AppText.bodyMedium(
+                      text: notification.title,
+                      fontWeight: FontWeight.bold,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  AppText.labelMedium(
+                    text: notification.message,
+                    textAlign: TextAlign.center,
+                  ),
+                  AppSizeScale(
+                      ratioWidth: 0.8, child: Divider(color: Theme.of(context).colorScheme.primary, thickness: 1)),
+                  ListTile(
+                    leading: Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: AppPadding.small(child: Icon(Icons.delete_outline))),
+                    title: AppText.bodyMedium(
+                      text: 'Xóa thông báo này',
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () => Navigator.pop(context, true),
+                  ),
+                ],
+              ),
+            ));
+    if (result == true) deleteNotification(notification);
+  }
+
+  Future<void> deleteNotification(NotificationModel notificationModel) async {
+    final _response = await _databaseService.deleteNotification(notificationModel: notificationModel);
     _response.fold((l) => handleFailure(_logName, l), (r) => null);
   }
 

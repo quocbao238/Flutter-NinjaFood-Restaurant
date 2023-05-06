@@ -11,7 +11,6 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/controllers/delivery_controller.dart';
 import 'package:ninjafood/app/controllers/restaurant_controller.dart';
-import 'package:ninjafood/app/features/role_user/notification/controller/notification_controller.dart';
 import 'package:ninjafood/app/models/cart_model.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/models/history_model.dart';

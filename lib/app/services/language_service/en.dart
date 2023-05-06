@@ -203,6 +203,9 @@ const Map<String, String> en = {
   "Cart_Remove_Item_Message": "Are you sure you want to remove this item?",
   "Cart_Remove_Item": "Remove Item",
 
+
+
+  "Notification_Title": "Notification",
   "Notification_Request": "You have a new order",
   "Notification_Done": "Order has been completed",
 };
