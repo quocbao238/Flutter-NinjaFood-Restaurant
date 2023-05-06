@@ -146,6 +146,26 @@ class DatabaseService extends GetxService
   }
 
   @override
+  Future<Either<Failure, List<OrderModel>>> getListOrdersByListId(
+      List<String> listOrderIds) async {
+    try {
+      List<OrderModel> _result = [];
+      final querySnapshot = await _db
+          .collection(DatabaseKeys.orderPath)
+          .where(FieldPath.documentId, whereIn: listOrderIds)
+          .get();
+      _result =
+          querySnapshot.docs.map((e) => OrderModel.fromJson(e.data())).toList();
+      return right(_result);
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  @override
   Future<Either<Failure, List<ProductModel>>> getListProducts() async {
     try {
       List<ProductModel> _result = [];
@@ -294,6 +314,7 @@ class DatabaseService extends GetxService
   }
 
   @override
+
   /// Listen order by status in day
   Stream<QuerySnapshot<Map<String, dynamic>>> listenOrders() {
     final dateTime = DateTime.now();

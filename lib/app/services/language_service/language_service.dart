@@ -17,13 +17,13 @@ class TranslationService extends Translations {
     return Locale(code.first, code.last);
   }
 
-  static Future<Null> init(Locale locale) async {
+  static Future<Null> init() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? lang = prefs.getString(LocalStorageKey.currentLanguage);
     if (lang != null && lang.isNotEmpty)
       fallbackLocale = localFromString(lang);
     else
-      fallbackLocale = locale;
+      fallbackLocale = fallbackLocale;
     return null;
   }
 

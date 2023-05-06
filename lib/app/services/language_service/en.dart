@@ -177,7 +177,11 @@ const Map<String, String> en = {
   "Cart_Oder_Loading": "Ordering...",
   "Cart_Order_Success": "Order Success",
   "Cart_Go_To_Home": "Go To Home Now",
+  "Cart_Detail_Show": "Show detail order",
+  "Cart_Detail_Hide": "Hide detail order",
 
+
+  "Request": "Waiting restaurant confirm your order...",
   "Pending": "Order is being processed...",
   "Delivering": "Your order is being delivered...",
   "Delivered": "The order has arrived. Please check and confirm your order...",

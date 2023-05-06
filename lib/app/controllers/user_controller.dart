@@ -75,7 +75,7 @@ class UserController extends GetxController implements Bootable {
     String? fcmToken,
     List<int>? favoriteIds,
     List<CartModel>? carts,
-    List<OrderModel>? historyOrders,
+    List<String>? orderIds,
     List<String>? cmtIds,
   }) async {
     final _currentUser = currentUser.value;
@@ -90,7 +90,7 @@ class UserController extends GetxController implements Bootable {
         favoriteIds: favoriteIds ?? _currentUser.favoriteIds,
         fcmToken: fcmToken ?? _currentUser.fcmToken,
         carts: carts ?? _currentUser.carts,
-        historyOrders: historyOrders ?? _currentUser.historyOrders,
+        orderIds: orderIds ?? _currentUser.orderIds,
         commentIds: cmtIds ?? _currentUser.commentIds,
       );
       await _databaseService.updateUser(userModel: newDataUser);
@@ -144,42 +144,44 @@ class UserController extends GetxController implements Bootable {
       required double rating,
       required String historyId}) async {
     FocusManager.instance.primaryFocus?.unfocus();
-    final _currentUser = currentUser.value;
-    if (_currentUser == null) return left(Failure.custom('User is null'));
-    final createAt = createTimeStamp();
-    try {
-      final commentModel = CommentModel(
-          uid: Uuid().v4(),
-          createAt: createAt,
-          userId: _currentUser.uid,
-          userImage: _currentUser.photoUrl ?? '',
-          userName: _currentUser.getName(),
-          comment: comment,
-          rating: rating);
-      final insertCommentProduct = await _databaseService.insertCommentProduct(
-          commentModel: commentModel);
-      return insertCommentProduct.fold((l) => left(l), (r) async {
-        _currentUser.historyOrders
-            .firstWhere((element) => element.uid == historyId)
-            .isRating = true;
-        final currentCommentIds = _currentUser.commentIds;
-        currentCommentIds.add(commentModel.uid);
 
-        return await updateUser(
-            historyOrders: _currentUser.historyOrders,
-            cmtIds: currentCommentIds);
-      });
-    } catch (e, stackTrace) {
-      return left(Failure(e.toString(), stackTrace));
-    }
+    // TODO: Update later
+    return Either.right(null);
+
+    // final _currentUser = currentUser.value;
+    // if (_currentUser == null) return left(Failure.custom('User is null'));
+    // final createAt = createTimeStamp();
+    // try {
+    //   final commentModel = CommentModel(
+    //       uid: Uuid().v4(),
+    //       createAt: createAt,
+    //       userId: _currentUser.uid,
+    //       userImage: _currentUser.photoUrl ?? '',
+    //       userName: _currentUser.getName(),
+    //       comment: comment,
+    //       rating: rating);
+    //   final insertCommentProduct = await _databaseService.insertCommentProduct(
+    //       commentModel: commentModel);
+    //   return insertCommentProduct.fold((l) => left(l), (r) async {
+    //     _currentUser.historyOrders
+    //         .firstWhere((element) => element.uid == historyId)
+    //         .isRating = true;
+    //     final currentCommentIds = _currentUser.commentIds;
+    //     currentCommentIds.add(commentModel.uid);
+    //
+    //     return await updateUser(
+    //         historyOrders: _currentUser.historyOrders,
+    //         cmtIds: currentCommentIds);
+    //   });
+    // } catch (e, stackTrace) {
+    //   return left(Failure(e.toString(), stackTrace));
+    // }
   }
 
   Future<Either<Failure, void>> updateStatusOrder(OrderModel orderModel) async {
     try {
       orderModel.status = HistoryStatus.done;
       await _databaseService.updateOrder(orderModel: orderModel);
-      final historyOrders = currentUser.value?.historyOrders ?? [];
-      await updateUser(historyOrders: [...historyOrders, orderModel]);
       sendDeliveryNotificationToRestaurant(orderModel);
       return right(null);
     } catch (e, stackTrace) {

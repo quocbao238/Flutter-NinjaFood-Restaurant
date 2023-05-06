@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ninjafood/app/models/cart_model.dart';
-import 'package:ninjafood/app/models/history_model.dart';
 
 const ROLE_USER = 'role_user';
 const ROLE_ADMIN = 'role_admin';
@@ -33,7 +32,7 @@ class UserModel {
   double? serviceFee = 6.0;
   List<int> favoriteIds;
   List<CartModel> carts;
-  List<OrderModel> historyOrders;
+  List<String> orderIds;
   List<String> commentIds = [];
 
   UserModel(
@@ -44,7 +43,7 @@ class UserModel {
       this.email,
       this.photoUrl,
       this.address,
-      required this.historyOrders,
+      required this.orderIds,
       this.role,
       this.createType,
       this.userType,
@@ -62,7 +61,7 @@ class UserModel {
         phoneNumber: authUser.phoneNumber,
         firstName: authUser.displayName,
         role: ROLE_USER,
-        historyOrders: [],
+        orderIds: [],
         favoriteIds: [],
         carts: [],
         userType: UserType.Sliver,
@@ -74,7 +73,7 @@ class UserModel {
       {required User authUser, required createType}) {
     return UserModel(
       uid: authUser.uid,
-      historyOrders: [],
+      orderIds: [],
       email: authUser.email,
       photoUrl: authUser.photoURL,
       phoneNumber: authUser.phoneNumber,
@@ -109,8 +108,7 @@ class UserModel {
         fcmToken = data['fcmToken'] ?? '',
         createType = data['createType'] ?? '',
         favoriteIds = List<int>.from(data['favoriteIds'] ?? []),
-        historyOrders = List<OrderModel>.from(
-            data['historyOrders']?.map((x) => OrderModel.fromJson(x)) ?? []),
+        orderIds = List<String>.from(data['orderIds'] ?? []),
         carts = List<CartModel>.from(
             data['carts']?.map((x) => CartModel.fromJson(x)) ?? []),
         userType = UserType.values[data['userType'] ?? 0];
@@ -128,7 +126,7 @@ class UserModel {
       'createType': createType,
       'fcmToken': fcmToken,
       'commentIds': commentIds,
-      'historyOrders': historyOrders.map((x) => x.toJson()).toList(),
+      'orderIds': orderIds,
       'carts': carts.map((x) => x.toJson()).toList(),
       'favoriteIds': favoriteIds,
       'userType': userType?.json,
@@ -145,7 +143,7 @@ class UserModel {
     String? address,
     List<CartModel>? carts,
     String? fcmToken,
-    List<OrderModel>? historyOrders,
+    List<String>? orderIds,
     UserType? userType,
     List<int>? favoriteIds,
     List<String>? commentIds,
@@ -158,7 +156,7 @@ class UserModel {
       email: email ?? this.email,
       photoUrl: photoUrl ?? this.photoUrl,
       address: address ?? this.address,
-      historyOrders: historyOrders ?? this.historyOrders,
+      orderIds: orderIds ?? this.orderIds,
       role: this.role,
       createType: this.createType,
       fcmToken: fcmToken ?? this.fcmToken,
