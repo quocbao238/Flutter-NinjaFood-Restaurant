@@ -118,5 +118,11 @@ class AppPages {
       page: () => RatingScreen(),
       binding: GetBinding(AppRouteProvider.ratingScreen),
     ),
+
+    GetPage(
+      name: AppRouteProvider.orderDetailScreen,
+      page: () => OrderDetailsScreen(orderModel: Get.arguments),
+      binding: GetBinding(AppRouteProvider.orderDetailScreen),
+    ),
   ];
 }

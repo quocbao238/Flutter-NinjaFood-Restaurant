@@ -187,6 +187,9 @@ const Map<String, String> vi = {
   "Cart_Detail_Show": "Chi tiết đơn hàng",
   "Cart_Detail_Hide": "Ẩn chi tiết đơn hàng",
 
+  // Order Detail
+  "Order_Detail_Title": "Chi tiết đơn hàng",
+
 
   // History Status
   "Request": "Đang đợi nhà hàng xác nhận...",

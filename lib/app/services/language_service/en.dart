@@ -189,6 +189,9 @@ const Map<String, String> en = {
   "OrderReceived": "Order received",
   "Done": "Order completed",
 
+  // Order Detail
+  "Order_Detail_Title": "Order Detail",
+
   "pending": "Pending",
   "delivering": "Delivering",
   "delivered": "Delivered",
