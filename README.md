@@ -18,7 +18,7 @@
  - ImagePicker,VideoPlayer...
 
 ## Feature (This project config for android, so some feature below maybe not working in ios)
-#### Ninja Food User
+#### Ninja Food User (user@gmail.com - 123456)
 - [x] Authentication 
 - [x] SignIn, SignUp (Email, Google, Facebook), Logout, Forgot Password
 - [x] Edit User Profile (Image, Avatar, Name, Phone Number)
@@ -39,7 +39,7 @@
 - [ ] Location Picker Address
 - [ ] View Rating Order
 
-#### Ninja Food Owner
+#### Ninja Food Owner (admin@gmail.com - 123456)
 - [x] Authentication 
 - [x] SignIn
 - [x] Edit User Profile (Image, Avatar, Name, Phone Number)
