@@ -18,8 +18,7 @@ class RoomChatAppBarWidget extends GetView<RoomChatScreenController> {
           padding: const AppEdgeInsets.only(
               top: AppGapSize.paddingMedium,
               left: AppGapSize.paddingMedium,
-              right: AppGapSize.paddingMedium,
-              bottom: AppGapSize.regular),
+              right: AppGapSize.paddingMedium),
           child: AppNetworkImage(borderRadius: 45, width: 45, height: 45, url: controller.receiverUser.photoUrl ?? ''),
         )
       ],

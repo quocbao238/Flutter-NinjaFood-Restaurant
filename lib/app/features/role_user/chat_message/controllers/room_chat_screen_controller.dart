@@ -34,13 +34,14 @@ class RoomChatScreenController extends BaseController {
   final TextEditingController textEditingController = TextEditingController();
 
   // create Rx null SelectChatFilesImpl
-  final Rx<SelectChatFilesImpl> selectChatFiles = Rx<SelectChatFilesImpl>(SelectChatTextOnly());
+  final Rx<SelectChatFilesImpl> selectChatFiles =
+      Rx<SelectChatFilesImpl>(SelectChatTextOnly());
   final RxList<File> selectedFiles = <File>[].obs;
 
   @override
   void onInit() {
     groupChatModel = Get.arguments;
-    final currentUser = userController.getCurrentUser!;
+    final currentUser = userController.currentUser.value!;
     receiverUser = {groupChatModel.receiverUser, groupChatModel.senderUser}
         .firstWhere((element) => element.uid != currentUser.uid);
     senderUser = {groupChatModel.receiverUser, groupChatModel.senderUser}
@@ -49,12 +50,14 @@ class RoomChatScreenController extends BaseController {
     _listenChatByGroupChatId(groupChatModel.groupChatId);
     lstChatMessage.listen((p0) {
       if (p0.isNotEmpty) {
-        Future.delayed(Duration(milliseconds: 500)).then((value) => _animateToBottom());
+        Future.delayed(Duration(milliseconds: 500))
+            .then((value) => _animateToBottom());
       }
     });
 
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => Future.delayed(Duration(milliseconds: 500)).then((value) => _animateToBottom()));
+    WidgetsBinding.instance.addPostFrameCallback((_) =>
+        Future.delayed(Duration(milliseconds: 500))
+            .then((value) => _animateToBottom()));
 
     super.onInit();
   }
@@ -68,15 +71,21 @@ class RoomChatScreenController extends BaseController {
   }
 
   _listenChatByGroupChatId(String groupChatId) {
-    streamListChat = databaseService.listenMessageChatByGroupChat(groupChatId: groupChatId).listen((event) {
-      final messages = event.docs.map((e) => MessageChat.fromJson(e.data())).toList().reversed;
+    streamListChat = databaseService
+        .listenMessageChatByGroupChat(groupChatId: groupChatId)
+        .listen((event) {
+      final messages = event.docs
+          .map((e) => MessageChat.fromJson(e.data()))
+          .toList()
+          .reversed;
       lstChatMessage.assignAll(messages);
     });
   }
 
   void _animateToBottom() {
     if (scrollController.hasClients) {
-      if (scrollController.position.maxScrollExtent == scrollController.position.pixels) return;
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.position.pixels) return;
       print('ChatDetailsController scroll');
       scrollController.animateTo(
         scrollController.position.maxScrollExtent,
@@ -92,7 +101,7 @@ class RoomChatScreenController extends BaseController {
   Future<void> onSendMessage() async {
     FocusManager.instance.primaryFocus?.unfocus();
 
-    final isAdmin = userController.getCurrentUser?.isAdmin() ?? false;
+    final isAdmin = userController.currentUser.value?.isAdmin() ?? false;
     final _receiverUser = isAdmin ? receiverUser : null;
     if (selectChatFiles.value is SelectChatTextOnly) {
       if (textEditingController.text.isEmpty) return;
@@ -101,22 +110,25 @@ class RoomChatScreenController extends BaseController {
           message: textEditingController.text,
           receiverUser: _receiverUser,
           messageChatType: selectChatFiles.value.messageChatType);
-      response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) => _clearAllSeason());
+      response.fold((l) => handleFailure(_logName, l, showDialog: true),
+          (r) => _clearAllSeason());
       loading.value = false;
       return;
     }
     if (selectedFiles.isEmpty) return;
     loading.value = true;
-    final chatFiles = await selectChatFiles.value.uploadFileToStorage(selectedFiles);
+    final chatFiles =
+        await selectChatFiles.value.uploadFileToStorage(selectedFiles);
     if (chatFiles.isEmpty) return;
-    final messageChat =
-        selectChatFiles.value.createMessageChat(message: textEditingController.text, chatFiles: chatFiles);
+    final messageChat = selectChatFiles.value.createMessageChat(
+        message: textEditingController.text, chatFiles: chatFiles);
     final response = await messageController.sendMessage(
       message: messageChat.toJson(),
       receiverUser: _receiverUser,
       messageChatType: selectChatFiles.value.messageChatType,
     );
-    response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) => _clearAllSeason());
+    response.fold((l) => handleFailure(_logName, l, showDialog: true),
+        (r) => _clearAllSeason());
     loading.value = false;
   }
 
@@ -124,16 +136,22 @@ class RoomChatScreenController extends BaseController {
     selectChatFiles.value = selectChatFilesImpl;
     FocusManager.instance.primaryFocus?.unfocus();
     final _files = await selectChatFilesImpl.selectFile();
-    if (_files.isEmpty) return;
+    if (_files.isEmpty) {
+      selectChatFiles.value = SelectChatTextOnly();
+      return;
+    }
     selectedFiles.assignAll(_files);
   }
 
   // Select more File
   Future<void> onPressedSelectMoreImages() async {
     final _fileResults = await FileHelper.pickImages();
-    final _selectedFilesName = selectedFiles.map((e) => FileHelper.getFileName(e.path)).toList();
-    final _files =
-        _fileResults.where((element) => !_selectedFilesName.contains(FileHelper.getFileName(element.path))).toList();
+    final _selectedFilesName =
+        selectedFiles.map((e) => FileHelper.getFileName(e.path)).toList();
+    final _files = _fileResults
+        .where((element) =>
+            !_selectedFilesName.contains(FileHelper.getFileName(element.path)))
+        .toList();
     selectedFiles.addAll(_files);
   }
 
@@ -155,5 +173,4 @@ class RoomChatScreenController extends BaseController {
     if (_resultFile == null) return;
     FileHelper.openFileByPath(_resultFile.path);
   }
-
 }

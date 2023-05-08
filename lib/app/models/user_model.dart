@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ninjafood/app/models/cart_model.dart';
-import 'package:ninjafood/app/models/history_model.dart';
 
 const ROLE_USER = 'role_user';
 const ROLE_ADMIN = 'role_admin';
@@ -28,12 +27,12 @@ class UserModel {
   String? address;
   String? role;
   String? createType;
-  String? fcmToken;
+  List<String> playerIds;
   UserType? userType;
   double? serviceFee = 6.0;
   List<int> favoriteIds;
   List<CartModel> carts;
-  List<HistoryOrderModel> historyOrders;
+  List<String> orderIds;
   List<String> commentIds = [];
 
   UserModel(
@@ -44,16 +43,17 @@ class UserModel {
       this.email,
       this.photoUrl,
       this.address,
-      required this.historyOrders,
+      required this.orderIds,
       this.role,
       this.createType,
       this.userType,
       required this.carts,
       required this.commentIds,
       required this.favoriteIds,
-      this.fcmToken});
+      required this.playerIds});
 
-  static UserModel createUserByAuthUser({required User authUser, required createType}) {
+  static UserModel createUserByAuthUser(
+      {required User authUser, required createType}) {
     return UserModel(
         uid: authUser.uid,
         email: authUser.email,
@@ -61,18 +61,20 @@ class UserModel {
         phoneNumber: authUser.phoneNumber,
         firstName: authUser.displayName,
         role: ROLE_USER,
-        historyOrders: [],
+        orderIds: [],
         favoriteIds: [],
+        playerIds: [],
         carts: [],
         userType: UserType.Sliver,
         commentIds: [],
         createType: createType);
   }
 
-  static UserModel createAdminByAuthUser({required User authUser, required createType}) {
+  static UserModel createAdminByAuthUser(
+      {required User authUser, required createType}) {
     return UserModel(
       uid: authUser.uid,
-      historyOrders: [],
+      orderIds: [],
       email: authUser.email,
       photoUrl: authUser.photoURL,
       phoneNumber: authUser.phoneNumber,
@@ -82,6 +84,7 @@ class UserModel {
       favoriteIds: [],
       commentIds: [],
       carts: [],
+      playerIds: [],
       createType: createType,
     );
   }
@@ -104,12 +107,12 @@ class UserModel {
         address = data['address'] ?? '',
         role = data['role'] ?? '',
         commentIds = List<String>.from(data['commentIds'] ?? []),
-        fcmToken = data['fcmToken'] ?? '',
+        playerIds = List<String>.from(data['playerIds'] ?? []),
         createType = data['createType'] ?? '',
         favoriteIds = List<int>.from(data['favoriteIds'] ?? []),
-        historyOrders =
-            List<HistoryOrderModel>.from(data['historyOrders']?.map((x) => HistoryOrderModel.fromJson(x)) ?? []),
-        carts = List<CartModel>.from(data['carts']?.map((x) => CartModel.fromJson(x)) ?? []),
+        orderIds = List<String>.from(data['orderIds'] ?? []),
+        carts = List<CartModel>.from(
+            data['carts']?.map((x) => CartModel.fromJson(x)) ?? []),
         userType = UserType.values[data['userType'] ?? 0];
 
   Map<String, dynamic> toJson() {
@@ -123,13 +126,21 @@ class UserModel {
       'address': address,
       'role': role,
       'createType': createType,
-      'fcmToken': fcmToken,
+      'playerIds': playerIds,
       'commentIds': commentIds,
-      'historyOrders': historyOrders.map((x) => x.toJson()).toList(),
+      'orderIds': orderIds,
       'carts': carts.map((x) => x.toJson()).toList(),
       'favoriteIds': favoriteIds,
       'userType': userType?.json,
     };
+  }
+
+  addPlayerId(String playerId) {
+    if (playerIds.contains(playerId)) {
+      return;
+    }
+
+    playerIds.add(playerId);
   }
 
   UserModel copyWith({
@@ -141,8 +152,8 @@ class UserModel {
     String? photoUrl,
     String? address,
     List<CartModel>? carts,
-    String? fcmToken,
-    List<HistoryOrderModel>? historyOrders,
+    List<String>? playerIds,
+    List<String>? orderIds,
     UserType? userType,
     List<int>? favoriteIds,
     List<String>? commentIds,
@@ -155,10 +166,10 @@ class UserModel {
       email: email ?? this.email,
       photoUrl: photoUrl ?? this.photoUrl,
       address: address ?? this.address,
-      historyOrders: historyOrders ?? this.historyOrders,
+      orderIds: orderIds ?? this.orderIds,
       role: this.role,
       createType: this.createType,
-      fcmToken: fcmToken ?? this.fcmToken,
+      playerIds: playerIds ?? this.playerIds,
       favoriteIds: favoriteIds ?? this.favoriteIds,
       commentIds: commentIds ?? this.commentIds,
       userType: userType ?? this.userType,

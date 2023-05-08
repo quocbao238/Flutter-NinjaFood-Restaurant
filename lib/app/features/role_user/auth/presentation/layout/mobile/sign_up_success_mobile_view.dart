@@ -8,10 +8,10 @@ class SignupSuccessMobileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 4)).then((value) {
-      Get.offAllNamed(AppRouteProvider.tabScreen);
-    });
-    return AppScaffoldBackgroundImage.splash(
+    // Future.delayed(Duration(seconds: 4)).then((value) {
+    //   Get.offAllNamed(AppRouteProvider.tabScreen);
+    // });
+    return AppScaffoldBackgroundImage.pattern(
       body: AppSizeScale(
         ratioWidth: 1,
         child: Column(
@@ -19,26 +19,26 @@ class SignupSuccessMobileView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                child: AppPadding.medium(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
                   AppIcons.success(),
                   AppPadding.regular(
-                    child: AppText.headlineLarge(
-                      text: 'Congrats!',
-                      color: ThemeColors.primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  AppText.titleLarge(
-                    text: 'Your Profile Is Ready To Use',
-                  ),
-                ],
-              ),
-            ),
-            AppPadding.regular(
-                child: AppButton.max(title: 'Next', onPressed: () => Get.offAllNamed(AppRouteProvider.tabScreen))),
+                      child: AppText.headlineLarge(
+                          text: 'Congrats_Title'.tr,
+                          color: ThemeColors.primaryColor,
+                          fontWeight: FontWeight.bold)),
+                  AppText.titleLarge(text: 'Congrats_Description'.tr)
+                ]))),
+            SafeArea(
+              child: AppPadding.regular(
+                  child: AppButton.max(
+                      title: 'Next_Button'.tr,
+                      onPressed: () =>
+                          Get.offAllNamed(AppRouteProvider.tabScreen))),
+            )
           ],
         ),
       ),

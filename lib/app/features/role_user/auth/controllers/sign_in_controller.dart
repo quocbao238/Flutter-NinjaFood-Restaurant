@@ -17,8 +17,8 @@ class SignInController extends BaseController {
 
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
-  Rxn<String?> emailError = Rxn<String?>(null);
-  Rxn<String?> passwordError = Rxn<String?>(null);
+  Rxn<String?> emailError = Rxn<String?>();
+  Rxn<String?> passwordError = Rxn<String?>();
 
   @override
   void onInit() {
@@ -46,18 +46,31 @@ class SignInController extends BaseController {
     super.dispose();
   }
 
-  void _onCheckFirstTimeLogin({required UserCredential userCredential, required String createType}) {
+  bool _checkValidEmailAndPassword() {
+    final email = emailController.text;
+    final password = passwordController.text;
+    emailError.value = Validator.validateEmail(email);
+    passwordError.value = Validator.validatePassword(password);
+    return emailError.value == null && passwordError.value == null;
+  }
+
+  void _onCheckFirstTimeLogin(
+      {required UserCredential userCredential, required String createType}) {
     if (userCredential.additionalUserInfo?.isNewUser == true) {
-      _createInsertUserDatabase(firebaseAuthUser: userCredential.user!, createType: createType);
+      _createInsertUserDatabase(
+          firebaseAuthUser: userCredential.user!, createType: createType);
       return;
     }
     Get.offAllNamed(AppRouteProvider.tabScreen);
   }
 
-  Future<void> _createInsertUserDatabase({required User firebaseAuthUser, required String createType}) async {
-    final newUser = UserModel.createUserByAuthUser(authUser: firebaseAuthUser, createType: createType);
+  Future<void> _createInsertUserDatabase(
+      {required User firebaseAuthUser, required String createType}) async {
+    final newUser = UserModel.createUserByAuthUser(
+        authUser: firebaseAuthUser, createType: createType);
     final response = await dbService.insertUser(userModel: newUser);
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
+        (r) {
       Get.offAllNamed(AppRouteProvider.signupProcessScreen);
     });
   }
@@ -65,9 +78,12 @@ class SignInController extends BaseController {
   Future<void> onPressedSocialFacebook() async {
     loading.value = true;
     final response = await authService.registerWithFacebook();
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (UserCredential? userCredential) {
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
+        (UserCredential? userCredential) {
       if (userCredential != null)
-        _onCheckFirstTimeLogin(userCredential: userCredential, createType: UserCreateType.facebook);
+        _onCheckFirstTimeLogin(
+            userCredential: userCredential,
+            createType: UserCreateType.facebook);
     });
     loading.value = false;
   }
@@ -75,24 +91,26 @@ class SignInController extends BaseController {
   Future<void> onPressedSocialGoogle() async {
     loading.value = true;
     final response = await authService.registerWithGoogle();
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (UserCredential? userCredential) {
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
+        (UserCredential? userCredential) {
       if (userCredential != null)
-        _onCheckFirstTimeLogin(userCredential: userCredential, createType: UserCreateType.google);
+        _onCheckFirstTimeLogin(
+            userCredential: userCredential, createType: UserCreateType.google);
     });
 
     loading.value = false;
   }
 
-
   Future<void> onPressedLogin() async {
-    if (emailError.value != null || passwordError.value != null) {
-      return;
-    }
+    if (!_checkValidEmailAndPassword()) return;
+
     final email = emailController.text;
     final password = passwordController.text;
     loading.value = true;
-    final response = await authService.loginWithEmail(email: email, password: password);
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
+    final response =
+        await authService.loginWithEmail(email: email, password: password);
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
+        (r) {
       Get.offAllNamed(AppRouteProvider.tabScreen);
     });
     loading.value = false;

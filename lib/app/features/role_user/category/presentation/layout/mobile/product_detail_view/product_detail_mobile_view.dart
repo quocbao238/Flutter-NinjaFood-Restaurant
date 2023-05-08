@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/category/controllers/product_detail_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
+import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 import 'widgets/product_detail_mobile_widgets.dart';
 
@@ -19,7 +20,7 @@ class FoodDetailMobileView extends GetView<ProductDetailScreenController> {
         alignment: Alignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 64),
+            padding: EdgeInsets.only(bottom: kTextTabBarHeight * 2),
             child: CustomScrollView(
               slivers: [
                 SliverPersistentHeader(
@@ -40,13 +41,13 @@ class FoodDetailMobileView extends GetView<ProductDetailScreenController> {
             alignment: Alignment.bottomCenter,
             child: Obx(
               () {
-                print("Rebuild button");
                 final loading = controller.loading.value;
                 return Obx(() {
                   final isInCurrentCarts = controller.isInCarts.value;
-                  final String textButton = isInCurrentCarts ? 'This item is already in your cart' : 'Add To Cart';
+                  final String textButton = isInCurrentCarts ? 'Food_Already_In_Cart'.tr : 'Add_To_Cart'.tr;
                   return AppPadding(
-                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.regular),
+                    padding: AppEdgeInsets.symmetric(
+                        horizontal: AppGapSize.medium, vertical: isIos ? AppGapSize.none : AppGapSize.medium),
                     child: SafeArea(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -58,8 +59,8 @@ class FoodDetailMobileView extends GetView<ProductDetailScreenController> {
                               duration: Duration(milliseconds: 300),
                               loading: loading,
                               textButton: textButton,
-                              textDone: 'Added..',
-                              textLoading: 'Adding...',
+                              textDone: 'Add_To_Cart'.tr,
+                              textLoading: 'Adding_To_Cart'.tr,
                               ratioWidthButton: isInCurrentCarts ? 0.65 : 0.85,
                               ratioWidthDone: 0.3,
                               ratioWidthLoading: 0.55,

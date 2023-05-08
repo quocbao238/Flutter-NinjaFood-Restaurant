@@ -6,7 +6,7 @@ import 'en.dart';
 import 'vi.dart';
 
 class TranslationService extends Translations {
-  static var fallbackLocale = Locale('en', 'EN');
+  static var fallbackLocale = Locale('vi', 'VN');
 
   static String localToString(Locale locale) {
     return locale.languageCode + "-" + locale.countryCode.toString();
@@ -17,13 +17,13 @@ class TranslationService extends Translations {
     return Locale(code.first, code.last);
   }
 
-  static Future<Null> init(Locale locale) async {
+  static Future<Null> init() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? lang = prefs.getString(LocalStorageKey.currentLanguage);
     if (lang != null && lang.isNotEmpty)
       fallbackLocale = localFromString(lang);
     else
-      fallbackLocale = locale;
+      fallbackLocale = fallbackLocale;
     return null;
   }
 
@@ -36,4 +36,9 @@ class TranslationService extends Translations {
     fallbackLocale = locale;
     prefs.setString(LocalStorageKey.currentLanguage, localToString(locale));
   }
+
+  static Map<String, String> lstLanguage = {
+    'en': 'Drawer_Language_English',
+    'vi': 'Drawer_Language_Vietnamese',
+  };
 }

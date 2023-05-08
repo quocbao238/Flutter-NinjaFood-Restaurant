@@ -9,13 +9,16 @@ class ProfileBody extends StatelessWidget {
       child: AppSizeScale(
         backgroundColor: Theme.of(context).colorScheme.background,
         child: AppPadding.medium(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
+            padding: const EdgeInsets.all(0),
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ProfileUserInformationWidget(),
-              ProfileVoucherWidget(),
-              FavoriteList(),
-              HistoryList(),
+              RoleWrapper(userView: ProfileVoucherWidget()),
+              RoleWrapper(userView:  FavoriteList()),
+              RoleWrapper(userView:  HistoryList()),
             ],
           ),
         ),

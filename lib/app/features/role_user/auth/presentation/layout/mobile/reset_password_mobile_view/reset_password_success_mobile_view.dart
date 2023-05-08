@@ -8,7 +8,7 @@ class SuccessNotificationMobileView extends GetView<ForgotPassWordController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldBackgroundImage.splash(
+    return AppScaffoldBackgroundImage.pattern(
       body: AppSizeScale(
         ratioWidth: 1,
         child: Column(
@@ -23,13 +23,13 @@ class SuccessNotificationMobileView extends GetView<ForgotPassWordController> {
                   AppIcons.success(),
                   AppPadding.regular(
                     child: AppText.headlineLarge(
-                      text: 'Congrats!',
+                      text: 'ResetPassword_Send_Success'.tr,
                       color: ThemeColors.primaryColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   AppText.titleLarge(
-                    text: 'Password reset successful',
+                    text: 'ResetPassword_Send_Success_Detail'.tr,
                   ),
                 ],
               ),

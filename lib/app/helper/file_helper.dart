@@ -12,12 +12,14 @@ enum FileType {
 }
 
 class FileHelper {
-  static Future<String?> getDirectory() async => await FilePicker.platform.getDirectoryPath();
+  static Future<String?> getDirectory() async =>
+      await FilePicker.platform.getDirectoryPath();
 
   static String getFileName(String path) => path.split('/').last;
 
   static Future<File?> pickImage() async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       return File(pickedFile.path);
     } else {
@@ -37,7 +39,8 @@ class FileHelper {
   }
 
   static Future<List<File>> pickVideos() async {
-    final imageFiles = await ImagePicker().pickVideo(source: ImageSource.gallery);
+    final imageFiles =
+        await ImagePicker().pickVideo(source: ImageSource.gallery);
     if (imageFiles != null) {
       return [File(imageFiles.path)];
     }
@@ -46,7 +49,8 @@ class FileHelper {
   }
 
   static Future<File?> takePhoto() async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
       return File(pickedFile.path);
     } else {
@@ -68,7 +72,7 @@ class FileHelper {
   }
 
   static FileType? getFileType({required File file}) {
-    final ext = file.path.split('.').last;
+    final ext = file.path.split('.').last.toLowerCase();
 
     if (FileType.image.extensions.contains(ext)) {
       return FileType.image;

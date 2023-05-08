@@ -15,7 +15,7 @@ class GroupChatItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final currentUser = UserController.instance.getCurrentUser;
+    final currentUser = UserController.instance.currentUser.value;
     final _user =
         {groupChatItem.receiverUser, groupChatItem.senderUser}.firstWhere((element) => element.uid != currentUser!.uid);
     return AnimationItem(

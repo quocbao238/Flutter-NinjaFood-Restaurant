@@ -1,6 +1,5 @@
 part of 'database_service.dart';
 
-
 abstract class DatabaseServiceImpl {
   /* User */
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUserDataStream(String uid);
@@ -31,10 +30,42 @@ abstract class DatabaseServiceImpl {
 
   Future<Either<Failure, void>> insertGroupChat({required GroupChatModel groupChatModel});
 
+  Future<Either<Failure, void>> getGroupChatByGroupChatId({required String groupChatId});
+
+
+
   Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat({required String groupChatId});
 
   Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat();
 
   // Comment Product
   Future<Either<Failure, void>> insertCommentProduct({required CommentModel commentModel});
+
+  //Order
+
+  Future<Either<Failure, List<OrderModel>>> getListOrdersByListId(List<String> orderIds);
+
+  Future<Either<Failure, void>> insertOrder({required OrderModel orderModel});
+
+  Future<Either<Failure, void>> updateOrder({required OrderModel orderModel});
+
+  //Listen CurrentOder By userId
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenCurrentOrder(String userId);
+
+  //Listen CurrentOder By userId
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenOrders();
+
+  Future<Either<Failure, List<OrderModel>>> getListOrderModelByStatus(
+      {required HistoryStatus status, required String timeStampStart, required String timeStampEnd});
+
+  // Notification
+  Future<Either<Failure, void>> insertNotification({required NotificationModel notificationModel});
+
+  // update status notification
+  Future<Either<Failure, void>> updateNotification({required NotificationModel notificationModel});
+
+  Future<Either<Failure, void>> deleteNotification({required NotificationModel notificationModel});
+
+  // listen notification
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenNotification({required String userId});
 }

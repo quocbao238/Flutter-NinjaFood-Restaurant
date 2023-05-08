@@ -19,20 +19,21 @@ class SignUpProcessController extends BaseController {
   late final TextEditingController lastNameController;
   late final TextEditingController phoneController;
 
-
-  late final File imageFile;
+  File? imageFile;
   Rxn<String?> firstNameError = Rxn<String?>(null);
   Rxn<String?> lastNameError = Rxn<String?>(null);
   Rxn<String?> phoneError = Rxn<String?>(null);
   Rxn<String?> addressLocation = Rxn<String?>(null);
 
-
   @override
   void onInit() {
-    final currentUser = userController.getCurrentUser;
-    firstNameController = TextEditingController(text: currentUser?.firstName ?? '');
-    lastNameController = TextEditingController(text: currentUser?.lastName ?? '');
-    phoneController = TextEditingController(text: currentUser?.phoneNumber ?? '');
+    final currentUser = userController.currentUser.value;
+    firstNameController =
+        TextEditingController(text: currentUser?.firstName ?? '');
+    lastNameController =
+        TextEditingController(text: currentUser?.lastName ?? '');
+    phoneController =
+        TextEditingController(text: currentUser?.phoneNumber ?? '');
 
     firstNameController.addListener(() {
       final firstName = firstNameController.text;
@@ -65,9 +66,13 @@ class SignUpProcessController extends BaseController {
   }
 
   Future<void> onPressedNext() async {
-    if (firstNameError.value != null || lastNameError.value != null || phoneError.value != null) {
+    FocusManager.instance.primaryFocus?.unfocus();
+    if (firstNameError.value != null ||
+        lastNameError.value != null ||
+        phoneError.value != null) {
       return;
     }
+
     loading(true);
     final response = await userController.updateUser(
       firstName: firstNameController.text,
@@ -81,7 +86,8 @@ class SignUpProcessController extends BaseController {
   }
 
   void onPressedSetLocation() {
-    addressLocation.value = '208 Nguyen Huu Canh, Vinhomes Tan Cang, Binh Thanh, Ho Chi Minh City 700000, Vietnam';
+    addressLocation.value =
+        '208 Nguyen Huu Canh, Vinhomes Tan Cang, Binh Thanh, Ho Chi Minh City 700000, Vietnam';
   }
 
   Future<void> onPressedNextButtonLocation() async {
@@ -90,15 +96,17 @@ class SignUpProcessController extends BaseController {
       return;
     }
     loading(true);
-    final response = await userController.updateUser(address: addressLocation.value);
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
+    final response =
+        await userController.updateUser(address: addressLocation.value);
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
+        (r) {
       Get.toNamed(AppRouteProvider.signupSuccessScreen);
     });
     loading(false);
   }
 
   void onPressedNextPayment() {
-    final currentUser = userController.getCurrentUser;
+    final currentUser = userController.currentUser.value;
     if (currentUser?.photoUrl?.isNotEmpty ?? false) {
       Get.toNamed(AppRouteProvider.setLocationScreen);
       return;
@@ -107,8 +115,12 @@ class SignUpProcessController extends BaseController {
   }
 
   Future<void> onPressedPhotoGallery() async {
+    imageFile = null;
     final image = await FileHelper.pickImage();
-    if (image != null) Get.toNamed(AppRouteProvider.uploadPreviewScreen);
+    if (image != null) {
+      imageFile = image;
+      Get.toNamed(AppRouteProvider.uploadPreviewScreen);
+    }
   }
 
   Future<void> onPressedTakePhoto() async {
@@ -124,13 +136,12 @@ class SignUpProcessController extends BaseController {
     Get.back();
   }
 
-
   Future<void> onPressedPhotoNext() async {
-    final currentUser = userController.getCurrentUser;
+    final currentUser = userController.currentUser.value;
     if (currentUser == null) return;
     loading(true);
     final urlCallBack = await cloudStorageService.uploadAvatarImage(
-      file: imageFile,
+      file: imageFile!,
       uid: currentUser.uid,
     );
     if (urlCallBack == null) {
@@ -138,21 +149,11 @@ class SignUpProcessController extends BaseController {
       return;
     }
     final response = await userController.updateUser(photoUrl: urlCallBack);
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
+        (r) {
       Get.toNamed(AppRouteProvider.setLocationScreen);
     });
 
     loading(false);
   }
-
-
-
-
-
-
-
-
-
-
-
 }

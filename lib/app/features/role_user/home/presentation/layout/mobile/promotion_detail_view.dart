@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:ninjafood/app/widgets/custom_appbar.dart';
 import 'package:ninjafood/app/widgets/widgets.dart';
 
 class PromotionMobileView extends StatelessWidget {
@@ -14,11 +14,10 @@ class PromotionMobileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldBackgroundImage.pattern(
-        appBarWidget: AppButtonBack(
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        appBarWidget: CustomAppBar.back(),
         body: AppPadding(
           padding: AppEdgeInsets.only(
+            top: isIos ? AppGapSize.none : AppGapSize.medium,
             left: AppGapSize.medium,
             right: AppGapSize.medium,
             bottom: AppGapSize.medium,
@@ -46,20 +45,6 @@ class PromotionMobileView extends StatelessWidget {
                         getExpiresDayLaterByTwoDateTime(promotionModel.startDate ?? '', promotionModel.endDate ?? '') +
                             ' days'),
                 Divider(color: Theme.of(context).colorScheme.primary, thickness: 1),
-                AppPadding(
-                    padding: AppEdgeInsets.only(top: AppGapSize.small),
-                    child: Builder(builder: (context) {
-                      final textStyle = Theme.of(context).textTheme.bodyMedium!;
-                      return Html(
-                        data: promotionModel.content ?? '',
-                        style: {
-                          "span": Style(
-                            fontSize: FontSize(textStyle.fontSize ?? 0),
-                            color: textStyle.color,
-                          ),
-                        },
-                      );
-                    })),
               ],
             ),
           ),

@@ -17,10 +17,16 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
 import 'package:open_file/open_file.dart';
 
-
 part 'validator.dart';
+
 part 'phoneNumber.dart';
+
 part 'cryptographic.dart';
+
 part 'common.dart';
+
 part 'file_helper.dart';
+
 part 'utils.dart';
+
+part 'platform_helper.dart';
