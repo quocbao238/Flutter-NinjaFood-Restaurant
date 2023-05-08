@@ -9,6 +9,7 @@ class AppPages {
       initial = AppRouteProvider.tabScreen;
       return;
     }
+
     initial = AppRouteProvider.splashScreen;
     // initial = AppRouteProvider.signupSuccessScreen;
   }

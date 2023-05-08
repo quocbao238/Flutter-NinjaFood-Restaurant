@@ -27,7 +27,7 @@ class UserModel {
   String? address;
   String? role;
   String? createType;
-  String? fcmToken;
+  List<String> playerIds;
   UserType? userType;
   double? serviceFee = 6.0;
   List<int> favoriteIds;
@@ -50,7 +50,7 @@ class UserModel {
       required this.carts,
       required this.commentIds,
       required this.favoriteIds,
-      this.fcmToken});
+      required this.playerIds});
 
   static UserModel createUserByAuthUser(
       {required User authUser, required createType}) {
@@ -63,6 +63,7 @@ class UserModel {
         role: ROLE_USER,
         orderIds: [],
         favoriteIds: [],
+        playerIds: [],
         carts: [],
         userType: UserType.Sliver,
         commentIds: [],
@@ -83,6 +84,7 @@ class UserModel {
       favoriteIds: [],
       commentIds: [],
       carts: [],
+      playerIds: [],
       createType: createType,
     );
   }
@@ -105,7 +107,7 @@ class UserModel {
         address = data['address'] ?? '',
         role = data['role'] ?? '',
         commentIds = List<String>.from(data['commentIds'] ?? []),
-        fcmToken = data['fcmToken'] ?? '',
+        playerIds = List<String>.from(data['playerIds'] ?? []),
         createType = data['createType'] ?? '',
         favoriteIds = List<int>.from(data['favoriteIds'] ?? []),
         orderIds = List<String>.from(data['orderIds'] ?? []),
@@ -124,13 +126,21 @@ class UserModel {
       'address': address,
       'role': role,
       'createType': createType,
-      'fcmToken': fcmToken,
+      'playerIds': playerIds,
       'commentIds': commentIds,
       'orderIds': orderIds,
       'carts': carts.map((x) => x.toJson()).toList(),
       'favoriteIds': favoriteIds,
       'userType': userType?.json,
     };
+  }
+
+  addPlayerId(String playerId) {
+    if (playerIds.contains(playerId)) {
+      return;
+    }
+
+    playerIds.add(playerId);
   }
 
   UserModel copyWith({
@@ -142,7 +152,7 @@ class UserModel {
     String? photoUrl,
     String? address,
     List<CartModel>? carts,
-    String? fcmToken,
+    List<String>? playerIds,
     List<String>? orderIds,
     UserType? userType,
     List<int>? favoriteIds,
@@ -159,7 +169,7 @@ class UserModel {
       orderIds: orderIds ?? this.orderIds,
       role: this.role,
       createType: this.createType,
-      fcmToken: fcmToken ?? this.fcmToken,
+      playerIds: playerIds ?? this.playerIds,
       favoriteIds: favoriteIds ?? this.favoriteIds,
       commentIds: commentIds ?? this.commentIds,
       userType: userType ?? this.userType,

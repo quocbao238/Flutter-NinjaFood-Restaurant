@@ -69,7 +69,10 @@ class NotificationModel {
       };
 
   static NotificationModel createNotificationModelByOSCreateNotification(
-      {required OSCreateNotification notification, required String receiverId, required NotificationType type}) {
+      {required OSCreateNotification notification,
+      required String receiverId,
+      required NotificationType type,
+      String? image}) {
     return NotificationModel(
         uid: Uuid().v4(),
         createAt: createTimeStamp(),
@@ -77,7 +80,7 @@ class NotificationModel {
         receiverId: receiverId,
         title: notification.heading ?? '',
         message: notification.content ?? '',
-        image: notification.bigPicture ?? '',
+        image: image ?? notification.bigPicture ?? '',
         type: type);
   }
 
