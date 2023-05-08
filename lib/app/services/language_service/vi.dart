@@ -190,10 +190,22 @@ const Map<String, String> vi = {
   // Order Detail
   "Order_Detail_Title": "Chi tiết đơn hàng",
 
+  // Rating
+  "Rating_Title": "Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi",
+  "Rating_Description": "Đánh giá của bạn sẽ giúp chúng tôi cải thiện dịch vụ của mình",
+  "Rating_Feedback": "Phản hồi",
+  "Rating_Rate": "Đánh giá",
+  "Rating_Skip": "Bỏ qua",
+  "Rating_Submit": "Gửi",
+  "Rating_Loading": "Đang gửi đánh giá...",
+  "Rating_Rate_Success": "Thành công",
+  "Rating_Rate_Success_Description": "Cảm ơn bạn đã đánh giá dịch vụ của chúng tôi",
+
 
   // History Status
   "Request": "Đang đợi nhà hàng xác nhận...",
   "Pending": "Đơn hàng đang được chuẩn bị...",
+
   "Delivering": "Đơn hàng đang trên đường giao hàng đến bạn...",
   "Delivered": "Đơn hàng đã đến nơi. Vui lòng kiểm tra và xác nhận đơn hàng...",
   "Cancelled": "Đơn hàng đã bị hủy bởi nhà hàng",

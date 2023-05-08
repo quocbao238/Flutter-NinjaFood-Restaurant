@@ -71,9 +71,6 @@ class ProfileController extends BaseController {
     Get.toNamed(AppRouteProvider.editProfileScreen);
   }
 
-  void onPressRating(OrderModel historyModel) {
-    Get.toNamed(AppRouteProvider.ratingScreen, arguments: historyModel.uid);
-  }
 
   void onPressedFavoriteItem(ProductModel productModel) {
     Get.toNamed(AppRouteProvider.foodDetailScreen, arguments: productModel);

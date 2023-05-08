@@ -5,33 +5,82 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/cart/presentation/layout/mobile/widgets/order_detail_bottom.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/history_model.dart';
+import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/widgets/custom_appbar.dart';
 
-class OrderDetailsMobileView extends StatelessWidget {
+class OrderDetailsMobileView extends StatefulWidget {
   final OrderModel orderModel;
 
   const OrderDetailsMobileView({Key? key, required this.orderModel})
       : super(key: key);
 
   @override
+  State<OrderDetailsMobileView> createState() => _OrderDetailsMobileViewState();
+}
+
+class _OrderDetailsMobileViewState extends State<OrderDetailsMobileView> {
+  late OrderModel _orderModel;
+
+  @override
+  void initState() {
+    _orderModel = widget.orderModel;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final subTotal = formatPriceToVND(orderModel.subTotal) + " VND";
-    final serviceFee = orderModel.serviceFee.toString() + "%";
-    final discount = formatPriceToVND(orderModel.discount) + " VND";
-    final total = formatPriceToVND(orderModel.total) + " VND";
+    final subTotal = formatPriceToVND(widget.orderModel.subTotal) + " VND";
+    final serviceFee = _orderModel.serviceFee.toString() + "%";
+    final discount = formatPriceToVND(_orderModel.discount) + " VND";
+    final total = formatPriceToVND(_orderModel.total) + " VND";
     return AppScaffoldBackgroundImage.pattern(
-        appBarWidget: CustomAppBar.back(title: 'Order_Detail_Title'.tr),
+        appBarWidget: CustomAppBar.back(
+          title: 'Order_Detail_Title'.tr,
+          trailingWidget: _orderModel.status != HistoryStatus.done
+              ? null
+              : AppPadding(
+                  padding: const AppEdgeInsets.only(
+                      top: AppGapSize.paddingMedium,
+                      left: AppGapSize.paddingMedium,
+                      right: AppGapSize.paddingMedium),
+                  child: SizedBox(
+                    width: 45,
+                    height: 45,
+                    child: IconButton(
+                      padding: EdgeInsets.zero,
+                      color: Colors.red,
+                      onPressed: widget.orderModel.isRating
+                          ? null
+                          : () async => await Get.toNamed(
+                                      AppRouteProvider.ratingScreen,
+                                      arguments: widget.orderModel)!
+                                  .then((value) {
+                                if (value != null) {
+                                  setState(() => _orderModel.isRating = true);
+                                }
+                              }),
+                      icon: Icon(
+                        // Icons.star_rounded,
+                        widget.orderModel.isRating
+                            ? Icons.star_rounded
+                            : Icons.star_border_rounded,
+                        color: ThemeColors.textPriceColor,
+                      ),
+                    ),
+                  ),
+                ),
+        ),
         body: AppPadding.medium(
           child: Column(
             children: [
-              if (orderModel.status != HistoryStatus.done)
+              if (widget.orderModel.status != HistoryStatus.done)
                 Center(
-                    child: Lottie.asset(orderModel.status.lottieUrl,
+                    child: Lottie.asset(widget.orderModel.status.lottieUrl,
                         width: MediaQuery.of(context).size.height * 0.15,
                         height: MediaQuery.of(context).size.height * 0.15,
                         fit: BoxFit.fill)),
-              if (orderModel.status != HistoryStatus.done)
+              if (widget.orderModel.status != HistoryStatus.done)
                 AppPadding(
                   padding: const AppEdgeInsets.symmetric(
                       horizontal: AppGapSize.medium,
@@ -39,27 +88,30 @@ class OrderDetailsMobileView extends StatelessWidget {
                   child: Center(
                     child: AppText.bodyLarge(
                         textAlign: TextAlign.center,
-                        text: orderModel.status.status.tr,
+                        text: widget.orderModel.status.status.tr,
                         color: ThemeColors.primaryColor,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-              if (orderModel.status != HistoryStatus.done)
+              if (widget.orderModel.status != HistoryStatus.done)
                 AppPadding(
                   padding: AppEdgeInsets.only(bottom: AppGapSize.medium),
                   child: Divider(
-                    color: Theme.of(context).textTheme.bodySmall!.color!.withOpacity(0.4),
-                    thickness: 1,
-                  ),
+                      color: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .color!
+                          .withOpacity(0.4),
+                      thickness: 1),
                 ),
               Expanded(
                 child: ListView.builder(
                   physics: AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
-                  itemCount: orderModel.carts.length,
+                  itemCount: widget.orderModel.carts.length,
                   itemBuilder: (context, index) {
-                    final _cartDetail = orderModel.carts[index];
+                    final _cartDetail = widget.orderModel.carts[index];
                     return Padding(
                       padding: EdgeInsets.only(bottom: AppGapSize.small.size),
                       child: DecoratedBox(
@@ -180,7 +232,10 @@ class OrderDetailsMobileView extends StatelessWidget {
                   ),
                 ),
               ),
-              AppButton.max(title: 'Review ')
+              // AppButton.min(
+              //   title: 'Review Order',
+              //   onPressed: () {},
+              // )
             ],
           ),
         ));

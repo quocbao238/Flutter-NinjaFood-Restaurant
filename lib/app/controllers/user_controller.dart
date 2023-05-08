@@ -68,7 +68,8 @@ class UserController extends GetxController implements Bootable {
       currentUser.value = UserModel.fromJson(event.data()!);
       final playerId = await OneSignalService.instance
           .setPlayerId(currentUser.value?.uid ?? '');
-      if (playerId != null && !currentUser.value!.playerIds.contains(playerId)) {
+      if (playerId != null &&
+          !currentUser.value!.playerIds.contains(playerId)) {
         currentUser.value!.addPlayerId(playerId);
         await updateUser(playerIds: currentUser.value!.playerIds);
       }
@@ -153,39 +154,36 @@ class UserController extends GetxController implements Bootable {
   Future<Either<Failure, void>> insertComment(
       {String? comment,
       required double rating,
-      required String historyId}) async {
+      required OrderModel orderModel}) async {
     FocusManager.instance.primaryFocus?.unfocus();
-    // TODO: Update later
-    return Either.right(null);
-
-    // final _currentUser = currentUser.value;
-    // if (_currentUser == null) return left(Failure.custom('User is null'));
-    // final createAt = createTimeStamp();
-    // try {
-    //   final commentModel = CommentModel(
-    //       uid: Uuid().v4(),
-    //       createAt: createAt,
-    //       userId: _currentUser.uid,
-    //       userImage: _currentUser.photoUrl ?? '',
-    //       userName: _currentUser.getName(),
-    //       comment: comment,
-    //       rating: rating);
-    //   final insertCommentProduct = await _databaseService.insertCommentProduct(
-    //       commentModel: commentModel);
-    //   return insertCommentProduct.fold((l) => left(l), (r) async {
-    //     _currentUser.historyOrders
-    //         .firstWhere((element) => element.uid == historyId)
-    //         .isRating = true;
-    //     final currentCommentIds = _currentUser.commentIds;
-    //     currentCommentIds.add(commentModel.uid);
-    //
-    //     return await updateUser(
-    //         historyOrders: _currentUser.historyOrders,
-    //         cmtIds: currentCommentIds);
-    //   });
-    // } catch (e, stackTrace) {
-    //   return left(Failure(e.toString(), stackTrace));
-    // }
+    final _currentUser = currentUser.value;
+    if (_currentUser == null) return left(Failure.custom('User is null'));
+    final createAt = createTimeStamp();
+    try {
+      final commentModel = CommentModel(
+          uid: Uuid().v4(),
+          createAt: createAt,
+          userId: _currentUser.uid,
+          userImage: _currentUser.photoUrl ?? '',
+          userName: _currentUser.getName(),
+          comment: comment,
+          rating: rating);
+      final insertCommentProduct = await _databaseService.insertCommentProduct(
+          commentModel: commentModel);
+      // set order Rating
+      return insertCommentProduct.fold((l) => left(l), (r) async {
+        orderModel.updateRating(true);
+        final upload =
+            await _databaseService.updateOrder(orderModel: orderModel);
+        return upload.fold((l) => left(l), (r) async {
+          final _response = await updateUser(
+              cmtIds: [...currentUser.value!.commentIds, commentModel.uid]);
+          return _response.fold((l) => left(l), (r) => right(null));
+        });
+      });
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
   }
 
   Future<Either<Failure, void>> updateStatusOrder(OrderModel orderModel) async {

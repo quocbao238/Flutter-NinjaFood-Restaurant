@@ -12,8 +12,10 @@ import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/controllers/delivery_controller.dart';
 import 'package:ninjafood/app/controllers/restaurant_controller.dart';
 import 'package:ninjafood/app/features/role_user/profile/controller/profile_controller.dart';
+import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/cart_model.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
+import 'package:ninjafood/app/models/comment_model.dart';
 import 'package:ninjafood/app/models/history_model.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
 import 'package:ninjafood/app/models/notification_model.dart';
@@ -23,6 +25,7 @@ import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/services/one_signal_service/one_signal_service.dart';
 import 'package:ninjafood/app/services/services.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:uuid/uuid.dart';
 
 part 'dialog_controller.dart';
 
