@@ -34,7 +34,6 @@ class AppBarHomeWidget extends GetView<TabsController> {
                   padding: const AppEdgeInsets.only(top: AppGapSize.medium),
                   child: AppText.headlineSmall(text: 'Ninja Food')),
             ),
-            // AppButtonNotification(onPressed: () => controller.onPressedNotification()),
             AppPadding(
                 padding: const AppEdgeInsets.only(
                     top: AppGapSize.paddingMedium, left: AppGapSize.paddingMedium, right: AppGapSize.paddingMedium),

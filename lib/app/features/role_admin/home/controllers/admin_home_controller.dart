@@ -105,6 +105,7 @@ class AdminHomeController extends BaseController {
             NotificationModel.createNotificationModelByOSCreateNotification(
                 notification: notification,
                 receiverId: r.uid,
+                orderId: orderModel.createdAt,
                 type: NotificationType.order);
         await OneSignalService.instance
             .sendNotification(notification)

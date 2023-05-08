@@ -30,6 +30,10 @@ abstract class DatabaseServiceImpl {
 
   Future<Either<Failure, void>> insertGroupChat({required GroupChatModel groupChatModel});
 
+  Future<Either<Failure, void>> getGroupChatByGroupChatId({required String groupChatId});
+
+
+
   Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat({required String groupChatId});
 
   Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat();

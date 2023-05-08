@@ -98,7 +98,8 @@ class MessageController extends GetxController implements Bootable {
               messageChatType == MessageChatType.text
                   ? message
                   : "You have new message",
-              senderUser.photoUrl!);
+              senderUser.photoUrl!,
+              groupChatId);
           return right(null);
         });
       });
@@ -138,7 +139,8 @@ class MessageController extends GetxController implements Bootable {
           _sendMessage(
               receiverUser,
               messageChatType == MessageChatType.text ? message : null,
-              senderUser.photoUrl!);
+              senderUser.photoUrl!,
+              groupChatId);
           return right(null);
         });
       });
@@ -147,8 +149,8 @@ class MessageController extends GetxController implements Bootable {
     }
   }
 
-  _sendMessage(
-      UserModel receiverUser, String? message, String senderAvatar) async {
+  _sendMessage(UserModel receiverUser, String? message, String senderAvatar,
+      String groupChatId) async {
     if (receiverUser.playerIds.isEmpty) return;
     try {
       final OSCreateNotification notification = OSCreateNotification(
@@ -162,7 +164,8 @@ class MessageController extends GetxController implements Bootable {
               notification: notification,
               receiverId: receiverUser.uid,
               image: senderAvatar,
-              type: NotificationType.chat);
+              type: NotificationType.chat,
+              groupChatId: groupChatId);
 
       await OneSignalService.instance
           .sendNotification(notification)

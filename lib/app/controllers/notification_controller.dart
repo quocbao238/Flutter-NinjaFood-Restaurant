@@ -1,7 +1,8 @@
 part of global_controller;
 
 class NotificationController extends GetxController implements Bootable {
-  static NotificationController get instance => Get.find<NotificationController>();
+  static NotificationController get instance =>
+      Get.find<NotificationController>();
   late final DatabaseService _databaseService;
   late final UserController _userController;
 
@@ -24,12 +25,15 @@ class NotificationController extends GetxController implements Bootable {
     });
 
     notifications.listen((_data) {
-      notificationNews.assignAll(notifications.where((element) => element.isRead == false).toList());
+      notificationNews.assignAll(
+          notifications.where((element) => element.isRead == false).toList());
     });
   }
 
   void _handleNotifications(String userId) async {
-    _notificationSubscription = _databaseService.listenNotification(userId: userId).listen((event) async {
+    _notificationSubscription = _databaseService
+        .listenNotification(userId: userId)
+        .listen((event) async {
       final result = event.docs.map((e) {
         final _data = e.data();
         return NotificationModel.fromJson(_data);
@@ -39,16 +43,46 @@ class NotificationController extends GetxController implements Bootable {
   }
 
   Future<void> readNotification(NotificationModel notificationModel) async {
-    // GoTo Page
-    if (notificationModel.type == NotificationType.order) {
-      DeliveryController.instance.onChangeDeliveryStatus();
-    }
     notificationModel = notificationModel.changeIsRead(true);
-    final _response = await _databaseService.updateNotification(notificationModel: notificationModel);
-    _response.fold((l) => handleFailure(_logName, l), (r) => null);
+
+    final _response = await _databaseService.updateNotification(
+        notificationModel: notificationModel);
+    _response.fold((l) => handleFailure(_logName, l), (r) async {
+      if (notificationModel.type == NotificationType.chat) {
+        if (notificationModel.groupChatId != null) {
+          final response = await _databaseService.getGroupChatByGroupChatId(
+              groupChatId: notificationModel.groupChatId!);
+          response.fold(
+              (l) => handleFailure(_logName, l),
+              (r) => Get.toNamed(AppRouteProvider.chatDetailsScreen,
+                  arguments: r));
+        }
+
+        return;
+      }
+
+      if (notificationModel.type == NotificationType.order) {
+        List<OrderModel> lstOrder =
+            ProfileController.instance.lstHistory.toList();
+        if (lstOrder.isEmpty) return;
+        final _order = lstOrder.firstWhereOrNull(
+            (element) => element.createdAt == notificationModel.orderId);
+        if (_order == null) return;
+        final currentOrder = DeliveryController.instance.currentOrder.value;
+        if (currentOrder != null &&
+            _order.createdAt == currentOrder.createdAt &&
+            currentOrder.status != HistoryStatus.done) {
+          DeliveryController.instance.onChangeDeliveryStatus();
+          Get.back();
+          return;
+        }
+        Get.toNamed(AppRouteProvider.orderDetailScreen, arguments: _order);
+      }
+    });
   }
 
-  Future<void> showBottomSheet(NotificationModel notification, BuildContext buildContext) async {
+  Future<void> showBottomSheet(
+      NotificationModel notification, BuildContext buildContext) async {
     final result = await showModalBottomSheet(
         context: buildContext,
         builder: (context) => AppPadding.medium(
@@ -63,24 +97,25 @@ class NotificationController extends GetxController implements Bootable {
                       url: notification.image),
                   AppPadding.small(
                     child: AppText.bodyMedium(
-                      text: notification.title,
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.center,
-                    ),
+                        text: notification.title,
+                        fontWeight: FontWeight.bold,
+                        textAlign: TextAlign.center),
                   ),
                   AppText.labelMedium(
-                    text: notification.message,
-                    textAlign: TextAlign.center,
-                  ),
+                      text: notification.message, textAlign: TextAlign.center),
                   AppSizeScale(
-                      ratioWidth: 0.8, child: Divider(color: Theme.of(context).colorScheme.primary, thickness: 1)),
+                      ratioWidth: 0.8,
+                      child: Divider(
+                          color: Theme.of(context).colorScheme.primary,
+                          thickness: 1)),
                   ListTile(
                     leading: Container(
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.onPrimary,
                           borderRadius: BorderRadius.circular(16.0),
                         ),
-                        child: AppPadding.small(child: Icon(Icons.delete_outline))),
+                        child: AppPadding.small(
+                            child: Icon(Icons.delete_outline))),
                     title: AppText.bodyMedium(
                       text: 'Xóa thông báo này',
                       textAlign: TextAlign.start,
@@ -94,7 +129,8 @@ class NotificationController extends GetxController implements Bootable {
   }
 
   Future<void> deleteNotification(NotificationModel notificationModel) async {
-    final _response = await _databaseService.deleteNotification(notificationModel: notificationModel);
+    final _response = await _databaseService.deleteNotification(
+        notificationModel: notificationModel);
     _response.fold((l) => handleFailure(_logName, l), (r) => null);
   }
 

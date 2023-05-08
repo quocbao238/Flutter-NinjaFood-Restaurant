@@ -20,9 +20,11 @@ class NotificationMobileView extends GetView<NotificationController> {
         child: Obx(() {
           final notifications = controller.notifications;
 
-          if (notifications.isEmpty) return Center(child: Text('No notification'));
+          if (notifications.isEmpty)
+            return Center(child: Text('No notification'));
 
           return ListView.builder(
+              padding: EdgeInsets.zero,
               itemCount: notifications.length,
               itemBuilder: (context, index) {
                 final notification = notifications[index];
@@ -33,8 +35,10 @@ class NotificationMobileView extends GetView<NotificationController> {
                         height: MediaQuery.of(context).size.shortestSide * 0.15,
                         fit: BoxFit.fill,
                         url: notification.image),
-                    onPressedItem: () => controller.readNotification(notification),
-                    onPressedMore: () => controller.showBottomSheet(notification, context),
+                    onPressedItem: () =>
+                        controller.readNotification(notification),
+                    onPressedMore: () =>
+                        controller.showBottomSheet(notification, context),
                     title: notification.title,
                     isRead: notification.isRead,
                     message: notification.message,

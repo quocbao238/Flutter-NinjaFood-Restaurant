@@ -224,6 +224,7 @@ class UserController extends GetxController implements Bootable {
           NotificationModel.createNotificationModelByOSCreateNotification(
         notification: notification,
         receiverId: restaurantProfile.uid,
+        orderId: orderModel.createdAt,
         type: NotificationType.order,
       );
 

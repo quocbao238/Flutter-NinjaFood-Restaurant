@@ -125,7 +125,6 @@ class AdminTabsController extends BaseController {
     loading.value = false;
   }
 
-  // Future<void> onPressedNotification() async {}
   void onPressedNotification() {
     Get.toNamed(AppRouteProvider.notificationScreen);
   }

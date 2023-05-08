@@ -33,8 +33,16 @@ class NotificationModel {
   final bool isRead;
   final String createAt;
 
+  // support type chat
+  final String? groupChatId;
+
+  // support type order
+  final String? orderId;
+
   NotificationModel(
       {required this.uid,
+      this.groupChatId,
+      this.orderId,
       required this.receiverId,
       required this.createAt,
       required this.title,
@@ -49,6 +57,8 @@ class NotificationModel {
         uid: json['uid'],
         receiverId: json['receiverId'],
         title: json['title'],
+        orderId: json['orderId'],
+        groupChatId: json['groupChatId'],
         message: json['message'],
         isRead: json['isRead'],
         createAt: json['createAt'],
@@ -61,7 +71,9 @@ class NotificationModel {
         'receiverId': receiverId,
         'uid': uid,
         'isRead': isRead,
+        'orderId': orderId,
         'title': title,
+        'groupChatId': groupChatId,
         'createAt': createAt,
         'message': message,
         'image': image,
@@ -72,12 +84,16 @@ class NotificationModel {
       {required OSCreateNotification notification,
       required String receiverId,
       required NotificationType type,
+      String? groupChatId,
+      String? orderId,
       String? image}) {
     return NotificationModel(
         uid: Uuid().v4(),
         createAt: createTimeStamp(),
         isRead: false,
         receiverId: receiverId,
+        orderId: orderId,
+        groupChatId: groupChatId,
         title: notification.heading ?? '',
         message: notification.content ?? '',
         image: image ?? notification.bigPicture ?? '',
@@ -89,10 +105,12 @@ class NotificationModel {
     return NotificationModel(
         uid: uid,
         receiverId: receiverId,
+        groupChatId: groupChatId,
         title: title,
         createAt: createAt,
         message: message,
         isRead: isRead,
+        orderId: orderId,
         image: image,
         type: type);
   }
