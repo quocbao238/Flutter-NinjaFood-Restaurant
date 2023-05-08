@@ -9,6 +9,7 @@ class AppPages {
       initial = AppRouteProvider.tabScreen;
       return;
     }
+
     initial = AppRouteProvider.splashScreen;
     // initial = AppRouteProvider.signupSuccessScreen;
   }
@@ -117,6 +118,12 @@ class AppPages {
       name: AppRouteProvider.ratingScreen,
       page: () => RatingScreen(),
       binding: GetBinding(AppRouteProvider.ratingScreen),
+    ),
+
+    GetPage(
+      name: AppRouteProvider.orderDetailScreen,
+      page: () => OrderDetailsScreen(orderModel: Get.arguments),
+      binding: GetBinding(AppRouteProvider.orderDetailScreen),
     ),
   ];
 }

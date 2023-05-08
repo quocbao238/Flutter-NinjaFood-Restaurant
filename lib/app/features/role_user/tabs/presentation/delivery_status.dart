@@ -115,10 +115,13 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              Divider(
-                  color: ThemeColors.textDarkColor.withOpacity(0.1),
+              AppPadding(
+                padding: AppEdgeInsets.only(bottom: AppGapSize.medium),
+                child: Divider(
+                  color: Theme.of(context).textTheme.bodySmall!.color!.withOpacity(0.4),
                   thickness: 1,
-                  height: AppGapSize.veryLarge.size),
+                ),
+              ),
               if (!_showListFood && !isDone)
                 AppButton.max(
                     title: 'Cart_Detail_Show'.tr,

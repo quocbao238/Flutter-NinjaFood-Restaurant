@@ -92,7 +92,16 @@ class MessageController extends GetxController implements Bootable {
       return uploadGroupChat.fold((l) => left(l), (r) async {
         final uploadChatMessage =
             await databaseService.insertMessageChat(messageChat: messageChat);
-        return uploadChatMessage.fold((l) => left(l), (r) => right(null));
+        return uploadChatMessage.fold((l) => left(l), (r) {
+          _sendMessage(
+              receiverUser,
+              messageChatType == MessageChatType.text
+                  ? message
+                  : "You have new message",
+              senderUser.photoUrl!,
+              groupChatId);
+          return right(null);
+        });
       });
     } catch (e, stacktrace) {
       return left(Failure(e.toString(), stacktrace));
@@ -126,10 +135,48 @@ class MessageController extends GetxController implements Bootable {
       return uploadGroupChat.fold((l) => left(l), (r) async {
         final uploadChatMessage =
             await databaseService.insertMessageChat(messageChat: messageChat);
-        return uploadChatMessage.fold((l) => left(l), (r) => right(null));
+        return uploadChatMessage.fold((l) => left(l), (r) {
+          _sendMessage(
+              receiverUser,
+              messageChatType == MessageChatType.text ? message : null,
+              senderUser.photoUrl!,
+              groupChatId);
+          return right(null);
+        });
       });
     } catch (e, stacktrace) {
       return left(Failure(e.toString(), stacktrace));
+    }
+  }
+
+  _sendMessage(UserModel receiverUser, String? message, String senderAvatar,
+      String groupChatId) async {
+    if (receiverUser.playerIds.isEmpty) return;
+    try {
+      final OSCreateNotification notification = OSCreateNotification(
+          playerIds: [receiverUser.playerIds.last],
+          content: message,
+          heading: "You have new message",
+          androidLargeIcon: senderAvatar);
+
+      final notificationModel =
+          NotificationModel.createNotificationModelByOSCreateNotification(
+              notification: notification,
+              receiverId: receiverUser.uid,
+              image: senderAvatar,
+              type: NotificationType.chat,
+              groupChatId: groupChatId);
+
+      await OneSignalService.instance
+          .sendNotification(notification)
+          .then((value) async {
+        await databaseService.insertNotification(
+            notificationModel: notificationModel);
+      });
+
+      return right(null);
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
     }
   }
 }

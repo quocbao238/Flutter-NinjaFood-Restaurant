@@ -10,6 +10,7 @@ import 'package:ninjafood/app/services/database_service/database_service.dart';
 const _logName = 'ProfileController';
 
 class ProfileController extends BaseController {
+  static ProfileController get instance => Get.find();
   final DatabaseService databaseService = DatabaseService.instance;
   final UserController userController = UserController.instance;
   final lstProducts = <ProductModel>[].obs;
@@ -70,9 +71,6 @@ class ProfileController extends BaseController {
     Get.toNamed(AppRouteProvider.editProfileScreen);
   }
 
-  void onPressRating(OrderModel historyModel) {
-    Get.toNamed(AppRouteProvider.ratingScreen, arguments: historyModel.uid);
-  }
 
   void onPressedFavoriteItem(ProductModel productModel) {
     Get.toNamed(AppRouteProvider.foodDetailScreen, arguments: productModel);

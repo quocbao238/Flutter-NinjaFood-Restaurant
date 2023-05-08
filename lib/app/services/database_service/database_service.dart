@@ -8,6 +8,7 @@ import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/models/comment_model.dart';
 import 'package:ninjafood/app/models/history_model.dart';
 import 'package:ninjafood/app/models/message_chat_model.dart';
+import 'package:ninjafood/app/models/notification_model.dart';
 import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
 import 'package:ninjafood/app/models/user_model.dart';
@@ -240,6 +241,30 @@ class DatabaseService extends GetxService
   }
 
   @override
+  Future<Either<Failure, GroupChatModel>> getGroupChatByGroupChatId(
+      {required String groupChatId}) async {
+    try {
+      final querySnapshot = await _db
+          .collection(DatabaseKeys.groupChat)
+          .where('groupChatId', isEqualTo: groupChatId)
+          .limit(1)
+          .get();
+      if (querySnapshot.docs.isNotEmpty) {
+        final groupChatModel =
+            GroupChatModel.fromJson(querySnapshot.docs.first.data());
+        return right(groupChatModel);
+      } else {
+        return left(Failure('No data', StackTrace.current));
+      }
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  @override
   Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat(
       {required String groupChatId}) {
     return _db
@@ -350,6 +375,75 @@ class DatabaseService extends GetxService
       _result =
           querySnapshot.docs.map((e) => OrderModel.fromJson(e.data())).toList();
       return right(_result);
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> insertNotification(
+      {required NotificationModel notificationModel}) async {
+    try {
+      await _db
+          .doc('${DatabaseKeys.notificationPath}${notificationModel.uid}')
+          .set(notificationModel.toJson());
+      return right(notificationModel.receiverId);
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenNotification(
+      {required String userId}) {
+    //Filter 3 days
+    final dateTime = DateTime.now();
+    final beginningOfDay =
+        DateTime(dateTime.year, dateTime.month, dateTime.day);
+    final endOfDay = beginningOfDay
+        .add(Duration(days: 3))
+        .subtract(Duration(milliseconds: 1));
+    final timeStampStart = beginningOfDay.millisecondsSinceEpoch.toString();
+    final endStampEnd = endOfDay.millisecondsSinceEpoch.toString();
+    return _db
+        .collection(DatabaseKeys.notificationPath)
+        .where('receiverId', isEqualTo: userId)
+        // .where('createdAt', isGreaterThanOrEqualTo: timeStampStart)
+        // .where('createdAt', isLessThanOrEqualTo: endStampEnd)
+        // .orderBy('createdAt', descending: true)
+        .snapshots();
+  }
+
+  @override
+  Future<Either<Failure, void>> updateNotification(
+      {required NotificationModel notificationModel}) async {
+    try {
+      await _db
+          .doc('${DatabaseKeys.notificationPath}${notificationModel.uid}')
+          .update(notificationModel.toJson());
+      return right(null);
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteNotification(
+      {required NotificationModel notificationModel}) async {
+    try {
+      await _db
+          .doc('${DatabaseKeys.notificationPath}${notificationModel.uid}')
+          .delete();
+      return right(null);
     } on FirebaseException catch (error) {
       handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));

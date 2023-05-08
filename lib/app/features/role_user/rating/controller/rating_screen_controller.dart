@@ -3,17 +3,18 @@ import 'package:get/get.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/models/history_model.dart';
 
 class RatingScreenController extends BaseController {
   final UserController userController = UserController.instance;
   final rating = 3.5.obs;
   final enableSubmit = false.obs;
   final TextEditingController commentController = TextEditingController();
-  late final String? historyId;
+  late final OrderModel orderModel;
 
   @override
   void onInit() {
-    historyId = Get.arguments as String;
+    orderModel = Get.arguments as OrderModel;
     commentController.addListener(() {
       if (commentController.text.isNotEmpty) {
         enableSubmit.value = true;
@@ -38,11 +39,22 @@ class RatingScreenController extends BaseController {
     if (!enableSubmit.value) return;
     if (commentController.text.isEmpty) return;
     if (rating.value == 0) return;
-    if (historyId == null) return;
     loading(true);
-    final response =
-        await userController.insertComment(comment: commentController.text, rating: rating.value, historyId: historyId!);
-    response.fold((l) => handleFailure("RatingScreenController.onPressedSubmit", l, showDialog: true), (r) => {});
+    final response = await userController.insertComment(
+        comment: commentController.text,
+        rating: rating.value,
+        orderModel: orderModel);
+    response.fold(
+        (l) => handleFailure("RatingScreenController.onPressedSubmit", l,
+            showDialog: true),
+        (r) => {
+              Get.back(result: true),
+              Get.snackbar(
+                'Rating_Rate_Success'.tr,
+                'Rating_Rate_Success_Description'.tr,
+                snackPosition: SnackPosition.TOP,
+              )
+            });
     loading(false);
   }
 }

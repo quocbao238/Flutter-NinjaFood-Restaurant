@@ -11,7 +11,6 @@ export 'console_service/console_service.dart';
 export 'database_service/database_service.dart';
 export 'theme_service/theme_service.dart';
 export 'language_service/language_service.dart';
-export 'notification_service/notification_service.dart';
 export 'boot_service/boot_services.dart';
 
 final Map<Bootable, int> listBootServices = {
@@ -19,7 +18,6 @@ final Map<Bootable, int> listBootServices = {
   ThemeService(): 512,
   AuthService(): 256,
   DatabaseService(): 128,
-  // NotificationService(): 64,
   CloudStorageService(): 32,
   OneSignalService(): 16,
 };

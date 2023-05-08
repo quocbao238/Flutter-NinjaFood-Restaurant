@@ -55,7 +55,7 @@ class DeliveryController extends GetxController implements Bootable {
   }
 
   void onChangeDeliveryStatus() =>
-      disableShowDelivery.value = !disableShowDelivery.value;
+      disableShowDelivery(!disableShowDelivery.value);
 
   @override
   void dispose() {

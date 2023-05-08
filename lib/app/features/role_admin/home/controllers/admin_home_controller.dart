@@ -4,6 +4,7 @@ import 'package:ninjafood/app/controllers/delivery_controller.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/history_model.dart';
+import 'package:ninjafood/app/models/notification_model.dart';
 import 'package:ninjafood/app/services/database_service/database_service.dart';
 import 'package:ninjafood/app/services/one_signal_service/one_signal_service.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -90,18 +91,28 @@ class AdminHomeController extends BaseController {
   void _sendDeliveryNotification(OrderModel orderModel) async {
     final _response = await DatabaseService.instance
         .getUserById(userModel: orderModel.userId);
-    _response.fold((l) => handleFailure(_logName, l), (r) {
-      final playerId = r.fcmToken;
-      if (playerId != null) {
+    _response.fold((l) => handleFailure(_logName, l), (r) async {
+      if (r.playerIds.isNotEmpty) {
         final cartImage = orderModel.carts[0].productModel.image?.url ?? '';
         final OSCreateNotification notification = OSCreateNotification(
-          playerIds: [playerId],
+          playerIds: r.playerIds,
           content: orderModel.status.status.tr,
           heading: "Code_Order".tr + ": ${orderModel.createdAt}",
           bigPicture: cartImage,
           androidLargeIcon: cartImage,
         );
-        OneSignalService.instance.sendNotification(notification);
+        final notificationModel =
+            NotificationModel.createNotificationModelByOSCreateNotification(
+                notification: notification,
+                receiverId: r.uid,
+                orderId: orderModel.createdAt,
+                type: NotificationType.order);
+        await OneSignalService.instance
+            .sendNotification(notification)
+            .then((value) {
+          databaseService.insertNotification(
+              notificationModel: notificationModel);
+        });
       }
     });
   }

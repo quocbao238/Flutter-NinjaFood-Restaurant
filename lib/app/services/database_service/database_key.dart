@@ -10,4 +10,5 @@ class DatabaseKeys {
   static String messageChatPath = '/message/';
   static String commentPath = '/comment/';
   static String orderPath = '/order/';
+  static String notificationPath = '/notification/';
 }

@@ -27,10 +27,10 @@ class OneSignalService extends GetxService implements Bootable {
   Future<String?> setPlayerId(String uid) async {
     await OneSignal.shared.setExternalUserId(uid);
     log.show(_logName, 'setPlayerId $uid');
-    return await _getPlayerId();
+    return await getPlayerId();
   }
 
-  Future<String?> _getPlayerId() async {
+  Future<String?> getPlayerId() async {
     var deviceState = await OneSignal.shared.getDeviceState();
     if (deviceState == null || deviceState.userId == null) return null;
     log.show(_logName, 'getPlayerId ${deviceState.userId}');

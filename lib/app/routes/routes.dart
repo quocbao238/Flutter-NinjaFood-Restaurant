@@ -26,11 +26,11 @@ import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_proces
 import 'package:ninjafood/app/features/role_user/auth/presentation/sign_up_process.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/sign_up_success_screen.dart';
 import 'package:ninjafood/app/features/role_user/home/presentation/promotion_detail_screen.dart';
-import 'package:ninjafood/app/features/role_user/notification/controller/notification_controller.dart';
 import 'package:ninjafood/app/features/role_user/notification/presentation/notification_screen.dart';
 import 'package:ninjafood/app/features/role_user/profile/controller/edit_profile_controller.dart';
 import 'package:ninjafood/app/features/role_user/profile/controller/profile_controller.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/edit_profile_screen.dart';
+import 'package:ninjafood/app/features/role_user/profile/presentation/order_detail_screen.dart';
 import 'package:ninjafood/app/features/role_user/rating/controller/rating_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/rating/presentation/rating_screen.dart';
 import 'package:ninjafood/app/features/role_user/splash/controllers/splash_controller.dart';

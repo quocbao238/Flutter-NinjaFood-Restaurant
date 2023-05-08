@@ -1,6 +1,6 @@
 import 'package:ninjafood/app/core/core.dart';
 
-class NotificationController extends BaseController {
+class NotificationScreenController extends BaseController {
   @override
   void onInit() {
     super.onInit();

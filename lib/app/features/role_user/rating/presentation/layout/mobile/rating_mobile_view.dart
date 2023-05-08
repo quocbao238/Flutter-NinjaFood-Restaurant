@@ -11,7 +11,6 @@ class RatingMobileView extends GetView<RatingScreenController> {
 
   @override
   Widget build(BuildContext context) {
-    final restaurantImage = UserController.instance.currentUser.value?.photoUrl ?? '';
     return AppScaffoldBackgroundImage.pattern(
       appBarWidget: AppButtonBack(onPressed: () => Get.back()),
       body: AppPadding(
@@ -26,29 +25,42 @@ class RatingMobileView extends GetView<RatingScreenController> {
                     children: [
                       AppNetworkImage(
                           width: MediaQuery.of(context).size.shortestSide * 0.4,
-                          height: MediaQuery.of(context).size.shortestSide * 0.4,
+                          height:
+                              MediaQuery.of(context).size.shortestSide * 0.4,
                           borderRadius: 100,
-                          url: restaurantImage),
+                          url: controller.orderModel.carts.first.productModel
+                                  .image?.url ??
+                              ''),
                       AppPadding(
-                        padding: AppEdgeInsets.only(top: AppGapSize.medium, bottom: AppGapSize.medium),
-                        child: AppText.headlineMedium(text: 'Thank You!\nEnjoy Your Meal', fontWeight: FontWeight.bold),
+                        padding: AppEdgeInsets.only(
+                          top: AppGapSize.medium,
+                        ),
+                        child: AppText.headlineMedium(
+                            text: 'Rating_Title'.tr,
+                            fontWeight: FontWeight.bold),
                       ),
-                      AppText.bodyMedium(text: 'Please help me rate Ninja Restaurant'),
+                      AppPadding.small(
+                          child: AppText.bodyMedium(
+                              text: 'Rating_Description'.tr)),
                       AppPadding(
-                        padding: AppEdgeInsets.only(top: AppGapSize.medium, bottom: AppGapSize.veryLarge),
+                        padding: AppEdgeInsets.only(
+                            top: AppGapSize.medium, bottom: AppGapSize.large),
                         child: RatingBar.builder(
-                            initialRating: 3,
+                            initialRating: 5,
                             minRating: 1,
                             allowHalfRating: true,
                             itemCount: 5,
                             unratedColor: Colors.grey.withOpacity(0.6),
                             itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                            itemBuilder: (context, _) => AppIcons.star(color: ThemeColors.primaryColor),
-                            onRatingUpdate: (rating) => controller.onRatingUpdate(rating)),
+                            itemBuilder: (context, _) =>
+                                AppIcons.star(color: ThemeColors.primaryColor),
+                            onRatingUpdate: (rating) =>
+                                controller.onRatingUpdate(rating)),
                       ),
                       AppTextFormField(
-                          prefixIcon: Icon(FontAwesomeIcons.penToSquare, color: ThemeColors.primaryColor),
-                          hintText: 'Food feedback',
+                          prefixIcon: Icon(FontAwesomeIcons.penToSquare,
+                              color: ThemeColors.primaryColor),
+                          hintText: 'Rating_Feedback'.tr,
                           controller: controller.commentController)
                     ]),
               ),
@@ -59,26 +71,34 @@ class RatingMobileView extends GetView<RatingScreenController> {
                 final enableSubmit = controller.enableSubmit.value;
                 return Row(
                   children: [
+                    if (!controller.loading.value)
+                      Expanded(
+                        flex: 2,
+                        child: AppPadding(
+                          padding: AppEdgeInsets.only(
+                              right: enableSubmit
+                                  ? AppGapSize.medium
+                                  : AppGapSize.none),
+                          child: AppButton.min(
+                            title: 'Rating_Skip'.tr,
+                            onPressed: () => controller.onPressedSkip(),
+                          ),
+                        ),
+                      ),
                     if (enableSubmit)
                       Expanded(
                         flex: 3,
                         child: AnimationButton(
-                          ratioWidthButton: 0.65,
-                          ratioWidthDone: 0.45,
-                          ratioWidthLoading: 0.55,
-                          textButton: 'Submit',
-                          onPressed: () => controller.onPressedSubmit(),
-                          textDone: 'Done',
-                          onDone: () => controller.onPressedSkip(),
-                          textLoading: 'Loading',
-                          loading: controller.loading.value,
-                        ),
+                            ratioWidthButton: 0.65,
+                            ratioWidthDone: 0.45,
+                            ratioWidthLoading: 0.85,
+                            textButton: 'Rating_Submit'.tr,
+                            onPressed: () => controller.onPressedSubmit(),
+                            textDone: 'Rating_Rate_Success'.tr,
+                            onDone: () => controller.onPressedSkip(),
+                            textLoading: 'Rating_Loading'.tr,
+                            loading: controller.loading.value),
                       ),
-                    Expanded(
-                        flex: 2,
-                        child: AppPadding(
-                            padding: AppEdgeInsets.only(left: AppGapSize.medium),
-                            child: AppButton.min(title: 'Skip', onPressed: () => controller.onPressedSkip())))
                   ],
                 );
               }),
