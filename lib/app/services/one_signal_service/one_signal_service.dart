@@ -1,3 +1,4 @@
+import 'package:flutter_config_plus/flutter_config_plus.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 import 'package:ninjafood/app/services/console_service/console_service.dart';
@@ -9,7 +10,7 @@ class OneSignalService extends GetxService implements Bootable {
   static OneSignalService get instance => Get.find<OneSignalService>();
 
   late ConsoleService log = ConsoleService.instance;
-  final String oneSignalAppId = 'bb9d8495-95e5-4bf9-a117-73722dd9413c';
+  final String oneSignalAppId = FlutterConfigPlus.get('ONE_SIGNAL_APP_ID');
   final oneSignal = OneSignal.shared;
 
   @override

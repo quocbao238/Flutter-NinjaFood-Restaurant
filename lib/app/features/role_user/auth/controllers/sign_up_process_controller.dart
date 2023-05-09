@@ -24,6 +24,7 @@ class SignUpProcessController extends BaseController {
   Rxn<String?> lastNameError = Rxn<String?>(null);
   Rxn<String?> phoneError = Rxn<String?>(null);
   Rxn<String?> addressLocation = Rxn<String?>(null);
+  Rx<bool> isPickerLocation = false.obs;
 
   @override
   void onInit() {
@@ -85,9 +86,13 @@ class SignUpProcessController extends BaseController {
     loading(false);
   }
 
-  void onPressedSetLocation() {
-    addressLocation.value =
-        '208 Nguyen Huu Canh, Vinhomes Tan Cang, Binh Thanh, Ho Chi Minh City 700000, Vietnam';
+  void onPressedSetLocation(String address) {
+    isPickerLocation.value = false;
+    addressLocation.value = address;
+  }
+
+  void onPressedLocationPicker() {
+    isPickerLocation.value = true;
   }
 
   Future<void> onPressedNextButtonLocation() async {
