@@ -8,6 +8,7 @@ import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controlle
 import 'package:ninjafood/app/features/role_user/tabs/infrastructure/models/menu_models.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/services/auth_service/auth_service.dart';
+import 'package:ninjafood/app/services/console_service/console_service.dart';
 import 'package:ninjafood/app/services/language_service/language_service.dart';
 import 'package:ninjafood/app/services/theme_service/theme_service.dart';
 
@@ -35,6 +36,7 @@ class AdminTabsController extends BaseController {
   }
 
   void toggleDrawer() {
+    ConsoleService.instance.show(_logName, 'toggleDrawer');
     zoomDrawerController.toggle?.call();
   }
 
@@ -52,10 +54,6 @@ class AdminTabsController extends BaseController {
       case MenuType.changeTheme:
         _onPressedChangeTheme();
         break;
-      case MenuType.notification:
-        onPressedNotification();
-        break;
-
 
       default:
         currentMenuItem.value = menuItem;
@@ -63,25 +61,11 @@ class AdminTabsController extends BaseController {
     }
   }
 
-  void onChangeToChatScreen() {
-    currentMenuItem.value =
-        menuItems.firstWhere((element) => element.menuType == MenuType.chat);
-  }
+  void onChangeToCartScreen() => currentMenuItem(
+      menuItems.firstWhere((element) => element.menuType == MenuType.cart));
 
-  void onChangeToOrderScreen() {
-    currentMenuItem.value =
-        menuItems.firstWhere((element) => element.menuType == MenuType.order);
-  }
-
-  void onChangeToCartScreen() {
-    currentMenuItem.value =
-        menuItems.firstWhere((element) => element.menuType == MenuType.cart);
-  }
-
-  void onChangeToHomeScreen() {
-    currentMenuItem.value =
-        menuItems.firstWhere((element) => element.menuType == MenuType.home);
-  }
+  void onChangeToHomeScreen() => currentMenuItem.value =
+      menuItems.firstWhere((element) => element.menuType == MenuType.home);
 
   Future<void> _onPressedChangeLanguage() async {
     final currentLocale = Get.locale;
@@ -139,7 +123,4 @@ class AdminTabsController extends BaseController {
     );
     loading.value = false;
   }
-
-  void onPressedNotification() =>
-      Get.toNamed(AppRouteProvider.notificationScreen);
 }

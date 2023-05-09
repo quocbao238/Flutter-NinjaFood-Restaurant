@@ -48,9 +48,7 @@ class AdminOrderController extends BaseController {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
+  void dispose() => super.dispose();
 
   void filterOrderByHistoryStatus(HistoryStatus status) {
     currentHistoryStatus.value = status;
@@ -82,7 +80,6 @@ class AdminOrderController extends BaseController {
     final List<HistoryStatus> listStatus = lstHistoryStatus
         .where((element) => element != orderModel.status)
         .toList();
-    // return listStatus;
     return listStatus
         .where((element) => element.index > orderModel.status.index)
         .toList();
@@ -95,24 +92,20 @@ class AdminOrderController extends BaseController {
       if (r.playerIds.isNotEmpty) {
         final cartImage = orderModel.carts[0].productModel.image?.url ?? '';
         final OSCreateNotification notification = OSCreateNotification(
-          playerIds: r.playerIds,
-          content: orderModel.status.status.tr,
-          heading: "Code_Order".tr + ": ${orderModel.createdAt}",
-          bigPicture: cartImage,
-          androidLargeIcon: cartImage,
-        );
+            playerIds: r.playerIds,
+            content: orderModel.status.status.tr,
+            heading: "Code_Order".tr + ": ${orderModel.createdAt}",
+            bigPicture: cartImage,
+            androidLargeIcon: cartImage);
         final notificationModel =
             NotificationModel.createNotificationModelByOSCreateNotification(
                 notification: notification,
                 receiverId: r.uid,
                 orderId: orderModel.createdAt,
                 type: NotificationType.order);
-        await OneSignalService.instance
-            .sendNotification(notification)
-            .then((value) {
-          databaseService.insertNotification(
-              notificationModel: notificationModel);
-        });
+        await OneSignalService.instance.sendNotification(notification).then(
+            (value) => databaseService.insertNotification(
+                notificationModel: notificationModel));
       }
     });
   }

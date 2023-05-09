@@ -16,53 +16,55 @@ class AdminOrderMobileView extends StatelessWidget {
       init: AdminOrderController(),
       builder: (controller) {
         return AppScaffoldBackgroundImage.pattern(
-          appBarWidget: CustomAppBar.drawer(
-            title: 'Order'.tr,
-            trailingWidget: PopupMenuButton<HistoryStatus>(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18),
-                  side: BorderSide(
-                      color: ThemeColors.backgroundIconColor(), width: 1)),
-              padding: EdgeInsets.zero,
-              splashRadius: 18,
-              color: Theme.of(context).colorScheme.onPrimary,
-              itemBuilder: (BuildContext context) {
-                return controller.filterHistoryStatus
-                    .toList()
-                    .map((HistoryStatus historyStatus) {
-                  return CustomPopupMenuItem<HistoryStatus>(
-                    value: historyStatus,
-                    showDivider: historyStatus !=
-                        controller.filterHistoryStatus.toList().last,
-                    child: AppText.bodySmall(
-                        text: historyStatus.json.tr,
-                        color: controller.currentHistoryStatus.value ==
-                                historyStatus
-                            ? historyStatus.color
-                            : null),
-                    onTap: () {
-                      controller.filterOrderByHistoryStatus(historyStatus);
-                      Navigator.of(context).pop();
-                    },
-                  );
-                }).toList();
-              },
-              onSelected: (HistoryStatus value) {},
-              child: SafeArea(
-                child: AppPadding(
-                  padding: const AppEdgeInsets.only(
-                      top: AppGapSize.medium,
-                      left: AppGapSize.paddingMedium,
-                      right: AppGapSize.paddingMedium),
-                  child: Container(
-                    width: 45,
-                    height: 45,
-                    padding: EdgeInsets.zero,
-                    decoration: BoxDecoration(
-                      color: ThemeColors.backgroundIconColor(),
-                      borderRadius: BorderRadius.circular(16),
+          appBarWidget: Obx(
+            () => CustomAppBar.drawer(
+              title: controller.currentHistoryStatus.value.json.tr,
+              trailingWidget: PopupMenuButton<HistoryStatus>(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                    side: BorderSide(
+                        color: ThemeColors.backgroundIconColor(), width: 1)),
+                padding: EdgeInsets.zero,
+                splashRadius: 18,
+                color: Theme.of(context).colorScheme.onPrimary,
+                itemBuilder: (BuildContext context) {
+                  return controller.filterHistoryStatus
+                      .toList()
+                      .map((HistoryStatus historyStatus) {
+                    return CustomPopupMenuItem<HistoryStatus>(
+                      value: historyStatus,
+                      showDivider: historyStatus !=
+                          controller.filterHistoryStatus.toList().last,
+                      child: AppText.bodySmall(
+                          text: historyStatus.json.tr,
+                          color: controller.currentHistoryStatus.value ==
+                                  historyStatus
+                              ? historyStatus.color
+                              : null),
+                      onTap: () {
+                        controller.filterOrderByHistoryStatus(historyStatus);
+                        Navigator.of(context).pop();
+                      },
+                    );
+                  }).toList();
+                },
+                onSelected: (HistoryStatus value) {},
+                child: SafeArea(
+                  child: AppPadding(
+                    padding: const AppEdgeInsets.only(
+                        top: AppGapSize.medium,
+                        left: AppGapSize.paddingMedium,
+                        right: AppGapSize.paddingMedium),
+                    child: Container(
+                      width: 45,
+                      height: 45,
+                      padding: EdgeInsets.zero,
+                      decoration: BoxDecoration(
+                        color: ThemeColors.backgroundIconColor(),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Center(child: AppIcons.filter()),
                     ),
-                    child: Center(child: AppIcons.filter()),
                   ),
                 ),
               ),

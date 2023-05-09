@@ -25,7 +25,9 @@ class BoxNotification extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    var backgroundColor = isDarkMode ? ThemeColors.backgroundTextFormDark() : Theme.of(context).colorScheme.onPrimary;
+    var backgroundColor = isDarkMode
+        ? ThemeColors.backgroundTextFormDark()
+        : Theme.of(context).colorScheme.onPrimary;
 
     if (isRead) backgroundColor = ThemeColors.primaryColor.withOpacity(0.1);
 
@@ -35,7 +37,8 @@ class BoxNotification extends StatelessWidget {
         style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
               padding: MaterialStateProperty.all(EdgeInsets.zero),
               backgroundColor: MaterialStateProperty.all(backgroundColor),
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0))),
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0))),
             ),
         onPressed: onPressedItem,
         child: Row(
@@ -44,7 +47,8 @@ class BoxNotification extends StatelessWidget {
             Expanded(
               flex: 4,
               child: AppPadding(
-                padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small, vertical: AppGapSize.small),
+                padding: AppEdgeInsets.symmetric(
+                    horizontal: AppGapSize.small, vertical: AppGapSize.small),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -54,9 +58,14 @@ class BoxNotification extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       textAlign: TextAlign.start,
                     ),
-                    AppText.labelMedium(
-                      text: message,
-                      textAlign: TextAlign.start,
+                    AppPadding(
+                      padding: AppEdgeInsets.symmetric(
+                        vertical: AppGapSize.small,
+                      ),
+                      child: AppText.labelMedium(
+                        text: message,
+                        textAlign: TextAlign.start,
+                      ),
                     ),
                     // AppPadding.small(),
                     AppText.labelSmall(
@@ -68,7 +77,9 @@ class BoxNotification extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(onPressed: () => onPressedMore?.call(), icon: Icon(Icons.more_horiz))
+            IconButton(
+                onPressed: () => onPressedMore?.call(),
+                icon: Icon(Icons.more_horiz))
           ],
         ),
       ),

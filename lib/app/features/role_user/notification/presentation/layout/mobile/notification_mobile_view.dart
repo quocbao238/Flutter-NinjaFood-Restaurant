@@ -11,10 +11,17 @@ class NotificationMobileView extends GetView<NotificationController> {
 
   @override
   Widget build(BuildContext context) {
+    final roleUser =
+        UserController.instance.currentUser.value?.isUser() ?? false;
+
     return AppScaffoldBackgroundImage.pattern(
-      appBarWidget: CustomAppBar.back(
-        title: 'Notification_Title'.tr,
-      ),
+      appBarWidget: roleUser
+          ? CustomAppBar.back(
+              title: 'Notification_Title'.tr,
+            )
+          : CustomAppBar.drawer(
+              title: 'Notification_Title'.tr,
+            ),
       body: AppPadding(
         padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
         child: Obx(() {
