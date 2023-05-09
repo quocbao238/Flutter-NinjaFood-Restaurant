@@ -163,6 +163,7 @@ class UserController extends GetxController implements Bootable {
       final commentModel = CommentModel(
           uid: Uuid().v4(),
           createAt: createAt,
+          orderId: orderModel.uid,
           userId: _currentUser.uid,
           userImage: _currentUser.photoUrl ?? '',
           userName: _currentUser.getName(),

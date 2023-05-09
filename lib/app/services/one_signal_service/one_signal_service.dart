@@ -1,6 +1,5 @@
 import 'package:flutter_config_plus/flutter_config_plus.dart';
 import 'package:get/get.dart';
-import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 import 'package:ninjafood/app/services/console_service/console_service.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -27,7 +26,6 @@ class OneSignalService extends GetxService implements Bootable {
 
   Future<String?> setPlayerId(String uid) async {
     await OneSignal.shared.setExternalUserId(uid);
-    log.show(_logName, 'setPlayerId $uid');
     return await getPlayerId();
   }
 
@@ -45,7 +43,6 @@ class OneSignalService extends GetxService implements Bootable {
     await OneSignal.shared.consentGranted(true);
 
     OneSignal.shared.promptUserForPushNotificationPermission();
-
     OneSignal.shared
         .setNotificationOpenedHandler((OSNotificationOpenedResult result) {
       log.show(_logName, 'NOTIFICATION OPENED HANDLER CALLED WITH: $result');

@@ -295,6 +295,25 @@ class DatabaseService extends GetxService
     }
   }
 
+
+  @override
+  Future<Either<Failure, CommentModel>> getCommentByOrderId(
+      {required String orderId}) async {
+    try {
+      final querySnapshot = await _db
+          .collection(DatabaseKeys.commentPath)
+          .where('orderId', isEqualTo: orderId)
+          .limit(1)
+          .get();
+      return right(CommentModel.fromJson(querySnapshot.docs.first.data()));
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
   @override
   Future<Either<Failure, String>> insertOrder(
       {required OrderModel orderModel}) async {
