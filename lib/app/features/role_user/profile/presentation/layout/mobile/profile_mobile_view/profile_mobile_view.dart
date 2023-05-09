@@ -14,7 +14,6 @@ import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/features/role_user/category/presentation/layout/mobile/product_detail_view/widgets/product_favorite_item.dart';
 import 'package:ninjafood/app/models/history_model.dart';
 import 'package:ninjafood/app/routes/routes.dart';
-import 'package:ninjafood/app/services/theme_service/theme_service.dart';
 import 'package:ninjafood/app/widgets/custom_appbar.dart';
 import 'package:ninjafood/app/widgets/role_wrapper.dart';
 
@@ -44,15 +43,12 @@ class ProfileMobileView extends GetView<UserController> {
           SliverPersistentHeader(
               pinned: true,
               delegate: ProfileAppBar(
-                expandedHeight: MediaQuery.of(context).size.height * 0.4,
-                minExtentHeight: MediaQuery.of(context).size.height * 0.2,
-                backgroundImage: Obx(
-                  () => CachedNetworkImage(
+                  expandedHeight: MediaQuery.of(context).size.height * 0.4,
+                  minExtentHeight: MediaQuery.of(context).size.height * 0.2,
+                  backgroundImage: Obx(() => CachedNetworkImage(
                       imageUrl: controller.currentUser.value?.photoUrl ?? '',
-                      fit: BoxFit.fill),
-                ),
-                title: CustomAppBar.drawer(),
-              )),
+                      fit: BoxFit.fill)),
+                  title: CustomAppBar.drawer())),
           ProfileBody(),
         ],
       );
