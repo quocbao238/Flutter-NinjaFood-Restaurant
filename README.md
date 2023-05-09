@@ -50,6 +50,7 @@
 - [x] DarkTheme & Light Theme
 - [x] Notification (Order, Chat) - (Only Android)
 - [x] Update Order Delivery Status
+- [ ] Order Detail 
 - [ ] View Rating 
 - [ ] Edit Food
 - [ ] Insert Food
