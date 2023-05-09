@@ -266,14 +266,12 @@ class DatabaseService extends GetxService
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat(
-      {required String groupChatId}) {
-    return _db
+      {required String groupChatId}) => _db
         .collection(DatabaseKeys.messageChatPath)
         .where('groupChatId', isEqualTo: groupChatId)
         .orderBy(FieldPath.documentId, descending: true)
         .limit(20)
         .snapshots();
-  }
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat() =>
@@ -287,6 +285,25 @@ class DatabaseService extends GetxService
           .doc('${DatabaseKeys.commentPath}${commentModel.uid}')
           .set(commentModel.toJson());
       return right(commentModel.uid);
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+
+  @override
+  Future<Either<Failure, CommentModel>> getCommentByOrderId(
+      {required String orderId}) async {
+    try {
+      final querySnapshot = await _db
+          .collection(DatabaseKeys.commentPath)
+          .where('orderId', isEqualTo: orderId)
+          .limit(1)
+          .get();
+      return right(CommentModel.fromJson(querySnapshot.docs.first.data()));
     } on FirebaseException catch (error) {
       handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));
@@ -329,14 +346,12 @@ class DatabaseService extends GetxService
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> listenCurrentOrder(
-      String userId) {
-    return _db
+      String userId) => _db
         .collection(DatabaseKeys.orderPath)
         .where('userId', isEqualTo: userId)
         .orderBy('createdAt', descending: true)
         .limit(2)
         .snapshots();
-  }
 
   @override
 
@@ -352,7 +367,6 @@ class DatabaseService extends GetxService
     final endStampEnd = endOfDay.millisecondsSinceEpoch.toString();
     return _db
         .collection(DatabaseKeys.orderPath)
-        // .where('status', isNotEqualTo: HistoryStatus.done.json)
         .where('createdAt', isGreaterThanOrEqualTo: timeStampStart)
         .where('createdAt', isLessThanOrEqualTo: endStampEnd)
         .orderBy('createdAt', descending: true)
@@ -401,24 +415,10 @@ class DatabaseService extends GetxService
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> listenNotification(
-      {required String userId}) {
-    //Filter 3 days
-    final dateTime = DateTime.now();
-    final beginningOfDay =
-        DateTime(dateTime.year, dateTime.month, dateTime.day);
-    final endOfDay = beginningOfDay
-        .add(Duration(days: 3))
-        .subtract(Duration(milliseconds: 1));
-    final timeStampStart = beginningOfDay.millisecondsSinceEpoch.toString();
-    final endStampEnd = endOfDay.millisecondsSinceEpoch.toString();
-    return _db
+      {required String userId}) => _db
         .collection(DatabaseKeys.notificationPath)
         .where('receiverId', isEqualTo: userId)
-        // .where('createdAt', isGreaterThanOrEqualTo: timeStampStart)
-        // .where('createdAt', isLessThanOrEqualTo: endStampEnd)
-        // .orderBy('createdAt', descending: true)
         .snapshots();
-  }
 
   @override
   Future<Either<Failure, void>> updateNotification(

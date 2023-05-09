@@ -35,24 +35,7 @@ class ProfileAppBar extends SliverPersistentHeaderDelegate {
             ),
           ),
         ),
-        Positioned(
-          top: 0,
-          left: 0,
-          child: title,
-        ),
-        Positioned(
-          bottom: 0,
-          child: Container(
-            height: 30,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-               border: Border.all(color: Theme.of(context).colorScheme.background, width: 0),
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-              color: Theme.of(context).colorScheme.background,
-            ),
-          ),
-        ),
+        Positioned(top: 0, left: 0, child: title),
       ],
     );
   }
