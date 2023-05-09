@@ -36,8 +36,8 @@
 - [x] DarkTheme & Light Theme
 - [x] Notification (Order, Chat) - (Only Android)
 - [x] Realtime Delivery Status
-- [ ] Location Picker Address
-- [ ] View Rating Order
+- [x] Location Picker Address
+- [x] View Rating Order
 
 #### Ninja Food Owner (admin@gmail.com - 123456)
 - [x] Authentication 
