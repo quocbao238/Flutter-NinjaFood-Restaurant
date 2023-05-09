@@ -14,6 +14,7 @@ import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/features/role_user/category/presentation/layout/mobile/product_detail_view/widgets/product_favorite_item.dart';
 import 'package:ninjafood/app/models/history_model.dart';
 import 'package:ninjafood/app/routes/routes.dart';
+import 'package:ninjafood/app/services/theme_service/theme_service.dart';
 import 'package:ninjafood/app/widgets/custom_appbar.dart';
 import 'package:ninjafood/app/widgets/role_wrapper.dart';
 
@@ -35,29 +36,25 @@ class ProfileMobileView extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      
       final currentUser = controller.currentUser.value;
       if (currentUser == null) return Container();
-      return ColoredBox(
-        color: Theme.of(context).colorScheme.background,
-        child: CustomScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
-          slivers: [
-            SliverPersistentHeader(
-                pinned: true,
-                delegate: ProfileAppBar(
-                  expandedHeight: MediaQuery.of(context).size.height * 0.4,
-                  minExtentHeight: MediaQuery.of(context).size.height * 0.2,
-                  backgroundImage: Obx(
-                    () => CachedNetworkImage(
-                        imageUrl: controller.currentUser.value?.photoUrl ?? '',
-                        fit: BoxFit.fill),
-                  ),
-                  title: CustomAppBar.drawer(),
-                )),
-            ProfileBody(),
-          ],
-        ),
+      return CustomScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
+        slivers: [
+          SliverPersistentHeader(
+              pinned: true,
+              delegate: ProfileAppBar(
+                expandedHeight: MediaQuery.of(context).size.height * 0.4,
+                minExtentHeight: MediaQuery.of(context).size.height * 0.2,
+                backgroundImage: Obx(
+                  () => CachedNetworkImage(
+                      imageUrl: controller.currentUser.value?.photoUrl ?? '',
+                      fit: BoxFit.fill),
+                ),
+                title: CustomAppBar.drawer(),
+              )),
+          ProfileBody(),
+        ],
       );
     });
   }
