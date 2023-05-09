@@ -22,19 +22,29 @@ class OrderItems extends StatelessWidget {
     final listStatus =
         adminOrderController.getListStatus(orderModel: orderModel);
 
-    return SizedBox(
-      height: MediaQuery.of(context).size.shortestSide * 0.3,
-      child: AppPadding(
-        padding: AppEdgeInsets.only(bottom: AppGapSize.small),
-        child: GestureDetector(
-          onTap: () => Get.toNamed(AppRouteProvider.orderDetailScreen,
-              arguments: orderModel),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: ColoredBox(
-              color: isDarkMode
-                  ? ThemeColors.backgroundTextFormDark()
-                  : Theme.of(context).colorScheme.onPrimary,
+    return AppPadding(
+      padding: AppEdgeInsets.only(bottom: AppGapSize.small),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.shortestSide * 0.25,
+        child: AppPadding(
+          padding: AppEdgeInsets.only(bottom: AppGapSize.small),
+          child: GestureDetector(
+            onTap: () => Get.toNamed(AppRouteProvider.orderDetailScreen,
+                arguments: orderModel),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context).shadowColor.withOpacity(0.25),
+                    blurRadius: 4,
+                    offset: Offset(0, 4),
+                  )
+                ],
+                color: isDarkMode
+                    ? ThemeColors.backgroundTextFormDark()
+                    : Theme.of(context).colorScheme.onPrimary,
+              ),
               child: AppPadding.small(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,10 +55,10 @@ class OrderItems extends StatelessWidget {
                         child: AppNetworkImage(
                             url: _image,
                             width:
-                                MediaQuery.of(context).size.shortestSide * 0.25,
+                                MediaQuery.of(context).size.shortestSide * 0.2,
                             height:
-                                MediaQuery.of(context).size.shortestSide * 0.25,
-                            fit: BoxFit.cover)),
+                                MediaQuery.of(context).size.shortestSide * 0.2,
+                            fit: BoxFit.fill)),
                     Expanded(
                       child: AppPadding(
                         padding: AppEdgeInsets.only(left: AppGapSize.medium),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ninjafood/app/features/role_admin/home/presentation/admin_home_screen.dart';
 import 'package:ninjafood/app/features/role_admin/orders/presentation/admin_order_screen.dart';
+import 'package:ninjafood/app/features/role_admin/rating/presentation/admin_rating_screen.dart';
 import 'package:ninjafood/app/features/role_user/cart/presentation/cart_screen.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/presentation/group_chat_screen.dart';
 import 'package:ninjafood/app/features/role_user/home/presentation/home_screen.dart';
@@ -18,7 +19,8 @@ enum MenuType {
   about,
   changeTheme,
   notification,
-  order
+  order,
+  rating;
 }
 
 class MenuItem {
@@ -57,30 +59,36 @@ class MenuItem {
         menuType: MenuType.notification),
     MenuItem(
         index: 3,
-        title: 'Drawer_Profile',
-        iconData: FontAwesomeIcons.user,
-        screen: ProfileScreen(),
-        menuType: MenuType.profile),
-    MenuItem(
-        index: 4,
         title: 'Drawer_Chat',
         iconData: FontAwesomeIcons.message,
         screen: GroupChatScreen(),
         menuType: MenuType.chat),
     MenuItem(
+        index: 4,
+        title: 'Drawer_Profile',
+        iconData: FontAwesomeIcons.user,
+        screen: ProfileScreen(),
+        menuType: MenuType.profile),
+    MenuItem(
         index: 5,
+        title: 'Rating_Rate',
+        iconData: FontAwesomeIcons.user,
+        screen: AdminRatingScreen(),
+        menuType: MenuType.rating),
+    MenuItem(
+        index: 6,
         title: 'Drawer_Language_Change',
         iconData: FontAwesomeIcons.gear,
         screen: null,
         menuType: MenuType.language),
     MenuItem(
-        index: 6,
+        index: 7,
         title: 'Drawer_Theme_Change',
         iconData: FontAwesomeIcons.themeisle,
         screen: null,
         menuType: MenuType.changeTheme),
     MenuItem(
-        index: 7,
+        index: 8,
         title: 'Drawer_Logout',
         iconData: FontAwesomeIcons.rightFromBracket,
         screen: null,

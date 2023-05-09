@@ -38,8 +38,8 @@ class NotificationMobileView extends GetView<NotificationController> {
                 return BoxNotification(
                     child: AppNetworkImage(
                         borderRadius: 16,
-                        width: MediaQuery.of(context).size.shortestSide * 0.15,
-                        height: MediaQuery.of(context).size.shortestSide * 0.15,
+                        width: MediaQuery.of(context).size.shortestSide * 0.2,
+                        height: MediaQuery.of(context).size.shortestSide * 0.2,
                         fit: BoxFit.fill,
                         url: notification.image),
                     onPressedItem: () =>
