@@ -50,6 +50,7 @@ dependencies:
   onesignal_flutter: ^3.5.1
   flutter_config_plus: ^1.1.1
   map_location_picker: ^1.0.1
+  logger: ^1.3.0
 
   ninja_theme:
 #    git:

@@ -1,5 +1,6 @@
 import 'package:flutter_config_plus/flutter_config_plus.dart';
 import 'package:get/get.dart';
+import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 import 'package:ninjafood/app/services/console_service/console_service.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -10,7 +11,6 @@ class OneSignalService extends GetxService implements Bootable {
   static OneSignalService get instance => Get.find<OneSignalService>();
 
   late ConsoleService log = ConsoleService.instance;
-  final String oneSignalAppId = FlutterConfigPlus.get('ONE_SIGNAL_APP_ID');
   final oneSignal = OneSignal.shared;
 
   @override
@@ -39,7 +39,7 @@ class OneSignalService extends GetxService implements Bootable {
   }
 
   _initService() async {
-    // Debug
+    final String oneSignalAppId = FlutterConfigPlus.get('ONE_SIGNAL_APP_ID');
     await OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
     await OneSignal.shared.setAppId(oneSignalAppId);
     await OneSignal.shared.consentGranted(true);
@@ -106,7 +106,7 @@ class OneSignalService extends GetxService implements Bootable {
       log.show(_logName, 'ON DID DISMISS IN APP MESSAGE ${message.messageId}');
     });
 
-    OneSignal.shared.setLaunchURLsInApp(false);
+    // if (isIos) OneSignal.shared.setLaunchURLsInApp(false);
 
     await OneSignal.shared.requiresUserPrivacyConsent();
 
