@@ -37,20 +37,25 @@ class ProfileMobileView extends GetView<UserController> {
     return Obx(() {
       final currentUser = controller.currentUser.value;
       if (currentUser == null) return Container();
-      return CustomScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
-        slivers: [
-          SliverPersistentHeader(
-              pinned: true,
-              delegate: ProfileAppBar(
-                  expandedHeight: MediaQuery.of(context).size.height * 0.4,
-                  minExtentHeight: MediaQuery.of(context).size.height * 0.2,
-                  backgroundImage: Obx(() => CachedNetworkImage(
-                      imageUrl: controller.currentUser.value?.photoUrl ?? '',
-                      fit: BoxFit.fill)),
-                  title: CustomAppBar.drawer())),
-          ProfileBody(),
-        ],
+      return ColoredBox(
+        color: Theme.of(context).colorScheme.background,
+        child: CustomScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          slivers: [
+            SliverPersistentHeader(
+                pinned: true,
+                delegate: ProfileAppBar(
+                    expandedHeight: MediaQuery.of(context).size.height * 0.4,
+                    minExtentHeight: MediaQuery.of(context).size.height * 0.2,
+                    backgroundImage: Obx(() => CachedNetworkImage(
+                          imageUrl:
+                              controller.currentUser.value?.photoUrl ?? '',
+                          fit: BoxFit.fill,
+                        )),
+                    title: CustomAppBar.drawer())),
+            ProfileBody(),
+          ],
+        ),
       );
     });
   }

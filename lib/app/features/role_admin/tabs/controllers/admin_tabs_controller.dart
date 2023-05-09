@@ -52,18 +52,35 @@ class AdminTabsController extends BaseController {
       case MenuType.changeTheme:
         _onPressedChangeTheme();
         break;
+      case MenuType.notification:
+        onPressedNotification();
+        break;
+
+
       default:
         currentMenuItem.value = menuItem;
         toggleDrawer();
     }
   }
 
+  void onChangeToChatScreen() {
+    currentMenuItem.value =
+        menuItems.firstWhere((element) => element.menuType == MenuType.chat);
+  }
+
+  void onChangeToOrderScreen() {
+    currentMenuItem.value =
+        menuItems.firstWhere((element) => element.menuType == MenuType.order);
+  }
+
   void onChangeToCartScreen() {
-    currentMenuItem.value = menuItems[2];
+    currentMenuItem.value =
+        menuItems.firstWhere((element) => element.menuType == MenuType.cart);
   }
 
   void onChangeToHomeScreen() {
-    currentMenuItem.value = menuItems[0];
+    currentMenuItem.value =
+        menuItems.firstWhere((element) => element.menuType == MenuType.home);
   }
 
   Future<void> _onPressedChangeLanguage() async {
@@ -77,7 +94,7 @@ class AdminTabsController extends BaseController {
             AppText.titleMedium(text: 'Drawer_Language_Change'.tr),
             AppPadding.small(),
             ...TranslationService.lstLanguage.entries.map(
-                  (e) {
+              (e) {
                 return InkWell(
                   onTap: () {
                     Get.back();
@@ -88,17 +105,17 @@ class AdminTabsController extends BaseController {
                         color: currentLocale!.languageCode == e.key
                             ? ThemeColors.primaryColor
                             : Theme.of(this.context)
-                            .textTheme
-                            .bodyMedium!
-                            .color),
+                                .textTheme
+                                .bodyMedium!
+                                .color),
                     title: Text(e.value.tr,
                         style: Theme.of(this.context)
                             .textTheme
                             .bodyMedium!
                             .copyWith(
-                            color: currentLocale.languageCode == e.key
-                                ? ThemeColors.primaryColor
-                                : null)),
+                                color: currentLocale.languageCode == e.key
+                                    ? ThemeColors.primaryColor
+                                    : null)),
                   ),
                 );
               },
@@ -111,23 +128,18 @@ class AdminTabsController extends BaseController {
 
   void _onPressedAbout() {}
 
-  void _onPressedChangeTheme() {
-    themeService.toggleTheme();
-  }
+  void _onPressedChangeTheme() => themeService.toggleTheme();
 
   Future<void> _onPressedLogout() async {
     loading.value = true;
     final response = await authService.signOut();
     response.fold(
-          (l) => handleFailure(_logName, l),
-          (r) => Get.offAllNamed(AppRouteProvider.splashScreen),
+      (l) => handleFailure(_logName, l),
+      (r) => Get.offAllNamed(AppRouteProvider.splashScreen),
     );
     loading.value = false;
   }
 
-  void onPressedNotification() {
-    Get.toNamed(AppRouteProvider.notificationScreen);
-  }
-
-
+  void onPressedNotification() =>
+      Get.toNamed(AppRouteProvider.notificationScreen);
 }

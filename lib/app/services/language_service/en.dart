@@ -236,4 +236,6 @@ const Map<String, String> en = {
   "Notification_Title": "Notification",
   "Notification_Request": "You have a new order",
   "Notification_Done": "Order has been completed",
+
+  "Order": "Order",
 };
