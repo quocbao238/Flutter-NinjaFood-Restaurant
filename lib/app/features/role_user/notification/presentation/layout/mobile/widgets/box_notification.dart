@@ -29,7 +29,7 @@ class BoxNotification extends StatelessWidget {
         ? ThemeColors.backgroundTextFormDark()
         : Theme.of(context).colorScheme.onPrimary;
 
-    if (isRead) backgroundColor = ThemeColors.primaryColor.withOpacity(0.1);
+    if (isRead) backgroundColor = backgroundColor.withOpacity(0.4);
 
     return AppPadding.small(
       padding: AppEdgeInsets.only(top: AppGapSize.medium),
@@ -42,13 +42,11 @@ class BoxNotification extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Theme.of(context).shadowColor.withOpacity(0.25),
-                blurRadius: 4,
-                offset: Offset(0, 4),
+                blurRadius: 2,
+                offset: Offset(0, 2),
               )
             ],
-            color: isDarkMode
-                ? ThemeColors.backgroundTextFormDark()
-                : Theme.of(context).colorScheme.onPrimary,
+            color: backgroundColor,
           ),
           child: Row(
             children: [

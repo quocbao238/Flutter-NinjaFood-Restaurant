@@ -62,7 +62,7 @@ class OrderDetailBottom extends GetView<CartScreenController> {
                     children: [
                       AppText.titleSmall(
                           text: 'Cart_Total_Price'.tr,
-                          color: ThemeColors.textDarkColor,
+                          // color: ThemeColors.textDarkColor,
                           fontWeight: FontWeight.bold),
                       Expanded(
                         child: AppText.titleMedium(
