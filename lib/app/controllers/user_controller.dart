@@ -62,14 +62,11 @@ class UserController extends GetxController implements Bootable {
   void _handleCloudUserChanged() async {
     if (_cloudUserSubscription != null || getFirebaseAuthUser == null) return;
     _consoleService.show(_logName, '_handleCloudUserChanged Run');
-    _cloudUserSubscription = _databaseService
-        .getUserDataStream(getFirebaseAuthUser!.uid)
-        .listen((event) async {
+    _cloudUserSubscription = _databaseService.getUserDataStream(getFirebaseAuthUser!.uid).listen((event) async {
+      if (event.data() == null) return;
       currentUser.value = UserModel.fromJson(event.data()!);
-      final playerId = await OneSignalService.instance
-          .setPlayerId(currentUser.value?.uid ?? '');
-      if (playerId != null &&
-          !currentUser.value!.playerIds.contains(playerId)) {
+      final playerId = await OneSignalService.instance.setPlayerId(currentUser.value?.uid ?? '');
+      if (playerId != null && !currentUser.value!.playerIds.contains(playerId)) {
         currentUser.value!.addPlayerId(playerId);
         await updateUser(playerIds: currentUser.value!.playerIds);
       }
@@ -112,8 +109,7 @@ class UserController extends GetxController implements Bootable {
     }
   }
 
-  Future<Either<Failure, void>> favoriteProduct(
-      {required int productId}) async {
+  Future<Either<Failure, void>> favoriteProduct({required int productId}) async {
     final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     final currentFavoriteProducts = _currentUser.favoriteIds;
@@ -128,14 +124,12 @@ class UserController extends GetxController implements Bootable {
     }
   }
 
-  Future<Either<Failure, void>> addProductToCard(
-      {required ProductModel productModel}) async {
+  Future<Either<Failure, void>> addProductToCard({required ProductModel productModel}) async {
     final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     List<CartModel> currentCartsProduct = _currentUser.carts;
 
-    int index = currentCartsProduct
-        .indexWhere((element) => element.productModel.id == productModel.id);
+    int index = currentCartsProduct.indexWhere((element) => element.productModel.id == productModel.id);
 
     if (index != -1) {
       currentCartsProduct[index].increaseQuantity();
@@ -152,9 +146,7 @@ class UserController extends GetxController implements Bootable {
 
 // Comment Product
   Future<Either<Failure, void>> insertComment(
-      {String? comment,
-      required double rating,
-      required OrderModel orderModel}) async {
+      {String? comment, required double rating, required OrderModel orderModel}) async {
     FocusManager.instance.primaryFocus?.unfocus();
     final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
@@ -169,16 +161,13 @@ class UserController extends GetxController implements Bootable {
           userName: _currentUser.getName(),
           comment: comment,
           rating: rating);
-      final insertCommentProduct = await _databaseService.insertCommentProduct(
-          commentModel: commentModel);
+      final insertCommentProduct = await _databaseService.insertCommentProduct(commentModel: commentModel);
       // set order Rating
       return insertCommentProduct.fold((l) => left(l), (r) async {
         orderModel.updateRating(true);
-        final upload =
-            await _databaseService.updateOrder(orderModel: orderModel);
+        final upload = await _databaseService.updateOrder(orderModel: orderModel);
         return upload.fold((l) => left(l), (r) async {
-          final _response = await updateUser(
-              cmtIds: [...currentUser.value!.commentIds, commentModel.uid]);
+          final _response = await updateUser(cmtIds: [...currentUser.value!.commentIds, commentModel.uid]);
           return _response.fold((l) => left(l), (r) => right(null));
         });
       });
@@ -199,16 +188,11 @@ class UserController extends GetxController implements Bootable {
   }
 
   // Send Notification to Restaurant when create and complete order
-  Future<Either<Failure, void>> sendDeliveryNotificationToRestaurant(
-      OrderModel orderModel) async {
-    final restaurantProfile =
-        RestaurantController.instance.restaurantProfile.value;
-    if (restaurantProfile == null)
-      return left(Failure.custom('Restaurant profile is null'));
+  Future<Either<Failure, void>> sendDeliveryNotificationToRestaurant(OrderModel orderModel) async {
+    final restaurantProfile = RestaurantController.instance.restaurantProfile.value;
+    if (restaurantProfile == null) return left(Failure.custom('Restaurant profile is null'));
 
-    final content = orderModel.status == HistoryStatus.request
-        ? 'Notification_Request'.tr
-        : 'Notification_Done'.tr;
+    final content = orderModel.status == HistoryStatus.request ? 'Notification_Request'.tr : 'Notification_Done'.tr;
 
     try {
       final cartImage = orderModel.carts[0].productModel.image?.url ?? '';
@@ -219,19 +203,15 @@ class UserController extends GetxController implements Bootable {
           bigPicture: cartImage,
           androidLargeIcon: cartImage);
 
-      final notificationModel =
-          NotificationModel.createNotificationModelByOSCreateNotification(
+      final notificationModel = NotificationModel.createNotificationModelByOSCreateNotification(
         notification: notification,
         receiverId: restaurantProfile.uid,
         orderId: orderModel.createdAt,
         type: NotificationType.order,
       );
 
-      await OneSignalService.instance
-          .sendNotification(notification)
-          .then((value) async {
-        await _databaseService.insertNotification(
-            notificationModel: notificationModel);
+      await OneSignalService.instance.sendNotification(notification).then((value) async {
+        await _databaseService.insertNotification(notificationModel: notificationModel);
       });
       return right(null);
     } catch (e, stackTrace) {

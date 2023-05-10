@@ -25,9 +25,7 @@ class BoxNotification extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    var backgroundColor = isDarkMode
-        ? ThemeColors.backgroundTextFormDark()
-        : Theme.of(context).colorScheme.onPrimary;
+    var backgroundColor = isDarkMode ? ThemeColors.backgroundTextFormDark() : Theme.of(context).colorScheme.onPrimary;
 
     if (isRead) backgroundColor = backgroundColor.withOpacity(0.4);
 
@@ -52,28 +50,24 @@ class BoxNotification extends StatelessWidget {
             children: [
               AppPadding.small(child: child),
               Expanded(
-                flex: 4,
                 child: AppPadding(
-                  padding: AppEdgeInsets.symmetric(
-                      horizontal: AppGapSize.small, vertical: AppGapSize.small),
+                  padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.small, vertical: AppGapSize.small),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      AppText.bodyMedium(
+                      AppText.bodySmall(
                         text: title,
                         fontWeight: FontWeight.bold,
                         textAlign: TextAlign.start,
                       ),
-                      AppPadding(
-                        padding: AppEdgeInsets.symmetric(
-                          vertical: AppGapSize.small,
-                        ),
-                        child: AppText.bodySmall(
-                          text: message,
-                          fontWeight: FontWeight.w500,
-                          textAlign: TextAlign.start,
-                        ),
+                      AppText.bodySmall(
+                        text: message,
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.start,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        // maxLines: 2,
                       ),
                       // AppPadding.small(),
                       AppText.labelSmall(
@@ -85,9 +79,7 @@ class BoxNotification extends StatelessWidget {
                   ),
                 ),
               ),
-              IconButton(
-                  onPressed: () => onPressedMore?.call(),
-                  icon: Icon(Icons.more_horiz))
+              IconButton(onPressed: () => onPressedMore?.call(), icon: Icon(Icons.more_horiz))
             ],
           ),
         ),

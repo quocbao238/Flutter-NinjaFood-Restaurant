@@ -11,9 +11,7 @@ class AdminRatingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final backgroundCardColor = isDarkMode
-        ? ThemeColors.backgroundTextFormDark()
-        : ThemeColors.backgroundTextFormLight;
+    final backgroundCardColor = isDarkMode ? ThemeColors.backgroundTextFormDark() : ThemeColors.backgroundTextFormLight;
     return AppScaffoldBackgroundImage.pattern(
       appBarWidget: CustomAppBar.drawer(
         title: 'Rating_Rate'.tr,
@@ -23,8 +21,7 @@ class AdminRatingScreen extends StatelessWidget {
         builder: (controller) => ListView.builder(
           itemCount: controller.ratings.length,
           padding: EdgeInsets.only(
-            top: AppGapSize.large.size,
-          ),
+              top: AppGapSize.medium.size, left: AppGapSize.paddingMedium.size, right: AppGapSize.paddingMedium.size),
           itemBuilder: (context, index) {
             final _commentModel = controller.ratings[index];
             return Container(
@@ -38,8 +35,7 @@ class AdminRatingScreen extends StatelessWidget {
                     )
                   ],
                   color: backgroundCardColor),
-              margin: EdgeInsets.symmetric(
-                  horizontal: AppGapSize.paddingMedium.size),
+              margin: EdgeInsets.only(bottom: AppGapSize.paddingMedium.size),
               child: AppPadding.medium(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,24 +52,19 @@ class AdminRatingScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              AppText.titleSmall(
-                                  text: _commentModel.userName,
-                                  fontWeight: FontWeight.bold),
+                              AppText.titleSmall(text: _commentModel.userName, fontWeight: FontWeight.bold),
                               RatingBarIndicator(
                                   itemCount: 5,
                                   itemSize: 18,
                                   rating: _commentModel.rating,
-                                  itemBuilder: (context, index) => Icon(
-                                      Icons.star,
-                                      color: ThemeColors.primaryColor))
+                                  itemBuilder: (context, index) => Icon(Icons.star, color: ThemeColors.primaryColor))
                             ],
                           ),
                         )
                       ],
                     ),
                     AppPadding(
-                      padding: const AppEdgeInsets.only(
-                          top: AppGapSize.paddingMedium),
+                      padding: const AppEdgeInsets.only(top: AppGapSize.paddingMedium),
                       child: AppText.bodyLarge(
                         text: _commentModel.comment ?? '',
                         fontWeight: FontWeight.w500,
