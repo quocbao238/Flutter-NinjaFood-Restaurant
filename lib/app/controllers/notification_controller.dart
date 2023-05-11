@@ -62,20 +62,31 @@ class NotificationController extends GetxController implements Bootable {
       }
 
       if (notificationModel.type == NotificationType.order) {
-        List<OrderModel> lstOrder =
-            ProfileController.instance.lstHistory.toList();
-        if (lstOrder.isEmpty) return;
-        final _order = lstOrder.firstWhereOrNull(
+        // Role User
+        if (_userController.currentUser.value?.isUser() ?? false) {
+          List<OrderModel> lstOrder =
+              ProfileController.instance.lstHistory.toList();
+          if (lstOrder.isEmpty) return;
+          final _order = lstOrder.firstWhereOrNull(
+              (element) => element.createdAt == notificationModel.orderId);
+          if (_order == null) return;
+          final currentOrder = DeliveryController.instance.currentOrder.value;
+          if (currentOrder != null &&
+              _order.createdAt == currentOrder.createdAt &&
+              currentOrder.status != HistoryStatus.done) {
+            DeliveryController.instance.onChangeDeliveryStatus();
+            Get.back();
+            return;
+          }
+          Get.toNamed(AppRouteProvider.orderDetailScreen, arguments: _order);
+        }
+
+        // Role Admin
+        final orders = DeliveryController.instance.lstOrderModel.toList();
+        if (orders.isEmpty) return;
+        final _order = orders.firstWhereOrNull(
             (element) => element.createdAt == notificationModel.orderId);
         if (_order == null) return;
-        final currentOrder = DeliveryController.instance.currentOrder.value;
-        if (currentOrder != null &&
-            _order.createdAt == currentOrder.createdAt &&
-            currentOrder.status != HistoryStatus.done) {
-          DeliveryController.instance.onChangeDeliveryStatus();
-          Get.back();
-          return;
-        }
         Get.toNamed(AppRouteProvider.orderDetailScreen, arguments: _order);
       }
     });

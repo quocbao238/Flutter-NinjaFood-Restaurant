@@ -266,12 +266,13 @@ class DatabaseService extends GetxService
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat(
-      {required String groupChatId}) => _db
-        .collection(DatabaseKeys.messageChatPath)
-        .where('groupChatId', isEqualTo: groupChatId)
-        .orderBy(FieldPath.documentId, descending: true)
-        .limit(20)
-        .snapshots();
+          {required String groupChatId}) =>
+      _db
+          .collection(DatabaseKeys.messageChatPath)
+          .where('groupChatId', isEqualTo: groupChatId)
+          .orderBy(FieldPath.documentId, descending: true)
+          .limit(20)
+          .snapshots();
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat() =>
@@ -293,7 +294,6 @@ class DatabaseService extends GetxService
     }
   }
 
-
   @override
   Future<Either<Failure, CommentModel>> getCommentByOrderId(
       {required String orderId}) async {
@@ -311,6 +311,12 @@ class DatabaseService extends GetxService
       return left(Failure(e.toString(), stackTrace));
     }
   }
+
+  //listenRating
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenRating() => _db
+      .collection(DatabaseKeys.commentPath)
+      .orderBy('createAt', descending: true)
+      .snapshots();
 
   @override
   Future<Either<Failure, String>> insertOrder(
@@ -346,12 +352,13 @@ class DatabaseService extends GetxService
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> listenCurrentOrder(
-      String userId) => _db
-        .collection(DatabaseKeys.orderPath)
-        .where('userId', isEqualTo: userId)
-        .orderBy('createdAt', descending: true)
-        .limit(2)
-        .snapshots();
+          String userId) =>
+      _db
+          .collection(DatabaseKeys.orderPath)
+          .where('userId', isEqualTo: userId)
+          .orderBy('createdAt', descending: true)
+          .limit(2)
+          .snapshots();
 
   @override
 
@@ -415,10 +422,11 @@ class DatabaseService extends GetxService
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> listenNotification(
-      {required String userId}) => _db
-        .collection(DatabaseKeys.notificationPath)
-        .where('receiverId', isEqualTo: userId)
-        .snapshots();
+          {required String userId}) =>
+      _db
+          .collection(DatabaseKeys.notificationPath)
+          .where('receiverId', isEqualTo: userId)
+          .snapshots();
 
   @override
   Future<Either<Failure, void>> updateNotification(

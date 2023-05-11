@@ -22,12 +22,8 @@ class OrderDetailItemCount extends StatelessWidget {
         height: 26,
         width: 26,
         child: DecoratedBox(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8), color: boxColor),
-          child: Icon(
-            icon,
-            color: iconColor,
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: boxColor),
+          child: Icon(icon, color: iconColor),
         ),
       ),
     );

@@ -46,6 +46,8 @@ abstract class DatabaseServiceImpl {
 
   Future<Either<Failure, void>> getCommentByOrderId({required String orderId});
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenRating();
+
   //Order
 
   Future<Either<Failure, List<OrderModel>>> getListOrdersByListId(

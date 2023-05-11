@@ -44,6 +44,7 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
                 OrderDetailBodyView(),
                 OrderDetailBottom(),
                 SafeArea(
+                  top: false,
                   child: Obx(
                     () {
                       return AnimationButton(
