@@ -11,7 +11,6 @@ class AppPages {
     }
 
     initial = AppRouteProvider.splashScreen;
-    // initial = AppRouteProvider.signupSuccessScreen;
   }
 
   //
@@ -119,11 +118,15 @@ class AppPages {
       page: () => RatingScreen(),
       binding: GetBinding(AppRouteProvider.ratingScreen),
     ),
-
     GetPage(
       name: AppRouteProvider.orderDetailScreen,
       page: () => OrderDetailsScreen(orderModel: Get.arguments),
       binding: GetBinding(AppRouteProvider.orderDetailScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.locationPickerScreen,
+      page: () => LocationPickerScreen(),
+      binding: GetBinding(AppRouteProvider.locationPickerScreen),
     ),
   ];
 }

@@ -24,17 +24,13 @@ class SignUpProcessController extends BaseController {
   Rxn<String?> lastNameError = Rxn<String?>(null);
   Rxn<String?> phoneError = Rxn<String?>(null);
   Rxn<String?> addressLocation = Rxn<String?>(null);
-  Rx<bool> isPickerLocation = false.obs;
 
   @override
   void onInit() {
     final currentUser = userController.currentUser.value;
-    firstNameController =
-        TextEditingController(text: currentUser?.firstName ?? '');
-    lastNameController =
-        TextEditingController(text: currentUser?.lastName ?? '');
-    phoneController =
-        TextEditingController(text: currentUser?.phoneNumber ?? '');
+    firstNameController = TextEditingController(text: currentUser?.firstName ?? '');
+    lastNameController = TextEditingController(text: currentUser?.lastName ?? '');
+    phoneController = TextEditingController(text: currentUser?.phoneNumber ?? '');
 
     firstNameController.addListener(() {
       final firstName = firstNameController.text;
@@ -68,9 +64,7 @@ class SignUpProcessController extends BaseController {
 
   Future<void> onPressedNext() async {
     FocusManager.instance.primaryFocus?.unfocus();
-    if (firstNameError.value != null ||
-        lastNameError.value != null ||
-        phoneError.value != null) {
+    if (firstNameError.value != null || lastNameError.value != null || phoneError.value != null) {
       return;
     }
 
@@ -86,13 +80,11 @@ class SignUpProcessController extends BaseController {
     loading(false);
   }
 
-  void onPressedSetLocation(String address) {
-    isPickerLocation.value = false;
-    addressLocation.value = address;
-  }
-
-  void onPressedLocationPicker() {
-    isPickerLocation.value = true;
+  Future<void> onPressedLocationPicker() async {
+    final result = await Get.toNamed(AppRouteProvider.locationPickerScreen);
+    if (result != null) {
+      addressLocation.value = result;
+    }
   }
 
   Future<void> onPressedNextButtonLocation() async {
@@ -101,10 +93,8 @@ class SignUpProcessController extends BaseController {
       return;
     }
     loading(true);
-    final response =
-        await userController.updateUser(address: addressLocation.value);
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) {
+    final response = await userController.updateUser(address: addressLocation.value);
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
       Get.toNamed(AppRouteProvider.signupSuccessScreen);
     });
     loading(false);
@@ -154,8 +144,7 @@ class SignUpProcessController extends BaseController {
       return;
     }
     final response = await userController.updateUser(photoUrl: urlCallBack);
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) {
+    await response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {
       Get.toNamed(AppRouteProvider.setLocationScreen);
     });
 
