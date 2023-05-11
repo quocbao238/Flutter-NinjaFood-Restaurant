@@ -32,7 +32,7 @@
 - [x] Realtime Chat with Restaurant
 - [x] Upload Chat File (Image, Video, ...) 
 - [x] Preview Image, Video ...
-- [x] Multilanuage (Vietnamese, English)
+- [x] Language (Vietnamese, English)
 - [x] DarkTheme & Light Theme
 - [x] Notification (Order, Chat) - (Only Android)
 - [x] Realtime Delivery Status
@@ -46,15 +46,15 @@
 - [x] Realtime Chat with User
 - [x] Upload Chat File (Image, Video, ...) 
 - [x] Preview Image, Video ...
-- [x] Multilanuage (Vietnamese, English)
+- [x] Language (Vietnamese, English)
 - [x] DarkTheme & Light Theme
 - [x] Notification (Order, Chat) - (Only Android)
 - [x] Update Order Delivery Status
-- [ ] Order Detail 
-- [ ] View Rating 
-- [ ] Edit Food
+- [x] Order Detail 
+- [x] View Rating 
+- [ ] Edit Food (Name, Price, Image, Description, Category)
+- [ ] Total income (day, month, quarterly, year) - Maybe view chart
 - [ ] Insert Food
-- [ ] Total income (day, month, quarterly, year) - Maybe view chart 
 
 
 
