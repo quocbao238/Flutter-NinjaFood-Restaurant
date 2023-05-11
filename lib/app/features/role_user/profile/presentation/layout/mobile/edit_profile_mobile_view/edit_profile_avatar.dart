@@ -12,6 +12,7 @@ class CircleAvatarWithEditButton extends GetView<EditProfileController> {
     return Obx(() {
       final imageUrl = controller.imageFile.value?.path ?? controller.currentUser.value?.photoUrl ?? '';
       return CircleAvatar(
+        backgroundColor: Colors.transparent,
         backgroundImage:
             !imageUrl.contains('http') ? FileImage(File(imageUrl)) : NetworkImage(imageUrl) as ImageProvider<Object>?,
         radius: avatarSize,
