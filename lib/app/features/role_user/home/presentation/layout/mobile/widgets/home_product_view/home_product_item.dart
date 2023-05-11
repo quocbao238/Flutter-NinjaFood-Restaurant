@@ -44,29 +44,45 @@ class ProductItem extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 3,
-                      child: AppText.titleSmall(text: foodName, textAlign: TextAlign.start),
-                    ),
-                    AppPadding(
-                      padding: AppEdgeInsets.only(left: AppGapSize.small),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          AppText.titleLarge(
-                              text: foodPrice,
-                              textAlign: TextAlign.end,
-                              maxLines: 1,
-                              fontWeight: FontWeight.w400,
-                              color: ThemeColors.textPriceColor),
-                          AppText.titleSmall(
-                            text: foodCurrency,
-                            textAlign: TextAlign.end,
-                            fontWeight: FontWeight.w400,
-                            color: ThemeColors.textPriceColor,
+                          AppText.titleSmall(text: foodName, textAlign: TextAlign.start),
+
+                          AppPadding(
+                            padding: AppEdgeInsets.only(right: AppGapSize.small),
+                            child: AppText.titleLarge(
+                                text: "$foodPrice $foodCurrency",
+                                textAlign: TextAlign.end,
+                                maxLines: 1,
+                                fontWeight: FontWeight.w400,
+                                color: ThemeColors.textPriceColor),
                           ),
                         ],
                       ),
                     ),
+                    // AppPadding(
+                    //   padding: AppEdgeInsets.only(left: AppGapSize.small),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.start,
+                    //     crossAxisAlignment: CrossAxisAlignment.end,
+                    //     children: [
+                    //       AppText.titleLarge(
+                    //           text: foodPrice,
+                    //           textAlign: TextAlign.end,
+                    //           maxLines: 1,
+                    //           fontWeight: FontWeight.w400,
+                    //           color: ThemeColors.textPriceColor),
+                    //       AppText.titleSmall(
+                    //         text: foodCurrency,
+                    //         textAlign: TextAlign.end,
+                    //         fontWeight: FontWeight.w400,
+                    //         color: ThemeColors.textPriceColor,
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

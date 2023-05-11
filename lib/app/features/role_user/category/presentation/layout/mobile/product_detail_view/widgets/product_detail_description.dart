@@ -21,21 +21,16 @@ class ProductDetailDescription extends GetView<ProductDetailScreenController> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18), color: ThemeColors.primaryColor.withOpacity(0.1)),
                     child: AppPadding.small(
-                      child: AppText.bodyMedium(
-                        text: 'Home_Popular_Food'.tr,
-                        fontWeight: FontWeight.w400,
-                        color: ThemeColors.primaryColor,
-                      ),
-                    ),
+                        child: AppText.bodyMedium(
+                            text: 'Home_Popular_Food'.tr,
+                            fontWeight: FontWeight.w400,
+                            color: ThemeColors.primaryColor)),
                   ),
                   Spacer(),
-                  // AppIcons.locationMap(),
                   AppPadding(
                       // padding: AppEdgeInsets.only(left: AppGapSize.small),
                       child: ProductFavoriteItem(
-                        productId: product.id ?? 0,
-                        onPressedFavorite: (v) => controller.onPressedFavorite(v),
-                      ))
+                          productId: product.id ?? 0, onPressedFavorite: (v) => controller.onPressedFavorite(v)))
                 ],
               ),
               AppPadding(
@@ -59,14 +54,6 @@ class ProductDetailDescription extends GetView<ProductDetailScreenController> {
                   textAlign: TextAlign.start,
                 ),
               ),
-              // AppPadding(
-              //   padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
-              //   child: AppText.bodyLarge(
-              //     text: 'Testimonials',
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
-              // ProductDetailReviewer(),
             ],
           ),
         ),

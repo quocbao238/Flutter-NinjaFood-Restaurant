@@ -153,6 +153,7 @@ const Map<String, String> en = {
   "Drawer_Theme_Change": "Theme Change",
   "Drawer_Theme_Light": "Light Theme",
   "Drawer_Theme_Dark": "Dark Theme",
+  "Drawer_Menu": "Menu",
   "Drawer_About": "About",
   "Drawer_Logout": "Logout",
 

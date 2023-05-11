@@ -1,6 +1,9 @@
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/comment_model.dart';
 
+final demoDetailProduct =
+    '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum''';
+
 class ProductModel {
   String? name;
   int? id;
@@ -97,6 +100,45 @@ class ProductModel {
       comments: newComments,
     );
   }
+
+  ProductModel copyWith({
+    String? name,
+    int? id,
+    String? uid,
+    Image? image,
+    SmallImage? smallImage,
+    List<MediaGallery>? mediaGallery,
+    String? sTypename,
+    PriceRange? priceRange,
+    Description? description,
+    Description? shortDescription,
+    List<CommentModel>? comments,
+  }) {
+    return ProductModel(
+      name: name ?? this.name,
+      id: id ?? this.id,
+      uid: uid ?? this.uid,
+      image: image ?? this.image,
+      smallImage: smallImage ?? this.smallImage,
+      mediaGallery: mediaGallery ?? this.mediaGallery,
+      sTypename: sTypename ?? this.sTypename,
+      priceRange: priceRange ?? this.priceRange,
+      description: description ?? this.description,
+      shortDescription: shortDescription ?? this.shortDescription,
+      comments: comments ?? this.comments,
+    );
+  }
+
+  // For update
+
+  void setPrice(int value) => this.priceRange?.copyWith(
+      minimumPrice:
+          priceRange?.minimumPrice?.copyWith(finalPrice: priceRange?.minimumPrice?.finalPrice?.copyWith(value: value)));
+
+  void setName(String val) => name = val;
+
+  void setDescription(String val) => this.description?.copyWith(content: val);
+
 }
 
 class Image {
@@ -196,6 +238,13 @@ class PriceRange {
     data['__typename'] = this.sTypename;
     return data;
   }
+
+  copyWith({MinimumPrice? minimumPrice}) {
+    return PriceRange(
+      minimumPrice: minimumPrice ?? this.minimumPrice,
+      sTypename: sTypename ?? this.sTypename,
+    );
+  }
 }
 
 class MinimumPrice {
@@ -216,6 +265,13 @@ class MinimumPrice {
     }
     data['__typename'] = this.sTypename;
     return data;
+  }
+
+  copyWith({FinalPrice? finalPrice}) {
+    return MinimumPrice(
+      finalPrice: finalPrice ?? this.finalPrice,
+      sTypename: sTypename ?? this.sTypename,
+    );
   }
 }
 
@@ -239,23 +295,46 @@ class FinalPrice {
     data['__typename'] = this.sTypename;
     return data;
   }
+
+  copyWith({String? currency, int? value}) {
+    return FinalPrice(
+      currency: currency ?? this.currency,
+      value: value ?? this.value,
+      sTypename: sTypename ?? this.sTypename,
+    );
+  }
 }
 
 class Description {
   String? html;
   String? sTypename;
+  String? content;
 
-  Description({this.html, this.sTypename});
+  Description({this.html, this.sTypename, this.content});
 
   Description.fromJson(Map<String, dynamic> json) {
     html = json['html'];
+    content = json['content'];
     sTypename = json['__typename'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['html'] = this.html;
+    data['content'] = this.content;
     data['__typename'] = this.sTypename;
     return data;
+  }
+
+  Description copyWith({
+    String? html,
+    String? sTypename,
+    String? content,
+  }) {
+    return Description(
+      html: html ?? this.html,
+      sTypename: sTypename ?? this.sTypename,
+      content: content ?? this.content,
+    );
   }
 }

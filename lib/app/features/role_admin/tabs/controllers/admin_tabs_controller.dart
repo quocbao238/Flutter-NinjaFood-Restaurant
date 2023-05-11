@@ -5,7 +5,7 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
-import 'package:ninjafood/app/features/role_user/tabs/infrastructure/models/menu_models.dart';
+import 'package:ninjafood/app/models/menu_models.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/services/auth_service/auth_service.dart';
 import 'package:ninjafood/app/services/console_service/console_service.dart';
@@ -22,11 +22,8 @@ class AdminTabsController extends BaseController {
 
   List<MenuItem> menuItems = MenuItem.listAdminMenu;
 
-  List<Widget> screens = MenuItem.listAdminMenu
-      .where((element) => element.screen != null)
-      .toList()
-      .map((e) => e.screen!)
-      .toList();
+  List<Widget> screens =
+      MenuItem.listAdminMenu.where((element) => element.screen != null).toList().map((e) => e.screen!).toList();
 
   Rx<MenuItem> currentMenuItem = MenuItem.listAdminMenu.first.obs;
 
@@ -54,6 +51,9 @@ class AdminTabsController extends BaseController {
       case MenuType.changeTheme:
         _onPressedChangeTheme();
         break;
+      case MenuType.category:
+        _onPressedMenu();
+        break;
 
       default:
         currentMenuItem.value = menuItem;
@@ -61,11 +61,10 @@ class AdminTabsController extends BaseController {
     }
   }
 
-  void onChangeToCartScreen() => currentMenuItem(
-      menuItems.firstWhere((element) => element.menuType == MenuType.cart));
+  void onChangeToCartScreen() => currentMenuItem(menuItems.firstWhere((element) => element.menuType == MenuType.cart));
 
-  void onChangeToHomeScreen() => currentMenuItem.value =
-      menuItems.firstWhere((element) => element.menuType == MenuType.home);
+  void onChangeToHomeScreen() =>
+      currentMenuItem.value = menuItems.firstWhere((element) => element.menuType == MenuType.home);
 
   Future<void> _onPressedChangeLanguage() async {
     final currentLocale = Get.locale;
@@ -88,18 +87,12 @@ class AdminTabsController extends BaseController {
                     leading: Icon(Icons.language,
                         color: currentLocale!.languageCode == e.key
                             ? ThemeColors.primaryColor
-                            : Theme.of(this.context)
-                                .textTheme
-                                .bodyMedium!
-                                .color),
+                            : Theme.of(this.context).textTheme.bodyMedium!.color),
                     title: Text(e.value.tr,
                         style: Theme.of(this.context)
                             .textTheme
                             .bodyMedium!
-                            .copyWith(
-                                color: currentLocale.languageCode == e.key
-                                    ? ThemeColors.primaryColor
-                                    : null)),
+                            .copyWith(color: currentLocale.languageCode == e.key ? ThemeColors.primaryColor : null)),
                   ),
                 );
               },
@@ -108,6 +101,11 @@ class AdminTabsController extends BaseController {
         ),
       ),
     );
+  }
+
+  void _onPressedMenu() {
+    Get.toNamed(AppRouteProvider.adminCategoryScreen);
+    toggleDrawer();
   }
 
   void _onPressedAbout() {}

@@ -14,7 +14,6 @@ const _logName = 'HomeController';
 enum HomeViewType { normal, popularMenu, popularFood, promotion }
 
 class HomeController extends BaseController {
-
   static HomeController get instant => Get.find<HomeController>();
 
   final databaseService = DatabaseService.instance;
@@ -77,13 +76,10 @@ class HomeController extends BaseController {
     response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) => promotions.value = r);
   }
 
-  String getImageUrlByProductId(int id) {
-    return products.firstWhere((element) => id == element.id).image?.url ?? '';
-  }
+  String getImageUrlByProductId(int id) => products.firstWhere((element) => id == element.id).image?.url ?? '';
 
-  List<ProductModel> filterProductByIds(List<int> ids) {
-    return products.where((element) => ids.contains(element.id)).toList();
-  }
+  List<ProductModel> filterProductByIds(List<int> ids) =>
+      products.where((element) => ids.contains(element.id)).toList();
 
   Future<List<ProductModel>> searchFood(String pattern) async {
     List<ProductModel> tempList = [];
@@ -128,8 +124,6 @@ class HomeController extends BaseController {
   void onPressedPromotionItem(PromotionModel promotion) {
     homeViewType.value = HomeViewType.promotion;
   }
-
-
 
   void onPressedClearSearch() {
     searchController.clear();

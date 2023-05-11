@@ -160,6 +160,7 @@ const Map<String, String> vi = {
   "Drawer_Theme_Change": "Thay đổi chủ đề",
   "Drawer_Theme_Light": "Chủ đề sáng",
   "Drawer_Theme_Dark": "Chủ đề tối",
+  "Drawer_Menu": "Thực đơn",
   "Drawer_About": "Về chúng tôi",
   "Drawer_Logout": "Đăng xuất",
 
@@ -168,6 +169,7 @@ const Map<String, String> vi = {
   "SearchBar_NoItem": "Không tìm thấy món ăn nào",
 
   "Home_Popular_Menu": "Thực đơn yêu thích",
+
   "Home_Popular_Food": "Món ăn yêu thích",
   "Home_ViewMore": "Xem thêm",
 

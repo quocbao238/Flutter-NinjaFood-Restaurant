@@ -5,8 +5,10 @@ class Common {
 
   ///Return a VND format
   static String formatMoney(dynamic number) {
+    if(number == null) return '';
+
     if(number is String) {
-      number = double.parse(number);
+      number = double.tryParse(number);
     }
     if(number is int) {
       number = double.parse(number.toString());

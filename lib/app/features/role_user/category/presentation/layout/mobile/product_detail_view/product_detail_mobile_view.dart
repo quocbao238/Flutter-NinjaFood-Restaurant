@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/controllers/controllers.dart';
+import 'package:ninjafood/app/features/role_admin/tabs/controllers/admin_tabs_controller.dart';
 import 'package:ninjafood/app/features/role_user/category/controllers/product_detail_screen_controller.dart';
+import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/routes/routes.dart';
@@ -14,19 +17,51 @@ class FoodDetailMobileView extends GetView<ProductDetailScreenController> {
 
   @override
   Widget build(BuildContext context) {
-    final tabsController = TabsController.instance;
+    final isRoleUser = UserController.instance.currentUser.value?.isUser() ?? false;
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: kTextTabBarHeight * 2),
+            padding: EdgeInsets.only(bottom: isRoleUser ? kTextTabBarHeight * 2 : 0),
             child: CustomScrollView(
               slivers: [
                 SliverPersistentHeader(
                   pinned: true,
                   delegate: ProductDetailAppbar(
-                    title: AppButtonBack(onPressed: () => Get.back()),
+                    title: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          AppButtonBack(onPressed: () => Get.back()),
+                          SafeArea(
+                            child: AppPadding(
+                              padding: const AppEdgeInsets.only(
+                                  top: AppGapSize.paddingMedium,
+                                  left: AppGapSize.paddingMedium,
+                                  right: AppGapSize.paddingMedium),
+                              child: SizedBox(
+                                width: 45,
+                                height: 45,
+                                child: ElevatedButton(
+                                  onPressed: () => Get.toNamed(AppRouteProvider.adminEditProductScreen,
+                                      arguments: controller.currentProduct),
+                                  style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                                        backgroundColor: MaterialStateProperty.all(Color(0xFFF9A84D).withOpacity(0.4)),
+                                        shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+                                        ),
+                                      ),
+                                  child: Icon(FontAwesomeIcons.penToSquare, size: 16.0, color: ThemeColors.orangeColor),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     expandedHeight: MediaQuery.of(context).size.height * 0.4,
                     minExtentHeight: MediaQuery.of(context).size.height * 0.2,
                     backgroundImage:
@@ -37,59 +72,64 @@ class FoodDetailMobileView extends GetView<ProductDetailScreenController> {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Obx(
-              () {
-                final loading = controller.loading.value;
-                return Obx(() {
-                  final isInCurrentCarts = controller.isInCarts.value;
-                  final String textButton = isInCurrentCarts ? 'Food_Already_In_Cart'.tr : 'Add_To_Cart'.tr;
-                  return AppPadding(
-                    padding: AppEdgeInsets.symmetric(
-                        horizontal: AppGapSize.medium, vertical: isIos ? AppGapSize.none : AppGapSize.medium),
-                    child: SafeArea(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: AnimationButton(
-                              duration: Duration(milliseconds: 300),
-                              loading: loading,
-                              textButton: textButton,
-                              textDone: 'Add_To_Cart'.tr,
-                              textLoading: 'Adding_To_Cart'.tr,
-                              ratioWidthButton: isInCurrentCarts ? 0.65 : 0.85,
-                              ratioWidthDone: 0.3,
-                              ratioWidthLoading: 0.55,
-                              onPressed: () {
-                                if (!isInCurrentCarts) {
-                                  controller.addToCart();
-                                }
-                              },
-                            ),
-                          ),
-                          if (isInCurrentCarts && !loading)
-                            Obx(() {
-                              final counterCarts = controller.lstCurrentCart.length;
-                              return CartItemWidget(
-                                counterCarts: counterCarts,
+          if (isRoleUser)
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Obx(
+                () {
+                  final loading = controller.loading.value;
+                  return Obx(() {
+                    final isInCurrentCarts = controller.isInCarts.value;
+                    final String textButton = isInCurrentCarts ? 'Food_Already_In_Cart'.tr : 'Add_To_Cart'.tr;
+                    return AppPadding(
+                      padding: AppEdgeInsets.symmetric(
+                          horizontal: AppGapSize.medium, vertical: isIos ? AppGapSize.none : AppGapSize.medium),
+                      child: SafeArea(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: AnimationButton(
+                                duration: Duration(milliseconds: 300),
+                                loading: loading,
+                                textButton: textButton,
+                                textDone: 'Add_To_Cart'.tr,
+                                textLoading: 'Adding_To_Cart'.tr,
+                                ratioWidthButton: isInCurrentCarts ? 0.65 : 0.85,
+                                ratioWidthDone: 0.3,
+                                ratioWidthLoading: 0.55,
                                 onPressed: () {
-                                  tabsController.onChangeToCartScreen();
-                                  Get.until((route) => Get.currentRoute == AppRouteProvider.tabScreen);
+                                  if (!isInCurrentCarts) {
+                                    controller.addToCart();
+                                  }
                                 },
-                              );
-                            })
-                        ],
+                              ),
+                            ),
+                            if (isInCurrentCarts && !loading)
+                              Obx(() {
+                                final counterCarts = controller.lstCurrentCart.length;
+                                return CartItemWidget(
+                                  counterCarts: counterCarts,
+                                  onPressed: () {
+                                    if (isRoleUser) {
+                                      TabsController.instance.onChangeToCartScreen();
+                                    } else {
+                                      AdminTabsController.instance.onChangeToCartScreen();
+                                    }
+                                    Get.until((route) => Get.currentRoute == AppRouteProvider.tabScreen);
+                                  },
+                                );
+                              })
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                });
-              },
-            ),
-          )
+                    );
+                  });
+                },
+              ),
+            )
         ],
       ),
     );

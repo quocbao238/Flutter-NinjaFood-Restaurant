@@ -19,30 +19,26 @@ abstract class DatabaseServiceImpl {
   /* ProductList */
   Future<Either<Failure, List<ProductModel>>> getListProducts();
 
-  Future<Either<Failure, List<ProductModel>>> getListProductByListId(
-      List<int> listProductsIds);
+  Future<Either<Failure, List<ProductModel>>> getListProductByListId(List<int> listProductsIds);
+
+  Future<Either<Failure, ProductModel>> updateProduct(ProductModel productModel);
 
   /* Promotion */
   Future<Either<Failure, List<PromotionModel>>> getListPromotions();
 
   /* Chat */
-  Future<Either<Failure, void>> insertMessageChat(
-      {required MessageChat messageChat});
+  Future<Either<Failure, void>> insertMessageChat({required MessageChat messageChat});
 
-  Future<Either<Failure, void>> insertGroupChat(
-      {required GroupChatModel groupChatModel});
+  Future<Either<Failure, void>> insertGroupChat({required GroupChatModel groupChatModel});
 
-  Future<Either<Failure, void>> getGroupChatByGroupChatId(
-      {required String groupChatId});
+  Future<Either<Failure, void>> getGroupChatByGroupChatId({required String groupChatId});
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat(
-      {required String groupChatId});
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenMessageChatByGroupChat({required String groupChatId});
 
   Stream<QuerySnapshot<Map<String, dynamic>>> listenGroupChat();
 
   // Rating
-  Future<Either<Failure, void>> insertCommentProduct(
-      {required CommentModel commentModel});
+  Future<Either<Failure, void>> insertCommentProduct({required CommentModel commentModel});
 
   Future<Either<Failure, void>> getCommentByOrderId({required String orderId});
 
@@ -50,8 +46,7 @@ abstract class DatabaseServiceImpl {
 
   //Order
 
-  Future<Either<Failure, List<OrderModel>>> getListOrdersByListId(
-      List<String> orderIds);
+  Future<Either<Failure, List<OrderModel>>> getListOrdersByListId(List<String> orderIds);
 
   Future<Either<Failure, void>> insertOrder({required OrderModel orderModel});
 
@@ -63,23 +58,18 @@ abstract class DatabaseServiceImpl {
   //Listen CurrentOder By userId
   Stream<QuerySnapshot<Map<String, dynamic>>> listenOrders();
 
-  Future<Either<Failure, List<OrderModel>>> getListOrderModelByStatus(
-      {required HistoryStatus status,
-      required String timeStampStart,
-      required String timeStampEnd});
+  Future<Either<Failure, List<OrderModel>>> getListOrderModelByStatus({required HistoryStatus status,
+    required String timeStampStart,
+    required String timeStampEnd});
 
   // Notification
-  Future<Either<Failure, void>> insertNotification(
-      {required NotificationModel notificationModel});
+  Future<Either<Failure, void>> insertNotification({required NotificationModel notificationModel});
 
   // update status notification
-  Future<Either<Failure, void>> updateNotification(
-      {required NotificationModel notificationModel});
+  Future<Either<Failure, void>> updateNotification({required NotificationModel notificationModel});
 
-  Future<Either<Failure, void>> deleteNotification(
-      {required NotificationModel notificationModel});
+  Future<Either<Failure, void>> deleteNotification({required NotificationModel notificationModel});
 
   // listen notification
-  Stream<QuerySnapshot<Map<String, dynamic>>> listenNotification(
-      {required String userId});
+  Stream<QuerySnapshot<Map<String, dynamic>>> listenNotification({required String userId});
 }

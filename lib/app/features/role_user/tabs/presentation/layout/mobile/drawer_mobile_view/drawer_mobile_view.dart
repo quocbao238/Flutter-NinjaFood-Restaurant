@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
-import 'package:ninjafood/app/features/role_user/tabs/infrastructure/models/menu_models.dart';
+import 'package:ninjafood/app/models/menu_models.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
 
 part 'drawer_mobile_header_widget.dart';

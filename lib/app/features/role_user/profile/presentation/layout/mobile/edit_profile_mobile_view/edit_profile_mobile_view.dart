@@ -6,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/profile/controller/edit_profile_controller.dart';
-import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/widgets/custom_appbar.dart';
 
 part 'edit_profile_avatar.dart';

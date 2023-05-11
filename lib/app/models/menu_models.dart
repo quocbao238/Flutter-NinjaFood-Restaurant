@@ -9,19 +9,7 @@ import 'package:ninjafood/app/features/role_user/home/presentation/home_screen.d
 import 'package:ninjafood/app/features/role_user/notification/presentation/notification_screen.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/profile_screen.dart';
 
-enum MenuType {
-  home,
-  chat,
-  profile,
-  cart,
-  language,
-  logout,
-  about,
-  changeTheme,
-  notification,
-  order,
-  rating;
-}
+enum MenuType { home, chat, profile, cart, language, logout, about, changeTheme, category, notification, order, rating }
 
 class MenuItem {
   final String title;
@@ -30,13 +18,7 @@ class MenuItem {
   final MenuType menuType;
   final int index;
 
-  MenuItem({
-    required this.title,
-    required this.iconData,
-    this.screen,
-    required this.menuType,
-    required this.index,
-  });
+  MenuItem({required this.title, required this.iconData, this.screen, required this.menuType, required this.index});
 
   static List<MenuItem> listAdminMenu = [
     MenuItem(
@@ -65,30 +47,36 @@ class MenuItem {
         menuType: MenuType.chat),
     MenuItem(
         index: 4,
-        title: 'Drawer_Profile',
-        iconData: FontAwesomeIcons.user,
-        screen: ProfileScreen(),
-        menuType: MenuType.profile),
-    MenuItem(
-        index: 5,
         title: 'Rating_Rate',
         iconData: FontAwesomeIcons.user,
         screen: AdminRatingScreen(),
         menuType: MenuType.rating),
     MenuItem(
+        index: 5,
+        title: 'Drawer_Menu',
+        iconData: FontAwesomeIcons.folderMinus,
+        screen: null,
+        menuType: MenuType.category),
+    MenuItem(
         index: 6,
+        title: 'Drawer_Profile',
+        iconData: FontAwesomeIcons.user,
+        screen: ProfileScreen(),
+        menuType: MenuType.profile),
+    MenuItem(
+        index: 7,
         title: 'Drawer_Language_Change',
         iconData: FontAwesomeIcons.gear,
         screen: null,
         menuType: MenuType.language),
     MenuItem(
-        index: 7,
+        index: 8,
         title: 'Drawer_Theme_Change',
         iconData: FontAwesomeIcons.themeisle,
         screen: null,
         menuType: MenuType.changeTheme),
     MenuItem(
-        index: 8,
+        index: 9,
         title: 'Drawer_Logout',
         iconData: FontAwesomeIcons.rightFromBracket,
         screen: null,
@@ -132,12 +120,7 @@ class MenuItem {
         iconData: FontAwesomeIcons.themeisle,
         screen: null,
         menuType: MenuType.changeTheme),
-    MenuItem(
-        index: 6,
-        title: 'Drawer_About',
-        iconData: FontAwesomeIcons.info,
-        screen: null,
-        menuType: MenuType.about),
+    MenuItem(index: 6, title: 'Drawer_About', iconData: FontAwesomeIcons.info, screen: null, menuType: MenuType.about),
     MenuItem(
         index: 7,
         title: 'Drawer_Logout',
