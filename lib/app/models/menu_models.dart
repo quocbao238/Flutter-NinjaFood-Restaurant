@@ -52,13 +52,13 @@ class MenuItem {
         screen: AdminRatingScreen(),
         menuType: MenuType.rating),
     MenuItem(
-        index: 5,
+        index: 6,
         title: 'Drawer_Menu',
         iconData: FontAwesomeIcons.folderMinus,
         screen: null,
         menuType: MenuType.category),
     MenuItem(
-        index: 6,
+        index: 5,
         title: 'Drawer_Profile',
         iconData: FontAwesomeIcons.user,
         screen: ProfileScreen(),

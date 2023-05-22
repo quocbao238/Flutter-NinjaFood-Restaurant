@@ -22,8 +22,11 @@ class AdminTabsController extends BaseController {
 
   List<MenuItem> menuItems = MenuItem.listAdminMenu;
 
-  List<Widget> screens =
-      MenuItem.listAdminMenu.where((element) => element.screen != null).toList().map((e) => e.screen!).toList();
+  List<Widget> screens = MenuItem.listAdminMenu
+      .where((element) => element.screen != null)
+      .toList()
+      .map((e) => e.screen!)
+      .toList();
 
   Rx<MenuItem> currentMenuItem = MenuItem.listAdminMenu.first.obs;
 
@@ -38,6 +41,7 @@ class AdminTabsController extends BaseController {
   }
 
   void onPressedMenuItem(MenuItem menuItem) {
+
     switch (menuItem.menuType) {
       case MenuType.language:
         _onPressedChangeLanguage();
@@ -61,10 +65,11 @@ class AdminTabsController extends BaseController {
     }
   }
 
-  void onChangeToCartScreen() => currentMenuItem(menuItems.firstWhere((element) => element.menuType == MenuType.cart));
+  void onChangeToCartScreen() => currentMenuItem(
+      menuItems.firstWhere((element) => element.menuType == MenuType.cart));
 
-  void onChangeToHomeScreen() =>
-      currentMenuItem.value = menuItems.firstWhere((element) => element.menuType == MenuType.home);
+  void onChangeToHomeScreen() => currentMenuItem.value =
+      menuItems.firstWhere((element) => element.menuType == MenuType.home);
 
   Future<void> _onPressedChangeLanguage() async {
     final currentLocale = Get.locale;
@@ -87,12 +92,18 @@ class AdminTabsController extends BaseController {
                     leading: Icon(Icons.language,
                         color: currentLocale!.languageCode == e.key
                             ? ThemeColors.primaryColor
-                            : Theme.of(this.context).textTheme.bodyMedium!.color),
+                            : Theme.of(this.context)
+                                .textTheme
+                                .bodyMedium!
+                                .color),
                     title: Text(e.value.tr,
                         style: Theme.of(this.context)
                             .textTheme
                             .bodyMedium!
-                            .copyWith(color: currentLocale.languageCode == e.key ? ThemeColors.primaryColor : null)),
+                            .copyWith(
+                                color: currentLocale.languageCode == e.key
+                                    ? ThemeColors.primaryColor
+                                    : null)),
                   ),
                 );
               },
@@ -103,10 +114,7 @@ class AdminTabsController extends BaseController {
     );
   }
 
-  void _onPressedMenu() {
-    Get.toNamed(AppRouteProvider.adminCategoryScreen);
-    toggleDrawer();
-  }
+  Future<void> _onPressedMenu() async => Get.toNamed(AppRouteProvider.adminCategoryScreen);
 
   void _onPressedAbout() {}
 

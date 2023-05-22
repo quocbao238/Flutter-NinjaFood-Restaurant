@@ -217,7 +217,7 @@ const Map<String, String> en = {
   "Rating_Submit": "Submit",
   "Rating_Loading": "Loading...",
   "Rating_Rate_Success": "Rate Success",
-  "Rating_Rate": "Rate",
+  "Rating_Rate": "Rating",
   "Rating_Rate_Success_Description": "Thank you for your rating",
 
   "pending": "Pending",
