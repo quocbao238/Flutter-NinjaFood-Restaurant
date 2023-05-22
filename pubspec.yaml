@@ -7,8 +7,6 @@ version: 1.0.0+1
 environment:
   sdk: '>=2.17.6 <3.0.0'
 
-
-
 dependencies:
   flutter:
     sdk: flutter
@@ -58,6 +56,7 @@ dependencies:
 #      ref: devMaster
     path: ../NinjaFood_Theme
   timelines: ^0.1.0
+  fl_chart: ^0.62.0
 
 
 flutter_icons:
