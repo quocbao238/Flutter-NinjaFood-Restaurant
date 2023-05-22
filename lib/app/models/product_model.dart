@@ -30,7 +30,8 @@ class ProductModel {
       this.comments,
       this.shortDescription});
 
-  String get getPrice => Common.formatMoney(priceRange?.minimumPrice?.finalPrice?.value ?? 0);
+  String get getPrice =>
+      Common.formatMoney(priceRange?.minimumPrice?.finalPrice?.value ?? 0);
 
   String get currency => priceRange?.minimumPrice?.finalPrice?.currency ?? '';
 
@@ -38,9 +39,15 @@ class ProductModel {
     name = json['name'];
     id = json['id'];
     uid = json['uid'];
-    comments = json['comments'] != null ? (json['comments'] as List).map((i) => CommentModel.fromJson(i)).toList() : [];
+    comments = json['comments'] != null
+        ? (json['comments'] as List)
+            .map((i) => CommentModel.fromJson(i))
+            .toList()
+        : [];
     image = json['image'] != null ? new Image.fromJson(json['image']) : null;
-    smallImage = json['small_image'] != null ? new SmallImage.fromJson(json['small_image']) : null;
+    smallImage = json['small_image'] != null
+        ? new SmallImage.fromJson(json['small_image'])
+        : null;
     if (json['media_gallery'] != null) {
       mediaGallery = <MediaGallery>[];
       json['media_gallery'].forEach((v) {
@@ -48,9 +55,15 @@ class ProductModel {
       });
     }
     sTypename = json['__typename'];
-    priceRange = json['price_range'] != null ? new PriceRange.fromJson(json['price_range']) : null;
-    description = json['description'] != null ? new Description.fromJson(json['description']) : null;
-    shortDescription = json['short_description'] != null ? new Description.fromJson(json['short_description']) : null;
+    priceRange = json['price_range'] != null
+        ? new PriceRange.fromJson(json['price_range'])
+        : null;
+    description = json['description'] != null
+        ? new Description.fromJson(json['description'])
+        : null;
+    shortDescription = json['short_description'] != null
+        ? new Description.fromJson(json['short_description'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -65,7 +78,8 @@ class ProductModel {
       data['small_image'] = this.smallImage!.toJson();
     }
     if (this.mediaGallery != null) {
-      data['media_gallery'] = this.mediaGallery!.map((v) => v.toJson()).toList();
+      data['media_gallery'] =
+          this.mediaGallery!.map((v) => v.toJson()).toList();
     }
     data['__typename'] = this.sTypename;
     if (this.priceRange != null) {
@@ -131,14 +145,19 @@ class ProductModel {
 
   // For update
 
-  void setPrice(int value) => this.priceRange?.copyWith(
-      minimumPrice:
-          priceRange?.minimumPrice?.copyWith(finalPrice: priceRange?.minimumPrice?.finalPrice?.copyWith(value: value)));
+  void setPrice(int _value) {
+    final finalPrice =
+        priceRange?.minimumPrice?.finalPrice?.copyWith(value: _value);
+    final minimumPrice =
+        priceRange?.minimumPrice?.copyWith(finalPrice: finalPrice);
+    priceRange = priceRange?.copyWith(minimumPrice: minimumPrice);
+  }
 
   void setName(String val) => name = val;
 
-  void setDescription(String val) => this.description?.copyWith(content: val);
+  void setDescription(String val) => description = description?.copyWith(content: val);
 
+  void setImage(String urlImage) => image = image?.copyWith(url: urlImage);
 }
 
 class Image {
@@ -164,6 +183,20 @@ class Image {
     data['__typename'] = this.sTypename;
     return data;
   }
+
+  Image copyWith({
+    String? label,
+    String? url,
+    Null position,
+    String? sTypename,
+  }) {
+    return Image(
+      label: label ?? this.label,
+      url: url ?? this.url,
+      position: position ?? this.position,
+      sTypename: sTypename ?? this.sTypename,
+    );
+  }
 }
 
 class SmallImage {
@@ -173,7 +206,8 @@ class SmallImage {
   String? url;
   String? sTypename;
 
-  SmallImage({this.disabled, this.label, this.position, this.url, this.sTypename});
+  SmallImage(
+      {this.disabled, this.label, this.position, this.url, this.sTypename});
 
   SmallImage.fromJson(Map<String, dynamic> json) {
     disabled = json['disabled'];
@@ -226,7 +260,9 @@ class PriceRange {
   PriceRange({this.minimumPrice, this.sTypename});
 
   PriceRange.fromJson(Map<String, dynamic> json) {
-    minimumPrice = json['minimum_price'] != null ? new MinimumPrice.fromJson(json['minimum_price']) : null;
+    minimumPrice = json['minimum_price'] != null
+        ? new MinimumPrice.fromJson(json['minimum_price'])
+        : null;
     sTypename = json['__typename'];
   }
 
@@ -254,7 +290,9 @@ class MinimumPrice {
   MinimumPrice({this.finalPrice, this.sTypename});
 
   MinimumPrice.fromJson(Map<String, dynamic> json) {
-    finalPrice = json['final_price'] != null ? new FinalPrice.fromJson(json['final_price']) : null;
+    finalPrice = json['final_price'] != null
+        ? new FinalPrice.fromJson(json['final_price'])
+        : null;
     sTypename = json['__typename'];
   }
 

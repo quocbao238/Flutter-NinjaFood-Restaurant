@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_admin/tabs/controllers/admin_tabs_controller.dart';
 import 'package:ninjafood/app/features/role_admin/tabs/presentation/admin_tab_drawer_menus.dart';
-import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
 
 class AdminTabsMobileView extends GetView<AdminTabsController> {
   const AdminTabsMobileView({Key? key}) : super(key: key);

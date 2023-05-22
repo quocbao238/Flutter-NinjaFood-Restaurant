@@ -49,7 +49,7 @@ class HomeController extends BaseController {
 
   Future<void> fetchAllData() async {
     loading.value = true;
-    await _fetchProduct();
+    await fetchProduct();
     await _fetchMenus();
     await _fetchPromotions();
     loading.value = false;
@@ -63,11 +63,11 @@ class HomeController extends BaseController {
     });
   }
 
-  Future<void> _fetchProduct() async {
+  Future<void> fetchProduct() async {
     final response = await databaseService.getListProducts();
     response.fold((l) => handleFailure(_logName, l, showDialog: true), (List<ProductModel> r) {
       r.sort((a, b) => a.name!.compareTo(b.name!));
-      return products.value = r;
+      return products.assignAll(r);
     });
   }
 
