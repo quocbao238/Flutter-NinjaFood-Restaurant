@@ -48,7 +48,7 @@ class ChartViewDataState extends State<ChartViewData> {
             color: isToday
                 ? context.theme.colorScheme.primary
                 : isTouched
-                    ? context.theme.colorScheme.onSurface
+                    ? context.theme.colorScheme.primaryContainer
                     : context.theme.colorScheme.secondary,
             width:
                 MediaQuery.of(context).size.width / widget.chartData.length / 3,
@@ -94,7 +94,7 @@ class ChartViewDataState extends State<ChartViewData> {
                     barTouchData: BarTouchData(
                       enabled: true,
                       touchTooltipData: BarTouchTooltipData(
-                        tooltipBgColor: context.theme.colorScheme.primary,
+                        tooltipBgColor: context.theme.colorScheme.primaryContainer,
                         tooltipPadding: const EdgeInsets.all(8),
                         tooltipMargin: 8,
                         getTooltipItem: (group, groupIndex, rod, rodIndex) {
@@ -106,7 +106,7 @@ class ChartViewDataState extends State<ChartViewData> {
                             ),
                             children: <TextSpan>[
                               TextSpan(
-                                text: (rod.toY - 1).toString(),
+                                text: (rod.toY - 1).toStringAsFixed(2),
                                 style: TextStyle(
                                     color: context
                                         .theme.textTheme.bodySmall!.color,
@@ -169,6 +169,7 @@ class ChartViewDataState extends State<ChartViewData> {
                     }).toList(),
                     gridData: FlGridData(
                         show: true,
+                        checkToShowVerticalLine: (value) => false,
                         checkToShowHorizontalLine: (value) => value % 1 == 0),
                   ),
                   swapAnimationDuration: const Duration(milliseconds: 250),

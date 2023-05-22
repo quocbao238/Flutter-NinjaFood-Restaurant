@@ -29,10 +29,9 @@ class HomeCardItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Theme.of(context).shadowColor.withOpacity(0.25),
-              blurRadius: 4,
-              offset: Offset(0, 4),
-            )
+                color: Theme.of(context).shadowColor.withOpacity(0.25),
+                blurRadius: 4,
+                offset: Offset(0, 4))
           ],
           color: backgroundCardColor),
       margin: EdgeInsets.only(bottom: AppGapSize.medium.size),
