@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/features/role_user/tabs/infrastructure/models/menu_models.dart';
+import 'package:ninjafood/app/models/menu_models.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/services/auth_service/auth_service.dart';
 import 'package:ninjafood/app/services/language_service/language_service.dart';

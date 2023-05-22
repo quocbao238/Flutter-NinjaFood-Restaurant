@@ -20,7 +20,6 @@ class _LocationPickerMobileViewState extends State<LocationPickerMobileView> {
     return MapLocationPicker(
       showBackButton: false,
       showMoreOptions: false,
-      // compassEnabled: true,
       currentLatLng: LatLng(10.7735994, 106.6944173),
       bottomCardTooltip: 'SetLocationScreen_Title'.tr,
       bottomCardIcon: Icon(Icons.check, color: isDark ? Colors.white : ThemeColors.textLightColor),

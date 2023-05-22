@@ -128,5 +128,15 @@ class AppPages {
       page: () => LocationPickerScreen(),
       binding: GetBinding(AppRouteProvider.locationPickerScreen),
     ),
+    GetPage(
+      name: AppRouteProvider.adminEditProductScreen,
+      page: () => AdminEditProductScreen(),
+      binding: GetBinding(AppRouteProvider.adminEditProductScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.adminCategoryScreen,
+      page: () => AdminCategoryScreen(),
+      binding: GetBinding(AppRouteProvider.adminCategoryScreen),
+    ),
   ];
 }

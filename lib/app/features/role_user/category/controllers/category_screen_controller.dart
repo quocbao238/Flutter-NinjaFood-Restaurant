@@ -7,15 +7,18 @@ import 'package:ninjafood/app/models/product_model.dart';
 class CategoryScreenController extends BaseController {
   final homeController = Get.find<HomeController>();
 
-
   late final CategoryModel currentMenu;
   final RxList<ProductModel> products = <ProductModel>[].obs;
-
 
   @override
   void onInit() {
     currentMenu = Get.arguments as CategoryModel;
     products.value = homeController.filterProductByIds(currentMenu.productIds!);
+
+    homeController.products.listen((_newVal) {
+      products.assignAll(
+          homeController.filterProductByIds(currentMenu.productIds!));
+    });
     super.onInit();
   }
 

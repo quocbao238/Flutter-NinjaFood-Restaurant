@@ -3,9 +3,7 @@ part of contains;
 class Failure {
   final String message;
   final StackTrace stackTrace;
-
   const Failure.custom(this.message) : stackTrace = StackTrace.empty;
-
   const Failure(this.message, this.stackTrace);
 }
 

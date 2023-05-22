@@ -147,6 +147,21 @@ class DatabaseService extends GetxService
   }
 
   @override
+  Future<Either<Failure, ProductModel>> updateProduct(ProductModel productModel) async {
+    try {
+      await _db.collection(DatabaseKeys.productPath).doc(productModel.id.toString()).update(productModel.toJson());
+      return right(productModel);
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    }
+  }
+
+
+
+
+
+  @override
   Future<Either<Failure, List<OrderModel>>> getListOrdersByListId(
       List<String> listOrderIds) async {
     try {

@@ -5,7 +5,7 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
-import 'package:ninjafood/app/features/role_user/tabs/infrastructure/models/menu_models.dart';
+import 'package:ninjafood/app/models/menu_models.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/services/auth_service/auth_service.dart';
 import 'package:ninjafood/app/services/console_service/console_service.dart';
@@ -41,6 +41,7 @@ class AdminTabsController extends BaseController {
   }
 
   void onPressedMenuItem(MenuItem menuItem) {
+
     switch (menuItem.menuType) {
       case MenuType.language:
         _onPressedChangeLanguage();
@@ -53,6 +54,9 @@ class AdminTabsController extends BaseController {
         break;
       case MenuType.changeTheme:
         _onPressedChangeTheme();
+        break;
+      case MenuType.category:
+        _onPressedMenu();
         break;
 
       default:
@@ -109,6 +113,8 @@ class AdminTabsController extends BaseController {
       ),
     );
   }
+
+  Future<void> _onPressedMenu() async => Get.toNamed(AppRouteProvider.adminCategoryScreen);
 
   void _onPressedAbout() {}
 

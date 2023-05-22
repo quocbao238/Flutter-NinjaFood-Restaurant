@@ -25,6 +25,7 @@ class GetBinding extends Bindings {
         break;
       case AppRouteProvider.tabScreen:
         Get.lazyPut(() => TabsController());
+        Get.lazyPut(() => AdminTabsController());
         Get.lazyPut(() => HomeController());
         Get.lazyPut(() => GroupChatScreenController());
         Get.lazyPut(() => CartScreenController());
@@ -45,11 +46,11 @@ class GetBinding extends Bindings {
       case AppRouteProvider.editProfileScreen:
         Get.lazyPut(() => EditProfileController());
         break;
-      case AppRouteProvider.notificationScreen:
-        // Get.lazyPut(() => NotificationScreenController());
-        break;
       case AppRouteProvider.ratingScreen:
         Get.lazyPut(() => RatingScreenController());
+        break;
+      case AppRouteProvider.adminEditProductScreen:
+        Get.lazyPut(() => AdminEditProductScreenController());
         break;
     }
   }

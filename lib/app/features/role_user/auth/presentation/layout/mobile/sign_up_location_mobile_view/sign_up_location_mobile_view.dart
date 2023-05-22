@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_config_plus/flutter_config_plus.dart';
 import 'package:get/get.dart';
-import 'package:map_location_picker/map_location_picker.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_user/auth/controllers/sign_up_process_controller.dart';
 import 'package:ninjafood/app/features/role_user/auth/presentation/layout/mobile/sign_up_location_mobile_view/sign_up_location_box.dart';
