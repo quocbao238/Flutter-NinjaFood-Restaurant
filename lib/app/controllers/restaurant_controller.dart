@@ -7,7 +7,7 @@ import 'package:ninjafood/app/services/database_service/database_service.dart';
 
 const _logName = 'RestaurantController';
 
-class RestaurantController extends GetxController implements Bootable {
+final class RestaurantController extends GetxController implements Bootable {
   static RestaurantController get instance => Get.find<RestaurantController>();
   late final DatabaseService _databaseService;
 

@@ -9,7 +9,7 @@ part 'cloud_storage_impl.dart';
 
 const _logName = 'CloudStorageService';
 
-class CloudStorageService extends GetxService
+final class CloudStorageService extends GetxService
     implements Bootable, CloudStorageServiceImpl {
   static CloudStorageService get instance => Get.find<CloudStorageService>();
 

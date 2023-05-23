@@ -94,24 +94,25 @@ class ChartViewDataState extends State<ChartViewData> {
                     barTouchData: BarTouchData(
                       enabled: true,
                       touchTooltipData: BarTouchTooltipData(
-                        tooltipBgColor: context.theme.colorScheme.primaryContainer,
+                        tooltipBgColor:
+                            context.theme.colorScheme.primaryContainer,
                         tooltipPadding: const EdgeInsets.all(8),
                         tooltipMargin: 8,
                         getTooltipItem: (group, groupIndex, rod, rodIndex) {
                           return BarTooltipItem(
                             widget.chartData[group.x.toInt()].toolTip + '\n',
                             TextStyle(
-                              color: context.theme.textTheme.bodySmall!.color,
-                              fontWeight: FontWeight.bold,
-                            ),
+                                color: context.theme.textTheme.bodySmall!.color,
+                                fontWeight: FontWeight.bold),
                             children: <TextSpan>[
                               TextSpan(
                                 text: (rod.toY - 1).toStringAsFixed(2),
                                 style: TextStyle(
-                                    color: context
-                                        .theme.textTheme.bodySmall!.color,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500),
+                                  color:
+                                      context.theme.textTheme.bodySmall!.color,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ],
                           );
