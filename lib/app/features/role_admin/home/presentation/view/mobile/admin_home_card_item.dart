@@ -21,17 +21,12 @@ class HomeCardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final backgroundCardColor = isDarkMode
-        ? ThemeColors.backgroundTextFormDark()
-        : ThemeColors.backgroundTextFormLight;
+    final backgroundCardColor = isDarkMode ? ThemeColors.backgroundTextFormDark() : ThemeColors.backgroundTextFormLight;
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
-            BoxShadow(
-                color: Theme.of(context).shadowColor.withOpacity(0.25),
-                blurRadius: 4,
-                offset: Offset(0, 4))
+            BoxShadow(color: Theme.of(context).shadowColor.withOpacity(0.25), blurRadius: 4, offset: Offset(0, 4))
           ],
           color: backgroundCardColor),
       margin: EdgeInsets.only(bottom: AppGapSize.medium.size),
@@ -46,9 +41,7 @@ class HomeCardItem extends StatelessWidget {
               height: MediaQuery.of(context).size.shortestSide * 0.15,
               width: MediaQuery.of(context).size.shortestSide * 0.15,
               alignment: Alignment.center,
-              child: Icon(icon,
-                  size: MediaQuery.of(context).size.shortestSide * 0.1,
-                  color: Colors.white),
+              child: Icon(icon, size: MediaQuery.of(context).size.shortestSide * 0.1, color: Colors.white),
             ),
             Expanded(
               child: AppPadding(
@@ -60,12 +53,14 @@ class HomeCardItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     AppText.titleLarge(
-                        text: value, fontWeight: FontWeight.bold),
+                      text: value,
+                      fontWeight: FontWeight.bold,
+                      color: foregroundColor,
+                    ),
                     AppText.bodyLarge(
                         text: title,
                         fontWeight: FontWeight.bold,
-                        color: context.theme.textTheme.bodySmall!.color!
-                            .withOpacity(0.8)),
+                        color: context.theme.textTheme.bodySmall!.color!.withOpacity(0.8)),
                   ],
                 ),
               ),

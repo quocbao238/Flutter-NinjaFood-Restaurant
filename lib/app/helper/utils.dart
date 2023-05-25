@@ -7,8 +7,16 @@ String formatPriceToVND(dynamic price) {
   return _result.trim();
 }
 
+bool compareTwoDateTimeIsSameDay(DateTime dateTime1, DateTime dateTime2) {
+  return dateTime1.year == dateTime2.year && dateTime1.month == dateTime2.month && dateTime1.day == dateTime2.day;
+}
+
 String createTimeStamp() {
   return DateTime.now().millisecondsSinceEpoch.toString();
+}
+
+DateTime convertTimeStampToDateTime(String timestamp) {
+  return DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp));
 }
 
 String convertTimeStamp(String timestamp) {
@@ -35,20 +43,24 @@ String getExpiresDayLaterByTwoDateTime(String timeStart, String timeEnd) {
 List<DateTime> getListCurrentDayInWeek(String timestamp) {
   final _date = DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp));
   final _startWeek = _date.subtract(Duration(days: _date.weekday - 1));
-  final _endWeek =
-      _date.add(Duration(days: DateTime.daysPerWeek - _date.weekday + 1));
+  final _endWeek = _date.add(Duration(days: DateTime.daysPerWeek - _date.weekday + 1));
   return getListDateTimeBetweenTwoDateTime(_startWeek, _endWeek);
 }
 
-List<DateTime> getListDateTimeBetweenTwoDateTime(
-    DateTime timeStart, DateTime timeEnd) {
+List<DateTime> getListDateTimeInYear(String timestamp) {
+  final _date = DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp));
+  final _startYear = DateTime(_date.year, 1, 1);
+  final _endYear = DateTime(_date.year + 1, 1, 1);
+  return getListDateTimeBetweenTwoDateTime(_startYear, _endYear);
+}
+
+List<DateTime> getListDateTimeBetweenTwoDateTime(DateTime timeStart, DateTime timeEnd) {
   final _listDay = <DateTime>[];
   for (var i = timeStart; i.isBefore(timeEnd); i = i.add(Duration(days: 1))) {
     _listDay.add(i);
   }
   return _listDay;
 }
-
 
 List<DateTime> getListDayInMonth(String timestamp) {
   final _date = DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp));

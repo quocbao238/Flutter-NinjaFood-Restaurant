@@ -150,7 +150,7 @@ class ChartViewDataState extends State<ChartViewData> {
                             reservedSize: 48,
                             getTitlesWidget: (val, title) => SideTitleWidget(
                               axisSide: title.axisSide,
-                              child: val % 5 != 0
+                              child: val % 100 != 0
                                   ? SizedBox()
                                   : AppText.bodySmall(
                                       text: val.toInt().toString(),
