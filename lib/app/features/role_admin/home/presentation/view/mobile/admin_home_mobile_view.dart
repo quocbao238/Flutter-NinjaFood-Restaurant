@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_admin/home/controllers/admin_home_controller.dart';
 import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/admin_home_card_item.dart';
-import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/chart_data/bar_chart_group_data.dart';
 import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/home_chart_revenue.dart';
 import 'package:ninjafood/app/widgets/custom_appbar.dart';
 
@@ -59,11 +58,6 @@ class AdminHomeMobileView extends StatelessWidget {
                         final lstOrdersChart = logic.lstOrdersChart.toList();
                         return ChartViewData(title: 'Orders Chart', chartData: lstOrdersChart);
                       }),
-                      // AppPadding.medium(),
-                      // Obx(() {
-                      //   final val = logic.totalRevenue.value;
-                      //   return ChartViewData(title: 'Orders Charts', chartData: ChartData.fakeDataYear());
-                      // }),
                     ],
                   ),
                 ),
@@ -71,7 +65,4 @@ class AdminHomeMobileView extends StatelessWidget {
         });
   }
 
-  String _convertDoubleToDollar(double value) {
-    return '\$${value.toStringAsFixed(2)}';
-  }
 }

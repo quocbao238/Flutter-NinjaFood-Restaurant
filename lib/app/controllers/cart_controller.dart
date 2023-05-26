@@ -127,5 +127,8 @@ final class CartController extends BaseController implements Bootable {
     });
   }
 
+  bool checkProductInCart(int productId) =>
+      lstCarts.any((element) => element.productModel.id == productId);
+
   void onSubmitDone() => TabsController.instance.onChangeToHomeScreen();
 }

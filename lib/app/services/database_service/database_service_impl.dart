@@ -48,6 +48,8 @@ abstract class DatabaseServiceImpl {
 
   Future<Either<Failure, void>> insertOrder({required OrderModel orderModel});
 
+  Future<Either<Failure, OrderModel>> getOrderById({required String orderId});
+
   Future<Either<Failure, void>> updateOrder({required OrderModel orderModel});
 
   Stream<QuerySnapshot<Map<String, dynamic>>> listenCurrentOrder(String userId);

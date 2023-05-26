@@ -87,18 +87,14 @@ class FavoriteList extends GetView<FavoriteController> {
                                         padding: AppEdgeInsets.only(
                                             bottom: AppGapSize.small),
                                         child: ProductFavoriteItem(
-                                          productId: _favoriteItem.id ?? 0,
-                                          onPressedFavorite: (v) =>
-                                              controller.setFavoriteProduct(
-                                                  _favoriteItem.id),
-                                        )),
+                                            productId: _favoriteItem.id ?? 0)),
                                     Obx(() {
                                       bool isExist = (UserController.instance
-                                                  .currentUser.value?.carts ??
-                                              [])
+                                          .currentUser.value?.carts ??
+                                          [])
                                           .any((element) =>
-                                              element.productModel.id ==
-                                              _favoriteItem.id);
+                                      element.productModel.id ==
+                                          _favoriteItem.id);
                                       return SizedBox(
                                         width: 36,
                                         height: 36,
@@ -107,39 +103,39 @@ class FavoriteList extends GetView<FavoriteController> {
                                             if (!isExist) {
                                               UserController.instance
                                                   .addProductToCard(
-                                                      productModel:
-                                                          _favoriteItem);
+                                                  productModel:
+                                                  _favoriteItem);
                                               return;
                                             }
                                             TabsController.instance
                                                 .onChangeToCartScreen();
                                             Get.until((route) =>
-                                                Get.currentRoute ==
+                                            Get.currentRoute ==
                                                 AppRouteProvider.tabScreen);
                                           },
                                           style: Theme.of(context)
                                               .elevatedButtonTheme
                                               .style
                                               ?.copyWith(
-                                                  backgroundColor:
-                                                      MaterialStateProperty.all(
-                                                          ThemeColors
-                                                              .backgroundTextFormDark()),
-                                                  fixedSize:
-                                                      MaterialStateProperty.all(
-                                                          Size(24, 24)),
-                                                  padding:
-                                                      MaterialStateProperty.all(
-                                                          EdgeInsets.zero),
-                                                  shape: MaterialStateProperty.all(
-                                                      RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.circular(96.0)))),
+                                              backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  ThemeColors
+                                                      .backgroundTextFormDark()),
+                                              fixedSize:
+                                              MaterialStateProperty.all(
+                                                  Size(24, 24)),
+                                              padding:
+                                              MaterialStateProperty.all(
+                                                  EdgeInsets.zero),
+                                              shape: MaterialStateProperty.all(
+                                                  RoundedRectangleBorder(
+                                                      borderRadius:
+                                                      BorderRadius.circular(96.0)))),
                                           child: Icon(
                                               !isExist
                                                   ? FontAwesomeIcons.cartPlus
                                                   : FontAwesomeIcons
-                                                      .cartShopping,
+                                                  .cartShopping,
                                               color: !isExist
                                                   ? ThemeColors.textDarkColor
                                                   : ThemeColors.primaryColor,

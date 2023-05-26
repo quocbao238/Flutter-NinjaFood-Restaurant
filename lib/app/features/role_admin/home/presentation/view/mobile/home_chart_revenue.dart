@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/chart_data/bar_chart_group_data.dart';
 
-enum chartFilter {
-  weekl,
+enum ChartFilter {
+  week,
   monthly,
   yearly,
 }

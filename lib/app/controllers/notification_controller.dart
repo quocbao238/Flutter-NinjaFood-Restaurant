@@ -39,52 +39,45 @@ final class NotificationController extends GetxController implements Bootable {
   }
 
   Future<void> readNotification(NotificationModel notificationModel) async {
-    notificationModel = notificationModel.changeIsRead(true);
+    if (!notificationModel.isRead) {
+      notificationModel = notificationModel.changeIsRead(true);
+      final _response = await _databaseService.updateNotification(
+          notificationModel: notificationModel);
+      _response.fold((l) => handleFailure(_logName, l), (r) async {});
+    }
 
-    final _response = await _databaseService.updateNotification(
-        notificationModel: notificationModel);
-    _response.fold((l) => handleFailure(_logName, l), (r) async {
-      if (notificationModel.type == NotificationType.chat) {
-        if (notificationModel.groupChatId != null) {
-          final response = await _databaseService.getGroupChatByGroupChatId(
-              groupChatId: notificationModel.groupChatId!);
-          response.fold(
-              (l) => handleFailure(_logName, l),
-              (r) => Get.toNamed(AppRouteProvider.chatDetailsScreen,
-                  arguments: r));
-        }
-        return;
+    if (notificationModel.type == NotificationType.chat) {
+      if (notificationModel.groupChatId != null) {
+        await _databaseService
+            .getGroupChatByGroupChatId(
+                groupChatId: notificationModel.groupChatId!)
+            .then((response) => response.fold(
+                (l) => handleFailure(_logName, l),
+                (r) => Get.toNamed(AppRouteProvider.chatDetailsScreen,
+                    arguments: r)));
       }
+      return;
+    }
 
-      if (notificationModel.type == NotificationType.order) {
-        // Role User
-        if (_userController.currentUser.value?.isUser() ?? false) {
-          List<OrderModel> lstOrder =
-              HistoryController.instance.lstHistory.toList();
-          if (lstOrder.isEmpty) return;
-          final _order = lstOrder.firstWhereOrNull(
-              (element) => element.createdAt == notificationModel.orderId);
-          if (_order == null) return;
-          final currentOrder = DeliveryController.instance.currentOrder.value;
-          if (currentOrder != null &&
-              _order.createdAt == currentOrder.createdAt &&
-              currentOrder.status != HistoryStatus.done) {
-            DeliveryController.instance.onChangeDeliveryStatus();
-            Get.back();
-            return;
-          }
-          Get.toNamed(AppRouteProvider.orderDetailScreen, arguments: _order);
+    if (notificationModel.type == NotificationType.order) {
+      // Role User
+      final _order = await _databaseService
+          .getOrderById(orderId: notificationModel.orderId)
+          .then((_response) => _response.fold((l) => null, (r) => r));
+      if (_order == null) return;
+
+      if (_userController.currentUser.value?.isUser() ?? false) {
+        final _currentOrder = DeliveryController.instance.currentOrder.value;
+        if (_currentOrder != null &&
+            _order.createdAt == _currentOrder.createdAt &&
+            _currentOrder.status != HistoryStatus.done) {
+          DeliveryController.instance.onChangeDeliveryStatus();
+          Get.back();
+          return;
         }
-
-        // Role Admin
-        final orders = DeliveryController.instance.lstOrderModel.toList();
-        if (orders.isEmpty) return;
-        final _order = orders.firstWhereOrNull(
-            (element) => element.createdAt == notificationModel.orderId);
-        if (_order == null) return;
-        Get.toNamed(AppRouteProvider.orderDetailScreen, arguments: _order);
       }
-    });
+      Get.toNamed(AppRouteProvider.orderDetailScreen, arguments: _order);
+    }
   }
 
   Future<void> showBottomSheet(

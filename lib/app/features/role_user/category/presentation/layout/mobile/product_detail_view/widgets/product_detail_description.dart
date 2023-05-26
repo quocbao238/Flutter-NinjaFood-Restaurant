@@ -31,11 +31,7 @@ class ProductDetailDescription extends GetView<ProductDetailScreenController> {
                     Spacer(),
                     AppPadding(
                         // padding: AppEdgeInsets.only(left: AppGapSize.small),
-                        child: ProductFavoriteItem(
-                            productId: product.id ?? 0,
-                            onPressedFavorite: (v) => FavoriteController
-                                .instance
-                                .setFavoriteProduct(product.id)))
+                        child: ProductFavoriteItem(productId: product.id ?? 0))
                   ],
                 ),
                 AppPadding(

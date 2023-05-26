@@ -32,7 +32,6 @@ import 'package:ninjafood/app/features/role_user/home/presentation/promotion_det
 import 'package:ninjafood/app/features/role_user/location_picker/presentation/location_picker_screen.dart';
 import 'package:ninjafood/app/features/role_user/notification/presentation/notification_screen.dart';
 import 'package:ninjafood/app/features/role_user/profile/controller/edit_profile_controller.dart';
-import 'package:ninjafood/app/features/role_user/profile/controller/profile_controller.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/edit_profile_screen.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/order_detail_screen.dart';
 import 'package:ninjafood/app/features/role_user/rating/controller/rating_screen_controller.dart';
