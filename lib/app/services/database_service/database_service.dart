@@ -115,8 +115,16 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
   Future<Either<Failure, List<ProductModel>>> getListProductByListId(List<int> listProductsIds) async {
     try {
       List<ProductModel> _result = [];
-      final querySnapshot = await _db.collection(DatabaseKeys.productPath).where('id', whereIn: listProductsIds).get();
-      _result = querySnapshot.docs.map((e) => ProductModel.fromJson(e.data())).toList();
+
+      // 10 products per request
+      final _listProductsIds = listProductsIds;
+      while (_listProductsIds.isNotEmpty) {
+        final _listIds = _listProductsIds.take(10).toList();
+        final querySnapshot = await _db.collection(DatabaseKeys.productPath).where('id', whereIn: _listIds).get();
+        _result.addAll(querySnapshot.docs.map((e) => ProductModel.fromJson(e.data())).toList());
+        _listProductsIds.removeRange(0, _listIds.length);
+      }
+
       return right(_result);
     } on FirebaseException catch (error) {
       handleFailure(_logName, Failure(error.code, StackTrace.current));
