@@ -36,7 +36,7 @@ class ProductDetailScreenController extends BaseController {
   void onPressedBack() => Get.back();
 
   Future<void> onPressedFavorite(int productId) async {
-    final response = await userController.favoriteProduct(productId: productId);
+    final response = await userController.setFavoriteProduct(productId: productId);
     response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {});
   }
 

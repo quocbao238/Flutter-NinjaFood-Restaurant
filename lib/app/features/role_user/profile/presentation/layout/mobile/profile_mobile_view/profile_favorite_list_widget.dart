@@ -90,7 +90,7 @@ class FavoriteList extends GetView<ProfileController> {
                                         child: ProductFavoriteItem(
                                           productId: _favoriteItem.id ?? 0,
                                           onPressedFavorite: (v) =>
-                                              userController.favoriteProduct(
+                                              userController.setFavoriteProduct(
                                                   productId:
                                                       _favoriteItem.id ?? 0),
                                         )),

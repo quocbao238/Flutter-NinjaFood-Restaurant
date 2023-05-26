@@ -1,6 +1,6 @@
 part of global_controller;
 
-class NotificationController extends GetxController implements Bootable {
+final class NotificationController extends GetxController implements Bootable {
   static NotificationController get instance =>
       Get.find<NotificationController>();
   late final DatabaseService _databaseService;

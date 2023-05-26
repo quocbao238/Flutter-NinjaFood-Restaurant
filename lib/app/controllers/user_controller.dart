@@ -2,29 +2,23 @@ part of global_controller;
 
 const _logName = 'UserController';
 
-class UserController extends GetxController implements Bootable {
+final class UserController extends GetxController implements Bootable {
   static UserController get instance => Get.find<UserController>();
-  final _authService = AuthService.instance;
   final _databaseService = DatabaseService.instance;
   final _consoleService = ConsoleService.instance;
+  // Private
+  StreamSubscription? _cloudUserSubscription;
 
-  // Firebase Auth User
-  late Rx<User?> _firebaseAuthUser = Rx<User?>(null);
-
-  User? get getFirebaseAuthUser => _firebaseAuthUser.value;
-
-  void setFirebaseAuthUser(User? user) => _firebaseAuthUser.value = user;
-
-  // Database User
+  // Public user
+  late Rx<User?> firebaseAuthUser = Rx<User?>(null);
   final currentUser = Rx<UserModel?>(null);
 
-  StreamSubscription? _cloudUserSubscription;
 
   Future<void> call() async {
     Get.put(this, permanent: true);
-    final _authUser = _authService.getFirebaseAuthUser;
+    final _authUser = AuthService.instance.getFirebaseAuthUser;
     if (_authUser != null) {
-      _firebaseAuthUser.value = _authUser;
+      firebaseAuthUser.value = _authUser;
     }
     _handleAuthChanged();
     super.onInit();
@@ -36,12 +30,13 @@ class UserController extends GetxController implements Bootable {
     super.onClose();
   }
 
+  // Private methods
   void _handleAuthChanged() async {
-    _authService.firebaseAuthUserStream.listen((User? firebaseUser) async {
-      setFirebaseAuthUser(firebaseUser);
+    AuthService.instance.firebaseAuthUserStream.listen((User? firebaseUser) async {
+      firebaseAuthUser.value = firebaseUser;
       if (firebaseUser == null) {
         _consoleService.show(_logName, 'User is currently signed out!');
-        await removePlayerId();
+        await _removePlayerId();
         currentUser.value = null;
         _cloudUserSubscription = null;
         return;
@@ -50,7 +45,7 @@ class UserController extends GetxController implements Bootable {
     });
   }
 
-  Future<void> removePlayerId() async {
+  Future<void> _removePlayerId() async {
     final playerId = await OneSignalService.instance.getPlayerId();
     if (playerId == null) return;
     final playerIds = currentUser.value?.playerIds;
@@ -60,9 +55,9 @@ class UserController extends GetxController implements Bootable {
   }
 
   void _handleCloudUserChanged() async {
-    if (_cloudUserSubscription != null || getFirebaseAuthUser == null) return;
+    if (_cloudUserSubscription != null || firebaseAuthUser.value == null) return;
     _consoleService.show(_logName, '_handleCloudUserChanged Run');
-    _cloudUserSubscription = _databaseService.getUserDataStream(getFirebaseAuthUser!.uid).listen((event) async {
+    _cloudUserSubscription = _databaseService.getUserDataStream(firebaseAuthUser.value!.uid).listen((event) async {
       if (event.data() == null) return;
       currentUser.value = UserModel.fromJson(event.data()!);
       final playerId = await OneSignalService.instance.setPlayerId(currentUser.value?.uid ?? '');
@@ -74,6 +69,9 @@ class UserController extends GetxController implements Bootable {
       FirebaseCrashlytics.instance.setUserIdentifier(currentUser.value!.uid);
     });
   }
+
+
+
 
   Future<Either<Failure, void>> updateUser({
     String? firstName,
@@ -109,9 +107,11 @@ class UserController extends GetxController implements Bootable {
     }
   }
 
-  Future<Either<Failure, void>> favoriteProduct({required int productId}) async {
+  // set favorite product
+  Future<Either<Failure, void>> setFavoriteProduct({required int productId}) async {
     final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
+
     final currentFavoriteProducts = _currentUser.favoriteIds;
     currentFavoriteProducts.contains(productId)
         ? currentFavoriteProducts.remove(productId)
@@ -124,6 +124,7 @@ class UserController extends GetxController implements Bootable {
     }
   }
 
+  // Add product to cart
   Future<Either<Failure, void>> addProductToCard({required ProductModel productModel}) async {
     final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
@@ -176,6 +177,7 @@ class UserController extends GetxController implements Bootable {
     }
   }
 
+  // Update status order
   Future<Either<Failure, void>> updateStatusOrder(OrderModel orderModel) async {
     try {
       orderModel.status = HistoryStatus.done;

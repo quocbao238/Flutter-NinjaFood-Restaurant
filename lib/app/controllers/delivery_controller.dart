@@ -6,7 +6,7 @@ import 'package:ninjafood/app/models/history_model.dart';
 import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 import 'package:ninjafood/app/services/database_service/database_service.dart';
 
-class DeliveryController extends GetxController implements Bootable {
+final class DeliveryController extends GetxController implements Bootable {
   static DeliveryController get instance => Get.find<DeliveryController>();
   StreamSubscription? _orderSubscription;
   late final UserController _userController;

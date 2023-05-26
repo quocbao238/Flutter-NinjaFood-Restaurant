@@ -5,7 +5,7 @@ class AppPages {
 
   static navigateDefaultPage() async {
     final userController = UserController.instance;
-    if (userController.getFirebaseAuthUser != null) {
+    if (userController.firebaseAuthUser.value != null) {
       initial = AppRouteProvider.tabScreen;
       return;
     }

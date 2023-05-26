@@ -7,7 +7,7 @@ part 'console_service_enum.dart';
 
 // Color console log support vscode
 // If use any other IDE, set useLogger = true
-class ConsoleService extends GetxService implements Bootable {
+final class ConsoleService extends GetxService implements Bootable {
   static ConsoleService get instance => Get.find<ConsoleService>();
 
   bool flutterLogs = false;

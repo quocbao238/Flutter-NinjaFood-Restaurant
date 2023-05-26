@@ -6,7 +6,7 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 const _logName = 'OneSignalService';
 
-class OneSignalService extends GetxService implements Bootable {
+final class OneSignalService extends GetxService implements Bootable {
   static OneSignalService get instance => Get.find<OneSignalService>();
 
   late ConsoleService log = ConsoleService.instance;

@@ -1,49 +1,64 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:ninjafood/app/constants/contains.dart';
+import 'package:intl/intl.dart';
 import 'package:ninjafood/app/controllers/delivery_controller.dart';
 import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/chart_data/bar_chart_group_data.dart';
 import 'package:ninjafood/app/helper/helper.dart';
+import 'package:ninjafood/app/models/comment_model.dart';
 import 'package:ninjafood/app/models/history_model.dart';
-import 'package:ninjafood/app/models/notification_model.dart';
 import 'package:ninjafood/app/services/database_service/database_service.dart';
-import 'package:ninjafood/app/services/one_signal_service/one_signal_service.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 const _logName = 'AdminHomeController';
 
+enum FilterChart {
+  week('filter_week'),
+  month('filter_month'),
+  year('filter_year'),
+  custom('filter_custom');
+
+  final String translation;
+
+  const FilterChart(this.translation);
+
+  List<DateTime> generateListDate() {
+    return switch (this) {
+      FilterChart.week => getListCurrentDayInWeek(createTimeStamp()),
+      FilterChart.month => getListDayInMonth(createTimeStamp()),
+      FilterChart.year => getListDateTimeInYear(createTimeStamp()),
+      _ => throw Exception('Not support'),
+    };
+  }
+}
+
 class AdminHomeController extends BaseController {
-  final deliveryController = DeliveryController.instance;
+  final DeliveryController deliveryController = DeliveryController.instance;
+
   final DatabaseService databaseService = DatabaseService.instance;
-  final orderModels = <OrderModel>[].obs;
-  final ordersFilter = <OrderModel>[].obs;
 
-  //Null safety
-  final currentHistoryStatus = Rx<HistoryStatus>(HistoryStatus.all);
+  // Revenue chart
+  final RxList<ChartData> lstRevenuesChart = <ChartData>[].obs;
 
-  final List<HistoryStatus> lstHistoryStatus = [
-    HistoryStatus.pending,
-    HistoryStatus.delivering,
-    HistoryStatus.delivered,
-    HistoryStatus.cancelled,
-  ];
+  // Order charts
+  final RxList<ChartData> lstOrdersChart = <ChartData>[].obs;
 
-  final List<HistoryStatus> filterHistoryStatus = [
-    HistoryStatus.pending,
-    HistoryStatus.delivering,
-    HistoryStatus.delivered,
-    HistoryStatus.cancelled,
-    HistoryStatus.done,
-    HistoryStatus.all
-  ];
+  //  Review Charts
+  final RxList<ChartData> lstReviewsChart = <ChartData>[].obs;
+
+  final revenuesFilterChartType = FilterChart.week.obs;
+  final ordersFilterChartType = FilterChart.week.obs;
+  final reviewsFilterChartType = FilterChart.week.obs;
+
+  final RxString todayRevenue = '0.0'.obs; // '0.0
+  final RxString todayOrder = '0'.obs;
+  final RxString totalReview = '0'.obs;
 
   @override
   void onInit() {
-    orderModels.value = deliveryController.lstOrderModel.toList();
-    filterOrderByHistoryStatus(currentHistoryStatus.value);
-    deliveryController.lstOrderModel.listen((value) {
-      orderModels.value = value;
-      filterOrderByHistoryStatus(currentHistoryStatus.value);
-    });
+    final lstOrderModel = deliveryController.lstOrderModel.toList();
+    todayRevenue.value = calculateTotalPriceToday(lstOrderModel);
+    todayOrder.value = lstOrderModel.length.toString();
+    _listens();
     super.onInit();
   }
 
@@ -52,68 +67,62 @@ class AdminHomeController extends BaseController {
     super.dispose();
   }
 
-  void filterOrderByHistoryStatus(HistoryStatus status) {
-    currentHistoryStatus.value = status;
-    if (status == HistoryStatus.all) {
-      ordersFilter.value = orderModels.toList();
-      return;
-    }
-    ordersFilter.value =
-        orderModels.where((item) => item.status == status).toList();
-  }
-
-  String calculateTotalPriceToday() {
-    final total = orderModels.toList().fold<double>(
-        0, (previousValue, element) => previousValue + element.total);
-    return formatPriceToVND(total);
-  }
-
-  Future<void> updateStatusOrder(
-      {required OrderModel orderModel, required HistoryStatus status}) async {
-    orderModel.status = status;
-    loading.value = true;
-    final response = await databaseService.updateOrder(orderModel: orderModel);
-    response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) async => _sendDeliveryNotification(orderModel));
-    loading.value = false;
-  }
-
-  List<HistoryStatus> getListStatus({required OrderModel orderModel}) {
-    final List<HistoryStatus> listStatus = lstHistoryStatus
-        .where((element) => element != orderModel.status)
-        .toList();
-    // return listStatus;
-    return listStatus
-        .where((element) => element.index > orderModel.status.index)
-        .toList();
-  }
-
-  void _sendDeliveryNotification(OrderModel orderModel) async {
-    final _response = await DatabaseService.instance
-        .getUserById(userModel: orderModel.userId);
-    _response.fold((l) => handleFailure(_logName, l), (r) async {
-      if (r.playerIds.isNotEmpty) {
-        final cartImage = orderModel.carts[0].productModel.image?.url ?? '';
-        final OSCreateNotification notification = OSCreateNotification(
-          playerIds: r.playerIds,
-          content: orderModel.status.status.tr,
-          heading: "Code_Order".tr + ": ${orderModel.createdAt}",
-          bigPicture: cartImage,
-          androidLargeIcon: cartImage,
-        );
-        final notificationModel =
-            NotificationModel.createNotificationModelByOSCreateNotification(
-                notification: notification,
-                receiverId: r.uid,
-                orderId: orderModel.createdAt,
-                type: NotificationType.order);
-        await OneSignalService.instance
-            .sendNotification(notification)
-            .then((value) {
-          databaseService.insertNotification(
-              notificationModel: notificationModel);
-        });
-      }
+  Future<void> _listens() async {
+    deliveryController.lstOrderModel.listen((_orders) {
+      todayRevenue.value = calculateTotalPriceToday(_orders);
+      todayOrder.value = _orders.length.toString();
     });
+
+    databaseService.listenRating().listen((QuerySnapshot<Map<String, dynamic>> event) {
+      final List<CommentModel> _result = event.docs.map((e) => CommentModel.fromJson(e.data())).toList();
+      totalReview.value = _result.length.toString();
+    });
+
+    lstRevenuesChart.assignAll(await createChartData(revenuesFilterChartType.value));
+    lstOrdersChart.assignAll(await createChartData(ordersFilterChartType.value));
+    lstReviewsChart.assignAll(await createChartData(reviewsFilterChartType.value));
+
+    print('$_logName: "lstRevenuesChart $lstRevenuesChart"');
+  }
+
+  String calculateTotalPriceToday(List<OrderModel> _orders) {
+    final total = _orders.fold<double>(0, (previousValue, element) => previousValue + element.total);
+    return formatPriceToVND(total) + ' VND';
+  }
+
+  // Chart
+
+  Future<List<ChartData>> createChartData(FilterChart filterChartType) async {
+    {
+      var result = <ChartData>[];
+      final lstDateTime = filterChartType.generateListDate();
+
+      final response = await databaseService.getListOrderModelByStatus(
+          timeStampStart: lstDateTime.first.millisecondsSinceEpoch.toString(),
+          timeStampEnd: lstDateTime.last.millisecondsSinceEpoch.toString());
+      var orders;
+      response.fold((l) => <OrderModel>[], (r) => orders = r);
+
+      result = lstDateTime.map((e) {
+        var _order = orders.firstWhere(
+            (element) => compareTwoDateTimeIsSameDay(convertTimeStampToDateTime(element.createdAt), e),
+            orElse: () => OrderModel.empty());
+
+        int index = lstDateTime.indexOf(e);
+        return ChartData(
+            bottomTitle: filterChartType == FilterChart.week
+                ? getDayInWeek(e)
+                : filterChartType == FilterChart.month
+                    ? DateFormat('dd').format(e)
+                    : filterChartType == FilterChart.year
+                        ? getMonthInYear(e.month)
+                        : getDayInWeek(e),
+            toolTip: getDayInWeek(e),
+            index: index,
+            dateTime: e,
+            value: _order.total);
+      }).toList();
+      return result;
+    }
   }
 }
