@@ -1,6 +1,6 @@
+import 'package:ninjafood/app/services/console_service/console_service.dart';
 
 part 'bootable_service.dart';
-
 
 class BootServices {
   /// List of boot services

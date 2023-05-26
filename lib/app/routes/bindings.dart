@@ -28,8 +28,6 @@ class GetBinding extends Bindings {
         Get.lazyPut(() => AdminTabsController());
         Get.lazyPut(() => HomeController());
         Get.lazyPut(() => GroupChatScreenController());
-        Get.lazyPut(() => CartScreenController());
-        Get.lazyPut(() => ProfileController());
         break;
       case AppRouteProvider.forgotPasswordScreen:
         Get.lazyPut(() => ForgotPassWordController());

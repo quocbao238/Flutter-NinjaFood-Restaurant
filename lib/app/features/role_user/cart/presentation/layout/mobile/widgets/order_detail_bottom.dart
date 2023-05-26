@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/cart/controllers/cart_screen_controller.dart';
+import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 
-class OrderDetailBottom extends GetView<CartScreenController> {
+class OrderDetailBottom extends GetView<CartController> {
   const OrderDetailBottom({super.key});
 
   @override
@@ -37,13 +37,12 @@ class OrderDetailBottom extends GetView<CartScreenController> {
             borderRadius: BorderRadius.circular(16)),
         child: AppPadding.small(
           child: Obx(() {
+            final cardCartModel = controller.cardCartModel.value;
             final subTotal =
-                formatPriceToVND(controller.subTotalPrice.value) + " VND";
-            final serviceFee = controller.serviceFee.toString() + "%";
-            final discount =
-                formatPriceToVND(controller.promotion.value) + " VND";
-            final total =
-                formatPriceToVND(controller.totalPrice.value) + " VND";
+                formatPriceToVND(cardCartModel.subTotalPrice) + " VND";
+            final serviceFee = cardCartModel.serviceFee.toString() + "%";
+            final discount = formatPriceToVND(cardCartModel.promotion) + " VND";
+            final total = formatPriceToVND(cardCartModel.totalPrice) + " VND";
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -62,7 +61,6 @@ class OrderDetailBottom extends GetView<CartScreenController> {
                     children: [
                       AppText.titleSmall(
                           text: 'Cart_Total_Price'.tr,
-                          // color: ThemeColors.textDarkColor,
                           fontWeight: FontWeight.bold),
                       Expanded(
                         child: AppText.titleMedium(
@@ -101,12 +99,10 @@ class OrderTitleValueText extends StatelessWidget {
         children: [
           AppText.bodyLarge(text: title, fontWeight: FontWeight.w500),
           Expanded(
-            child: AppText.bodyLarge(
-              textAlign: TextAlign.end,
-              text: value,
-              fontWeight: FontWeight.bold
-            )
-          )
+              child: AppText.bodyLarge(
+                  textAlign: TextAlign.end,
+                  text: value,
+                  fontWeight: FontWeight.bold))
         ],
       ),
     );

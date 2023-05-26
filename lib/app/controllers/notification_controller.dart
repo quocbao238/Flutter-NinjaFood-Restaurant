@@ -65,7 +65,7 @@ final class NotificationController extends GetxController implements Bootable {
         // Role User
         if (_userController.currentUser.value?.isUser() ?? false) {
           List<OrderModel> lstOrder =
-              ProfileController.instance.lstHistory.toList();
+              HistoryController.instance.lstHistory.toList();
           if (lstOrder.isEmpty) return;
           final _order = lstOrder.firstWhereOrNull(
               (element) => element.createdAt == notificationModel.orderId);

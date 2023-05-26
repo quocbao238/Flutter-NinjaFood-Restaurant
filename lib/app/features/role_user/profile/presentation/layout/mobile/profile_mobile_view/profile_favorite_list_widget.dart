@@ -1,15 +1,14 @@
 part of 'profile_mobile_view.dart';
 
-class FavoriteList extends GetView<ProfileController> {
+class FavoriteList extends GetView<FavoriteController> {
   const FavoriteList();
 
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final userController = UserController.instance;
     return Obx(
       () {
-        final lstFavorite = controller.lstProducts.toList();
+        final lstFavorite = controller.lstFavoriteProduct.toList();
         if (lstFavorite.isEmpty) return SizedBox.shrink();
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,7 +24,7 @@ class FavoriteList extends GetView<ProfileController> {
               itemBuilder: (context, index, animation) {
                 final _favoriteItem = lstFavorite[index];
                 return InkWell(
-                  onTap: () => controller.onPressedFavoriteItem(_favoriteItem),
+                  onTap: () => controller.onPressedItem(_favoriteItem),
                   child: AnimationItem(
                     animation: animation,
                     child: AppPadding(
@@ -90,12 +89,11 @@ class FavoriteList extends GetView<ProfileController> {
                                         child: ProductFavoriteItem(
                                           productId: _favoriteItem.id ?? 0,
                                           onPressedFavorite: (v) =>
-                                              userController.setFavoriteProduct(
-                                                  productId:
-                                                      _favoriteItem.id ?? 0),
+                                              controller.setFavoriteProduct(
+                                                  _favoriteItem.id),
                                         )),
                                     Obx(() {
-                                      bool isExist = (userController
+                                      bool isExist = (UserController.instance
                                                   .currentUser.value?.carts ??
                                               [])
                                           .any((element) =>
@@ -107,8 +105,10 @@ class FavoriteList extends GetView<ProfileController> {
                                         child: ElevatedButton(
                                           onPressed: () {
                                             if (!isExist) {
-                                              userController.addProductToCard(
-                                                  productModel: _favoriteItem);
+                                              UserController.instance
+                                                  .addProductToCard(
+                                                      productModel:
+                                                          _favoriteItem);
                                               return;
                                             }
                                             TabsController.instance

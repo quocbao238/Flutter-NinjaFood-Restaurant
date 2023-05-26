@@ -16,10 +16,8 @@ class ProductFavoriteItem extends StatelessWidget {
       onTap: () => onPressedFavorite(productId),
       child: Obx(
         () {
-          final userController = UserController.instance;
-          final currentUser = userController.currentUser.value;
-          final listFavoriteIds = currentUser?.favoriteIds ?? [];
-          final isFavorite = listFavoriteIds.isEmpty ? false : listFavoriteIds.contains(productId);
+          final favoriteController = FavoriteController.instance;
+          final isFavorite = favoriteController.checkProductIsFavorite(productId);
           final iconColor = isFavorite ? ThemeColors.textRedColor : ThemeColors.textDarkColor;
           return DecoratedBox(
               decoration:

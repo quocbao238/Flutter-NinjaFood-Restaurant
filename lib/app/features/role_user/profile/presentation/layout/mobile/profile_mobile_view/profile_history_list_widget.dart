@@ -1,6 +1,6 @@
 part of 'profile_mobile_view.dart';
 
-class HistoryList extends GetView<ProfileController> {
+class HistoryList extends GetView<HistoryController> {
   const HistoryList();
 
   @override

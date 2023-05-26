@@ -35,10 +35,10 @@ class ProductDetailScreenController extends BaseController {
 
   void onPressedBack() => Get.back();
 
-  Future<void> onPressedFavorite(int productId) async {
-    final response = await userController.setFavoriteProduct(productId: productId);
-    response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {});
-  }
+  // Future<void> onPressedFavorite(int productId) async {
+  //   final response = await userController.setFavoriteProduct(productId: productId);
+  //   response.fold((l) => handleFailure(_logName, l, showDialog: true), (r) {});
+  // }
 
   bool checkInCurrentCart() => lstCurrentCart
       .any((element) => element.productModel.id == currentProduct.value.id);

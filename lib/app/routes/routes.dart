@@ -6,7 +6,6 @@ import 'package:ninjafood/app/features/role_admin/category/controller/admin_edit
 import 'package:ninjafood/app/features/role_admin/category/presentation/admin_category_screen.dart';
 import 'package:ninjafood/app/features/role_admin/category/presentation/admin_edit_product_screen.dart';
 import 'package:ninjafood/app/features/role_admin/tabs/controllers/admin_tabs_controller.dart';
-import 'package:ninjafood/app/features/role_user/cart/controllers/cart_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/category/controllers/category_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/category/presentation/category_screen.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/controllers/room_chat_screen_controller.dart';
