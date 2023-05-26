@@ -682,10 +682,10 @@ packages:
     dependency: transitive
     description:
       name: google_maps_flutter
-      sha256: "469d41a7a77f56eec91a6221d40f4f8c2fd43f57bfcc07df29340ca67a82ac38"
+      sha256: abefcb1e5e5c96bdd8084939dda555257af272c7972902ca46d5631092c1df68
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.7"
+    version: "2.2.8"
   google_maps_flutter_android:
     dependency: transitive
     description:
@@ -730,10 +730,10 @@ packages:
     dependency: "direct main"
     description:
       name: google_sign_in
-      sha256: c912e5dbdbf75c18427a6c77f866192fe2c0ae29e1a5ef12e9a1d9d93f69a9a3
+      sha256: bb882facf7efa69b825cb536cb395acc2b22702cca59597b4e928b23f5ef37c3
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.1"
+    version: "6.1.2"
   google_sign_in_android:
     dependency: transitive
     description:
@@ -762,10 +762,10 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_web
-      sha256: "7e0ec507f4752383a6daa67d0cc775253cfc3b1d87907e7004e2c1b99c0a723f"
+      sha256: "7b154bc84da4c6a578072fc53c0a68ce3168beb39fab8235657d17c18ea12924"
       url: "https://pub.dev"
     source: hosted
-    version: "0.12.0"
+    version: "0.12.0+1"
   html:
     dependency: transitive
     description:
@@ -1184,10 +1184,10 @@ packages:
     dependency: transitive
     description:
       name: signature
-      sha256: "2c00ae3ca66877527ae872b45413a76e15203ddd752c81e277435399250b28c2"
+      sha256: d95143b8e310b395ea0be59a46bb69fa24106cb6ec79815fc56fd320268e24e6
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.2"
+    version: "5.4.0"
   sky_engine:
     dependency: transitive
     description: flutter

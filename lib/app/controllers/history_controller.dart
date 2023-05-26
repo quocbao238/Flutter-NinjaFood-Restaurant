@@ -17,8 +17,9 @@ final class HistoryController extends BaseController implements Bootable {
       .listen((event) => _getListOrderHistory(event?.orderIds));
 
   Future<void> _getListOrderHistory(List<String>? ordersId) async {
+    lstHistory.clear();
     if (ordersId != null && ordersId.isNotEmpty) {
-      await _databaseService.getListOrdersByListId(ordersId!).then((response) =>
+      await _databaseService.getListOrdersByListId(ordersId).then((response) =>
           response.fold(
               (l) => handleFailure(_logName, l, showDialog: true),
               (r) => lstHistory.assignAll(r

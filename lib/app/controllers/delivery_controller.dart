@@ -35,11 +35,9 @@ final class DeliveryController extends GetxController implements Bootable {
 
   void _handleDelivery(String userUid) async {
     if (_userController.currentUser.value?.isAdmin() ?? false) {
-      _orderSubscription = _databaseService.listenOrders().listen((event) {
-        lstOrderModel.value =
-            event.docs.map((e) => OrderModel.fromJson(e.data())).toList();
-        print(lstOrderModel);
-      });
+      _orderSubscription = _databaseService.listenOrders().listen((event) =>
+          lstOrderModel.value =
+              event.docs.map((e) => OrderModel.fromJson(e.data())).toList());
       return;
     }
 

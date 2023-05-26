@@ -111,17 +111,18 @@ final class CartController extends BaseController implements Bootable {
         status: HistoryStatus.request);
     await Future.delayed(Duration(seconds: 1));
     loading(false);
-    Future.delayed(Duration(seconds: 3)).then((value) async {
-      final response =
-          await _databaseService.insertOrder(orderModel: orderModel);
-      response.fold(
-          (l) => handleFailure('Cart Screen Controller', l, showDialog: true),
-          (r) async {
-        final orderIds = _userController.currentUser.value?.orderIds ?? [];
-        _userController
-            .updateUser(carts: [], orderIds: [...orderIds, orderModel.uid]);
-        _userController.sendDeliveryNotificationToRestaurant(orderModel);
-      });
+    Future.delayed(Duration(seconds: 1)).then((value) async {
+      await _databaseService.insertOrder(orderModel: orderModel).then(
+          (response) => response.fold(
+                  (l) => handleFailure('Cart Screen Controller', l,
+                      showDialog: true), (r) async {
+                final orderIds =
+                    _userController.currentUser.value?.orderIds ?? [];
+                _userController.updateUser(
+                    carts: [], orderIds: [...orderIds, orderModel.uid]);
+                _userController
+                    .sendDeliveryNotificationToRestaurant(orderModel);
+              }));
       loading(false);
     });
   }

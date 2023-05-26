@@ -12,7 +12,6 @@ import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/controllers/delivery_controller.dart';
 import 'package:ninjafood/app/controllers/restaurant_controller.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/features/role_user/profile/controller/profile_controller.dart';
 import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/card_cart_model.dart';

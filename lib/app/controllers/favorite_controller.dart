@@ -21,24 +21,19 @@ final class FavoriteController extends BaseController implements Bootable {
     _userController.currentUser.listen((event) {
       if (event == null) return;
       lstFavoriteProductId.assignAll(event.favoriteIds);
-      _getListFavoritesProduct();
+      _getListFavoritesProduct(event.favoriteIds);
     });
   }
 
-  void _getListFavoritesProduct() async {
+  void _getListFavoritesProduct(List<int> lstFavoriteProductId) async {
     loading.value = true;
-    final lstFavoriteIds = _userController.currentUser.value?.favoriteIds ?? [];
-    if (lstFavoriteIds.isEmpty) {
-      loading.value = false;
-      return;
-    }
-    final response =
-        await _databaseService.getListProductByListId(lstFavoriteIds);
-    response.fold((l) => handleFailure(_logName, l, showDialog: false), (r) {
-      if (r.length != lstFavoriteProduct.length) {
-        lstFavoriteProduct.assignAll(r);
-      }
-    });
+    lstFavoriteProduct.clear();
+    await _databaseService.getListProductByListId(lstFavoriteProductId).then(
+        (response) => response.fold(
+            (l) => handleFailure(_logName, l, showDialog: false),
+            (r) => (r.length != lstFavoriteProduct.length)
+                ? lstFavoriteProduct.assignAll(r)
+                : null));
     loading.value = false;
   }
 
@@ -52,11 +47,9 @@ final class FavoriteController extends BaseController implements Bootable {
   // Public methods
   void setFavoriteProduct(int? productId) {
     if (productId == null) return;
-    if (lstFavoriteProductId.contains(productId)) {
-      lstFavoriteProductId.remove(productId);
-    } else {
-      lstFavoriteProductId.add(productId);
-    }
+    lstFavoriteProductId.contains(productId)
+        ? lstFavoriteProductId.remove(productId)
+        : lstFavoriteProductId.add(productId);
     _userController.updateUser(favoriteIds: lstFavoriteProductId);
   }
 

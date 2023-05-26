@@ -126,12 +126,10 @@ final class UserController extends GetxController implements Bootable {
 
     int index = currentCartsProduct
         .indexWhere((element) => element.productModel.id == productModel.id);
-
-    if (index != -1) {
-      currentCartsProduct[index].increaseQuantity();
-    } else {
-      currentCartsProduct.add(CartModel.createNew(productModel: productModel));
-    }
+    (index != -1)
+        ? currentCartsProduct[index].increaseQuantity()
+        : currentCartsProduct
+            .add(CartModel.createNew(productModel: productModel));
     try {
       await updateUser(carts: currentCartsProduct);
       return Right(null);
@@ -159,18 +157,20 @@ final class UserController extends GetxController implements Bootable {
           userName: _currentUser.getName(),
           comment: comment,
           rating: rating);
-      final insertCommentProduct = await _databaseService.insertCommentProduct(
-          commentModel: commentModel);
-      return insertCommentProduct.fold((l) => left(l), (r) async {
-        orderModel.updateRating(true);
-        final upload =
-            await _databaseService.updateOrder(orderModel: orderModel);
-        return upload.fold((l) => left(l), (r) async {
-          final _response = await updateUser(
-              cmtIds: [...currentUser.value!.commentIds, commentModel.uid]);
-          return _response.fold((l) => left(l), (r) => right(null));
-        });
-      });
+      return await _databaseService
+          .insertCommentProduct(commentModel: commentModel)
+          .then((insertCommentProduct) =>
+              insertCommentProduct.fold((l) => left(l), (r) async {
+                orderModel.updateRating(true);
+                await _databaseService.updateOrder(orderModel: orderModel).then(
+                    (uploadResponse) => uploadResponse.fold(
+                        (l) => left(l),
+                        (r) async => await updateUser(cmtIds: [
+                              ...currentUser.value!.commentIds,
+                              commentModel.uid
+                            ]).then((_updateUserResponse) => _updateUserResponse
+                                .fold((l) => left(l), (r) => right(null)))));
+              }));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
@@ -217,12 +217,9 @@ final class UserController extends GetxController implements Bootable {
         type: NotificationType.order,
       );
 
-      await OneSignalService.instance
-          .sendNotification(notification)
-          .then((value) async {
-        await _databaseService.insertNotification(
-            notificationModel: notificationModel);
-      });
+      await OneSignalService.instance.sendNotification(notification).then(
+          (value) async => await _databaseService.insertNotification(
+              notificationModel: notificationModel));
       return right(null);
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
