@@ -21,14 +21,17 @@ class PromotionDeal extends GetView<HomeController> {
                     controller.currentIndexPromotion.value = index;
                   }),
               items: promotions
-                  .map((item) => GestureDetector(
-                        onTap: () => controller.onPressedPromotionItem(item),
-                        child: AppNetworkImage(
-                            borderRadius: 16,
-                            width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.fill,
-                            url: item.thumbnail!),
-                      ))
+                  .map(
+                    (item) => GestureDetector(
+                      onTap: () => controller.onPressedPromotionItem(item),
+                      child: AppNetworkImage(
+                        borderRadius: 16,
+                        width: MediaQuery.of(context).size.width,
+                        fit: BoxFit.fill,
+                        url: item.thumbnail!,
+                      ),
+                    ),
+                  )
                   .toList(),
             ),
             AppPadding.small(),

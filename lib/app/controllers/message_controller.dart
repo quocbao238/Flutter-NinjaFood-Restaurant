@@ -22,7 +22,6 @@ final class MessageController extends GetxController implements Bootable {
         groupChats.clear();
         return;
       }
-
       _handleStreamGroupChat();
     });
   }
@@ -37,13 +36,11 @@ final class MessageController extends GetxController implements Bootable {
         .listen((QuerySnapshot<Map<String, dynamic>> event) {
       final List<GroupChatModel> _result =
           event.docs.map((e) => GroupChatModel.fromJson(e.data())).toList();
-      if (isAdmin) {
-        groupChats.assignAll(_result);
-        return;
-      }
-      final _listFilter = _result
-          .where((element) => element.groupChatId == groupChatId)
-          .toList();
+      final _listFilter = isAdmin
+          ? _result
+          : _result
+              .where((element) => element.groupChatId == groupChatId)
+              .toList();
       groupChats.assignAll(_listFilter);
     });
   }
@@ -53,17 +50,21 @@ final class MessageController extends GetxController implements Bootable {
       UserModel? receiverUser,
       required MessageChatType messageChatType}) async {
     final isUser = userController.currentUser.value!.isUser();
+
     if (isUser) {
-      final _response = await _userMessage(message, messageChatType);
-      return _response.fold((l) => left(l), (r) => right(null));
+      return await _userMessage(message, messageChatType).then(
+          (_response) => _response.fold((l) => left(l), (r) => right(null)));
     }
+
     if (receiverUser == null)
       return left(Failure.custom('receiverUser is null'));
-    final _response = await _adminMessage(
-        message: message,
-        receiverUser: receiverUser,
-        messageChatType: messageChatType);
-    return _response.fold((l) => left(l), (r) => right(null));
+
+    return await _adminMessage(
+            message: message,
+            receiverUser: receiverUser,
+            messageChatType: messageChatType)
+        .then(
+            (_response) => _response.fold((l) => left(l), (r) => right(null)));
   }
 
   Future<Either<Failure, void>> _userMessage(
@@ -80,29 +81,34 @@ final class MessageController extends GetxController implements Bootable {
         groupChatId: groupChatId);
 
     final groupChat = GroupChatModel(
-      senderUser: senderUser,
-      receiverUser: receiverUser,
-      groupChatId: groupChatId,
-      lastMessageChat: messageChat,
-    );
+        senderUser: senderUser,
+        receiverUser: receiverUser,
+        groupChatId: groupChatId,
+        lastMessageChat: messageChat);
 
     try {
-      final uploadGroupChat =
-          await databaseService.insertGroupChat(groupChatModel: groupChat);
-      return uploadGroupChat.fold((l) => left(l), (r) async {
-        final uploadChatMessage =
-            await databaseService.insertMessageChat(messageChat: messageChat);
-        return uploadChatMessage.fold((l) => left(l), (r) {
-          _sendMessage(
-              receiverUser,
-              messageChatType == MessageChatType.text
-                  ? message
-                  : "You have new message",
-              senderUser.photoUrl!,
-              groupChatId);
-          return right(null);
-        });
-      });
+      return await databaseService
+          .insertGroupChat(groupChatModel: groupChat)
+          .then(
+            (uploadResponse) => uploadResponse.fold(
+              (l) => left(l),
+              (r) async => await databaseService
+                  .insertMessageChat(messageChat: messageChat)
+                  .then(
+                    (sendMessageResponse) => sendMessageResponse.fold(
+                      (l) => left(l),
+                      (r) {
+                        final _message = messageChatType == MessageChatType.text
+                            ? message
+                            : "You have new message";
+                        _sendMessage(receiverUser, _message,
+                            senderUser.photoUrl!, groupChatId);
+                        return right(null);
+                      },
+                    ),
+                  ),
+            ),
+          );
     } catch (e, stacktrace) {
       return left(Failure(e.toString(), stacktrace));
     }
@@ -123,35 +129,44 @@ final class MessageController extends GetxController implements Bootable {
         groupChatId: groupChatId);
 
     final groupChat = GroupChatModel(
-      senderUser: senderUser,
-      receiverUser: receiverUser,
-      groupChatId: groupChatId,
-      lastMessageChat: messageChat,
-    );
+        senderUser: senderUser,
+        receiverUser: receiverUser,
+        groupChatId: groupChatId,
+        lastMessageChat: messageChat);
 
     try {
-      final uploadGroupChat =
-          await databaseService.insertGroupChat(groupChatModel: groupChat);
-      return uploadGroupChat.fold((l) => left(l), (r) async {
-        final uploadChatMessage =
-            await databaseService.insertMessageChat(messageChat: messageChat);
-        return uploadChatMessage.fold((l) => left(l), (r) {
-          _sendMessage(
-              receiverUser,
-              messageChatType == MessageChatType.text ? message : null,
-              senderUser.photoUrl!,
-              groupChatId);
-          return right(null);
-        });
-      });
+      return await databaseService
+          .insertGroupChat(groupChatModel: groupChat)
+          .then(
+            (uploadGroupChat) => uploadGroupChat.fold(
+              (l) => left(l),
+              (r) async {
+                return await databaseService
+                    .insertMessageChat(messageChat: messageChat)
+                    .then(
+                      (uploadChatMessage) => uploadChatMessage.fold(
+                        (l) => left(l),
+                        (r) => _sendMessage(
+                            receiverUser,
+                            messageChatType == MessageChatType.text
+                                ? message
+                                : null,
+                            senderUser.photoUrl!,
+                            groupChatId),
+                      ),
+                    );
+              },
+            ),
+          );
     } catch (e, stacktrace) {
       return left(Failure(e.toString(), stacktrace));
     }
   }
 
-  _sendMessage(UserModel receiverUser, String? message, String senderAvatar,
-      String groupChatId) async {
-    if (receiverUser.playerIds.isEmpty) return;
+  Future<Either<Failure, void>> _sendMessage(UserModel receiverUser,
+      String? message, String senderAvatar, String groupChatId) async {
+    if (receiverUser.playerIds.isEmpty)
+      return left(Failure.custom('playerIds is empty'));
     try {
       final OSCreateNotification notification = OSCreateNotification(
           playerIds: [receiverUser.playerIds.last],
@@ -167,12 +182,9 @@ final class MessageController extends GetxController implements Bootable {
               type: NotificationType.chat,
               groupChatId: groupChatId);
 
-      await OneSignalService.instance
-          .sendNotification(notification)
-          .then((value) async {
-        await databaseService.insertNotification(
-            notificationModel: notificationModel);
-      });
+      await OneSignalService.instance.sendNotification(notification).then(
+          (value) async => await databaseService.insertNotification(
+              notificationModel: notificationModel));
 
       return right(null);
     } catch (e, stackTrace) {

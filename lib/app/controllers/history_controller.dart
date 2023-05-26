@@ -13,21 +13,17 @@ final class HistoryController extends BaseController implements Bootable {
     _listenHistory();
   }
 
-  void _listenHistory() => _userController.currentUser.listen((event) {
-        if (event == null) return;
-        _getListOrderHistory(event.orderIds);
-      });
+  void _listenHistory() => _userController.currentUser
+      .listen((event) => _getListOrderHistory(event?.orderIds));
 
-  Future<void> _getListOrderHistory(List<String> ordersId) async {
-    if (ordersId.isEmpty) {
-      return;
+  Future<void> _getListOrderHistory(List<String>? ordersId) async {
+    if (ordersId != null && ordersId.isNotEmpty) {
+      await _databaseService.getListOrdersByListId(ordersId!).then((response) =>
+          response.fold(
+              (l) => handleFailure(_logName, l, showDialog: true),
+              (r) => lstHistory.assignAll(r
+                  .where((element) => element.status == HistoryStatus.done)
+                  .toList())));
     }
-    loading(true);
-    final response = await _databaseService.getListOrdersByListId(ordersId);
-    response.fold(
-        (l) => handleFailure(_logName, l, showDialog: true),
-        (r) => lstHistory.assignAll(r
-            .where((element) => element.status == HistoryStatus.done)
-            .toList()));
   }
 }

@@ -24,20 +24,16 @@ final class NotificationController extends GetxController implements Bootable {
       _handleNotifications(user.uid);
     });
 
-    notifications.listen((_data) {
-      notificationNews.assignAll(
-          notifications.where((element) => element.isRead == false).toList());
-    });
+    notifications.listen((_data) => notificationNews.assignAll(
+        notifications.where((element) => element.isRead == false).toList()));
   }
 
   void _handleNotifications(String userId) async {
     _notificationSubscription = _databaseService
         .listenNotification(userId: userId)
         .listen((event) async {
-      final result = event.docs.map((e) {
-        final _data = e.data();
-        return NotificationModel.fromJson(_data);
-      }).toList();
+      final result =
+          event.docs.map((e) => NotificationModel.fromJson(e.data())).toList();
       notifications.assignAll(result);
     });
   }
@@ -57,7 +53,6 @@ final class NotificationController extends GetxController implements Bootable {
               (r) => Get.toNamed(AppRouteProvider.chatDetailsScreen,
                   arguments: r));
         }
-
         return;
       }
 
@@ -122,15 +117,12 @@ final class NotificationController extends GetxController implements Bootable {
                   ListTile(
                     leading: Container(
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          borderRadius: BorderRadius.circular(16.0),
-                        ),
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            borderRadius: BorderRadius.circular(16.0)),
                         child: AppPadding.small(
                             child: Icon(Icons.delete_outline))),
                     title: AppText.bodyMedium(
-                      text: 'Xóa thông báo này',
-                      textAlign: TextAlign.start,
-                    ),
+                        text: 'Xóa thông báo này', textAlign: TextAlign.start),
                     onTap: () => Navigator.pop(context, true),
                   ),
                 ],
@@ -139,11 +131,11 @@ final class NotificationController extends GetxController implements Bootable {
     if (result == true) deleteNotification(notification);
   }
 
-  Future<void> deleteNotification(NotificationModel notificationModel) async {
-    final _response = await _databaseService.deleteNotification(
-        notificationModel: notificationModel);
-    _response.fold((l) => handleFailure(_logName, l), (r) => null);
-  }
+  Future<void> deleteNotification(NotificationModel notificationModel) async =>
+      await _databaseService
+          .deleteNotification(notificationModel: notificationModel)
+          .then((_response) =>
+              _response.fold((l) => handleFailure(_logName, l), (r) => null));
 
   @override
   void dispose() => super.dispose();

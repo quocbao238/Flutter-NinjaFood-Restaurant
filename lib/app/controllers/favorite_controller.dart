@@ -42,7 +42,6 @@ final class FavoriteController extends BaseController implements Bootable {
     loading.value = false;
   }
 
-
 /* -------------------------------- Public methods --------------------------------*/
 
   bool checkProductIsFavorite(int? productId) {
@@ -61,5 +60,6 @@ final class FavoriteController extends BaseController implements Bootable {
     _userController.updateUser(favoriteIds: lstFavoriteProductId);
   }
 
-  void onPressedItem(ProductModel productModel) => Get.toNamed(AppRouteProvider.foodDetailScreen, arguments: productModel);
+  void onPressedItem(ProductModel productModel) =>
+      Get.toNamed(AppRouteProvider.foodDetailScreen, arguments: productModel);
 }

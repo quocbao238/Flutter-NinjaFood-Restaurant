@@ -19,7 +19,6 @@ final class UserController extends GetxController implements Bootable {
     _databaseService = DatabaseService.instance;
     _consoleService = ConsoleService.instance;
 
-
     final _authUser = AuthService.instance.getFirebaseAuthUser;
     if (_authUser != null) {
       firebaseAuthUser.value = _authUser;
@@ -67,7 +66,9 @@ final class UserController extends GetxController implements Bootable {
         .getUserDataStream(firebaseAuthUser.value!.uid)
         .listen((event) async {
       if (event.data() == null) return;
-      currentUser.value = UserModel.fromJson(event.data()!);
+
+      final newest = UserModel.fromJson(event.data()!);
+      currentUser.value = newest;
       final playerId = await OneSignalService.instance
           .setPlayerId(currentUser.value?.uid ?? '');
       if (playerId != null &&
@@ -75,38 +76,40 @@ final class UserController extends GetxController implements Bootable {
         currentUser.value!.addPlayerId(playerId);
         await updateUser(playerIds: currentUser.value!.playerIds);
       }
+
       _consoleService.show(_logName, '_handleCloudUserChanged');
       FirebaseCrashlytics.instance.setUserIdentifier(currentUser.value!.uid);
     });
   }
 
-  Future<Either<Failure, void>> updateUser({
-    String? firstName,
-    String? lastName,
-    String? phoneNumber,
-    String? address,
-    String? photoUrl,
-    List<String>? playerIds,
-    List<int>? favoriteIds,
-    List<CartModel>? carts,
-    List<String>? orderIds,
-    List<String>? cmtIds,
-  }) async {
+  Future<Either<Failure, void>> updateUser(
+      {String? firstName,
+      String? lastName,
+      String? phoneNumber,
+      String? address,
+      String? photoUrl,
+      List<String>? playerIds,
+      List<int>? favoriteIds,
+      List<CartModel>? carts,
+      List<String>? orderIds,
+      List<String>? cmtIds}) async {
     final _currentUser = currentUser.value;
+    _consoleService.show(_logName,
+        'updateUser Run favoriteIds ${favoriteIds ?? _currentUser?.favoriteIds.length}');
+
     if (_currentUser == null) return left(Failure.custom('User is null'));
     try {
       final newDataUser = _currentUser.copyWith(
-        firstName: firstName ?? _currentUser.firstName,
-        lastName: lastName ?? _currentUser.lastName,
-        phoneNumber: phoneNumber ?? _currentUser.phoneNumber,
-        address: address ?? _currentUser.address,
-        photoUrl: photoUrl ?? _currentUser.photoUrl,
-        favoriteIds: favoriteIds ?? _currentUser.favoriteIds,
-        playerIds: playerIds ?? _currentUser.playerIds,
-        carts: carts ?? _currentUser.carts,
-        orderIds: orderIds ?? _currentUser.orderIds,
-        commentIds: cmtIds ?? _currentUser.commentIds,
-      );
+          firstName: firstName ?? _currentUser.firstName,
+          lastName: lastName ?? _currentUser.lastName,
+          phoneNumber: phoneNumber ?? _currentUser.phoneNumber,
+          address: address ?? _currentUser.address,
+          photoUrl: photoUrl ?? _currentUser.photoUrl,
+          favoriteIds: favoriteIds ?? _currentUser.favoriteIds,
+          playerIds: playerIds ?? _currentUser.playerIds,
+          carts: carts ?? _currentUser.carts,
+          orderIds: orderIds ?? _currentUser.orderIds,
+          commentIds: cmtIds ?? _currentUser.commentIds);
       await _databaseService.updateUser(userModel: newDataUser);
       return Right(null);
     } catch (e, stackTrace) {
@@ -158,7 +161,6 @@ final class UserController extends GetxController implements Bootable {
           rating: rating);
       final insertCommentProduct = await _databaseService.insertCommentProduct(
           commentModel: commentModel);
-      // set order Rating
       return insertCommentProduct.fold((l) => left(l), (r) async {
         orderModel.updateRating(true);
         final upload =

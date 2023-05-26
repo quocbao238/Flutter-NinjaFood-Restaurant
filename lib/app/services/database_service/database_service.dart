@@ -116,8 +116,8 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
     try {
       List<ProductModel> _result = [];
 
+      final _listProductsIds = [...listProductsIds];
       // 10 products per request
-      final _listProductsIds = listProductsIds;
       while (_listProductsIds.isNotEmpty) {
         final _listIds = _listProductsIds.take(10).toList();
         final querySnapshot = await _db.collection(DatabaseKeys.productPath).where('id', whereIn: _listIds).get();
@@ -150,13 +150,15 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
     try {
       List<OrderModel> _result = [];
 
+      final _listOrderIds = [...listOrderIds];
+
       // query 10 orders per request
-      while (listOrderIds.isNotEmpty) {
+      while (_listOrderIds.isNotEmpty) {
         final _listIds = listOrderIds.take(10).toList();
         final querySnapshot =
             await _db.collection(DatabaseKeys.orderPath).where(FieldPath.documentId, whereIn: _listIds).get();
         _result.addAll(querySnapshot.docs.map((e) => OrderModel.fromJson(e.data())).toList());
-        listOrderIds.removeRange(0, _listIds.length);
+        _listOrderIds.removeRange(0, _listIds.length);
       }
       return right(_result);
     } on FirebaseException catch (error) {
