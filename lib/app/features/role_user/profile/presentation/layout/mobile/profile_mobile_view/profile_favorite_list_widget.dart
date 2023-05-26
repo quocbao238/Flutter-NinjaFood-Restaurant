@@ -88,61 +88,8 @@ class FavoriteList extends GetView<FavoriteController> {
                                             bottom: AppGapSize.small),
                                         child: ProductFavoriteItem(
                                             productId: _favoriteItem.id ?? 0)),
-                                    Obx(() {
-                                      bool isExist = (UserController.instance
-                                          .currentUser.value?.carts ??
-                                          [])
-                                          .any((element) =>
-                                      element.productModel.id ==
-                                          _favoriteItem.id);
-                                      return SizedBox(
-                                        width: 36,
-                                        height: 36,
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            if (!isExist) {
-                                              UserController.instance
-                                                  .addProductToCard(
-                                                  productModel:
-                                                  _favoriteItem);
-                                              return;
-                                            }
-                                            TabsController.instance
-                                                .onChangeToCartScreen();
-                                            Get.until((route) =>
-                                            Get.currentRoute ==
-                                                AppRouteProvider.tabScreen);
-                                          },
-                                          style: Theme.of(context)
-                                              .elevatedButtonTheme
-                                              .style
-                                              ?.copyWith(
-                                              backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  ThemeColors
-                                                      .backgroundTextFormDark()),
-                                              fixedSize:
-                                              MaterialStateProperty.all(
-                                                  Size(24, 24)),
-                                              padding:
-                                              MaterialStateProperty.all(
-                                                  EdgeInsets.zero),
-                                              shape: MaterialStateProperty.all(
-                                                  RoundedRectangleBorder(
-                                                      borderRadius:
-                                                      BorderRadius.circular(96.0)))),
-                                          child: Icon(
-                                              !isExist
-                                                  ? FontAwesomeIcons.cartPlus
-                                                  : FontAwesomeIcons
-                                                  .cartShopping,
-                                              color: !isExist
-                                                  ? ThemeColors.textDarkColor
-                                                  : ThemeColors.primaryColor,
-                                              size: 12.0),
-                                        ),
-                                      );
-                                    }),
+                                    ProductAddToCartWidget(
+                                        productModel: _favoriteItem),
                                   ],
                                 ),
                               ],

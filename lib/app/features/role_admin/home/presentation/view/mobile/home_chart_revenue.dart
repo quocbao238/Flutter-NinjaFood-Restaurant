@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/chart_data/bar_chart_group_data.dart';
+import 'package:ninjafood/app/helper/helper.dart';
 
 enum ChartFilter {
   week,
@@ -106,12 +107,12 @@ class ChartViewDataState extends State<ChartViewData> {
                                 fontWeight: FontWeight.bold),
                             children: <TextSpan>[
                               TextSpan(
-                                text: (rod.toY - 1).toStringAsFixed(2),
+                                text: formatPriceToVND(rod.toY) + ' VND',
                                 style: TextStyle(
                                   color:
                                       context.theme.textTheme.bodySmall!.color,
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],

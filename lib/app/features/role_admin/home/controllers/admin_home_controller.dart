@@ -73,20 +73,27 @@ class AdminHomeController extends BaseController {
       todayOrder.value = _orders.length.toString();
     });
 
-    databaseService.listenRating().listen((QuerySnapshot<Map<String, dynamic>> event) {
-      final List<CommentModel> _result = event.docs.map((e) => CommentModel.fromJson(e.data())).toList();
+    databaseService
+        .listenRating()
+        .listen((QuerySnapshot<Map<String, dynamic>> event) {
+      final List<CommentModel> _result =
+          event.docs.map((e) => CommentModel.fromJson(e.data())).toList();
       totalReview.value = _result.length.toString();
     });
 
-    lstRevenuesChart.assignAll(await createChartData(revenuesFilterChartType.value));
-    lstOrdersChart.assignAll(await createChartData(ordersFilterChartType.value));
-    lstReviewsChart.assignAll(await createChartData(reviewsFilterChartType.value));
+    lstRevenuesChart
+        .assignAll(await createChartData(revenuesFilterChartType.value));
+    lstOrdersChart
+        .assignAll(await createChartData(ordersFilterChartType.value));
+    lstReviewsChart
+        .assignAll(await createChartData(reviewsFilterChartType.value));
 
     print('$_logName: "lstRevenuesChart $lstRevenuesChart"');
   }
 
   String calculateTotalPriceToday(List<OrderModel> _orders) {
-    final total = _orders.fold<double>(0, (previousValue, element) => previousValue + element.total);
+    final total = _orders.fold<double>(
+        0, (previousValue, element) => previousValue + element.total);
     return formatPriceToVND(total) + ' VND';
   }
 
@@ -100,13 +107,22 @@ class AdminHomeController extends BaseController {
       final response = await databaseService.getListOrderModelByStatus(
           timeStampStart: lstDateTime.first.millisecondsSinceEpoch.toString(),
           timeStampEnd: lstDateTime.last.millisecondsSinceEpoch.toString());
-      var orders;
-      response.fold((l) => <OrderModel>[], (r) => orders = r);
+      List<OrderModel> orders = [];
+      response.fold((l) => <OrderModel>[], (r) {
+        final _filter =
+            r.where((element) => element.status == HistoryStatus.done).toList();
+        orders.assignAll(_filter);
+      });
 
       result = lstDateTime.map((e) {
-        var _order = orders.firstWhere(
-            (element) => compareTwoDateTimeIsSameDay(convertTimeStampToDateTime(element.createdAt), e),
-            orElse: () => OrderModel.empty());
+        final listOrderInDay = orders
+            .where((element) =>
+                compareTwoDateTimeIsSameDay(
+                    convertTimeStampToDateTime(element.createdAt), e) &&
+                element.status == HistoryStatus.done)
+            .toList();
+        final total = listOrderInDay.fold<double>(
+            0, (previousValue, element) => previousValue + element.total);
 
         int index = lstDateTime.indexOf(e);
         return ChartData(
@@ -120,7 +136,7 @@ class AdminHomeController extends BaseController {
             toolTip: getDayInWeek(e),
             index: index,
             dateTime: e,
-            value: _order.total);
+            value: total);
       }).toList();
       return result;
     }

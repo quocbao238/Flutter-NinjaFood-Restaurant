@@ -403,7 +403,7 @@ class DatabaseService extends GetxService
         DateTime(dateTime.year, dateTime.month, dateTime.day);
     final endOfDay = beginningOfDay
         .add(Duration(days: 1))
-        .subtract(Duration(milliseconds: 1));
+        .subtract(Duration(milliseconds: -1));
     final timeStampStart = beginningOfDay.millisecondsSinceEpoch.toString();
     final endStampEnd = endOfDay.millisecondsSinceEpoch.toString();
     return _db
