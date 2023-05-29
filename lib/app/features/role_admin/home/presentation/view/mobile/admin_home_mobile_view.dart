@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/controllers/delivery_controller.dart';
 import 'package:ninjafood/app/features/role_admin/home/controllers/admin_home_controller.dart';
 import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/admin_home_card_item.dart';
 import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/home_chart_revenue.dart';
+import 'package:ninjafood/app/models/history_model.dart';
 import 'package:ninjafood/app/widgets/custom_appbar.dart';
 
 class AdminHomeMobileView extends StatelessWidget {
@@ -20,10 +22,27 @@ class AdminHomeMobileView extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      GetBuilder<DeliveryController>(builder: (controller) {
+                        return Obx(() {
+                          final val = controller.lstOrderModel
+                              .toList()
+                              .where((element) => element.status != HistoryStatus.done)
+                              .toList();
+                          if (val.length > 0)
+                            return HomeCardItem(
+                              title: 'Dashboard_Order_Processing'.tr,
+                              value: val.length.toString(),
+                              icon: Icons.delivery_dining,
+                              backgroundColor: ThemeColors.orangeColor,
+                              foregroundColor: ThemeColors.orangeColor,
+                            );
+                          return const SizedBox();
+                        });
+                      }),
                       Obx(() {
                         final val = logic.todayRevenue.value;
                         return HomeCardItem(
-                          title: 'Today\'s Revenue',
+                          title: 'Dashboard_TotalReviews'.tr,
                           value: val,
                           icon: Icons.attach_money_outlined,
                           backgroundColor: context.theme.colorScheme.onPrimary,
@@ -33,7 +52,7 @@ class AdminHomeMobileView extends StatelessWidget {
                       Obx(() {
                         final val = logic.todayOrder.value;
                         return HomeCardItem(
-                          title: 'Today\'s Orders',
+                          title: 'Dashboard_TodayOrders'.tr,
                           value: val,
                           icon: Icons.shopping_cart_checkout,
                           backgroundColor: context.theme.colorScheme.onTertiary,
@@ -43,7 +62,7 @@ class AdminHomeMobileView extends StatelessWidget {
                       Obx(() {
                         final val = logic.totalReview.value;
                         return HomeCardItem(
-                          title: 'Total Reviews',
+                          title: 'Dashboard_TotalReviews'.tr,
                           value: val,
                           icon: Icons.reviews,
                           backgroundColor: context.theme.colorScheme.onSurface,
@@ -52,11 +71,12 @@ class AdminHomeMobileView extends StatelessWidget {
                       }),
                       Obx(() {
                         final lstRevenuesChart = logic.lstRevenuesChart.toList();
-                        return ChartViewData(title: 'Revenue Chart', chartData: lstRevenuesChart);
-                      }),
-                      Obx(() {
-                        final lstOrdersChart = logic.lstOrdersChart.toList();
-                        return ChartViewData(title: 'Orders Chart', chartData: lstOrdersChart);
+                        final filterChart = logic.revenuesFilterChartType;
+                        return ChartViewData(
+                          title: 'Dashboard_Revenue_Chart'.tr,
+                          chartData: lstRevenuesChart,
+                          filterChart: filterChart.value,
+                        );
                       }),
                     ],
                   ),
@@ -64,5 +84,4 @@ class AdminHomeMobileView extends StatelessWidget {
               ));
         });
   }
-
 }

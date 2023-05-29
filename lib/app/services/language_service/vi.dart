@@ -20,10 +20,10 @@ const Map<String, String> vi = {
 
   // Onboard Screen
   "OnboardScreen_Title1": "Ninja Food",
-  "OnboardScreen_Title2": "Food Ninja - Nơi ẩm thực của bạn",
+  "OnboardScreen_Title2": "Tìm thấy Món ăn Thú vị của bạn ở đây",
   "OnboardScreen_Description1":
-      "Bạn có thể tìm thấy mọi món ăn cho mọi khẩu vị và màu sắc. Hãy thưởng thức!",
-  "OnboardScreen_Description2": "Thưởng thức đồ ăn một cách nhanh chóng",
+      "Ở đây, bạn có thể tìm thấy đầu bếp hoặc món ăn phù hợp với mọi khẩu vị và sắc màu. Thưởng thức thôi!",
+  "OnboardScreen_Description2": "Hãy tận hưởng việc giao thức ăn nhanh chóng và mượt mà ngay tại cửa nhà bạn.",
 
   // Button
   "Next_Button": "Tiếp tục",
@@ -61,39 +61,33 @@ const Map<String, String> vi = {
 
   //SignUp Process
   "SignUpProcessScreen_Title": "Nhập thông tin của bạn để bắt đầu",
-  "SignUpProcessScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
+  "SignUpProcessScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
   "SignUpProcessScreen_FirstName": "Họ",
   "SignUpProcessScreen_LastName": "Tên",
   "SignUpProcessScreen_MobileNumber": "Số Điện Thoại",
 
   //Payment Method
   "PaymentMethodScreen_Title": "Phương thức thanh toán",
-  "PaymentMethodScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
+  "PaymentMethodScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
 
   //Upload Photo
   "UploadPhotoScreen_Title": "Tải ảnh đại diện của bạn lên",
-  "UploadPhotoScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
+  "UploadPhotoScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
 
   //Upload Preview
   "UploadPreviewScreen_Title": "Tải ảnh của bạn lên",
-  "UploadPreviewScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
+  "UploadPreviewScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
 
   //Set Location
   "SetLocationScreen_Title": "Thiết lập vị trí của bạn",
-  "SetLocationScreen_Description":
-      "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
+  "SetLocationScreen_Description": "Dữ liệu này sẽ được hiển thị trong hồ sơ tài khoản của bạn",
   "SetLocationScreen_YourLocation": "  Vị trí của bạn",
   "SetLocationScreen_SetLocation": "Thiết lập vị trí",
   "SetLocationScreen_Next": "Tiếp Theo",
 
   //Congrats
   "Congrats_Title": "Bạn đã đăng ký thành công",
-  "Congrats_Description":
-      "Bây giờ bạn có thể đăng nhập vào ứng dụng và thưởng thức các món ăn tuyệt vời của chúng tôi",
+  "Congrats_Description": "Bây giờ bạn có thể đăng nhập vào ứng dụng và thưởng thức các món ăn tuyệt vời của chúng tôi",
 
   // Reset Password
   "ResetPassword_Title": "Quên mật khẩu",
@@ -106,47 +100,37 @@ const Map<String, String> vi = {
   // Firebase Auth Exception
   "email-already-in-use": "Email đã được sử dụng cho một tài khoản khác.",
   "invalid-email": "Email không hợp lệ.",
-  "operation-not-allowed":
-      "Đăng nhập bằng email và mật khẩu đã bị vô hiệu hóa.",
+  "operation-not-allowed": "Đăng nhập bằng email và mật khẩu đã bị vô hiệu hóa.",
   "weak-password": "Mật khẩu không đủ mạnh.",
-  "user-not-found":
-      "Không tìm thấy thông tin người dùng. Nếu bạn chưa đăng ký, vui lòng đăng ký trước.",
+  "user-not-found": "Không tìm thấy thông tin người dùng. Nếu bạn chưa đăng ký, vui lòng đăng ký trước.",
   "wrong-password": "Mật khẩu không chính xác.",
 
   // Firebase Storage Exception
   "bucket-not-found": "Không có bucket được cấu hình cho Firebase Storage.",
   "cancelled": "Người dùng đã hủy thao tác.",
   "canceled": "Thao tác đã bị hủy.",
-  "invalid-checksum":
-      "Đối tượng được tải lên hoặc tải xuống có checksum không hợp lệ.",
-  "not-authenticated":
-      "Người dùng chưa được xác thực, vui lòng xác thực và thử lại.",
+  "invalid-checksum": "Đối tượng được tải lên hoặc tải xuống có checksum không hợp lệ.",
+  "not-authenticated": "Người dùng chưa được xác thực, vui lòng xác thực và thử lại.",
   "not-authorized": "Người dùng không được phép thực hiện hành động mong muốn.",
   "object-not-found": "Không thể tìm thấy đối tượng được chỉ định.",
-  "quota-exceeded":
-      "Đã vượt quá hạn mức cho phép trên bucket Firebase Storage của bạn.",
-  "retry-limit-exceeded":
-      "Đã đạt đến giới hạn thời gian tối đa trên một thao tác (tải lên, tải xuống, xóa, vv.).",
-  "unauthenticated":
-      "Người dùng chưa được xác thực, vui lòng xác thực và thử lại.",
+  "quota-exceeded": "Đã vượt quá hạn mức cho phép trên bucket Firebase Storage của bạn.",
+  "retry-limit-exceeded": "Đã đạt đến giới hạn thời gian tối đa trên một thao tác (tải lên, tải xuống, xóa, vv.).",
+  "unauthenticated": "Người dùng chưa được xác thực, vui lòng xác thực và thử lại.",
   "unauthorized": "Người dùng không được phép thực hiện hành động mong muốn.",
 
   // Firebase Cloud Firestore Exception
   "data-loss": "Mất mát hoặc hỏng dữ liệu không thể khôi phục được.",
   "deadline-exceeded": "Đã hết hạn trước khi thao tác có thể hoàn thành.",
-  "failed-precondition":
-      "Thao tác bị từ chối vì hệ thống không ở trạng thái cần thiết cho thao tác đó.",
+  "failed-precondition": "Thao tác bị từ chối vì hệ thống không ở trạng thái cần thiết cho thao tác đó.",
   "internal": "Đã xảy ra lỗi nội bộ.",
   "invalid-argument": "Khách hàng chỉ định một đối số không hợp lệ.",
   "not-found": "Không tìm thấy một số tài liệu được yêu cầu.",
   "out-of-range": "Khách hàng chỉ định một phạm vi không hợp lệ.",
-  "permission-denied":
-      "Người gọi không có quyền thực thi thao tác được chỉ định.",
+  "permission-denied": "Người gọi không có quyền thực thi thao tác được chỉ định.",
   "resource-exhausted":
       "Một số tài nguyên đã bị kiệt quệ, có thể là hạn ngạch cho mỗi người dùng hoặc toàn bộ hệ thống tập tin đã hết dung lượng.",
   "unavailable": "Dịch vụ hiện không khả dụng.",
-  "unimplemented":
-      "Thao tác không được triển khai hoặc không được hỗ trợ / kích hoạt.",
+  "unimplemented": "Thao tác không được triển khai hoặc không được hỗ trợ / kích hoạt.",
   "unknown": "Đã xảy ra lỗi không xác định.",
 
   // Drawer
@@ -211,16 +195,14 @@ const Map<String, String> vi = {
 
   // Rating
   "Rating_Title": "Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi",
-  "Rating_Description":
-      "Đánh giá của bạn sẽ giúp chúng tôi cải thiện dịch vụ của mình",
+  "Rating_Description": "Đánh giá của bạn sẽ giúp chúng tôi cải thiện dịch vụ của mình",
   "Rating_Feedback": "Phản hồi",
   "Rating_Rate": "Đánh giá",
   "Rating_Skip": "Bỏ qua",
   "Rating_Submit": "Gửi",
   "Rating_Loading": "Đang gửi đánh giá...",
   "Rating_Rate_Success": "Thành công",
-  "Rating_Rate_Success_Description":
-      "Cảm ơn bạn đã đánh giá dịch vụ của chúng tôi",
+  "Rating_Rate_Success_Description": "Cảm ơn bạn đã đánh giá dịch vụ của chúng tôi",
 
   // History Status
   "Request": "Đang đợi nhà hàng xác nhận...",
@@ -260,4 +242,21 @@ const Map<String, String> vi = {
   "Notification_Title": "Thông báo",
   "Notification_Request": "Bạn có một đơn hàng mới",
   "Notification_Done": "Đơn hàng đã hoàn thành",
+  "Notification_Empty": "Không có thông báo nào",
+  "Notification_Mark_All": "Đánh dấu tất cả đã đọc",
+  "Notification_Remove_All": "Xóa tất cả thông báo",
+  "Notification_Remove": "Xóa thông báo này",
+
+  // Dashboard
+  "Dashboard_TodayRevenue": "Doanh thu hôm nay",
+  "Dashboard_TodayOrders": "Tổng đơn hàng hôm nay",
+  "Dashboard_TotalReviews": "Tổng số đánh giá",
+  "Dashboard_Order_Processing": "Bạn có đơn hàng cần xử lý",
+  "Dashboard_Revenue_Chart": "Biểu đồ doanh thu",
+  "Dashboard_Order_Chart": "Biểu đồ đơn hàng",
+
+  // Chart Filter
+  "Chart_Filter_Week": "Tuần",
+  "Chart_Filter_Month": "Tháng",
+  "Chart_Filter_Year": "Năm",
 };

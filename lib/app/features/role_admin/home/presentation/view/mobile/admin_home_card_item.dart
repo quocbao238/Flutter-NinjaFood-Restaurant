@@ -32,6 +32,8 @@ class HomeCardItem extends StatelessWidget {
       margin: EdgeInsets.only(bottom: AppGapSize.medium.size),
       child: AppPadding.medium(
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
               decoration: BoxDecoration(
@@ -45,9 +47,7 @@ class HomeCardItem extends StatelessWidget {
             ),
             Expanded(
               child: AppPadding(
-                padding: AppEdgeInsets.symmetric(
-                  horizontal: AppGapSize.medium,
-                ),
+                padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -60,6 +60,7 @@ class HomeCardItem extends StatelessWidget {
                     AppText.bodyLarge(
                         text: title,
                         fontWeight: FontWeight.bold,
+                        textAlign: TextAlign.start,
                         color: context.theme.textTheme.bodySmall!.color!.withOpacity(0.8)),
                   ],
                 ),

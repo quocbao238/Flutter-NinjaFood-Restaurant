@@ -69,5 +69,10 @@ abstract class DatabaseServiceImpl {
 
   Future<Either<Failure, void>> deleteNotification({required NotificationModel notificationModel});
 
+  Future<Either<Failure, void>> deleteAllNotification({required String userId});
+
+  Future<Either<Failure, void>> readAllNotification({required String userId});
+
+
   Stream<QuerySnapshot<Map<String, dynamic>>> listenNotification({required String userId});
 }
