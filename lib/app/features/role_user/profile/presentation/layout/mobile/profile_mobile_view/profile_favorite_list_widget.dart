@@ -14,9 +14,10 @@ class FavoriteList extends GetView<FavoriteController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppPadding(
-                padding: AppEdgeInsets.only(bottom: AppGapSize.medium),
-                child: AppText.bodyLarge(
-                    text: 'Favorite_Food'.tr, fontWeight: FontWeight.bold)),
+              padding: AppEdgeInsets.only(bottom: AppGapSize.medium),
+              child: AppText.bodyLarge(
+                  text: 'Favorite_Food'.tr, fontWeight: FontWeight.bold),
+            ),
             AnimatedList(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),

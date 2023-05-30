@@ -5,7 +5,6 @@ final class FavoriteController extends BaseController implements Bootable {
   late final UserController _userController;
   final DatabaseService _databaseService = DatabaseService.instance;
 
-  final lstFavoriteProductId = <int>[].obs;
   final lstFavoriteProduct = <ProductModel>[].obs;
 
   @override
@@ -17,40 +16,39 @@ final class FavoriteController extends BaseController implements Bootable {
 
 /* -------------------------------- Private Methods --------------------------------*/
 
+  bool checkProductIsFavorite(int productId) =>
+      lstFavoriteProduct.toList().any((element) => element.id == productId);
+
   void _listenCart() {
     _userController.currentUser.listen((event) {
       if (event == null) return;
-      lstFavoriteProductId.assignAll(event.favoriteIds);
       _getListFavoritesProduct(event.favoriteIds);
     });
   }
 
   void _getListFavoritesProduct(List<int> lstFavoriteProductId) async {
-    loading.value = true;
     lstFavoriteProduct.clear();
+
     await _databaseService.getListProductByListId(lstFavoriteProductId).then(
         (response) => response.fold(
-            (l) => handleFailure(_logName, l, showDialog: false),
-            (r) => (r.length != lstFavoriteProduct.length)
-                ? lstFavoriteProduct.assignAll(r)
-                : null));
-    loading.value = false;
+                (l) => handleFailure(_logName, l, showDialog: false), (r) {
+              lstFavoriteProduct.addAll(r);
+            }));
   }
 
 /* -------------------------------- Public methods --------------------------------*/
 
-  bool checkProductIsFavorite(int? productId) {
-    if (productId == null) return false;
-    return lstFavoriteProductId.contains(productId) ? true : false;
-  }
-
   // Public methods
   void setFavoriteProduct(int? productId) {
     if (productId == null) return;
-    lstFavoriteProductId.contains(productId)
-        ? lstFavoriteProductId.remove(productId)
-        : lstFavoriteProductId.add(productId);
-    _userController.updateUser(favoriteIds: lstFavoriteProductId);
+    final lstFavoriteProductId =
+        _userController.currentUser.value?.favoriteIds ?? [];
+    if (lstFavoriteProductId.contains(productId)) {
+      lstFavoriteProductId.remove(productId);
+    } else {
+      lstFavoriteProductId.add(productId);
+    }
+    _userController.updateUser(favoriteIds: [...lstFavoriteProductId]);
   }
 
   void onPressedItem(ProductModel productModel) =>

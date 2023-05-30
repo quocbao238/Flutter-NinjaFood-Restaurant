@@ -7,7 +7,7 @@ import 'package:ninjafood/app/models/history_model.dart';
 
 class RatingScreenController extends BaseController {
   final UserController userController = UserController.instance;
-  final rating = 3.5.obs;
+  final rating = 5.0.obs;
   final enableSubmit = false.obs;
   final TextEditingController commentController = TextEditingController();
   late final OrderModel orderModel;

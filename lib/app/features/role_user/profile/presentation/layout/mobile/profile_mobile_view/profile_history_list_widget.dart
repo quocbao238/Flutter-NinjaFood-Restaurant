@@ -80,11 +80,11 @@ class HistoryList extends GetView<HistoryController> {
                                                 top: AppGapSize.small),
                                             child: FittedBox(
                                               child: AppText.bodyMedium(
-                                                  text: createAt,
-                                                  fontWeight: FontWeight.w400,
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis),
+                                                text: createAt,
+                                                fontWeight: FontWeight.w400,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -92,15 +92,17 @@ class HistoryList extends GetView<HistoryController> {
                                     ),
                                   ),
                                   AppPadding(
-                                      padding: AppEdgeInsets.symmetric(
-                                          horizontal: AppGapSize.medium),
-                                      child: Container(
-                                          width: 1,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .shortestSide *
-                                              0.15,
-                                          color: Colors.white)),
+                                    padding: AppEdgeInsets.symmetric(
+                                        horizontal: AppGapSize.medium),
+                                    child: Container(
+                                      width: 1,
+                                      height: MediaQuery.of(context)
+                                              .size
+                                              .shortestSide *
+                                          0.15,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                   Column(
                                     children: [
                                       AppText.bodyLarge(

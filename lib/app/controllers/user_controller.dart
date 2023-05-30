@@ -157,20 +157,31 @@ final class UserController extends GetxController implements Bootable {
           userName: _currentUser.getName(),
           comment: comment,
           rating: rating);
-      return await _databaseService
+      await _databaseService
           .insertCommentProduct(commentModel: commentModel)
-          .then((insertCommentProduct) =>
-              insertCommentProduct.fold((l) => left(l), (r) async {
+          .then(
+            (insertCommentProduct) => insertCommentProduct.fold(
+              (l) => left(l),
+              (r) async {
                 orderModel.updateRating(true);
                 await _databaseService.updateOrder(orderModel: orderModel).then(
-                    (uploadResponse) => uploadResponse.fold(
+                      (uploadResponse) => uploadResponse.fold(
                         (l) => left(l),
                         (r) async => await updateUser(cmtIds: [
-                              ...currentUser.value!.commentIds,
-                              commentModel.uid
-                            ]).then((_updateUserResponse) => _updateUserResponse
-                                .fold((l) => left(l), (r) => right(null)))));
-              }));
+                          ...currentUser.value!.commentIds,
+                          commentModel.uid
+                        ]).then(
+                          (_updateUserResponse) => _updateUserResponse.fold(
+                            (l) => left(l),
+                            (r) => right(r),
+                          ),
+                        ),
+                      ),
+                    );
+              },
+            ),
+          );
+      return right(null);
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }
