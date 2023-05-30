@@ -35,24 +35,17 @@ class TabsController extends BaseController {
 
   void toggleDrawer() => zoomDrawerController.toggle?.call();
 
-  void onPressedMenuItem(MenuItem menuItem) {
-    switch (menuItem.menuType) {
-      case MenuType.language:
-        _onPressedChangeLanguage();
-        break;
-      case MenuType.logout:
-        _onPressedLogout();
-        break;
-      case MenuType.about:
-        _onPressedAbout();
-        break;
-      case MenuType.changeTheme:
-        _onPressedChangeTheme();
-        break;
-      default:
-        currentMenuItem.value = menuItem;
-        toggleDrawer();
-    }
+  void onPressedMenuItem(MenuItem menuItem) => switch (menuItem.menuType) {
+        MenuType.language => _onPressedChangeLanguage(),
+        MenuType.logout => _onPressedLogout(),
+        MenuType.about => _onPressedAbout(),
+        MenuType.changeTheme => _onPressedChangeTheme(),
+        _ => _onChangeMenuItem(menuItem),
+      };
+
+  void _onChangeMenuItem(MenuItem menuItem) {
+    currentMenuItem.value = menuItem;
+    toggleDrawer();
   }
 
   void onChangeToCartScreen() => currentMenuItem.value = menuItems[2];

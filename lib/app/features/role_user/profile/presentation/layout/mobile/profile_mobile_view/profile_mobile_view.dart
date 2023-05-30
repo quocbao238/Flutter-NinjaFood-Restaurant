@@ -9,7 +9,6 @@ import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/controllers/delivery_controller.dart';
 import 'package:ninjafood/app/features/role_user/category/presentation/layout/mobile/product_detail_view/widgets/product_add_to_cart.dart';
 import 'package:ninjafood/app/features/role_user/home/controllers/home_controller.dart';
-import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/features/role_user/category/presentation/layout/mobile/product_detail_view/widgets/product_favorite_item.dart';
 import 'package:ninjafood/app/models/history_model.dart';

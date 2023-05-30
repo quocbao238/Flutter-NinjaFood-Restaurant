@@ -29,43 +29,7 @@ class RoomChatFileView extends StatelessWidget {
                   : null),
           child: Stack(
             children: [
-              Builder(builder: (context) {
-                return switch (fileType) {
-                  FileType.video => Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Center(
-                            child: Icon(Icons.video_library,
-                                size: 24,
-                                color: Theme.of(context).colorScheme.primary)),
-                        AppPadding.small(
-                          child: AppText.bodySmall(
-                              text: FileHelper.getFileName(file.path),
-                              maxLines: 2),
-                        ),
-                      ],
-                    ),
-                  FileType.another => Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Center(
-                            child: Icon(
-                                FileHelper.getIconByExtension(
-                                    file.path.split('.').last),
-                                size: 24,
-                                color: Theme.of(context).colorScheme.primary)),
-                        AppPadding.small(
-                          child: AppText.bodySmall(
-                              text: FileHelper.getFileName(file.path),
-                              maxLines: 2),
-                        ),
-                      ],
-                    ),
-                  _ => Container(),
-                };
-              }),
+              IconTypeView(fileType: fileType, file: file),
               // Delete widget right top
               Positioned(
                 top: 0,

@@ -8,7 +8,9 @@ String formatPriceToVND(dynamic price) {
 }
 
 bool compareTwoDateTimeIsSameDay(DateTime dateTime1, DateTime dateTime2) {
-  return dateTime1.year == dateTime2.year && dateTime1.month == dateTime2.month && dateTime1.day == dateTime2.day;
+  return dateTime1.year == dateTime2.year &&
+      dateTime1.month == dateTime2.month &&
+      dateTime1.day == dateTime2.day;
 }
 
 String createTimeStamp() {
@@ -44,7 +46,8 @@ List<DateTime> getListCurrentDayInWeek(String timestamp) {
   var _date = DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp));
   _date = DateTime(_date.year, _date.month, _date.day);
   final _startWeek = _date.subtract(Duration(days: _date.weekday - 1));
-  final _endWeek = _date.add(Duration(days: DateTime.daysPerWeek - _date.weekday + 1));
+  final _endWeek =
+      _date.add(Duration(days: DateTime.daysPerWeek - _date.weekday + 1));
   return getListDateTimeBetweenTwoDateTime(_startWeek, _endWeek);
 }
 
@@ -57,15 +60,15 @@ List<DateTime> getListDateTimeInYear(String timestamp) {
 }
 
 List<DateTime> getListMonthInYear() {
-final _listMonth = <DateTime>[];
-for (var i = 1; i <= 12; i++) {
-  _listMonth.add(DateTime(2021, i, 1));
+  final _listMonth = <DateTime>[];
+  for (var i = 1; i <= 12; i++) {
+    _listMonth.add(DateTime(2021, i, 1));
+  }
+  return _listMonth;
 }
-return _listMonth;
 
-}
-
-List<DateTime> getListDateTimeBetweenTwoDateTime(DateTime timeStart, DateTime timeEnd) {
+List<DateTime> getListDateTimeBetweenTwoDateTime(
+    DateTime timeStart, DateTime timeEnd) {
   final _listDay = <DateTime>[];
   for (var i = timeStart; i.isBefore(timeEnd); i = i.add(Duration(days: 1))) {
     _listDay.add(i);
@@ -81,54 +84,29 @@ List<DateTime> getListDayInMonth(String timestamp) {
   return getListDateTimeBetweenTwoDateTime(_startMonth, _endMonth);
 }
 
-String getDayInWeek(DateTime dateTime) {
-  switch (dateTime.weekday) {
-    case 1:
-      return 'Mon';
-    case 2:
-      return 'Tue';
-    case 3:
-      return 'Wed';
-    case 4:
-      return 'Thu';
-    case 5:
-      return 'Fri';
-    case 6:
-      return 'Sat';
-    case 7:
-      return 'Sun';
-    default:
-      return '';
-  }
-}
+String getDayInWeek(DateTime dateTime) => switch (dateTime.weekday) {
+      1 => 'Mon',
+      2 => 'Tue',
+      3 => 'Wed',
+      4 => 'Thu',
+      5 => 'Fri',
+      6 => 'Sat',
+      7 => 'Sun',
+      _ => ''
+    };
 
-String getMonthInYear(int index) {
-  switch (index) {
-    case 1:
-      return 'Jan';
-    case 2:
-      return 'Feb';
-    case 3:
-      return 'Mar';
-    case 4:
-      return 'Apr';
-    case 5:
-      return 'May';
-    case 6:
-      return 'Jun';
-    case 7:
-      return 'Jul';
-    case 8:
-      return 'Aug';
-    case 9:
-      return 'Sep';
-    case 10:
-      return 'Oct';
-    case 11:
-      return 'Nov';
-    case 12:
-      return 'Dec';
-    default:
-      return '';
-  }
-}
+String getMonthInYear(int index) => switch (index) {
+      1 => 'Jan',
+      2 => 'Feb',
+      3 => 'Mar',
+      4 => 'Apr',
+      5 => 'May',
+      6 => 'Jun',
+      7 => 'Jul',
+      8 => 'Aug',
+      9 => 'Sep',
+      10 => 'Oct',
+      11 => 'Nov',
+      12 => 'Dec',
+      _ => ''
+    };
