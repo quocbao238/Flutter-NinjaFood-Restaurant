@@ -4,6 +4,7 @@ const Map<String, String> en = {
   "Dialog_Warning": "Warning",
   "Dialog_Success": "Success",
   "Dialog_OK": "OK",
+  "Dialog_Update_Success": "Update Success",
 
   // Member
   "Member Sliver": "Member Sliver",
@@ -33,6 +34,10 @@ const Map<String, String> en = {
   "Validate.Name_Invalid": "Name is invalid",
   "Validate.Address_Required": "Address is required",
   "Validate.Address_Invalid": "Address is invalid",
+
+  "Validate.Name_IsEmpty": "Name is empty",
+  "Validate.Price_IsEmpty": "Price is empty",
+  "Validate.Description_IsEmpty": "Description is empty",
 
 // Button
   "Next_Button": "Next",
@@ -182,6 +187,13 @@ const Map<String, String> en = {
   "Cart_Go_To_Home": "Go To Home Now",
   "Cart_Detail_Show": "Show detail order",
   "Cart_Detail_Hide": "Hide detail order",
+
+  // Product
+  "Product_Edit_Title": "Edit Product",
+  "Product_Edit_Price": "Price (VND)",
+  "Product_Detail_Title": "Product Detail",
+
+
 
   "Request": "Waiting restaurant confirm your order...",
   "Pending": "Order is being processed...",

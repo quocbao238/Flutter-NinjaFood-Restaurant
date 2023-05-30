@@ -42,7 +42,7 @@ class AdminHomeMobileView extends StatelessWidget {
                       Obx(() {
                         final val = logic.todayRevenue.value;
                         return HomeCardItem(
-                          title: 'Dashboard_TotalReviews'.tr,
+                          title: 'Dashboard_TodayRevenue'.tr,
                           value: val,
                           icon: Icons.attach_money_outlined,
                           backgroundColor: context.theme.colorScheme.onPrimary,

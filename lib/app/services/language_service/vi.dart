@@ -7,6 +7,7 @@ const Map<String, String> vi = {
   "Dialog_OK": "OK",
   "Dialog_Cancel": "Hủy",
   "Dialog_Yes": "Có",
+  "Dialog_Update_Success": "Cập nhật thành công",
 
   // Member
   "Member Sliver": "Thành viên Sliver",
@@ -42,6 +43,10 @@ const Map<String, String> vi = {
   "Validate.Name_Invalid": "Tên không hợp lệ",
   "Validate.Address_Required": "Địa chỉ là bắt buộc",
   "Validate.Address_Invalid": "Địa chỉ không hợp lệ",
+
+  "Validate.Name_IsEmpty": "Tên không được để trống",
+  "Validate.Price_IsEmpty": "Giá không được để trống",
+  "Validate.Description_IsEmpty": "Mô tả không được để trống",
 
   // SignIn Screen
   "SignInScreen_Title": "Đăng nhập tài khoản",
@@ -175,6 +180,11 @@ const Map<String, String> vi = {
   "Edit_Profile_Updating": "Đang cập nhật...",
   "Edit_Profile_Update_Success": "Cập nhật thành công",
 
+  // Product
+  "Product_Edit_Title": "Chỉnh sửa món ăn",
+  "Product_Edit_Price": "Giá (VND)",
+  "Product_Detail_Title": "Chi tiết món ăn",
+
   // Cart
   "Cart_Title": "Giỏ hàng",
   "Cart_Empty": "Giỏ hàng trống",
@@ -259,4 +269,6 @@ const Map<String, String> vi = {
   "Chart_Filter_Week": "Tuần",
   "Chart_Filter_Month": "Tháng",
   "Chart_Filter_Year": "Năm",
+
+
 };

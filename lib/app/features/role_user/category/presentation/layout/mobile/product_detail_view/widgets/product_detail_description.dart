@@ -37,16 +37,14 @@ class ProductDetailDescription extends GetView<ProductDetailScreenController> {
                 AppPadding(
                   padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
                   child: AppText.headlineMedium(
-                    text: product.name ?? '',
-                    fontWeight: FontWeight.bold,
-                    textAlign: TextAlign.start,
-                  ),
+                      text: product.name ?? '',
+                      fontWeight: FontWeight.bold,
+                      textAlign: TextAlign.start),
                 ),
                 AppText.headlineSmall(
-                  text: product.getPrice + ' ' + product.currency,
-                  color: ThemeColors.textPriceColor,
-                  textAlign: TextAlign.start,
-                ),
+                    text: product.getPrice + ' ' + product.currency,
+                    color: ThemeColors.textPriceColor,
+                    textAlign: TextAlign.start),
                 AppPadding(
                   padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
                   child: AppText.bodyMedium(

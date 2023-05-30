@@ -20,7 +20,7 @@ class AdminEditProductMobileView
 
     return AppScaffoldBackgroundImage.splash(
         appBarWidget: CustomAppBar.back(
-          title: 'Chỉnh sửa thông tin',
+          title: 'Product_Edit_Title'.tr,
         ),
         body: AppPadding.medium(
           child: SingleChildScrollView(
@@ -117,7 +117,7 @@ class AdminEditProductMobileView
                   child: Row(
                     children: [
                       TextInputTitle(
-                          title: 'Giá (VND)'.tr, paddingLeft: AppGapSize.none),
+                          title: 'Product_Edit_Price'.tr, paddingLeft: AppGapSize.none),
                       Expanded(
                         child: AppPadding(
                           padding: AppEdgeInsets.only(
@@ -139,7 +139,7 @@ class AdminEditProductMobileView
                   ),
                 ),
                 AppTextFormField(
-                    hintText: 'Giá (VND)'.tr,
+                    hintText: 'Product_Edit_Price'.tr,
                     textStyle: textStyle,
                     keyboardType: TextInputType.number,
                     maxLines: 1,
@@ -147,10 +147,10 @@ class AdminEditProductMobileView
                         controller.productPriceError.value, context),
                     controller: controller.productPriceController),
                 TextInputTitle(
-                    title: 'Chi tiết về món ăn'.tr,
+                    title: 'Product_Detail_Title'.tr,
                     paddingLeft: AppGapSize.none),
                 AppTextFormField(
-                    hintText: 'Chi tiết về món ăn'.tr,
+                    hintText: 'Product_Detail_Title'.tr,
                     textStyle: textStyle,
                     maxLines: null,
                     decoration: _decoration(

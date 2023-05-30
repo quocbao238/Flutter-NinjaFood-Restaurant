@@ -20,7 +20,6 @@ class ChartViewData extends StatefulWidget {
 class ChartViewDataState extends State<ChartViewData> {
   int touchedIndex = -1;
   final today = DateTime.now();
-
   final Color touchedBarColor = Colors.amberAccent;
 
   @override
@@ -28,9 +27,7 @@ class ChartViewDataState extends State<ChartViewData> {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final Color barBackgroundColor =
         isDarkMode ? ThemeColors.backgroundTextFormDark() : context.theme.colorScheme.onPrimary;
-
     if (widget.chartData.length == 0) return const SizedBox();
-
     final maxY = widget.chartData.map((e) => e.value).reduce((value, element) => value > element ? value : element);
 
     BarChartGroupData makeGroupData(ChartData chartData, {bool isTouched = false, List<int> showTooltips = const []}) {
@@ -42,9 +39,6 @@ class ChartViewDataState extends State<ChartViewData> {
         barRods: [
           BarChartRodData(
             toY: chartData.value,
-            // isTouched
-            //     ? chartData.value + (chartData.value * 10 / 100)
-            //     : chartData.value,
             color: isToday
                 ? context.theme.colorScheme.primary
                 : isTouched
