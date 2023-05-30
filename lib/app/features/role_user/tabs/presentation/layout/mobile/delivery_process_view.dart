@@ -151,8 +151,6 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
   }
 }
 
-/// hardcoded bezier painter
-/// TODO: Bezier curve into package component
 class _BezierPainter extends CustomPainter {
   const _BezierPainter({
     required this.color,

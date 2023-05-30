@@ -14,11 +14,7 @@ class ForgotPassWordController extends BaseController {
   @override
   void onInit() {
     emailController = TextEditingController();
-
-    emailController.addListener(() {
-      checkValidEmail();
-    });
-
+    emailController.addListener(() => checkValidEmail());
     super.onInit();
   }
 
@@ -28,17 +24,16 @@ class ForgotPassWordController extends BaseController {
     super.dispose();
   }
 
-  void onPressBack() {
-    Get.back();
-  }
+
+
+  void onPressBack() => Get.back();
 
   Future<void> onPressedSend() async {
     if (!checkValidEmail()) return;
-    final response =
-        await authService.sendEmailResetPassword(email: emailController.text);
-    response.fold((l) => handleFailure("ForgotPassWordController", l), (r) {
-      Get.toNamed(AppRouteProvider.successNotificationScreen);
-    });
+    await authService.sendEmailResetPassword(email: emailController.text).then(
+        (response) => response.fold(
+            (l) => handleFailure("ForgotPassWordController", l),
+            (r) => Get.toNamed(AppRouteProvider.successNotificationScreen)));
   }
 
   bool checkValidEmail() {
@@ -48,7 +43,5 @@ class ForgotPassWordController extends BaseController {
     return isValid == null;
   }
 
-  Future<void> onPressedBackSuccess() async {
-    Get.offAllNamed(AppRouteProvider.signInScreen);
-  }
+  void onPressedBackSuccess() => Get.offAllNamed(AppRouteProvider.signInScreen);
 }

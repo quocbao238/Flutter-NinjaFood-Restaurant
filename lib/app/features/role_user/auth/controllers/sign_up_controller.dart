@@ -76,12 +76,11 @@ class SignUpController extends BaseController {
     final email = emailController.text;
     final password = passwordController.text;
     loading(true);
-    final response =
-        await authService.registerWithEmail(email: email, password: password);
-    await response.fold(
-        (l) => handleFailure(_logName, l, showDialog: true),
-        (r) => _createInsertUserDatabase(
-            firebaseAuthUser: r.user!, createType: UserCreateType.email));
+    await authService.registerWithEmail(email: email, password: password).then(
+        (response) => response.fold(
+            (l) => handleFailure(_logName, l, showDialog: true),
+            (r) => _createInsertUserDatabase(
+                firebaseAuthUser: r.user!, createType: UserCreateType.email)));
     loading(false);
   }
 
@@ -89,14 +88,11 @@ class SignUpController extends BaseController {
       {required User firebaseAuthUser, required String createType}) async {
     final newUser = UserModel.createUserByAuthUser(
         authUser: firebaseAuthUser, createType: createType);
-    final response = await dbService.insertUser(userModel: newUser);
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) {
-      Get.offAllNamed(AppRouteProvider.signupProcessScreen);
-    });
+    await dbService.insertUser(userModel: newUser).then((response) =>
+        response.fold((l) => handleFailure(_logName, l, showDialog: true),
+            (r) => Get.offAllNamed(AppRouteProvider.signupProcessScreen)));
   }
 
-  void onPressedAlreadyHaveAnAccount() {
-    Get.offAllNamed(AppRouteProvider.signInScreen);
-  }
+  void onPressedAlreadyHaveAnAccount() =>
+      Get.offAllNamed(AppRouteProvider.signInScreen);
 }

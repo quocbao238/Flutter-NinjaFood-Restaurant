@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ninja_theme/ninja_theme.dart';
-import 'package:ninjafood/app/features/role_user/cart/controllers/cart_screen_controller.dart';
+import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/features/role_user/cart/presentation/layout/mobile/widgets/order_detail_bottom.dart';
 import 'package:ninjafood/app/features/role_user/cart/presentation/layout/mobile/widgets/order_detail_body.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/widgets/custom_appbar.dart';
 
-class OrderDetailsMobileView extends GetView<CartScreenController> {
+class OrderDetailsMobileView extends GetView<CartController> {
   const OrderDetailsMobileView({super.key});
 
   @override
@@ -17,10 +17,11 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
       appBarWidget: CustomAppBar.drawer(title: 'Cart_Title'.tr),
       body: AppPadding(
         padding: AppEdgeInsets.symmetric(
-            horizontal: AppGapSize.medium, vertical: isIos ? AppGapSize.none : AppGapSize.medium),
+            horizontal: AppGapSize.medium,
+            vertical: isIos ? AppGapSize.none : AppGapSize.medium),
         child: Obx(
           () {
-            final _listCarts = controller.lstCarts;
+            final _listCarts = controller.lstCarts.toList();
             if (_listCarts.isEmpty) {
               return Container(
                 margin: EdgeInsets.only(bottom: kToolbarHeight * 2),
@@ -41,7 +42,14 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                OrderDetailBodyView(),
+                OrderDetailBodyView(
+                    onPressedIncreaseQuantity: (cart, index) =>
+                        controller.increaseQuantity(cart, index),
+                    onPressedDecreaseQuantity: (cart, index) =>
+                        controller.decreaseQuantity(cart, index),
+                    onPressedRemoveItem: (index) =>
+                        controller.onPressedRemoveItem(index),
+                    lstCarts: _listCarts),
                 OrderDetailBottom(),
                 SafeArea(
                   top: false,
@@ -51,9 +59,9 @@ class OrderDetailsMobileView extends GetView<CartScreenController> {
                           ratioWidthDone: 0.95,
                           ratioWidthLoading: 0.9,
                           ratioWidthButton: 0.95,
-                          onPressed: () => controller.onPressedPlaceMyOrder(),
+                          onPressed: () => controller.onSubmit(),
                           textDone: 'Cart_Order_Success'.tr,
-                          onDone: () => controller.onPressedDone(),
+                          onDone: () => controller.onSubmitDone(),
                           textLoading: 'Cart_Oder_Loading'.tr,
                           textButton: 'Cart_Order_Now'.tr,
                           loading: controller.loading.value);

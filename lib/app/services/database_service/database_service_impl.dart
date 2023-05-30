@@ -48,6 +48,8 @@ abstract class DatabaseServiceImpl {
 
   Future<Either<Failure, void>> insertOrder({required OrderModel orderModel});
 
+  Future<Either<Failure, OrderModel>> getOrderById({required String orderId});
+
   Future<Either<Failure, void>> updateOrder({required OrderModel orderModel});
 
   Stream<QuerySnapshot<Map<String, dynamic>>> listenCurrentOrder(String userId);
@@ -66,6 +68,11 @@ abstract class DatabaseServiceImpl {
   Future<Either<Failure, void>> updateNotification({required NotificationModel notificationModel});
 
   Future<Either<Failure, void>> deleteNotification({required NotificationModel notificationModel});
+
+  Future<Either<Failure, void>> deleteAllNotification({required String userId});
+
+  Future<Either<Failure, void>> readAllNotification({required String userId});
+
 
   Stream<QuerySnapshot<Map<String, dynamic>>> listenNotification({required String userId});
 }

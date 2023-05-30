@@ -13,7 +13,6 @@ import 'package:ninjafood/app/models/product_model.dart';
 import 'package:ninjafood/app/models/promotion_model.dart';
 import 'package:ninjafood/app/models/user_model.dart';
 import 'package:ninjafood/app/services/boot_service/boot_services.dart';
-import 'package:ninjafood/app/services/console_service/console_service.dart';
 
 part 'database_key.dart';
 
@@ -116,8 +115,8 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
     try {
       List<ProductModel> _result = [];
 
+      final _listProductsIds = [...listProductsIds];
       // 10 products per request
-      final _listProductsIds = listProductsIds;
       while (_listProductsIds.isNotEmpty) {
         final _listIds = _listProductsIds.take(10).toList();
         final querySnapshot = await _db.collection(DatabaseKeys.productPath).where('id', whereIn: _listIds).get();
@@ -149,9 +148,17 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
   Future<Either<Failure, List<OrderModel>>> getListOrdersByListId(List<String> listOrderIds) async {
     try {
       List<OrderModel> _result = [];
-      final querySnapshot =
-          await _db.collection(DatabaseKeys.orderPath).where(FieldPath.documentId, whereIn: listOrderIds).get();
-      _result = querySnapshot.docs.map((e) => OrderModel.fromJson(e.data())).toList();
+
+      final _listOrderIds = [...listOrderIds];
+
+      // query 10 orders per request
+      while (_listOrderIds.isNotEmpty) {
+        final _listIds = _listOrderIds.take(10).toList();
+        final querySnapshot =
+            await _db.collection(DatabaseKeys.orderPath).where(FieldPath.documentId, whereIn: _listIds).get();
+        _result.addAll(querySnapshot.docs.map((e) => OrderModel.fromJson(e.data())).toList());
+        _listOrderIds.removeRange(0, _listIds.length);
+      }
       return right(_result);
     } on FirebaseException catch (error) {
       handleFailure(_logName, Failure(error.code, StackTrace.current));
@@ -320,14 +327,19 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
 
   @override
 
-  /// Listen order by status in day
-  /// Currently get in one day
+  /// Listen order by status in 1 day
   Stream<QuerySnapshot<Map<String, dynamic>>> listenOrders({DateTime? timeStart, DateTime? timeEnd}) {
     final dateTime = DateTime.now();
+    // final beginningOfDay = DateTime(dateTime.year, dateTime.month, dateTime.day).add(Duration(days: -5));
+    // final endOfDay = beginningOfDay.add(Duration(days: 6)).subtract(Duration(milliseconds: -1));
     final beginningOfDay = DateTime(dateTime.year, dateTime.month, dateTime.day);
-    final endOfDay = beginningOfDay.add(Duration(days: 1)).subtract(Duration(milliseconds: 1));
-    final timeStampStart = beginningOfDay.millisecondsSinceEpoch.toString();
-    final endStampEnd = endOfDay.millisecondsSinceEpoch.toString();
+    final endOfDay = beginningOfDay.add(Duration(days: 1)).subtract(Duration(milliseconds: -1));
+
+    final _timeStart = timeStart ?? beginningOfDay;
+    final _timeEnd = timeEnd ?? endOfDay;
+
+    final timeStampStart = _timeStart.millisecondsSinceEpoch.toString();
+    final endStampEnd = _timeEnd.millisecondsSinceEpoch.toString();
     return _db
         .collection(DatabaseKeys.orderPath)
         .where('createdAt', isGreaterThanOrEqualTo: timeStampStart)
@@ -401,10 +413,64 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
   }
 
   @override
+  Future<Either<Failure, void>> deleteAllNotification({required String userId}) async {
+    try {
+      // Delete all Notification in path by ReceiverId
+      final querySnapshot =
+          await _db.collection(DatabaseKeys.notificationPath).where('receiverId', isEqualTo: userId).get();
+      for (final doc in querySnapshot.docs) {
+        await doc.reference.delete();
+      }
+      return right(null);
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> readAllNotification({required String userId}) async {
+    try {
+      // Read all Notification in path by ReceiverId
+      final querySnapshot =
+          await _db.collection(DatabaseKeys.notificationPath).where('receiverId', isEqualTo: userId).get();
+      for (final doc in querySnapshot.docs) {
+        await doc.reference.update({'isRead': true});
+      }
+      return right(null);
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> deleteNotification({required NotificationModel notificationModel}) async {
     try {
       await _db.doc('${DatabaseKeys.notificationPath}${notificationModel.uid}').delete();
       return right(null);
+    } on FirebaseException catch (error) {
+      handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
+      return left(Failure(error.code.tr, StackTrace.current));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  @override
+  Future<Either<Failure, OrderModel>> getOrderById({String? orderId}) async {
+    try {
+      if (orderId == null) return left(Failure('Order id is null', StackTrace.current));
+      final response =
+          await _db.collection(DatabaseKeys.orderPath).where('createdAt', isEqualTo: orderId).limit(1).get();
+      if (response.docs.isEmpty) {
+        return left(Failure('Order not found', StackTrace.current));
+      }
+      return right(OrderModel.fromJson(response.docs.first.data()));
     } on FirebaseException catch (error) {
       handleFailure(_logName, Failure(error.code.tr, StackTrace.current));
       return left(Failure(error.code.tr, StackTrace.current));

@@ -21,11 +21,8 @@ class OnboardController extends BaseController {
     super.dispose();
   }
 
-  void onPressedNext(int index) {
-    if (index == 1) {
-      Get.toNamed(AppRouteProvider.signInScreen);
-      return;
-    }
-    pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
-  }
+  void onPressedNext(int index) => (index == 1)
+        ? Get.toNamed(AppRouteProvider.signInScreen)
+        : pageController.nextPage(
+            duration: Duration(milliseconds: 500), curve: Curves.ease);
 }

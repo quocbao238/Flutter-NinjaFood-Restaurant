@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/controllers/delivery_controller.dart';
 import 'package:ninjafood/app/features/role_admin/home/controllers/admin_home_controller.dart';
 import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/admin_home_card_item.dart';
-import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/chart_data/bar_chart_group_data.dart';
 import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/home_chart_revenue.dart';
+import 'package:ninjafood/app/models/history_model.dart';
 import 'package:ninjafood/app/widgets/custom_appbar.dart';
 
 class AdminHomeMobileView extends StatelessWidget {
@@ -21,10 +22,32 @@ class AdminHomeMobileView extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      GetBuilder<DeliveryController>(builder: (controller) {
+                        return Obx(() {
+                          final val = controller.lstOrderModel
+                              .toList()
+                              .where((element) =>
+                                  element.status != HistoryStatus.done &&
+                                  element.status != HistoryStatus.cancelled)
+                              .toList();
+                          if (val.length > 0)
+                            return HomeCardItem(
+                              title: 'Dashboard_Order_Processing'.tr,
+                              onPressedIcon: () =>
+                                  logic.onPressedOrderProcess(),
+                              value: val.length.toString(),
+                              icon: Icons.delivery_dining,
+                              backgroundColor: ThemeColors.orangeColor,
+                              foregroundColor: ThemeColors.orangeColor,
+                            );
+                          return const SizedBox();
+                        });
+                      }),
                       Obx(() {
                         final val = logic.todayRevenue.value;
                         return HomeCardItem(
-                          title: 'Today\'s Revenue',
+                          title: 'Dashboard_TodayRevenue'.tr,
+                          // onPressedIcon: () => logic.onPressedOrderProcess(),
                           value: val,
                           icon: Icons.attach_money_outlined,
                           backgroundColor: context.theme.colorScheme.onPrimary,
@@ -34,7 +57,8 @@ class AdminHomeMobileView extends StatelessWidget {
                       Obx(() {
                         final val = logic.todayOrder.value;
                         return HomeCardItem(
-                          title: 'Today\'s Orders',
+                          title: 'Dashboard_TodayOrders'.tr,
+                          onPressedIcon: () => logic.onPressedOrderProcess(),
                           value: val,
                           icon: Icons.shopping_cart_checkout,
                           backgroundColor: context.theme.colorScheme.onTertiary,
@@ -44,34 +68,27 @@ class AdminHomeMobileView extends StatelessWidget {
                       Obx(() {
                         final val = logic.totalReview.value;
                         return HomeCardItem(
-                          title: 'Total Reviews',
+                          title: 'Dashboard_TotalReviews'.tr,
+                          onPressedIcon: () => logic.onPressedReview(),
                           value: val,
                           icon: Icons.reviews,
                           backgroundColor: context.theme.colorScheme.onSurface,
-                          foregroundColor: context.theme.colorScheme.surfaceTint,
+                          foregroundColor:
+                              context.theme.colorScheme.surfaceTint,
                         );
                       }),
                       Obx(() {
-                        final lstRevenuesChart = logic.lstRevenuesChart.toList();
-                        return ChartViewData(title: 'Revenue Chart', chartData: lstRevenuesChart);
+                        final filterChart = logic.revenuesFilterChartType.value;
+                        return Obx(() => ChartViewData(
+                              title: 'Dashboard_Revenue_Chart'.tr,
+                              chartData: logic.lstRevenuesChart.toList(),
+                              filterChart: filterChart,
+                            ));
                       }),
-                      Obx(() {
-                        final lstOrdersChart = logic.lstOrdersChart.toList();
-                        return ChartViewData(title: 'Orders Chart', chartData: lstOrdersChart);
-                      }),
-                      // AppPadding.medium(),
-                      // Obx(() {
-                      //   final val = logic.totalRevenue.value;
-                      //   return ChartViewData(title: 'Orders Charts', chartData: ChartData.fakeDataYear());
-                      // }),
                     ],
                   ),
                 ),
               ));
         });
-  }
-
-  String _convertDoubleToDollar(double value) {
-    return '\$${value.toStringAsFixed(2)}';
   }
 }

@@ -11,8 +11,10 @@ import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/controllers/delivery_controller.dart';
 import 'package:ninjafood/app/controllers/restaurant_controller.dart';
-import 'package:ninjafood/app/features/role_user/profile/controller/profile_controller.dart';
+import 'package:ninjafood/app/core/core.dart';
+import 'package:ninjafood/app/features/role_user/tabs/controllers/tabs_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
+import 'package:ninjafood/app/models/card_cart_model.dart';
 import 'package:ninjafood/app/models/cart_model.dart';
 import 'package:ninjafood/app/models/chat_model.dart';
 import 'package:ninjafood/app/models/comment_model.dart';
@@ -35,11 +37,20 @@ part 'user_controller.dart';
 
 part 'notification_controller.dart';
 
+part 'favorite_controller.dart';
+
+part 'cart_controller.dart';
+
+part 'history_controller.dart';
+
 final Map<Bootable, int> listBootsController = {
   DialogController(): 1024,
   UserController(): 512,
   RestaurantController(): 256,
   DeliveryController(): 128,
-  MessageController(): 64,
+  FavoriteController(): 68,
+  CartController(): 66,
+  HistoryController(): 64,
+  MessageController(): 62,
   NotificationController(): 32,
 };

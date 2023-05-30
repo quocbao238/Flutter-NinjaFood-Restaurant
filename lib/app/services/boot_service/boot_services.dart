@@ -1,7 +1,6 @@
 
 part 'bootable_service.dart';
 
-
 class BootServices {
   /// List of boot services
   /// The first element is the service

@@ -46,7 +46,7 @@ class AdminEditProductScreenController extends BaseController {
 
     productNameController.addListener(() {
       if (productNameController.text.isEmpty) {
-        productNameError.value = 'Tên không được để trống'.tr;
+        productNameError.value = 'Validate.Name_IsEmpty'.tr;
       } else {
         productNameError.value = null;
       }
@@ -55,7 +55,7 @@ class AdminEditProductScreenController extends BaseController {
     productPriceController.addListener(() {
       newPrice.value = productPriceController.text;
       if (productPriceController.text.isEmpty) {
-        productPriceError.value = 'Giá không được để trống'.tr;
+        productPriceError.value = 'Validate.Name_IsEmpty'.tr;
       } else {
         productPriceError.value = null;
       }
@@ -63,7 +63,7 @@ class AdminEditProductScreenController extends BaseController {
 
     productDescriptionController.addListener(() {
       if (productDescriptionController.text.isEmpty) {
-        productDescriptionError.value = 'Chi tiết không được để trống'.tr;
+        productDescriptionError.value = 'Validate.Name_IsEmpty'.tr;
       } else {
         productDescriptionError.value = null;
       }
@@ -117,7 +117,7 @@ class AdminEditProductScreenController extends BaseController {
         Get.back(result: productModel);
         Get.snackbar(
           'Dialog_Notification'.tr,
-          'Cập nhật thành công',
+          'Dialog_Update_Success'.tr,
           snackPosition: SnackPosition.TOP,
         );
       });

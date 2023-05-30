@@ -7,6 +7,7 @@ const Map<String, String> vi = {
   "Dialog_OK": "OK",
   "Dialog_Cancel": "Hủy",
   "Dialog_Yes": "Có",
+  "Dialog_Update_Success": "Cập nhật thành công",
 
   // Member
   "Member Sliver": "Thành viên Sliver",
@@ -20,10 +21,11 @@ const Map<String, String> vi = {
 
   // Onboard Screen
   "OnboardScreen_Title1": "Ninja Food",
-  "OnboardScreen_Title2": "Food Ninja - Nơi ẩm thực của bạn",
+  "OnboardScreen_Title2": "Tìm thấy Món ăn Thú vị của bạn ở đây",
   "OnboardScreen_Description1":
-      "Bạn có thể tìm thấy mọi món ăn cho mọi khẩu vị và màu sắc. Hãy thưởng thức!",
-  "OnboardScreen_Description2": "Thưởng thức đồ ăn một cách nhanh chóng",
+      "Ở đây, bạn có thể tìm thấy đầu bếp hoặc món ăn phù hợp với mọi khẩu vị và sắc màu. Thưởng thức thôi!",
+  "OnboardScreen_Description2":
+      "Hãy tận hưởng việc giao thức ăn nhanh chóng và mượt mà ngay tại cửa nhà bạn.",
 
   // Button
   "Next_Button": "Tiếp tục",
@@ -42,6 +44,12 @@ const Map<String, String> vi = {
   "Validate.Name_Invalid": "Tên không hợp lệ",
   "Validate.Address_Required": "Địa chỉ là bắt buộc",
   "Validate.Address_Invalid": "Địa chỉ không hợp lệ",
+
+  "Validate.Name_IsEmpty": "Tên không được để trống",
+  "Validate.Price_IsEmpty": "Giá không được để trống",
+  "Validate.Description_IsEmpty": "Mô tả không được để trống",
+
+  "Validate.Empty_Card": "Giỏ hàng trống",
 
   // SignIn Screen
   "SignInScreen_Title": "Đăng nhập tài khoản",
@@ -191,6 +199,11 @@ const Map<String, String> vi = {
   "Edit_Profile_Updating": "Đang cập nhật...",
   "Edit_Profile_Update_Success": "Cập nhật thành công",
 
+  // Product
+  "Product_Edit_Title": "Chỉnh sửa món ăn",
+  "Product_Edit_Price": "Giá (VND)",
+  "Product_Detail_Title": "Chi tiết món ăn",
+
   // Cart
   "Cart_Title": "Giỏ hàng",
   "Cart_Empty": "Giỏ hàng trống",
@@ -254,10 +267,32 @@ const Map<String, String> vi = {
   "Cart_Remove_Item_Message": "Bạn có muốn xóa món ăn này khỏi giỏ hàng?",
   "Cart_Remove_Item": "Xóa món ăn",
 
+
   // Only Restaurant
 
   // Notification
   "Notification_Title": "Thông báo",
   "Notification_Request": "Bạn có một đơn hàng mới",
   "Notification_Done": "Đơn hàng đã hoàn thành",
+  "Notification_Empty": "Không có thông báo nào",
+  "Notification_Mark_All": "Đánh dấu tất cả đã đọc",
+  "Notification_Remove_All": "Xóa tất cả thông báo",
+  "Notification_Remove": "Xóa thông báo này",
+  "Notification_New_Message": "Bạn có một tin nhắn mới",
+
+  // Dashboard
+  "Dashboard_TodayRevenue": "Doanh thu hôm nay",
+  "Dashboard_TodayOrders": "Tổng đơn hàng hôm nay",
+  "Dashboard_TotalReviews": "Tổng số đánh giá",
+  "Dashboard_Order_Processing": "Bạn có đơn hàng cần xử lý",
+  "Dashboard_Revenue_Chart": "Biểu đồ doanh thu",
+  "Dashboard_Order_Chart": "Biểu đồ đơn hàng",
+
+  // Chart Filter
+  "Chart_Filter_Week": "Tuần",
+  "Chart_Filter_Month": "Tháng",
+  "Chart_Filter_Year": "Năm",
+
+  "Cart_Already_Order":
+      "Bạn đang có một đơn hàng đang được xử lý. Vui lòng hoàn thành đơn hàng này trước khi đặt đơn hàng mới",
 };

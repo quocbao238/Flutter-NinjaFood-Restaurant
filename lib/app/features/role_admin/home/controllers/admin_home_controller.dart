@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/controllers/delivery_controller.dart';
 import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/chart_data/bar_chart_group_data.dart';
+import 'package:ninjafood/app/features/role_admin/tabs/controllers/admin_tabs_controller.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/comment_model.dart';
 import 'package:ninjafood/app/models/history_model.dart';
@@ -11,27 +13,9 @@ import 'package:ninjafood/app/services/database_service/database_service.dart';
 
 const _logName = 'AdminHomeController';
 
-enum FilterChart {
-  week('filter_week'),
-  month('filter_month'),
-  year('filter_year'),
-  custom('filter_custom');
-
-  final String translation;
-
-  const FilterChart(this.translation);
-
-  List<DateTime> generateListDate() {
-    return switch (this) {
-      FilterChart.week => getListCurrentDayInWeek(createTimeStamp()),
-      FilterChart.month => getListDayInMonth(createTimeStamp()),
-      FilterChart.year => getListDateTimeInYear(createTimeStamp()),
-      _ => throw Exception('Not support'),
-    };
-  }
-}
-
 class AdminHomeController extends BaseController {
+  final AdminTabsController adminTabsController = AdminTabsController.instance;
+
   final DeliveryController deliveryController = DeliveryController.instance;
 
   final DatabaseService databaseService = DatabaseService.instance;
@@ -58,6 +42,10 @@ class AdminHomeController extends BaseController {
     final lstOrderModel = deliveryController.lstOrderModel.toList();
     todayRevenue.value = calculateTotalPriceToday(lstOrderModel);
     todayOrder.value = lstOrderModel.length.toString();
+    createChartData(revenuesFilterChartType.value)
+        .then((value) => lstRevenuesChart.assignAll(value));
+    createChartData(ordersFilterChartType.value)
+        .then((value) => lstOrdersChart.assignAll(value));
     _listens();
     super.onInit();
   }
@@ -68,25 +56,32 @@ class AdminHomeController extends BaseController {
   }
 
   Future<void> _listens() async {
-    deliveryController.lstOrderModel.listen((_orders) {
+    deliveryController.lstOrderModel.listen((_orders) async {
       todayRevenue.value = calculateTotalPriceToday(_orders);
       todayOrder.value = _orders.length.toString();
+      await createChartData(revenuesFilterChartType.value)
+          .then((value) => lstRevenuesChart.assignAll(value));
+      await createChartData(ordersFilterChartType.value)
+          .then((value) => lstOrdersChart.assignAll(value));
     });
 
-    databaseService.listenRating().listen((QuerySnapshot<Map<String, dynamic>> event) {
-      final List<CommentModel> _result = event.docs.map((e) => CommentModel.fromJson(e.data())).toList();
+    databaseService
+        .listenRating()
+        .listen((QuerySnapshot<Map<String, dynamic>> event) {
+      final List<CommentModel> _result =
+          event.docs.map((e) => CommentModel.fromJson(e.data())).toList();
       totalReview.value = _result.length.toString();
     });
-
-    lstRevenuesChart.assignAll(await createChartData(revenuesFilterChartType.value));
-    lstOrdersChart.assignAll(await createChartData(ordersFilterChartType.value));
-    lstReviewsChart.assignAll(await createChartData(reviewsFilterChartType.value));
 
     print('$_logName: "lstRevenuesChart $lstRevenuesChart"');
   }
 
-  String calculateTotalPriceToday(List<OrderModel> _orders) {
-    final total = _orders.fold<double>(0, (previousValue, element) => previousValue + element.total);
+  String calculateTotalPriceToday(List<OrderModel> orders) {
+    final _orders = orders
+        .where((element) => element.status == HistoryStatus.done)
+        .toList();
+    final total = _orders.fold<double>(
+        0, (previousValue, element) => previousValue + element.total);
     return formatPriceToVND(total) + ' VND';
   }
 
@@ -96,33 +91,73 @@ class AdminHomeController extends BaseController {
     {
       var result = <ChartData>[];
       final lstDateTime = filterChartType.generateListDate();
-
       final response = await databaseService.getListOrderModelByStatus(
           timeStampStart: lstDateTime.first.millisecondsSinceEpoch.toString(),
           timeStampEnd: lstDateTime.last.millisecondsSinceEpoch.toString());
-      var orders;
-      response.fold((l) => <OrderModel>[], (r) => orders = r);
+      List<OrderModel> orders = [];
+
+      response.fold((l) => <OrderModel>[], (r) {
+        final _filter =
+            r.where((element) => element.status == HistoryStatus.done).toList();
+        orders.assignAll(_filter);
+      });
 
       result = lstDateTime.map((e) {
-        var _order = orders.firstWhere(
-            (element) => compareTwoDateTimeIsSameDay(convertTimeStampToDateTime(element.createdAt), e),
-            orElse: () => OrderModel.empty());
-
+        final listOrderInDay = orders
+            .where((element) =>
+                compareTwoDateTimeIsSameDay(
+                    convertTimeStampToDateTime(element.createdAt), e) &&
+                element.status == HistoryStatus.done)
+            .toList();
+        final total = listOrderInDay.fold<double>(
+            0, (previousValue, element) => previousValue + element.total);
         int index = lstDateTime.indexOf(e);
         return ChartData(
             bottomTitle: filterChartType == FilterChart.week
                 ? getDayInWeek(e)
                 : filterChartType == FilterChart.month
-                    ? DateFormat('dd').format(e)
+                    ? e.day % 2 == 0
+                        ? DateFormat('d').format(e)
+                        : ''
                     : filterChartType == FilterChart.year
                         ? getMonthInYear(e.month)
                         : getDayInWeek(e),
             toolTip: getDayInWeek(e),
+            month: e.month,
             index: index,
             dateTime: e,
-            value: _order.total);
+            value: total);
       }).toList();
+
+      if (filterChartType == FilterChart.year) {
+        final _lst = <ChartData>[];
+        for (int i = 0; i < 12; i++) {
+          final _filter =
+              result.where((element) => element.month == i + 1).toList();
+          final total = _filter.fold<double>(
+              0, (previousValue, element) => previousValue + element.value);
+          _lst.add(ChartData(
+              bottomTitle: (i + 1).toString(),
+              toolTip: getMonthInYear(i + 1),
+              month: i + 1,
+              index: i,
+              dateTime: DateTime(2021, i + 1, 1),
+              value: total));
+        }
+        return _lst;
+      }
+
       return result;
     }
   }
+
+  void onFilterRevenueChart(FilterChart filterChartType) {
+    revenuesFilterChartType.value = filterChartType;
+    createChartData(filterChartType)
+        .then((value) => lstRevenuesChart.assignAll(value));
+  }
+
+  void onPressedOrderProcess() => adminTabsController.onChangeToOrderScreen();
+
+  void onPressedReview() => adminTabsController.onChangeToReviewScreen();
 }

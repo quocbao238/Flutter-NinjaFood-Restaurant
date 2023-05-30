@@ -10,10 +10,8 @@ enum UserType {
   Platinum('Member Platinum', 2),
   Diamond('Member Diamond', 3),
   Owners('Restaurant Owners', 4);
-
   final String name;
   final int json;
-
   const UserType(this.name, this.json);
 }
 

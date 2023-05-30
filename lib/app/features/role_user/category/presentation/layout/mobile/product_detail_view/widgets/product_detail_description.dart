@@ -31,25 +31,20 @@ class ProductDetailDescription extends GetView<ProductDetailScreenController> {
                     Spacer(),
                     AppPadding(
                         // padding: AppEdgeInsets.only(left: AppGapSize.small),
-                        child: ProductFavoriteItem(
-                            productId: product.id ?? 0,
-                            onPressedFavorite: (v) =>
-                                controller.onPressedFavorite(v)))
+                        child: ProductFavoriteItem(productId: product.id ?? 0))
                   ],
                 ),
                 AppPadding(
                   padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
                   child: AppText.headlineMedium(
-                    text: product.name ?? '',
-                    fontWeight: FontWeight.bold,
-                    textAlign: TextAlign.start,
-                  ),
+                      text: product.name ?? '',
+                      fontWeight: FontWeight.bold,
+                      textAlign: TextAlign.start),
                 ),
                 AppText.headlineSmall(
-                  text: product.getPrice + ' ' + product.currency,
-                  color: ThemeColors.textPriceColor,
-                  textAlign: TextAlign.start,
-                ),
+                    text: product.getPrice + ' ' + product.currency,
+                    color: ThemeColors.textPriceColor,
+                    textAlign: TextAlign.start),
                 AppPadding(
                   padding: AppEdgeInsets.symmetric(vertical: AppGapSize.medium),
                   child: AppText.bodyMedium(

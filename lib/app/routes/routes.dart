@@ -6,7 +6,6 @@ import 'package:ninjafood/app/features/role_admin/category/controller/admin_edit
 import 'package:ninjafood/app/features/role_admin/category/presentation/admin_category_screen.dart';
 import 'package:ninjafood/app/features/role_admin/category/presentation/admin_edit_product_screen.dart';
 import 'package:ninjafood/app/features/role_admin/tabs/controllers/admin_tabs_controller.dart';
-import 'package:ninjafood/app/features/role_user/cart/controllers/cart_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/category/controllers/category_screen_controller.dart';
 import 'package:ninjafood/app/features/role_user/category/presentation/category_screen.dart';
 import 'package:ninjafood/app/features/role_user/chat_message/controllers/room_chat_screen_controller.dart';
@@ -33,7 +32,6 @@ import 'package:ninjafood/app/features/role_user/home/presentation/promotion_det
 import 'package:ninjafood/app/features/role_user/location_picker/presentation/location_picker_screen.dart';
 import 'package:ninjafood/app/features/role_user/notification/presentation/notification_screen.dart';
 import 'package:ninjafood/app/features/role_user/profile/controller/edit_profile_controller.dart';
-import 'package:ninjafood/app/features/role_user/profile/controller/profile_controller.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/edit_profile_screen.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/order_detail_screen.dart';
 import 'package:ninjafood/app/features/role_user/rating/controller/rating_screen_controller.dart';
