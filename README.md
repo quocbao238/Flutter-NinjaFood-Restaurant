@@ -75,5 +75,5 @@
 - FlutterFire: https://firebase.flutter.dev/
 
 <!-- Variables/Text References -->
-[image-link-1]: https://github.com/quocbao238/NinjaFood/blob/devMaster/screen_shot/splash_screen.png
+[image-link-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/splash_screen.png
 
