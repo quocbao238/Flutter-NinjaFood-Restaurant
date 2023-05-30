@@ -61,10 +61,22 @@
 #### - 1. Splash, Login, Register
 
 
-| Splash Screen | Login Screen | Register Screen |
-| :---: | :---: | :---: |
-| ![Splash Screen][splash-image] | ![Login Screen][login-image] | ![Register Screen 1][register-image-1] |
+| Splash Screen |  
+| :---: |
+| ![Splash Screen][splash-image] |
 
+| Login Screen |Login Fail| 
+| :---: | :---: |
+| ![Login Screen][login-image] | ![Login Fail][login-fail-image] |
+
+| Register Screen 1 | Register Screen 2 | Register Screen 3 | Register Screen 4 |
+| :---: | :---: | :---: | :---: |
+| ![Register Screen 1][register-image-1] | ![Register Screen 2][register-image-2] | ![Register Screen 3][register-image-3] | ![Register Screen 4][register-image-4] |
+
+
+| Register Screen 5 | Register Screen 6 | Register Screen 7 | Register Screen 8 | Register Screen 9 |
+| :---: | :---: | :---: | :---: | :---: |
+| ![Register Screen 5][register-image-5] | ![Register Screen 6][register-image-6] | ![Register Screen 7][register-image-7] | ![Register Screen 8][register-image-8] | ![Register Screen 9][register-image-9] |
 
 
 
@@ -75,10 +87,10 @@
 - Figma: https://www.figma.com/file/pMmzsDZr1VPuPbVZehlIXN/Pixel-True---Food-Delivery-UI-Kit?type=design&node-id=401-934&t=fPfpguuPtTSr8sHy-0
 - FlutterFire: https://firebase.flutter.dev/
 
-<!-- Variables/Text References -->
-[splash-image]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/splash_screen.png
-[login-image]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login_1.png
+<!-- Variables/Text References max width = 200 -->
 
+[splash-image]:     https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/splash.png
+[login-image]:      https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login_1.png
 [login-fail-image]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login_2.png
 [register-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_1.png
 [register-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_2.png
