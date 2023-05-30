@@ -52,13 +52,13 @@
 - [x] Update Order Delivery Status
 - [x] Order Detail 
 - [x] View Rating 
-- [ ] Edit Food (Name, Price, Image, Description, Category)
-- [ ] Total income (day, month, quarterly, year) - Maybe view chart
-- [ ] Insert Food
+- [x] Edit Food (Name, Price, Image, Description)
+- [x] Total income (day, month, year) - Maybe view chart
 
 
 
 ### Documenttation style & source
+- 
 - Figma: https://www.figma.com/file/pMmzsDZr1VPuPbVZehlIXN/Pixel-True---Food-Delivery-UI-Kit?type=design&node-id=401-934&t=fPfpguuPtTSr8sHy-0
 - FlutterFire: https://firebase.flutter.dev/
 
