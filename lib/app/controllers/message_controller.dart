@@ -100,7 +100,7 @@ final class MessageController extends GetxController implements Bootable {
                       (r) {
                         final _message = messageChatType == MessageChatType.text
                             ? message
-                            : "You have new message";
+                            : "Notification_New_Message".tr;
                         _sendMessage(receiverUser, _message,
                             senderUser.photoUrl!, groupChatId);
                         return right(null);
@@ -171,7 +171,7 @@ final class MessageController extends GetxController implements Bootable {
       final OSCreateNotification notification = OSCreateNotification(
           playerIds: [receiverUser.playerIds.last],
           content: message,
-          heading: "You have new message",
+          heading: "Notification_New_Message".tr,
           androidLargeIcon: senderAvatar);
 
       final notificationModel =

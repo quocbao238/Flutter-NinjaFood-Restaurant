@@ -71,14 +71,18 @@ class SignUpProcessController extends BaseController {
       return;
     }
     loading(true);
-    await userController
+    userController
         .updateUser(
             firstName: firstNameController.text,
             lastName: lastNameController.text,
             phoneNumber: phoneController.text)
-        .then((response) => response.fold((l) => handleFailure(_logName, l),
-            (r) => Get.toNamed(AppRouteProvider.paymentMethodScreen)));
-    loading(false);
+        .then((response) => response.fold((l) {
+              loading(false);
+              return handleFailure(_logName, l);
+            }, (r) {
+              loading(false);
+              return Get.toNamed(AppRouteProvider.paymentMethodScreen);
+            }));
   }
 
   Future<void> onPressedLocationPicker() async {
@@ -93,13 +97,16 @@ class SignUpProcessController extends BaseController {
       Get.offNamed(AppRouteProvider.signupSuccessScreen);
       return;
     }
-
     loading(true);
-    await userController.updateUser(address: addressLocation.value).then(
-        (response) => response.fold(
-            (l) => handleFailure(_logName, l, showDialog: true),
-            (r) => Get.toNamed(AppRouteProvider.signupSuccessScreen)));
-    loading(false);
+    await userController
+        .updateUser(address: addressLocation.value)
+        .then((response) => response.fold((l) {
+              loading(false);
+              return handleFailure(_logName, l, showDialog: true);
+            }, (r) {
+              loading(false);
+              return Get.toNamed(AppRouteProvider.signupSuccessScreen);
+            }));
   }
 
   void onPressedNextPayment() =>
@@ -128,18 +135,26 @@ class SignUpProcessController extends BaseController {
   Future<void> onPressedPhotoNext() async {
     final currentUser = userController.currentUser.value;
     if (currentUser == null) return;
-    loading(true);
+    try {
+      loading(true);
+      final urlCallBack = await cloudStorageService.uploadAvatarImage(
+          file: imageFile!, uid: currentUser.uid);
 
-    final urlCallBack = await cloudStorageService.uploadAvatarImage(
-        file: imageFile!, uid: currentUser.uid);
-    if (urlCallBack == null) {
+      if (urlCallBack == null) {
+        return;
+      }
+      await userController
+          .updateUser(photoUrl: urlCallBack)
+          .then((response) => response.fold((l) {
+                loading(false);
+                return handleFailure(_logName, l, showDialog: true);
+              }, (r) {
+                loading(false);
+                return Get.toNamed(AppRouteProvider.setLocationScreen);
+              }));
+    } catch (e) {
       loading(false);
-      return;
+      handleFailure(_logName, Failure.custom(e.toString()), showDialog: true);
     }
-    await userController.updateUser(photoUrl: urlCallBack).then((response) =>
-        response.fold((l) => handleFailure(_logName, l, showDialog: true),
-            (r) => Get.toNamed(AppRouteProvider.setLocationScreen)));
-
-    loading(false);
   }
 }

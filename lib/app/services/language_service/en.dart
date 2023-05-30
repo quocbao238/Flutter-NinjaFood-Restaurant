@@ -6,6 +6,7 @@ const Map<String, String> en = {
   "Dialog_OK": "OK",
   "Dialog_Update_Success": "Update Success",
 
+
   // Member
   "Member Sliver": "Member Sliver",
   "Member Gold": "Member Gold",
@@ -38,6 +39,9 @@ const Map<String, String> en = {
   "Validate.Name_IsEmpty": "Name is empty",
   "Validate.Price_IsEmpty": "Price is empty",
   "Validate.Description_IsEmpty": "Description is empty",
+  "Validate.Empty_Card": "Your cart is empty",
+
+
 
 // Button
   "Next_Button": "Next",
@@ -184,6 +188,7 @@ const Map<String, String> en = {
   "Cart_Order_Now": "Order Now",
   "Cart_Oder_Loading": "Ordering...",
   "Cart_Order_Success": "Order Success",
+  "Cart_Already_Order": "You already have ordering",
   "Cart_Go_To_Home": "Go To Home Now",
   "Cart_Detail_Show": "Show detail order",
   "Cart_Detail_Hide": "Hide detail order",
@@ -246,6 +251,8 @@ const Map<String, String> en = {
   "Notification_Mark_All": "Mark all as read",
   "Notification_Remove_All": "Remove all",
   "Notification_Remove": "Remove this message",
+  "Notification_New_Message": "You have new message",
+
 
   // Dashboard
   "Dashboard_TodayRevenue": "Today\'s Revenue",

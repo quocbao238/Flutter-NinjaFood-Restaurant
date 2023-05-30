@@ -101,22 +101,31 @@ class _DeliveryWidgetState extends State<DeliveryWidget> {
           children: [
             AppPadding(
               padding: AppEdgeInsets.only(left: AppGapSize.medium),
-              child: Lottie.asset(widget.currentOrder.status.lottieUrl,
-                  width: MediaQuery.of(context).size.height * 0.1,
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  fit: BoxFit.fill),
+              child: Lottie.asset(
+                widget.currentOrder.status.lottieUrl,
+                width: MediaQuery.of(context).size.height * 0.1,
+                height: MediaQuery.of(context).size.height * 0.1,
+                fit: BoxFit.fill,
+              ),
             ),
             if (_show)
               Expanded(
-                child: AppText.bodyMedium(
-                  text: widget.currentOrder.status.status.tr,
-                  maxLines: 2,
+                child: GestureDetector(
+                  onTap: () =>
+                      DeliveryController.instance.onChangeDeliveryStatus(),
+                  child: AppText.bodyMedium(
+                    text: widget.currentOrder.status.status.tr,
+                    maxLines: 2,
+                  ),
                 ),
               ),
             if (_show)
               IconButton(
-                  onPressed: () => setState(() => _show = false),
-                  icon: Icon(Icons.arrow_forward_ios))
+                onPressed: () => setState(() => _show = false),
+                icon: Icon(
+                  Icons.arrow_forward_ios,
+                ),
+              ),
           ],
         ),
       ),

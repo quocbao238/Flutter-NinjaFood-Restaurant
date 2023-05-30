@@ -21,9 +21,19 @@ final class HistoryController extends BaseController implements Bootable {
     if (ordersId != null && ordersId.isNotEmpty) {
       await _databaseService.getListOrdersByListId(ordersId).then((response) =>
           response.fold((l) => handleFailure(_logName, l, showDialog: true),
-              (r) => lstHistory.assignAll(r)));
+              (r) {
+            final newestList = r
+                .where((element) =>
+                    element.status == HistoryStatus.done ||
+                    element.status == HistoryStatus.cancelled)
+                .toList();
+            lstHistory.assignAll(r);
+          }));
     }
   }
+
+
+  void onRefresh()=> _getListOrderHistory(_userController.currentUser.value?.orderIds);
 
   OrderModel? getOrderById(String orderId) =>
       lstHistory.firstWhereOrNull((element) => element.createdAt == orderId);

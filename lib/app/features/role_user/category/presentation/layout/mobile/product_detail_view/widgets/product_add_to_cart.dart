@@ -14,6 +14,11 @@ class ProductAddToCartWidget extends GetView<CartController> {
 
   @override
   Widget build(BuildContext context) {
+
+    final isAdmin =
+        UserController.instance.currentUser.value?.isAdmin() ?? false;
+    if (isAdmin) return const SizedBox();
+
     return Obx(() {
       bool isExist = controller.checkProductInCart(productModel.id ?? 0);
       return SizedBox(

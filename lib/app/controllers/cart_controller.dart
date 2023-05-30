@@ -86,13 +86,14 @@ final class CartController extends BaseController implements Bootable {
 
   Future<void> onSubmit() async {
     if (lstCarts.isEmpty) {
-      Get.snackbar('Error', 'Your cart is empty');
+      Get.snackbar('Dialog_Error'.tr, 'Validate.Empty_Card'.tr);
       return;
     }
     // Show dialog if already have ordering...
-    if (loading.value) {
+    final currentOrder = DeliveryController.instance.currentOrder.value;
+    if (currentOrder != null && currentOrder.status != HistoryStatus.done) {
       await DialogController.instance
-          .showError(message: 'You already have ordering');
+          .showError(message: 'Cart_Already_Order'.tr);
       DeliveryController.instance.onChangeDeliveryStatus();
       return;
     }

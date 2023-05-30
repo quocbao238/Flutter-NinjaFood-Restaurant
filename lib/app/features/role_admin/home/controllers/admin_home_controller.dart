@@ -158,4 +158,6 @@ class AdminHomeController extends BaseController {
   }
 
   void onPressedOrderProcess() => adminTabsController.onChangeToOrderScreen();
+
+  void onPressedReview() => adminTabsController.onChangeToReviewScreen();
 }

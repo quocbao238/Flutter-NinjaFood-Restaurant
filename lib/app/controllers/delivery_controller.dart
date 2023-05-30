@@ -45,6 +45,7 @@ final class DeliveryController extends GetxController implements Bootable {
         _databaseService.listenCurrentOrder(userUid).listen((event) {
       if (event.docs.isEmpty || event.docs.last.data().isEmpty) return;
       final _order = OrderModel.fromJson(event.docs.first.data());
+      HistoryController.instance.onRefresh();
       if (_order.status != currentOrder.value?.status) {
         disableShowDelivery.value = false;
       }

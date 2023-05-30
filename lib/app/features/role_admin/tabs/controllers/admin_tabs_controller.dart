@@ -34,13 +34,11 @@ class AdminTabsController extends BaseController {
   void toggleDrawer() => zoomDrawerController.toggle?.call();
 
   void onPressedMenuItem(MenuItem menuItem) => switch (menuItem.menuType) {
-        MenuType.language =>  _onPressedChangeLanguage,
+        MenuType.language => _onPressedChangeLanguage(),
         MenuType.logout => _onPressedLogout(),
         MenuType.about => _onPressedAbout(),
         MenuType.changeTheme => _onPressedChangeTheme(),
         MenuType.category => _onPressedCategory(),
-        MenuType.home => onChangeToHomeScreen(),
-        MenuType.order => onChangeToOrderScreen(),
         MenuType.cart => onChangeToCartScreen(),
         _ => _onChangeMenuItem(menuItem),
       };
@@ -58,6 +56,9 @@ class AdminTabsController extends BaseController {
 
   void onChangeToOrderScreen() => currentMenuItem.value =
       menuItems.firstWhere((element) => element.menuType == MenuType.order);
+
+  void onChangeToReviewScreen() => currentMenuItem.value =
+      menuItems.firstWhere((element) => element.menuType == MenuType.rating);
 
   void _onPressedChangeLanguage() {
     final currentLocale = Get.locale;

@@ -12,6 +12,9 @@ class ProductFavoriteItem extends GetView<FavoriteController> {
 
   @override
   Widget build(BuildContext context) {
+    final isAdmin =
+        UserController.instance.currentUser.value?.isAdmin() ?? false;
+    if (isAdmin) return const SizedBox();
     return GestureDetector(
       onTap: () => controller.setFavoriteProduct(productId),
       child: Obx(
