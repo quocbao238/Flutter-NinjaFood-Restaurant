@@ -26,7 +26,8 @@ class AdminHomeMobileView extends StatelessWidget {
                         return Obx(() {
                           final val = controller.lstOrderModel
                               .toList()
-                              .where((element) => element.status != HistoryStatus.done)
+                              .where((element) =>
+                                  element.status != HistoryStatus.done)
                               .toList();
                           if (val.length > 0)
                             return HomeCardItem(
@@ -66,17 +67,17 @@ class AdminHomeMobileView extends StatelessWidget {
                           value: val,
                           icon: Icons.reviews,
                           backgroundColor: context.theme.colorScheme.onSurface,
-                          foregroundColor: context.theme.colorScheme.surfaceTint,
+                          foregroundColor:
+                              context.theme.colorScheme.surfaceTint,
                         );
                       }),
                       Obx(() {
-                        final lstRevenuesChart = logic.lstRevenuesChart.toList();
-                        final filterChart = logic.revenuesFilterChartType;
-                        return ChartViewData(
-                          title: 'Dashboard_Revenue_Chart'.tr,
-                          chartData: lstRevenuesChart,
-                          filterChart: filterChart.value,
-                        );
+                        final filterChart = logic.revenuesFilterChartType.value;
+                        return Obx(() => ChartViewData(
+                              title: 'Dashboard_Revenue_Chart'.tr,
+                              chartData: logic.lstRevenuesChart.toList(),
+                              filterChart: filterChart,
+                            ));
                       }),
                     ],
                   ),

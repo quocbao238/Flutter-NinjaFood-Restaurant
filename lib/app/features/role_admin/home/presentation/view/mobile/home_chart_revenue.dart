@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninja_theme/ninja_theme.dart';
+import 'package:ninjafood/app/constants/contains.dart';
 import 'package:ninjafood/app/features/role_admin/home/controllers/admin_home_controller.dart';
 import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/chart_data/bar_chart_group_data.dart';
 import 'package:ninjafood/app/helper/helper.dart';
@@ -139,7 +140,7 @@ class ChartViewDataState extends State<ChartViewData> {
                             reservedSize: 42,
                             getTitlesWidget: (val, title) => SideTitleWidget(
                               axisSide: title.axisSide,
-                              child: val % 500 != 0
+                              child: val % 30 != 0
                                   ? SizedBox()
                                   : AppText.bodySmall(
                                       text: formatVND(val.toInt()), maxLines: 1, fontWeight: FontWeight.bold),

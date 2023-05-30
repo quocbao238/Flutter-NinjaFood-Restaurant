@@ -33,9 +33,7 @@ class TabsController extends BaseController {
     super.onInit();
   }
 
-  void toggleDrawer() {
-    zoomDrawerController.toggle?.call();
-  }
+  void toggleDrawer() => zoomDrawerController.toggle?.call();
 
   void onPressedMenuItem(MenuItem menuItem) {
     switch (menuItem.menuType) {
@@ -57,13 +55,9 @@ class TabsController extends BaseController {
     }
   }
 
-  void onChangeToCartScreen() {
-    currentMenuItem.value = menuItems[2];
-  }
+  void onChangeToCartScreen() => currentMenuItem.value = menuItems[2];
 
-  void onChangeToHomeScreen() {
-    currentMenuItem.value = menuItems[0];
-  }
+  void onChangeToHomeScreen() => currentMenuItem.value = menuItems[0];
 
   Future<void> _onPressedChangeLanguage() async {
     final currentLocale = Get.locale;
@@ -110,9 +104,7 @@ class TabsController extends BaseController {
 
   void _onPressedAbout() {}
 
-  void _onPressedChangeTheme() {
-    themeService.toggleTheme();
-  }
+  void _onPressedChangeTheme() => themeService.toggleTheme();
 
   Future<void> _onPressedLogout() async {
     loading.value = true;
@@ -124,7 +116,6 @@ class TabsController extends BaseController {
     loading.value = false;
   }
 
-  void onPressedNotification() {
-    Get.toNamed(AppRouteProvider.notificationScreen);
-  }
+  void onPressedNotification() =>
+      Get.toNamed(AppRouteProvider.notificationScreen);
 }

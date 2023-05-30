@@ -1,8 +1,3 @@
-import 'dart:math';
-
-import 'package:intl/intl.dart';
-import 'package:ninjafood/app/helper/helper.dart';
-
 class ChartData {
   final int index;
   final String bottomTitle;

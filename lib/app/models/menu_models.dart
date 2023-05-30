@@ -9,7 +9,20 @@ import 'package:ninjafood/app/features/role_user/home/presentation/home_screen.d
 import 'package:ninjafood/app/features/role_user/notification/presentation/notification_screen.dart';
 import 'package:ninjafood/app/features/role_user/profile/presentation/profile_screen.dart';
 
-enum MenuType { home, chat, profile, cart, language, logout, about, changeTheme, category, notification, order, rating }
+enum MenuType {
+  home,
+  chat,
+  profile,
+  cart,
+  language,
+  logout,
+  about,
+  changeTheme,
+  category,
+  notification,
+  order,
+  rating,
+}
 
 class MenuItem {
   final String title;
@@ -18,7 +31,12 @@ class MenuItem {
   final MenuType menuType;
   final int index;
 
-  MenuItem({required this.title, required this.iconData, this.screen, required this.menuType, required this.index});
+  MenuItem(
+      {required this.title,
+      required this.iconData,
+      this.screen,
+      required this.menuType,
+      required this.index});
 
   static List<MenuItem> listAdminMenu = [
     MenuItem(
@@ -120,7 +138,12 @@ class MenuItem {
         iconData: FontAwesomeIcons.themeisle,
         screen: null,
         menuType: MenuType.changeTheme),
-    MenuItem(index: 6, title: 'Drawer_About', iconData: FontAwesomeIcons.info, screen: null, menuType: MenuType.about),
+    MenuItem(
+        index: 6,
+        title: 'Drawer_About',
+        iconData: FontAwesomeIcons.info,
+        screen: null,
+        menuType: MenuType.about),
     MenuItem(
         index: 7,
         title: 'Drawer_Logout',

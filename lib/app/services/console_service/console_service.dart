@@ -16,7 +16,7 @@ final class ConsoleService extends GetxService implements Bootable {
 
   bool useLogger = true;
 
-  final logger = Logger(printer: PrettyPrinter());
+  final logger = Logger(printer: PrettyPrinter(methodCount: 3));
   final loggerNoStack = Logger(
     printer: PrettyPrinter(methodCount: 0, colors: false, printEmojis: true),
   );

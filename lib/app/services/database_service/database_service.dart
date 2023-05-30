@@ -153,7 +153,7 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
 
       // query 10 orders per request
       while (_listOrderIds.isNotEmpty) {
-        final _listIds = listOrderIds.take(10).toList();
+        final _listIds = _listOrderIds.take(10).toList();
         final querySnapshot =
             await _db.collection(DatabaseKeys.orderPath).where(FieldPath.documentId, whereIn: _listIds).get();
         _result.addAll(querySnapshot.docs.map((e) => OrderModel.fromJson(e.data())).toList());
@@ -327,14 +327,19 @@ class DatabaseService extends GetxService implements Bootable, DatabaseServiceIm
 
   @override
 
-  /// Listen order by status in day
-  /// Currently get in one day
+  /// Listen order by status in 1 day
   Stream<QuerySnapshot<Map<String, dynamic>>> listenOrders({DateTime? timeStart, DateTime? timeEnd}) {
     final dateTime = DateTime.now();
+    // final beginningOfDay = DateTime(dateTime.year, dateTime.month, dateTime.day).add(Duration(days: -5));
+    // final endOfDay = beginningOfDay.add(Duration(days: 6)).subtract(Duration(milliseconds: -1));
     final beginningOfDay = DateTime(dateTime.year, dateTime.month, dateTime.day);
     final endOfDay = beginningOfDay.add(Duration(days: 1)).subtract(Duration(milliseconds: -1));
-    final timeStampStart = beginningOfDay.millisecondsSinceEpoch.toString();
-    final endStampEnd = endOfDay.millisecondsSinceEpoch.toString();
+
+    final _timeStart = timeStart ?? beginningOfDay;
+    final _timeEnd = timeEnd ?? endOfDay;
+
+    final timeStampStart = _timeStart.millisecondsSinceEpoch.toString();
+    final endStampEnd = _timeEnd.millisecondsSinceEpoch.toString();
     return _db
         .collection(DatabaseKeys.orderPath)
         .where('createdAt', isGreaterThanOrEqualTo: timeStampStart)

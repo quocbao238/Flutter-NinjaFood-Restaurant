@@ -140,7 +140,7 @@ class MessageChat {
         receiverId: receiverId,
         groupChatId: groupChatId,
         timestamp: createTimeStamp(),
-        message: message,
+        message: message,z
         messageChatType: messageChatType);
   }
 }

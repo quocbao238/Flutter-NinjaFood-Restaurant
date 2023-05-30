@@ -8,19 +8,13 @@ enum NotificationType {
   other('other');
 
   final String json;
-
   const NotificationType(this.json);
 
-  static NotificationType parseJson(String json) {
-    switch (json) {
-      case 'order':
-        return NotificationType.order;
-      case 'chat':
-        return NotificationType.chat;
-      default:
-        return NotificationType.other;
-    }
-  }
+  static NotificationType parseJson(String json) => switch (json) {
+        'order' => NotificationType.order,
+        'chat' => NotificationType.chat,
+        _ => NotificationType.other
+      };
 }
 
 class NotificationModel {

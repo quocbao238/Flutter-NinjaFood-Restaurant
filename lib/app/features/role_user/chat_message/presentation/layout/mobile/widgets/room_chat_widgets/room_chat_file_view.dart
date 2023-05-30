@@ -4,7 +4,9 @@ class RoomChatFileView extends StatelessWidget {
   final File file;
   final VoidCallback onRemoveFile;
 
-  const RoomChatFileView({Key? key, required this.onRemoveFile, required this.file}) : super(key: key);
+  const RoomChatFileView(
+      {Key? key, required this.onRemoveFile, required this.file})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,8 @@ class RoomChatFileView extends StatelessWidget {
           width: 100,
           height: 100,
           decoration: BoxDecoration(
-              border: Border.all(color: Theme.of(context).colorScheme.primary, width: 1.5),
+              border: Border.all(
+                  color: Theme.of(context).colorScheme.primary, width: 1.5),
               borderRadius: BorderRadius.circular(8),
               image: fileType == FileType.image
                   ? DecorationImage(
@@ -27,39 +30,41 @@ class RoomChatFileView extends StatelessWidget {
           child: Stack(
             children: [
               Builder(builder: (context) {
-                switch (fileType) {
-                  case FileType.video:
-                    return Column(
+                return switch (fileType) {
+                  FileType.video => Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Center(
-                            child: Icon(Icons.video_library, size: 24, color: Theme.of(context).colorScheme.primary)),
+                            child: Icon(Icons.video_library,
+                                size: 24,
+                                color: Theme.of(context).colorScheme.primary)),
                         AppPadding.small(
-                          child: AppText.bodySmall(text: FileHelper.getFileName(file.path), maxLines: 2),
+                          child: AppText.bodySmall(
+                              text: FileHelper.getFileName(file.path),
+                              maxLines: 2),
                         ),
                       ],
-                    );
-                  case FileType.another:
-                    return Column(
+                    ),
+                  FileType.another => Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Center(
                             child: Icon(
                                 FileHelper.getIconByExtension(
-                                  file.path.split('.').last,
-                                ),
+                                    file.path.split('.').last),
                                 size: 24,
                                 color: Theme.of(context).colorScheme.primary)),
                         AppPadding.small(
-                          child: AppText.bodySmall(text: FileHelper.getFileName(file.path), maxLines: 2),
+                          child: AppText.bodySmall(
+                              text: FileHelper.getFileName(file.path),
+                              maxLines: 2),
                         ),
                       ],
-                    );
-                  default:
-                    return Container();
-                }
+                    ),
+                  _ => Container(),
+                };
               }),
               // Delete widget right top
               Positioned(
@@ -72,9 +77,12 @@ class RoomChatFileView extends StatelessWidget {
                     height: 20,
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.primary,
-                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8)),
+                      borderRadius:
+                          BorderRadius.only(bottomLeft: Radius.circular(8)),
                     ),
-                    child: Icon(Icons.close, size: 16, color: Theme.of(context).colorScheme.background),
+                    child: Icon(Icons.close,
+                        size: 16,
+                        color: Theme.of(context).colorScheme.background),
                   ),
                 ),
               ),
@@ -83,5 +91,48 @@ class RoomChatFileView extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class IconTypeView extends StatelessWidget {
+  final File file;
+  final FileType? fileType;
+
+  const IconTypeView({Key? key, required this.fileType, required this.file})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return switch (fileType) {
+      FileType.video => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+                child: Icon(Icons.video_library,
+                    size: 24, color: Theme.of(context).colorScheme.primary)),
+            AppPadding.small(
+              child: AppText.bodySmall(
+                  text: FileHelper.getFileName(file.path), maxLines: 2),
+            ),
+          ],
+        ),
+      FileType.another => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+                child: Icon(
+                    FileHelper.getIconByExtension(file.path.split('.').last),
+                    size: 24,
+                    color: Theme.of(context).colorScheme.primary)),
+            AppPadding.small(
+              child: AppText.bodySmall(
+                  text: FileHelper.getFileName(file.path), maxLines: 2),
+            ),
+          ],
+        ),
+      _ => Container()
+    };
   }
 }
