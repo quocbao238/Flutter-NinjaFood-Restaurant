@@ -77,8 +77,9 @@
 
 <!-- Variables/Text References -->
 [splash-image]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/splash_screen.png
-[login-image]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login.png
-[login-fail-image]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login_fail.png
+[login-image]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login_1.png
+
+[login-fail-image]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login_2.png
 [register-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_1.png
 [register-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_2.png
 [register-image-3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_3.png
