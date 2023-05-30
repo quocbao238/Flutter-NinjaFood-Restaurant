@@ -15,7 +15,7 @@ class OnboardModel {
     OnboardModel(
         image: AppImages.onboardBanner1(),
         title: 'OnboardScreen_Title1',
-        description: 'OnboardScreen_Description2'),
+        description: 'OnboardScreen_Description1'),
     OnboardModel(
         image: AppImages.onboardBanner2(),
         title: 'OnboardScreen_Title2',
