@@ -59,7 +59,7 @@
 ## III.Screenshot
 
 #### - 1. Splash, Login, Register
-<img src=[image-link-1] width="200"/> 
+<img src= [image-link-1] width="200"/> 
 
 
 
@@ -75,5 +75,5 @@
 - FlutterFire: https://firebase.flutter.dev/
 
 <!-- Variables/Text References -->
-[image-link-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/screen_shot/screen_shot/register_1.png
+[image-link-1]: https://github.com/quocbao238/NinjaFood/blob/devMaster/screen_shot/splash_screen.png
 
