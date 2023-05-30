@@ -55,7 +55,9 @@ class SignInController extends BaseController {
   }
 
   void _onCheckFirstTimeLogin(
-      {required UserCredential userCredential, required String createType}) {
+      {UserCredential? userCredential, required String createType}) {
+    if (userCredential == null) return;
+
     if (userCredential.additionalUserInfo?.isNewUser == true) {
       _createInsertUserDatabase(
           firebaseAuthUser: userCredential.user!, createType: createType);
@@ -68,36 +70,28 @@ class SignInController extends BaseController {
       {required User firebaseAuthUser, required String createType}) async {
     final newUser = UserModel.createUserByAuthUser(
         authUser: firebaseAuthUser, createType: createType);
-    final response = await dbService.insertUser(userModel: newUser);
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) {
-      Get.offAllNamed(AppRouteProvider.signupProcessScreen);
-    });
+    await dbService.insertUser(userModel: newUser).then((response) =>
+        response.fold((l) => handleFailure(_logName, l, showDialog: true),
+            (r) => Get.offAllNamed(AppRouteProvider.signupProcessScreen)));
   }
 
   Future<void> onPressedSocialFacebook() async {
     loading.value = true;
-    final response = await authService.registerWithFacebook();
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (UserCredential? userCredential) {
-      if (userCredential != null)
-        _onCheckFirstTimeLogin(
+    await authService.registerWithFacebook().then((response) => response.fold(
+        (l) => handleFailure(_logName, l, showDialog: true),
+        (UserCredential? userCredential) => _onCheckFirstTimeLogin(
             userCredential: userCredential,
-            createType: UserCreateType.facebook);
-    });
+            createType: UserCreateType.facebook)));
     loading.value = false;
   }
 
   Future<void> onPressedSocialGoogle() async {
     loading.value = true;
-    final response = await authService.registerWithGoogle();
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (UserCredential? userCredential) {
-      if (userCredential != null)
-        _onCheckFirstTimeLogin(
-            userCredential: userCredential, createType: UserCreateType.google);
-    });
-
+    await authService.registerWithGoogle().then((response) => response.fold(
+        (l) => handleFailure(_logName, l, showDialog: true),
+        (UserCredential? userCredential) => _onCheckFirstTimeLogin(
+            userCredential: userCredential,
+            createType: UserCreateType.google)));
     loading.value = false;
   }
 
@@ -107,20 +101,15 @@ class SignInController extends BaseController {
     final email = emailController.text;
     final password = passwordController.text;
     loading.value = true;
-    final response =
-        await authService.loginWithEmail(email: email, password: password);
-    await response.fold((l) => handleFailure(_logName, l, showDialog: true),
-        (r) {
-      Get.offAllNamed(AppRouteProvider.tabScreen);
-    });
+    await authService.loginWithEmail(email: email, password: password).then(
+        (response) => response.fold(
+            (l) => handleFailure(_logName, l, showDialog: true),
+            (r) => Get.offAllNamed(AppRouteProvider.tabScreen)));
     loading.value = false;
   }
 
-  void onPressedSignUp() {
-    Get.offAllNamed(AppRouteProvider.signupScreen);
-  }
+  void onPressedSignUp() => Get.offAllNamed(AppRouteProvider.signupScreen);
 
-  void onPressedForgotPassword() {
-    Get.toNamed(AppRouteProvider.forgotPasswordScreen);
-  }
+  void onPressedForgotPassword() =>
+      Get.toNamed(AppRouteProvider.forgotPasswordScreen);
 }

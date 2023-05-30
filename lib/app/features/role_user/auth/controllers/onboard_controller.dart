@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/core/core.dart';
-import 'package:ninjafood/app/features/role_user/auth/infrastructure/models/onboard_model.dart';
+import 'package:ninjafood/app/models/onboard_model.dart';
 import 'package:ninjafood/app/routes/routes.dart';
 
 class OnboardController extends BaseController {
@@ -21,11 +21,8 @@ class OnboardController extends BaseController {
     super.dispose();
   }
 
-  void onPressedNext(int index) {
-    if (index == 1) {
-      Get.toNamed(AppRouteProvider.signInScreen);
-      return;
-    }
-    pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
-  }
+  void onPressedNext(int index) => (index == 1)
+        ? Get.toNamed(AppRouteProvider.signInScreen)
+        : pageController.nextPage(
+            duration: Duration(milliseconds: 500), curve: Curves.ease);
 }

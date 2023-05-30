@@ -43,6 +43,21 @@ class OrderModel {
       required this.isRating,
       required this.status});
 
+  // empty
+  factory OrderModel.empty() {
+    return OrderModel(
+        uid: '',
+        userId: '',
+        createdAt: '',
+        subTotal: 0,
+        serviceFee: 0,
+        discount: 0,
+        total: 0,
+        isRating: false,
+        carts: [],
+        status: HistoryStatus.request);
+  }
+
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     final historyModel = OrderModel(
         uid: json['uid'] as String,

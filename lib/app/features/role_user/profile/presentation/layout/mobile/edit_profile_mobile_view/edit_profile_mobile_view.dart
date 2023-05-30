@@ -12,7 +12,6 @@ part 'edit_profile_avatar.dart';
 
 part 'edit_profile_input_title.dart';
 
-
 class EditProfileMobileScreen extends GetView<EditProfileController> {
   const EditProfileMobileScreen({super.key});
 
@@ -25,10 +24,7 @@ class EditProfileMobileScreen extends GetView<EditProfileController> {
         child: Obx(() {
           final currentUser = controller.currentUser.value;
           if (currentUser == null) return SizedBox();
-          final textStyle = Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .copyWith(fontWeight: FontWeight.bold);
+          final textStyle = Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold);
           return Column(
             children: [
               Expanded(
@@ -42,15 +38,13 @@ class EditProfileMobileScreen extends GetView<EditProfileController> {
                       AppTextFormField(
                           hintText: 'Edit_Profile_FirstName'.tr,
                           textStyle: textStyle,
-                          decoration: decoration(
-                              controller.firstNameError.value, context),
+                          decoration: decoration(controller.firstNameError.value, context),
                           controller: controller.firstNameController),
                       TextInputTitle(title: 'Edit_Profile_LastName'.tr),
                       AppTextFormField(
                           hintText: 'Edit_Profile_LastName'.tr,
                           textStyle: textStyle,
-                          decoration: decoration(
-                              controller.lastNameError.value, context),
+                          decoration: decoration(controller.lastNameError.value, context),
                           controller: controller.lastNameController),
                       TextInputTitle(title: 'Edit_Profile_Email'.tr),
                       AppTextFormField(
@@ -63,16 +57,23 @@ class EditProfileMobileScreen extends GetView<EditProfileController> {
                       AppTextFormField.phone(
                           hintText: 'Edit_Profile_Phone'.tr,
                           textStyle: textStyle,
-                          decoration:
-                              decoration(controller.phoneError.value, context),
+                          decoration: decoration(controller.phoneError.value, context),
                           controller: controller.phoneController),
                       TextInputTitle(title: 'Edit_Profile_Address'.tr),
-                      AppTextFormField(
-                          hintText: 'Edit_Profile_Address'.tr,
-                          textStyle: textStyle,
-                          decoration: decoration(
-                              controller.addressError.value, context),
-                          controller: controller.addressController),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: AppTextFormField(
+                                hintText: 'Edit_Profile_Address'.tr,
+                                textStyle: textStyle,
+                                decoration: decoration(controller.addressError.value, context),
+                                controller: controller.addressController),
+                          ),
+                          IconButton(
+                              onPressed: () => controller.onPressedLocationPicker(),
+                              icon: Icon(FontAwesomeIcons.mapLocationDot, color: ThemeColors.primaryColor))
+                        ],
+                      ),
                       SizedBox(height: AppGapSize.medium.size),
                     ],
                   ),
@@ -102,23 +103,14 @@ class EditProfileMobileScreen extends GetView<EditProfileController> {
   }
 }
 
-InputDecoration decoration(String? errorText, BuildContext context) =>
-    InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-        fillColor: Colors.transparent,
-        errorText: errorText,
-        enabledBorder: UnderlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(
-                color:
-                    Theme.of(context).colorScheme.onBackground.withOpacity(0.6),
-                width: 2.0)),
-        border: UnderlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide:
-                BorderSide(color: ThemeColors.primaryColor, width: 2.0)),
-        errorBorder: UnderlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide:
-                BorderSide(color: ThemeColors.textRedColor, width: 3.0)));
+InputDecoration decoration(String? errorText, BuildContext context) => InputDecoration(
+    contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+    fillColor: Colors.transparent,
+    errorText: errorText,
+    enabledBorder: UnderlineInputBorder(
+        borderRadius: BorderRadius.circular(8.0),
+        borderSide: BorderSide(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.6), width: 2.0)),
+    border: UnderlineInputBorder(
+        borderRadius: BorderRadius.circular(8.0), borderSide: BorderSide(color: ThemeColors.primaryColor, width: 2.0)),
+    errorBorder: UnderlineInputBorder(
+        borderRadius: BorderRadius.circular(8.0), borderSide: BorderSide(color: ThemeColors.textRedColor, width: 3.0)));

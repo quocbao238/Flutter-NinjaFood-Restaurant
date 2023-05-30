@@ -1,3 +1,4 @@
+import 'package:flutter_config_plus/flutter_config_plus.dart';
 import 'package:get/get.dart';
 import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 import 'package:ninjafood/app/services/console_service/console_service.dart';
@@ -5,11 +6,10 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 const _logName = 'OneSignalService';
 
-class OneSignalService extends GetxService implements Bootable {
+final class OneSignalService extends GetxService implements Bootable {
   static OneSignalService get instance => Get.find<OneSignalService>();
 
   late ConsoleService log = ConsoleService.instance;
-  final String oneSignalAppId = 'bb9d8495-95e5-4bf9-a117-73722dd9413c';
   final oneSignal = OneSignal.shared;
 
   @override
@@ -26,7 +26,6 @@ class OneSignalService extends GetxService implements Bootable {
 
   Future<String?> setPlayerId(String uid) async {
     await OneSignal.shared.setExternalUserId(uid);
-    log.show(_logName, 'setPlayerId $uid');
     return await getPlayerId();
   }
 
@@ -38,13 +37,12 @@ class OneSignalService extends GetxService implements Bootable {
   }
 
   _initService() async {
-    // Debug
+    final String oneSignalAppId = FlutterConfigPlus.get('ONE_SIGNAL_APP_ID');
     await OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
     await OneSignal.shared.setAppId(oneSignalAppId);
     await OneSignal.shared.consentGranted(true);
 
     OneSignal.shared.promptUserForPushNotificationPermission();
-
     OneSignal.shared
         .setNotificationOpenedHandler((OSNotificationOpenedResult result) {
       log.show(_logName, 'NOTIFICATION OPENED HANDLER CALLED WITH: $result');
@@ -105,7 +103,7 @@ class OneSignalService extends GetxService implements Bootable {
       log.show(_logName, 'ON DID DISMISS IN APP MESSAGE ${message.messageId}');
     });
 
-    OneSignal.shared.setLaunchURLsInApp(false);
+    // if (isIos) OneSignal.shared.setLaunchURLsInApp(false);
 
     await OneSignal.shared.requiresUserPrivacyConsent();
 

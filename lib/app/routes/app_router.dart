@@ -5,13 +5,12 @@ class AppPages {
 
   static navigateDefaultPage() async {
     final userController = UserController.instance;
-    if (userController.getFirebaseAuthUser != null) {
+    if (userController.firebaseAuthUser.value != null) {
       initial = AppRouteProvider.tabScreen;
       return;
     }
 
     initial = AppRouteProvider.splashScreen;
-    // initial = AppRouteProvider.signupSuccessScreen;
   }
 
   //
@@ -119,11 +118,25 @@ class AppPages {
       page: () => RatingScreen(),
       binding: GetBinding(AppRouteProvider.ratingScreen),
     ),
-
     GetPage(
       name: AppRouteProvider.orderDetailScreen,
       page: () => OrderDetailsScreen(orderModel: Get.arguments),
       binding: GetBinding(AppRouteProvider.orderDetailScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.locationPickerScreen,
+      page: () => LocationPickerScreen(),
+      binding: GetBinding(AppRouteProvider.locationPickerScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.adminEditProductScreen,
+      page: () => AdminEditProductScreen(),
+      binding: GetBinding(AppRouteProvider.adminEditProductScreen),
+    ),
+    GetPage(
+      name: AppRouteProvider.adminCategoryScreen,
+      page: () => AdminCategoryScreen(),
+      binding: GetBinding(AppRouteProvider.adminCategoryScreen),
     ),
   ];
 }

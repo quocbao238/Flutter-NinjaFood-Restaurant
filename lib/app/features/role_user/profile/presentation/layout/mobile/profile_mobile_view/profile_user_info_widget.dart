@@ -5,7 +5,6 @@ class ProfileUserInformationWidget extends GetView<UserController> {
 
   @override
   Widget build(BuildContext context) {
-    final profileController = Get.find<ProfileController>();
     final currentUser = controller.currentUser.value;
     if (currentUser == null) return SizedBox();
     return Column(
@@ -13,7 +12,8 @@ class ProfileUserInformationWidget extends GetView<UserController> {
       children: [
         DecoratedBox(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18), color: ThemeColors.textPriceColor.withOpacity(0.1)),
+              borderRadius: BorderRadius.circular(18),
+              color: ThemeColors.textPriceColor.withOpacity(0.1)),
           child: AppPadding.small(
             child: AppText.bodyMedium(
               text: currentUser.userType?.name.tr ?? '',
@@ -27,9 +27,11 @@ class ProfileUserInformationWidget extends GetView<UserController> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AppText.headlineMedium(text: currentUser.getName(), fontWeight: FontWeight.bold),
+              AppText.headlineMedium(
+                  text: currentUser.getName(), fontWeight: FontWeight.bold),
               IconButton(
-                onPressed: profileController.onPressEditProfile,
+                onPressed: () =>
+                    Get.toNamed(AppRouteProvider.editProfileScreen),
                 icon: Icon(
                   FontAwesomeIcons.penToSquare,
                   color: ThemeColors.primaryColor,
@@ -38,7 +40,8 @@ class ProfileUserInformationWidget extends GetView<UserController> {
             ],
           ),
         ),
-        AppText.bodyMedium(text: currentUser.email ?? '', fontWeight: FontWeight.w400),
+        AppText.bodyMedium(
+            text: currentUser.email ?? '', fontWeight: FontWeight.w400),
       ],
     );
   }

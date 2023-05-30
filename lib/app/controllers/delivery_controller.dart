@@ -6,7 +6,7 @@ import 'package:ninjafood/app/models/history_model.dart';
 import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 import 'package:ninjafood/app/services/database_service/database_service.dart';
 
-class DeliveryController extends GetxController implements Bootable {
+final class DeliveryController extends GetxController implements Bootable {
   static DeliveryController get instance => Get.find<DeliveryController>();
   StreamSubscription? _orderSubscription;
   late final UserController _userController;
@@ -35,11 +35,9 @@ class DeliveryController extends GetxController implements Bootable {
 
   void _handleDelivery(String userUid) async {
     if (_userController.currentUser.value?.isAdmin() ?? false) {
-      _orderSubscription = _databaseService.listenOrders().listen((event) {
-        lstOrderModel.value =
-            event.docs.map((e) => OrderModel.fromJson(e.data())).toList();
-        print(lstOrderModel);
-      });
+      _orderSubscription = _databaseService.listenOrders().listen((event) =>
+          lstOrderModel.value =
+              event.docs.map((e) => OrderModel.fromJson(e.data())).toList());
       return;
     }
 
@@ -47,6 +45,7 @@ class DeliveryController extends GetxController implements Bootable {
         _databaseService.listenCurrentOrder(userUid).listen((event) {
       if (event.docs.isEmpty || event.docs.last.data().isEmpty) return;
       final _order = OrderModel.fromJson(event.docs.first.data());
+      HistoryController.instance.onRefresh();
       if (_order.status != currentOrder.value?.status) {
         disableShowDelivery.value = false;
       }

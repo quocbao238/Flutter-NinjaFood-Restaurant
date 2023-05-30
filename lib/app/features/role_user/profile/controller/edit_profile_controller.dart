@@ -7,6 +7,7 @@ import 'package:ninjafood/app/core/core.dart';
 import 'package:ninjafood/app/controllers/controllers.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 import 'package:ninjafood/app/models/user_model.dart';
+import 'package:ninjafood/app/routes/routes.dart';
 import 'package:ninjafood/app/services/cloud_storage_service/cloud_storage_service.dart';
 
 const _logName = 'EditProfileController';
@@ -96,5 +97,12 @@ class EditProfileController extends BaseController {
   void onPickerImage() async {
     final image = await FileHelper.pickImage();
     if (image != null) imageFile.value = image;
+  }
+
+  Future<void> onPressedLocationPicker() async {
+    final result = await Get.toNamed(AppRouteProvider.locationPickerScreen);
+    if (result != null) {
+      addressController.text = result.toString();
+    }
   }
 }

@@ -10,35 +10,20 @@ enum MessageChatType {
 
   const MessageChatType(this.type);
 
-  static int setMessageType(MessageChatType type) {
-    switch (type) {
-      case MessageChatType.text:
-        return 0;
-      case MessageChatType.image:
-        return 1;
-      case MessageChatType.video:
-        return 2;
-      case MessageChatType.anotherFile:
-        return 3;
-      default:
-        return 0;
-    }
-  }
+  static int setMessageType(MessageChatType type) => switch (type) {
+        MessageChatType.text => 0,
+        MessageChatType.image => 1,
+        MessageChatType.video => 2,
+        MessageChatType.anotherFile => 3,
+      };
 
-  static MessageChatType getTypeMessage(int type) {
-    switch (type) {
-      case 0:
-        return MessageChatType.text;
-      case 1:
-        return MessageChatType.image;
-      case 2:
-        return MessageChatType.video;
-      case 3:
-        return MessageChatType.anotherFile;
-      default:
-        return MessageChatType.text;
-    }
-  }
+  static MessageChatType getTypeMessage(int type) => switch (type) {
+        0 => MessageChatType.text,
+        1 => MessageChatType.image,
+        2 => MessageChatType.video,
+        3 => MessageChatType.anotherFile,
+        _ => MessageChatType.text
+      };
 }
 
 class ChatFileModel {
@@ -46,7 +31,8 @@ class ChatFileModel {
   final String fileType;
   final String fileUrl;
 
-  ChatFileModel({required this.fileName, required this.fileType, required this.fileUrl});
+  ChatFileModel(
+      {required this.fileName, required this.fileType, required this.fileUrl});
 
   Map<String, dynamic> toJson() {
     return {
@@ -119,7 +105,8 @@ class MessageChat {
   }
 
   factory MessageChat.fromJson(Map<dynamic, dynamic> json) {
-    MessageChatType messageChatType = MessageChatType.getTypeMessage(json["messageChatType"]);
+    MessageChatType messageChatType =
+        MessageChatType.getTypeMessage(json["messageChatType"]);
     return MessageChat(
         senderId: json["senderId"],
         groupChatId: json["groupChatId"],

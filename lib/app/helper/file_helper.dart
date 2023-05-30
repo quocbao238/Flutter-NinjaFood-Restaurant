@@ -86,26 +86,18 @@ class FileHelper {
     return throw Exception('File type is not supported');
   }
 
-  static IconData getIconByExtension(String extension) {
-    switch (extension) {
-      case 'pdf':
-        return Icons.picture_as_pdf;
-      case 'doc':
-      case 'docx':
-        return Icons.description;
-      case 'xls':
-      case 'xlsx':
-        return Icons.table_chart;
-      case 'ppt':
-      case 'pptx':
-        return Icons.slideshow;
-      case 'txt':
-      case 'rtf':
-        return Icons.text_fields;
-      default:
-        return Icons.insert_drive_file;
-    }
-  }
+  static IconData getIconByExtension(String extension) => switch (extension) {
+        'pdf' => Icons.picture_as_pdf,
+        'doc' => Icons.description,
+        'docx' => Icons.description,
+        'xls' => Icons.table_chart,
+        'xlsx' => Icons.table_chart,
+        'ppt' => Icons.slideshow,
+        'pptx' => Icons.slideshow,
+        'txt' => Icons.text_fields,
+        'rtf' => Icons.text_fields,
+        _ => Icons.insert_drive_file,
+      };
 
   static Future<File?> downloadFile(String url) async {
     try {

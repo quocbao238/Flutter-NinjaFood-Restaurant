@@ -11,18 +11,47 @@ class NotificationMobileView extends GetView<NotificationController> {
 
   @override
   Widget build(BuildContext context) {
+    final roleUser = UserController.instance.currentUser.value?.isUser() ?? false;
+
     return AppScaffoldBackgroundImage.pattern(
-      appBarWidget: CustomAppBar.back(
-        title: 'Notification_Title'.tr,
-      ),
+      appBarWidget: roleUser
+          ? CustomAppBar.back(title: 'Notification_Title'.tr)
+          : CustomAppBar.drawer(
+              title: 'Notification_Title'.tr,
+              trailingWidget: Row(
+                children: [
+                  SafeArea(
+                    child: AppPadding(
+                      padding: const AppEdgeInsets.only(
+                          top: AppGapSize.paddingMedium,
+                          left: AppGapSize.paddingMedium,
+                          right: AppGapSize.paddingMedium),
+                      child: SizedBox(
+                        width: 45,
+                        height: 45,
+                        child: ElevatedButton(
+                            onPressed: () => controller.showBottomSheetSettings(context),
+                            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                                  padding: MaterialStateProperty.all(EdgeInsets.zero),
+                                  backgroundColor: MaterialStateProperty.all(ThemeColors.backgroundIconColor()),
+                                  shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16.0),
+                                    ),
+                                  ),
+                                ),
+                            child: const Center(child: Icon(Icons.settings, color: ThemeColors.orangeColor, size: 24))),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
       body: AppPadding(
         padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
         child: Obx(() {
           final notifications = controller.notifications;
-
-          if (notifications.isEmpty)
-            return Center(child: Text('No notification'));
-
+          if (notifications.isEmpty) return Center(child: Text('No notification'));
           return ListView.builder(
               padding: EdgeInsets.zero,
               itemCount: notifications.length,
@@ -31,14 +60,12 @@ class NotificationMobileView extends GetView<NotificationController> {
                 return BoxNotification(
                     child: AppNetworkImage(
                         borderRadius: 16,
-                        width: MediaQuery.of(context).size.shortestSide * 0.15,
-                        height: MediaQuery.of(context).size.shortestSide * 0.15,
+                        width: MediaQuery.of(context).size.shortestSide * 0.2,
+                        height: MediaQuery.of(context).size.shortestSide * 0.2,
                         fit: BoxFit.fill,
                         url: notification.image),
-                    onPressedItem: () =>
-                        controller.readNotification(notification),
-                    onPressedMore: () =>
-                        controller.showBottomSheet(notification, context),
+                    onPressedItem: () => controller.readNotification(notification),
+                    onPressedMore: () => controller.showBottomSheet(notification, context),
                     title: notification.title,
                     isRead: notification.isRead,
                     message: notification.message,

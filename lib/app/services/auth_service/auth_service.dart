@@ -10,7 +10,7 @@ import 'package:ninjafood/app/services/boot_service/boot_services.dart';
 
 part 'auth_service_impl.dart';
 
-class AuthService extends GetxService implements Bootable, AuthServiceImpl {
+final class AuthService extends GetxService implements Bootable, AuthServiceImpl {
   static AuthService get instance => Get.find<AuthService>();
 
   late final FirebaseAuth _firebaseAuth;

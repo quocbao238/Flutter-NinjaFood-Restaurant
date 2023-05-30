@@ -9,7 +9,8 @@ class Failure {
   const Failure(this.message, this.stackTrace);
 }
 
-handleFailure(String _logName, Failure failure, {bool showDialog = false}) {
+handleFailure(String _logName, Failure failure,
+    {bool showDialog = false}) async {
   final consoleService = ConsoleService.instance;
   consoleService.showError(_logName, failure.message);
   if (showDialog) {

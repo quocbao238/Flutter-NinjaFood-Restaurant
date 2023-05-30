@@ -1,6 +1,6 @@
 class CommentModel {
   final String uid;
-  /// will be mapping with user id
+  final String orderId;
   final String userId;
   final String userName;
   final String userImage;
@@ -9,7 +9,8 @@ class CommentModel {
   final String? comment;
 
   CommentModel(
-      {required this.uid,
+      {required this.orderId,
+      required this.uid,
       required this.userId,
       required this.userName,
       required this.userImage,
@@ -20,6 +21,7 @@ class CommentModel {
   factory CommentModel.fromJson(Map<String, dynamic> json) {
     return CommentModel(
         comment: json['comment'] as String,
+        orderId: json['orderId'] as String,
         uid: json['uid'] as String,
         userId: json['userId'] as String,
         userName: json['userName'] as String,
@@ -34,6 +36,7 @@ class CommentModel {
       'uid': uid,
       'userId': userId,
       'userName': userName,
+      'orderId': orderId,
       'userImage': userImage,
       'createAt': createAt,
       'rating': rating

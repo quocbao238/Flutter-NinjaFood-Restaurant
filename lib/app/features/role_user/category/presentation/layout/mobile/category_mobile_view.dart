@@ -18,7 +18,7 @@ class CategoryMobileView extends GetView<CategoryScreenController> {
         }
         return AppPadding.medium(
             child: SingleChildScrollView(
-                child: ProductList(productList: controller.products)));
+                child: Obx(() => ProductList(productList: controller.products.toList()))));
       }),
     );
   }

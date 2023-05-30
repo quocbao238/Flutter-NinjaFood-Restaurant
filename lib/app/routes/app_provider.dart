@@ -24,4 +24,8 @@ class AppRouteProvider {
   static const String notificationScreen = '/notificationScreen';
   static const String ratingScreen = '/rateFoodScreen';
   static const String orderDetailScreen = '/orderDetailScreen';
+  static const String locationPickerScreen = '/locationPickerScreen';
+  static const String adminEditProductScreen = '/editProductScreen';
+  static const String adminCategoryScreen = '/adminCategoryScreen';
+
 }
