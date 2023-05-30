@@ -59,10 +59,11 @@
 ## III.Screenshot
 
 #### - 1. Splash, Login, Register
-<img src= "[image-link-1] width="200"/> 
 
 
-
+| Splash Screen | Login Screen | Register Screen |
+| :---: | :---: | :---: |
+| ![Splash Screen][splash-image] | ![Login Screen][login-image] | ![Register Screen 1][register-image-1] |
 
 
 
@@ -75,5 +76,17 @@
 - FlutterFire: https://firebase.flutter.dev/
 
 <!-- Variables/Text References -->
-[image-link-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/splash_screen.png
+[splash-image]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/splash_screen.png
+[login-image]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login.png
+[login-fail-image]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login_fail.png
+[register-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_1.png
+[register-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_2.png
+[register-image-3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_3.png
+[register-image-4]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_4.png
+[register-image-5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_5.png
+[register-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_6.png
+[register-image-7]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_7.png
+[register-image-8]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_8.png
+[register-image-9]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_9.png
+
 
