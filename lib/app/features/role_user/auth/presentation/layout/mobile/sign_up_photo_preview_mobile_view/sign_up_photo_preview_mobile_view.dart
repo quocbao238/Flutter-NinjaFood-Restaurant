@@ -21,9 +21,9 @@ class SignUpPhotoPreviewMobileView extends GetView<SignUpProcessController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  AppPadding.small(),
                   AppPadding(
-                    padding:
-                        AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
                     child: AppText.headlineSmall(
                         fontWeight: FontWeight.bold,
                         textAlign: TextAlign.start,

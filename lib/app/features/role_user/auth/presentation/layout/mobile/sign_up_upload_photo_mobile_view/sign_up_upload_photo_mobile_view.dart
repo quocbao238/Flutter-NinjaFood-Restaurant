@@ -20,9 +20,9 @@ class SignUpUploadPhotoMobileView extends GetView<SignUpProcessController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                AppPadding.small(),
                 AppPadding(
-                    padding:
-                        AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
                     child: AppText.headlineSmall(
                         fontWeight: FontWeight.bold,
                         textAlign: TextAlign.start,

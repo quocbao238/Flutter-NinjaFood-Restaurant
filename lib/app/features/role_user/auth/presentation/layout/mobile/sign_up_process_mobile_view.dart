@@ -21,9 +21,9 @@ class SignUpProcessMobileScreen extends GetView<SignUpProcessController> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    AppPadding.small(),
                     AppPadding(
-                      padding: AppEdgeInsets.symmetric(
-                          horizontal: AppGapSize.medium),
+                      padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
                       child: AppText.headlineSmall(
                         textAlign: TextAlign.start,
                         text: 'SignUpProcessScreen_Title'.tr,
