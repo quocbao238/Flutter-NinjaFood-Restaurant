@@ -98,9 +98,10 @@
 
 # IV. Record
 
-|             Login             |              Register               |
-|:-----------------------------:|:-----------------------------------:|
-| ![Login Record][login-record] | ![Register Record][register-record] |
+|             Login             |              Register               | Home |
+|:-----------------------------:|:-----------------------------------:|:----:|
+| ![Login][login-record] | ![Register][register-record] | ![Home][home-record] |
+
 
 
 
@@ -147,6 +148,7 @@
 [home-image-4]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_4.png
 [home-image-5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_5.png
 [home-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_6.png
+[home-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_record.gif
 
 
 
