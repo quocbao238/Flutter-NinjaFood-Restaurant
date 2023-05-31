@@ -138,6 +138,13 @@
 | ![Chat Image Screen 7][chat-image-7] | ![Chat Image Screen 8][chat-image-8] | ![Chat Image Screen 9][chat-image-9] |
 
 
+### **Notification Screen**
+| Notification Screen 1 | Notification Screen 2 | Notification Screen 3 |
+|:---------------------:|:---------------------:|:---------------------:|
+| ![Notification Screen 1][notification-image-1] | ![Notification Screen 2][notification-image-2] | ![Notification Screen 3][notification-image-3] |
+
+
+
 
 ### **Delivery Screen**
 | Delivery Screen 1 | Delivery Screen 2 | Delivery Screen 3 |
@@ -201,7 +208,6 @@
 [home-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_6.png
 [home-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_record.gif
 
-
 [drawer-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_1.png
 [drawer-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_2.png
 [drawer-image-3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_3.png
@@ -244,6 +250,11 @@
 [product_image_1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/detail_image_1.png
 [product_image_2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/detail_image_2.png
 [product_image_3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/detail_image_3.png
+
+[notification-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/notification_image_1.png
+[notification-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/notification_image_2.png
+[notification-image-3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/notification_image_3.png
+
 
 [language-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/language_record.gif
 [theme-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/theme_record.gif
