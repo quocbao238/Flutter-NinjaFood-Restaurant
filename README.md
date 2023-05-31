@@ -124,6 +124,15 @@
 | ![Cart Screen 1][cart-image-1] | ![Cart Screen 2][cart-image-2] | ![Cart Screen 3][cart-image-3] |
 
 
+### **Delivery Screen**
+| Delivery Screen 1 | Delivery Screen 2 | Delivery Screen 3 |
+|:-----------------:|:-----------------:|:-----------------:|
+| ![Delivery Screen 1][delivery-image-1] | ![Delivery Screen 2][delivery-image-2] | ![Delivery Screen 3][delivery-image-3] |
+
+| Delivery Screen 4 | Delivery Screen 5 | Delivery Screen 6 |
+|:-----------------:|:-----------------:|:-----------------:|
+| ![Delivery Screen 4][delivery-image-4] | ![Delivery Screen 5][delivery-image-5] | ![Delivery Screen 6][delivery-image-6] |
+
 
 # IV. Record
 
@@ -150,30 +159,20 @@
 [splash-image]:     https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/splash.png
 
 [login-image]:      https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login_1.png
-
 [login-fail-image]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login_2.png
+[login-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login_record.gif
 
 [register-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_1.png
-
 [register-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_2.png
-
 [register-image-3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_3.png
-
 [register-image-4]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_4.png
-
 [register-image-5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_5.png
-
 [register-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_6.png
-
 [register-image-7]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_7.png
-
 [register-image-8]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_8.png
-
 [register-image-9]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_9.png
-
 [register-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_record.gif
 
-[login-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login_record.gif
 
 [home-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_1.png
 [home-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_2.png
@@ -181,7 +180,7 @@
 [home-image-4]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_4.png
 [home-image-5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_5.png
 [home-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_6.png
-[home-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_record.gif
+[home-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_record.gif
 
 
 [drawer-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_1.png
@@ -190,7 +189,7 @@
 [drawer-image-4]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_4.png
 [drawer-image-5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_5.png
 [drawer-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_6.png
-[drawer-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_record.gif
+[drawer-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_record.gif
 
 [profile-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/profile_image_1.png
 [profile-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/profile_image_2.png
@@ -198,12 +197,19 @@
 [profile-image-4]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/profile_image_4.png
 [profile-image-5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/profile_image_5.png
 [profile-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/profile_image_6.png
-[profile-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/profile_record.gif
-
+[profile-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/profile_record.gif
 
 [cart-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/cart_image_1.png
 [cart-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/cart_image_2.png
 [cart-image-3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/cart_image_3.png
-[cart-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/cart_record.gif
+[cart-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/cart_record.gif
+
+[delivery-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/delivery_image_1.png
+[delivery-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/delivery_image_2.png
+[delivery-image-3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/delivery_image_3.png
+[delivery-image-4]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/delivery_image_4.png
+[delivery-image-5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/delivery_image_5.png
+[delivery-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/delivery_image_6.png
+
 
 
