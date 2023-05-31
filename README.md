@@ -118,5 +118,5 @@
 
 [register-image-9]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_9.png
 
-[record-register]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/record_register.mov
+[record-register]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/record_register.gif
 
