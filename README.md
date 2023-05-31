@@ -156,10 +156,14 @@
 | ![Login Screen][login-record] | ![Register Screen][register-record] | ![Drawer Screen][drawer-record] |
 
 
-
 | Home | Profile | Cart |
 |:----:|:-------:|:----:|
 | ![Home Screen][home-record] | ![Profile Screen][profile-record] | ![Cart Screen][cart-record] |
+
+
+| Chat | Language | Theme |
+|:----:|:--------:|:-----:|
+| ![Chat Screen][chat-record] | ![Language Screen][language-record] | ![Theme Screen][theme-record] |
 
 
 
@@ -235,5 +239,9 @@
 [chat-image-7]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_image_7.png
 [chat-image-8]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_image_8.png
 [chat-image-9]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_image_9.png
+[chat-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_record.gif
+
+[language-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/language_record.gif
+[theme-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/theme_record.gif
 
 
