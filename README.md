@@ -63,9 +63,9 @@
 
 ### - 1. Splash, Login, Register
 
-| Record Register | Record Login |
-|:---------------:|:------------:|
-| ![Record Register][record-register] | ![Record Login][record-login] |
+| Login Record | Register Record |
+|:------------:|:---------------:|
+| ![Login Record][login-record] | ![Register Record][register-record] |
 
 
 |         Splash Screen          |  |         Login Screen         |             Login Failure              |
@@ -118,5 +118,7 @@
 
 [register-image-9]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_9.png
 
-[record-register]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/record_register.gif
+[register-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_record.gif
+
+[login-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login_record.gif
 
