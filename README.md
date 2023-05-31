@@ -123,6 +123,21 @@
 |:-------------:|:-------------:|:-------------:|
 | ![Cart Screen 1][cart-image-1] | ![Cart Screen 2][cart-image-2] | ![Cart Screen 3][cart-image-3] |
 
+### **Chat Image Screen**
+
+| Chat Image Screen 1 | Chat Image Screen 2 | Chat Image Screen 3 |
+|:-------------------:|:-------------------:|:-------------------:|
+| ![Chat Image Screen 1][chat-image-1] | ![Chat Image Screen 2][chat-image-2] | ![Chat Image Screen 3][chat-image-3] |
+
+| Chat Image Screen 4 | Chat Image Screen 5 | Chat Image Screen 6 |
+|:-------------------:|:-------------------:|:-------------------:|
+| ![Chat Image Screen 4][chat-image-4] | ![Chat Image Screen 5][chat-image-5] | ![Chat Image Screen 6][chat-image-6] |
+
+| Chat Image Screen 7 | Chat Image Screen 8 | Chat Image Screen 9 |
+|:-------------------:|:-------------------:|:-------------------:|
+| ![Chat Image Screen 7][chat-image-7] | ![Chat Image Screen 8][chat-image-8] | ![Chat Image Screen 9][chat-image-9] |
+
+
 
 ### **Delivery Screen**
 | Delivery Screen 1 | Delivery Screen 2 | Delivery Screen 3 |
@@ -211,5 +226,14 @@
 [delivery-image-5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/delivery_image_5.png
 [delivery-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/delivery_image_6.png
 
+[chat-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_image_1.png
+[chat-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_image_2.png
+[chat-image-3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_image_3.png
+[chat-image-4]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_image_4.png
+[chat-image-5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_image_5.png
+[chat-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_image_6.png
+[chat-image-7]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_image_7.png
+[chat-image-8]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_image_8.png
+[chat-image-9]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_image_9.png
 
 
