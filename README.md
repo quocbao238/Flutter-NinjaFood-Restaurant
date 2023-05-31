@@ -63,14 +63,14 @@
 
 # III. Screenshot
 
-### - Splash Screen, Login Screen
+### **Splash Screen, Login Screen**
 
 
 |         Splash Screen          |  |         Login Screen         |             Login Failure              |
 |:------------------------------:|:-|:-----------------------------:|:--------------------------------------:|
 | ![Splash Screen][splash-image] |  | ![Login Screen][login-image] | ![Login Fail Screen][login-fail-image] |
 
-### - Register Screen
+### **Register Screen**
 
 |           Register Screen 1            |           Register Screen 2            |           Register Screen 3 |
 |:--------------------------------------:|:--------------------------------------:|:----------------------------:|
@@ -84,8 +84,17 @@
 |:--------------------------------------:|:--------------------------------------:|:----------------------------:|
 | ![Register Screen 7][register-image-7] | ![Register Screen 8][register-image-8] | ![Register Screen 9][register-image-9] |
 
-### Home Screen
 
+### **Drawer**
+|           Drawer Screen 1            |           Drawer Screen 2            |           Drawer Screen 3 |
+|:------------------------------------:|:------------------------------------:|:--------------------------:|
+| ![Drawer Screen 1][drawer-image-1] | ![Drawer Screen 2][drawer-image-2] | ![Drawer Screen 3][drawer-image-3] |
+
+|           Drawer Screen 4            |           Drawer Screen 5            |           Drawer Screen 6 |
+|:------------------------------------:|:------------------------------------:|:--------------------------:|
+| ![Drawer Screen 4][drawer-image-4] | ![Drawer Screen 5][drawer-image-5] | ![Drawer Screen 6][drawer-image-6] |
+
+### **Home Screen**
 |           Home Screen 1            |           Home Screen 2            |           Home Screen 3 |
 |:----------------------------------:|:----------------------------------:|:------------------------:|
 | ![Home Screen 1][home-image-1] | ![Home Screen 2][home-image-2] | ![Home Screen 3][home-image-3] |
@@ -108,7 +117,7 @@
 
 
 
-### Documentation style & source
+# Documentation style & source
 - Figma: https://www.figma.com/file/pMmzsDZr1VPuPbVZehlIXN/Pixel-True---Food-Delivery-UI-Kit?type=design&node-id=401-934&t=fPfpguuPtTSr8sHy-0
 - FlutterFire: https://firebase.flutter.dev/
 
@@ -149,6 +158,14 @@
 [home-image-5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_5.png
 [home-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_6.png
 [home-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_record.gif
+
+
+[drawer_image_1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_1.png
+[drawer_image_2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_2.png
+[drawer_image_3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_3.png
+[drawer_image_4]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_4.png
+[drawer_image_5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_5.png
+[drawer_image_6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_6.png
 
 
 
