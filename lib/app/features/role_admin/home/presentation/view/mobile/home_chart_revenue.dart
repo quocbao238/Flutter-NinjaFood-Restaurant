@@ -99,7 +99,7 @@ class ChartViewDataState extends State<ChartViewData> {
                         tooltipMargin: 8,
                         getTooltipItem: (group, groupIndex, rod, rodIndex) {
                           return BarTooltipItem(
-                            widget.chartData[group.x.toInt()].toolTip + '\n',
+                            widget.chartData[group.x.toInt()].toolTip.tr + '\n',
                             TextStyle(color: context.theme.textTheme.bodySmall!.color, fontWeight: FontWeight.bold),
                             children: <TextSpan>[
                               TextSpan(

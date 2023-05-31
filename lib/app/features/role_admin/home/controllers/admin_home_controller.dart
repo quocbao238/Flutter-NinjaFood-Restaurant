@@ -69,7 +69,7 @@ class AdminHomeController extends BaseController {
         .listenRating()
         .listen((QuerySnapshot<Map<String, dynamic>> event) {
       final List<CommentModel> _result =
-          event.docs.map((e) => CommentModel.fromJson(e.data())).toList();
+      event.docs.map((e) => CommentModel.fromJson(e.data())).toList();
       totalReview.value = _result.length.toString();
     });
 
@@ -98,42 +98,48 @@ class AdminHomeController extends BaseController {
 
       response.fold((l) => <OrderModel>[], (r) {
         final _filter =
-            r.where((element) => element.status == HistoryStatus.done).toList();
+        r.where((element) => element.status == HistoryStatus.done).toList();
         orders.assignAll(_filter);
       });
 
       result = lstDateTime.map((e) {
         final listOrderInDay = orders
             .where((element) =>
-                compareTwoDateTimeIsSameDay(
-                    convertTimeStampToDateTime(element.createdAt), e) &&
-                element.status == HistoryStatus.done)
+        compareTwoDateTimeIsSameDay(
+            convertTimeStampToDateTime(element.createdAt), e) &&
+            element.status == HistoryStatus.done)
             .toList();
         final total = listOrderInDay.fold<double>(
             0, (previousValue, element) => previousValue + element.total);
         int index = lstDateTime.indexOf(e);
+
+        final _bottomTitle = switch(filterChartType){
+          FilterChart.week => getDayInWeek(e),
+          FilterChart.month =>
+          e.day % 2 == 0
+              ? DateFormat('d').format(e)
+              : '',
+          FilterChart.year => getMonthInYear(e.month),
+        };
+
+        final _toolTip = switch(filterChartType){
+          FilterChart.week => getDayInWeek(e),
+          FilterChart.month => DateFormat('dd/MM/yyyy').format(e),
+          FilterChart.year => getMonthInYear(e.month)
+        };
         return ChartData(
-            bottomTitle: filterChartType == FilterChart.week
-                ? getDayInWeek(e)
-                : filterChartType == FilterChart.month
-                    ? e.day % 2 == 0
-                        ? DateFormat('d').format(e)
-                        : ''
-                    : filterChartType == FilterChart.year
-                        ? getMonthInYear(e.month)
-                        : getDayInWeek(e),
-            toolTip: getDayInWeek(e),
+            bottomTitle: _bottomTitle,
+            toolTip: _toolTip,
             month: e.month,
             index: index,
             dateTime: e,
             value: total);
       }).toList();
-
       if (filterChartType == FilterChart.year) {
         final _lst = <ChartData>[];
         for (int i = 0; i < 12; i++) {
           final _filter =
-              result.where((element) => element.month == i + 1).toList();
+          result.where((element) => element.month == i + 1).toList();
           final total = _filter.fold<double>(
               0, (previousValue, element) => previousValue + element.value);
           _lst.add(ChartData(
