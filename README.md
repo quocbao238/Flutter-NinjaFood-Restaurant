@@ -7,7 +7,7 @@
 * Hope you like it 👍
 * Give me a star if you like it ⭐
 
-## I.Core
+# I. Core
 
 - Firebase authentication
 - OneSingal Notification
@@ -18,7 +18,7 @@
 - Permission...
 - ImagePicker,VideoPlayer...
 
-## II.Feature (This project config for android, so some feature below maybe not working in ios)
+# II. Feature (This project config for android, so some feature below maybe not working in ios)
 
 #### Ninja Food User (user@gmail.com - 123456)
 
@@ -59,18 +59,18 @@
 - [x] Edit Food (Name, Price, Image, Description)
 - [x] Total income (day, month, year) - Maybe view chart
 
-## III.Screenshot
 
-### - 1. Splash, Login, Register
 
-| Login Record | Register Record |
-|:------------:|:---------------:|
-| ![Login Record][login-record] | ![Register Record][register-record] |
+# III. Screenshot
+
+### - Splash Screen, Login Screen
 
 
 |         Splash Screen          |  |         Login Screen         |             Login Failure              |
 |:------------------------------:|:-|:-----------------------------:|:--------------------------------------:|
 | ![Splash Screen][splash-image] |  | ![Login Screen][login-image] | ![Login Fail Screen][login-fail-image] |
+
+### - Register Screen
 
 |           Register Screen 1            |           Register Screen 2            |           Register Screen 3 |
 |:--------------------------------------:|:--------------------------------------:|:----------------------------:|
@@ -83,6 +83,25 @@
 |           Register Screen 7            |           Register Screen 8            |           Register Screen 9 |
 |:--------------------------------------:|:--------------------------------------:|:----------------------------:|
 | ![Register Screen 7][register-image-7] | ![Register Screen 8][register-image-8] | ![Register Screen 9][register-image-9] |
+
+### Home Screen
+
+|           Home Screen 1            |           Home Screen 2            |           Home Screen 3 |
+|:----------------------------------:|:----------------------------------:|:------------------------:|
+| ![Home Screen 1][home-image-1] | ![Home Screen 2][home-image-2] | ![Home Screen 3][home-image-3] |
+
+|           Home Screen 4            |           Home Screen 5            |           Home Screen 6 |
+|:----------------------------------:|:----------------------------------:|:------------------------:|
+| ![Home Screen 4][home-image-4] | ![Home Screen 5][home-image-5] | ![Home Screen 6][home-image-6] |
+
+
+
+# IV. Record
+
+|             Login             |              Register               |
+|:-----------------------------:|:-----------------------------------:|
+| ![Login Record][login-record] | ![Register Record][register-record] |
+
 
 
 
@@ -121,4 +140,13 @@
 [register-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/register_record.gif
 
 [login-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/login_record.gif
+
+[home-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_1.png
+[home-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_2.png
+[home-image-3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_3.png
+[home-image-4]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_4.png
+[home-image-5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_5.png
+[home-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/home_image_6.png
+
+
 
