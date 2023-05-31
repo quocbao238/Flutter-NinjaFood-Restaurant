@@ -117,6 +117,12 @@
 | ![Profile Screen 4][profile-image-4] | ![Profile Screen 5][profile-image-5] | ![Profile Screen 6][profile-image-6] |
 
 
+### **Cart Screen**
+
+| Cart Screen 1 | Cart Screen 2 | Cart Screen 3 |
+|:-------------:|:-------------:|:-------------:|
+| ![Cart Screen 1][cart-image-1] | ![Cart Screen 2][cart-image-2] | ![Cart Screen 3][cart-image-3] |
+
 
 
 # IV. Record
@@ -193,5 +199,11 @@
 [profile-image-5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/profile_image_5.png
 [profile-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/profile_image_6.png
 [profile-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/profile_record.gif
+
+
+[cart-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/cart_image_1.png
+[cart-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/cart_image_2.png
+[cart-image-3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/cart_image_3.png
+[cart-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/cart_record.gif
 
 
