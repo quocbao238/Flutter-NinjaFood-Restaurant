@@ -61,7 +61,7 @@
 
 
 
-# III. Screenshot
+# III. Screenshot User App
 
 ### **Splash Screen, Login Screen**
 
@@ -108,11 +108,15 @@
 
 # IV. Record
 
-|             Login             |              Register               | Home |
-|:-----------------------------:|:-----------------------------------:|:----:|
-| ![Login][login-record] | ![Register][register-record] | ![Home][home-record] |
+|             Login             |              Register               |        Drawer        |
+|:-----------------------------:|:-----------------------------------:|:--------------------:|
+| ![Login Screen][login-record] | ![Register Screen][register-record] | ![Drawer Screen][drawer-record] |
 
 
+
+| Home | Profile | Cart |
+|:----:|:-------:|:----:|
+| ![Home Screen][home-record] | ![Profile Screen][profile-record] | ![Cart Screen][cart-record] |
 
 
 
@@ -167,6 +171,6 @@
 [drawer-image-4]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_4.png
 [drawer-image-5]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_5.png
 [drawer-image-6]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_6.png
-
+[drawer-record]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/drawer_record.gif
 
 
