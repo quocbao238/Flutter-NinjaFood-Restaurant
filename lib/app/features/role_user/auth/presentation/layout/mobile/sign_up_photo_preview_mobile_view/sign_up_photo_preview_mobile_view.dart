@@ -23,7 +23,8 @@ class SignUpPhotoPreviewMobileView extends GetView<SignUpProcessController> {
                 children: [
                   AppPadding.small(),
                   AppPadding(
-                    padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
+                    padding:
+                        AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
                     child: AppText.headlineSmall(
                         fontWeight: FontWeight.bold,
                         textAlign: TextAlign.start,
@@ -39,8 +40,7 @@ class SignUpPhotoPreviewMobileView extends GetView<SignUpProcessController> {
                     child: Center(
                         child: AppPadding.medium(
                             child: SignUpPhotoPreview(
-                      removePhoto: controller.onPressedRemovePhoto,
-                    ))),
+                                removePhoto: controller.onPressedRemovePhoto))),
                   ),
                 ],
               ),
