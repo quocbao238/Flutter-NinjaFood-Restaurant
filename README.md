@@ -241,6 +241,10 @@
 [chat-image-9]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_image_9.png
 [chat-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/chat_record.gif
 
+[product_image_1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/detail_image_1.png
+[product_image_2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/detail_image_2.png
+[product_image_3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/detail_image_3.png
+
 [language-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/language_record.gif
 [theme-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/theme_record.gif
 
