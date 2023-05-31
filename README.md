@@ -157,6 +157,15 @@
 
 
 ### **Admin Home Screen**
+| Admin Home Screen 1 | Admin Home Screen 2 | Admin Home Screen 3 |
+|:-------------------:|:-------------------:|:-------------------:|
+| ![Admin Home Screen 1][admin-home-image-1] | ![Admin Home Screen 2][admin-home-image-2] | ![Admin Home Screen 3][admin-home-image-3] |
+
+### **Admin Orders Screen**
+| Admin Orders Screen 1 | Admin Orders Screen 2 | Admin Orders Screen 3 |
+|:---------------------:|:---------------------:|:---------------------:|
+| ![Admin Orders Screen 1][admin-orders-image-1] | ![Admin Orders Screen 2][admin-orders-image-2] | ![Admin Orders Screen 3][admin-orders-image-3] |
+
 
 
 
@@ -262,5 +271,14 @@
 
 [language-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/language_record.gif
 [theme-record]:  https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/theme_record.gif
+
+[admin-home-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/admin_home_image_1.png
+[admin-home-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/admin_home_image_2.png
+[admin-home-image-3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/admin_home_image_3.png
+
+[admin-orders-image-1]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/admin_orders_image_1.png
+[admin-orders-image-2]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/admin_orders_image_2.png
+[admin-orders-image-3]: https://raw.githubusercontent.com/quocbao238/NinjaFood/devMaster/screen_shot/admin_orders_image_3.png
+
 
 
