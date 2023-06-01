@@ -9,12 +9,12 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: '12.x'
-      - uses: subosito/flutter-action@v1
+      - uses: quocbao238/flutter-action@v1
         with:
           flutter-version: '3.10.2'
       - run: flutter pub get
 #      - run: flutter test
-      - run: flutter build apk --debug --split-per-abi
+      - run: flutter build apk --profile --split-per-abi
       - name: Create a Release APK
         uses: quocbao238/release-action@v1
         with:
