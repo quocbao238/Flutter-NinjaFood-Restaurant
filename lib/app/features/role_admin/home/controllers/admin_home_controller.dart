@@ -26,12 +26,8 @@ class AdminHomeController extends BaseController {
   // Order charts
   final RxList<ChartData> lstOrdersChart = <ChartData>[].obs;
 
-  //  Review Charts
-  final RxList<ChartData> lstReviewsChart = <ChartData>[].obs;
-
   final revenuesFilterChartType = FilterChart.week.obs;
   final ordersFilterChartType = FilterChart.week.obs;
-  final reviewsFilterChartType = FilterChart.week.obs;
 
   final RxString todayRevenue = '0.0'.obs; // '0.0
   final RxString todayOrder = '0'.obs;
@@ -42,10 +38,8 @@ class AdminHomeController extends BaseController {
     final lstOrderModel = deliveryController.lstOrderModel.toList();
     todayRevenue.value = calculateTotalPriceToday(lstOrderModel);
     todayOrder.value = lstOrderModel.length.toString();
-    createChartData(revenuesFilterChartType.value)
-        .then((value) => lstRevenuesChart.assignAll(value));
-    createChartData(ordersFilterChartType.value)
-        .then((value) => lstOrdersChart.assignAll(value));
+    createChartData(revenuesFilterChartType.value).then((value) => lstRevenuesChart.assignAll(value));
+    createChartData(ordersFilterChartType.value, isOrdersChart: true).then((value) => lstOrdersChart.assignAll(value));
     _listens();
     super.onInit();
   }
@@ -59,17 +53,13 @@ class AdminHomeController extends BaseController {
     deliveryController.lstOrderModel.listen((_orders) async {
       todayRevenue.value = calculateTotalPriceToday(_orders);
       todayOrder.value = _orders.length.toString();
-      await createChartData(revenuesFilterChartType.value)
-          .then((value) => lstRevenuesChart.assignAll(value));
-      await createChartData(ordersFilterChartType.value)
+      await createChartData(revenuesFilterChartType.value).then((value) => lstRevenuesChart.assignAll(value));
+      await createChartData(ordersFilterChartType.value, isOrdersChart: true)
           .then((value) => lstOrdersChart.assignAll(value));
     });
 
-    databaseService
-        .listenRating()
-        .listen((QuerySnapshot<Map<String, dynamic>> event) {
-      final List<CommentModel> _result =
-      event.docs.map((e) => CommentModel.fromJson(e.data())).toList();
+    databaseService.listenRating().listen((QuerySnapshot<Map<String, dynamic>> event) {
+      final List<CommentModel> _result = event.docs.map((e) => CommentModel.fromJson(e.data())).toList();
       totalReview.value = _result.length.toString();
     });
 
@@ -77,17 +67,14 @@ class AdminHomeController extends BaseController {
   }
 
   String calculateTotalPriceToday(List<OrderModel> orders) {
-    final _orders = orders
-        .where((element) => element.status == HistoryStatus.done)
-        .toList();
-    final total = _orders.fold<double>(
-        0, (previousValue, element) => previousValue + element.total);
+    final _orders = orders.where((element) => element.status == HistoryStatus.done).toList();
+    final total = _orders.fold<double>(0, (previousValue, element) => previousValue + element.total);
     return formatPriceToVND(total) + ' VND';
   }
 
   // Chart
 
-  Future<List<ChartData>> createChartData(FilterChart filterChartType) async {
+  Future<List<ChartData>> createChartData(FilterChart filterChartType, {bool isOrdersChart = false}) async {
     {
       var result = <ChartData>[];
       final lstDateTime = filterChartType.generateListDate();
@@ -97,51 +84,41 @@ class AdminHomeController extends BaseController {
       List<OrderModel> orders = [];
 
       response.fold((l) => <OrderModel>[], (r) {
-        final _filter =
-        r.where((element) => element.status == HistoryStatus.done).toList();
+        final _filter = r.where((element) => element.status == HistoryStatus.done).toList();
         orders.assignAll(_filter);
       });
 
       result = lstDateTime.map((e) {
         final listOrderInDay = orders
             .where((element) =>
-        compareTwoDateTimeIsSameDay(
-            convertTimeStampToDateTime(element.createdAt), e) &&
-            element.status == HistoryStatus.done)
+                compareTwoDateTimeIsSameDay(convertTimeStampToDateTime(element.createdAt), e) &&
+                element.status == HistoryStatus.done)
             .toList();
-        final total = listOrderInDay.fold<double>(
-            0, (previousValue, element) => previousValue + element.total);
+
+        final total = isOrdersChart
+            ? listOrderInDay.length.toDouble()
+            : listOrderInDay.fold<double>(0, (previousValue, element) => previousValue + element.total);
         int index = lstDateTime.indexOf(e);
 
-        final _bottomTitle = switch(filterChartType){
+        final _bottomTitle = switch (filterChartType) {
           FilterChart.week => getDayInWeek(e),
-          FilterChart.month =>
-          e.day % 2 == 0
-              ? DateFormat('d').format(e)
-              : '',
+          FilterChart.month => e.day % 2 == 0 ? DateFormat('d').format(e) : '',
           FilterChart.year => getMonthInYear(e.month),
         };
 
-        final _toolTip = switch(filterChartType){
+        final _toolTip = switch (filterChartType) {
           FilterChart.week => getDayInWeek(e),
           FilterChart.month => DateFormat('dd/MM/yyyy').format(e),
           FilterChart.year => getMonthInYear(e.month)
         };
         return ChartData(
-            bottomTitle: _bottomTitle,
-            toolTip: _toolTip,
-            month: e.month,
-            index: index,
-            dateTime: e,
-            value: total);
+            bottomTitle: _bottomTitle, toolTip: _toolTip, month: e.month, index: index, dateTime: e, value: total);
       }).toList();
       if (filterChartType == FilterChart.year) {
         final _lst = <ChartData>[];
         for (int i = 0; i < 12; i++) {
-          final _filter =
-          result.where((element) => element.month == i + 1).toList();
-          final total = _filter.fold<double>(
-              0, (previousValue, element) => previousValue + element.value);
+          final _filter = result.where((element) => element.month == i + 1).toList();
+          final total = _filter.fold<double>(0, (previousValue, element) => previousValue + element.value);
           _lst.add(ChartData(
               bottomTitle: (i + 1).toString(),
               toolTip: getMonthInYear(i + 1),
@@ -159,8 +136,12 @@ class AdminHomeController extends BaseController {
 
   void onFilterRevenueChart(FilterChart filterChartType) {
     revenuesFilterChartType.value = filterChartType;
-    createChartData(filterChartType)
-        .then((value) => lstRevenuesChart.assignAll(value));
+    createChartData(filterChartType).then((value) => lstRevenuesChart.assignAll(value));
+  }
+
+  void onFilterOrderChart(FilterChart filterChartType) {
+    ordersFilterChartType.value = filterChartType;
+    createChartData(filterChartType, isOrdersChart: true).then((value) => lstOrdersChart.assignAll(value));
   }
 
   void onPressedOrderProcess() => adminTabsController.onChangeToOrderScreen();

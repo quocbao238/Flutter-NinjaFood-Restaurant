@@ -7,18 +7,23 @@ import 'package:ninjafood/app/features/role_admin/home/controllers/admin_home_co
 import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/chart_data/bar_chart_group_data.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 
-class HomeChartRevenue extends StatefulWidget {
+class HomeChartOrders extends StatefulWidget {
   final List<ChartData> chartData;
   final String title;
   final FilterChart filterChart;
 
-  HomeChartRevenue({Key? key, required this.chartData, required this.title, required this.filterChart}) : super(key: key);
+  HomeChartOrders({
+    Key? key,
+    required this.chartData,
+    required this.title,
+    required this.filterChart,
+  }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => HomeChartRevenueState();
+  State<StatefulWidget> createState() => HomeChartOrdersState();
 }
 
-class HomeChartRevenueState extends State<HomeChartRevenue> {
+class HomeChartOrdersState extends State<HomeChartOrders> {
   int touchedIndex = -1;
   final today = DateTime.now();
   final Color touchedBarColor = Colors.amberAccent;
@@ -84,7 +89,7 @@ class HomeChartRevenueState extends State<HomeChartRevenue> {
                         value: widget.filterChart,
                         icon: Icon(Icons.filter_list, color: context.theme.textTheme.bodySmall!.color),
                         underline: SizedBox(),
-                        onChanged: (val) => controller.onFilterRevenueChart(val!))
+                        onChanged: (val) => controller.onFilterOrderChart(val!))
                   ],
                 ),
               ),
@@ -103,7 +108,7 @@ class HomeChartRevenueState extends State<HomeChartRevenue> {
                             TextStyle(color: context.theme.textTheme.bodySmall!.color, fontWeight: FontWeight.bold),
                             children: <TextSpan>[
                               TextSpan(
-                                text: formatPriceToVND(rod.toY) + ' VND',
+                                text: formatPriceToVND(rod.toY),
                                 style: TextStyle(
                                     color: context.theme.textTheme.bodySmall!.color,
                                     fontSize: 16,
