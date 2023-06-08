@@ -32,7 +32,10 @@ final class OneSignalService extends GetxService implements Bootable {
   Future<String?> getPlayerId() async {
     var deviceState = await OneSignal.shared.getDeviceState();
     if (deviceState == null || deviceState.userId == null) return null;
+
+    log.show(_logName, 'getPlayerId ${deviceState.jsonRepresentation()}');
     log.show(_logName, 'getPlayerId ${deviceState.userId}');
+
     return deviceState.userId;
   }
 
@@ -116,8 +119,9 @@ final class OneSignalService extends GetxService implements Bootable {
   Future<void> sendNotification(OSCreateNotification notification) async {
     try {
       var response = await OneSignal.shared.postNotification(notification);
-
       print(response.toString());
+      log.show(_logName, 'sendNotification: ${response.toString()}');
+
     } catch (e) {
       log.show(_logName, 'NOTIFICATION OPENED HANDLER ERROR: $e');
     }

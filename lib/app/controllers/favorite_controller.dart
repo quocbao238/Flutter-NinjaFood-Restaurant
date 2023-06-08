@@ -5,7 +5,7 @@ final class FavoriteController extends BaseController implements Bootable {
   late final UserController _userController;
   final DatabaseService _databaseService = DatabaseService.instance;
 
-  final lstFavoriteProduct = <ProductModel>[].obs;
+  RxList<ProductModel> lstFavoriteProduct = <ProductModel>[].obs;
 
   @override
   Future<void> call() async {
@@ -17,22 +17,21 @@ final class FavoriteController extends BaseController implements Bootable {
 /* -------------------------------- Private Methods --------------------------------*/
 
   bool checkProductIsFavorite(int productId) =>
-      lstFavoriteProduct.toList().any((element) => element.id == productId);
+      lstFavoriteProduct.any((element) => element.id == productId);
 
-  void _listenCart() {
-    _userController.currentUser.listen((event) {
-      if (event == null) return;
-      _getListFavoritesProduct(event.favoriteIds);
-    });
-  }
+  void _listenCart() => _userController.currentUser.listen((event) {
+        if (event == null) return;
+        _getListFavoritesProduct(event.favoriteIds);
+      });
 
   void _getListFavoritesProduct(List<int> lstFavoriteProductId) async {
-    lstFavoriteProduct.clear();
-
     await _databaseService.getListProductByListId(lstFavoriteProductId).then(
         (response) => response.fold(
                 (l) => handleFailure(_logName, l, showDialog: false), (r) {
-              lstFavoriteProduct.addAll(r);
+              if (r.isEmpty) return;
+              if (r.length == lstFavoriteProduct.length) return;
+              lstFavoriteProduct.assignAll(r);
+
             }));
   }
 

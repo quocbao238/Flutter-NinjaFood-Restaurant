@@ -13,7 +13,7 @@ final class ThemeService extends GetxService implements Bootable {
     Get.put(this, permanent: true);
     _sharedPreferences = await SharedPreferences.getInstance();
     final localTheme =
-        _sharedPreferences.getBool(LocalStorageKey.isDarkThemeKey) ?? false;
+        _sharedPreferences.getBool(LocalStorageKey.isDarkThemeKey) ?? true;
     isDarkTheme.value = localTheme;
     if (isDarkTheme.value) {
       Get.changeThemeMode(ThemeMode.dark);
@@ -26,7 +26,6 @@ final class ThemeService extends GetxService implements Bootable {
       isDarkTheme.value = false;
       return Get.changeThemeMode(ThemeMode.light);
     }
-
     _writeCurrentThemeToLocal(true);
     isDarkTheme.value = true;
     Get.changeThemeMode(ThemeMode.dark);

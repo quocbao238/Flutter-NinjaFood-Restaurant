@@ -35,8 +35,7 @@ final class UserController extends GetxController implements Bootable {
 
   // Private methods
   void _handleAuthChanged() async {
-    AuthService.instance.firebaseAuthUserStream
-        .listen((User? firebaseUser) async {
+    AuthService.instance.firebaseAuthUserStream.listen((User? firebaseUser) async {
       firebaseAuthUser.value = firebaseUser;
       if (firebaseUser == null) {
         _consoleService.show(_logName, 'User is currently signed out!');
@@ -59,22 +58,17 @@ final class UserController extends GetxController implements Bootable {
   }
 
   void _handleCloudUserChanged() async {
-    if (_cloudUserSubscription != null || firebaseAuthUser.value == null)
-      return;
+    if (_cloudUserSubscription != null || firebaseAuthUser.value == null) return;
     _consoleService.show(_logName, '_handleCloudUserChanged Run');
-    _cloudUserSubscription = _databaseService
-        .getUserDataStream(firebaseAuthUser.value!.uid)
-        .listen((event) async {
+    _cloudUserSubscription = _databaseService.getUserDataStream(firebaseAuthUser.value!.uid).listen((event) async {
       if (event.data() == null) return;
 
       final newest = UserModel.fromJson(event.data()!);
       currentUser.value = newest;
-      final playerId = await OneSignalService.instance
-          .setPlayerId(currentUser.value?.uid ?? '');
-      if (playerId != null &&
-          !currentUser.value!.playerIds.contains(playerId)) {
+      final playerId = await OneSignalService.instance.setPlayerId(currentUser.value?.uid ?? '');
+      if (playerId != null && !currentUser.value!.playerIds.contains(playerId)) {
         currentUser.value!.addPlayerId(playerId);
-        await updateUser(playerIds: currentUser.value!.playerIds);
+        await updateUser(playerIds: [playerId]);
       }
 
       _consoleService.show(_logName, '_handleCloudUserChanged');
@@ -94,8 +88,7 @@ final class UserController extends GetxController implements Bootable {
       List<String>? orderIds,
       List<String>? cmtIds}) async {
     final _currentUser = currentUser.value;
-    _consoleService.show(_logName,
-        'updateUser Run favoriteIds ${favoriteIds ?? _currentUser?.favoriteIds.length}');
+    _consoleService.show(_logName, 'updateUser Run favoriteIds ${favoriteIds ?? _currentUser?.favoriteIds.length}');
 
     if (_currentUser == null) return left(Failure.custom('User is null'));
     try {
@@ -118,18 +111,15 @@ final class UserController extends GetxController implements Bootable {
   }
 
   // Add product to cart
-  Future<Either<Failure, void>> addProductToCard(
-      {required ProductModel productModel}) async {
+  Future<Either<Failure, void>> addProductToCard({required ProductModel productModel}) async {
     final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
     List<CartModel> currentCartsProduct = _currentUser.carts;
 
-    int index = currentCartsProduct
-        .indexWhere((element) => element.productModel.id == productModel.id);
+    int index = currentCartsProduct.indexWhere((element) => element.productModel.id == productModel.id);
     (index != -1)
         ? currentCartsProduct[index].increaseQuantity()
-        : currentCartsProduct
-            .add(CartModel.createNew(productModel: productModel));
+        : currentCartsProduct.add(CartModel.createNew(productModel: productModel));
     try {
       await updateUser(carts: currentCartsProduct);
       return Right(null);
@@ -140,9 +130,7 @@ final class UserController extends GetxController implements Bootable {
 
 // Comment Product
   Future<Either<Failure, void>> insertComment(
-      {String? comment,
-      required double rating,
-      required OrderModel orderModel}) async {
+      {String? comment, required double rating, required OrderModel orderModel}) async {
     FocusManager.instance.primaryFocus?.unfocus();
     final _currentUser = currentUser.value;
     if (_currentUser == null) return left(Failure.custom('User is null'));
@@ -157,9 +145,7 @@ final class UserController extends GetxController implements Bootable {
           userName: _currentUser.getName(),
           comment: comment,
           rating: rating);
-      await _databaseService
-          .insertCommentProduct(commentModel: commentModel)
-          .then(
+      await _databaseService.insertCommentProduct(commentModel: commentModel).then(
             (insertCommentProduct) => insertCommentProduct.fold(
               (l) => left(l),
               (r) async {
@@ -167,10 +153,8 @@ final class UserController extends GetxController implements Bootable {
                 await _databaseService.updateOrder(orderModel: orderModel).then(
                       (uploadResponse) => uploadResponse.fold(
                         (l) => left(l),
-                        (r) async => await updateUser(cmtIds: [
-                          ...currentUser.value!.commentIds,
-                          commentModel.uid
-                        ]).then(
+                        (r) async =>
+                            await updateUser(cmtIds: [...currentUser.value!.commentIds, commentModel.uid]).then(
                           (_updateUserResponse) => _updateUserResponse.fold(
                             (l) => left(l),
                             (r) => right(r),
@@ -200,16 +184,11 @@ final class UserController extends GetxController implements Bootable {
   }
 
   // Send Notification to Restaurant when create and complete order
-  Future<Either<Failure, void>> sendDeliveryNotificationToRestaurant(
-      OrderModel orderModel) async {
-    final restaurantProfile =
-        RestaurantController.instance.restaurantProfile.value;
-    if (restaurantProfile == null)
-      return left(Failure.custom('Restaurant profile is null'));
+  Future<Either<Failure, void>> sendDeliveryNotificationToRestaurant(OrderModel orderModel) async {
+    final restaurantProfile = RestaurantController.instance.restaurantProfile.value;
+    if (restaurantProfile == null) return left(Failure.custom('Restaurant profile is null'));
 
-    final content = orderModel.status == HistoryStatus.request
-        ? 'Notification_Request'.tr
-        : 'Notification_Done'.tr;
+    final content = orderModel.status == HistoryStatus.request ? 'Notification_Request'.tr : 'Notification_Done'.tr;
 
     try {
       final cartImage = orderModel.carts[0].productModel.image?.url ?? '';
@@ -220,17 +199,16 @@ final class UserController extends GetxController implements Bootable {
           bigPicture: cartImage,
           androidLargeIcon: cartImage);
 
-      final notificationModel =
-          NotificationModel.createNotificationModelByOSCreateNotification(
+      final notificationModel = NotificationModel.createNotificationModelByOSCreateNotification(
         notification: notification,
         receiverId: restaurantProfile.uid,
         orderId: orderModel.createdAt,
         type: NotificationType.order,
       );
 
-      await OneSignalService.instance.sendNotification(notification).then(
-          (value) async => await _databaseService.insertNotification(
-              notificationModel: notificationModel));
+      await OneSignalService.instance
+          .sendNotification(notification)
+          .then((value) async => await _databaseService.insertNotification(notificationModel: notificationModel));
       return right(null);
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));

@@ -11,47 +11,27 @@ class NotificationMobileView extends GetView<NotificationController> {
 
   @override
   Widget build(BuildContext context) {
-    final roleUser = UserController.instance.currentUser.value?.isUser() ?? false;
+    final roleUser =
+        UserController.instance.currentUser.value?.isUser() ?? false;
 
     return AppScaffoldBackgroundImage.pattern(
       appBarWidget: roleUser
-          ? CustomAppBar.back(title: 'Notification_Title'.tr)
+          ? CustomAppBar.back(
+              title: 'Notification_Title'.tr,
+              trailingWidget: SettingIcon(
+                  onPressed: () => controller.showBottomSheetSettings(context)),
+            )
           : CustomAppBar.drawer(
               title: 'Notification_Title'.tr,
-              trailingWidget: Row(
-                children: [
-                  SafeArea(
-                    child: AppPadding(
-                      padding: const AppEdgeInsets.only(
-                          top: AppGapSize.paddingMedium,
-                          left: AppGapSize.paddingMedium,
-                          right: AppGapSize.paddingMedium),
-                      child: SizedBox(
-                        width: 45,
-                        height: 45,
-                        child: ElevatedButton(
-                            onPressed: () => controller.showBottomSheetSettings(context),
-                            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                                  padding: MaterialStateProperty.all(EdgeInsets.zero),
-                                  backgroundColor: MaterialStateProperty.all(ThemeColors.backgroundIconColor()),
-                                  shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16.0),
-                                    ),
-                                  ),
-                                ),
-                            child: const Center(child: Icon(Icons.settings, color: ThemeColors.orangeColor, size: 24))),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+              trailingWidget: SettingIcon(
+                  onPressed: () =>
+                      controller.showBottomSheetSettings(context))),
       body: AppPadding(
         padding: AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
         child: Obx(() {
           final notifications = controller.notifications;
-          if (notifications.isEmpty) return Center(child: Text('No notification'));
+          if (notifications.isEmpty)
+            return Center(child: Text('No notification'));
           return ListView.builder(
               padding: EdgeInsets.zero,
               itemCount: notifications.length,
@@ -64,8 +44,10 @@ class NotificationMobileView extends GetView<NotificationController> {
                         height: MediaQuery.of(context).size.shortestSide * 0.2,
                         fit: BoxFit.fill,
                         url: notification.image),
-                    onPressedItem: () => controller.readNotification(notification),
-                    onPressedMore: () => controller.showBottomSheet(notification, context),
+                    onPressedItem: () =>
+                        controller.readNotification(notification),
+                    onPressedMore: () =>
+                        controller.showBottomSheet(notification, context),
                     title: notification.title,
                     isRead: notification.isRead,
                     message: notification.message,
@@ -73,6 +55,47 @@ class NotificationMobileView extends GetView<NotificationController> {
               });
         }),
       ),
+    );
+  }
+}
+
+class SettingIcon extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const SettingIcon({super.key, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SafeArea(
+          child: AppPadding(
+            padding: const AppEdgeInsets.only(
+                top: AppGapSize.paddingMedium,
+                left: AppGapSize.paddingMedium,
+                right: AppGapSize.paddingMedium),
+            child: SizedBox(
+              width: 45,
+              height: 45,
+              child: ElevatedButton(
+                  onPressed: () => onPressed(),
+                  style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                        padding: MaterialStateProperty.all(EdgeInsets.zero),
+                        backgroundColor: MaterialStateProperty.all(
+                            ThemeColors.backgroundIconColor()),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                        ),
+                      ),
+                  child: const Center(
+                      child: Icon(Icons.settings,
+                          color: ThemeColors.orangeColor, size: 24))),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

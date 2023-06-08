@@ -21,6 +21,7 @@ class SignUpPhotoPreviewMobileView extends GetView<SignUpProcessController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  AppPadding.small(),
                   AppPadding(
                     padding:
                         AppEdgeInsets.symmetric(horizontal: AppGapSize.medium),
@@ -39,8 +40,7 @@ class SignUpPhotoPreviewMobileView extends GetView<SignUpProcessController> {
                     child: Center(
                         child: AppPadding.medium(
                             child: SignUpPhotoPreview(
-                      removePhoto: controller.onPressedRemovePhoto,
-                    ))),
+                                removePhoto: controller.onPressedRemovePhoto))),
                   ),
                 ],
               ),

@@ -31,44 +31,29 @@ final class MessageController extends GetxController implements Bootable {
     final currentUser = userController.currentUser.value;
     final groupChatId = isAdmin ? null : currentUser!.uid;
     // GroupChatID is id of user
-    _messageSubscription = databaseService
-        .listenGroupChat()
-        .listen((QuerySnapshot<Map<String, dynamic>> event) {
-      final List<GroupChatModel> _result =
-          event.docs.map((e) => GroupChatModel.fromJson(e.data())).toList();
-      final _listFilter = isAdmin
-          ? _result
-          : _result
-              .where((element) => element.groupChatId == groupChatId)
-              .toList();
+    _messageSubscription = databaseService.listenGroupChat().listen((QuerySnapshot<Map<String, dynamic>> event) {
+      final List<GroupChatModel> _result = event.docs.map((e) => GroupChatModel.fromJson(e.data())).toList();
+      final _listFilter = isAdmin ? _result : _result.where((element) => element.groupChatId == groupChatId).toList();
       groupChats.assignAll(_listFilter);
     });
   }
 
   Future<Either<Failure, void>> sendMessage(
-      {required dynamic message,
-      UserModel? receiverUser,
-      required MessageChatType messageChatType}) async {
+      {required dynamic message, UserModel? receiverUser, required MessageChatType messageChatType}) async {
     final isUser = userController.currentUser.value!.isUser();
 
     if (isUser) {
-      return await _userMessage(message, messageChatType).then(
-          (_response) => _response.fold((l) => left(l), (r) => right(null)));
+      return await _userMessage(message, messageChatType)
+          .then((_response) => _response.fold((l) => left(l), (r) => right(null)));
     }
 
-    if (receiverUser == null)
-      return left(Failure.custom('receiverUser is null'));
+    if (receiverUser == null) return left(Failure.custom('receiverUser is null'));
 
-    return await _adminMessage(
-            message: message,
-            receiverUser: receiverUser,
-            messageChatType: messageChatType)
-        .then(
-            (_response) => _response.fold((l) => left(l), (r) => right(null)));
+    return await _adminMessage(message: message, receiverUser: receiverUser, messageChatType: messageChatType)
+        .then((_response) => _response.fold((l) => left(l), (r) => right(null)));
   }
 
-  Future<Either<Failure, void>> _userMessage(
-      dynamic message, MessageChatType messageChatType) async {
+  Future<Either<Failure, void>> _userMessage(dynamic message, MessageChatType messageChatType) async {
     final senderUser = userController.currentUser.value!;
     final receiverUser = restaurantController.restaurantProfile.value!;
     final groupChatId = senderUser.uid;
@@ -81,28 +66,19 @@ final class MessageController extends GetxController implements Bootable {
         groupChatId: groupChatId);
 
     final groupChat = GroupChatModel(
-        senderUser: senderUser,
-        receiverUser: receiverUser,
-        groupChatId: groupChatId,
-        lastMessageChat: messageChat);
+        senderUser: senderUser, receiverUser: receiverUser, groupChatId: groupChatId, lastMessageChat: messageChat);
 
     try {
-      return await databaseService
-          .insertGroupChat(groupChatModel: groupChat)
-          .then(
+      return await databaseService.insertGroupChat(groupChatModel: groupChat).then(
             (uploadResponse) => uploadResponse.fold(
               (l) => left(l),
-              (r) async => await databaseService
-                  .insertMessageChat(messageChat: messageChat)
-                  .then(
+              (r) async => await databaseService.insertMessageChat(messageChat: messageChat).then(
                     (sendMessageResponse) => sendMessageResponse.fold(
                       (l) => left(l),
                       (r) {
-                        final _message = messageChatType == MessageChatType.text
-                            ? message
-                            : "Notification_New_Message".tr;
-                        _sendMessage(receiverUser, _message,
-                            senderUser.photoUrl!, groupChatId);
+                        final _message =
+                            messageChatType == MessageChatType.text ? message : "Notification_New_Message".tr;
+                        _sendMessage(receiverUser, _message, senderUser.photoUrl!, groupChatId);
                         return right(null);
                       },
                     ),
@@ -115,9 +91,7 @@ final class MessageController extends GetxController implements Bootable {
   }
 
   Future<Either<Failure, void>> _adminMessage(
-      {required dynamic message,
-      required UserModel receiverUser,
-      required MessageChatType messageChatType}) async {
+      {required dynamic message, required UserModel receiverUser, required MessageChatType messageChatType}) async {
     final senderUser = userController.currentUser.value!;
     final groupChatId = receiverUser.uid;
 
@@ -129,30 +103,18 @@ final class MessageController extends GetxController implements Bootable {
         groupChatId: groupChatId);
 
     final groupChat = GroupChatModel(
-        senderUser: senderUser,
-        receiverUser: receiverUser,
-        groupChatId: groupChatId,
-        lastMessageChat: messageChat);
+        senderUser: senderUser, receiverUser: receiverUser, groupChatId: groupChatId, lastMessageChat: messageChat);
 
     try {
-      return await databaseService
-          .insertGroupChat(groupChatModel: groupChat)
-          .then(
+      return await databaseService.insertGroupChat(groupChatModel: groupChat).then(
             (uploadGroupChat) => uploadGroupChat.fold(
               (l) => left(l),
               (r) async {
-                return await databaseService
-                    .insertMessageChat(messageChat: messageChat)
-                    .then(
+                return await databaseService.insertMessageChat(messageChat: messageChat).then(
                       (uploadChatMessage) => uploadChatMessage.fold(
                         (l) => left(l),
-                        (r) => _sendMessage(
-                            receiverUser,
-                            messageChatType == MessageChatType.text
-                                ? message
-                                : null,
-                            senderUser.photoUrl!,
-                            groupChatId),
+                        (r) => _sendMessage(receiverUser, messageChatType == MessageChatType.text ? message : null,
+                            senderUser.photoUrl!, groupChatId),
                       ),
                     );
               },
@@ -163,10 +125,9 @@ final class MessageController extends GetxController implements Bootable {
     }
   }
 
-  Future<Either<Failure, void>> _sendMessage(UserModel receiverUser,
-      String? message, String senderAvatar, String groupChatId) async {
-    if (receiverUser.playerIds.isEmpty)
-      return left(Failure.custom('playerIds is empty'));
+  Future<Either<Failure, void>> _sendMessage(
+      UserModel receiverUser, String? message, String senderAvatar, String groupChatId) async {
+    if (receiverUser.playerIds.isEmpty) return left(Failure.custom('playerIds is empty'));
     try {
       final OSCreateNotification notification = OSCreateNotification(
           playerIds: [receiverUser.playerIds.last],
@@ -174,17 +135,18 @@ final class MessageController extends GetxController implements Bootable {
           heading: "Notification_New_Message".tr,
           androidLargeIcon: senderAvatar);
 
-      final notificationModel =
-          NotificationModel.createNotificationModelByOSCreateNotification(
-              notification: notification,
-              receiverId: receiverUser.uid,
-              image: senderAvatar,
-              type: NotificationType.chat,
-              groupChatId: groupChatId);
+      final notificationModel = NotificationModel.createNotificationModelByOSCreateNotification(
+          notification: notification,
+          receiverId: receiverUser.uid,
+          image: senderAvatar,
+          type: NotificationType.chat,
+          groupChatId: groupChatId);
+      ConsoleService.instance.show("__sendMessage", "playerId = ${receiverUser.playerIds.last}");
+      ConsoleService.instance.show("_sendMessage", notificationModel.toJson().toString());
 
-      await OneSignalService.instance.sendNotification(notification).then(
-          (value) async => await databaseService.insertNotification(
-              notificationModel: notificationModel));
+      await OneSignalService.instance
+          .sendNotification(notification)
+          .then((value) async => await databaseService.insertNotification(notificationModel: notificationModel));
 
       return right(null);
     } catch (e, stackTrace) {

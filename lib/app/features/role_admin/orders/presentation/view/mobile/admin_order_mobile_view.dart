@@ -1,6 +1,7 @@
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:ninja_theme/ninja_theme.dart';
 import 'package:ninjafood/app/features/role_admin/orders/controllers/order_home_controller.dart';
 import 'package:ninjafood/app/features/role_admin/orders/presentation/view/mobile/admin_order_item.dart';
@@ -73,6 +74,22 @@ class AdminOrderMobileView extends StatelessWidget {
           body: Obx(
             () {
               final ordersFilter = controller.ordersFilter.toList();
+              if (ordersFilter.isEmpty)
+                return Container(
+                  margin: EdgeInsets.only(bottom: kToolbarHeight * 2),
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Lottie.asset('assets/lottie/empty_cart.json'),
+                      // AppText.bodyLarge(
+                      //     text: 'Cart_Empty'.tr, textAlign: TextAlign.center),
+                    ],
+                  ),
+                );
               return AppPadding(
                 padding: AppEdgeInsets.symmetric(
                     horizontal: AppGapSize.medium,

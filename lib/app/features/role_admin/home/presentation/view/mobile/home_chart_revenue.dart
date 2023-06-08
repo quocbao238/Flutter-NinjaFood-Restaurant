@@ -7,18 +7,18 @@ import 'package:ninjafood/app/features/role_admin/home/controllers/admin_home_co
 import 'package:ninjafood/app/features/role_admin/home/presentation/view/mobile/chart_data/bar_chart_group_data.dart';
 import 'package:ninjafood/app/helper/helper.dart';
 
-class ChartViewData extends StatefulWidget {
+class HomeChartRevenue extends StatefulWidget {
   final List<ChartData> chartData;
   final String title;
   final FilterChart filterChart;
 
-  ChartViewData({Key? key, required this.chartData, required this.title, required this.filterChart}) : super(key: key);
+  HomeChartRevenue({Key? key, required this.chartData, required this.title, required this.filterChart}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ChartViewDataState();
+  State<StatefulWidget> createState() => HomeChartRevenueState();
 }
 
-class ChartViewDataState extends State<ChartViewData> {
+class HomeChartRevenueState extends State<HomeChartRevenue> {
   int touchedIndex = -1;
   final today = DateTime.now();
   final Color touchedBarColor = Colors.amberAccent;
@@ -99,7 +99,7 @@ class ChartViewDataState extends State<ChartViewData> {
                         tooltipMargin: 8,
                         getTooltipItem: (group, groupIndex, rod, rodIndex) {
                           return BarTooltipItem(
-                            widget.chartData[group.x.toInt()].toolTip + '\n',
+                            widget.chartData[group.x.toInt()].toolTip.tr + '\n',
                             TextStyle(color: context.theme.textTheme.bodySmall!.color, fontWeight: FontWeight.bold),
                             children: <TextSpan>[
                               TextSpan(
