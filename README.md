@@ -60,8 +60,23 @@
 - [x] Total income (day, month, year) - Maybe view chart
 
 
+# III. Record
 
-# III. Screenshot
+|             Login             |              Register               |        Drawer        |
+|:-----------------------------:|:-----------------------------------:|:--------------------:|
+| ![Login Screen][login-record] | ![Register Screen][register-record] | ![Drawer Screen][drawer-record] |
+
+
+| Home | Profile | Cart |
+|:----:|:-------:|:----:|
+| ![Home Screen][home-record] | ![Profile Screen][profile-record] | ![Cart Screen][cart-record] |
+
+
+| Chat | Language | Theme |
+|:----:|:--------:|:-----:|
+| ![Chat Screen][chat-record] | ![Language Screen][language-record] | ![Theme Screen][theme-record] |
+
+# IV. Screenshot
 
 ### **Splash Screen, Login Screen**
 
@@ -165,27 +180,6 @@
 | Admin Orders Screen 1 | Admin Orders Screen 2 | Admin Orders Screen 3 |
 |:---------------------:|:---------------------:|:---------------------:|
 | ![Admin Orders Screen 1][admin-orders-image-1] | ![Admin Orders Screen 2][admin-orders-image-2] | ![Admin Orders Screen 3][admin-orders-image-3] |
-
-
-
-
-# IV. Record
-
-|             Login             |              Register               |        Drawer        |
-|:-----------------------------:|:-----------------------------------:|:--------------------:|
-| ![Login Screen][login-record] | ![Register Screen][register-record] | ![Drawer Screen][drawer-record] |
-
-
-| Home | Profile | Cart |
-|:----:|:-------:|:----:|
-| ![Home Screen][home-record] | ![Profile Screen][profile-record] | ![Cart Screen][cart-record] |
-
-
-| Chat | Language | Theme |
-|:----:|:--------:|:-----:|
-| ![Chat Screen][chat-record] | ![Language Screen][language-record] | ![Theme Screen][theme-record] |
-
-
 
 
 
